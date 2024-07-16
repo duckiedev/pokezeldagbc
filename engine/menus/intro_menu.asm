@@ -64,7 +64,8 @@ NewGame:
 	call ResetWRAM
 	call NewGame_ClearTilemapEtc
 	call PlayerProfileSetup
-	call OakSpeech
+	;call OakSpeech
+	call NamePlayer
 	call InitializeWorld
 
 	ld a, LANDMARK_NEW_BARK_TOWN
@@ -740,14 +741,14 @@ OakText7:
 	text_end
 
 NamePlayer:
-	farcall MovePlayerPicRight
-	farcall ShowPlayerNamingChoices
+	;farcall MovePlayerPicRight
+	;farcall ShowPlayerNamingChoices
 	ld a, [wMenuCursorY]
 	dec a
 	jr z, .NewName
 	call StorePlayerName
-	farcall ApplyMonOrTrainerPals
-	farcall MovePlayerPicLeft
+	;farcall ApplyMonOrTrainerPals
+	;farcall MovePlayerPicLeft
 	ret
 
 .NewName:
