@@ -71,7 +71,7 @@ NewGame:
 	ld a, LANDMARK_NEW_BARK_TOWN
 	ld [wPrevLandmark], a
 
-	ld a, SPAWN_HOME
+	ld a, SPAWN_FOREST_START
 	ld [wDefaultSpawnpoint], a
 
 	ld a, MAPSETUP_WARP

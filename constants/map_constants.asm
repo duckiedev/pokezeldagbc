@@ -500,5 +500,9 @@ ENDM
 	map_const MR_POKEMONS_HOUSE,                            4,  4 ; 10
 	map_const ROUTE_31_VIOLET_GATE,                         5,  4 ; 11
 	endgroup
+	
+	newgroup FOREST												  ; 27
+	map_const FOREST_STARTING_AREA,							5,  4 ;  1
+	endgroup
 
-DEF NUM_MAP_GROUPS EQU const_value ; 26
+DEF NUM_MAP_GROUPS EQU const_value ; 27

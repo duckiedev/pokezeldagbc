@@ -36,10 +36,11 @@
 	const TILESET_KABUTO_WORD_ROOM     ; 22
 	const TILESET_OMANYTE_WORD_ROOM    ; 23
 	const TILESET_AERODACTYL_WORD_ROOM ; 24
+	const TILESET_OVERWORLD_MAIN	   ; 25
 DEF NUM_TILESETS EQU const_value - 1
 
 ; wTileset struct size
-DEF TILESET_LENGTH EQU 15
+DEF TILESET_LENGTH EQU 14
 
 ; roof length (see gfx/tilesets/roofs)
 DEF ROOF_LENGTH EQU 9

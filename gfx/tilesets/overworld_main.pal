@@ -1,0 +1,40 @@
+; gray
+	RGB 26, 24, 26
+	RGB 22, 21, 25
+	RGB 14, 13, 16
+	RGB 07, 07, 07
+; red
+	RGB 31, 28, 24
+	RGB 29, 10, 08
+	RGB 18, 07, 09
+	RGB 07, 07, 07
+; green
+	RGB 31, 28, 22
+	RGB 20, 24, 09
+	RGB 13, 15, 12
+	RGB 07, 07, 07
+; water (blue)
+	RGB 30, 28, 26
+	RGB 15, 16, 31
+	RGB 11, 18, 06
+	RGB 07, 07, 07
+; yellow - N/A 
+	RGB 26, 24, 26
+	RGB 30, 18, 26
+	RGB 19, 24, 18
+	RGB 07, 07, 07
+; brown
+	RGB 31, 28, 22
+	RGB 28, 20, 09
+	RGB 17, 10, 05
+	RGB 07, 07, 07
+; roof (glass)
+	RGB 30, 28, 26
+	RGB 31, 19, 24
+	RGB 16, 13, 03
+	RGB 07, 07, 07
+; text
+	RGB 31, 31, 16
+	RGB 31, 31, 16
+	RGB 14, 09, 00
+	RGB 00, 00, 00
