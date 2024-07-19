@@ -2930,12 +2930,13 @@ endr
 
 wCmdQueue:: ds CMDQUEUE_CAPACITY * CMDQUEUE_ENTRY_SIZE
 
-	ds 40
+	ds 6
 
 wMapObjects::
 wPlayerObject:: map_object wPlayer ; player is map object 0
-; wMap1Object - wMap15Object
-for n, 1, NUM_OBJECTS
+; wMap1Object - wMap17Object
+; search "additional wMapObjects" for more down below
+for n, 1, NUM_OBJECTS - 7
 wMap{d:n}Object:: map_object wMap{d:n}
 endr
 
@@ -3112,7 +3113,11 @@ wMountMoonSquareSceneID::                         db
 wMobileTradeRoomSceneID::                         db
 wMobileBattleRoomSceneID::                        db
 
-	ds 49
+	ds 15
+
+; 2 additional wMapObjects
+wMap18Object:: map_object wMap18
+wMap19Object:: map_object wMap19
 
 ; fight counts
 wJackFightCount::    db
@@ -3144,7 +3149,14 @@ wKenjiFightCount::   db ; unreferenced
 wParryFightCount::   db
 wErinFightCount::    db
 
-	ds 100
+	ds 15
+
+; 5 additional wMapObjects
+wMap20Object:: map_object wMap20
+wMap21Object:: map_object wMap21
+wMap22Object:: map_object wMap22
+wMap23Object:: map_object wMap23
+wMap24Object:: map_object wMap24
 
 wEventFlags:: flag_array NUM_EVENTS
 

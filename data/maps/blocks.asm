@@ -1054,8 +1054,8 @@ SECTION "Map Blocks 4", ROMX
 ForestStartingArea_Blocks:
 	INCBIN "maps/ForestStartingArea.ablk"
 
-;ForestAreaF7_Blocks:
-	;INCBIN "maps/ForestAreaF7.ablk"
+ForestAreaF7_Blocks:
+	INCBIN "maps/ForestAreaF7.ablk"
 
 ForestAreaF8_Blocks:
 	INCBIN "maps/ForestAreaF8.ablk"

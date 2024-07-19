@@ -701,9 +701,9 @@ ENDM
 	connection north, ForestAreaH7, FOREST_AREA_H7, 0
 	connection west, ForestAreaG8, FOREST_AREA_G8, 0
 	
-	;map_attributes ForestAreaF7, FOREST_AREA_F7, $00, SOUTH | EAST
-	;connection south, ForestAreaF8, FOREST_AREA_F8, 0
-	;connection east, ForestAreaG7, FOREST_AREA_G7, 0
+	map_attributes ForestAreaF7, FOREST_AREA_F7, $00, SOUTH | EAST
+	connection south, ForestAreaF8, FOREST_AREA_F8, 0
+	connection east, ForestAreaG7, FOREST_AREA_G7, 0
 	
 	map_attributes ForestAreaF8, FOREST_AREA_F8, $00, EAST
 	connection east, ForestAreaG8, FOREST_AREA_G8, 0
@@ -712,7 +712,7 @@ ENDM
 	;connection north ForestAreaG6, FOREST_AREA_G6, 0
 	connection south, ForestAreaG8, FOREST_AREA_G8, 0
 	connection east, ForestAreaH7, FOREST_AREA_H7, 0
-	;connection west ForestAreaF7, FOREST_AREA_F7, 0
+	connection west, ForestAreaF7, FOREST_AREA_F7, 0
 	
 	map_attributes ForestAreaG8, FOREST_AREA_G8, $00, NORTH | WEST | EAST
 	connection north, ForestAreaG7, FOREST_AREA_G7, 0
