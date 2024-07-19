@@ -1120,7 +1120,7 @@ TitleScreenEntrance:
 	ldh [hLCDCPointer], a
 
 ; Play the title screen music.
-	ld de, MUSIC_TITLE
+	ld de, MUSIC_ZELDA_TITLE
 	call PlayMusic
 
 	ld a, $88

@@ -485,5 +485,8 @@ SECTION "Map Scripts 25", ROMX
 INCLUDE "maps/SilverCaveOutside.asm"
 INCLUDE "maps/Route10North.asm"
 INCLUDE "maps/ForestStartingArea.asm"
-
-ENDSECTION
+;INCLUDE "maps/ForestAreaF7.asm"
+INCLUDE "maps/ForestAreaF8.asm"
+INCLUDE "maps/ForestAreaG7.asm"
+INCLUDE "maps/ForestAreaG8.asm"
+INCLUDE "maps/ForestAreaH7.asm"

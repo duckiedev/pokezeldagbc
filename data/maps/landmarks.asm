@@ -104,6 +104,7 @@ Landmarks:
 	landmark  12, 100, TohjoFallsName
 	landmark  20,  68, Route28Name
 	landmark 140, 116, FastShipName
+	landmark 140, 100, ForestG8Name
 	assert_table_length NUM_LANDMARKS
 
 NewBarkTownName:     db "NEW BARK<BSP>TOWN@"
@@ -208,3 +209,4 @@ TohjoFallsName:      db "TOHJO FALLS@"
 UndergroundName:     db "UNDERGROUND@"
 BattleTowerName:     db "BATTLE<BSP>TOWER@"
 SpecialMapName:      db "SPECIAL@"
+ForestG8Name:		 db "G8@"

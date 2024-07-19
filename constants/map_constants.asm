@@ -502,7 +502,12 @@ ENDM
 	endgroup
 	
 	newgroup FOREST												  ; 27
-	map_const FOREST_STARTING_AREA,							5,  4 ;  1
+	map_const FOREST_STARTING_AREA,							5,  5 ;  1
+	;map_const FOREST_AREA_F7,								5,  4 ;  2
+	map_const FOREST_AREA_F8,								5,  5 ;  3
+	map_const FOREST_AREA_G7,								5,  4 ;  4
+	map_const FOREST_AREA_G8,								5,  5 ;  5
+	map_const FOREST_AREA_H7,								5,  4 ;  6
 	endgroup
 
 DEF NUM_MAP_GROUPS EQU const_value ; 27
