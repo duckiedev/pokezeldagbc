@@ -1395,7 +1395,7 @@ LoadTilesetGFX::
 
 	ld hl, wDecompressScratch + $80 tiles
 	ld de, vTiles5
-	ld bc, $80 tiles
+	ld bc, $A0 tiles
 	call CopyBytes
 
 	pop af

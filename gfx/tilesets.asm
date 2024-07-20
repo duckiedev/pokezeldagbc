@@ -36,6 +36,9 @@ INCBIN "data/tilesets/ice_path_metatiles.bin"
 TilesetIcePathColl::
 INCLUDE "data/tilesets/ice_path_collision.asm"
 
+
+SECTION "Tileset Data 2", ROMX
+
 TilesetPlayersRoomGFX::
 INCBIN "gfx/tilesets/players_room.2bpp.lz"
 
@@ -44,18 +47,6 @@ INCBIN "data/tilesets/players_room_metatiles.bin"
 
 TilesetPlayersRoomColl::
 INCLUDE "data/tilesets/players_room_collision.asm"
-
-
-SECTION "Tileset Data 2", ROMX
-
-TilesetPokecenterGFX::
-INCBIN "gfx/tilesets/pokecenter.2bpp.lz"
-
-TilesetPokecenterMeta::
-INCBIN "data/tilesets/pokecenter_metatiles.bin"
-
-TilesetPokecenterColl::
-INCLUDE "data/tilesets/pokecenter_collision.asm"
 
 TilesetPortGFX::
 INCBIN "gfx/tilesets/port.2bpp.lz"
@@ -84,6 +75,9 @@ INCBIN "data/tilesets/mansion_metatiles.bin"
 TilesetMansionColl::
 INCLUDE "data/tilesets/mansion_collision.asm"
 
+
+SECTION "Tileset Data 3", ROMX
+
 TilesetCaveGFX::
 INCBIN "gfx/tilesets/cave.2bpp.lz"
 
@@ -94,9 +88,6 @@ INCBIN "data/tilesets/cave_metatiles.bin"
 TilesetCaveColl::
 TilesetDarkCaveColl::
 INCLUDE "data/tilesets/cave_collision.asm"
-
-
-SECTION "Tileset Data 3", ROMX
 
 TilesetTowerGFX::
 INCBIN "gfx/tilesets/tower.2bpp.lz"
@@ -124,27 +115,6 @@ INCBIN "data/tilesets/mart_metatiles.bin"
 
 TilesetMartColl::
 INCLUDE "data/tilesets/mart_collision.asm"
-
-TilesetGameCornerGFX::
-INCBIN "gfx/tilesets/game_corner.2bpp.lz"
-
-TilesetGameCornerMeta::
-INCBIN "data/tilesets/game_corner_metatiles.bin"
-
-TilesetGameCornerColl::
-INCLUDE "data/tilesets/game_corner_collision.asm"
-
-TilesetTrainStationGFX::
-INCBIN "gfx/tilesets/train_station.2bpp.lz"
-
-TilesetTrainStationMeta::
-INCBIN "data/tilesets/train_station_metatiles.bin"
-
-TilesetTrainStationColl::
-INCLUDE "data/tilesets/train_station_collision.asm"
-
-TilesetForestMeta::
-INCBIN "data/tilesets/forest_metatiles.bin"
 
 
 SECTION "Tileset Data 4", ROMX
@@ -453,6 +423,36 @@ INCBIN "data/tilesets/aerodactyl_word_room_attributes.bin"
 
 
 SECTION "Tileset Data 12", ROMX
+
+TilesetPokecenterGFX::
+INCBIN "gfx/tilesets/pokecenter.2bpp.lz"
+
+TilesetPokecenterMeta::
+INCBIN "data/tilesets/pokecenter_metatiles.bin"
+
+TilesetPokecenterColl::
+INCLUDE "data/tilesets/pokecenter_collision.asm"
+
+TilesetGameCornerGFX::
+INCBIN "gfx/tilesets/game_corner.2bpp.lz"
+
+TilesetGameCornerMeta::
+INCBIN "data/tilesets/game_corner_metatiles.bin"
+
+TilesetGameCornerColl::
+INCLUDE "data/tilesets/game_corner_collision.asm"
+
+TilesetTrainStationGFX::
+INCBIN "gfx/tilesets/train_station.2bpp.lz"
+
+TilesetTrainStationMeta::
+INCBIN "data/tilesets/train_station_metatiles.bin"
+
+TilesetTrainStationColl::
+INCLUDE "data/tilesets/train_station_collision.asm"
+
+TilesetForestMeta::
+INCBIN "data/tilesets/forest_metatiles.bin"
 
 TilesetOverworldMainGFX::
 INCBIN "gfx/tilesets/overworld_main.2bpp.lz"
