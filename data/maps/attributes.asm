@@ -96,6 +96,24 @@ MACRO connection
 	endc
 ENDM
 
+MACRO corner_connection
+;\1: direction
+;\2: pointer to 3x3 blocks
+	if !STRCMP("\1", "northeast")
+		DEF _off = CURRENT_MAP_WIDTH + MAP_CONNECTION_PADDING_WIDTH
+	elif !STRCMP("\1", "northwest")
+		DEF _off = 0
+	elif !STRCMP("\1", "southeast")
+		DEF _off = (CURRENT_MAP_WIDTH + MAP_CONNECTION_PADDING_WIDTH * 2) * (CURRENT_MAP_HEIGHT + MAP_CONNECTION_PADDING_WIDTH) + CURRENT_MAP_WIDTH + MAP_CONNECTION_PADDING_WIDTH
+	elif !STRCMP("\1", "southwest")
+		DEF _off = (CURRENT_MAP_WIDTH + MAP_CONNECTION_PADDING_WIDTH * 2) * (CURRENT_MAP_HEIGHT + MAP_CONNECTION_PADDING_WIDTH)
+	else
+		fail "Invalid direction for 'corner_connection'."
+	endc
+
+	dw wOverworldMapBlocks + _off
+	dba \2
+ENDM
 
 	map_attributes NewBarkTown, NEW_BARK_TOWN, $05, WEST | EAST
 	connection west, Route29, ROUTE_29, 0
@@ -684,32 +702,42 @@ ENDM
 	map_attributes Route31VioletGate, ROUTE_31_VIOLET_GATE, $00, 0
 	
 	; New
-	map_attributes ForestAreaF7, FOREST_AREA_F7, $00, SOUTH | EAST
+	map_attributes ForestAreaF7, FOREST_AREA_F7, $00, SOUTH | EAST | SOUTHEAST
 	connection south, ForestAreaF8, FOREST_AREA_F8, 0
 	connection east, ForestAreaG7, FOREST_AREA_G7, 0
+	corner_connection southeast, ForestAreaF7_SouthEastCorner_Blocks	; ForestAreaG8
 	
-	map_attributes ForestAreaF8, FOREST_AREA_F8, $00, NORTH | EAST
+	map_attributes ForestAreaF8, FOREST_AREA_F8, $00, NORTH | EAST | NORTHEAST
 	connection north, ForestAreaF7, FOREST_AREA_F7, 0
 	connection east, ForestAreaG8, FOREST_AREA_G8, 0
+	corner_connection northeast, ForestAreaF8_NorthEastCorner_Blocks	; ForestAreaG7
 	
-	map_attributes ForestAreaG7, FOREST_AREA_G7, $00, SOUTH | WEST | EAST
+	map_attributes ForestAreaG7, FOREST_AREA_G7, $00, SOUTH | WEST | EAST | SOUTHEAST | SOUTHWEST
 	connection south, ForestAreaG8, FOREST_AREA_G8, 0
 	connection west, ForestAreaF7, FOREST_AREA_F7, 0
 	connection east, ForestAreaH7, FOREST_AREA_H7, 0
+	corner_connection southeast, ForestAreaG7_SouthEastCorner_Blocks	; ForestAreaH8
+	corner_connection southwest, ForestAreaG7_SouthWestCorner_Blocks	; ForestAreaF8
 
-	map_attributes ForestAreaG8, FOREST_AREA_G8, $00, NORTH | WEST | EAST
+	map_attributes ForestAreaG8, FOREST_AREA_G8, $00, NORTH | WEST | EAST | NORTHEAST | NORTHWEST
 	connection north, ForestAreaG7, FOREST_AREA_G7, 0
 	connection west, ForestAreaF8, FOREST_AREA_F8, 0
 	connection east, ForestAreaH8, FOREST_AREA_H8, 0
+	corner_connection northeast, ForestAreaG8_NorthEastCorner_Blocks	; ForestAreaH7
+	corner_connection northwest, ForestAreaG8_NorthWestCorner_Blocks	; ForestAreaF7
 	
-	map_attributes ForestAreaH7, FOREST_AREA_H7, $00, SOUTH | WEST
+	map_attributes ForestAreaH7, FOREST_AREA_H7, $00, SOUTH | WEST | SOUTHEAST | SOUTHWEST
 	connection south, ForestAreaH8, FOREST_AREA_H8, 0
 	connection west, ForestAreaG7, FOREST_AREA_G7, 0
+	corner_connection southeast, ForestAreaH7_SouthEastCorner_Blocks	; ForestAreaI8
+	corner_connection southwest, ForestAreaH7_SouthWestCorner_Blocks	; ForestAreaG8
 	
-	map_attributes ForestAreaH8, FOREST_AREA_H8, $00, NORTH | WEST | EAST
+	map_attributes ForestAreaH8, FOREST_AREA_H8, $00, NORTH | WEST | EAST | NORTHWEST
 	connection north, ForestAreaH7, FOREST_AREA_H7, 0
 	connection west, ForestAreaG8, FOREST_AREA_G8, 0
 	connection east, ForestAreaI8, FOREST_AREA_I8, 0
+	corner_connection northwest, ForestAreaH8_NorthWestCorner_Blocks	; ForestAreaG7
 
-	map_attributes ForestAreaI8, FOREST_AREA_I8, $00, WEST
+	map_attributes ForestAreaI8, FOREST_AREA_I8, $00, WEST | NORTHWEST
 	connection west, ForestAreaH8, FOREST_AREA_H8, 0
+	corner_connection northwest, ForestAreaI8_NorthWestCorner_Blocks	; ForestAreaH7

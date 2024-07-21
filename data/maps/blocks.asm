@@ -1,3 +1,30 @@
+; work around limitations of tools/scan_includes.c
+DEF XINC EQUS "INC"
+MACRO {XINC}MAPCORNER
+;\1: map file
+;\2: map id
+;\3: direction
+	if !STRCMP("\3", "northeast")
+		for x, 3
+			{XINC}BIN \1, \2_WIDTH * (x + 1) - 3, 3
+		endr
+	elif !STRCMP("\3", "northwest")
+		for x, 3
+			{XINC}BIN \1, \2_WIDTH * x, 3
+		endr
+	elif !STRCMP("\3", "southeast")
+		for x, 3
+			{XINC}BIN \1, \2_WIDTH * (\2_HEIGHT + x - 2) - 3, 3
+		endr
+	elif !STRCMP("\3", "southwest")
+		for x, 3
+			{XINC}BIN \1, \2_WIDTH * (\2_HEIGHT + x - 3), 3
+		endr
+	else
+		fail "Invalid direction for '{XINC}MAPCORNER'."
+	endc
+ENDM
+
 SECTION "Map Blocks 1", ROMX
 
 Route32_Blocks:
@@ -907,24 +934,44 @@ ENDSECTION
 
 SECTION "Map Blocks 4", ROMX
 
-ForestAreaH8_Blocks:
-	INCBIN "maps/ForestAreaH8.ablk"
-
 ForestAreaF7_Blocks:
 	INCBIN "maps/ForestAreaF7.ablk"
-
+ForestAreaF7_SouthEastCorner_Blocks:
+	INCMAPCORNER "maps/ForestAreaG8.ablk", FOREST_AREA_G8, southeast
+	
 ForestAreaF8_Blocks:
 	INCBIN "maps/ForestAreaF8.ablk"
+ForestAreaF8_NorthEastCorner_Blocks:
+	INCMAPCORNER "maps/ForestAreaG7.ablk", FOREST_AREA_G7, northeast
 
 ForestAreaG7_Blocks:
 	INCBIN "maps/ForestAreaG7.ablk"
+ForestAreaG7_SouthEastCorner_Blocks:
+	INCMAPCORNER "maps/ForestAreaH8.ablk", FOREST_AREA_H8, southeast
+ForestAreaG7_SouthWestCorner_Blocks:
+	INCMAPCORNER "maps/ForestAreaF8.ablk", FOREST_AREA_G7, southwest
 
 ForestAreaG8_Blocks:
 	INCBIN "maps/ForestAreaG8.ablk"
+ForestAreaG8_NorthEastCorner_Blocks:
+	INCMAPCORNER "maps/ForestAreaH7.ablk", FOREST_AREA_H7, northeast
+ForestAreaG8_NorthWestCorner_Blocks:
+	INCMAPCORNER "maps/ForestAreaF7.ablk", FOREST_AREA_F7, northwest
 
 ForestAreaH7_Blocks:
 	INCBIN "maps/ForestAreaH7.ablk"
-	
+ForestAreaH7_SouthEastCorner_Blocks:
+	INCMAPCORNER "maps/ForestAreaI8.ablk", FOREST_AREA_I8, southeast
+ForestAreaH7_SouthWestCorner_Blocks:
+	INCMAPCORNER "maps/ForestAreaG8.ablk", FOREST_AREA_G8, southwest
+
+ForestAreaH8_Blocks:
+	INCBIN "maps/ForestAreaH8.ablk"
+ForestAreaH8_NorthWestCorner_Blocks:
+	INCMAPCORNER "maps/ForestAreaG7.ablk", FOREST_AREA_G7, northwest
+
 ForestAreaI8_Blocks:
 	INCBIN "maps/ForestAreaI8.ablk"
+ForestAreaI8_NorthWestCorner_Blocks:
+	INCMAPCORNER "maps/ForestAreaH7.ablk", FOREST_AREA_H7, northwest
 ENDSECTION
