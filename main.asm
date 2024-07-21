@@ -399,6 +399,7 @@ INCLUDE "engine/phone/scripts/parry.asm"
 INCLUDE "engine/phone/scripts/erin.asm"
 INCLUDE "engine/phone/scripts/generic_callee.asm"
 INCLUDE "engine/events/trainer_scripts.asm"
+INCLUDE "engine/events/init_events.asm"
 
 
 SECTION "bank32", ROMX
