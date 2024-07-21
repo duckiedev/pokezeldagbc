@@ -907,8 +907,8 @@ ENDSECTION
 
 SECTION "Map Blocks 4", ROMX
 
-ForestStartingArea_Blocks:
-	INCBIN "maps/ForestStartingArea.ablk"
+ForestAreaH8_Blocks:
+	INCBIN "maps/ForestAreaH8.ablk"
 
 ForestAreaF7_Blocks:
 	INCBIN "maps/ForestAreaF7.ablk"

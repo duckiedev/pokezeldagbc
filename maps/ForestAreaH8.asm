@@ -1,9 +1,9 @@
-ForestStartingArea_MapScripts:
+ForestAreaH8_MapScripts:
 	def_scene_scripts
 
 	def_callbacks
 
-ForestStartingArea_MapEvents:
+ForestAreaH8_MapEvents:
 	db 0, 0 ; filler
 
 	def_warp_events

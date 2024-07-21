@@ -684,34 +684,32 @@ ENDM
 	map_attributes Route31VioletGate, ROUTE_31_VIOLET_GATE, $00, 0
 	
 	; New
-	map_attributes ForestStartingArea, FOREST_STARTING_AREA, $00, NORTH | WEST
-	connection north, ForestAreaH7, FOREST_AREA_H7, 0
-	connection west, ForestAreaG8, FOREST_AREA_G8, 0
-	connection east, ForestAreaI8, FOREST_AREA_I8, 0
-	
+	map_attributes ForestAreaF7, FOREST_AREA_F7, $00, SOUTH | EAST
 	connection south, ForestAreaF8, FOREST_AREA_F8, 0
 	connection east, ForestAreaG7, FOREST_AREA_G7, 0
 	
+	map_attributes ForestAreaF8, FOREST_AREA_F8, $00, NORTH | EAST
 	connection north, ForestAreaF7, FOREST_AREA_F7, 0
 	connection east, ForestAreaG8, FOREST_AREA_G8, 0
-	corner_connection northeast, ForestAreaF8CornerNorthEast_Blocks
 	
-	map_attributes ForestAreaG7, FOREST_AREA_G7, $00, SOUTH | WEST | EAST | SOUTHEAST | SOUTHWEST
+	map_attributes ForestAreaG7, FOREST_AREA_G7, $00, SOUTH | WEST | EAST
 	connection south, ForestAreaG8, FOREST_AREA_G8, 0
-	connection east, ForestAreaH7, FOREST_AREA_H7, 0
 	connection west, ForestAreaF7, FOREST_AREA_F7, 0
-	corner_connection southeast, ForestAreaG7CornerSouthEast_Blocks
-	corner_connection southwest, ForestAreaG7CornerSouthWest_Blocks
-	
-	map_attributes ForestAreaG8, FOREST_AREA_G8, $00, NORTH | WEST | EAST | NORTHEAST | NORTHWEST
+	connection east, ForestAreaH7, FOREST_AREA_H7, 0
+
+	map_attributes ForestAreaG8, FOREST_AREA_G8, $00, NORTH | WEST | EAST
 	connection north, ForestAreaG7, FOREST_AREA_G7, 0
 	connection west, ForestAreaF8, FOREST_AREA_F8, 0
-	connection east, ForestStartingArea, FOREST_STARTING_AREA, 0
-	corner_connection northeast, ForestAreaG8CornerNorthEast_Blocks
-	corner_connection northwest, ForestAreaG8CornerNorthWest_Blocks
+	connection east, ForestAreaH8, FOREST_AREA_H8, 0
 	
-	connection south, ForestStartingArea, FOREST_STARTING_AREA, 0
+	map_attributes ForestAreaH7, FOREST_AREA_H7, $00, SOUTH | WEST
+	connection south, ForestAreaH8, FOREST_AREA_H8, 0
 	connection west, ForestAreaG7, FOREST_AREA_G7, 0
+	
+	map_attributes ForestAreaH8, FOREST_AREA_H8, $00, NORTH | WEST | EAST
+	connection north, ForestAreaH7, FOREST_AREA_H7, 0
+	connection west, ForestAreaG8, FOREST_AREA_G8, 0
+	connection east, ForestAreaI8, FOREST_AREA_I8, 0
 
-	map_attributes ForestAreaI8, FOREST_AREA_I8, $00, WEST | NORTHWEST
-	connection west, ForestStartingArea, FOREST_STARTING_AREA, 0
+	map_attributes ForestAreaI8, FOREST_AREA_I8, $00, WEST
+	connection west, ForestAreaH8, FOREST_AREA_H8, 0
