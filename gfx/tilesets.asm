@@ -421,9 +421,6 @@ INCBIN "data/tilesets/omanyte_word_room_attributes.bin"
 TilesetAerodactylWordRoomAttr::
 INCBIN "data/tilesets/aerodactyl_word_room_attributes.bin"
 
-
-SECTION "Tileset Data 12", ROMX
-
 TilesetPokecenterGFX::
 INCBIN "gfx/tilesets/pokecenter.2bpp.lz"
 
@@ -432,6 +429,9 @@ INCBIN "data/tilesets/pokecenter_metatiles.bin"
 
 TilesetPokecenterColl::
 INCLUDE "data/tilesets/pokecenter_collision.asm"
+
+
+SECTION "Tileset Data 12", ROMX
 
 TilesetGameCornerGFX::
 INCBIN "gfx/tilesets/game_corner.2bpp.lz"
@@ -453,6 +453,9 @@ INCLUDE "data/tilesets/train_station_collision.asm"
 
 TilesetForestMeta::
 INCBIN "data/tilesets/forest_metatiles.bin"
+
+
+SECTION "Tileset Data 13", ROMX
 
 TilesetOverworldMainGFX::
 INCBIN "gfx/tilesets/overworld_main.2bpp.lz"

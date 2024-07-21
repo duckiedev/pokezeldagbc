@@ -103,3 +103,20 @@
 	tilecoll FLOOR, FLOOR, WALL, FLOOR ; 66
 	tilecoll FLOOR, FLOOR, WALL, WALL ; 67
 	tilecoll FLOOR, FLOOR, WALL, WALL ; 68
+	tilecoll WALL, WALL, WALL, WALL ; 69
+	tilecoll WALL, WALL, WALL, WALL ; 6a
+	tilecoll FLOOR, FLOOR, FLOOR, FLOOR ; 6b
+	tilecoll WALL, WALL, FLOOR, FLOOR ; 6c
+	tilecoll FLOOR, FLOOR, FLOOR, FLOOR ; 6d
+	tilecoll FLOOR, FLOOR, FLOOR, FLOOR ; 6e
+	tilecoll WALL, WALL, FLOOR, WALL ; 6f
+	tilecoll FLOOR, CUT_TREE, FLOOR, FLOOR ; 70
+	tilecoll FLOOR, CUT_TREE, FLOOR, FLOOR ; 71
+	tilecoll FLOOR, FLOOR, FLOOR, FLOOR ; 72
+	tilecoll FLOOR, FLOOR, FLOOR, FLOOR ; 73
+	tilecoll FLOOR, CUT_TREE, FLOOR, FLOOR ; 74
+	tilecoll FLOOR, CUT_TREE, FLOOR, FLOOR ; 75
+	tilecoll FLOOR, FLOOR, FLOOR, FLOOR ; 76
+	tilecoll FLOOR, FLOOR, WALL, WALL ; 77
+	tilecoll FLOOR, FLOOR, WALL, WALL ; 78
+	tilecoll WALL, WALL, WALL, WALL ; 79
