@@ -949,7 +949,7 @@ ForestAreaG7_Blocks:
 ForestAreaG7_SouthEastCorner_Blocks:
 	INCMAPCORNER "maps/ForestAreaH8.ablk", FOREST_AREA_H8, southeast
 ForestAreaG7_SouthWestCorner_Blocks:
-	INCMAPCORNER "maps/ForestAreaF8.ablk", FOREST_AREA_G7, southwest
+	INCMAPCORNER "maps/ForestAreaF8.ablk", FOREST_AREA_F8, southwest
 
 ForestAreaG8_Blocks:
 	INCBIN "maps/ForestAreaG8.ablk"
