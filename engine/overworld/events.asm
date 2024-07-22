@@ -1110,10 +1110,17 @@ TryTileCollisionEvent::
 .headbutt
 	ld a, [wFacingTileID]
 	call CheckHeadbuttTreeTile
-	jr nz, .surf
+	jr nz, .vine_whip
 	farcall TryHeadbuttOW
 	jr c, .done
 	jr .noevent
+
+.vine_whip
+	ld a, [wFacingTileID]
+	call CheckVineWhipTile
+	jr nz, .surf
+	farcall TryVineWhipOW
+	jr .done
 
 .surf
 	farcall TrySurfOW

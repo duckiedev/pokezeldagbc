@@ -1810,3 +1810,163 @@ CantCutScript:
 CanCutText:
 	text_far _CanCutText
 	text_end
+
+VineWhipFunction:
+	call FieldMoveJumptableReset
+.loop
+	ld hl, .jumptable
+	call FieldMoveJumptable
+	jr nc, .loop
+	and $7f
+	ld [wFieldMoveSucceeded], a
+	ret
+	
+.jumptable:
+	dw .TryVineWhip
+	dw .DoVineWhip
+	dw .FailVineWhip
+
+.TryVineWhip:
+	;ld de, ENGINE_EARTHBADGE
+	;farcall CheckBadge
+	;jr c, .noearthbadge
+	call TryVineWhipMenu
+	jr c, .failed
+	ld a, $1
+	ret
+
+;.noearthbadge
+	;ld, a $80
+	;ret
+
+.failed
+	ld a, $2
+	ret
+	
+.DoVineWhip:
+	ld hl, VineWhipFromMenuScript
+	call QueueScript
+	ld a, $81
+	ret
+
+.FailVineWhip:
+	call FieldMoveFailed
+	ld a, $80
+	ret
+
+TryVineWhipMenu:
+	call GetFacingTileCoord
+	ld c, a
+	push de
+	call CheckVineWhipTile
+	pop de
+	jr nz, .failed
+	xor a
+	ret
+
+.failed
+	scf
+	ret
+
+TryVineWhipOW::
+	ld de, ENGINE_EARTHBADGE
+	call CheckEngineFlag
+	jr c, .cant_whip
+	
+	ld d, VINE_WHIP
+	call CheckPartyMove
+	jr c, .cant_whip
+
+	ld a, BANK(AskVineWhipScript)
+	ld hl, AskVineWhipScript
+	call CallScript
+	scf
+	ret
+
+.cant_whip
+	ld a, BANK(CantVineWhipScript)
+	ld hl, CantVineWhipScript
+	call CallScript
+	scf
+	ret
+
+AskVineWhipScript:
+	opentext
+	writetext AskVineWhipText
+	yesorno
+	iftrue UsedVineWhipScript
+	closetext
+	end
+
+CantVineWhipScript:
+	jumptext CantVineWhipText
+
+VineWhipFromMenuScript:
+	reloadmappart
+	special UpdateTimePals
+
+UsedVineWhipScript:
+	callasm GetPartyNickname
+	writetext UsedVineWhipText
+	closetext
+	loadvar VAR_MOVEMENT, PLAYER_NORMAL
+	special UpdatePlayerSprite
+	waitsfx
+	playsound SFX_STRENGTH
+	readvar VAR_FACING
+	if_equal DOWN, .down
+.loop_up
+	applymovement PLAYER, .VineWhipUpStep
+	callasm .CheckContinueVineWhip
+	iffalse .loop_up
+	end
+	
+.down:
+	applymovement PLAYER, .VineWhipFixFacing
+.loop_down
+	applymovement PLAYER, .VineWhipDownStep
+	callasm .CheckContinueVineWhip
+	iffalse .loop_down
+	applymovement PLAYER, .VineWhipRemoveFixedFacing
+	end
+	
+.CheckContinueVineWhip:
+	xor a
+	ld [wScriptVar], a
+	ld a, [wPlayerTileCollision]
+	call CheckVineWhipTile
+	ret z
+	ld a, $1
+	ld [wScriptVar], a
+	ret
+	
+.VineWhipUpStep:
+	step UP
+	step_end
+
+.VineWhipDownStep:
+	step DOWN
+	step_end
+
+.VineWhipFixFacing:
+	turn_head UP
+	fix_facing
+	step_end
+	
+.VineWhipRemoveFixedFacing:
+	remove_fixed_facing
+	turn_head DOWN
+	step_end
+
+AskVineWhipText:
+	text_far _AskVineWhipText
+	text_end
+
+UsedVineWhipText:
+	text_far _UsedVineWhipText
+	text_end
+
+CantVineWhipText:
+	text_far _CantVineWhipText
+	text_end
+	

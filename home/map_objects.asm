@@ -153,6 +153,10 @@ CheckHeadbuttTreeTile::
 	cp COLL_HEADBUTT_TREE_1D
 	ret
 
+CheckVineWhipTile::
+	cp COLL_VINEWHIP
+	ret
+
 CheckCounterTile::
 	cp COLL_COUNTER
 	ret z

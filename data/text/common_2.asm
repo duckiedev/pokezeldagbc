@@ -1549,3 +1549,23 @@ _OakText5::
 	para "That's why I study"
 	line "#MON every day."
 	prompt
+
+_AskVineWhipText::
+	text "Something could"
+	line "latch on over"
+	line "there…"
+	
+	para "Want to use"
+	line "VINE WHIP?"
+	done
+
+_UsedVineWhipText::
+	text_ram wStringBuffer2
+	text " used"
+	line "VINE WHIP!"
+	prompt
+
+_CantVineWhipText::
+	text "Something could"
+	line "latch on over"
+	line "there…"
