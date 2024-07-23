@@ -741,3 +741,5 @@ ENDM
 	map_attributes ForestAreaI8, FOREST_AREA_I8, $00, WEST | NORTHWEST
 	connection west, ForestAreaH8, FOREST_AREA_H8, 0
 	corner_connection northwest, ForestAreaI8_NorthWestCorner_Blocks	; ForestAreaH7
+	
+	map_attributes CaveH8, CAVE_H8, $00, 0								; CaveH8

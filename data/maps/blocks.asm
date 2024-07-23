@@ -970,6 +970,9 @@ ForestAreaH8_Blocks:
 ForestAreaH8_NorthWestCorner_Blocks:
 	INCMAPCORNER "maps/ForestAreaG7.ablk", FOREST_AREA_G7, northwest
 
+CaveH8_Blocks:
+	INCBIN "maps/CaveH8.ablk"
+
 ForestAreaI8_Blocks:
 	INCBIN "maps/ForestAreaI8.ablk"
 ForestAreaI8_NorthWestCorner_Blocks:

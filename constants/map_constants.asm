@@ -497,5 +497,9 @@ ENDM
 	map_const FOREST_AREA_H8,								5,  5 ;  6
 	map_const FOREST_AREA_I8,								5,  5 ;  7
 	endgroup
+	
+	newgroup CAVE												  ; 28
+	map_const CAVE_H8,										6,  5 ;  1
+	endgroup
 
 DEF NUM_MAP_GROUPS EQU const_value ; 27

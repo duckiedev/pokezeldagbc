@@ -44,6 +44,7 @@ MapGroupPointers::
 	dw MapGroup_Saffron     ; 25
 	dw MapGroup_Cherrygrove ; 26
 	dw MapGroup_Forest		; 27
+	dw MapGroup_Cave		; 28
 	assert_table_length NUM_MAP_GROUPS
 
 MapGroup_Olivine:
@@ -535,3 +536,8 @@ MapGroup_Forest:
 	map ForestAreaH8, TILESET_OVERWORLD_MAIN, ROUTE, LANDMARK_NEW_BARK_TOWN, MUSIC_NEW_BARK_TOWN, TRUE, PALETTE_AUTO, FISHGROUP_NONE
 	map ForestAreaI8, TILESET_OVERWORLD_MAIN, ROUTE, LANDMARK_NEW_BARK_TOWN, MUSIC_NEW_BARK_TOWN, TRUE, PALETTE_AUTO, FISHGROUP_NONE
 	assert_table_length NUM_FOREST_MAPS
+
+MapGroup_Cave:
+	table_width MAP_LENGTH, MapGroup_Cave
+	map CaveH8, TILESET_CAVE_MAIN, CAVE, LANDMARK_NEW_BARK_TOWN, MUSIC_DARK_CAVE, TRUE, PALETTE_AUTO, FISHGROUP_NONE
+	assert_table_length NUM_CAVE_MAPS

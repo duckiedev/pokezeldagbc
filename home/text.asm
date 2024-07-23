@@ -69,7 +69,7 @@ TextboxBorder::
 	push hl
 	ld a, "│"
 	ld [hli], a
-	ld a, " "
+	ld a, "│"
 	call .PlaceChars
 	ld [hl], "│"
 	pop hl

@@ -468,3 +468,15 @@ INCLUDE "data/tilesets/overworld_main_collision.asm"
 
 TilesetOverworldMainAttr::
 INCBIN "data/tilesets/overworld_main_attributes.bin"
+
+TilesetCaveMainGFX::
+INCBIN "gfx/tilesets/cave_main.2bpp.lz"
+
+TilesetCaveMainMeta::
+INCBIN "data/tilesets/cave_main_metatiles.bin"
+
+TilesetCaveMainColl::
+INCLUDE "data/tilesets/cave_main_collision.asm"
+
+TilesetCaveMainAttr::
+INCBIN "data/tilesets/cave_main_attributes.bin"

@@ -109,3 +109,7 @@
 ; group 27 (Forest)
 	RGB 21,21,21, 11,11,11 ; morn/day
 	RGB 21,21,21, 11,11,11 ; nite
+
+; group 28 (Cave)
+	RGB 21,21,21, 11,11,11 ; morn/day
+	RGB 21,21,21, 11,11,11 ; nite
