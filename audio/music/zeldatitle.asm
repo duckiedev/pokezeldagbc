@@ -19,6 +19,7 @@ Music_ZeldaTitle_Ch1:
 	volume_envelope 10, 0
 	tempo 159
 ;Bar 1
+.mainloop:
 	note_type 8, 10, 7
 	octave 3
 	note A#, 4
@@ -200,7 +201,7 @@ Music_ZeldaTitle_Ch1:
 	note_type 12, 11, 7
 	octave 2
 	note A#, 16
-	sound_ret
+	sound_loop 0, .mainloop
 
 ; ============================================================================================================
 
@@ -209,6 +210,7 @@ Music_ZeldaTitle_Ch2:
 	vibrato 20, 1, 2
 	note_type 12, 10, 7
 ;Bar 1
+.mainloop:
 	octave 1
 	volume_envelope 10, 4
 	note A#, 2
@@ -507,7 +509,7 @@ Music_ZeldaTitle_Ch2:
 	note A_, 1
 ;Bar 19
 	note A#, 16
-	sound_ret
+	sound_loop 0, .mainloop
 
 ; ============================================================================================================
 
@@ -515,6 +517,7 @@ Music_ZeldaTitle_Ch3:
 	vibrato 16, 1, 4
 	note_type 12, 1, 0
 ;Bar 1
+.mainloop:
 	volume_envelope 2, 0
 	rest 16
 	rest 2
@@ -664,7 +667,7 @@ Music_ZeldaTitle_Ch3:
 	note A_, 16
 	note A_, 16
 	note A_, 16
-	sound_ret
+	sound_loop 0, .mainloop
 
 ; ============================================================================================================
 

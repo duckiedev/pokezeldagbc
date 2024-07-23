@@ -16,23 +16,15 @@ Get2bppOptionalHDMA: ; unreferenced
 	jp Get2bpp
 
 _LoadStandardFont::
- 	ld de, Font
- 	ld hl, vTiles1
- 	lb bc, BANK(Font), 32 ; "A" to "]"
- 	call Get1bppViaHDMA
- 	ld de, Font + 32 * LEN_1BPP_TILE
- 	ld hl, vTiles1 tile $20
-	lb bc, BANK(Font), 26 ; "a" to "z" (skip "┌" to "┘")
- 	call Get1bppViaHDMA
- 	ld de, Font + 64 * LEN_1BPP_TILE
- 	ld hl, vTiles1 tile $40
-	lb bc, BANK(Font), 32 ; $c0 to "←"
- 	call Get1bppViaHDMA
- 	ld de, Font + 96 * LEN_1BPP_TILE
- 	ld hl, vTiles1 tile $60
- 	lb bc, BANK(Font), 32 ; "'" to "9"
- 	call Get1bppViaHDMA
- 	ret
+	ld de, Font
+	ld hl, vTiles1
+	lb bc, BANK(Font), $80
+	call Get2bpp
+	ld de, TextboxSpaceUniqueGFX
+	ld hl, vTiles2 tile " "
+	lb bc, BANK(TextboxSpaceUniqueGFX), 1
+	call Get2bpp
+	ret
 
 _LoadFontsExtra1::
 	jr LoadFrame
@@ -58,7 +50,7 @@ LoadFrame:
 	ld hl, vTiles0 tile "┌" ; $ba
 	lb bc, BANK(Frames), TEXTBOX_FRAME_TILES ; "┌" to "┘"
 	call Get1bppViaHDMA
-	ld hl, vTiles2 tile " " ; $7f
+	ld hl, vTiles2 tile $D7 ; $7f
 	ld de, TextboxSpaceUniqueGFX
 	lb bc, BANK(TextboxSpaceUniqueGFX), 1
 	call Get1bppViaHDMA

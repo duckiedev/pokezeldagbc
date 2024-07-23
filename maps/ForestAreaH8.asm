@@ -7,7 +7,7 @@ ForestAreaH8_MapEvents:
 	db 0, 0 ; filler
 
 	def_warp_events
-	warp_event  2,  1, NEW_BARK_TOWN, 1
+	warp_event  2,  1, CAVE_H8, 1
 
 	def_coord_events
 

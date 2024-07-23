@@ -4,6 +4,7 @@ INCLUDE "engine/link/place_waiting_text.asm"
 INCLUDE "engine/gfx/load_push_oam.asm"
 INCLUDE "engine/overworld/map_objects.asm"
 INCLUDE "engine/menus/intro_menu.asm"
+;INCLUDE "engine/menus/new_intro_menu.asm"
 INCLUDE "engine/overworld/init_map.asm"
 INCLUDE "engine/pokemon/learn.asm"
 INCLUDE "engine/pokemon/correct_nick_errors.asm"
@@ -469,6 +470,7 @@ INCLUDE "engine/link/mystery_gift.asm"
 INCLUDE "engine/battle/used_move_text.asm"
 INCLUDE "mobile/mobile_41.asm"
 INCLUDE "engine/gfx/load_overworld_font.asm"
+INCLUDE "engine/gfx/load_zelda_font.asm"
 
 
 SECTION "mobile42", ROMX
@@ -617,6 +619,7 @@ INCLUDE "engine/events/diploma.asm"
 INCLUDE "engine/pokedex/pokedex_3.asm"
 INCLUDE "engine/events/catch_tutorial_input.asm"
 INCLUDE "engine/pokegear/townmap_convertlinebreakcharacters.asm"
+;INCLUDE "engine/menus/new_intro_menu.asm"
 
 
 SECTION "European Mail", ROMX

@@ -65,7 +65,7 @@ NewGame:
 	call NewGame_ClearTilemapEtc
 	call PlayerProfileSetup
 	call OakSpeech
-	call NamePlayer
+	;call NamePlayer
 	call InitializeWorld
 
 	ld a, LANDMARK_NEW_BARK_TOWN
@@ -631,7 +631,7 @@ Continue_DisplayGameTime:
 	jp PrintNum
 
 OakSpeech:
-	farcall InitClock
+	;farcall InitClock
 	call RotateFourPalettesLeft
 	call ClearTilemap
 
