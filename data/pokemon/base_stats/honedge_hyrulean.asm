@@ -14,7 +14,8 @@
 	INCBIN "gfx/pokemon/honedge_hyrulean/front.dimensions"
 	dw NULL, NULL ; unused (beta front/back pics)
 	db GROWTH_MEDIUM_SLOW ; growth rate
-	dn EGG_NONE, EGG_NONE ; egg type
+	dn EGG_NONE, EGG_NONE ; egg groups
 	
 	; tm/hm learnset
-	tmhm HIDDEN_POWER, PROTECT, ENDURE, DETECT, FURY CUTTER, CUT
+	tmhm HIDDEN_POWER, PROTECT, ENDURE, DETECT, CUT
+	;end

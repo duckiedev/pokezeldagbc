@@ -3362,6 +3362,5 @@ HonedgeHyruleanEvosAttacks:
 	db 1, SWORDS_DANCE
 	db 1, FURY_CUTTER
 	db 15, SLASH
-	db 20, AERIAL_ACE
 	db 0 ; no more level up moves for now
 	

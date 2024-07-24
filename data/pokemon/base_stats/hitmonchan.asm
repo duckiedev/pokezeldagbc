@@ -3,7 +3,7 @@
 	db  50, 105,  79,  76,  35, 110
 	;   hp  atk  def  spd  sat  sdf
 
-	db WARRIOR WARRIOR ; type
+	db WARRIOR, WARRIOR ; type
 	db 45 ; catch rate
 	db 140 ; base exp
 	db NO_ITEM, NO_ITEM ; items
