@@ -64,8 +64,8 @@ NewGame:
 	call ResetWRAM
 	call NewGame_ClearTilemapEtc
 	call PlayerProfileSetup
-	call OakSpeech
-	;call NamePlayer
+	;call OakSpeech
+	call NamePlayer
 	call InitializeWorld
 
 	ld a, LANDMARK_NEW_BARK_TOWN
