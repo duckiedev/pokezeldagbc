@@ -8,7 +8,7 @@
 
 DEF PHYSICAL EQU const_value
 	const NORMAL
-	const FIGHTING
+	const WARRIOR
 	const FLYING
 	const POISON
 	const GROUND
@@ -26,7 +26,7 @@ DEF UNUSED_TYPES_END EQU const_value
 DEF SPECIAL EQU const_value
 	const FIRE
 	const WATER
-	const GRASS
+	const FOREST
 	const ELECTRIC
 	const PSYCHIC_TYPE
 	const ICE

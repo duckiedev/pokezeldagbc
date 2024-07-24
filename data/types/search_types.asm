@@ -4,10 +4,10 @@ PokedexTypeSearchConversionTable:
 	db NORMAL
 	db FIRE
 	db WATER
-	db GRASS
+	db FOREST
 	db ELECTRIC
 	db ICE
-	db FIGHTING
+	db WARRIOR
 	db POISON
 	db GROUND
 	db FLYING

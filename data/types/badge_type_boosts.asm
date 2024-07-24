@@ -5,7 +5,7 @@ BadgeTypeBoosts:
 	db NORMAL       ; PLAINBADGE
 	db GHOST        ; FOGBADGE
 	db STEEL        ; MINERALBADGE
-	db FIGHTING     ; STORMBADGE
+	db WARRIOR     ; STORMBADGE
 	db ICE          ; GLACIERBADGE
 	db DRAGON       ; RISINGBADGE
 	; fallthrough
@@ -13,7 +13,7 @@ BadgeTypeBoosts:
 	db ROCK         ; BOULDERBADGE
 	db WATER        ; CASCADEBADGE
 	db ELECTRIC     ; THUNDERBADGE
-	db GRASS        ; RAINBOWBADGE
+	db FOREST        ; RAINBOWBADGE
 	db POISON       ; SOULBADGE
 	db PSYCHIC_TYPE ; MARSHBADGE
 	db FIRE         ; VOLCANOBADGE

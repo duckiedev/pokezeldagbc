@@ -3355,3 +3355,13 @@ CelebiEvosAttacks:
 	db 40, BATON_PASS
 	db 50, PERISH_SONG
 	db 0 ; no more level-up moves
+
+HonedgeHyruleanEvosAttacks:
+	db 0 ; no evolutions for now
+	db 1, TACKLE
+	db 1, SWORDS_DANCE
+	db 1, FURY_CUTTER
+	db 15, SLASH
+	db 20, AERIAL_ACE
+	db 0 ; no more level up moves for now
+	

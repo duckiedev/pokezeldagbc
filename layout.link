@@ -186,7 +186,6 @@ ROMX $46
 ROMX $47
 	"Battle Tower"
 ROMX $48
-	org $4000
 	"Pic Pointers"
 	"Pics 1"
 ROMX $49

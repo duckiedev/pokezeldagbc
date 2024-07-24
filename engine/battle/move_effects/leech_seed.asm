@@ -13,12 +13,12 @@ BattleCommand_LeechSeed:
 .ok
 
 	ld a, [de]
-	cp GRASS
-	jr z, .grass
+	cp FOREST
+	jr z, .forest
 	inc de
 	ld a, [de]
-	cp GRASS
-	jr z, .grass
+	cp FOREST
+	jr z, .forest
 
 	ld a, BATTLE_VARS_SUBSTATUS4_OPP
 	call GetBattleVarAddr
@@ -29,7 +29,7 @@ BattleCommand_LeechSeed:
 	ld hl, WasSeededText
 	jp StdBattleTextbox
 
-.grass
+.forest
 	call AnimateFailedMove
 	jp PrintDoesntAffect
 

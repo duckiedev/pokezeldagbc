@@ -3,7 +3,7 @@ TypeNames:
 	table_width 2, TypeNames
 
 	dw Normal
-	dw Fighting
+	dw Warrior
 	dw Flying
 	dw Poison
 	dw Ground
@@ -31,13 +31,13 @@ endr
 	assert_table_length TYPES_END
 
 Normal:    db "NORMAL@"
-Fighting:  db "FIGHTING@"
+Warrior:  db "WARRIOR@"
 Flying:    db "FLYING@"
 Poison:    db "POISON@"
 CurseType: db "???@"
 Fire:      db "FIRE@"
 Water:     db "WATER@"
-Grass:     db "GRASS@"
+Grass:     db "FOREST@"
 Electric:  db "ELECTRIC@"
 Psychic:   db "PSYCHIC@"
 Ice:       db "ICE@"
