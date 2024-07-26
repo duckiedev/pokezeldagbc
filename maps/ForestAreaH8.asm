@@ -11,10 +11,7 @@ CaveSignTest:
 	end
 	
 CaveSignText:
-	text "This is a test"
-	line "to see how many"
-	line "characters can "
-	cont "fit."
+	text "ELM: What?!?"
 
 	para "PROF.OAK gave you"
 	line "a #DEX?"
@@ -22,6 +19,29 @@ CaveSignText:
 	para "<PLAY_G>, is that"
 	line "true? Th-that's"
 	cont "incredible!"
+
+	para "He is superb at"
+	line "seeing the poten-"
+	cont "tial of people as"
+	cont "trainers."
+
+	para "Wow, <PLAY_G>. You"
+	line "may have what it"
+
+	para "takes to become"
+	line "the CHAMPION."
+
+	para "You seem to be"
+	line "getting on great"
+	cont "with #MON too."
+
+	para "You should take"
+	line "the #MON GYM"
+	cont "challenge."
+
+	para "The closest GYM"
+	line "would be the one"
+	cont "in VIOLET CITY."
 	done
 
 ForestAreaH8_MapEvents:

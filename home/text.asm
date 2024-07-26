@@ -140,7 +140,7 @@ PrintText::
 BuenaPrintText::
 	push hl
 	hlcoord TEXTBOX_INNERX, TEXTBOX_INNERY
-	lb bc, TEXTBOX_INNERH, TEXTBOX_INNERW
+	lb bc, TEXTBOX_INNERH - 1, TEXTBOX_INNERW
 	call ClearBox
 	pop hl
 	; fallthrough
@@ -425,7 +425,7 @@ CarriageReturnChar::
 
 LineChar::
 	pop hl
-	hlcoord TEXTBOX_INNERX, TEXTBOX_INNERY + 1
+	hlcoord TEXTBOX_INNERX, TEXTBOX_INNERY + 2
 	push hl
 	jp NextChar
 
