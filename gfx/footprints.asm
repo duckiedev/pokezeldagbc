@@ -294,10 +294,10 @@ INCBIN "gfx/footprints/tyranitar.1bpp"
 INCBIN "gfx/footprints/lugia.1bpp"      
 INCBIN "gfx/footprints/ho_oh.1bpp"      
 INCBIN "gfx/footprints/celebi.1bpp"     
-INCBIN "gfx/footprints/honedge_hyrulean.1bpp"        
+INCBIN "gfx/footprints/honedge_h.1bpp"        
 INCBIN "gfx/footprints/253.1bpp"        
 INCBIN "gfx/footprints/254.1bpp"        
-INCBIN "gfx/footprints/255.1bpp"        
+INCBIN "gfx/footprints/255.1bpp"
 INCBIN "gfx/footprints/256.1bpp"
 
 	assert_table_length $100

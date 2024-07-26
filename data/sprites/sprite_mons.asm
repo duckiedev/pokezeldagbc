@@ -36,5 +36,5 @@ SpriteMons:
 	db GYARADOS
 	db LUGIA
 	db HO_OH
-	db HONEDGE_HYRULEAN
+	db HONEDGE_H
 	assert_table_length NUM_POKEMON_SPRITES

@@ -3356,7 +3356,7 @@ CelebiEvosAttacks:
 	db 50, PERISH_SONG
 	db 0 ; no more level-up moves
 
-HonedgeHyruleanEvosAttacks:
+HonedgeHEvosAttacks:
 	db 0 ; no evolutions for now
 	db 1, TACKLE
 	db 1, SWORDS_DANCE

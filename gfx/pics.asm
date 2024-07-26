@@ -713,8 +713,8 @@ SECTION "Pics 19", ROMX
 
 ; Seems to be an accidental copy of the previous bank
 
-HonedgeHyruleanFrontPic:	INCBIN "gfx/pokemon/honedge_hyrulean/front.2bpp.lz"
-HonedgeHyruleanBackPic:		INCBIN "gfx/pokemon/honedge_hyrulean/back.2bpp.lz"
+HonedgeHFrontPic:	INCBIN "gfx/pokemon/honedge_h/front.animated.2bpp.lz"
+HonedgeHBackPic:		INCBIN "gfx/pokemon/honedge_h/back.2bpp.lz"
 
 
 ; Sections "Pics 20" to "Pics 24" are not used for any graphics,

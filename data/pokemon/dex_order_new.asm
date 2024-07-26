@@ -253,5 +253,5 @@ NewPokedexOrder:
 	db MEWTWO
 	db MEW
 	db CELEBI
-	db HONEDGE_HYRULEAN
+	db HONEDGE_H
 	assert_table_length NUM_POKEMON

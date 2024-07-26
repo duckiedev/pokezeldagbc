@@ -40,5 +40,5 @@ IconPointers:
 	dw SlowpokeIcon
 	dw SudowoodoIcon
 	dw BigmonIcon
-	dw Honedge_HyruleanIcon
+	dw Honedge_HIcon
 	assert_table_length NUM_ICONS + 1

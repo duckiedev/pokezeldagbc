@@ -1,4 +1,4 @@
-	db HONEDGE_HYRULEAN ; 252
+	db HONEDGE_H ; 252
 
 	db  45,  80, 100,  28,  35,  37
 	;   hp  atk  def  spd  sat  sdf
@@ -11,7 +11,7 @@
 	db 100 ; unknown 1
 	db 40 ; step cycles to hatch
 	db 5 ; unknown 2
-	INCBIN "gfx/pokemon/honedge_hyrulean/front.dimensions"
+	INCBIN "gfx/pokemon/honedge_h/front.dimensions"
 	dw NULL, NULL ; unused (beta front/back pics)
 	db GROWTH_MEDIUM_SLOW ; growth rate
 	dn EGG_NONE, EGG_NONE ; egg groups

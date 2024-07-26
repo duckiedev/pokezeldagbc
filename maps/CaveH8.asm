@@ -20,20 +20,20 @@ CaveH8_ItsDangerousToGoAloneScene:
 	writetext OldManText_ItsDangerous
 	waitbutton
 	closetext
-	pokepic HONEDGE_HYRULEAN
-	cry HONEDGE_HYRULEAN
+	pokepic HONEDGE_H
+	cry HONEDGE_H
 	waitbutton
 	closepokepic
 	disappear CAVEH8_HONEDGE
 	setevent EVENT_GOT_CHIKORITA_FROM_ELM
 	promptbutton
 	waitsfx
-	getmonname STRING_BUFFER_3, HONEDGE_HYRULEAN
+	getmonname STRING_BUFFER_3, HONEDGE_H
 	;writetext ReceivedStarterText
 	playsound SFX_CAUGHT_MON
 	waitsfx
 	promptbutton
-	givepoke HONEDGE_HYRULEAN, 5, BERRY
+	givepoke HONEDGE_H, 5, BERRY
 	closetext
 	end
 
@@ -51,8 +51,8 @@ CaveH8_WalkUpToOldManMovement:
 	step_end
 
 CaveH8_HonedgeScript:
-	pokepic HONEDGE_HYRULEAN
-	cry HONEDGE_HYRULEAN
+	pokepic HONEDGE_H
+	cry HONEDGE_H
 	waitbutton
 	closepokepic
 	end
@@ -70,4 +70,4 @@ CaveH8_MapEvents:
 
 	def_object_events
 	object_event  5,  3, SPRITE_OLDMAN, SPRITEMOVEDATA_STILL, 1, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, -1, -1
-	object_event  6,  3, SPRITE_HONEDGE_HYRULEAN, SPRITEMOVEDATA_STILL, 0, 1, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, CaveH8_HonedgeScript, -1
+	object_event  6,  3, SPRITE_HONEDGE_H, SPRITEMOVEDATA_STILL, 0, 1, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, CaveH8_HonedgeScript, -1
