@@ -164,6 +164,9 @@ SECTION "Crystal Sound Effects", ROMX
 
 INCLUDE "audio/sfx_crystal.asm"
 
+SECTION "Zelda Sound Effects", ROMX
+
+INCLUDE "audio/sfx_zelda.asm"
 
 SECTION "Cries", ROMX
 

@@ -56,9 +56,7 @@ TextboxBorder::
 	push hl
 	ld a, "┌"
 	ld [hli], a
-	inc a ; "─"
 	call .PlaceChars
-	inc a ; "┐"
 	ld [hl], a
 	pop hl
 
@@ -67,11 +65,9 @@ TextboxBorder::
 	add hl, de
 .row
 	push hl
-	ld a, "│"
 	ld [hli], a
-	ld a, "│"
 	call .PlaceChars
-	ld [hl], "│"
+	ld [hl], a
 	pop hl
 
 	ld de, SCREEN_WIDTH
@@ -80,11 +76,9 @@ TextboxBorder::
 	jr nz, .row
 
 	; Bottom
-	ld a, "└"
 	ld [hli], a
-	ld a, "─"
 	call .PlaceChars
-	ld [hl], "┘"
+	ld [hl], a
 
 	ret
 
@@ -146,7 +140,7 @@ PrintText::
 BuenaPrintText::
 	push hl
 	hlcoord TEXTBOX_INNERX, TEXTBOX_INNERY
-	lb bc, TEXTBOX_INNERH + 1, TEXTBOX_INNERW
+	lb bc, TEXTBOX_INNERH, TEXTBOX_INNERW
 	call ClearBox
 	pop hl
 	; fallthrough
@@ -431,7 +425,7 @@ CarriageReturnChar::
 
 LineChar::
 	pop hl
-	hlcoord TEXTBOX_INNERX, TEXTBOX_INNERY + 2
+	hlcoord TEXTBOX_INNERX, TEXTBOX_INNERY + 1
 	push hl
 	jp NextChar
 
