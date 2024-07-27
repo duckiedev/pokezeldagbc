@@ -14,6 +14,8 @@ LoadSpecialMapPalette:
 	jr z, .mansion_mobile
 	cp TILESET_OVERWORLD_MAIN
 	jr z, .overworld_main
+	cp TILESET_CAVE_MAIN
+	jr z, .cave_main
 	jr .do_nothing
 
 .pokecom_2f
@@ -52,6 +54,11 @@ LoadSpecialMapPalette:
 
 .overworld_main
 	call LoadOverworldMainPalette
+	scf
+	ret
+
+.cave_main
+	call LoadCaveMainPalette
 	scf
 	ret
 
@@ -152,3 +159,13 @@ LoadOverworldMainPalette:
 	
 OverworldMainPalette:
 INCLUDE "gfx/tilesets/overworld_main.pal"
+
+LoadCaveMainPalette:
+	ld a, BANK(wBGPals1)
+	ld de, wBGPals1
+	ld hl, CaveMainPalette
+	ld bc, 8 palettes
+	jp FarCopyWRAM
+
+CaveMainPalette:
+INCLUDE "gfx/tilesets/cave_main.pal"
