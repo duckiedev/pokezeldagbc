@@ -5,9 +5,12 @@
 CaveH8_MapScripts:
 	def_scene_scripts
 	scene_script CaveH8_ItsDangerousToGoAloneScene, SCENE_CAVE_H8_OLDMAN_DANGEROUS_TO_GO_ALONE
-	;scene_script CaveH8Noop2Scene, SCENE_CAVE_H8_NOOP
+	scene_script CaveH8NoopScene, SCENE_CAVE_H8_NOOP
 
 	def_callbacks
+
+CaveH8NoopScene:
+	end
 
 CaveH8_ItsDangerousToGoAloneScene:
 	applymovement PLAYER, CaveH8_WalkUpToOldManMovement
@@ -16,11 +19,10 @@ CaveH8_ItsDangerousToGoAloneScene:
 	writetext OldManText_ItsDangerous
 	waitbutton
 	closetext
-	turnobject CAVEH8_OLDMAN, RIGHT
-	cry HONEDGE_H
-	waitsfx
+	applymovement CAVEH8_OLDMAN, CaveH8_TurnToPokemon
+	pause 60
 	disappear CAVEH8_HONEDGE
-	turnobject CAVEH8_OLDMAN, DOWN
+	pause 60
 	applymovement CAVEH8_OLDMAN, CaveH8_WalkDownToPlayer
 	writetext OldManText_TakeThis
 	waitbutton
@@ -31,20 +33,32 @@ CaveH8_ItsDangerousToGoAloneScene:
 	closepokepic
 	setevent EVENT_GOT_CHIKORITA_FROM_ELM
 	getmonname STRING_BUFFER_3, HONEDGE_H
-	;writetext ReceivedStarterText
+	writetext ReceivedHonedgeText
 	playsound SFX_CAUGHT_MON
 	waitsfx
 	promptbutton
+	applymovement CAVEH8_OLDMAN, CaveH8_TeleportOut
+	playsound SFX_WARP_TO
+	disappear CAVEH8_OLDMAN
 	givepoke HONEDGE_H, 5, BERRY
+	
+	setscene SCENE_CAVE_H8_NOOP
 	end
 
 OldManText_ItsDangerous:
 	text "It's dangerous to"
-	line "go alone."
+	line "go alone…"
 	done
 	
 OldManText_TakeThis:
 	text "Take this!"
+	done
+
+ReceivedHonedgeText:
+	text "<PLAYER> received"
+	line "@"
+	text_ram wStringBuffer3
+	text "!"
 	done
 
 CaveH8_WalkUpToOldManMovement:
@@ -53,8 +67,17 @@ CaveH8_WalkUpToOldManMovement:
 	step UP
 	step_end
 
+CaveH8_TurnToPokemon:
+	turn_step RIGHT
+	step_end
+
 CaveH8_WalkDownToPlayer:
-	step DOWN
+	turn_step DOWN
+	slow_step DOWN
+	step_end
+
+CaveH8_TeleportOut:
+	teleport_to
 	step_end
 
 CaveH8_HonedgeScript:
