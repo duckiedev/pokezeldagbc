@@ -1248,8 +1248,8 @@ _NewDexDataText::
 	text_end ; unreferenced
 
 _AskGiveNicknameText::
-	text "Give a nickname to"
-	line "@"
+	text "Give a nickname"
+	line "to @"
 	text_ram wStringBuffer1
 	text "?"
 	done

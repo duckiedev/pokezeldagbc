@@ -5,57 +5,60 @@
 
 CaveH8_MapScripts:
 	def_scene_scripts
-	scene_script CaveH8_ItsDangerousToGoAloneScene, SCENE_CAVE_H8_OLDMAN_DANGEROUS_TO_GO_ALONE
-	scene_script CaveH8NoopScene, SCENE_CAVE_H8_NOOP
+	scene_script CaveH8_IntroScene, SCENE_CAVEH8_INTRO
+	scene_script CaveH8_ItsDangerousToGoAloneIntroScene, SCENE_CAVEH8_OLDMAN_DANGEROUS_TO_GO_ALONE_INTRO
+	scene_script CaveH8NoopScene, SCENE_CAVEH8_NOOP
 
 	def_callbacks
+
+CaveH8_IntroScene:
+	sdefer CaveH8_ItsDangerousToGoAloneIntroScene
+	end
 
 CaveH8NoopScene:
 	end
 
-CaveH8_ItsDangerousToGoAloneScene:
+CaveH8_ItsDangerousToGoAloneIntroScene:
 	applymovement PLAYER, CaveH8_WalkUpToOldManMovement
 	showemote EMOTE_SHOCK, CAVEH8_OLDMAN, 15
 	reanchormap
+	setevent EVENT_CAVEH8_OLDMAN_INTRO
+	setscene SCENE_CAVEH8_NOOP
+	sjump CaveH8_ItsDangerousSpeechBox
+	end
+
+CaveH8_ItsDangerousSpeechBox:
 	opentext
 	writetext OldManText_ItsDangerous
-	waitbutton
+	promptbutton
 	closetext
-	applymovement CAVEH8_OLDMAN, CaveH8_TurnToPokemon
-	pause 30
-	disappear CAVEH8_HONEDGE
-	pause 30
-	applymovement CAVEH8_OLDMAN, CaveH8_WalkDownToPlayer
-	opentext
-	writetext OldManText_TakeThis
-	waitbutton
-	closetext
+	end
+	
+CaveH8_HonedgeScript:
+	reanchormap
 	pokepic HONEDGE_H
 	cry HONEDGE_H
 	waitbutton
 	closepokepic
-	setevent EVENT_GOT_HONEDGE_FROM_OLDMAN
+	setevent EVENT_GOT_HONEDGE
 	getmonname STRING_BUFFER_3, HONEDGE_H
 	opentext
 	writetext ReceivedHonedgeText
 	playsound SFX_CAUGHT_MON
 	waitsfx
-	promptbutton
+	waitbutton
 	closetext
-	playsound SFX_WARP_TO
-	applymovement CAVEH8_OLDMAN, CaveH8_TeleportOut
-	waitsfx
+	disappear CAVEH8_HONEDGE
 	disappear CAVEH8_OLDMAN
 	opentext
 	givepoke HONEDGE_H, 5, BERRY
 	closetext
-	setscene SCENE_CAVE_H8_NOOP
 	end
-	
-CaveH8_RevealDoor:
-	checkevent EVENT_CAVEH8_HIDDEN_DOOR_REVEALED
-	iftrue .AlreadyRevealed
-	checkevent EVENT_GOT_HONEDGE_FROM_OLDMAN
+
+CheckBush:
+	conditional_event EVENT_CAVEH8_HIDDEN_DOOR_REVEALED, .Script
+.Script
+	checkevent EVENT_GOT_HONEDGE
 	opentext
 	iftrue .AskToCut
 	farwritetext _CanCutText
@@ -64,35 +67,22 @@ CaveH8_RevealDoor:
 
 .AskToCut
 	farwritetext _AskCutText
+	yesorno
+	iffalse .skip
 	closetext
-	callasm .OWCutAnimation
+	callasm OWCutAnimation
+	changeblock $8, $3, $15
+	refreshmap
+	reanchormap
 
-	;callasm GetPartyNickname
-	;writetext UseCutText
-	;refreshmap
-	;callasm CutDownTreeOrGrass
-	;closetext
-	end
-
-.OWCutAnimation:
-	farcall OWCutAnimation
-	call BufferScreen
-	call GetMovementPermissions
-	call UpdateSprites
-	call DelayFrame
-	call LoadStandardFont
-	ret
-
-.AlreadyRevealed
+.skip
 	end
 
 OldManText_ItsDangerous:
 	text "It's dangerous to"
-	line "go alone…"
-	done
+	line "go alone!"
 	
-OldManText_TakeThis:
-	text "Take this!"
+	para "Take this."
 	done
 
 ReceivedHonedgeText:
@@ -103,7 +93,6 @@ ReceivedHonedgeText:
 	done
 
 CaveH8_WalkUpToOldManMovement:
-	step UP
 	step UP
 	step UP
 	step_end
@@ -121,13 +110,6 @@ CaveH8_TeleportOut:
 	teleport_to
 	step_end
 
-CaveH8_HonedgeScript:
-	pokepic HONEDGE_H
-	cry HONEDGE_H
-	waitbutton
-	closepokepic
-	end
-
 CaveH8_MapEvents:
 	db 0, 0 ; filler
 
@@ -138,8 +120,8 @@ CaveH8_MapEvents:
 	def_coord_events
 
 	def_bg_events
-
+	bg_event  9,  2, BGEVENT_IFNOTSET, CheckBush
+	
 	def_object_events
-	object_event  5,  3, SPRITE_OLDMAN, SPRITEMOVEDATA_STANDING_DOWN, 1, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, -1, -1
-	object_event  6,  3, SPRITE_HONEDGE_H, SPRITEMOVEDATA_POKEMON, 0, 1, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, CaveH8_HonedgeScript, -1
-	object_event  9,  7, SPRITE_OLDMAN, SPRITEMOVEDATA_STILL, -1, -1, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, CaveH8_RevealDoor, -1
+	object_event  5,  3, SPRITE_OLDMAN, SPRITEMOVEDATA_STILL, 1, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, CaveH8_ItsDangerousSpeechBox, -1
+	object_event  5,  4, SPRITE_HONEDGE_H, SPRITEMOVEDATA_STILL, 0, 1, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, CaveH8_HonedgeScript, -1

@@ -514,15 +514,16 @@ _GotOffBikeText::
 	done
 
 _AskCutText::
-	text "This tree can be"
-	line "CUT!"
+	text "This can be"
+	line "SLASHed!"
 
-	para "Want to use CUT?"
+	para "Want to use"
+	line "SLASH?"
 	done
 
 _CanCutText::
-	text "This tree can be"
-	line "CUT!"
+	text "This can be"
+	line "SLASHed!"
 	done
 
 _FoundItemText::
@@ -775,8 +776,8 @@ _BreedEggHatchText::
 	text_end ; unreferenced
 
 _BreedAskNicknameText::
-	text "Give a nickname to"
-	line "@"
+	text "Give a nickname"
+	line "to @"
 	text_ram wStringBuffer1
 	text "?"
 	done
@@ -1056,11 +1057,8 @@ _LuckyNumberMatchPCText::
 	prompt
 
 _CaughtAskNicknameText::
-	text "Give a nickname to"
-	line "the @"
-	text_ram wStringBuffer1
-	text " you"
-	cont "received?"
+	text "Give it a nick-"
+	line "name?"
 	done
 
 _PokecenterPCCantUseText::

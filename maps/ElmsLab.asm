@@ -228,7 +228,7 @@ ChikoritaPokeBallScript:
 	yesorno
 	iffalse DidntChooseStarterScript
 	disappear ELMSLAB_POKE_BALL3
-	setevent EVENT_GOT_HONEDGE_FROM_OLDMAN
+	setevent EVENT_GOT_HONEDGE
 	writetext ChoseStarterText
 	promptbutton
 	waitsfx
