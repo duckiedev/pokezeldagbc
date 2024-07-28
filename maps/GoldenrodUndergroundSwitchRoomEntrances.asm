@@ -169,7 +169,7 @@ UndergroundRivalBattleScript:
 	setevent EVENT_RIVAL_GOLDENROD_UNDERGROUND
 	checkevent EVENT_GOT_TOTODILE_FROM_ELM
 	iftrue .Totodile
-	checkevent EVENT_GOT_CHIKORITA_FROM_ELM
+	checkevent EVENT_GOT_HONEDGE_FROM_OLDMAN
 	iftrue .Chikorita
 	winlosstext UndergroundRivalWinText, UndergroundRivalLossText
 	setlasttalked GOLDENRODUNDERGROUNDSWITCHROOMENTRANCES_RIVAL

@@ -1569,3 +1569,8 @@ _CantVineWhipText::
 	text "Something could"
 	line "latch on over"
 	line "there…"
+
+_CantDepositText::
+	text "Can't deposit"
+	line "this item."
+	prompt

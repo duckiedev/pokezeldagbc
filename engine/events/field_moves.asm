@@ -110,7 +110,7 @@ TreeRelativeLocationTable:
 	dwcoord 8 - 2, 8     ; DOWN
 	dwcoord 8 + 2, 8     ; UP
 
-OWCutAnimation:
+OWCutAnimation::
 	; Animation index in e
 	; 0: Split tree in half
 	; 1: Mow the lawn

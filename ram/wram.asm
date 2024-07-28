@@ -3251,7 +3251,9 @@ wPlayerMonSelection:: ds 3
 wdc5f:: db
 wdc60:: db
 
-	ds 18
+	ds 17
+
+wCaveH8HiddenDoor:: db
 
 wStepCount:: db
 wPoisonStepCount:: db
