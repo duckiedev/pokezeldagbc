@@ -57,7 +57,7 @@ AlphabeticalPokedexOrder:
 	db ELEKID
 	db ENTEI
 	db ESPEON
-	db EXEGGCUTE
+	db BOOMBLOOM
 	db EXEGGUTOR
 	db FARFETCH_D
 	db FEAROW

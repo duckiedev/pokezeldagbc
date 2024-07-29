@@ -125,7 +125,7 @@ INCBIN "gfx/footprints/krabby.1bpp"
 INCBIN "gfx/footprints/kingler.1bpp"    
 INCBIN "gfx/footprints/voltorb.1bpp"    
 INCBIN "gfx/footprints/electrode.1bpp"
-INCBIN "gfx/footprints/exeggcute.1bpp"
+INCBIN "gfx/footprints/boombloom.1bpp"
 INCBIN "gfx/footprints/exeggutor.1bpp"
 INCBIN "gfx/footprints/cubone.1bpp"     
 ; 105-112

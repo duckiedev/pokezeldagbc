@@ -103,7 +103,7 @@ KantoMonSpecials:
 	db  50 ; KINGLER
 	db  55 ; VOLTORB
 	db  80 ; ELECTRODE
-	db  60 ; EXEGGCUTE
+	db  60 ; BOOMBLOOM
 	db 125 ; EXEGGUTOR
 	db  40 ; CUBONE
 	db  50 ; MAROWAK

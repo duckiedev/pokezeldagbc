@@ -103,7 +103,7 @@ EvosAttacksPointers::
 	dw KinglerEvosAttacks
 	dw VoltorbEvosAttacks
 	dw ElectrodeEvosAttacks
-	dw ExeggcuteEvosAttacks
+	dw BoombloomEvosAttacks
 	dw ExeggutorEvosAttacks
 	dw CuboneEvosAttacks
 	dw MarowakEvosAttacks

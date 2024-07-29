@@ -205,8 +205,8 @@ PokemonPicPointers::
 	dba VoltorbBackpic
 	dba ElectrodeFrontpic
 	dba ElectrodeBackpic
-	dba ExeggcuteFrontpic
-	dba ExeggcuteBackpic
+	dba BoombloomFrontpic
+	dba BoombloomBackpic
 	dba ExeggutorFrontpic
 	dba ExeggutorBackpic
 	dba CuboneFrontpic

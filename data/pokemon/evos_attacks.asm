@@ -1375,8 +1375,7 @@ ElectrodeEvosAttacks:
 	db 48, MIRROR_COAT
 	db 0 ; no more level-up moves
 
-ExeggcuteEvosAttacks:
-	db EVOLVE_ITEM, LEAF_STONE, EXEGGUTOR
+BoombloomEvosAttacks:
 	db 0 ; no more evolutions
 	db 1, BARRAGE
 	db 1, HYPNOSIS

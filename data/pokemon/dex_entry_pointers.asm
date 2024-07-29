@@ -102,7 +102,7 @@ PokedexDataPointerTable:
 	dw KinglerPokedexEntry
 	dw VoltorbPokedexEntry
 	dw ElectrodePokedexEntry
-	dw ExeggcutePokedexEntry
+	dw BoombloomPokedexEntry
 	dw ExeggutorPokedexEntry
 	dw CubonePokedexEntry
 	dw MarowakPokedexEntry
