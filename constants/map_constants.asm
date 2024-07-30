@@ -496,10 +496,29 @@ ENDM
 	map_const FOREST_AREA_H7,								5,  4 ;  5
 	map_const FOREST_AREA_H8,								5,  5 ;  6
 	map_const FOREST_AREA_I8,								5,  5 ;  7
+	map_const FOREST_AREA_N4,								5,  4 ;  8
+	map_const FOREST_AREA_N5,								5,  4 ;	 9
 	endgroup
 	
-	newgroup CAVE												  ; 28
+	newgroup BEACH												  ; 28
+	map_const BEACH_AREA_J8,								5,  5 ;  1
+	map_const BEACH_AREA_K8,								5,  5 ;  2
+	map_const BEACH_AREA_L8,								5,  5 ;  3
+	map_const BEACH_AREA_M8,								5,  5 ;  4
+	map_const BEACH_AREA_N3,								5,  4 ;  5
+	map_const BEACH_AREA_N8,								5,  5 ;  6
+	map_const BEACH_AREA_O3,								5,  4 ;  7
+	map_const BEACH_AREA_O4,								5,  4 ;	 8
+	map_const BEACH_AREA_O8,								5,  5 ;  9
+	map_const BEACH_AREA_P4,								5,  4 ; 10
+	map_const BEACH_AREA_P5,								5,  4 ; 11
+	map_const BEACH_AREA_P6,								5,  4 ; 12
+	map_const BEACH_AREA_P7,								5,  4 ; 13
+	map_const BEACH_AREA_P8,								5,  5 ; 14
+	endgroup
+	
+	newgroup CAVE												  ; 29
 	map_const CAVE_H8,										6,  5 ;  1
 	endgroup
 
-DEF NUM_MAP_GROUPS EQU const_value ; 27
+DEF NUM_MAP_GROUPS EQU const_value ; 29

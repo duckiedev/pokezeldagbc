@@ -738,8 +738,83 @@ ENDM
 	connection east, ForestAreaI8, FOREST_AREA_I8, 0
 	corner_connection northwest, ForestAreaH8_NorthWestCorner_Blocks	; ForestAreaG7
 
-	map_attributes ForestAreaI8, FOREST_AREA_I8, $00, WEST | NORTHWEST
+	map_attributes ForestAreaI8, FOREST_AREA_I8, $00, WEST | EAST | NORTHWEST
 	connection west, ForestAreaH8, FOREST_AREA_H8, 0
+	connection east, BeachAreaJ8, BEACH_AREA_J8, 0
 	corner_connection northwest, ForestAreaI8_NorthWestCorner_Blocks	; ForestAreaH7
+	
+	map_attributes ForestAreaN4, FOREST_AREA_N4, $00, NORTH | SOUTH | EAST | NORTHEAST
+	connection north, BeachAreaN3, BEACH_AREA_N3, 0
+	connection south, ForestAreaN5, FOREST_AREA_N5, 0
+	connection east, BeachAreaO4, BEACH_AREA_O4, 0
+	corner_connection northeast, ForestAreaN4_NorthEastCorner_Blocks	; BeachAreaO3
+	
+	map_attributes ForestAreaN5, FOREST_AREA_N5, $00, NORTH | NORTHEAST
+	connection north, ForestAreaN4, FOREST_AREA_N4, 0
+	corner_connection northeast, ForestAreaN5_NorthEastCorner_Blocks	; BeachAreaO4
+	
+	map_attributes BeachAreaJ8, BEACH_AREA_J8, $00, WEST | EAST
+	connection west, ForestAreaI8, FOREST_AREA_I8, 0
+	connection east, BeachAreaK8, BEACH_AREA_K8, 0
+	
+	map_attributes BeachAreaK8, BEACH_AREA_K8, $00, WEST | EAST
+	connection west, BeachAreaJ8, BEACH_AREA_J8, 0
+	connection east, BeachAreaL8, BEACH_AREA_L8, 0
+	
+	map_attributes BeachAreaL8, BEACH_AREA_L8, $00, WEST | EAST
+	connection west, BeachAreaK8, BEACH_AREA_K8, 0
+	connection east, BeachAreaM8, BEACH_AREA_M8, 0
+	
+	map_attributes BeachAreaM8, BEACH_AREA_M8, $00, WEST | EAST
+	connection west, BeachAreaL8, BEACH_AREA_L8, 0
+	connection east, BeachAreaN8, BEACH_AREA_N8, 0
+
+	map_attributes BeachAreaN3, BEACH_AREA_N3, $00, SOUTH | EAST | SOUTHEAST
+	connection south, ForestAreaN4, FOREST_AREA_N4, 0
+	connection west, BeachAreaO3, BEACH_AREA_O3, 0
+	corner_connection southeast, BeachAreaN3_SouthEastCorner_Blocks		; BeachAreaO4
+	
+	map_attributes BeachAreaN8, BEACH_AREA_N8, $00, WEST | EAST
+	connection west, BeachAreaM8, BEACH_AREA_M8, 0
+	connection east, BeachAreaO8, BEACH_AREA_O8, 0
+	
+	map_attributes BeachAreaO3, BEACH_AREA_O3, $00, SOUTH | WEST | SOUTHWEST
+	connection south, BeachAreaO4, BEACH_AREA_O4, 0
+	connection west, BeachAreaN3, BEACH_AREA_N3, 0
+	corner_connection southwest, BeachAreaO3_SouthWestCorner_Blocks		; ForestAreaN4
+	
+	map_attributes BeachAreaO4, BEACH_AREA_O4, $00, NORTH | WEST | EAST | NORTHWEST | SOUTHWEST
+	connection north, BeachAreaO3, BEACH_AREA_O3, 0
+	connection west, ForestAreaN4, FOREST_AREA_N4, 0
+	connection east, BeachAreaP4, BEACH_AREA_P4, 0 
+	corner_connection northwest, BeachAreaO4_NorthWestCorner_Blocks 	; BeachAreaN3
+	corner_connection southwest, BeachAreaO4_SouthWestCorner_Blocks		; ForestAreaN5
+	
+	map_attributes BeachAreaO8, BEACH_AREA_O8, $00, WEST | EAST
+	connection west, BeachAreaN8, BEACH_AREA_N8, 0
+	connection east, BeachAreaP8, BEACH_AREA_P8, 0
+
+	map_attributes BeachAreaP4, BEACH_AREA_P4, $00, SOUTH | WEST | NORTHWEST
+	connection south, BeachAreaP5, BEACH_AREA_P5, 0
+	connection west, BeachAreaO4, BEACH_AREA_O4, 0
+	corner_connection northwest, BeachAreaP4_NorthWestCorner_Blocks		; BeachAreaO3
+
+	map_attributes BeachAreaP5, BEACH_AREA_P5, $00, NORTH | SOUTH | NORTHWEST
+	connection north, BeachAreaP4, BEACH_AREA_P4, 0
+	connection south, BeachAreaP6, BEACH_AREA_P6, 0
+	corner_connection northwest, BeachAreaP5_NorthWestCorner_Blocks		; BeachAreaO4
+
+	map_attributes BeachAreaP6, BEACH_AREA_P6, $00, NORTH | SOUTH
+	connection north, BeachAreaP5, BEACH_AREA_P5, 0
+	connection south, BeachAreaP7, BEACH_AREA_P7, 0
+
+	map_attributes BeachAreaP7, BEACH_AREA_P7, $00, NORTH | SOUTH | SOUTHWEST
+	connection north, BeachAreaP6, BEACH_AREA_P6, 0
+	connection south, BeachAreaP8, BEACH_AREA_P8, 0
+	corner_connection southwest, BeachAreaP7_SouthWestCorner_Blocks 	; BeachAreaO8
+
+	map_attributes BeachAreaP8, BEACH_AREA_P8, $00, NORTH | WEST
+	connection north, BeachAreaP7, BEACH_AREA_P7, 0
+	connection west, BeachAreaO8, BEACH_AREA_O8, 0
 	
 	map_attributes CaveH8, CAVE_H8, $00, 0								; CaveH8

@@ -31,6 +31,7 @@ OutdoorSprites:
 	dw SaffronGroupSprites
 	dw CherrygroveGroupSprites
 	dw ForestGroupSprites
+	dw BeachGroupSprites
 	dw CaveGroupSprites
 	assert_table_length NUM_MAP_GROUPS
 
@@ -290,6 +291,7 @@ CableClubGroupSprites:
 	; 0 of max 9 walking sprites
 	db 0 ; end
 
+BeachGroupSprites:
 ForestGroupSprites:
 	; 12 non-walking filler sprites
 	db SPRITE_SUICUNE

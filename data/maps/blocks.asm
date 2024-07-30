@@ -969,12 +969,75 @@ ForestAreaH8_Blocks:
 	INCBIN "maps/ForestAreaH8.ablk"
 ForestAreaH8_NorthWestCorner_Blocks:
 	INCMAPCORNER "maps/ForestAreaG7.ablk", FOREST_AREA_G7, southeast
-
-CaveH8_Blocks:
-	INCBIN "maps/CaveH8.ablk"
-
+	
 ForestAreaI8_Blocks:
 	INCBIN "maps/ForestAreaI8.ablk"
 ForestAreaI8_NorthWestCorner_Blocks:
 	INCMAPCORNER "maps/ForestAreaH7.ablk", FOREST_AREA_H7, southeast
+
+BeachAreaJ8_Blocks:
+	INCBIN "maps/BeachAreaJ8.ablk"
+
+BeachAreaK8_Blocks:
+	INCBIN "maps/BeachAreaK8.ablk"
+
+BeachAreaL8_Blocks:
+	INCBIN "maps/BeachAreaL8.ablk"
+
+BeachAreaM8_Blocks:
+BeachAreaN8_Blocks:
+	INCBIN "maps/BeachAreaM8.ablk"
+
+BeachAreaN3_Blocks:
+	INCBIN "maps/BeachAreaN3.ablk"
+BeachAreaN3_SouthEastCorner_Blocks:
+	INCMAPCORNER "maps/BeachAreaO4.ablk", BEACH_AREA_O4, northwest
+
+ForestAreaN4_Blocks:
+	INCBIN "maps/ForestAreaN4.ablk"
+ForestAreaN4_NorthEastCorner_Blocks:
+	INCMAPCORNER "maps/BeachAreaO3.ablk", BEACH_AREA_O3, southwest
+
+ForestAreaN5_Blocks:
+	INCBIN "maps/ForestAreaN5.ablk"
+ForestAreaN5_NorthEastCorner_Blocks:
+	INCMAPCORNER "maps/BeachAreaO4.ablk", BEACH_AREA_O4, southwest
+
+BeachAreaO3_Blocks:
+	INCBIN "maps/BeachAreaO3.ablk"
+BeachAreaO3_SouthWestCorner_Blocks:
+	INCMAPCORNER "maps/ForestAreaN4.ablk", FOREST_AREA_N4, northeast
+
+BeachAreaO4_Blocks:
+	INCBIN "maps/BeachAreaO4.ablk"
+BeachAreaO4_NorthWestCorner_Blocks:
+	INCMAPCORNER "maps/BeachAreaN3.ablk", BEACH_AREA_N3, southeast
+BeachAreaO4_SouthWestCorner_Blocks:
+	INCMAPCORNER "maps/ForestAreaN5.ablk", FOREST_AREA_N5, northeast
+
+BeachAreaO8_Blocks:
+	INCBIN "maps/BeachAreaO8.ablk"
+
+BeachAreaP4_Blocks:
+	INCBIN "maps/BeachAreaP4.ablk"
+BeachAreaP4_NorthWestCorner_Blocks:
+	INCMAPCORNER "maps/BeachAreaO3.ablk", BEACH_AREA_O3, southeast
+
+BeachAreaP5_Blocks:
+BeachAreaP6_Blocks:
+	INCBIN "maps/BeachAreaP6.ablk"
+BeachAreaP5_NorthWestCorner_Blocks:
+	INCMAPCORNER "maps/BeachAreaO4.ablk", BEACH_AREA_O4, southeast
+
+BeachAreaP7_Blocks:
+	INCBIN "maps/BeachAreaP7.ablk"
+BeachAreaP7_SouthWestCorner_Blocks:
+	INCMAPCORNER "maps/BeachAreaO8.ablk", BEACH_AREA_O8, northeast
+
+BeachAreaP8_Blocks:
+	INCBIN "maps/BeachAreaP8.ablk"
+
+CaveH8_Blocks:
+	INCBIN "maps/CaveH8.ablk"
+
 ENDSECTION

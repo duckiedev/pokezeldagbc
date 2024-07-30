@@ -229,7 +229,7 @@
 	tilecoll CUT_TREE, FLOOR, FLOOR, FLOOR ; e4
 	tilecoll FLOOR, FLOOR, CUT_TREE, FLOOR ; e5
 	tilecoll CUT_TREE, FLOOR, FLOOR, FLOOR ; e6
-	tilecoll FLOOR, CUT_TREE, WARP, FLOOR ; e7
+	tilecoll FLOOR, CUT_TREE, LADDER, FLOOR ; e7
 	tilecoll FLOOR, FLOOR, FLOOR, CUT_TREE ; e8
 	tilecoll FLOOR, FLOOR, FLOOR, FLOOR ; e9
 	tilecoll FLOOR, FLOOR, WALL, WALL ; ea
