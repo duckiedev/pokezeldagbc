@@ -48,5 +48,6 @@ Tilesets::
 	tileset TilesetOmanyteWordRoom
 	tileset TilesetAerodactylWordRoom
 	tileset TilesetOverworldMain
+	tileset TilesetOverworldMainTwo
 	tileset TilesetCaveMain
 	assert_table_length NUM_TILESETS + 1

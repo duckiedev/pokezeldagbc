@@ -14,6 +14,8 @@ LoadSpecialMapPalette:
 	jr z, .mansion_mobile
 	cp TILESET_OVERWORLD_MAIN
 	jr z, .overworld_main
+	cp TILESET_OVERWORLD_MAIN_TWO
+	jr z, .overworld_main
 	cp TILESET_CAVE_MAIN
 	jr z, .cave_main
 	jr .do_nothing

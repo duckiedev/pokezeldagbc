@@ -1028,25 +1028,6 @@ Function106464::
 	farcall LoadFrame
 	ret
 
-Function10649b: ; unreferenced
-	ld a, [wTextboxFrame]
-	maskbits NUM_FRAMES
-	ld bc, TEXTBOX_FRAME_TILES * LEN_1BPP_TILE
-	ld hl, Frames
-	call AddNTimes
-	ld d, h
-	ld e, l
-	ld hl, vTiles0 tile "┌" ; $ba
-	ld c, TEXTBOX_FRAME_TILES ; "┌" to "┘"
-	ld b, BANK(Frames)
-	call Function1064c3
-	ld hl, vTiles2 tile " " ; $7f
-	ld de, TextboxSpaceGFX
-	ld c, 1
-	ld b, BANK(TextboxSpaceGFX)
-	call Function1064c3
-	ret
-
 Function1064c3:
 	ldh a, [rSVBK]
 	push af

@@ -209,6 +209,7 @@ TilesetAerodactylWordRoomAnim:
 	dw NULL,  DoneTileAnimation
 	
 TilesetOverworldMainAnim:
+TilesetOverworldMainTwoAnim:
 	dw vTiles2 tile $2A, AnimateWaterTile
 	dw NULL,  WaitTileAnimation
 	dw NULL,  WaitTileAnimation

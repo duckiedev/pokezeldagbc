@@ -458,6 +458,7 @@ INCBIN "data/tilesets/forest_metatiles.bin"
 SECTION "Tileset Data 13", ROMX
 
 TilesetOverworldMainGFX::
+TilesetOverworldMainTwoGFX::
 INCBIN "gfx/tilesets/overworld_main.2bpp.lz"
 
 TilesetOverworldMainMeta::
@@ -468,6 +469,15 @@ INCLUDE "data/tilesets/overworld_main_collision.asm"
 
 TilesetOverworldMainAttr::
 INCBIN "data/tilesets/overworld_main_attributes.bin"
+
+TilesetOverworldMainTwoMeta::
+INCBIN "data/tilesets/overworld_main_two_metatiles.bin"
+
+TilesetOverworldMainTwoColl::
+INCLUDE "data/tilesets/overworld_main_two_collision.asm"
+
+TilesetOverworldMainTwoAttr::
+INCBIN "data/tilesets/overworld_main_two_attributes.bin"
 
 TilesetCaveMainGFX::
 INCBIN "gfx/tilesets/cave_main.2bpp.lz"
