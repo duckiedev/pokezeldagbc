@@ -470,6 +470,9 @@ INCLUDE "data/tilesets/overworld_main_collision.asm"
 TilesetOverworldMainAttr::
 INCBIN "data/tilesets/overworld_main_attributes.bin"
 
+
+SECTION "Tileset Data 14", ROMX
+
 TilesetOverworldMainTwoMeta::
 INCBIN "data/tilesets/overworld_main_two_metatiles.bin"
 
