@@ -124,27 +124,81 @@ UpdateOverworldMap:
 	ret
 
 .step_down
+    ; Check if the next tile is a border tile
+    ld hl, wOverworldMapAnchor
+    ld a, [wMapWidth]
+    add 3 * 2 ; surrounding tiles
+    add [hl]
+    ld a, [hli]
+    ld b, a
+    ld a, [wMapBorderBlock]
+    cp b
+    jr z, .border_tile_down_step
+
+	; default code if no border tile is detected
 	call .ScrollOverworldMapDown
 	call LoadOverworldTilemap
 	call ScrollMapDown
 	ret
 
+.border_tile_down_step:
+	ret
+
 .step_up
+	ld hl, wOverworldMapAnchor
+	ld a, [wMapWidth]
+	add 3 * 2 ; surrounding tiles
+	ld b, a
+	ld a, [hl]
+	sub b
+	ld b, a
+    ld a, [wMapBorderBlock]
+    cp b
+    jr z, .border_tile_up_step
+	
+	; default code if no border tile is detected
 	call .ScrollOverworldMapUp
 	call LoadOverworldTilemap
 	call ScrollMapUp
 	ret
 
-.step_left
-	call .ScrollOverworldMapLeft
-	call LoadOverworldTilemap
-	call ScrollMapLeft
+.border_tile_up_step:
 	ret
 
+.step_left
+    ; Check if the next tile to the left is a border tile
+    ld hl, wOverworldMapAnchor
+    ld a, [hl]
+    sub 1
+    ld b, a
+    ld a, [wMapBorderBlock]
+    cp b
+    jr z, .border_tile_left_step ; If the next tile is a border tile, skip scrolling
+
+    ; Default code if no border tile is detected
+    call .ScrollOverworldMapLeft
+    call LoadOverworldTilemap
+    call ScrollMapLeft
+	ret
+
+.border_tile_left_step:
+    ret
+
 .step_right
+	ld hl, wOverworldMapAnchor
+	ld a, [hl]
+	add 1
+    ld b, a
+    ld a, [wMapBorderBlock]
+    cp b
+    jr z, .border_tile_right_step ; If the next tile is a border tile, skip scrolling
+	
 	call .ScrollOverworldMapRight
 	call LoadOverworldTilemap
 	call ScrollMapRight
+	ret
+	
+.border_tile_right_step:
 	ret
 
 .ScrollOverworldMapDown:
