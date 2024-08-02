@@ -934,46 +934,12 @@ ENDSECTION
 
 SECTION "Map Blocks 4", ROMX
 
-ForestAreaF7_Blocks:
-	INCBIN "maps/ForestAreaF7.ablk"
-ForestAreaF7_SouthEastCorner_Blocks:
-	INCMAPCORNER "maps/ForestAreaG8.ablk", FOREST_AREA_G8, northwest
-	
-ForestAreaF8_Blocks:
-	INCBIN "maps/ForestAreaF8.ablk"
-ForestAreaF8_NorthEastCorner_Blocks:
-	INCMAPCORNER "maps/ForestAreaG7.ablk", FOREST_AREA_G7, southwest
-
-ForestAreaG7_Blocks:
-	INCBIN "maps/ForestAreaG7.ablk"
-ForestAreaG7_SouthEastCorner_Blocks:
-	INCMAPCORNER "maps/ForestAreaH8.ablk", FOREST_AREA_H8, northwest
-ForestAreaG7_SouthWestCorner_Blocks:
-	INCMAPCORNER "maps/ForestAreaF8.ablk", FOREST_AREA_F8, northeast
-
-ForestAreaG8_Blocks:
-	INCBIN "maps/ForestAreaG8.ablk"
-ForestAreaG8_NorthEastCorner_Blocks:
-	INCMAPCORNER "maps/ForestAreaH7.ablk", FOREST_AREA_H7, southwest
-ForestAreaG8_NorthWestCorner_Blocks:
-	INCMAPCORNER "maps/ForestAreaF7.ablk", FOREST_AREA_F7, southeast
-
-ForestAreaH7_Blocks:
-	INCBIN "maps/ForestAreaH7.ablk"
-ForestAreaH7_SouthEastCorner_Blocks:
-	INCMAPCORNER "maps/ForestAreaI8.ablk", FOREST_AREA_I8, northwest
-ForestAreaH7_SouthWestCorner_Blocks:
-	INCMAPCORNER "maps/ForestAreaG8.ablk", FOREST_AREA_G8, northeast
 
 ForestAreaH8_Blocks:
 	INCBIN "maps/ForestAreaH8.ablk"
-ForestAreaH8_NorthWestCorner_Blocks:
-	INCMAPCORNER "maps/ForestAreaG7.ablk", FOREST_AREA_G7, southeast
 	
-ForestAreaI8_Blocks:
-	INCBIN "maps/ForestAreaI8.ablk"
-ForestAreaI8_NorthWestCorner_Blocks:
-	INCMAPCORNER "maps/ForestAreaH7.ablk", FOREST_AREA_H7, southeast
+ForestZone01_Blocks:
+	INCBIN "maps/ForestZone01.ablk"
 
 BeachAreaJ8_Blocks:
 	INCBIN "maps/BeachAreaJ8.ablk"
@@ -993,27 +959,13 @@ BeachAreaN3_Blocks:
 BeachAreaN3_SouthEastCorner_Blocks:
 	INCMAPCORNER "maps/BeachAreaO4.ablk", BEACH_AREA_O4, northwest
 
-ForestAreaN4_Blocks:
-	INCBIN "maps/ForestAreaN4.ablk"
-ForestAreaN4_NorthEastCorner_Blocks:
-	INCMAPCORNER "maps/BeachAreaO3.ablk", BEACH_AREA_O3, southwest
-
-ForestAreaN5_Blocks:
-	INCBIN "maps/ForestAreaN5.ablk"
-ForestAreaN5_NorthEastCorner_Blocks:
-	INCMAPCORNER "maps/BeachAreaO4.ablk", BEACH_AREA_O4, southwest
-
 BeachAreaO3_Blocks:
 	INCBIN "maps/BeachAreaO3.ablk"
-BeachAreaO3_SouthWestCorner_Blocks:
-	INCMAPCORNER "maps/ForestAreaN4.ablk", FOREST_AREA_N4, northeast
 
 BeachAreaO4_Blocks:
 	INCBIN "maps/BeachAreaO4.ablk"
 BeachAreaO4_NorthWestCorner_Blocks:
 	INCMAPCORNER "maps/BeachAreaN3.ablk", BEACH_AREA_N3, southeast
-BeachAreaO4_SouthWestCorner_Blocks:
-	INCMAPCORNER "maps/ForestAreaN5.ablk", FOREST_AREA_N5, northeast
 
 BeachAreaO8_Blocks:
 	INCBIN "maps/BeachAreaO8.ablk"

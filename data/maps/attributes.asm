@@ -702,59 +702,11 @@ ENDM
 	map_attributes Route31VioletGate, ROUTE_31_VIOLET_GATE, $00, 0
 	
 	; New
-	map_attributes ForestAreaF7, FOREST_AREA_F7, $00, SOUTH | EAST | SOUTHEAST
-	connection south, ForestAreaF8, FOREST_AREA_F8, 0
-	connection east, ForestAreaG7, FOREST_AREA_G7, 0
-	corner_connection southeast, ForestAreaF7_SouthEastCorner_Blocks	; ForestAreaG8
-	
-	map_attributes ForestAreaF8, FOREST_AREA_F8, $00, NORTH | EAST | NORTHEAST
-	connection north, ForestAreaF7, FOREST_AREA_F7, 0
-	connection east, ForestAreaG8, FOREST_AREA_G8, 0
-	corner_connection northeast, ForestAreaF8_NorthEastCorner_Blocks	; ForestAreaG7
-	
-	map_attributes ForestAreaG7, FOREST_AREA_G7, $00, SOUTH | WEST | EAST | SOUTHEAST | SOUTHWEST
-	connection south, ForestAreaG8, FOREST_AREA_G8, 0
-	connection west, ForestAreaF7, FOREST_AREA_F7, 0
-	connection east, ForestAreaH7, FOREST_AREA_H7, 0
-	corner_connection southeast, ForestAreaG7_SouthEastCorner_Blocks	; ForestAreaH8
-	corner_connection southwest, ForestAreaG7_SouthWestCorner_Blocks	; ForestAreaF8
 
-	map_attributes ForestAreaG8, FOREST_AREA_G8, $00, NORTH | WEST | EAST | NORTHEAST | NORTHWEST
-	connection north, ForestAreaG7, FOREST_AREA_G7, 0
-	connection west, ForestAreaF8, FOREST_AREA_F8, 0
-	connection east, ForestAreaH8, FOREST_AREA_H8, 0
-	corner_connection northeast, ForestAreaG8_NorthEastCorner_Blocks	; ForestAreaH7
-	corner_connection northwest, ForestAreaG8_NorthWestCorner_Blocks	; ForestAreaF7
-	
-	map_attributes ForestAreaH7, FOREST_AREA_H7, $00, SOUTH | WEST | SOUTHEAST | SOUTHWEST
-	connection south, ForestAreaH8, FOREST_AREA_H8, 0
-	connection west, ForestAreaG7, FOREST_AREA_G7, 0
-	corner_connection southeast, ForestAreaH7_SouthEastCorner_Blocks	; ForestAreaI8
-	corner_connection southwest, ForestAreaH7_SouthWestCorner_Blocks	; ForestAreaG8
-	
-	map_attributes ForestAreaH8, FOREST_AREA_H8, $00, NORTH | WEST | EAST | NORTHWEST
-	connection north, ForestAreaH7, FOREST_AREA_H7, 0
-	connection west, ForestAreaG8, FOREST_AREA_G8, 0
-	connection east, ForestAreaI8, FOREST_AREA_I8, 0
-	corner_connection northwest, ForestAreaH8_NorthWestCorner_Blocks	; ForestAreaG7
+	map_attributes ForestAreaH8, FOREST_AREA_H8, $00, 0
+	map_attributes ForestZone01, FOREST_ZONE_01, $00, 0
 
-	map_attributes ForestAreaI8, FOREST_AREA_I8, $00, WEST | EAST | NORTHWEST
-	connection west, ForestAreaH8, FOREST_AREA_H8, 0
-	connection east, BeachAreaJ8, BEACH_AREA_J8, 0
-	corner_connection northwest, ForestAreaI8_NorthWestCorner_Blocks	; ForestAreaH7
-	
-	map_attributes ForestAreaN4, FOREST_AREA_N4, $00, NORTH | SOUTH | EAST | NORTHEAST
-	connection north, BeachAreaN3, BEACH_AREA_N3, 0
-	connection south, ForestAreaN5, FOREST_AREA_N5, 0
-	connection east, BeachAreaO4, BEACH_AREA_O4, 0
-	corner_connection northeast, ForestAreaN4_NorthEastCorner_Blocks	; BeachAreaO3
-	
-	map_attributes ForestAreaN5, FOREST_AREA_N5, $00, NORTH | NORTHEAST
-	connection north, ForestAreaN4, FOREST_AREA_N4, 0
-	corner_connection northeast, ForestAreaN5_NorthEastCorner_Blocks	; BeachAreaO4
-	
-	map_attributes BeachAreaJ8, BEACH_AREA_J8, $00, WEST | EAST
-	connection west, ForestAreaI8, FOREST_AREA_I8, 0
+	map_attributes BeachAreaJ8, BEACH_AREA_J8, $00, EAST
 	connection east, BeachAreaK8, BEACH_AREA_K8, 0
 	
 	map_attributes BeachAreaK8, BEACH_AREA_K8, $00, WEST | EAST
@@ -769,8 +721,7 @@ ENDM
 	connection west, BeachAreaL8, BEACH_AREA_L8, 0
 	connection east, BeachAreaN8, BEACH_AREA_N8, 0
 
-	map_attributes BeachAreaN3, BEACH_AREA_N3, $00, SOUTH | EAST | SOUTHEAST
-	connection south, ForestAreaN4, FOREST_AREA_N4, 0
+	map_attributes BeachAreaN3, BEACH_AREA_N3, $00, EAST | SOUTHEAST
 	connection west, BeachAreaO3, BEACH_AREA_O3, 0
 	corner_connection southeast, BeachAreaN3_SouthEastCorner_Blocks		; BeachAreaO4
 	
@@ -778,17 +729,14 @@ ENDM
 	connection west, BeachAreaM8, BEACH_AREA_M8, 0
 	connection east, BeachAreaO8, BEACH_AREA_O8, 0
 	
-	map_attributes BeachAreaO3, BEACH_AREA_O3, $00, SOUTH | WEST | SOUTHWEST
+	map_attributes BeachAreaO3, BEACH_AREA_O3, $00, SOUTH | WEST
 	connection south, BeachAreaO4, BEACH_AREA_O4, 0
 	connection west, BeachAreaN3, BEACH_AREA_N3, 0
-	corner_connection southwest, BeachAreaO3_SouthWestCorner_Blocks		; ForestAreaN4
 	
-	map_attributes BeachAreaO4, BEACH_AREA_O4, $00, NORTH | WEST | EAST | NORTHWEST | SOUTHWEST
+	map_attributes BeachAreaO4, BEACH_AREA_O4, $00, NORTH | WEST | EAST
 	connection north, BeachAreaO3, BEACH_AREA_O3, 0
-	connection west, ForestAreaN4, FOREST_AREA_N4, 0
 	connection east, BeachAreaP4, BEACH_AREA_P4, 0 
 	corner_connection northwest, BeachAreaO4_NorthWestCorner_Blocks 	; BeachAreaN3
-	corner_connection southwest, BeachAreaO4_SouthWestCorner_Blocks		; ForestAreaN5
 	
 	map_attributes BeachAreaO8, BEACH_AREA_O8, $00, WEST | EAST
 	connection west, BeachAreaN8, BEACH_AREA_N8, 0

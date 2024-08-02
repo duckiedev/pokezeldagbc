@@ -99,7 +99,8 @@ DEF KANTO_LANDMARK EQU const_value
 	const LANDMARK_ROUTE_28          ; 5e
 	const LANDMARK_FAST_SHIP         ; 5f
 DEF HYRULE_LANDMARK EQU const_value
-	const LANDMARK_FOREST_G8		 ; 60
+	const LANDMARK_FOREST_H8		 ; 60
+	const LANDMARK_FOREST_ZONE_01    ; 61
 DEF NUM_LANDMARKS EQU const_value
 
 ; used in CaughtData

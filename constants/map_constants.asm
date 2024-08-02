@@ -489,15 +489,9 @@ ENDM
 	endgroup
 	
 	newgroup FOREST												  ; 27
-	map_const FOREST_AREA_F7,								5,  4 ;  1
-	map_const FOREST_AREA_F8,								5,  5 ;  2
-	map_const FOREST_AREA_G7,								5,  4 ;  3
-	map_const FOREST_AREA_G8,								5,  5 ;  4
-	map_const FOREST_AREA_H7,								5,  4 ;  5
-	map_const FOREST_AREA_H8,								5,  5 ;  6
-	map_const FOREST_AREA_I8,								5,  5 ;  7
-	map_const FOREST_AREA_N4,								5,  4 ;  8
-	map_const FOREST_AREA_N5,								5,  4 ;	 9
+	map_const FOREST_AREA_H8,								5,  5 ;  1
+	map_const FOREST_ZONE_01,							   19,  9 ;  2
+
 	endgroup
 	
 	newgroup BEACH												  ; 28
