@@ -94,3 +94,6 @@ rept 6
 	RGB 00, 00, 00
 endr
 	db 0
+
+PalPacket_NamingScreen:
+	sgb_pal_set NAMING_SCREEN, ROUTES, ROUTES, ROUTES

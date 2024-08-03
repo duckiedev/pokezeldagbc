@@ -55,6 +55,7 @@ SGBLayoutJumptable:
 	dw .SGB_TrainerOrMonFrontpicPals
 	dw .SGB_MysteryGift
 	dw .SGB_Unused1E
+	dw .SGB_NamingScreen
 	assert_table_length NUM_SCGB_LAYOUTS
 
 .SGB_BattleGrayscale:
@@ -294,6 +295,11 @@ SGBLayoutJumptable:
 .SGB_Diploma:
 .SGB_MysteryGift:
 	ld hl, PalPacket_Diploma
+	ld de, BlkPacket_AllPal0
+	ret
+	
+.SGB_NamingScreen:
+	ld hl, PalPacket_NamingScreen
 	ld de, BlkPacket_AllPal0
 	ret
 

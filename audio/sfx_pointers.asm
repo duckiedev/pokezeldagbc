@@ -211,4 +211,6 @@ SFX:
 	dba Sfx_Twinkle
 ; Zelda
 	dba Sfx_TextPrint
+	dba Sfx_SolvePuzzle
+	dba Sfx_GetItem
 	assert_table_length NUM_SFX

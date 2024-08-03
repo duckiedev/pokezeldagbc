@@ -62,6 +62,7 @@ CGBLayoutJumptable:
 	dw _CGB_TrainerOrMonFrontpicPals
 	dw _CGB_MysteryGift
 	dw _CGB_Unused1E
+	dw _CGB_NamingScreen
 	assert_table_length NUM_SCGB_LAYOUTS
 
 _CGB_BattleGrayscale:
@@ -984,3 +985,19 @@ GS_CGB_MysteryGift: ; unreferenced
 
 .MysteryGiftPalette:
 INCLUDE "gfx/mystery_gift/gs_mystery_gift.pal"
+
+_CGB_NamingScreen:
+	ld hl, NamingScreenPalettes
+	ld de, wBGPals1
+	ld bc, 3 palettes
+	ld a, BANK(wBGPals1)
+	call FarCopyWRAM
+
+	ld hl, PalPacket_Diploma + 1
+	call CopyFourPalettes
+	call WipeAttrmap
+	call ApplyAttrmap
+	ret
+
+NamingScreenPalettes:
+INCLUDE "gfx/naming_screen/name_screen.pal"

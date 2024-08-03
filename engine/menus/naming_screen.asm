@@ -45,7 +45,7 @@ NamingScreen:
 
 .SetUpNamingScreen:
 	call ClearBGPalettes
-	ld b, SCGB_DIPLOMA
+	ld b, SCGB_NAMING_SCREEN
 	call GetSGBLayout
 	call DisableLCD
 	call LoadNamingScreenGFX
@@ -853,26 +853,32 @@ NamingScreen_GetLastCharacter:
 	ret
 
 LoadNamingScreenGFX:
+	;call ClearBGPalettes
 	call ClearSprites
 	callfar ClearSpriteAnims
 	call LoadStandardFont
 	call LoadFontsExtra
 
-	ld de, NamingScreenGFX_MiddleLine
-	ld hl, vTiles0 tile NAMINGSCREEN_MIDDLELINE
-	lb bc, BANK(NamingScreenGFX_MiddleLine), 1
-	call Get1bpp
-
-	ld de, NamingScreenGFX_UnderLine
-	ld hl, vTiles0 tile NAMINGSCREEN_UNDERLINE
-	lb bc, BANK(NamingScreenGFX_UnderLine), 1
-	call Get1bpp
-
-	ld de, vTiles0 tile NAMINGSCREEN_BORDER
-	ld hl, NamingScreenGFX_Border
-	ld bc, 1 tiles
-	ld a, BANK(NamingScreenGFX_Border)
+	ld de, vTiles2 tile $00
+	ld bc, $58 tiles
+	ld a, BANK(ZeldaNamingScreenGFX) ; aka BANK(KrisCardPic)
 	call FarCopyBytes
+
+	;ld de, NamingScreenGFX_MiddleLine
+	;ld hl, vTiles0 tile NAMINGSCREEN_MIDDLELINE
+	;lb bc, BANK(NamingScreenGFX_MiddleLine), 1
+	;call Get1bpp
+
+	;ld de, NamingScreenGFX_UnderLine
+	;ld hl, vTiles0 tile NAMINGSCREEN_UNDERLINE
+	;lb bc, BANK(NamingScreenGFX_UnderLine), 1
+	;call Get1bpp
+
+	;ld de, vTiles0 tile NAMINGSCREEN_BORDER
+	;ld hl, NamingScreenGFX_Border
+	;ld bc, 1 tiles
+	;ld a, BANK(NamingScreenGFX_Border)
+	;call FarCopyBytes
 
 	ld de, vTiles0 tile NAMINGSCREEN_CURSOR
 	ld hl, NamingScreenGFX_Cursor
@@ -896,6 +902,15 @@ LoadNamingScreenGFX:
 	ld a, $7
 	ldh [hWX], a
 	ret
+
+ZeldaNamingScreenGFX:
+INCBIN "gfx/naming_screen/name_screen.2bpp"
+
+ZeldaNamingScreenTileMap:
+INCBIN "gfx/naming_screen/name_screen.tilemap"
+
+ZeldaNamingScreenAttrmap:
+INCBIN "gfx/naming_screen/name_screen.attrmap.lz"
 
 NamingScreenGFX_Border:
 INCBIN "gfx/naming_screen/border.2bpp"

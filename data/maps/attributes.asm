@@ -765,4 +765,4 @@ ENDM
 	connection north, BeachAreaP7, BEACH_AREA_P7, 0
 	connection west, BeachAreaO8, BEACH_AREA_O8, 0
 	
-	map_attributes CaveH8, CAVE_H8, $00, 0								; CaveH8
+	map_attributes CaveH8, CAVE_H8, $16, 0								; CaveH8

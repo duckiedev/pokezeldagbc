@@ -44,7 +44,7 @@ CaveH8_HonedgeScript:
 	getmonname STRING_BUFFER_3, HONEDGE_H
 	opentext
 	writetext ReceivedHonedgeText
-	playsound SFX_CAUGHT_MON
+	playsound SFX_GET_ITEM
 	waitsfx
 	waitbutton
 	closetext
@@ -74,7 +74,8 @@ CheckBush:
 	changeblock $8, $3, $15
 	refreshmap
 	reanchormap
-
+	playsound SFX_SOLVE_PUZZLE
+	waitsfx
 .skip
 	end
 

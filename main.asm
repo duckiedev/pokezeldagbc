@@ -48,7 +48,6 @@ SECTION "bank4", ROMX
 INCLUDE "engine/items/pack.asm"
 INCLUDE "engine/overworld/time.asm"
 INCLUDE "engine/items/tmhm2.asm"
-INCLUDE "engine/menus/naming_screen.asm"
 INCLUDE "engine/events/misc_scripts.asm"
 INCLUDE "engine/events/heal_machine_anim.asm"
 INCLUDE "engine/events/whiteout.asm"
@@ -619,7 +618,6 @@ INCLUDE "engine/events/diploma.asm"
 INCLUDE "engine/pokedex/pokedex_3.asm"
 INCLUDE "engine/events/catch_tutorial_input.asm"
 INCLUDE "engine/pokegear/townmap_convertlinebreakcharacters.asm"
-;INCLUDE "engine/menus/new_intro_menu.asm"
 
 
 SECTION "European Mail", ROMX
@@ -636,6 +634,7 @@ endc
 
 SECTION "Battle Tower Text", ROMX
 
+INCLUDE "engine/menus/naming_screen.asm"
 INCLUDE "data/battle_tower/trainer_text.asm"
 
 
