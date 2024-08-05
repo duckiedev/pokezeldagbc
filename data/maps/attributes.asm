@@ -766,3 +766,5 @@ ENDM
 	connection west, BeachAreaO8, BEACH_AREA_O8, 0
 	
 	map_attributes CaveH8, CAVE_H8, $16, 0								; CaveH8
+
+	map_attributes HeroesCave01, HEROES_CAVE_01, $16, 0

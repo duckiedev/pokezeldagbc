@@ -109,4 +109,5 @@ Music:
 	dba Music_MobileCenter
 ; new songs
 	dba Music_ZeldaTitle
+	dba Music_CaveTheme
 	assert_table_length NUM_MUSIC_SONGS

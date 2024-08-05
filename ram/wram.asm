@@ -3124,7 +3124,6 @@ wMap19Object:: map_object wMap19
 
 ; fight counts
 wJackFightCount::    db
-wBeverlyFightCount:: db ; unreferenced
 wHueyFightCount::    db
 wGavenFightCount::   db
 wBethFightCount::    db
@@ -3137,22 +3136,19 @@ wLizFightCount::     db
 wAnthonyFightCount:: db
 wToddFightCount::    db
 wGinaFightCount::    db
-wIrwinFightCount::   db ; unreferenced
 wArnieFightCount::   db
 wAlanFightCount::    db
 wDanaFightCount::    db
 wChadFightCount::    db
-wDerekFightCount::   db ; unreferenced
 wTullyFightCount::   db
 wBrentFightCount::   db
 wTiffanyFightCount:: db
 wVanceFightCount::   db
 wWiltonFightCount::  db
-wKenjiFightCount::   db ; unreferenced
 wParryFightCount::   db
 wErinFightCount::    db
 
-	ds 10
+	ds 14
 
 ; 5 additional wMapObjects
 wMap20Object:: map_object wMap20
@@ -3251,7 +3247,19 @@ wPlayerMonSelection:: ds 3
 wdc5f:: db
 wdc60:: db
 
-	ds 17
+	ds 1
+	
+wSeenRoamMonBank:: db
+wSeenRoamMonDistance:: db
+wSeenRoamMonDirection:: db
+wTempRoamMon::
+wTempRoamMonEventFlag:: dw
+wTempRoamMonClass:: db
+wTempRoamMonID:: db
+wRunningRoamMonBattleScript:: db
+wTempRoamMonEnd::
+
+	ds 8
 
 wCaveH8HiddenDoor:: db
 

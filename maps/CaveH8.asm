@@ -116,7 +116,7 @@ CaveH8_MapEvents:
 
 	def_warp_events
 	warp_event  5,  8, FOREST_AREA_H8, 1
-	warp_event  9,  2, PLAYERS_HOUSE_1F, 1
+	warp_event  9,  2, HEROES_CAVE_01, 1
 
 	def_coord_events
 

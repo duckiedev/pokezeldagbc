@@ -2110,24 +2110,23 @@ Cry_Rattata_Ch8:
 	sound_ret
 
 Cry_HonedgeH:
-    channel_count 1
+    channel_count 2
+    channel 2, Cry_HonedgeH_Ch2
     channel 8, Cry_HonedgeH_Ch8
 
+Cry_HonedgeH_Ch2:
+    square_note 9, 0, 0, 0  ; length, duty, volume, frequency
+    square_note 6, 0, 7, 192
+    sound_ret
+
 Cry_HonedgeH_Ch8:
-    noise_note 1, 4, 0, 64  ; length, volume, fade, frequency
-    noise_note 2, 5, 0, 80
-    noise_note 3, 6, 0, 96
-    noise_note 4, 7, 0, 112
-    noise_note 5, 8, 0, 128
-    noise_note 6, 9, 0, 144
-    noise_note 7, 10, 0, 160
-    noise_note 8, 11, 0, 176
-    noise_note 9, 11, 0, 176
-    noise_note 10, 10, 0, 160
-    noise_note 11, 9, 0, 144
-    noise_note 12, 8, 0, 128
-    noise_note 13, 7, 0, 112
-    noise_note 14, 6, 0, 96
-    noise_note 15, 5, 0, 80
-    noise_note 16, 4, 0, 64
+    noise_note 1, 8, 0, 39  ; length, volume, fade, frequency
+    noise_note 1, 8, 0, 55
+    noise_note 1, 8, 0, 70
+    noise_note 1, 8, 0, 86
+    noise_note 1, 8, 0, 102
+    noise_note 1, 8, 0, 86
+    noise_note 1, 8, 0, 70
+    noise_note 1, 8, 0, 55
+    noise_note 1, 8, 0, 39
     sound_ret

@@ -33,6 +33,7 @@ OutdoorSprites:
 	dw ForestGroupSprites
 	dw BeachGroupSprites
 	dw CaveGroupSprites
+	dw HeroesCaveGroupSprites
 	assert_table_length NUM_MAP_GROUPS
 
 ; Route1 and ViridianCity are connected
@@ -321,6 +322,7 @@ ForestGroupSprites:
 	db SPRITE_FRUIT_TREE
 
 CaveGroupSprites:
+HeroesCaveGroupSprites:
 	; 12 non-walking filler sprites
 	db SPRITE_SUICUNE
 	db SPRITE_SILVER_TROPHY

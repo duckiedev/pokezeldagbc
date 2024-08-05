@@ -514,5 +514,9 @@ ENDM
 	newgroup CAVE												  ; 29
 	map_const CAVE_H8,										6,  5 ;  1
 	endgroup
+	
+	newgroup HEROES_CAVE										  ; 30
+	map_const HEROES_CAVE_01,								7,  5 ;  1
+	endgroup
 
 DEF NUM_MAP_GROUPS EQU const_value ; 29

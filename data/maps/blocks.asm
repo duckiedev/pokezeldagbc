@@ -992,4 +992,7 @@ BeachAreaP8_Blocks:
 CaveH8_Blocks:
 	INCBIN "maps/CaveH8.ablk"
 
+HeroesCave01_Blocks:
+	INCBIN "maps/HeroesCave01.ablk"
+
 ENDSECTION

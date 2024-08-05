@@ -108,4 +108,5 @@ OverworldSprites:
 	overworld_sprite EnteiSpriteGFX, 4, STILL_SPRITE, PAL_OW_RED
 	overworld_sprite RaikouSpriteGFX, 4, STILL_SPRITE, PAL_OW_RED
 	overworld_sprite OldManSpriteGFX, 12, WALKING_SPRITE, PAL_OW_RED
+	overworld_sprite CaptainToadSpriteGFX, 4, STILL_SPRITE, PAL_OW_RED
 	assert_table_length NUM_OVERWORLD_SPRITES

@@ -609,6 +609,7 @@ INCLUDE "engine/overworld/landmarks.asm"
 SECTION "Print Party", ROMX
 
 INCLUDE "engine/printer/print_party.asm"
+INCLUDE "home/roamingmons.asm"
 
 
 SECTION "bank77", ROMX

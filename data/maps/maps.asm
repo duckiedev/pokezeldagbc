@@ -46,6 +46,7 @@ MapGroupPointers::
 	dw MapGroup_Forest		; 27
 	dw MapGroup_Beach		; 28
 	dw MapGroup_Cave		; 29
+	dw MapGroup_HeroesCave  ; 30
 	assert_table_length NUM_MAP_GROUPS
 
 MapGroup_Olivine:
@@ -553,5 +554,10 @@ MapGroup_Beach:
 
 MapGroup_Cave:
 	table_width MAP_LENGTH, MapGroup_Cave
-	map CaveH8, TILESET_CAVE_MAIN, CAVE, LANDMARK_NEW_BARK_TOWN, MUSIC_DARK_CAVE, TRUE, PALETTE_AUTO, FISHGROUP_NONE
+	map CaveH8, TILESET_CAVE_MAIN, CAVE, LANDMARK_NEW_BARK_TOWN, MUSIC_CAVE_THEME, TRUE, PALETTE_AUTO, FISHGROUP_NONE
+	assert_table_length NUM_CAVE_MAPS
+
+MapGroup_HeroesCave:
+	table_width MAP_LENGTH, MapGroup_HeroesCave
+	map HeroesCave01, TILESET_CAVE_MAIN, DUNGEON, LANDMARK_NEW_BARK_TOWN, MUSIC_CAVE_THEME, TRUE, PALETTE_AUTO, FISHGROUP_NONE
 	assert_table_length NUM_CAVE_MAPS

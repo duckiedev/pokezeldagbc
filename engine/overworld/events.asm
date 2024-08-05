@@ -575,8 +575,8 @@ ObjectEventTypeArray:
 	dbw OBJECTTYPE_ITEMBALL, .itemball
 	dbw OBJECTTYPE_TRAINER, .trainer
 	; the remaining four are dummy events
-	dbw OBJECTTYPE_3, .three
-	dbw OBJECTTYPE_4, .four
+	dbw OBJECTTYPE_TRAINER, .three
+	dbw OBJECTTYPE_ROAMMON, .four
 	dbw OBJECTTYPE_5, .five
 	dbw OBJECTTYPE_6, .six
 	assert_table_length NUM_OBJECT_TYPES

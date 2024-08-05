@@ -153,6 +153,7 @@ INCLUDE "audio/music/postcredits.asm"
 SECTION "New Songs", ROMX
 
 INCLUDE "audio/music/zeldatitle.asm"
+INCLUDE "audio/music/cavetheme.asm"
 
 
 SECTION "Sound Effects", ROMX

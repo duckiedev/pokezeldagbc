@@ -108,3 +108,4 @@ RaikouSpriteGFX::              INCBIN "gfx/sprites/raikou.2bpp"
 SECTION "Sprites 3", ROMX
 
 OldManSpriteGFX::			   INCBIN "gfx/sprites/oldman.2bpp"
+CaptainToadSpriteGFX::		   INCBIN "gfx/sprites/capt_toad.2bpp"

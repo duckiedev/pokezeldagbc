@@ -107,6 +107,7 @@
 	const MUSIC_MOBILE_CENTER                ; 66
 ; new songs
 	const MUSIC_ZELDA_TITLE					 ; 67
+	const MUSIC_CAVE_THEME					 ; 68
 DEF NUM_MUSIC_SONGS EQU const_value
 
 ; GetMapMusic picks music for this value (see home/map.asm)
