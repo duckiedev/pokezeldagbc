@@ -58,8 +58,8 @@ CaveH8_HonedgeScript:
 CheckBush:
 	conditional_event EVENT_CAVEH8_HIDDEN_DOOR_REVEALED, .Script
 .Script
-	checkevent EVENT_GOT_HONEDGE
 	opentext
+	checkevent EVENT_GOT_HONEDGE
 	iftrue .AskToCut
 	farwritetext _CanCutText
 	closetext

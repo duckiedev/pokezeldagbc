@@ -234,6 +234,7 @@ ScriptCommandTable:
 	dw Script_getname                    ; a7
 	dw Script_wait                       ; a8
 	dw Script_checksave                  ; a9
+	dw Script_loadtempowmon				 ; aa
 	assert_table_length NUM_EVENT_COMMANDS
 
 StartScript:
@@ -1136,6 +1137,32 @@ Script_loadtemptrainer:
 	ld [wOtherTrainerClass], a
 	ld a, [wTempTrainerID]
 	ld [wOtherTrainerID], a
+	ret
+
+Script_loadtempowmon:
+	ld a, (1 << 7)
+	ld [wBattleScriptFlags], a
+	ld a, [wTempOWMonSpecies]
+	ld [wTempWildMonSpecies], a
+	xor a
+	ld [wCurPartyLevel], a
+	ret
+
+Script_owmonflagaction:
+	xor a
+	ld [wScriptVar], a
+	ld hl, wTempOWMonEventFlag
+	ld e, [hl]
+	inc hl
+	ld d, [hl]
+	call GetScriptByte
+	ld b, a
+	call EventFlagAction
+	ld a, c
+	and a
+	ret z
+	ld a, TRUE
+	ld [wScriptVar], a
 	ret
 
 Script_loadwildmon:

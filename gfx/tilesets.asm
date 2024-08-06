@@ -482,6 +482,8 @@ INCLUDE "data/tilesets/overworld_main_two_collision.asm"
 TilesetOverworldMainTwoAttr::
 INCBIN "data/tilesets/overworld_main_two_attributes.bin"
 
+SECTION "Tileset Data 15", ROMX
+
 TilesetCaveMainGFX::
 INCBIN "gfx/tilesets/cave_main.2bpp.lz"
 

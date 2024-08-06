@@ -250,6 +250,9 @@ PlayerEvents:
 	call CheckTrainerEvent
 	jr c, .ok
 
+	call CheckOWMonEvent
+	jr c, .ok
+
 	call CheckTileEvent
 	jr c, .ok
 
@@ -295,6 +298,20 @@ CheckTrainerEvent:
 	jr nc, .nope
 
 	ld a, PLAYEREVENT_SEENBYTRAINER
+	scf
+	ret
+
+.nope
+	xor a
+	ret
+
+CheckOWMonEvent:
+	nop
+	nop
+	call CheckOWMonBattle
+	jr nc, .nope
+
+	ld a, PLAYEREVENT_SEENBYOWMON
 	scf
 	ret
 
@@ -576,7 +593,7 @@ ObjectEventTypeArray:
 	dbw OBJECTTYPE_TRAINER, .trainer
 	; the remaining four are dummy events
 	dbw OBJECTTYPE_TRAINER, .three
-	dbw OBJECTTYPE_ROAMMON, .four
+	dbw OBJECTTYPE_OWMON, .owmon
 	dbw OBJECTTYPE_5, .five
 	dbw OBJECTTYPE_6, .six
 	assert_table_length NUM_OBJECT_TYPES
@@ -616,8 +633,10 @@ ObjectEventTypeArray:
 	xor a
 	ret
 
-.four
-	xor a
+.owmon
+	call TalkToOWMon
+	ld a, PLAYEREVENT_TALKTOOWMON
+	scf
 	ret
 
 .five
@@ -987,6 +1006,8 @@ PlayerEventScriptPointers:
 	dba OverworldWhiteoutScript ; PLAYEREVENT_WHITEOUT
 	dba HatchEggScript          ; PLAYEREVENT_HATCH
 	dba ChangeDirectionScript   ; PLAYEREVENT_JOYCHANGEFACING
+	dba SeenByOWMonScript       ; PLAYEREVENT_SEENBYOWMON
+	dba TalkToOWMonScript       ; PLAYEREVENT_TALKTOOWMON
 	dba InvalidEventScript      ; (NUM_PLAYER_EVENTS)
 	assert_table_length NUM_PLAYER_EVENTS + 1
 

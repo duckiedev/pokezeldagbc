@@ -1,16 +1,16 @@
-CheckRoamMonBattle::
+CheckOWMonBattle::
 	ldh a, [hROMBank]
 	push af
 
 	call SwitchToMapScriptsBank
-	call _CheckRoamMonBattle
+	call _CheckOWMonBattle
 
 	pop bc
 	ld a, b
 	rst Bankswitch
 	ret
 
-_CheckRoamMonBattle::
+_CheckOWMonBattle::
 ; Check if any roaming mon on the map sees the player and wants to battle.
 
 ; Skip the player object.
@@ -35,7 +35,7 @@ _CheckRoamMonBattle::
 	add hl, de
 	ld a, [hl]
 	and MAPOBJECT_TYPE_MASK
-	cp OBJECTTYPE_ROAMMON
+	cp OBJECTTYPE_OWMON
 	jr nz, .next
 
 ; Is visible on the map
@@ -95,34 +95,34 @@ _CheckRoamMonBattle::
 	pop af
 	ldh [hLastTalked], a
 	ld a, b
-	ld [wSeenRoamMonDistance], a
+	ld [wSeenOWMonDistance], a
 	ld a, c
-	ld [wSeenRoamMonDirection], a
-	jr LoadRoamMon_continue
+	ld [wSeenOWMonDirection], a
+	jr LoadOWMon_continue
 
-TalkToRoamMon::
+TalkToOWMon::
 	ld a, 1
-	ld [wSeenRoamMonDistance], a
+	ld [wSeenOWMonDistance], a
 	ld a, -1
-	ld [wSeenTrainerDirection], a
+	ld [wSeenOWMonDirection], a
 
-LoadRoamMon_continue::
+LoadOWMon_continue::
 	call GetMapScriptsBank
-	ld [wSeenRoamMonBank], a
+	ld [wSeenOWMonBank], a
 
 	ldh a, [hLastTalked]
 	call GetMapObject
 
 	ld hl, MAPOBJECT_SCRIPT_POINTER
 	add hl, bc
-	ld a, [wSeenRoamMonBank]
+	ld a, [wSeenOWMonBank]
 	call GetFarWord
-	ld de, wTempRoamMon
-	ld bc, wTempRoamMonEnd - wTempRoamMon
-	ld a, [wSeenRoamMonBank]
+	ld de, wTempOWMon
+	ld bc, wTempOWMonEnd - wTempOWMon
+	ld a, [wSeenOWMonBank]
 	call FarCopyBytes
 	xor a
-	ld [wRunningRoamMonBattleScript], a
+	ld [wRunningOWMonBattleScript], a
 	scf
 	ret
 /*
@@ -203,7 +203,7 @@ FacingPlayerDistance::
 	and a
 	ret
 */
-CheckRoamMonFlag:: ; unreferenced
+CheckOWMonFlag:: ; unreferenced
 	push bc
 	ld hl, OBJECT_MAP_OBJECT_INDEX
 	add hl, bc

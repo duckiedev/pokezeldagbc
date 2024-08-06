@@ -3249,15 +3249,15 @@ wdc60:: db
 
 	ds 1
 	
-wSeenRoamMonBank:: db
-wSeenRoamMonDistance:: db
-wSeenRoamMonDirection:: db
-wTempRoamMon::
-wTempRoamMonEventFlag:: dw
-wTempRoamMonClass:: db
-wTempRoamMonID:: db
-wRunningRoamMonBattleScript:: db
-wTempRoamMonEnd::
+wSeenOWMonBank:: db
+wSeenOWMonDistance:: db
+wSeenOWMonDirection:: db
+wTempOWMon::
+wTempOWMonEventFlag:: dw
+wTempOWMonSpecies:: db
+wTempOWMonLevel:: db
+wRunningOWMonBattleScript:: db
+wTempOWMonEnd::
 
 	ds 8
 

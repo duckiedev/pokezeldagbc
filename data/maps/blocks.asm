@@ -994,5 +994,7 @@ CaveH8_Blocks:
 
 HeroesCave01_Blocks:
 	INCBIN "maps/HeroesCave01.ablk"
+HeroesCave02_Blocks:
+	INCBIN "maps/HeroesCave02.ablk"
 
 ENDSECTION

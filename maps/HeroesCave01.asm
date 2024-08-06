@@ -29,7 +29,7 @@ HeroesCave01_MapEvents:
 
 	def_warp_events
 	warp_event  6,  7, CAVE_H8, 2
-	warp_event 13,  5, HEROES_CAVE_01, 1
+	warp_event 13,  5, HEROES_CAVE_02, 1
 
 	def_coord_events
 

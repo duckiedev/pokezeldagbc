@@ -144,6 +144,13 @@ MACRO trainer
 	dw \4, \5, \6, \7
 ENDM
 
+MACRO owmon
+;\1: mon
+;\2: level
+	db \1 
+	db \2 
+ENDM
+
 MACRO itemball
 ;\1: item: from constants/item_constants.asm
 ;\2: quantity: default 1

@@ -1065,4 +1065,9 @@ MACRO checksave
 	db checksave_command
 ENDM
 
+	const loadtempowmon_command ; $aa
+MACRO loadtempowmon
+	db loadtempowmon_command
+ENDM
+
 DEF NUM_EVENT_COMMANDS EQU const_value

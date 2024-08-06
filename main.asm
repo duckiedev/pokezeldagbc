@@ -399,6 +399,7 @@ INCLUDE "engine/phone/scripts/parry.asm"
 INCLUDE "engine/phone/scripts/erin.asm"
 INCLUDE "engine/phone/scripts/generic_callee.asm"
 INCLUDE "engine/events/trainer_scripts.asm"
+INCLUDE "engine/events/owmon_scripts.asm"
 INCLUDE "engine/events/init_events.asm"
 
 
@@ -609,7 +610,7 @@ INCLUDE "engine/overworld/landmarks.asm"
 SECTION "Print Party", ROMX
 
 INCLUDE "engine/printer/print_party.asm"
-INCLUDE "home/roamingmons.asm"
+INCLUDE "home/owmons.asm"
 
 
 SECTION "bank77", ROMX
