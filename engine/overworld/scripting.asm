@@ -235,6 +235,7 @@ ScriptCommandTable:
 	dw Script_wait                       ; a8
 	dw Script_checksave                  ; a9
 	dw Script_loadtempowmon				 ; aa
+	dw Script_owmonflagaction            ; ab
 	assert_table_length NUM_EVENT_COMMANDS
 
 StartScript:

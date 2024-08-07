@@ -43,6 +43,10 @@ PrintLetterDelay::
 	ld a, TEXT_DELAY_FAST
 
 .updatedelay
+	pop de
+	ld de, SFX_TEXT_PRINT
+	call PlaySFX
+	push de
 	ld [wTextDelayFrames], a
 
 .checkjoypad

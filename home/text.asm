@@ -117,7 +117,15 @@ TextboxPalette::
 
 SpeechTextbox::
 ; Standard textbox.
+	ld a, [wBattleMode]
+	and a
+	jr nz, .battle
 	hlcoord TEXTBOX_X, TEXTBOX_Y
+	jr .finish
+.battle
+	hlcoord TEXTBOX_BATTLE_X, TEXTBOX_BATTLE_Y
+	; fallthrough
+.finish
 	ld b, TEXTBOX_INNERH
 	ld c, TEXTBOX_INNERW
 	jp Textbox
@@ -146,7 +154,17 @@ BuenaPrintText::
 	; fallthrough
 
 PrintTextboxText::
+	ld a, [wBattleMode]
+	and a
+	jr nz, .battle
 	bccoord TEXTBOX_INNERX, TEXTBOX_INNERY
+	jr .finish
+
+.battle
+	bccoord TEXTBOX_BATTLE_INNERX, TEXTBOX_BATTLE_INNERY
+	; fallthrough
+
+.finish
 	call PrintTextboxTextAt
 	ret
 
@@ -581,8 +599,16 @@ Diacritic::
 	ret
 
 LoadBlinkingCursor::
+	ld a, [wBattleMode]
+	and a
+	jr nz, .battle
 	ld a, "▼"
-	ldcoord_a 18, 17
+	ldcoord_a BLINKING_CURSOR_X, BLINKING_CURSOR_Y
+	ret
+
+.battle
+	ld a, "▼"
+	ldcoord_a BLINKING_CURSOR_BATTLE_X, BLINKING_CURSOR_BATTLE_Y
 	ret
 
 UnloadBlinkingCursor::

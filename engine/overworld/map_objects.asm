@@ -2252,14 +2252,14 @@ UpdateObjectFrozen:
 	call CheckObjectOnScreen
 	jr c, SetFacing_Standing
 	call UpdateObjectTile
-	farcall HandleFrozenObjectAction ; no need to farcall
+	call HandleFrozenObjectAction ; no need to farcall
 	xor a
 	ret
 
 UpdateRespawnedObjectFrozen:
 	call CheckObjectOnScreen
 	jr c, SetFacing_Standing
-	farcall HandleFrozenObjectAction ; no need to farcall
+	call HandleFrozenObjectAction ; no need to farcall
 	xor a
 	ret
 

@@ -210,6 +210,7 @@
 	const SFX_TWINKLE                     ; ce
 ; Zelda
 	const SFX_TEXT_PRINT				  ; cf
-	const SFX_SOLVE_PUZZLE				  ; d0
-	const SFX_GET_ITEM					  ; d1
+	const SFX_TEXT_PRINT_DONE			  ; d0
+	const SFX_SOLVE_PUZZLE				  ; d1
+	const SFX_GET_ITEM					  ; d2
 DEF NUM_SFX EQU const_value

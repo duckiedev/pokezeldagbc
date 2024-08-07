@@ -104,6 +104,7 @@
 	const SPRITE_RAIKOU ; 64
 	const SPRITE_OLDMAN ; 65
 	const SPRITE_CAPTAIN_TOAD ; 66
+	const SPRITE_ZUBAT ; 67
 DEF NUM_OVERWORLD_SPRITES EQU const_value - 1
 
 ; SpriteMons indexes (see data/sprites/sprite_mons.asm)
@@ -116,7 +117,6 @@ DEF SPRITE_POKEMON EQU const_value
 	const SPRITE_SHELLDER ; 84
 	const SPRITE_ODDISH ; 85
 	const SPRITE_GENGAR ; 86
-	const SPRITE_ZUBAT ; 87
 	const SPRITE_MAGIKARP ; 88
 	const SPRITE_SQUIRTLE ; 89
 	const SPRITE_TOGEPI ; 8a

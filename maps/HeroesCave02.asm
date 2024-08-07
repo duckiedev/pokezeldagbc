@@ -58,4 +58,4 @@ HeroesCave02_MapEvents:
 	def_bg_events
 	
 	def_object_events
-	object_event  5,  5, SPRITE_ZUBAT, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_OWMON, 1, RoamingMonZubat01, -1
+	object_event  5,  5, SPRITE_ZUBAT, SPRITEMOVEDATA_WANDER, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_OWMON, 1, RoamingMonZubat01, -1

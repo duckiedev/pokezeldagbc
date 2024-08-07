@@ -357,7 +357,15 @@ WaitPressAorB_BlinkCursor::
 
 .loop
 	push hl
-	hlcoord 18, 17
+	ld a, [wBattleMode]
+	and a
+	jr nz, .battle
+	hlcoord BLINKING_CURSOR_X, BLINKING_CURSOR_Y
+	call .finish
+.battle
+	hlcoord BLINKING_CURSOR_BATTLE_X, BLINKING_CURSOR_BATTLE_Y
+
+.finish
 	call BlinkCursor
 	pop hl
 
@@ -389,7 +397,7 @@ PromptButton::
 	jr nz, .link
 	call .wait_input
 	push de
-	ld de, SFX_READ_TEXT_2
+	ld de, SFX_TEXT_PRINT_DONE
 	call PlaySFX
 	pop de
 	ret

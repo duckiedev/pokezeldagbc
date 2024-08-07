@@ -308,7 +308,7 @@ CheckTrainerEvent:
 CheckOWMonEvent:
 	nop
 	nop
-	call CheckOWMonBattle
+	farcall CheckOWMonBattle
 	jr nc, .nope
 
 	ld a, PLAYEREVENT_SEENBYOWMON

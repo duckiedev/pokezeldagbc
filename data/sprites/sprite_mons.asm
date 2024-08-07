@@ -8,7 +8,6 @@ SpriteMons:
 	db SHELLDER
 	db ODDISH
 	db GENGAR
-	db ZUBAT
 	db MAGIKARP
 	db SQUIRTLE
 	db TOGEPI

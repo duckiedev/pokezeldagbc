@@ -1070,4 +1070,10 @@ MACRO loadtempowmon
 	db loadtempowmon_command
 ENDM
 
+	const owmonflagaction_command ; $ab
+MACRO owmonflagaction
+	db owmonflagaction_command
+	db \1 ; action
+ENDM
+
 DEF NUM_EVENT_COMMANDS EQU const_value

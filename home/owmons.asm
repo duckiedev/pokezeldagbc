@@ -203,26 +203,3 @@ FacingPlayerDistance::
 	and a
 	ret
 */
-CheckOWMonFlag:: ; unreferenced
-	push bc
-	ld hl, OBJECT_MAP_OBJECT_INDEX
-	add hl, bc
-	ld a, [hl]
-	call GetMapObject
-	ld hl, MAPOBJECT_SCRIPT_POINTER
-	add hl, bc
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	call GetMapScriptsBank
-	call GetFarWord
-	ld d, h
-	ld e, l
-	push de
-	ld b, CHECK_FLAG
-	call EventFlagAction
-	pop de
-	ld a, c
-	and a
-	pop bc
-	ret

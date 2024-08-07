@@ -24,7 +24,7 @@ StartBattleWithMapOWMonScript:
 	loadtempowmon
 	startbattle
 	reloadmapafterbattle
-	trainerflagaction SET_FLAG
+	owmonflagaction SET_FLAG
 	loadmem wRunningOWMonBattleScript, -1
 
 ;AlreadyBeatenTrainerScript:
