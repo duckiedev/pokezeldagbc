@@ -4,7 +4,7 @@ Music_CaveTheme:
 	channel 2, Music_CaveTheme_Ch2
 	channel 3, Music_CaveTheme_Ch3
 
-Music_CaveTheme_Ch1:
+Music_CaveTheme_Ch2:
 	volume 7, 7
 	duty_cycle 2
 	note_type 12, 9, -7
@@ -38,7 +38,7 @@ Music_CaveTheme_Ch1:
 	note F_, 8
 	sound_loop 0, Music_CaveTheme_Ch1
 
-Music_CaveTheme_Ch2:
+Music_CaveTheme_Ch1:
 	duty_cycle 1
 	note_type 12, 9, 7
 	octave 3

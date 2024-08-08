@@ -213,4 +213,6 @@
 	const SFX_TEXT_PRINT_DONE			  ; d0
 	const SFX_SOLVE_PUZZLE				  ; d1
 	const SFX_GET_ITEM					  ; d2
+	const SFX_MENU_MOVE					  ; d3
+	const SFX_SELECT_ITEM				  ; d4
 DEF NUM_SFX EQU const_value

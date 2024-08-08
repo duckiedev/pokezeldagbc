@@ -214,4 +214,6 @@ SFX:
 	dba Sfx_TextPrintDone
 	dba Sfx_SolvePuzzle
 	dba Sfx_GetItem
+	dba Sfx_MenuMove
+	dba Sfx_SelectItem
 	assert_table_length NUM_SFX

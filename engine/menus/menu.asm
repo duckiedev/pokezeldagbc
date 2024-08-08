@@ -401,6 +401,7 @@ _2DMenuInterpretJoypad:
 	jr z, .check_wrap_around_down
 	inc [hl]
 	xor a
+	call PlayMenuMoveSFX
 	ret
 
 .check_wrap_around_down
@@ -424,6 +425,7 @@ _2DMenuInterpretJoypad:
 	jr z, .check_wrap_around_up
 	ld [hl], a
 	xor a
+	call PlayMenuMoveSFX
 	ret
 
 .check_wrap_around_up
@@ -448,6 +450,7 @@ _2DMenuInterpretJoypad:
 	jr z, .check_wrap_around_left
 	ld [hl], a
 	xor a
+	call PlayMenuMoveSFX
 	ret
 
 .check_wrap_around_left
@@ -472,6 +475,7 @@ _2DMenuInterpretJoypad:
 	jr z, .check_wrap_around_right
 	inc [hl]
 	xor a
+	call PlayMenuMoveSFX
 	ret
 
 .check_wrap_around_right
@@ -492,6 +496,13 @@ _2DMenuInterpretJoypad:
 	xor a
 	ret
 
+PlayMenuMoveSFX:
+	push de
+	ld de, SFX_MENU_MOVE
+	call PlaySFX
+	pop de
+	ret
+
 Move2DMenuCursor:
 	ld hl, wCursorCurrentTile
 	ld a, [hli]
@@ -502,6 +513,7 @@ Move2DMenuCursor:
 	jr nz, Place2DMenuCursor
 	ld a, [wCursorOffCharacter]
 	ld [hl], a
+
 Place2DMenuCursor:
 	ld a, [w2DMenuCursorInitY]
 	ld b, a
@@ -795,6 +807,7 @@ _InitVerticalMenuCursor::
 	ld [hl], c
 	inc hl
 ; wMenuCursorX
+
 	ld a, 1
 	ld [hli], a
 ; wCursorOffCharacter, wCursorCurrentTile

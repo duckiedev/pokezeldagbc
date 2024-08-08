@@ -804,7 +804,7 @@ MenuClickSound::
 
 PlayClickSFX::
 	push de
-	ld de, SFX_TEXT_PRINT_DONE
+	ld de, SFX_SELECT_ITEM
 	call PlaySFX
 	pop de
 	ret
