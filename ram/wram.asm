@@ -1059,7 +1059,14 @@ NEXTU
 wMysteryGiftCardHolderName:: ds PLAYER_NAME_LENGTH
 ENDU
 
-	ds 138
+; pcmwav-related?
+wc0f3:: dw
+
+; needed by pcmwav
+wRedrawRowOrColumnSrcTiles:: ds SCREEN_WIDTH * 2
+wPCMWavPointerTableAddr:: db
+	
+	ds 94
 
 wMysteryGiftPartnerData::
 wMysteryGiftPartnerGameVersion:: db
@@ -2235,7 +2242,17 @@ wPoisonStepPartyFlags:: ds PARTY_LENGTH
 wPoisonStepDataEnd::
 ENDU
 
-	ds 23
+wSeenOWMonBank:: db
+wSeenOWMonDistance:: db
+wSeenOWMonDirection:: db
+wTempOWMon::
+wTempOWMonEventFlag:: dw
+wTempOWMonSpecies:: db
+wTempOWMonLevel:: db
+wRunningOWMonBattleScript:: db
+wTempOWMonEnd::
+
+	ds 15
 
 
 SECTION "More WRAM 1", WRAMX
@@ -3124,6 +3141,7 @@ wMap19Object:: map_object wMap19
 
 ; fight counts
 wJackFightCount::    db
+wBeverlyFightCount:: db ; unreferenced
 wHueyFightCount::    db
 wGavenFightCount::   db
 wBethFightCount::    db
@@ -3136,19 +3154,22 @@ wLizFightCount::     db
 wAnthonyFightCount:: db
 wToddFightCount::    db
 wGinaFightCount::    db
+wIrwinFightCount::   db ; unreferenced
 wArnieFightCount::   db
 wAlanFightCount::    db
 wDanaFightCount::    db
 wChadFightCount::    db
+wDerekFightCount::   db ; unreferenced
 wTullyFightCount::   db
 wBrentFightCount::   db
 wTiffanyFightCount:: db
 wVanceFightCount::   db
 wWiltonFightCount::  db
+wKenjiFightCount::   db ; unreferenced
 wParryFightCount::   db
 wErinFightCount::    db
 
-	ds 14
+	ds 10
 
 ; 5 additional wMapObjects
 wMap20Object:: map_object wMap20
@@ -3247,19 +3268,7 @@ wPlayerMonSelection:: ds 3
 wdc5f:: db
 wdc60:: db
 
-	ds 1
-	
-wSeenOWMonBank:: db
-wSeenOWMonDistance:: db
-wSeenOWMonDirection:: db
-wTempOWMon::
-wTempOWMonEventFlag:: dw
-wTempOWMonSpecies:: db
-wTempOWMonLevel:: db
-wRunningOWMonBattleScript:: db
-wTempOWMonEnd::
-
-	ds 8
+	ds 17
 
 wCaveH8HiddenDoor:: db
 

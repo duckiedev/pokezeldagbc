@@ -236,6 +236,7 @@ ScriptCommandTable:
 	dw Script_checksave                  ; a9
 	dw Script_loadtempowmon				 ; aa
 	dw Script_owmonflagaction            ; ab
+	dw Script_playpcmwav				 ; ac
 	assert_table_length NUM_EVENT_COMMANDS
 
 StartScript:
@@ -1166,6 +1167,12 @@ Script_owmonflagaction:
 	ld [wScriptVar], a
 	ret
 
+Script_playpcmwav:
+	;call GetScriptByte
+	;ldpcmwav e, a
+	;farcall PlayPCMSoundClip
+	ret
+ 
 Script_loadwildmon:
 	ld a, (1 << 7)
 	ld [wBattleScriptFlags], a
@@ -2200,10 +2207,6 @@ Script_warpcheck:
 	farcall EnableEvents
 	ret
 
-Script_enableevents: ; unreferenced
-	farcall EnableEvents
-	ret
-
 Script_newloadmap:
 	call GetScriptByte
 	ldh [hMapEntryMethod], a
@@ -2229,9 +2232,6 @@ Script_writeunusedbyte:
 	call GetScriptByte
 	ld [wUnusedScriptByte], a
 	ret
-
-UnusedClosetextScript: ; unreferenced
-	closetext
 
 Script_closetext:
 	call HDMATransferTilemapAndAttrmap_Menu

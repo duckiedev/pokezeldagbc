@@ -1076,4 +1076,10 @@ MACRO owmonflagaction
 	db \1 ; action
 ENDM
 
+	const playpcmwav_command ; $ac
+MACRO playpcmwav
+	db playpcmwav_command
+	dpcmwav \1 ; pcmwav
+ENDM
+
 DEF NUM_EVENT_COMMANDS EQU const_value

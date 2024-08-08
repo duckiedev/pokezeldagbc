@@ -1121,6 +1121,9 @@ TitleScreenEntrance:
 	ldh [hLCDCPointer], a
 
 ; Play the title screen music.
+	ldpcmwav e, HonedgeHCry
+	farcall PlayPCMSoundClip
+
 	ld de, MUSIC_ZELDA_TITLE
 	call PlayMusic
 

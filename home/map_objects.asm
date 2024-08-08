@@ -304,12 +304,6 @@ CheckObjectTime::
 	scf
 	ret
 
-CopyMapObjectStruct:: ; unreferenced
-	ldh [hMapObjectIndex], a
-	call GetMapObject
-	call CopyObjectStruct
-	ret
-
 UnmaskCopyMapObjectStruct::
 	ldh [hMapObjectIndex], a
 	call UnmaskObject
@@ -576,16 +570,6 @@ _GetMovementIndex::
 	rst Bankswitch
 
 	ld a, h
-	ret
-
-SetVramState_SpriteUpdatesDisabled:: ; unreferenced
-	ld hl, wStateFlags
-	set SPRITE_UPDATES_DISABLED_F, [hl]
-	ret
-
-ResetVramState_SpriteUpdatesDisabled:: ; unreferenced
-	ld hl, wStateFlags
-	res SPRITE_UPDATES_DISABLED_F, [hl]
 	ret
 
 UpdateSprites::

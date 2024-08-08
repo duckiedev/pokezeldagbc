@@ -2232,9 +2232,6 @@ GetMapEnvironment::
 	pop hl
 	ret
 
-Map_DummyFunction:: ; unreferenced
-	ret
-
 GetAnyMapEnvironment::
 	push hl
 	push de
