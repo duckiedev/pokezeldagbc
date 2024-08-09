@@ -61,6 +61,7 @@ UsedMoveInsteadText:
 
 MoveNameText:
 	text_far _MoveNameText
+	text_end
 
 UpdateUsedMoves:
 ; append move a to wPlayerUsedMoves unless it has already been used
