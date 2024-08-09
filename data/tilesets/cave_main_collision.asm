@@ -55,7 +55,7 @@
 	tilecoll WARP_CARPET_UP, WALL, FLOOR, FLOOR ; 36
 	tilecoll WALL, WALL, FLOOR, WALL ; 37
 	tilecoll FLOOR, WALL, FLOOR, WALL ; 38
-	tilecoll FLOOR, WALL, FLOOR, WALL ; 39
+	tilecoll FLOOR, WALL, FLOOR, VINEWHIP ; 39
 	tilecoll FLOOR, WALL, FLOOR, WALL ; 3a
 	tilecoll FLOOR, FLOOR, WALL, WALL ; 3b
 	tilecoll FLOOR, FLOOR, WARP_CARPET_DOWN, WALL ; 3c

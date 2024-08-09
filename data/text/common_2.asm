@@ -1510,7 +1510,8 @@ _UsedVineWhipText::
 _CantVineWhipText::
 	text "Something could"
 	line "latch on over"
-	line "there…"
+	cont "there…"
+	prompt
 
 _CantDepositText::
 	text "Can't deposit"

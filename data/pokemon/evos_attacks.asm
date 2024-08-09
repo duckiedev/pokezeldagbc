@@ -3357,9 +3357,10 @@ CelebiEvosAttacks:
 
 HonedgeHEvosAttacks:
 	db 0 ; no evolutions for now
-	db 1, TACKLE
+	db 1, SCRATCH
 	db 1, SWORDS_DANCE
 	db 1, FURY_CUTTER
+	db 1, VINE_WHIP
 	db 15, SLASH
 	db 0 ; no more level up moves for now
 	

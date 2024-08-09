@@ -2032,7 +2032,7 @@ UsedVineWhipScript:
 	loadvar VAR_MOVEMENT, PLAYER_NORMAL
 	special UpdatePlayerSprite
 	waitsfx
-	playsound SFX_STRENGTH
+	playsound SFX_VINE_WHIP
 	readvar VAR_FACING
 	if_equal DOWN, .down
 .loop_up

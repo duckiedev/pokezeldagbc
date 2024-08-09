@@ -80,6 +80,7 @@ DEF SPDSPCDV_SHINY EQU $AA
 	const_def 1
 	const WILD_BATTLE
 	const TRAINER_BATTLE
+	const OW_BATTLE
 
 ; battle types (wBattleType values)
 	const_def
@@ -96,6 +97,8 @@ DEF SPDSPCDV_SHINY EQU $AA
 	const BATTLETYPE_FORCEITEM
 	const BATTLETYPE_CELEBI
 	const BATTLETYPE_SUICUNE
+	const BATTLETYPE_ADVANTAGE
+	const BATTLETYPE_DISADVANTAGE
 
 ; BattleVarPairs indexes (see home/battle_vars.asm)
 	const_def
