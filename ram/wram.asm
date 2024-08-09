@@ -71,7 +71,10 @@ wMusicFade::
 wMusicFadeCount:: db
 wMusicFadeID:: dw
 
-	ds 5
+	ds 3
+
+wc0f3:: dw
+; needed by pcmwav
 
 wCryPitch:: dw
 wCryLength:: dw
@@ -1059,14 +1062,7 @@ NEXTU
 wMysteryGiftCardHolderName:: ds PLAYER_NAME_LENGTH
 ENDU
 
-; pcmwav-related?
-wc0f3:: dw
-
-; needed by pcmwav
-wRedrawRowOrColumnSrcTiles:: ds SCREEN_WIDTH * 2
-wPCMWavPointerTableAddr:: db
-	
-	ds 94
+	ds 138
 
 wMysteryGiftPartnerData::
 wMysteryGiftPartnerGameVersion:: db
@@ -2242,6 +2238,8 @@ wPoisonStepPartyFlags:: ds PARTY_LENGTH
 wPoisonStepDataEnd::
 ENDU
 
+	ds 15
+
 wSeenOWMonBank:: db
 wSeenOWMonDistance:: db
 wSeenOWMonDirection:: db
@@ -2251,9 +2249,6 @@ wTempOWMonSpecies:: db
 wTempOWMonLevel:: db
 wRunningOWMonBattleScript:: db
 wTempOWMonEnd::
-
-	ds 15
-
 
 SECTION "More WRAM 1", WRAMX
 
@@ -2952,13 +2947,13 @@ endr
 
 wCmdQueue:: ds CMDQUEUE_CAPACITY * CMDQUEUE_ENTRY_SIZE
 
-	ds 6
+wRedrawRowOrColumnSrcTiles:: ds SCREEN_WIDTH * 2
+; needed by pcmwav
 
 wMapObjects::
 wPlayerObject:: map_object wPlayer ; player is map object 0
-; wMap1Object - wMap17Object
-; search "additional wMapObjects" for more down below
-for n, 1, NUM_OBJECTS - 7
+; wMap1Object - wMap15Object
+for n, 1, NUM_OBJECTS
 wMap{d:n}Object:: map_object wMap{d:n}
 endr
 
@@ -3075,7 +3070,7 @@ wKarensRoomSceneID::                              db
 wLancesRoomSceneID::                              db
 wHallOfFameSceneID::                              db
 wRoute27SceneID::                                 db
-wCaveH8SceneID::	                              db
+wCaveH8SceneID::                                  db
 wElmsLabSceneID::                                 db
 wPlayersHouse1FSceneID::                          db
 wRoute29SceneID::                                 db
@@ -3135,9 +3130,7 @@ wMountMoonSquareSceneID::                         db
 wMobileTradeRoomSceneID::                         db
 wMobileBattleRoomSceneID::                        db
 
-; 2 additional wMapObjects
-wMap18Object:: map_object wMap18
-wMap19Object:: map_object wMap19
+	ds 29
 
 ; fight counts
 wJackFightCount::    db
@@ -3169,14 +3162,7 @@ wKenjiFightCount::   db ; unreferenced
 wParryFightCount::   db
 wErinFightCount::    db
 
-	ds 10
-
-; 5 additional wMapObjects
-wMap20Object:: map_object wMap20
-wMap21Object:: map_object wMap21
-wMap22Object:: map_object wMap22
-wMap23Object:: map_object wMap23
-wMap24Object:: map_object wMap24
+	ds 100
 
 wEventFlags:: flag_array NUM_EVENTS
 
@@ -3499,7 +3485,6 @@ ENDU
 SECTION "News Script RAM", WRAMX
 
 w4_d000:: ds $1000
-
 
 SECTION "Surrounding Data", WRAMX
 
