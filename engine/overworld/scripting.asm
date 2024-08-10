@@ -1275,12 +1275,15 @@ Script_memcall:
 	; fallthrough
 
 ScriptCall:
-; BUG: ScriptCall can overflow wScriptStack and crash (see docs/bugs_and_glitches.md)
+
+	ld hl, wScriptStackSize
+	ld a, [hl]
+	cp [hl]
+	ret nc
 
 	push de
-	ld hl, wScriptStackSize
-	ld e, [hl]
 	inc [hl]
+	ld e, a
 	ld d, 0
 	ld hl, wScriptStack
 	add hl, de
