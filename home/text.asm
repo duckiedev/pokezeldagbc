@@ -605,7 +605,14 @@ LoadBlinkingCursor::
 
 UnloadBlinkingCursor::
 	lda_coord 17, 17
-	ldcoord_a 18, 17
+	ld a, [wBattleMode]
+	and a
+	jr nz, .battle
+	ldcoord_a BLINKING_CURSOR_X, BLINKING_CURSOR_Y
+	ret
+
+.battle
+	ldcoord_a BLINKING_CURSOR_BATTLE_X, BLINKING_CURSOR_BATTLE_Y
 	ret
 
 PlaceFarString::

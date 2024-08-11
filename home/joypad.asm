@@ -413,10 +413,10 @@ PromptButton::
 	jr .load_cursor_state
 
 .cursor_off
-	lda_coord 17, 17
+	lda_coord BLINKING_CURSOR_X-1, BLINKING_CURSOR_Y
 
 .load_cursor_state
-	ldcoord_a 18, 17
+	ldcoord_a BLINKING_CURSOR_X, BLINKING_CURSOR_Y
 	ret
 
 BlinkCursor::

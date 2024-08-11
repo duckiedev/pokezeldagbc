@@ -8,7 +8,6 @@ TalkToOWMonScript::
 SeenByOWMonScript::
 	;encountermusic
 	;callasm .breakpoint
-	loademote EMOTE_SHOCK
 	showemote EMOTE_SHOCK, LAST_TALKED, 30
 	callasm TrainerWalkToPlayer
 	applymovementlasttalked wMovementBuffer
