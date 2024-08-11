@@ -1278,7 +1278,7 @@ ScriptCall:
 
 	ld hl, wScriptStackSize
 	ld a, [hl]
-	cp [hl]
+	cp 5
 	ret nc
 
 	push de
