@@ -2244,9 +2244,9 @@ wSeenOWMonBank:: db
 wSeenOWMonDistance:: db
 wSeenOWMonDirection:: db
 wTempOWMon::
-wTempOWMonEventFlag:: dw
 wTempOWMonSpecies:: db
 wTempOWMonLevel:: db
+wTempOWMonEventFlag:: dw
 wRunningOWMonBattleScript:: db
 wTempOWMonEnd::
 

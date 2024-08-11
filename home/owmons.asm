@@ -107,6 +107,7 @@ TalkToOWMon::
 	ld [wSeenOWMonDirection], a
 
 LoadOWMon_continue::
+	; this gets the arguments from the map script owmon MON, level, .script and stores them in wram
 	call GetMapScriptsBank
 	ld [wSeenOWMonBank], a
 
@@ -121,6 +122,11 @@ LoadOWMon_continue::
 	ld bc, wTempOWMonEnd - wTempOWMon
 	ld a, [wSeenOWMonBank]
 	call FarCopyBytes
+	; this takes those values and transfers them to where they need to be for the wild battle
+	ld a, [wTempOWMonSpecies]
+	ld [wTempWildMonSpecies], a
+	ld a, [wTempOWMonLevel]
+	ld [wCurPartyLevel], a
 	xor a
 	ld [wRunningOWMonBattleScript], a
 	scf

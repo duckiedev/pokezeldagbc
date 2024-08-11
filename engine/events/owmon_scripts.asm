@@ -2,12 +2,10 @@ TalkToOWMonScript::
 	faceplayer
 	;owmonflagaction CHECK_FLAG
 	;iftrue AlreadyBeatenTrainerScript
-	loadtempowmon
 	;encountermusic
 	sjump StartBattleWithMapOWMonScript
 
 SeenByOWMonScript::
-	loadtempowmon
 	;encountermusic
 	showemote EMOTE_SHOCK, LAST_TALKED, 30
 	callasm TrainerWalkToPlayer
@@ -21,7 +19,7 @@ StartBattleWithMapOWMonScript:
 	;trainertext TRAINERTEXT_SEEN
 	;waitbutton
 	;closetext
-	loadtempowmon
+	;loadtempowmon
 	startbattle
 	reloadmapafterbattle
 	owmonflagaction SET_FLAG

@@ -1065,18 +1065,13 @@ MACRO checksave
 	db checksave_command
 ENDM
 
-	const loadtempowmon_command ; $aa
-MACRO loadtempowmon
-	db loadtempowmon_command
-ENDM
-
-	const owmonflagaction_command ; $ab
+	const owmonflagaction_command ; $aa
 MACRO owmonflagaction
 	db owmonflagaction_command
 	db \1 ; action
 ENDM
 
-	const playpcmwav_command ; $ac
+	const playpcmwav_command ; $ab
 MACRO playpcmwav
 	db playpcmwav_command
 	dpcmwav \1 ; pcmwav

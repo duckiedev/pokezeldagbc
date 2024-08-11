@@ -147,8 +147,12 @@ ENDM
 MACRO owmon
 ;\1: mon
 ;\2: level
+;\3: flag: an EVENT_BEAT_* constant
+;\4: script
 	db \1 
-	db \2 
+	db \2
+	dw \3
+	dw \4
 ENDM
 
 MACRO itemball
