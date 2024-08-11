@@ -2238,7 +2238,7 @@ wPoisonStepPartyFlags:: ds PARTY_LENGTH
 wPoisonStepDataEnd::
 ENDU
 
-	ds 15
+	ds 13
 
 wSeenOWMonBank:: db
 wSeenOWMonDistance:: db
@@ -2247,6 +2247,7 @@ wTempOWMon::
 wTempOWMonSpecies:: db
 wTempOWMonLevel:: db
 wTempOWMonEventFlag:: dw
+wTempOWMonAfterBattleScript:: dw
 wRunningOWMonBattleScript:: db
 wTempOWMonEnd::
 

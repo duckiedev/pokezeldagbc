@@ -10,16 +10,15 @@ RoamingMonZubat01:
 	owmon ZUBAT, 5, EVENT_BEAT_ZUBAT_HEROES_CAVE_02, .Script
 
 .Script
-	disappear HEROES_CAVE_02_ROAMINGMON_ZUBAT
-	changeblock $3, $0, $35
+	changeblock $6, $1, $36
 	playsound SFX_PLACE_PUZZLE_PIECE_DOWN
 	waitsfx
 	refreshmap
-	changeblock $0, $2, $3D
+	changeblock $0, $5, $3E
 	playsound SFX_PLACE_PUZZLE_PIECE_DOWN
 	waitsfx
 	refreshmap
-	changeblock $3, $4, $3C
+	changeblock $6, $9, $3C
 	playsound SFX_PLACE_PUZZLE_PIECE_DOWN
 	waitsfx
 	refreshmap

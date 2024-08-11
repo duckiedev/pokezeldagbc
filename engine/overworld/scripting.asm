@@ -235,7 +235,8 @@ ScriptCommandTable:
 	dw Script_wait                       ; a8
 	dw Script_checksave                  ; a9
 	dw Script_owmonflagaction            ; aa
-	dw Script_playpcmwav				 ; ab
+	dw Script_owmonafterbattle			 ; ab
+	dw Script_playpcmwav				 ; ac
 	assert_table_length NUM_EVENT_COMMANDS
 
 StartScript:
@@ -1156,6 +1157,15 @@ Script_owmonflagaction:
 	ld a, TRUE
 	ld [wScriptVar], a
 	ret
+
+Script_owmonafterbattle:
+	ld hl, wTempOWMonAfterBattleScript
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ld a, [wSeenOWMonBank]
+	ld b, a
+	jp ScriptJump
 
 Script_playpcmwav:
 	;call GetScriptByte

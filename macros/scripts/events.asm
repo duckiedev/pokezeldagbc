@@ -1071,7 +1071,12 @@ MACRO owmonflagaction
 	db \1 ; action
 ENDM
 
-	const playpcmwav_command ; $ab
+	const owmonafterbattle_command ; $ab
+MACRO owmonafterbattle
+	db owmonafterbattle_command
+ENDM
+
+	const playpcmwav_command ; $ac
 MACRO playpcmwav
 	db playpcmwav_command
 	dpcmwav \1 ; pcmwav

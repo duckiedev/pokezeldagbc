@@ -7,12 +7,17 @@ TalkToOWMonScript::
 
 SeenByOWMonScript::
 	;encountermusic
+	;callasm .breakpoint
+	loademote EMOTE_SHOCK
 	showemote EMOTE_SHOCK, LAST_TALKED, 30
 	callasm TrainerWalkToPlayer
 	applymovementlasttalked wMovementBuffer
 	writeobjectxy LAST_TALKED
 	faceobject PLAYER, LAST_TALKED
 	sjump StartBattleWithMapOWMonScript
+;.breakpoint
+	;ld b, b
+	;ret
 
 StartBattleWithMapOWMonScript:
 	;opentext
@@ -21,9 +26,15 @@ StartBattleWithMapOWMonScript:
 	;closetext
 	;loadtempowmon
 	startbattle
+	ifequal WIN, .RunAfterBattle
+	loadmem wRunningOWMonBattleScript, -1
+	end
+
+.RunAfterBattle
 	reloadmapafterbattle
 	owmonflagaction SET_FLAG
-	loadmem wRunningOWMonBattleScript, -1
+	disappear LAST_TALKED
+	owmonafterbattle
 
 ;AlreadyBeatenTrainerScript:
 ;	scripttalkafter
