@@ -818,9 +818,9 @@ WasSeededText:
 	line "was seeded!"
 	prompt
 
-EvadedText:
+DodgedText:
 	text "<TARGET>"
-	line "evaded the attack!"
+	line "dodged the attack!"
 	prompt
 
 WasDisabledText:
