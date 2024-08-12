@@ -405,19 +405,42 @@ PromptButton::
 	ldh [hOAMUpdate], a
 	ret
 
-.blink_cursor
-	ldh a, [hVBlankCounter]
-	and %00010000 ; bit 4, a
-	jr z, .cursor_off
-	ld a, "▼"
-	jr .load_cursor_state
-
-.cursor_off
-	lda_coord BLINKING_CURSOR_X-1, BLINKING_CURSOR_Y
-
-.load_cursor_state
-	ldcoord_a BLINKING_CURSOR_X, BLINKING_CURSOR_Y
-	ret
+	.blink_cursor
+		ldh a, [hVBlankCounter]
+		and %00010000 ; bit 4, a
+		jr z, .cursor_off
+		ld a, "▼"
+		jr .load_cursor_state
+	
+	.cursor_off
+		; copies tile to the left of the cursor
+		push af
+		ld a, [wBattleMode]
+		and a
+		jr nz, .battle_off
+		pop af
+		lda_coord BLINKING_CURSOR_X-1, BLINKING_CURSOR_Y
+		jr .load_cursor_state
+	
+	.battle_off
+		pop af
+		lda_coord BLINKING_CURSOR_BATTLE_X-1, BLINKING_CURSOR_BATTLE_Y
+	
+	.load_cursor_state
+		; places either "▼" or the copied tile
+		push af
+		ld a, [wBattleMode]
+		and a
+		jr nz, .battle_load
+		pop af
+		ldcoord_a BLINKING_CURSOR_X, BLINKING_CURSOR_Y
+		ret
+	
+	.battle_load
+		; places either "▼" or the copied tile
+		pop af
+		ldcoord_a BLINKING_CURSOR_BATTLE_X, BLINKING_CURSOR_BATTLE_Y
+		ret
 
 BlinkCursor::
 	push bc

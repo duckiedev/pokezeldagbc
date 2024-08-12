@@ -542,7 +542,6 @@ NullChar::
 	jp NextChar
 
 TextScroll::
-	ld b, b
 	hlcoord TEXTBOX_INNERX, TEXTBOX_INNERY
 	decoord TEXTBOX_INNERX, TEXTBOX_INNERY - 1
 	ld a, TEXTBOX_INNERH - 1

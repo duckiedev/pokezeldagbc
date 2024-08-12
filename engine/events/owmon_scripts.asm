@@ -14,9 +14,6 @@ SeenByOWMonScript::
 	writeobjectxy LAST_TALKED
 	faceobject PLAYER, LAST_TALKED
 	sjump StartBattleWithMapOWMonScript
-;.breakpoint
-	;ld b, b
-	;ret
 
 StartBattleWithMapOWMonScript:
 	;opentext
