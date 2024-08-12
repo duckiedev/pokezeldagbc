@@ -542,6 +542,7 @@ NullChar::
 	jp NextChar
 
 TextScroll::
+	ld b, b
 	hlcoord TEXTBOX_INNERX, TEXTBOX_INNERY
 	decoord TEXTBOX_INNERX, TEXTBOX_INNERY - 1
 	ld a, TEXTBOX_INNERH - 1
@@ -604,14 +605,15 @@ LoadBlinkingCursor::
 	ret
 
 UnloadBlinkingCursor::
-	lda_coord 17, 17
 	ld a, [wBattleMode]
 	and a
 	jr nz, .battle
+	lda_coord BLINKING_CURSOR_X - 1, BLINKING_CURSOR_Y
 	ldcoord_a BLINKING_CURSOR_X, BLINKING_CURSOR_Y
 	ret
 
 .battle
+	lda_coord BLINKING_CURSOR_BATTLE_X - 1, BLINKING_CURSOR_BATTLE_Y
 	ldcoord_a BLINKING_CURSOR_BATTLE_X, BLINKING_CURSOR_BATTLE_Y
 	ret
 
