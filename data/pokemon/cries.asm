@@ -46,7 +46,7 @@ PokemonCries::
 	mon_cry CRY_VULPIX,      136,  224 ; NINETALES
 	mon_cry CRY_PIDGEY,      255,  181 ; JIGGLYPUFF
 	mon_cry CRY_PIDGEY,      104,  224 ; WIGGLYTUFF
-	mon_cry CRY_SQUIRTLE,    224,  256 ; ZUBAT
+	mon_cry CRY_SQUIRTLE,    224,  256 ; ITTIBAT
 	mon_cry CRY_SQUIRTLE,    250,  256 ; GOLBAT
 	mon_cry CRY_ODDISH,      221,  129 ; ODDISH
 	mon_cry CRY_ODDISH,      170,  192 ; GLOOM

@@ -45,7 +45,7 @@ MonMenuIconPals:
 	icon_pals BROWN, GRAY   ; NINETALES
 	icon_pals PINK, GREEN   ; JIGGLYPUFF
 	icon_pals PINK, GREEN   ; WIGGLYTUFF
-	icon_pals BLUE, GREEN   ; ZUBAT
+	icon_pals BLUE, GREEN   ; ITTIBAT
 	icon_pals BLUE, GREEN   ; GOLBAT
 	icon_pals GREEN, BROWN  ; ODDISH
 	icon_pals RED, BROWN    ; GLOOM

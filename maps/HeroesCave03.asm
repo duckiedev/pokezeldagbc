@@ -1,0 +1,58 @@
+	object_const_def
+	const HEROES_CAVE_03_ROAMINGMON_ITTIBAT_01
+	const HEROES_CAVE_03_ROAMINGMON_ITTIBAT_02
+	const HEROES_CAVE_03_ROAMINGMON_ITTIBAT_03
+
+HeroesCave03_MapScripts:
+	def_scene_scripts
+
+	def_callbacks
+
+HeroesCave03RoamingMonIttibat01:
+	owmon ITTIBAT, 5, EVENT_BEAT_ITTIBAT_01_HEROES_CAVE_03, .AfterScript
+
+.AfterScript
+	reloadmapafterbattle
+	disappear HEROES_CAVE_03_ROAMINGMON_ITTIBAT_01
+	end
+
+HeroesCave03CheckBush:
+	conditional_event EVENT_CAVEH8_HIDDEN_DOOR_REVEALED, .Script
+.Script
+	opentext
+	checkevent EVENT_GOT_HONEDGE
+	iftrue .AskToCut
+	farwritetext _CanCutText
+	closetext
+	end
+
+.AskToCut
+	farwritetext _AskCutText
+	yesorno
+	iffalse .skip
+	closetext
+	callasm OWCutAnimation
+	changeblock $8, $3, $15
+	refreshmap
+	reanchormap
+	playsound SFX_SOLVE_PUZZLE
+	waitsfx
+.skip
+	end
+
+
+HeroesCave03_MapEvents:
+	db 0, 0 ; filler
+
+	def_warp_events
+	warp_event  6,  9, HEROES_CAVE_02, 2
+
+	def_coord_events
+
+	def_bg_events
+	bg_event  9,  2, BGEVENT_IFNOTSET, HeroesCave03CheckBush
+	
+	def_object_events
+	object_event 11,  2, SPRITE_ITTIBAT, SPRITEMOVEDATA_WANDER, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_OWMON, 3, HeroesCave03RoamingMonIttibat01, -1
+	object_event 12,  8, SPRITE_ITTIBAT, SPRITEMOVEDATA_WANDER, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_OWMON, 3, HeroesCave03RoamingMonIttibat01, -1
+	object_event  1,  7, SPRITE_ITTIBAT, SPRITEMOVEDATA_WANDER, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_OWMON, 3, HeroesCave03RoamingMonIttibat01, -1

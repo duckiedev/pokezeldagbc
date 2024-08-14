@@ -42,7 +42,7 @@ MonMenuIcons:
 	db ICON_FOX         ; NINETALES
 	db ICON_JIGGLYPUFF  ; JIGGLYPUFF
 	db ICON_JIGGLYPUFF  ; WIGGLYTUFF
-	db ICON_BAT         ; ZUBAT
+	db ICON_BAT         ; ITTIBAT
 	db ICON_BAT         ; GOLBAT
 	db ICON_ODDISH      ; ODDISH
 	db ICON_ODDISH      ; GLOOM

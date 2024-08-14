@@ -38,7 +38,7 @@ NewPokedexOrder:
 	db GEODUDE
 	db GRAVELER
 	db GOLEM
-	db ZUBAT
+	db ITTIBAT
 	db GOLBAT
 	db CROBAT
 	db CLEFFA

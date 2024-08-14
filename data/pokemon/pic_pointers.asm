@@ -83,8 +83,8 @@ PokemonPicPointers::
 	dba JigglypuffBackpic
 	dba WigglytuffFrontpic
 	dba WigglytuffBackpic
-	dba ZubatFrontpic
-	dba ZubatBackpic
+	dba IttibatFrontpic
+	dba IttibatBackpic
 	dba GolbatFrontpic
 	dba GolbatBackpic
 	dba OddishFrontpic

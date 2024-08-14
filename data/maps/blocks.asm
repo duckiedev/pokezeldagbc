@@ -996,5 +996,7 @@ HeroesCave01_Blocks:
 	INCBIN "maps/HeroesCave01.ablk"
 HeroesCave02_Blocks:
 	INCBIN "maps/HeroesCave02.ablk"
+HeroesCave03_Blocks:
+	INCBIN "maps/HeroesCave03.ablk"
 
 ENDSECTION

@@ -40,7 +40,7 @@ PokemonNames::
 	db "NINETALES@"
 	db "JIGGLYPUFF"
 	db "WIGGLYTUFF"
-	db "ZUBAT@@@@@"
+	db "ITTIBAT@@@"
 	db "GOLBAT@@@@"
 	db "ODDISH@@@@"
 	db "GLOOM@@@@@"

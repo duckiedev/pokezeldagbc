@@ -40,7 +40,7 @@ EggMovePointers::
 	dw NoEggMoves
 	dw NoEggMoves
 	dw NoEggMoves
-	dw ZubatEggMoves
+	dw IttibatEggMoves
 	dw NoEggMoves
 	dw OddishEggMoves
 	dw NoEggMoves

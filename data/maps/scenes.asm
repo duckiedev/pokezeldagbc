@@ -25,7 +25,6 @@ MapScenes::
 	scene_var LANCES_ROOM,                                 wLancesRoomSceneID
 	scene_var HALL_OF_FAME,                                wHallOfFameSceneID
 	scene_var ROUTE_27,                                    wRoute27SceneID
-	scene_var CAVE_H8,		                               wCaveH8SceneID
 	scene_var ELMS_LAB,                                    wElmsLabSceneID
 	scene_var PLAYERS_HOUSE_1F,                            wPlayersHouse1FSceneID
 	scene_var ROUTE_29,                                    wRoute29SceneID
@@ -40,8 +39,6 @@ MapScenes::
 	scene_var GOLDENROD_MAGNET_TRAIN_STATION,              wGoldenrodMagnetTrainStationSceneID
 	scene_var GOLDENROD_POKECENTER_1F,                     wGoldenrodPokecenter1FSceneID
 	scene_var OLIVINE_CITY,                                wOlivineCitySceneID
-	scene_var ROUTE_34,                                    wRoute34SceneID ; unused
-	scene_var ROUTE_34_ILEX_FOREST_GATE,                   wRoute34IlexForestGateSceneID ; unused
 	scene_var ECRUTEAK_TIN_TOWER_ENTRANCE,                 wEcruteakTinTowerEntranceSceneID
 	scene_var WISE_TRIOS_ROOM,                             wWiseTriosRoomSceneID
 	scene_var ECRUTEAK_POKECENTER_1F,                      wEcruteakPokecenter1FSceneID
@@ -53,7 +50,6 @@ MapScenes::
 	scene_var BATTLE_TOWER_BATTLE_ROOM,                    wBattleTowerBattleRoomSceneID
 	scene_var BATTLE_TOWER_ELEVATOR,                       wBattleTowerElevatorSceneID
 	scene_var BATTLE_TOWER_HALLWAY,                        wBattleTowerHallwaySceneID
-	scene_var BATTLE_TOWER_OUTSIDE,                        wBattleTowerOutsideSceneID ; unused
 	scene_var ROUTE_43_GATE,                               wRoute43GateSceneID
 	scene_var MOUNT_MOON,                                  wMountMoonSceneID
 	scene_var SPROUT_TOWER_3F,                             wSproutTower3FSceneID
@@ -73,7 +69,6 @@ MapScenes::
 	scene_var TEAM_ROCKET_BASE_B2F,                        wTeamRocketBaseB2FSceneID
 	scene_var TEAM_ROCKET_BASE_B3F,                        wTeamRocketBaseB3FSceneID
 	scene_var GOLDENROD_UNDERGROUND_SWITCH_ROOM_ENTRANCES, wGoldenrodUndergroundSwitchRoomEntrancesSceneID
-	scene_var SILVER_CAVE_ROOM_3,                          wSilverCaveRoom3SceneID ; unused
 	scene_var VICTORY_ROAD,                                wVictoryRoadSceneID
 	scene_var DRAGONS_DEN_B1F,                             wDragonsDenB1FSceneID
 	scene_var DRAGON_SHRINE,                               wDragonShrineSceneID
@@ -84,4 +79,5 @@ MapScenes::
 	scene_var MOUNT_MOON_SQUARE,                           wMountMoonSquareSceneID
 	scene_var MOBILE_TRADE_ROOM,                           wMobileTradeRoomSceneID
 	scene_var MOBILE_BATTLE_ROOM,                          wMobileBattleRoomSceneID
+	scene_var CAVE_H8,		                               wCaveH8SceneID
 	db -1 ; end

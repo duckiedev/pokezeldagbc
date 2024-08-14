@@ -3071,7 +3071,6 @@ wKarensRoomSceneID::                              db
 wLancesRoomSceneID::                              db
 wHallOfFameSceneID::                              db
 wRoute27SceneID::                                 db
-wCaveH8SceneID::                                  db
 wElmsLabSceneID::                                 db
 wPlayersHouse1FSceneID::                          db
 wRoute29SceneID::                                 db
@@ -3086,8 +3085,6 @@ wGoldenrodGymSceneID::                            db
 wGoldenrodMagnetTrainStationSceneID::             db
 wGoldenrodPokecenter1FSceneID::                   db
 wOlivineCitySceneID::                             db
-wRoute34SceneID::                                 db
-wRoute34IlexForestGateSceneID::                   db
 wEcruteakTinTowerEntranceSceneID::                db
 wWiseTriosRoomSceneID::                           db
 wEcruteakPokecenter1FSceneID::                    db
@@ -3099,7 +3096,6 @@ wBattleTower1FSceneID::                           db
 wBattleTowerBattleRoomSceneID::                   db
 wBattleTowerElevatorSceneID::                     db
 wBattleTowerHallwaySceneID::                      db
-wBattleTowerOutsideSceneID::                      db
 wRoute43GateSceneID::                             db
 wMountMoonSceneID::                               db
 wSproutTower3FSceneID::                           db
@@ -3119,7 +3115,6 @@ wTeamRocketBaseB1FSceneID::                       db
 wTeamRocketBaseB2FSceneID::                       db
 wTeamRocketBaseB3FSceneID::                       db
 wGoldenrodUndergroundSwitchRoomEntrancesSceneID:: db
-wSilverCaveRoom3SceneID::                         db
 wVictoryRoadSceneID::                             db
 wDragonsDenB1FSceneID::                           db
 wDragonShrineSceneID::                            db
@@ -3130,12 +3125,12 @@ wFastShipB1FSceneID::                             db
 wMountMoonSquareSceneID::                         db
 wMobileTradeRoomSceneID::                         db
 wMobileBattleRoomSceneID::                        db
+wCaveH8SceneID::                                  db
 
-	ds 29
+	ds 33
 
 ; fight counts
 wJackFightCount::    db
-wBeverlyFightCount:: db ; unreferenced
 wHueyFightCount::    db
 wGavenFightCount::   db
 wBethFightCount::    db
@@ -3148,22 +3143,19 @@ wLizFightCount::     db
 wAnthonyFightCount:: db
 wToddFightCount::    db
 wGinaFightCount::    db
-wIrwinFightCount::   db ; unreferenced
 wArnieFightCount::   db
 wAlanFightCount::    db
 wDanaFightCount::    db
 wChadFightCount::    db
-wDerekFightCount::   db ; unreferenced
 wTullyFightCount::   db
 wBrentFightCount::   db
 wTiffanyFightCount:: db
 wVanceFightCount::   db
 wWiltonFightCount::  db
-wKenjiFightCount::   db ; unreferenced
 wParryFightCount::   db
 wErinFightCount::    db
 
-	ds 100
+	ds 104
 
 wEventFlags:: flag_array NUM_EVENTS
 

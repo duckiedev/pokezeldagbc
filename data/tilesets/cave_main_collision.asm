@@ -73,3 +73,25 @@
 	tilecoll FLOOR, WALL, WALL, WALL ; 48
 	tilecoll WALL, FLOOR, WALL, WALL ; 49
 	tilecoll WALL, FLOOR, WALL, WALL ; 4a
+	tilecoll WALL, WALL, WALL, WALL ; 4b
+	tilecoll WALL, WALL, WALL, WALL ; 4c
+	tilecoll FLOOR, WALL, FLOOR, WALL ; 4d
+	tilecoll FLOOR, FLOOR, WALL, WALL ; 4e
+	tilecoll FLOOR, FLOOR, WALL, WALL ; 4f
+	tilecoll FLOOR, FLOOR, WALL, WALL ; 50
+	tilecoll FLOOR, WALL, FLOOR, WALL ; 51
+	tilecoll FLOOR, FLOOR, WALL, WALL ; 52
+	tilecoll WALL, WALL, WALL, WALL ; 53
+	tilecoll FLOOR, WALL, FLOOR, VINEWHIP ; 54
+	tilecoll WALL, WALL, FLOOR, WALL ; 55
+	tilecoll WALL, WALL, WALL, FLOOR ; 56
+	tilecoll WALL, WALL, WALL, WALL ; 57
+	tilecoll WALL, WALL, WALL, WALL ; 58
+	tilecoll WALL, WALL, WALL, WALL ; 59
+	tilecoll FLOOR, WALL, FLOOR, WALL ; 5a
+	tilecoll WALL, FLOOR, WALL, FLOOR ; 5b
+	tilecoll FLOOR, WALL, FLOOR, WALL ; 5c
+	tilecoll WALL, WALL, WALL, WALL ; 5d
+	tilecoll WALL, WALL, WALL, WALL ; 5e
+	tilecoll FLOOR, FLOOR, FLOOR, FLOOR ; 5f
+	tilecoll FLOOR, FLOOR, FLOOR, FLOOR ; 60

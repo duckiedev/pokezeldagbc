@@ -769,3 +769,4 @@ ENDM
 
 	map_attributes HeroesCave01, HEROES_CAVE_01, $16, 0
 	map_attributes HeroesCave02, HEROES_CAVE_02, $16, 0
+	map_attributes HeroesCave03, HEROES_CAVE_03, $16, 0

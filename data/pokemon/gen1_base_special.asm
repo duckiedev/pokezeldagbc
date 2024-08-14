@@ -42,7 +42,7 @@ KantoMonSpecials:
 	db 100 ; NINETALES
 	db  25 ; JIGGLYPUFF
 	db  50 ; WIGGLYTUFF
-	db  40 ; ZUBAT
+	db  40 ; ITTIBAT
 	db  75 ; GOLBAT
 	db  75 ; ODDISH
 	db  85 ; GLOOM

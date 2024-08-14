@@ -41,7 +41,7 @@ PokedexDataPointerTable:
 	dw NinetalesPokedexEntry
 	dw JigglypuffPokedexEntry
 	dw WigglytuffPokedexEntry
-	dw ZubatPokedexEntry
+	dw IttibatPokedexEntry
 	dw GolbatPokedexEntry
 	dw OddishPokedexEntry
 	dw GloomPokedexEntry

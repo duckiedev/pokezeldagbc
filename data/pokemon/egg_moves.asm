@@ -103,7 +103,7 @@ VulpixEggMoves:
 	db DISABLE
 	db -1 ; end
 
-ZubatEggMoves:
+IttibatEggMoves:
 	db QUICK_ATTACK
 	db PURSUIT
 	db FAINT_ATTACK

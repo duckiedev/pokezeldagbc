@@ -57,7 +57,7 @@ INCBIN "gfx/footprints/ninetales.1bpp"
 INCBIN "gfx/footprints/jigglypuff.1bpp" 
 INCBIN "gfx/footprints/wigglytuff.1bpp" 
 ; 041-048
-INCBIN "gfx/footprints/zubat.1bpp"      
+INCBIN "gfx/footprints/ittibat.1bpp"      
 INCBIN "gfx/footprints/golbat.1bpp"     
 INCBIN "gfx/footprints/oddish.1bpp"     
 INCBIN "gfx/footprints/gloom.1bpp"      

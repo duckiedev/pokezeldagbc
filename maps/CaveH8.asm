@@ -7,7 +7,8 @@ CaveH8_MapScripts:
 	def_scene_scripts
 	scene_script CaveH8_IntroScene, SCENE_CAVEH8_INTRO
 	scene_script CaveH8_ItsDangerousToGoAloneIntroScene, SCENE_CAVEH8_OLDMAN_DANGEROUS_TO_GO_ALONE_INTRO
-	scene_script CaveH8NoopScene, SCENE_CAVEH8_NOOP
+	scene_script CaveH8NoopScene1, SCENE_CAVEH8_NOOP
+	scene_script CaveH8NoopScene2, SCENE_CAVEH8_CANT_LEAVE
 
 	def_callbacks
 
@@ -15,7 +16,10 @@ CaveH8_IntroScene:
 	sdefer CaveH8_ItsDangerousToGoAloneIntroScene
 	end
 
-CaveH8NoopScene:
+CaveH8NoopScene1:
+	end
+
+CaveH8NoopScene2:
 	end
 
 CaveH8_ItsDangerousToGoAloneIntroScene:
@@ -53,9 +57,10 @@ CaveH8_HonedgeScript:
 	opentext
 	givepoke HONEDGE_H, 5, BERRY
 	closetext
+	setscene SCENE_CAVEH8_CANT_LEAVE
 	end
 
-CheckBush:
+CaveH8CheckBush:
 	conditional_event EVENT_CAVEH8_HIDDEN_DOOR_REVEALED, .Script
 .Script
 	opentext
@@ -98,17 +103,28 @@ CaveH8_WalkUpToOldManMovement:
 	step UP
 	step_end
 
-CaveH8_TurnToPokemon:
-	turn_step RIGHT
-	step_end
+CaveH8CantLeaveScript:
+	;conditional_event EVENT_GOT_KINSTONE_OCARINA, .Script
+	opentext
+	writetext CaveH8CantLeaveYetText
+	waitbutton
+	closetext
+	applymovement PLAYER, CaveH8_CantLeaveMovement
+	end
 
-CaveH8_WalkDownToPlayer:
-	turn_step DOWN
-	slow_step DOWN
-	step_end
+.Script
+	end
 
-CaveH8_TeleportOut:
-	teleport_to
+CaveH8CantLeaveYetText:
+	text "A strong sense"
+	line "that you've"
+
+	para "missed something"
+	line "overcomes you."
+	done
+
+CaveH8_CantLeaveMovement:
+	step UP
 	step_end
 
 CaveH8_MapEvents:
@@ -119,9 +135,10 @@ CaveH8_MapEvents:
 	warp_event  9,  2, HEROES_CAVE_01, 1
 
 	def_coord_events
+	coord_event  5,  8, SCENE_CAVEH8_CANT_LEAVE, CaveH8CantLeaveScript
 
 	def_bg_events
-	bg_event  9,  2, BGEVENT_IFNOTSET, CheckBush
+	bg_event  9,  2, BGEVENT_IFNOTSET, CaveH8CheckBush
 	
 	def_object_events
 	object_event  5,  3, SPRITE_OLDMAN, SPRITEMOVEDATA_STILL, 1, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, CaveH8_ItsDangerousSpeechBox, -1
