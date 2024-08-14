@@ -109,4 +109,5 @@ SECTION "Sprites 3", ROMX
 
 OldManSpriteGFX::			   INCBIN "gfx/sprites/oldman.2bpp"
 CaptainToadSpriteGFX::		   INCBIN "gfx/sprites/capt_toad.2bpp"
-IttibatSpriteGFX::                INCBIN "gfx/sprites/ittibat.2bpp"
+IttibatSpriteGFX::             INCBIN "gfx/sprites/ittibat.2bpp"
+ZolSpriteGFX::                 INCBIN "gfx/sprites/zol.2bpp"

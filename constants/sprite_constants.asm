@@ -105,6 +105,7 @@
 	const SPRITE_OLDMAN ; 65
 	const SPRITE_CAPTAIN_TOAD ; 66
 	const SPRITE_ITTIBAT ; 67
+	const SPRITE_ZOL ; 68
 DEF NUM_OVERWORLD_SPRITES EQU const_value - 1
 
 ; SpriteMons indexes (see data/sprites/sprite_mons.asm)

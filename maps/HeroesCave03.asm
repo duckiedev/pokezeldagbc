@@ -1,19 +1,19 @@
 	object_const_def
-	const HEROES_CAVE_03_ROAMINGMON_ITTIBAT_01
-	const HEROES_CAVE_03_ROAMINGMON_ITTIBAT_02
-	const HEROES_CAVE_03_ROAMINGMON_ITTIBAT_03
+	const HEROES_CAVE_03_ROAMINGMON_ZOL_01
+	const HEROES_CAVE_03_ROAMINGMON_ZOL_02
+	const HEROES_CAVE_03_ROAMINGMON_ZOL_03
 
 HeroesCave03_MapScripts:
 	def_scene_scripts
 
 	def_callbacks
 
-HeroesCave03RoamingMonIttibat01:
-	owmon ITTIBAT, 5, EVENT_BEAT_ITTIBAT_01_HEROES_CAVE_03, .AfterScript
+HeroesCave03RoamingMonZol01:
+	owmon ZOL, 5, EVENT_BEAT_ZOL_01_HEROES_CAVE_03, .AfterScript
 
 .AfterScript
 	reloadmapafterbattle
-	disappear HEROES_CAVE_03_ROAMINGMON_ITTIBAT_01
+	disappear HEROES_CAVE_03_ROAMINGMON_ZOL_01
 	end
 
 HeroesCave03CheckBush:
@@ -53,6 +53,6 @@ HeroesCave03_MapEvents:
 	bg_event  9,  2, BGEVENT_IFNOTSET, HeroesCave03CheckBush
 	
 	def_object_events
-	object_event 11,  2, SPRITE_ITTIBAT, SPRITEMOVEDATA_WANDER, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_OWMON, 3, HeroesCave03RoamingMonIttibat01, -1
-	object_event 12,  8, SPRITE_ITTIBAT, SPRITEMOVEDATA_WANDER, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_OWMON, 3, HeroesCave03RoamingMonIttibat01, -1
-	object_event  1,  7, SPRITE_ITTIBAT, SPRITEMOVEDATA_WANDER, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_OWMON, 3, HeroesCave03RoamingMonIttibat01, -1
+	object_event 11,  2, SPRITE_ZOL, SPRITEMOVEDATA_WANDER, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_OWMON, 3, HeroesCave03RoamingMonZol01, -1
+	object_event 12,  8, SPRITE_ZOL, SPRITEMOVEDATA_WANDER, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_OWMON, 3, HeroesCave03RoamingMonZol01, -1
+	object_event  1,  7, SPRITE_ZOL, SPRITEMOVEDATA_WANDER, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_OWMON, 3, HeroesCave03RoamingMonZol01, -1

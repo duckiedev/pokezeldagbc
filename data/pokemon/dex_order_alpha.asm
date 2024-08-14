@@ -95,6 +95,7 @@ AlphabeticalPokedexOrder:
 	db HOUNDOUR
 	db HYPNO
 	db IGGLYBUFF
+	db ITTIBAT
 	db IVYSAUR
 	db JIGGLYPUFF
 	db JOLTEON
@@ -253,5 +254,5 @@ AlphabeticalPokedexOrder:
 	db XATU
 	db YANMA
 	db ZAPDOS
-	db ITTIBAT
+	db ZOL
 	assert_table_length NUM_POKEMON

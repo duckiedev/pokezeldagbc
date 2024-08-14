@@ -3363,4 +3363,10 @@ HonedgeHEvosAttacks:
 	db 1, VINE_WHIP
 	db 15, SLASH
 	db 0 ; no more level up moves for now
-	
+
+ZolEvosAttacks:
+	db 0 ; no evolutions
+	db 1, POUND
+	db 1, ENDURE
+	db 1, AGILITY
+	db 0 ; no more level-up moves for now

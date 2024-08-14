@@ -256,7 +256,8 @@ MonMenuIconPals:
 	icon_pals BLUE, PINK    ; LUGIA
 	icon_pals RED, BROWN    ; HO_OH
 	icon_pals GREEN, PINK   ; CELEBI
-	icon_pals GREEN, PINK	; HONEDGE_HYRULE
+	icon_pals GREEN, PINK	; HONEDGE_H
+	icon_pals GREEN, PINK	; ZOL
 	assert_table_length NUM_POKEMON
 
 	icon_pals RED,    RED   ; 252

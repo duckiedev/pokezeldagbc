@@ -110,4 +110,5 @@ OverworldSprites:
 	overworld_sprite OldManSpriteGFX, 12, WALKING_SPRITE, PAL_OW_RED
 	overworld_sprite CaptainToadSpriteGFX, 4, STILL_SPRITE, PAL_OW_RED
 	overworld_sprite IttibatSpriteGFX, 12, WALKING_SPRITE, PAL_OW_BLUE
+	overworld_sprite ZolSpriteGFX, 12, WALKING_SPRITE, PAL_OW_GREEN
 	assert_table_length NUM_OVERWORLD_SPRITES

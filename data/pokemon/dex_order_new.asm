@@ -254,4 +254,5 @@ NewPokedexOrder:
 	db MEW
 	db CELEBI
 	db HONEDGE_H
+	db ZOL
 	assert_table_length NUM_POKEMON
