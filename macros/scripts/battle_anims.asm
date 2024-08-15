@@ -171,9 +171,9 @@ MACRO anim_minimize
 	db anim_minimize_command
 ENDM
 
-	const anim_0xea_command ; $ea
-MACRO anim_0xea
-	db anim_0xea_command
+	const anim_zoltogels_command ; $ea
+MACRO anim_zoltogels
+	db anim_zoltogels_command
 ENDM
 
 	const anim_0xeb_command ; $eb

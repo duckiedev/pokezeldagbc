@@ -282,6 +282,7 @@ BattleAnimations::
 	dw BattleAnim_Wobble
 	dw BattleAnim_Shake
 	dw BattleAnim_HitConfusion
+	dw BattleAnim_ZolGelExplosion
 	assert_table_length NUM_BATTLE_ANIMS + 1
 
 BattleAnim_Dummy:
@@ -4799,4 +4800,16 @@ BattleAnim_ShowMon_1:
 	anim_wait 4
 	anim_incobj 1
 	anim_wait 1
+	anim_ret
+
+BattleAnim_ZolGelExplosion:
+	anim_1gfx BATTLE_ANIM_GFX_EXPLOSION
+	anim_sound 0, 1, SFX_EGG_BOMB
+	anim_obj BATTLE_ANIM_OBJ_EXPLOSION2, 128, 64, $0
+	anim_zoltogels
+	;anim_updateactorpic
+	anim_call BattleAnim_ShowMon_0
+	anim_sound 0, 1, SFX_EGG_BOMB
+	anim_obj BATTLE_ANIM_OBJ_EXPLOSION2, 128, 64, $0
+	anim_wait 24
 	anim_ret

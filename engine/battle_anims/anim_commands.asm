@@ -360,7 +360,7 @@ BattleAnimCommands::
 	dw BattleAnimCmd_E7
 	dw BattleAnimCmd_UpdateActorPic
 	dw BattleAnimCmd_Minimize
-	dw BattleAnimCmd_EA ; dummy
+	dw BattleAnimCmd_ZolToGels
 	dw BattleAnimCmd_EB ; dummy
 	dw BattleAnimCmd_EC ; dummy
 	dw BattleAnimCmd_ED ; dummy
@@ -384,7 +384,33 @@ BattleAnimCommands::
 	dw BattleAnimCmd_Ret
 	assert_table_length $100 - FIRST_BATTLE_ANIM_CMD
 
-BattleAnimCmd_EA:
+BattleAnimCmd_ZolToGels:
+    ldh a, [rSVBK]
+    push af
+    ld a, BANK(GelsFrontpic) ; Load the bank for GelsFrontpic and GelsBackpic
+    ldh [rSVBK], a
+
+    ldh a, [hBattleTurn]
+    and a
+    jr z, .player
+
+    ; Load GelsFrontpic
+    ld de, vTiles2 tile $00
+    ld hl, GelsBackpic
+    call DecompressGet2bpp
+    jr .done
+
+.player
+    ; Load GelsBackpic
+    ld de, vTiles2 tile $00
+    ld hl, GelsFrontpic
+    call DecompressGet2bpp
+
+.done
+    pop af
+    ldh [rSVBK], a
+    ret
+
 BattleAnimCmd_EB:
 BattleAnimCmd_EC:
 BattleAnimCmd_ED:

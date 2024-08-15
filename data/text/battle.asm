@@ -1087,3 +1087,8 @@ BattleText_LinkErrorBattleCanceled:
 	para "The battle has"
 	line "been canceled…"
 	prompt
+
+BattleText_ZolGenTransformedText:
+	text "The ZOL broke"
+	line "into GELs!"
+	prompt

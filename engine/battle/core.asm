@@ -2035,6 +2035,17 @@ UpdateHPBar:
 	ret
 
 HandleEnemyMonFaint:
+	; if the current enemy mon fainting isn't a ZOL, continue normal process
+	ld a, [wCurSpecies]
+	cp ZOL
+	jp nz, ContinueFaintProcess
+	
+	; if they are, check to see if they're already in the GEL form
+	ld a, [wEnemySubStatus5]
+	bit SUBSTATUS_ZOLGELS, a
+	jr z, HandleEnemyZolTransform
+	; fallthrough
+ContinueFaintProcess:
 	call FaintEnemyPokemon
 	ld hl, wBattleMonHP
 	ld a, [hli]
@@ -2100,6 +2111,29 @@ HandleEnemyMonFaint:
 	jp z, WildFled_EnemyFled_LinkBattleCanceled
 	xor a ; BATTLEPLAYERACTION_USEMOVE
 	ld [wBattlePlayerAction], a
+	ret
+
+HandleEnemyZolTransform:
+	; set the substatus
+	ld a, BATTLE_VARS_SUBSTATUS5
+	call GetBattleVarAddr
+	set SUBSTATUS_TRANSFORMED, [hl]
+	; play the animation
+	ld de, ANIM_ZOLGEL_EXPLODE
+	call z, Call_PlayBattleAnim_OnlyIfVisible
+	call GetMaxHP
+	call ReviveFullHP
+	ld a, $1
+	ldh [hBGMapMode], a
+	call RestoreHP
+	ld hl, BattleText_ZolGenTransformedText
+	call StdBattleTextbox
+	call SetEnemyTurn
+	call SpikesDamage
+	xor a
+	ld [wEnemyMoveStruct + MOVE_ANIM], a
+	ld [wBattlePlayerAction], a
+	inc a
 	ret
 
 DoubleSwitch:
