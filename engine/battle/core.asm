@@ -2114,15 +2114,17 @@ ContinueFaintProcess:
 	ret
 
 HandleEnemyZolTransform:
+	ld a, [hBattleTurn]
+	push hl
 	; set the substatus
-	ld a, BATTLE_VARS_SUBSTATUS5
+	ld a, BATTLE_VARS_SUBSTATUS5_OPP
 	call GetBattleVarAddr
 	set SUBSTATUS_TRANSFORMED, [hl]
+	pop hl
 	; play the animation
 	ld de, ANIM_ZOLGEL_EXPLODE
 	call z, Call_PlayBattleAnim_OnlyIfVisible
 	call GetMaxHP
-	call ReviveFullHP
 	ld a, $1
 	ldh [hBGMapMode], a
 	call RestoreHP

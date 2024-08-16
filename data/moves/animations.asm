@@ -4808,7 +4808,6 @@ BattleAnim_ZolGelExplosion:
 	anim_obj BATTLE_ANIM_OBJ_EXPLOSION2, 128, 64, $0
 	anim_zoltogels
 	;anim_updateactorpic
-	anim_call BattleAnim_ShowMon_0
 	anim_sound 0, 1, SFX_EGG_BOMB
 	anim_obj BATTLE_ANIM_OBJ_EXPLOSION2, 128, 64, $0
 	anim_wait 24

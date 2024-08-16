@@ -39,24 +39,26 @@ CaveH8_ItsDangerousSpeechBox:
 	end
 	
 CaveH8_HonedgeScript:
-	reanchormap
-	pokepic HONEDGE_H
-	cry HONEDGE_H
-	waitbutton
-	closepokepic
+	;reanchormap
+	;pokepic HONEDGE_H
+	;cry HONEDGE_H
+	;waitbutton
+	;closepokepic
 	setevent EVENT_GOT_HONEDGE
-	getmonname STRING_BUFFER_3, HONEDGE_H
-	opentext
-	writetext ReceivedHonedgeText
-	playsound SFX_GET_ITEM
-	waitsfx
-	waitbutton
-	closetext
-	disappear CAVEH8_HONEDGE
-	disappear CAVEH8_OLDMAN
-	opentext
+	;getmonname STRING_BUFFER_3, HONEDGE_H
+	;opentext
+	;writetext ReceivedHonedgeText
+	;playsound SFX_GET_ITEM
+	;waitsfx
+	;waitbutton
+	;closetext
+	;disappear CAVEH8_HONEDGE
+	;disappear CAVEH8_OLDMAN
+	;opentext
 	givepoke HONEDGE_H, 5, BERRY
-	closetext
+	;closetext
+	loadwildmon ZOL, 2
+	startbattle
 	setscene SCENE_CAVEH8_CANT_LEAVE
 	end
 

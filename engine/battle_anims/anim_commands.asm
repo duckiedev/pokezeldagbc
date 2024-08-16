@@ -392,19 +392,22 @@ BattleAnimCmd_ZolToGels:
 
     ldh a, [hBattleTurn]
     and a
-    jr z, .player
+    jr z, .frontpic
 
+.frontpic
     ; Load GelsFrontpic
     ld de, vTiles2 tile $00
-    ld hl, GelsBackpic
-    call DecompressGet2bpp
+    ld hl, GelsFrontpic
+	ld c, 7 * 7
+    predef DecompressGet2bpp
     jr .done
 
-.player
     ; Load GelsBackpic
-    ld de, vTiles2 tile $00
-    ld hl, GelsFrontpic
-    call DecompressGet2bpp
+    ld de, vTiles2 tile $30
+    ld hl, GelsBackpic
+	ld c, 6 * 6
+
+    predef DecompressGet2bpp
 
 .done
     pop af
