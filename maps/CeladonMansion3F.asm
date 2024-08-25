@@ -47,18 +47,11 @@ GameFreakGraphicArtistScript:
 	writetext GameFreakGraphicArtistPrintDiplomaText
 	yesorno
 	iffalse .Refused
-	special PrintDiploma
 	closetext
 	end
 
 .Refused:
 	writetext GameFreakGraphicArtistRefusedText
-	waitbutton
-	closetext
-	end
-
-.CancelPrinting: ; unreferenced
-	writetext GameFreakGraphicArtistErrorText
 	waitbutton
 	closetext
 	end

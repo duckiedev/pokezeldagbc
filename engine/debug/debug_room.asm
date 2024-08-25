@@ -121,7 +121,6 @@ _DebugRoom:
 	dw DebugRoomMenu_RTCEdit
 	dw DebugRoomMenu_Next
 	dw DebugRoomMenu_GBIDSet
-	dw DebugRoomMenu_BtlRecClr
 	dw DebugRoomMenu_PokedexClr
 	dw DebugRoomMenu_HaltChkClr
 	dw DebugRoomMenu_BattleSkip
@@ -1549,18 +1548,6 @@ DebugRoomMenu_GBIDSet_Page1Values:
 
 .GBID0String: db "GB ID [0]@"
 .GBID1String: db "GB ID [1]@"
-
-DebugRoomMenu_BtlRecClr:
-	call YesNoBox
-	ret c
-	ld a, BANK(sLinkBattleStats)
-	call OpenSRAM
-	xor a
-	ld hl, sLinkBattleStats
-	ld bc, sLinkBattleStatsEnd - sLinkBattleStats
-	call ByteFill
-	call CloseSRAM
-	ret
 
 DebugRoomMenu_HOFClear:
 	call YesNoBox

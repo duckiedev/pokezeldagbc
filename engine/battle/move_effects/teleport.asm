@@ -34,7 +34,7 @@ BattleCommand_Teleport:
 	inc c
 	; Generate a number less than c
 .loop_player
-	call BattleRandom
+	call Random
 	cp c
 	jr nc, .loop_player
 	; b = enemy level / 4
@@ -66,7 +66,7 @@ BattleCommand_Teleport:
 	inc c
 	; Generate a number less than c
 .loop_enemy
-	call BattleRandom
+	call Random
 	cp c
 	jr nc, .loop_enemy
 	; b = player level / 4

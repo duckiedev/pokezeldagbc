@@ -211,85 +211,6 @@ _ReceivedTMHMText::
 	text "!"
 	prompt
 
-_MysteryGiftCanceledText::
-	text "The link has been"
-	line "cancelled."
-	prompt
-
-_MysteryGiftCommErrorText::
-	text "Communication"
-	line "error."
-	prompt
-
-_RetrieveMysteryGiftText::
-	text "Must retrieve GIFT"
-	line "at #MON CENTER."
-	prompt
-
-_YourFriendIsNotReadyText::
-	text "Your friend isn't"
-	line "ready."
-	prompt
-
-_MysteryGiftFiveADayText::
-	text "Sorry--only five"
-	line "GIFTS a day."
-	prompt
-
-_MysteryGiftOneADayText::
-	text "Sorry. One GIFT"
-	line "a day per person."
-	prompt
-
-_MysteryGiftSentText::
-	text_ram wMysteryGiftPartnerName
-	text " sent"
-	line "@"
-	text_ram wStringBuffer1
-	text "."
-	prompt
-
-_MysteryGiftSentHomeText::
-	text_ram wMysteryGiftPartnerName
-	text " sent"
-	line "@"
-	text_ram wStringBuffer1
-	text_start
-	cont "to @"
-	text_ram wMysteryGiftPlayerName
-	text "'s home."
-	prompt
-
-_NameCardReceivedCardText::
-	text "Received"
-	line "@"
-	text_ram wMysteryGiftCardHolderName
-	text "'s CARD."
-	prompt
-
-_NameCardListedCardText::
-	text_ram wMysteryGiftCardHolderName
-	text "'s CARD was"
-	line "listed as no.@"
-	text_decimal wTextDecimalByte, 1, 2
-	text "."
-	prompt
-
-_NameCardNotRegisteredCardText::
-	text "The CARD was not"
-	line "registered."
-	prompt
-
-_NameCardLinkCancelledText::
-	text "The link has been"
-	line "cancelled."
-	prompt
-
-_NameCardLinkCommErrorText::
-	text "Communication"
-	line "error."
-	prompt
-
 _BadgeRequiredText::
 	text "Sorry! A new BADGE"
 	line "is required."
@@ -672,7 +593,7 @@ Text_BattleEffectActivate::
 
 _BattleStatWentWayUpText::
 	text_pause
-	text "<SCROLL>went way up!"
+	text " went way up!"
 	prompt
 
 _BattleStatWentUpText::
@@ -687,7 +608,7 @@ Text_BattleFoeEffectActivate::
 
 _BattleStatSharplyFellText::
 	text_pause
-	text "<SCROLL>sharply fell!"
+	text "sharply fell!"
 	prompt
 
 _BattleStatFellText::

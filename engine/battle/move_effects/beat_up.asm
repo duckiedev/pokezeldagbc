@@ -100,14 +100,6 @@ BattleCommand_BeatUp:
 	dec a
 	jr z, .wild
 
-	ld a, [wLinkMode]
-	and a
-	jr nz, .link_or_tower
-
-	ld a, [wInBattleTowerBattle]
-	and a
-	jr nz, .link_or_tower
-
 	ld a, [wCurBeatUpPartyMon]
 	ld c, a
 	ld b, 0
@@ -117,14 +109,6 @@ BattleCommand_BeatUp:
 	ld [wNamedObjectIndex], a
 	call GetPokemonName
 	jr .got_enemy_nick
-
-.link_or_tower
-	ld a, [wCurBeatUpPartyMon]
-	ld hl, wOTPartyMonNicknames
-	ld bc, NAME_LENGTH
-	call AddNTimes
-	ld de, wStringBuffer1
-	call CopyBytes
 
 .got_enemy_nick
 	ld a, MON_HP

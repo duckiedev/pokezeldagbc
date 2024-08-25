@@ -10,7 +10,6 @@
 	const ROUTE40_MONICA
 	const ROUTE40_POKEFAN_M
 	const ROUTE40_LASS2
-	const ROUTE40_STANDING_YOUNGSTER
 
 Route40_MapScripts:
 	def_scene_scripts
@@ -19,7 +18,6 @@ Route40_MapScripts:
 	callback MAPCALLBACK_OBJECTS, Route40MonicaCallback
 
 Route40MonicaCallback:
-	clearevent EVENT_BATTLE_TOWER_OPEN_CIVILIANS
 	readvar VAR_WEEKDAY
 	ifequal MONDAY, .MonicaAppears
 	disappear ROUTE40_MONICA
@@ -77,18 +75,10 @@ Route40Lass1Script:
 	jumptextfaceplayer Route40Lass1Text
 
 Route40PokefanMScript:
-	special CheckMobileAdapterStatusSpecial
-	iftrue .mobile
 	jumptextfaceplayer Route40PokefanMText
-
-.mobile
-	jumptextfaceplayer Route40PokefanMText_Mobile
 
 Route40Lass2Script:
 	jumptextfaceplayer Route40Lass2Text
-
-Route40StandingYoungsterScript:
-	jumptextfaceplayer Route40StandingYoungsterText
 
 MonicaScript:
 	faceplayer
@@ -248,15 +238,6 @@ Route40PokefanMText:
 	para "What is it?"
 	done
 
-Route40PokefanMText_Mobile:
-	text "Hm! Look at all"
-	line "those serious-"
-	cont "looking trainers"
-	cont "streaming in."
-
-	para "What? What?"
-	done
-
 Route40Lass2Text:
 	text "I came to OLIVINE"
 	line "by ship to see the"
@@ -267,23 +248,6 @@ Route40Lass2Text:
 	para "Being a port, it"
 	line "feels so different"
 	cont "from a big city."
-	done
-
-Route40StandingYoungsterText:
-	text "Have you gone to"
-	line "the BATTLE TOWER?"
-
-	para "I think a lot of"
-	line "tough trainers"
-
-	para "have gathered"
-	line "there already."
-
-	para "But since you have"
-	line "so many BADGES,"
-
-	para "you shouldn't do"
-	line "badly at all."
 	done
 
 MeetMonicaText:
@@ -339,7 +303,6 @@ Route40_MapEvents:
 	db 0, 0 ; filler
 
 	def_warp_events
-	warp_event  9,  5, ROUTE_40_BATTLE_TOWER_GATE, 1
 
 	def_coord_events
 
@@ -359,4 +322,3 @@ Route40_MapEvents:
 	object_event  8, 10, SPRITE_BEAUTY, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, MonicaScript, EVENT_ROUTE_40_MONICA_OF_MONDAY
 	object_event  7,  6, SPRITE_POKEFAN_M, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route40PokefanMScript, -1
 	object_event 13,  4, SPRITE_LASS, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Route40Lass2Script, -1
-	object_event 16,  9, SPRITE_YOUNGSTER, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, Route40StandingYoungsterScript, EVENT_BATTLE_TOWER_OPEN_CIVILIANS

@@ -134,19 +134,15 @@ wUnusedScriptByte:: db
 
 wMapTimeOfDay:: db
 
-	ds 3
+	ds 5
 
-wPrinterConnectionOpen:: db
-wPrinterOpcode:: db
 wPrevDexEntry:: db
 wDisableTextAcceleration:: db
 wPrevLandmark:: db
 wCurLandmark:: db
 wLandmarkSignTimer:: dw
 
-wLinkMode::
-; a LINK_* value for the link type
-	db
+	ds 1
 
 wScriptVar:: db
 
@@ -201,7 +197,6 @@ wTilePermissions::
 
 SECTION "wSpriteAnims", WRAM0
 
-UNION
 wSpriteAnimData::
 
 wSpriteAnimDict::
@@ -218,39 +213,6 @@ for n, 1, NUM_SPRITE_ANIM_STRUCTS + 1
 wSpriteAnim{d:n}:: sprite_anim_struct wSpriteAnim{d:n}
 endr
 wSpriteAnimationStructsEnd::
-
-NEXTU
-; mobile data
-wMobileWRAM::
-wMobileErrorCodeBuffer:: ds 3
-wc303:: ds 2
-wc305:: ds 1
-wc306:: ds 1
-wc307:: ds 1
-wc308:: ds 1
-wc309:: ds 1
-wc30a:: ds 1
-wc30b:: ds 1
-wc30c:: ds 1
-wc30d:: ds 1
-wc30e:: ds 1
-wc30f:: ds 1
-wc310:: ds 1
-wc311:: ds 1
-wc312:: ds 1
-wc313:: ds 1
-wc314:: ds 5
-wc319:: db
-wc31a:: db
-wc31b:: db
-wc31c:: db
-wc31d:: db
-wc31e:: db
-wc31f:: db
-wc320:: ds 38
-wc346:: ds 102
-wc3ac:: ds 8
-ENDU
 
 wSpriteAnimCount:: db
 wCurSpriteOAMAddr:: db
@@ -274,31 +236,7 @@ wGlobalAnimXOffset:: db
 
 wSpriteAnimDataEnd::
 
-	ds 11
-
-; mobile data
-wc3cc:: ds 1
-wEmailAddress:: ds MOBILE_EMAIL_LENGTH
-	ds 1
-wc3ec:: ds 1
-wc3ed:: ds 1
-wc3ee:: ds 1
-wc3ef:: ds 1
-wc3f0:: ds 1
-wc3f1:: ds 1
-wc3f2:: ds 1
-wc3f3:: ds 1
-wc3f4:: ds 1
-wc3f5:: ds 1
-wc3f6:: ds 1
-wc3f7:: ds 1
-wc3f8:: ds 1
-wc3f9:: ds 1
-wc3fa:: ds 1
-wc3fb:: ds 1
-wc3fc:: ds 1
-	ds 3
-wMobileWRAMEnd::
+	ds 63
 
 
 SECTION "Sprites", WRAM0
@@ -327,12 +265,6 @@ SECTION UNION "Miscellaneous", WRAM0
 ; needs more space than the buffer can hold.
 wBoxPartialData:: ds 480
 wBoxPartialDataEnd::
-
-
-SECTION UNION "Miscellaneous", WRAM0
-
-; battle tower temp struct
-wBT_OTTemp:: battle_tower_struct wBT_OTTemp
 
 
 SECTION UNION "Miscellaneous", WRAM0
@@ -478,10 +410,7 @@ wUnusedPlayerLockedMove:: db
 
 wCurPlayerMove:: db
 wCurEnemyMove::  db
-
-wLinkBattleRNCount::
-; how far through the prng stream
-	db
+	ds 1
 
 wEnemyItemState:: db
 	ds 2
@@ -489,8 +418,7 @@ wCurEnemyMoveNum:: db
 
 wEnemyHPAtTimeOfPlayerSwitch:: dw
 wPayDayMoney:: ds 3
-
-wSafariMonAngerCount:: db ; unreferenced
+	ds 1
 wSafariMonEating:: db
 	ds 1
 wEnemyBackupDVs:: dw ; used when enemy is transformed
@@ -533,9 +461,8 @@ wPlayerReflectCount:: db
 wEnemySafeguardCount:: db
 wEnemyLightScreenCount:: db
 wEnemyReflectCount:: db
-	ds 1
 
-	ds 1
+	ds 2
 
 wBattleWeather::
 ; 00 normal
@@ -611,19 +538,6 @@ wBattleEnd::
 
 SECTION UNION "Miscellaneous", WRAM0
 
-; link patch lists
-wPlayerPatchLists:: ds SERIAL_PATCH_LIST_LENGTH
-wOTPatchLists:: ds SERIAL_PATCH_LIST_LENGTH
-
-
-SECTION UNION "Miscellaneous", WRAM0
-
-; mobile
-wMobileTransferData:: ds 480
-
-
-SECTION UNION "Miscellaneous", WRAM0
-
 ; This union spans 200 bytes.
 UNION
 ; timeset temp storage
@@ -662,51 +576,7 @@ wDebugWhiteTileColor:: ds 2
 wDebugLightTileColor:: ds 2
 wDebugDarkTileColor::  ds 2
 wDebugBlackTileColor:: ds 2
-
-NEXTU
-wMobileMonSender:: ds NAME_LENGTH_JAPANESE - 1
-wMobileMon::       party_struct wMobileMon
-wMobileMonOT::     ds NAME_LENGTH_JAPANESE - 1
-wMobileMonNick::   ds NAME_LENGTH_JAPANESE - 1
-wMobileMonMail::   mailmsg_jp wMobileMonMail
-
-NEXTU
-wOfferEmail::      ds MOBILE_EMAIL_LENGTH
-wOfferTrainerID::  dw
-wOfferSecretID::   dw
-wOfferGender::     db
-wOfferSpecies::    db
-wOfferReqGender::  db
-wOfferReqSpecies:: db
-wOfferMonSender::  ds NAME_LENGTH_JAPANESE - 1
-wOfferMon::        party_struct wOfferMon
-wOfferMonOT::      ds NAME_LENGTH_JAPANESE - 1
-wOfferMonNick::    ds NAME_LENGTH_JAPANESE - 1
-wOfferMonMail::    mailmsg_jp wOfferMonMail
-
-NEXTU
-wUnknownGender::     db
-wUnknownSpecies::    db
-wUnknownReqGender::  db
-wUnknownReqSpecies:: db
-wUnknownMonSender::  ds NAME_LENGTH_JAPANESE - 1
-wUnknownMon::        party_struct wUnknownMon
-wUnknownMonOT::      ds NAME_LENGTH_JAPANESE - 1
-wUnknownMonNick::    ds NAME_LENGTH_JAPANESE - 1
-wUnknownMonMail::    mailmsg_jp wUnknownMonMail
-
-NEXTU
-wc608:: ds 7
-wc60f:: ds 9
-wc618:: ds 48
-wc648:: ds 2
-wc64a:: ds 62
-wc688:: ds 2
-wc68a:: ds 15
-wc699:: ds 15
-wc6a8:: ds 40
 ENDU
-
 ; This union spans 280 bytes.
 UNION
 ; pokedex
@@ -834,31 +704,6 @@ wMemoryGameNumCardsMatched:: db
 NEXTU
 ; unown puzzle
 wPuzzlePieces:: ds 6 * 6
-
-NEXTU
-; mobile data
-wc6d0:: ds 56
-wc708:: db
-wc709:: db
-wc70a:: db
-wc70b:: db
-wc70c:: db
-wc70d:: db
-wc70e:: db
-wc70f:: db
-wc710:: db
-wc711:: db
-wc712:: ds 7
-wc719:: ds 53
-wc74e:: ds 107
-wc7b9:: ds 1
-wc7ba:: ds 1
-wc7bb:: ds 2
-wc7bd:: ds 19
-wc7d0:: ds 1
-wc7d1:: ds 1
-wc7d2:: ds 1
-wc7d3:: ds 2
 ENDU
 
 
@@ -875,42 +720,6 @@ SECTION UNION "Overworld Map", WRAM0
 ; overworld map blocks
 wOverworldMapBlocks:: ds 1300
 wOverworldMapBlocksEnd::
-
-
-SECTION UNION "Overworld Map", WRAM0
-
-; GB Printer data
-wGameboyPrinterRAM::
-wGameboyPrinter2bppSource:: ds 40 tiles
-wGameboyPrinter2bppSourceEnd::
-wUnusedGameboyPrinterSafeCancelFlag:: db
-wPrinterRowIndex:: db
-
-; Printer data
-wPrinterData:: ds 4
-wPrinterChecksum:: dw
-wPrinterHandshake:: db
-wPrinterStatusFlags::
-; bit 7: set if error 1 (battery low)
-; bit 6: set if error 4 (too hot or cold)
-; bit 5: set if error 3 (paper jammed or empty)
-; if this and the previous byte are both $ff: error 2 (connection error)
-	db
-
-wHandshakeFrameDelay:: db
-wPrinterSerialFrameDelay:: db
-wPrinterSendByteOffset:: dw
-wPrinterSendByteCounter:: dw
-
-; tilemap backup?
-wPrinterTilemapBuffer:: ds SCREEN_HEIGHT * SCREEN_WIDTH
-wPrinterStatus:: db
-	ds 1
-; High nibble is for margin before the image, low nibble is for after.
-wPrinterMargins:: db
-wPrinterExposureTime:: db
-	ds 16
-wGameboyPrinterRAMEnd::
 
 
 SECTION UNION "Overworld Map", WRAM0
@@ -948,308 +757,11 @@ wDebugOriginalColors:: ds 256 * 4
 
 SECTION UNION "Overworld Map", WRAM0
 
-; raw link data
-wLinkData:: ds 1300
-wLinkDataEnd::
-
-
-SECTION UNION "Overworld Map", WRAM0
-
-; link data members
-wLinkPlayerName:: ds NAME_LENGTH
-wLinkPartyCount:: db
-wLinkPartySpecies:: ds PARTY_LENGTH
-wLinkPartyEnd:: db ; older code doesn't check PartyCount
-
-UNION
-; link player data
-wLinkPlayerData::
-; wLinkPlayerPartyMon1 - wLinkPlayerPartyMon6
-for n, 1, PARTY_LENGTH + 1
-wLinkPlayerPartyMon{d:n}:: party_struct wLinkPlayerPartyMon{d:n}
-endr
-
-wLinkPlayerPartyMonOTs::
-; wLinkPlayerPartyMon1OT - wLinkPlayerPartyMon6OT
-for n, 1, PARTY_LENGTH + 1
-wLinkPlayerPartyMon{d:n}OT:: ds NAME_LENGTH
-endr
-
-wLinkPlayerPartyMonNicknames::
-; wLinkPlayerPartyMon1Nickname - wLinkPlayerPartyMon6Nickname
-for n, 1, PARTY_LENGTH + 1
-wLinkPlayerPartyMon{d:n}Nickname:: ds MON_NAME_LENGTH
-endr
-
-NEXTU
-; time capsule party data
-wTimeCapsulePlayerData::
-; wTimeCapsulePartyMon1 - wTimeCapsulePartyMon6
-for n, 1, PARTY_LENGTH + 1
-wTimeCapsulePartyMon{d:n}:: red_party_struct wTimeCapsulePartyMon{d:n}
-endr
-
-wTimeCapsulePartyMonOTs::
-; wTimeCapsulePartyMon1OT - wTimeCapsulePartyMon6OT
-for n, 1, PARTY_LENGTH + 1
-wTimeCapsulePartyMon{d:n}OT:: ds NAME_LENGTH
-endr
-
-wTimeCapsulePartyMonNicknames::
-; wTimeCapsulePartyMon1Nickname - wTimeCapsulePartyMon6Nickname
-for n, 1, PARTY_LENGTH + 1
-wTimeCapsulePartyMon{d:n}Nickname:: ds MON_NAME_LENGTH
-endr
-
-ENDU
-
-
-SECTION UNION "Overworld Map", WRAM0
-
-; link data prep
-	ds 1000
-wCurLinkOTPartyMonTypePointer:: dw
-
-wLinkOTPartyMonTypes::
-; wLinkOTPartyMon1Type - wLinkOTPartyMon6Type
-for n, 1, PARTY_LENGTH + 1
-wLinkOTPartyMon{d:n}Type:: dw
-endr
-
-
-SECTION UNION "Overworld Map", WRAM0
-
-; link mail data
-	ds 500
-wLinkPlayerMail::
-wLinkPlayerMailPreamble:: ds SERIAL_MAIL_PREAMBLE_LENGTH
-wLinkPlayerMailMessages:: ds (MAIL_MSG_LENGTH + 1) * PARTY_LENGTH
-wLinkPlayerMailMetadata:: ds (MAIL_STRUCT_LENGTH - (MAIL_MSG_LENGTH + 1)) * PARTY_LENGTH
-wLinkPlayerMailPatchSet:: ds 100 + SERIAL_PATCH_PREAMBLE_LENGTH
-wLinkPlayerMailEnd::
-	ds 10
-wLinkOTMail::
-wLinkOTMailMessages:: ds (MAIL_MSG_LENGTH + 1) * PARTY_LENGTH
-wLinkOTMailMetadata:: ds (MAIL_STRUCT_LENGTH - (MAIL_MSG_LENGTH + 1)) * PARTY_LENGTH
-wLinkOTMailPatchSet:: ds 100 + SERIAL_PATCH_PREAMBLE_LENGTH
-wLinkOTMailPadding:: ds SERIAL_MAIL_PREAMBLE_LENGTH
-wLinkOTMailEnd::
-	ds 10
-
-
-SECTION UNION "Overworld Map", WRAM0
-
-; received link mail data
-	ds 500
-wLinkReceivedMail:: ds MAIL_STRUCT_LENGTH * PARTY_LENGTH
-wLinkReceivedMailEnd:: db
-
-
-SECTION UNION "Overworld Map", WRAM0
-
-; mystery gift data
-wMysteryGiftStaging:: ds 80
-
-UNION
-wMysteryGiftTrainer:: ds 1 + (1 + 1 + NUM_MOVES) * PARTY_LENGTH + 1
-wMysteryGiftTrainerEnd::
-
-NEXTU
-wNameCardData:: ds NAME_LENGTH + 2 + 2 + 1 + 8 + 12
-wNameCardDataEnd::
-
-NEXTU
-wMysteryGiftCardHolderName:: ds PLAYER_NAME_LENGTH
-ENDU
-
-	ds 138
-
-wMysteryGiftPartnerData::
-wMysteryGiftPartnerGameVersion:: db
-wMysteryGiftPartnerID:: dw
-wMysteryGiftPartnerName:: ds NAME_LENGTH
-wMysteryGiftPartnerDexCaught:: db
-wMysteryGiftPartnerSentDeco:: db
-wMysteryGiftPartnerWhichItem:: db
-wMysteryGiftPartnerWhichDeco:: db
-wMysteryGiftPartnerBackupItem:: db
-	ds 1
-wMysteryGiftPartnerDataEnd::
-
-	ds 60
-
-wMysteryGiftPlayerData::
-wMysteryGiftPlayerGameVersion:: db
-wMysteryGiftPlayerID:: dw
-wMysteryGiftPlayerName:: ds NAME_LENGTH
-wMysteryGiftPlayerDexCaught:: db
-wMysteryGiftPlayerSentDeco:: db
-wMysteryGiftPlayerWhichItem:: db
-wMysteryGiftPlayerWhichDeco:: db
-wMysteryGiftPlayerBackupItem:: db
-	ds 1
-wMysteryGiftPlayerDataEnd::
-
-
-SECTION UNION "Overworld Map", WRAM0
-
-	ds $200
-
-; mystery gift data
-wUnusedMysteryGiftStagedDataLength:: db
-wMysteryGiftMessageCount:: db
-wMysteryGiftStagedDataLength:: db
-
-
-SECTION UNION "Overworld Map", WRAM0
-
 	ds $200
 
 ; blank credits tile buffer
 wCreditsBlankFrame2bpp:: ds 4 * 4 tiles
 wCreditsBlankFrame2bppEnd::
-
-
-SECTION UNION "Overworld Map", WRAM0
-
-; mobile
-wc800:: db
-wc801:: db
-wc802:: db
-wc803:: db
-wc804:: db
-wc805:: db
-wc806:: db
-wc807:: db
-wc808:: dw
-wc80a:: db
-wc80b:: db
-wc80c:: dw
-wc80e:: db
-wc80f:: db
-wc810:: dw
-wMobileSDK_PacketChecksum:: dw
-wc814:: db
-wc815:: db
-wc816:: dw
-wMobileSDK_AdapterType:: db
-wc819:: db
-wc81a:: db
-wc81b:: db
-wc81c:: db
-wc81d:: db
-wMobileSDK_SendCommandID:: db
-wc81f:: db
-wc820:: db
-wc821:: db
-wc822:: db
-wc823:: ds 4
-wc827:: dw
-wc829:: dw
-wc82b:: db
-wc82c:: db
-wc82d:: db
-wc82e:: db
-wc82f:: ds 3
-wc832:: db
-wc833:: db
-wc834:: db
-wc835:: db
-wc836:: ds 8
-wc83e:: ds 20
-wc852:: ds 20
-wc866:: ds 4
-wc86a:: db
-wc86b:: db
-wc86c:: db
-wc86d:: db
-wc86e:: dw
-wc870:: db
-wc871:: db
-wc872:: db
-wc873:: db
-wc874:: db
-wc875:: db
-wc876:: db
-wc877:: db
-wc878:: dw
-wc87a:: db
-wc87b:: db
-wc87c:: db
-wc87d:: db
-wc87e:: db
-wc87f:: db
-wc880:: dw
-wc882:: db
-wc883:: db
-wc884:: ds 8
-wc88c:: ds 32
-wc8ac:: ds 26
-wc8c6:: db
-wc8c7:: db
-wc8c8:: db
-wc8c9:: db
-wc8ca:: ds 44
-wc8f6:: ds 8
-wc8fe:: db
-wc8ff:: ds 15
-wc90e:: ds 8
-wc916:: ds 16
-wc926:: ds 8
-wc92e:: ds 75
-wc979:: db
-wc97a:: ds 5
-wc97f:: db
-wc980:: db
-wc981:: db
-wc982:: db
-wc983:: dw
-wc985:: db
-wc986:: db
-wc987:: db
-wMobileAPIIndex:: db
-wc989:: db
-wc98a:: db
-wc98b:: db
-wc98c:: db
-wc98d:: db
-wc98e:: db
-wc98f:: db
-wc990:: db
-wc991:: db
-wc992:: db
-wc993:: db
-wc994:: db
-wc995:: ds 16
-wc9a5:: ds 5
-wc9aa:: db
-wc9ab:: db
-wc9ac:: db
-wc9ad:: db
-wc9ae:: db
-wc9af:: dw
-wc9b1:: db
-wc9b2:: ds 3
-wc9b5:: db
-wc9b6:: ds 121
-
-wMobileSDK_ReceivePacketBufferAlt:: ds 11
-wMobileSDK_ReceivedBytes:: dw
-wMobileSDK_ReceivePacketBuffer:: ds 250
-wcb36:: db
-	ds 16
-wMobileSDK_PacketBuffer:: ds 281
-wcc60:: ds 1
-wcc61:: ds 1
-wcc62:: ds 2
-wcc64:: ds 1
-wcc65:: ds 57
-	ds 22
-wccb4:: ds 1
-wccb5:: ds 3
-wccb8:: ds 1
-wccb9:: ds 1
-wccba:: ds 90
 
 
 if DEF(_DEBUG)
@@ -1308,142 +820,7 @@ NEXTU
 wCreditsPos:: dw
 wCreditsTimer:: db
 
-NEXTU
-; mobile data
-wMobileMonSpeciesPointer:: dw
-wMobileMonStructPointer:: dw
-wMobileMonOTPointer:: dw
-wMobileMonNicknamePointer:: dw
-wMobileMonMailPointer:: dw
-
-NEXTU
-; more mobile data
-wcd20:: ds 1
-wcd21:: ds 1
-wcd22:: ds 1
-wcd23:: ds 1
-wcd24:: ds 1
-wMobileCommsJumptableIndex:: ds 1
-wcd26:: ds 1
-wcd27:: ds 1
-wcd28:: ds 1
-wcd29:: ds 1
-
-wMobileMonIndex::
-wMobileMonMiscSpecies::
-wcd2a:: db
-
-UNION
 wTempOddEggNickname:: ds MON_NAME_LENGTH
-NEXTU
-wcd2b:: ds 1
-wcd2c:: ds 1
-wcd2d:: ds 1
-wcd2e:: ds 1
-wcd2f:: ds 1
-wcd30:: ds 1
-wcd31:: ds 1
-wcd32:: ds 1
-wcd33:: ds 1
-wcd34:: ds 1
-wcd35:: ds 1
-ENDU
-
-; current time for link/mobile?
-wcd36:: db ; hours
-wcd37:: db ; mins
-wcd38:: db ; secs
-
-wcd39:: ds 1
-wcd3a:: ds 1
-wcd3b:: ds 1
-wBattleTowerRoomMenu2JumptableIndex:: ds 1
-wcd3d:: ds 1
-wcd3e:: ds 1
-wcd3f:: ds 1
-wcd40:: ds 1
-wcd41:: ds 1
-wcd42:: ds 1
-wcd43:: ds 1
-
-; some sort of timer in link battles
-wMobileInactivityTimerMinutes:: db ; mins
-wMobileInactivityTimerSeconds:: db ; secs
-wMobileInactivityTimerFrames:: db ; frames
-wcd47:: ds 1
-
-	ds 1
-
-wBTTempOTSprite::
-wcd49:: db
-
-wcd4a:: ds 1
-wcd4b:: ds 1
-
-wEZChatCursorXCoord::
-wcd4c:: db
-wEZChatCursorYCoord::
-wcd4d:: db
-
-wcd4e:: ds 1
-wcd4f:: ds 1
-wcd50:: ds 1
-wcd51:: ds 1
-wcd52:: ds 1
-
-wMobileOpponentBattleMessage:: ; ds 12
-wcd53:: ds 1
-wcd54:: ds 1
-wcd55:: ds 1
-wcd56:: ds 1
-wcd57:: ds 1
-wcd58:: ds 1
-wcd59:: ds 1
-wcd5a:: ds 1
-wcd5b:: ds 1
-wcd5c:: ds 1
-wcd5d:: ds 1
-wcd5e:: ds 1
-wcd5f:: ds 1
-wcd60:: ds 2
-wcd62:: ds 1
-wcd63:: ds 1
-wcd64:: ds 1
-wcd65:: ds 1
-wcd66:: ds 1
-wcd67:: ds 1
-wcd68:: ds 1
-wcd69:: ds 1
-wcd6a:: ds 1
-wcd6b:: ds 1
-wcd6c:: ds 1
-wcd6d:: ds 1
-wcd6e:: ds 1
-wcd6f:: ds 1
-wcd70:: ds 1
-wcd71:: ds 1
-wcd72:: ds 1
-wcd73:: ds 1
-wcd74:: ds 1
-
-wOTMonSelection:: ds 2 ; ds BATTLETOWER_PARTY_LENGTH
-wcd77:: ds 1
-
-wMobileCrashCheckPointer:: dw
-wcd7a:: ds 2
-wcd7c:: ds 3
-wcd7f:: ds 1
-wcd80:: ds 1
-wcd81:: ds 1
-wcd82:: ds 1
-wcd83:: ds 1
-wcd84:: ds 1
-wcd85:: ds 4
-wcd89:: ds 1
-wcd8a:: ds 1
-wcd8b:: ds 1
-wcd8c:: ds 1
-wcd8d:: ds 11
 ENDU
 
 wDefaultSGBLayout:: db
@@ -1470,32 +847,9 @@ wAttrmap::
 	ds SCREEN_WIDTH * SCREEN_HEIGHT
 wAttrmapEnd::
 
-UNION
-; addresses dealing with serial comms
-	ds 1
-wcf42:: db
-	ds 1
-wcf44:: db
-wcf45:: db
-
-NEXTU
 wTileAnimBuffer:: ds 1 tiles
-ENDU
 
-; link data
-UNION
-wOtherPlayerLinkMode:: db
-wOtherPlayerLinkAction:: db
-	ds 3
-wPlayerLinkAction:: db
-wUnusedLinkAction:: db
-	ds 3
-NEXTU
-wLinkReceivedSyncBuffer:: ds 5
-wLinkPlayerSyncBuffer:: ds 5
-ENDU
-wLinkTimeoutFrames:: dw
-wLinkByteTimeout:: dw
+	ds 14
 
 wMonType:: db
 
@@ -1506,7 +860,6 @@ wNamedObjectType:: db
 	ds 1
 
 wJumptableIndex::
-wBattleTowerBattleEnded::
 	db
 
 UNION
@@ -1611,12 +964,6 @@ NEXTU
 wStatsScreenFlags:: db
 
 NEXTU
-; battle tower
-wNrOfBeatenBattleTowerTrainers:: db
-	ds 1
-wBattleTowerRoomMenuJumptableIndex:: db
-
-NEXTU
 ; miscellaneous
 wFrameCounter::
 wMomBankDigitCursorPosition::
@@ -1625,16 +972,9 @@ wHallOfFameMonCounter::
 wTradeDialog::
 	db
 wFrameCounter2::
-wPrinterQueueLength::
 wUnusedSGB1eColorOffset::
 	db
 wUnusedTradeAnimPlayEvolutionMusic:: db
-
-NEXTU
-; mobile
-wcf64:: db
-wcf65:: db
-wcf66:: db
 ENDU
 
 wRequested2bppSize:: db
@@ -1739,11 +1079,10 @@ wPredefHL:: dw
 wPredefAddress:: dw
 wFarCallBC:: dw
 
-wUnusedLinkCommunicationByte:: db
+	ds 1
 
 wGameTimerPaused::
 ; bit 0: game timer paused
-; bit 7: something mobile
 	db
 
 	ds 1
@@ -1755,14 +1094,7 @@ wJoypadDisable::
 ; bit 7: ongoing sgb data transfer
 	db
 
-	ds 1
-
-wInBattleTowerBattle::
-; 0 not in BattleTower-Battle
-; 1 BattleTower-Battle
-	db
-
-	ds 1
+	ds 3
 
 wFXAnimID:: dw
 
@@ -1797,14 +1129,7 @@ wTextboxFlags::
 ; bit 0: 1-frame text delay
 ; bit 4: no text delay
 	db
-wGBPrinterBrightness::
-; bit 0-6: brightness
-;   lightest: $00
-;   lighter:  $20
-;   normal:   $40 (default)
-;   darker:   $60
-;   darkest:  $7F
-	db
+ds 1
 wOptions2::
 ; bit 1: menu account off/on
 	db
@@ -1966,15 +1291,6 @@ wTrainerHUDTiles:: ds 4
 
 SECTION UNION "Miscellaneous WRAM 1", WRAMX
 
-; mobile participant nicknames
-	ds 4
-wMobileParticipant1Nickname:: ds NAME_LENGTH_JAPANESE
-wMobileParticipant2Nickname:: ds NAME_LENGTH_JAPANESE
-wMobileParticipant3Nickname:: ds NAME_LENGTH_JAPANESE
-
-
-SECTION UNION "Miscellaneous WRAM 1", WRAMX
-
 ; battle exp gain
 wExperienceGained:: ds 3
 
@@ -2051,16 +1367,6 @@ wBufferTrademonNickname:: ds MON_NAME_LENGTH
 
 SECTION UNION "Miscellaneous WRAM 1", WRAMX
 
-; link battle record data
-wLinkBattleRecordBuffer::
-wLinkBattleRecordName::   ds NAME_LENGTH
-wLinkBattleRecordWins::   dw
-wLinkBattleRecordLosses:: dw
-wLinkBattleRecordDraws::  dw
-
-
-SECTION UNION "Miscellaneous WRAM 1", WRAMX
-
 ; miscellaneous
 wTempDayOfWeek::
 wPrevPartyLevel::
@@ -2080,36 +1386,6 @@ SECTION UNION "Miscellaneous WRAM 1", WRAMX
 wDebugColorIsTrainer:: db
 wDebugColorIsShiny:: db
 wDebugColorCurTMHM:: db
-
-
-SECTION UNION "Miscellaneous WRAM 1", WRAMX
-
-; mobile?
-wd002:: ds 1
-wd003:: ds 1
-wd004:: ds 1
-	ds 3
-wd008:: ds 2
-	ds 6
-wd010:: ds 1
-wd011:: ds 1
-wd012:: ds 1
-wd013:: ds 1
-wd014:: ds 2
-	ds 1
-wd017:: ds 1
-wd018:: ds 1
-wd019:: ds 1
-	ds 19
-wd02d:: ds 1
-wd02e:: ds 1
-wd02f:: ds 1
-wd030:: ds 1
-wd031:: ds 1
-wd032:: ds 1
-wd033:: ds 1
-wd034:: ds 2
-wd036:: ds 2
 
 
 SECTION UNION "Miscellaneous WRAM 1", WRAMX
@@ -2290,7 +1566,6 @@ wTMHMPocketScrollPosition::     db
 wSwitchMon::
 wSwitchItem::
 wSwappingMove::
-wd0e3:: ; mobile
 	db
 
 wMenuScrollPosition:: ds 4
@@ -2449,11 +1724,6 @@ wSouthMapConnection:: map_connection_struct wSouth
 wWestMapConnection::  map_connection_struct wWest
 wEastMapConnection::  map_connection_struct wEast
 
-wNorthEastMapConnection:: corner_connection_struct wNorthEast
-wNorthWestMapConnection:: corner_connection_struct wNorthWest
-wSouthEastMapConnection:: corner_connection_struct wSouthEast
-wSouthWestMapConnection:: corner_connection_struct wSouthWest
-
 wTileset::
 wTilesetBank:: db
 wTilesetAddress:: dw
@@ -2598,26 +1868,6 @@ wRestartClockHour:: db
 wRestartClockMin::  db
 
 NEXTU
-; link
-	ds 9
-wLinkBattleRNPreamble:: ds SERIAL_RN_PREAMBLE_LENGTH
-wLinkBattleRNs:: ds SERIAL_RNS_LENGTH
-
-NEXTU
-; mobile
-wd1ea:: ds 1
-wd1eb:: ds 1
-wd1ec:: ds 1
-wd1ed:: ds 1
-wd1ee:: ds 1
-wd1ef:: ds 1
-wd1f0:: ds 1
-wd1f1:: ds 1
-wd1f2:: ds 1
-wd1f3:: ds 1
-	ds 6
-
-NEXTU
 ; miscellaneous bytes
 wSkipMovesBeforeLevelUp::
 wRegisteredPhoneNumbers::
@@ -2629,23 +1879,19 @@ wCurEnemyItem:: db
 
 NEXTU
 ; miscellaneous words
-wBuySellItemPrice::
-wTempMysteryGiftTimer::
+wBuySellItemPrice:: dw
+	ds 2
 wMagikarpLength:: dw
 ENDU
 
 wTempEnemyMonSpecies::  db
 wTempBattleMonSpecies:: db
 
-UNION
-wOTLinkBattleRNData:: ds SERIAL_RN_PREAMBLE_LENGTH + SERIAL_RNS_LENGTH
-NEXTU
 wEnemyMon:: battle_struct wEnemyMon
 wEnemyMonBaseStats:: ds NUM_EXP_STATS
 wEnemyMonCatchRate:: db
 wEnemyMonBaseExp::   db
 wEnemyMonEnd::
-ENDU
 
 wBattleMode::
 ; 0: overworld
@@ -2736,7 +1982,6 @@ wBreedingCompatibility::
 wMoveGrammar::
 wApplyStatLevelMultipliersToEnemy::
 wUsePPUp::
-wd265:: ; mobile
 	db
 
 wFailedToFlee:: db
@@ -2753,8 +1998,7 @@ SECTION "Enemy Party", WRAMX
 UNION
 wPokedexShowPointerAddr:: dw
 wPokedexShowPointerBank:: db
-	ds 3
-wd271:: dw ; mobile
+	ds 5
 
 NEXTU
 wUnusedEggHatchFlag:: db
@@ -2803,12 +2047,12 @@ wDudeNumBalls:: db
 wDudeBalls:: ds 2 * 4 + 1
 ENDU
 
-	ds 4
+	ds 5
 
-wd430:: ; mobile
 wBattleAction:: db
 
-wLinkBattleSentAction:: db
+	ds 1
+
 wMapStatus:: db
 wMapEventStatus:: db
 
@@ -2871,7 +2115,8 @@ wReceiveCallDelay_StartTime:: ds 3
 wBugContestMinsRemaining:: db
 wBugContestSecsRemaining:: db
 
-	ds 2
+wEnemyMonUseFormPics:: db
+wCurPartyMonUseFormPics:: db
 
 wMapStatusEnd::
 
@@ -3048,13 +2293,15 @@ wMooMooBerries:: db
 wUndergroundSwitchPositions:: db
 wFarfetchdPosition:: db
 
-	ds 13
+wNorthEastMapConnection:: corner_connection_struct wNorthEast
+wNorthWestMapConnection:: corner_connection_struct wNorthWest
+wSouthEastMapConnection:: corner_connection_struct wSouthEast
+wSouthWestMapConnection:: corner_connection_struct wSouthWest
+	ds 1
 
 ; map scene ids
 wPokecenter2FSceneID::                            db
-wTradeCenterSceneID::                             db
 wColosseumSceneID::                               db
-wTimeCapsuleSceneID::                             db
 wPowerPlantSceneID::                              db
 wCeruleanGymSceneID::                             db
 wRoute25SceneID::                                 db
@@ -3092,10 +2339,6 @@ wEcruteakGymSceneID::                             db
 wMahoganyTownSceneID::                            db
 wRoute42SceneID::                                 db
 wCianwoodCitySceneID::                            db
-wBattleTower1FSceneID::                           db
-wBattleTowerBattleRoomSceneID::                   db
-wBattleTowerElevatorSceneID::                     db
-wBattleTowerHallwaySceneID::                      db
 wRoute43GateSceneID::                             db
 wMountMoonSceneID::                               db
 wSproutTower3FSceneID::                           db
@@ -3123,11 +2366,9 @@ wVermilionPortSceneID::                           db
 wFastShip1FSceneID::                              db
 wFastShipB1FSceneID::                             db
 wMountMoonSquareSceneID::                         db
-wMobileTradeRoomSceneID::                         db
-wMobileBattleRoomSceneID::                        db
 wCaveH8SceneID::                                  db
 
-	ds 33
+	ds 41
 
 ; fight counts
 wJackFightCount::    db
@@ -3231,10 +2472,7 @@ wBugContestStartTime:: ds 4 ; day, hour, min, sec
 wUnusedTwoDayTimerOn:: db
 wUnusedTwoDayTimer:: db
 wUnusedTwoDayTimerStartDate:: db
-	ds 4
-wMobileOrCable_LastSelection:: db
-wdc41:: ds 1
-wdc42:: ds 8
+	ds 14
 wBuenasPassword:: db
 wBlueCardBalance:: db
 wDailyRematchFlags:: ds 4
@@ -3244,10 +2482,8 @@ wKenjiBreakTimer:: ds 2 ; Kenji
 wYanmaMapGroup:: db
 wYanmaMapNumber:: db
 wPlayerMonSelection:: ds 3
-wdc5f:: db
-wdc60:: db
 
-	ds 17
+	ds 19
 
 wCaveH8HiddenDoor:: db
 
@@ -3404,81 +2640,6 @@ wTempTilemap::
 ; 20x18 grid of 8x8 tiles
 	ds SCREEN_WIDTH * SCREEN_HEIGHT
 
-
-SECTION "Battle Tower RAM", WRAMX
-
-w3_d000:: ds 1
-w3_d001:: ds 1
-w3_d002:: ds 16
-w3_d012:: ds $6e
-w3_d080:: ds 1
-w3_d081:: ds $f
-w3_d090:: ds $70
-
-w3_d100::
-wBT_OTTrainer:: battle_tower_struct wBT_OT
-	ds $20
-wBT_TrainerTextIndex:: db
-	ds 1
-w3_d202:: battle_tower_struct w3_d202
-w3_d2e2:: battle_tower_struct w3_d2e2
-w3_d3c2:: battle_tower_struct w3_d3c2
-w3_d4a2:: battle_tower_struct w3_d4a2
-w3_d582:: battle_tower_struct w3_d582
-w3_d662:: battle_tower_struct w3_d662
-
-UNION
-w3_d742:: battle_tower_struct w3_d742
-
-NEXTU
-	ds $be
-w3_d800:: ds BG_MAP_WIDTH * SCREEN_HEIGHT
-
-NEXTU
-	ds $be
-wBTChoiceOfLvlGroup:: db
-	ds $1
-w3_d802:: ds 12
-w3_d80e:: db
-	ds $1
-w3_d810::
-	ds $59
-w3_d869:: ds $17
-w3_d880:: ds 1
-w3_d881:: ds 8
-w3_d889:: ds 1
-w3_d88a:: ds 4
-w3_d88e:: ds 1
-w3_d88f:: ds 4
-w3_d893:: ds 1
-w3_d894:: ds 1
-w3_d895:: ds 11
-w3_d8a0:: ds 1
-w3_d8a1:: ds 1
-w3_d8a2:: ds 1
-w3_d8a3:: ds 1
-ENDU
-
-	ds $1c0
-
-w3_dc00:: ds SCREEN_WIDTH * SCREEN_HEIGHT
-UNION
-w3_dd68:: ds SCREEN_WIDTH * SCREEN_HEIGHT
-
-	ds $11c
-
-w3_dfec:: ds $10
-w3_dffc:: ds 4
-NEXTU
-	ds $98
-w3_de00:: ds $200
-ENDU
-
-
-SECTION "News Script RAM", WRAMX
-
-w4_d000:: ds $1000
-
 SECTION "Surrounding Data", WRAMX
 
 wSurroundingTiles:: ds SURROUNDING_WIDTH * SURROUNDING_HEIGHT
@@ -3591,19 +2752,6 @@ NEXTU
 wSurfWaveBGEffect:: ds $40
 wSurfWaveBGEffectEnd::
 ENDU
-
-
-SECTION "Mobile RAM", WRAMX
-
-w5_d800:: ds $200
-w5_da00:: ds $200
-w5_dc00:: ds $d
-w5_dc0d:: ds 4
-w5_dc11:: ds 9
-w5_MobileOpponentBattleMessages:: ds $c
-w5_MobileOpponentBattleStartMessage:: ds $c
-w5_MobileOpponentBattleWinMessage:: ds $c
-w5_MobileOpponentBattleLossMessage:: ds $c
 
 
 SECTION "Scratch RAM", WRAMX

@@ -1,11 +1,4 @@
 ReadTrainerParty:
-	ld a, [wInBattleTowerBattle]
-	bit 0, a
-	ret nz
-
-	ld a, [wLinkMode]
-	and a
-	ret nz
 
 	ld hl, wOTPartyCount
 	xor a
@@ -73,11 +66,6 @@ ReadTrainerParty:
 	jp ComputeTrainerReward
 
 .cal2
-	ld a, BANK(sMysteryGiftTrainer)
-	call OpenSRAM
-	ld de, sMysteryGiftTrainer
-	call TrainerType2
-	call CloseSRAM
 	jr .done
 
 TrainerTypes:
@@ -322,8 +310,6 @@ ComputeTrainerReward:
 	ret
 
 Battle_GetTrainerName::
-	ld a, [wInBattleTowerBattle]
-	bit 0, a
 	ld hl, wOTPlayerName
 	jp nz, CopyTrainerName
 
@@ -336,19 +322,6 @@ GetTrainerName::
 	ld a, c
 	cp CAL
 	jr nz, .not_cal2
-
-	ld a, BANK(sMysteryGiftTrainerHouseFlag)
-	call OpenSRAM
-	ld a, [sMysteryGiftTrainerHouseFlag]
-	and a
-	call CloseSRAM
-	jr z, .not_cal2
-
-	ld a, BANK(sMysteryGiftPartnerName)
-	call OpenSRAM
-	ld hl, sMysteryGiftPartnerName
-	call CopyTrainerName
-	jp CloseSRAM
 
 .not_cal2
 	dec c
@@ -385,14 +358,6 @@ INCLUDE "data/trainers/parties.asm"
 SetTrainerBattleLevel:
 	ld a, 255
 	ld [wCurPartyLevel], a
-
-	ld a, [wInBattleTowerBattle]
-	bit 0, a
-	ret nz
-
-	ld a, [wLinkMode]
-	and a
-	ret nz
 
 	ld a, [wOtherTrainerClass]
 	dec a

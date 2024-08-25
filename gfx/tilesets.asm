@@ -176,15 +176,6 @@ INCBIN "data/tilesets/pokecom_center_metatiles.bin"
 TilesetPokeComCenterColl::
 INCLUDE "data/tilesets/pokecom_center_collision.asm"
 
-TilesetBattleTowerInsideGFX::
-INCBIN "gfx/tilesets/battle_tower_inside.2bpp.lz"
-
-TilesetBattleTowerInsideMeta::
-INCBIN "data/tilesets/battle_tower_inside_metatiles.bin"
-
-TilesetBattleTowerInsideColl::
-INCLUDE "data/tilesets/battle_tower_inside_collision.asm"
-
 TilesetGateGFX::
 INCBIN "gfx/tilesets/gate.2bpp.lz"
 
@@ -195,7 +186,6 @@ TilesetGateColl::
 INCLUDE "data/tilesets/gate_collision.asm"
 
 TilesetJohtoModernGFX::
-TilesetBattleTowerOutsideGFX::
 INCBIN "gfx/tilesets/johto_modern.2bpp.lz"
 
 TilesetJohtoModernMeta::
@@ -248,12 +238,6 @@ INCBIN "data/tilesets/facility_metatiles.bin"
 
 TilesetFacilityColl::
 INCLUDE "data/tilesets/facility_collision.asm"
-
-TilesetBattleTowerOutsideMeta::
-INCBIN "data/tilesets/battle_tower_outside_metatiles.bin"
-
-TilesetBattleTowerOutsideColl::
-INCLUDE "data/tilesets/battle_tower_outside_collision.asm"
 
 TilesetBetaWordRoomMeta::
 INCBIN "data/tilesets/beta_word_room_metatiles.bin"
@@ -318,9 +302,6 @@ INCBIN "data/tilesets/johto_modern_attributes.bin"
 TilesetKantoAttr::
 INCBIN "data/tilesets/kanto_attributes.bin"
 
-TilesetBattleTowerOutsideAttr::
-INCBIN "data/tilesets/battle_tower_outside_attributes.bin"
-
 TilesetHouseAttr::
 INCBIN "data/tilesets/house_attributes.bin"
 
@@ -374,9 +355,6 @@ INCBIN "data/tilesets/players_room_attributes.bin"
 
 TilesetPokeComCenterAttr::
 INCBIN "data/tilesets/pokecom_center_attributes.bin"
-
-TilesetBattleTowerInsideAttr::
-INCBIN "data/tilesets/battle_tower_inside_attributes.bin"
 
 TilesetTowerAttr::
 INCBIN "data/tilesets/tower_attributes.bin"
@@ -495,3 +473,15 @@ INCLUDE "data/tilesets/cave_main_collision.asm"
 
 TilesetCaveMainAttr::
 INCBIN "data/tilesets/cave_main_attributes.bin"
+
+TilesetGateOfTimeGFX::
+INCBIN "gfx/tilesets/gate_of_time.2bpp.lz"
+
+TilesetGateOfTimeMeta::
+INCBIN "data/tilesets/gate_of_time_metatiles.bin"
+
+TilesetGateOfTimeColl::
+INCLUDE "data/tilesets/gate_of_time_collision.asm"
+
+TilesetGateOfTimeAttr::
+INCBIN "data/tilesets/gate_of_time_attributes.bin"

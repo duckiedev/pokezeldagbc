@@ -4,7 +4,6 @@
 
 	charmap "<NULL>",    $00
 	charmap "<PLAY_G>",  $14 ; "<PLAYER>くん" or "<PLAYER>ちゃん"; same as "<PLAYER>" in English
-	charmap "<MOBILE>",  $15
 	charmap "<CR>",      $16
 	charmap "<BSP>",     $1f ; breakable space (usually " ", or "<LF>" on the Town Map)
 	charmap "<LF>",      $22
@@ -399,16 +398,4 @@ pushc
 		charmap STRSUB("{PRINTABLE_UNOWN}", i + 1, 1), $10 * (i / 8) + 2 * i
 	endr
 	charmap "@", $ff ; end
-popc
-
-; ASCII charmap, for mobile functions
-pushc
-	newcharmap ascii
-	DEF PRINTABLE_ASCII EQUS " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz\{|}~"
-	for i, STRLEN("{PRINTABLE_ASCII}")
-		charmap STRSUB("{PRINTABLE_ASCII}", i + 1, 1), i + $20
-	endr
-	charmap "\t", $09
-	charmap "\n", $0a
-	charmap "\r", $0d
 popc

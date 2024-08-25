@@ -7,10 +7,6 @@ AIChooseMove:
 	dec a
 	ret z
 
-	ld a, [wLinkMode]
-	and a
-	ret nz
-
 ; No use picking a move if there's no choice.
 	farcall CheckEnemyLockedIn
 	ret nz
@@ -64,18 +60,11 @@ AIChooseMove:
 .ApplyLayers:
 	ld hl, TrainerClassAttributes + TRNATTR_AI_MOVE_WEIGHTS
 
-	; If we have a battle in BattleTower just load the Attributes of the first trainer class in wTrainerClass (Falkner)
-	; so we have always the same AI, regardless of the loaded class of trainer
-	ld a, [wInBattleTowerBattle]
-	bit 0, a
-	jr nz, .battle_tower_skip
-
 	ld a, [wTrainerClass]
 	dec a
 	ld bc, NUM_TRAINER_ATTRIBUTES
 	call AddNTimes
 
-.battle_tower_skip
 	lb bc, CHECK_FLAG, 0
 	push bc
 	push hl

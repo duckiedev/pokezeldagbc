@@ -14,8 +14,6 @@ CianwoodPhotoStudioFishingGuruScript:
 	iffalse .Refused
 	writetext CianwoodPhotoStudioFishingGuruText_Yes
 	waitbutton
-	special PhotoStudio
-	waitbutton
 	closetext
 	end
 

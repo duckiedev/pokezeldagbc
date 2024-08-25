@@ -44,9 +44,8 @@ hJoyLast::        db
 
 hInMenu:: db
 
-	ds 1
+	ds 2
 
-hPrinter:: db
 hGraphicStartTile:: db
 hMoveMon:: db
 
@@ -86,17 +85,6 @@ hMathBuffer:: ds 5
 NEXTU
 ; PrintNum scratch space
 hPrintNumBuffer:: ds 10
-
-NEXTU
-; Mystery Gift
-hMGExchangedByte:: db
-hMGExchangedWord:: dw
-hMGNumBits:: db
-hMGChecksum:: dw
-	ds 1
-hMGUnusedMsgLength:: db
-hMGRole:: db
-hMGStatusFlags:: db
 ENDU
 
 UNION
@@ -111,24 +99,13 @@ hCurSpriteTile::     db
 hCurSpriteOAMFlags:: db
 ENDU
 
-UNION
 hMoneyTemp:: ds 3
-NEXTU
-hMGJoypadPressed::  db
-hMGJoypadReleased:: db
-hMGPrevTIMA::       db
-ENDU
 
 hLCDCPointer::     db
 hLYOverrideStart:: db
 hLYOverrideEnd::   db
 
-hMobileReceive::             db
-hSerialReceivedNewData::     db
-hSerialConnectionStatus::    db
-hSerialIgnoringInitialData:: db
-hSerialSend::                db
-hSerialReceive::             db
+	ds 6
 
 hSCX::           db
 hSCY::           db
@@ -167,7 +144,9 @@ hCGB::          db
 hSGB::          db
 
 hDMATransfer:: db
-hMobile:: db
+
+	ds 1
+
 hSystemBooted:: db
 
 if DEF(_DEBUG)

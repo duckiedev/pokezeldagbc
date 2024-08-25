@@ -15,7 +15,7 @@ BattleCommand_Present:
 	jp nz, AnimateFailedMove
 
 	push bc
-	call BattleRandom
+	call Random
 	ld b, a
 	ld hl, PresentPower
 	ld c, 0

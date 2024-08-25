@@ -70,7 +70,6 @@ INCLUDE "audio/music/route29.asm"
 INCLUDE "audio/music/halloffame.asm"
 INCLUDE "audio/music/healpokemon.asm"
 INCLUDE "audio/music/evolution.asm"
-INCLUDE "audio/music/printer.asm"
 
 
 SECTION "Songs 4", ROMX
@@ -128,21 +127,21 @@ INCLUDE "audio/music/bugcatchingcontest.asm"
 
 SECTION "Songs 5", ROMX
 
-INCLUDE "audio/music/mobileadaptermenu.asm"
+; FREE SPACE
 INCLUDE "audio/music/buenaspassword.asm"
 INCLUDE "audio/music/lookmysticalman.asm"
 INCLUDE "audio/music/crystalopening.asm"
-INCLUDE "audio/music/battletowertheme.asm"
+; FREE SPACE
 INCLUDE "audio/music/suicunebattle.asm"
-INCLUDE "audio/music/battletowerlobby.asm"
-INCLUDE "audio/music/mobilecenter.asm"
+; FREE SPACE
+; FREE SPACE
 
 
 SECTION "Extra Songs 1", ROMX
 
 INCLUDE "audio/music/credits.asm"
 INCLUDE "audio/music/clair.asm"
-INCLUDE "audio/music/mobileadapter.asm"
+; FREE SPACE
 
 
 SECTION "Extra Songs 2", ROMX
@@ -154,6 +153,7 @@ SECTION "New Songs", ROMX
 
 INCLUDE "audio/music/zeldatitle.asm"
 INCLUDE "audio/music/cavetheme.asm"
+INCLUDE "audio/music/gateoftime.asm"
 
 
 SECTION "Sound Effects", ROMX

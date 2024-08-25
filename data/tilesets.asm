@@ -14,7 +14,6 @@ Tilesets::
 	tileset TilesetJohto
 	tileset TilesetJohtoModern
 	tileset TilesetKanto
-	tileset TilesetBattleTowerOutside
 	tileset TilesetHouse
 	tileset TilesetPlayersHouse
 	tileset TilesetPokecenter
@@ -32,7 +31,6 @@ Tilesets::
 	tileset TilesetLighthouse
 	tileset TilesetPlayersRoom
 	tileset TilesetPokeComCenter
-	tileset TilesetBattleTowerInside
 	tileset TilesetTower
 	tileset TilesetCave
 	tileset TilesetPark
@@ -50,4 +48,5 @@ Tilesets::
 	tileset TilesetOverworldMain
 	tileset TilesetOverworldMainTwo
 	tileset TilesetCaveMain
+	tileset TilesetGateOfTime
 	assert_table_length NUM_TILESETS + 1

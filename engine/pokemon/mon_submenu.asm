@@ -119,9 +119,6 @@ GetMonSubmenuItems:
 	ld a, [wCurPartySpecies]
 	cp EGG
 	jr z, .egg
-	ld a, [wLinkMode]
-	and a
-	jr nz, .skip_moves
 	ld a, MON_MOVES
 	call GetPartyParamLocation
 	ld d, h
@@ -145,26 +142,6 @@ GetMonSubmenuItems:
 	pop bc
 	dec c
 	jr nz, .loop
-
-.skip_moves
-	ld a, MONMENUITEM_STATS
-	call AddMonMenuItem
-	ld a, MONMENUITEM_SWITCH
-	call AddMonMenuItem
-	ld a, MONMENUITEM_MOVE
-	call AddMonMenuItem
-	ld a, [wLinkMode]
-	and a
-	jr nz, .skip2
-	push hl
-	ld a, MON_ITEM
-	call GetPartyParamLocation
-	ld d, [hl]
-	farcall ItemIsMail
-	pop hl
-	ld a, MONMENUITEM_MAIL
-	jr c, .ok
-	ld a, MONMENUITEM_ITEM
 
 .ok
 	call AddMonMenuItem

@@ -65,20 +65,13 @@ DoBattleTransition:
 	ret
 
 .InitGFX:
-	ld a, [wLinkMode]
-	cp LINK_MOBILE
-	jr z, .mobile
 	farcall ReanchorBGMap_NoOAMUpdate
 	call UpdateSprites
 	call DelayFrame
-	call .NonMobile_LoadPokeballTiles
-	call BattleStart_CopyTilemapAtOnce
-	jr .resume
-
-.mobile
 	call LoadTrainerBattlePokeballTiles
-
-.resume
+	hlbgcoord 0, 0
+	call ConvertTrainerBattlePokeballTilesTo2bpp
+	call BattleStart_CopyTilemapAtOnce
 	ld a, SCREEN_HEIGHT_PX
 	ldh [hWY], a
 	call DelayFrame
@@ -90,12 +83,6 @@ DoBattleTransition:
 	ld [hli], a
 	ld [hl], a
 	call WipeLYOverrides
-	ret
-
-.NonMobile_LoadPokeballTiles:
-	call LoadTrainerBattlePokeballTiles
-	hlbgcoord 0, 0
-	call ConvertTrainerBattlePokeballTilesTo2bpp
 	ret
 
 LoadTrainerBattlePokeballTiles:

@@ -268,6 +268,7 @@ GetBaseData::
 
 ; Beta front and back sprites
 ; (see pokegold-spaceworld's data/pokemon/base_stats/*)
+	ld b, b
 	ld hl, wBaseUnusedFrontpic
 	ld [hl], e
 	inc hl
@@ -276,7 +277,6 @@ GetBaseData::
 	ld [hl], e
 	inc hl
 	ld [hl], d
-	jr .end ; useless
 
 .end
 ; Replace Pokedex # with species

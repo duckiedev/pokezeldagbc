@@ -985,8 +985,6 @@ Sfx_RegisterPhoneNumber_Ch5:
 	rest 8
 	sound_ret
 
-	toggle_sfx ; unused
-
 Sfx_RegisterPhoneNumber_Ch6:
 	toggle_sfx
 	duty_cycle 3
@@ -1009,8 +1007,6 @@ Sfx_RegisterPhoneNumber_Ch6:
 	rest 8
 	sound_ret
 
-	toggle_sfx ; unused
-
 Sfx_RegisterPhoneNumber_Ch7:
 	toggle_sfx
 	note_type 12, 2, 5
@@ -1030,8 +1026,6 @@ Sfx_RegisterPhoneNumber_Ch7:
 	rest 8
 	sound_ret
 
-	toggle_sfx ; unused
-
 Sfx_RegisterPhoneNumber_Ch8:
 	toggle_sfx
 	sfx_toggle_noise 4
@@ -1040,8 +1034,6 @@ Sfx_RegisterPhoneNumber_Ch8:
 	rest 16
 	rest 16
 	sound_ret
-
-	toggle_sfx ; unused
 
 Sfx_3rdPlace:
 	channel_count 3

@@ -130,9 +130,6 @@ Init::
 	; BG on
 	ldh [rLCDC], a
 
-	ld a, CONNECTION_NOT_ESTABLISHED
-	ldh [hSerialConnectionStatus], a
-
 	farcall InitCGBPals
 
 	ld a, HIGH(vBGMap1)

@@ -307,7 +307,6 @@ ElmsLabHealingMachine:
 	end
 
 ElmsLabHealingMachine_HealParty:
-	special StubbedTrainerRankings_Healings
 	special HealParty
 	playmusic MUSIC_NONE
 	setval HEALMACHINE_ELMS_LAB
@@ -339,7 +338,6 @@ ElmAfterTheftScript:
 	writetext ElmAfterTheftText5
 	promptbutton
 	setevent EVENT_GAVE_MYSTERY_EGG_TO_ELM
-	setflag ENGINE_MOBILE_SYSTEM
 	setmapscene ROUTE_29, SCENE_ROUTE29_CATCH_TUTORIAL
 	clearevent EVENT_ROUTE_30_YOUNGSTER_JOEY
 	setevent EVENT_ROUTE_30_BATTLE

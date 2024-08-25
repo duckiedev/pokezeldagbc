@@ -92,31 +92,23 @@
 	const MUSIC_BUG_CATCHING_CONTEST_RANKING ; 58
 	const MUSIC_BUG_CATCHING_CONTEST         ; 59
 	const MUSIC_LAKE_OF_RAGE_ROCKET_RADIO    ; 5a
-	const MUSIC_PRINTER                      ; 5b
-	const MUSIC_POST_CREDITS                 ; 5c
+	const MUSIC_POST_CREDITS                 ; 5b
 ; new to Crystal
-	const MUSIC_CLAIR                        ; 5d
-	const MUSIC_MOBILE_ADAPTER_MENU          ; 5e
-	const MUSIC_MOBILE_ADAPTER               ; 5f
-	const MUSIC_BUENAS_PASSWORD              ; 60
-	const MUSIC_MYSTICALMAN_ENCOUNTER        ; 61
-	const MUSIC_CRYSTAL_OPENING              ; 62
-	const MUSIC_BATTLE_TOWER_THEME           ; 63
-	const MUSIC_SUICUNE_BATTLE               ; 64
-	const MUSIC_BATTLE_TOWER_LOBBY           ; 65
-	const MUSIC_MOBILE_CENTER                ; 66
+	const MUSIC_CLAIR                        ; 5c
+	const MUSIC_BUENAS_PASSWORD              ; 5d
+	const MUSIC_MYSTICALMAN_ENCOUNTER        ; 5e
+	const MUSIC_CRYSTAL_OPENING              ; 5f
+	const MUSIC_SUICUNE_BATTLE               ; 60
 ; new songs
-	const MUSIC_ZELDA_TITLE					 ; 67
-	const MUSIC_CAVE_THEME					 ; 68
+	const MUSIC_ZELDA_TITLE					 ; 61
+	const MUSIC_CAVE_THEME					 ; 62
+	const MUSIC_GATE_OF_TIME				 ; 63
 DEF NUM_MUSIC_SONGS EQU const_value
 
-; GetMapMusic picks music for this value (see home/map.asm)
-DEF MUSIC_MAHOGANY_MART EQU $64
+; GetMapMusic picks music for these values (see home/map.asm)
+DEF MUSIC_MAHOGANY_MART EQU $fc
+DEF MUSIC_RADIO_TOWER EQU $fd
 
 ; ExitPokegearRadio_HandleMusic uses these values
 DEF RESTART_MAP_MUSIC EQU $fe
 DEF ENTER_MAP_MUSIC   EQU $ff
-
-; GetMapMusic picks music for this bit flag
-DEF RADIO_TOWER_MUSIC_F EQU 7
-DEF RADIO_TOWER_MUSIC EQU 1 << RADIO_TOWER_MUSIC_F

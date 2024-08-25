@@ -94,20 +94,15 @@ Music:
 	dba Music_ContestResults
 	dba Music_BugCatchingContest
 	dba Music_LakeOfRageRocketRadio
-	dba Music_Printer
 	dba Music_PostCredits
 ; new to Crystal
 	dba Music_Clair
-	dba Music_MobileAdapterMenu
-	dba Music_MobileAdapter
 	dba Music_BuenasPassword
 	dba Music_LookMysticalMan
 	dba Music_CrystalOpening
-	dba Music_BattleTowerTheme
 	dba Music_SuicuneBattle
-	dba Music_BattleTowerLobby
-	dba Music_MobileCenter
 ; new songs
 	dba Music_ZeldaTitle
 	dba Music_CaveTheme
+	dba Music_GateOfTime
 	assert_table_length NUM_MUSIC_SONGS

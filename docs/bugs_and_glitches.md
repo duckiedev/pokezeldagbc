@@ -312,7 +312,7 @@ This bug existed for all battles in Gold and Silver, and was only fixed for sing
 ```diff
  .got_move_chance
 -; BUG: Moves with a 100% secondary effect chance will not trigger it in 1/256 uses (see docs/bugs_and_glitches.md)
--	call BattleRandom
+-	call Random
 +	ld a, [hl]
 +	sub 100 percent
 +	; If chance was 100%, RNG won't be called (carry not set)
@@ -391,7 +391,7 @@ This bug existed for all battles in Gold and Silver, and was only fixed for sing
 +	jr z, .set_confuse_count
 +	ld hl, wEnemyConfuseCount
 +.set_confuse_count
-+	call BattleRandom
++	call Random
 +	and %11
 +	add 2
 +	ld [hl], a
@@ -1419,7 +1419,7 @@ In the `AI_TryItem` routine, an item pointer is set to `wEnemyTrainerItem1` and 
  .loop_enemy
 -; BUG: Wild Pokémon can always Teleport regardless of level difference (see docs/bugs_and_glitches.md)
 +; If a random number >= player level / 4, Teleport will succeed
- 	call BattleRandom
+ 	call Random
  	cp c
  	jr nc, .loop_enemy
  	; b = player level / 4

@@ -30,19 +30,12 @@
 	const SCGB_PLAYER_OR_MON_FRONTPIC_PALS
 	const SCGB_TRADE_TUBE
 	const SCGB_TRAINER_OR_MON_FRONTPIC_PALS
-	const SCGB_MYSTERY_GIFT
 	const SCGB_1E
 	const SCGB_NAMING_SCREEN
 DEF NUM_SCGB_LAYOUTS EQU const_value
 
 DEF SCGB_PARTY_MENU_HP_BARS EQU $fc
 DEF SCGB_DEFAULT EQU $ff
-
-; GetCrystalCGBLayout arguments (see engine/gfx/crystal_layouts.asm)
-	const_def
-	const CRYSTAL_CGB_MOBILE_0
-	const CRYSTAL_CGB_MOBILE_1
-	const CRYSTAL_CGB_NAME_CARD
 
 ; PredefPals indexes (see gfx/sgb/predef.pal)
 ; GetPredefPal arguments (see engine/gfx/color.asm)
@@ -75,6 +68,7 @@ DEF SCGB_DEFAULT EQU $ff
 	const PREDEFPAL_FOREST
 	const PREDEFPAL_BEACH
 	const PREDEFPAL_CAVE
+	const PREDEFPAL_GATE_OF_TIME
 	const PREDEFPAL_HEROES_CAVE
 	const PREDEFPAL_NITE
 	const PREDEFPAL_BLACKOUT

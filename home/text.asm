@@ -121,13 +121,14 @@ SpeechTextbox::
 	and a
 	jr nz, .battle
 	hlcoord TEXTBOX_X, TEXTBOX_Y
-	jr .finish
-.battle
-	hlcoord TEXTBOX_BATTLE_X, TEXTBOX_BATTLE_Y
-	; fallthrough
-.finish
 	ld b, TEXTBOX_INNERH
 	ld c, TEXTBOX_INNERW
+	jp Textbox
+	
+.battle
+	hlcoord TEXTBOX_BATTLE_X, TEXTBOX_BATTLE_Y
+	ld b, TEXTBOX_BATTLE_INNERH
+	ld c, TEXTBOX_BATTLE_INNERW
 	jp Textbox
 
 RadioTerminator::
@@ -210,7 +211,6 @@ MACRO dict
 	endc
 ENDM
 
-	dict "<MOBILE>",  MobileScriptChar
 	dict "<LINE>",    LineChar
 	dict "<NEXT>",    NextLineChar
 	dict "<CR>",      CarriageReturnChar
@@ -250,12 +250,6 @@ ENDM
 	ld [hli], a
 	call PrintLetterDelay
 	jp NextChar
-
-MobileScriptChar::
-	ld c, l
-	ld b, h
-	farcall RunMobileScript
-	jp PlaceNextChar
 
 MACRO print_name
 	push de
@@ -310,10 +304,6 @@ PlaceBattlersName:
 PlaceEnemysName::
 	push de
 
-	ld a, [wLinkMode]
-	and a
-	jr nz, .linkbattle
-
 	ld a, [wTrainerClass]
 	cp RIVAL1
 	jr z, .rival
@@ -334,10 +324,6 @@ PlaceEnemysName::
 
 .rival
 	ld de, wRivalName
-	jr PlaceCommandCharacter
-
-.linkbattle
-	ld de, wOTClassName
 	jr PlaceCommandCharacter
 
 PlaceGenderedPlayerName::
@@ -435,21 +421,21 @@ CarriageReturnChar::
 
 LineChar::
 	pop hl
+	ld a, [wBattleMode]
+	and a
+	jr nz, .battle
 	hlcoord TEXTBOX_INNERX, TEXTBOX_INNERY + 2
+	jp .continue
+.battle
+	hlcoord TEXTBOX_BATTLE_INNERX, TEXTBOX_BATTLE_INNERY + 1
+
+.continue
 	push hl
 	jp NextChar
 
 Paragraph::
 	push de
-
-	ld a, [wLinkMode]
-	cp LINK_COLOSSEUM
-	jr z, .linkbattle
-	cp LINK_MOBILE
-	jr z, .linkbattle
 	call LoadBlinkingCursor
-
-.linkbattle
 	call Text_WaitBGMap
 	call PromptButton
 	hlcoord TEXTBOX_INNERX, TEXTBOX_INNERY
@@ -463,28 +449,24 @@ Paragraph::
 	jp NextChar
 
 _ContText::
-	ld a, [wLinkMode]
-	or a
-	jr nz, .communication
 	call LoadBlinkingCursor
-
-.communication
-	call Text_WaitBGMap
-
-	push de
-	call PromptButton
-	pop de
-
-	ld a, [wLinkMode]
-	or a
-	call z, UnloadBlinkingCursor
-	; fallthrough
 
 _ContTextNoPause::
 	push de
+	ld a, [wBattleMode]
+	and a
+	jr nz, .battle
 	call TextScroll
 	call TextScroll
 	hlcoord TEXTBOX_INNERX, TEXTBOX_INNERY + 2
+	jp .continue
+
+.battle
+	;call TextScrollBattle
+	call TextScrollBattle
+	hlcoord TEXTBOX_BATTLE_INNERX, TEXTBOX_BATTLE_INNERY + 1
+
+.continue
 	pop de
 	jp NextChar
 
@@ -509,21 +491,9 @@ PlaceDexEnd::
 	ret
 
 PromptText::
-	ld a, [wLinkMode]
-	cp LINK_COLOSSEUM
-	jr z, .ok
-	cp LINK_MOBILE
-	jr z, .ok
 	call LoadBlinkingCursor
-
-.ok
 	call Text_WaitBGMap
 	call PromptButton
-	ld a, [wLinkMode]
-	cp LINK_COLOSSEUM
-	jr z, DoneText
-	cp LINK_MOBILE
-	jr z, DoneText
 	call UnloadBlinkingCursor
 
 DoneText::
@@ -568,6 +538,38 @@ TextScroll::
 	hlcoord TEXTBOX_INNERX, TEXTBOX_INNERY + 2
 	ld a, " "
 	ld bc, TEXTBOX_INNERW
+	call ByteFill
+	ld c, 5
+	call DelayFrames
+	ret
+
+TextScrollBattle::
+	hlcoord TEXTBOX_BATTLE_INNERX, TEXTBOX_BATTLE_INNERY
+	decoord TEXTBOX_BATTLE_INNERX, TEXTBOX_BATTLE_INNERY - 1
+	ld a, TEXTBOX_BATTLE_INNERH - 1
+
+.col
+	push af
+	ld c, TEXTBOX_BATTLE_INNERW
+
+.row
+	ld a, [hli]
+	ld [de], a
+	inc de
+	dec c
+	jr nz, .row
+
+	inc de
+	inc de
+	inc hl
+	inc hl
+	pop af
+	dec a
+	jr nz, .col
+
+	hlcoord TEXTBOX_BATTLE_INNERX, TEXTBOX_BATTLE_INNERY + 2
+	ld a, " "
+	ld bc, TEXTBOX_BATTLE_INNERW
 	call ByteFill
 	ld c, 5
 	call DelayFrames
@@ -802,12 +804,6 @@ TextCommand_LOW::
 
 TextCommand_PROMPT_BUTTON::
 ; wait for button press; show arrow
-	ld a, [wLinkMode]
-	cp LINK_COLOSSEUM
-	jp z, TextCommand_WAIT_BUTTON
-	cp LINK_MOBILE
-	jp z, TextCommand_WAIT_BUTTON
-
 	push hl
 	call LoadBlinkingCursor
 	push bc
@@ -822,10 +818,19 @@ TextCommand_SCROLL::
 ; below the first character column of the text box.
 	push hl
 	call UnloadBlinkingCursor
+	ld a, [wBattleMode]
+	and a
+	jr nz, .battle
 	call TextScroll
 	call TextScroll
 	pop hl
 	bccoord TEXTBOX_INNERX, TEXTBOX_INNERY + 2
+	ret 
+.battle
+	call TextScrollBattle
+	call TextScrollBattle
+	pop hl
+	bccoord TEXTBOX_BATTLE_INNERX, TEXTBOX_BATTLE_INNERY + 2
 	ret
 
 TextCommand_START_ASM::

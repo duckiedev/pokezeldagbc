@@ -4803,12 +4803,11 @@ BattleAnim_ShowMon_1:
 	anim_ret
 
 BattleAnim_ZolGelExplosion:
-	anim_1gfx BATTLE_ANIM_GFX_EXPLOSION
+	anim_2gfx BATTLE_ANIM_GFX_EXPLOSION, BATTLE_ANIM_GFX_SMOKE
 	anim_sound 0, 1, SFX_EGG_BOMB
 	anim_obj BATTLE_ANIM_OBJ_EXPLOSION2, 128, 64, $0
 	anim_zoltogels
-	;anim_updateactorpic
-	anim_sound 0, 1, SFX_EGG_BOMB
-	anim_obj BATTLE_ANIM_OBJ_EXPLOSION2, 128, 64, $0
+	anim_sound 0, 1, SFX_BALL_POOF
+	anim_obj BATTLE_ANIM_OBJ_BALL_POOF, 136, 64, $10
 	anim_wait 24
 	anim_ret

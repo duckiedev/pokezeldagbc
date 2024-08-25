@@ -199,7 +199,6 @@ Route35GoldenrodGate_Blocks:
 Route36RuinsOfAlphGate_Blocks:
 Route34IlexForestGate_Blocks:
 Route6SaffronGate_Blocks:
-Route40BattleTowerGate_Blocks:
 Route2Gate_Blocks:
 Route29Route46Gate_Blocks:
 Route5SaffronGate_Blocks:
@@ -375,10 +374,6 @@ CeladonGameCornerPrizeRoom_Blocks:
 
 Colosseum_Blocks:
 	INCBIN "maps/Colosseum.ablk"
-
-TradeCenter_Blocks:
-TimeCapsule_Blocks:
-	INCBIN "maps/TradeCenter.ablk"
 
 EcruteakLugiaSpeechHouse_Blocks:
 EcruteakItemfinderHouse_Blocks:
@@ -902,30 +897,6 @@ RuinsOfAlphAerodactylWordRoom_Blocks:
 DragonShrine_Blocks:
 	INCBIN "maps/DragonShrine.ablk"
 
-BattleTower1F_Blocks:
-	INCBIN "maps/BattleTower1F.ablk"
-
-BattleTowerBattleRoom_Blocks:
-	INCBIN "maps/BattleTowerBattleRoom.ablk"
-
-PokecomCenterAdminOfficeMobile_Blocks:
-	INCBIN "maps/PokecomCenterAdminOfficeMobile.ablk"
-
-MobileTradeRoom_Blocks:
-	INCBIN "maps/MobileTradeRoom.ablk"
-
-MobileBattleRoom_Blocks:
-	INCBIN "maps/MobileBattleRoom.ablk"
-
-BattleTowerHallway_Blocks:
-	INCBIN "maps/BattleTowerHallway.ablk"
-
-BattleTowerElevator_Blocks:
-	INCBIN "maps/BattleTowerElevator.ablk"
-
-BattleTowerOutside_Blocks:
-	INCBIN "maps/BattleTowerOutside.ablk"
-
 GoldenrodDeptStoreRoof_Blocks:
 	INCBIN "maps/GoldenrodDeptStoreRoof.ablk"
 
@@ -985,12 +956,14 @@ BeachAreaP7_Blocks:
 	INCBIN "maps/BeachAreaP7.ablk"
 BeachAreaP7_SouthWestCorner_Blocks:
 	INCMAPCORNER "maps/BeachAreaO8.ablk", BEACH_AREA_O8, northeast
-
 BeachAreaP8_Blocks:
 	INCBIN "maps/BeachAreaP8.ablk"
 
 CaveH8_Blocks:
 	INCBIN "maps/CaveH8.ablk"
+
+GateOfTime_Blocks:
+	INCBIN "maps/GateOfTime.ablk"
 
 HeroesCave01_Blocks:
 	INCBIN "maps/HeroesCave01.ablk"

@@ -30,21 +30,14 @@ ReadAnyMail:
 	pop de
 	push de
 	ld a, BANK(sPartyMail)
-	call OpenSRAM
-	farcall ParseMailLanguage
-	call CloseSRAM
 	ld a, c
-	ld de, StandardEnglishFont
+	ld de, Font
 	or a ; MAIL_LANG_ENGLISH
 	jr z, .got_font
-	ld de, FrenchGermanFont
-	sub MAIL_LANG_ITALIAN
-	jr c, .got_font
-	ld de, SpanishItalianFont
 
 .got_font
 	ld hl, vTiles1
-	lb bc, BANK(StandardEnglishFont), $80
+	lb bc, BANK(Font), $80
 	call Get1bpp
 	pop de
 	call .LoadGFX
@@ -67,20 +60,13 @@ ReadAnyMail:
 	ldh a, [hJoyPressed]
 	and A_BUTTON | B_BUTTON | START
 	jr z, .loop
-	vc_patch Forbid_printing_mail
-if DEF(_CRYSTAL11_VC)
 	and NO_INPUT
-else
-	and START
-endc
-	vc_patch_end
 	jr nz, .pressed_start
 	ret
 
 .pressed_start
 	ld a, [wJumptableIndex]
 	push af
-	callfar PrintMailAndExit ; printer
 	pop af
 	ld [wJumptableIndex], a
 	jr .loop

@@ -711,12 +711,12 @@ UnownRBackpic:       INCBIN "gfx/pokemon/unown_r/back.2bpp.lz"
 
 SECTION "Pics 19", ROMX
 
-; Seems to be an accidental copy of the previous bank
-
 HonedgeHFrontPic:	 INCBIN "gfx/pokemon/honedge_h/front.animated.2bpp.lz"
 HonedgeHBackPic:	 INCBIN "gfx/pokemon/honedge_h/back.2bpp.lz"
 ZolFrontPic:         INCBIN "gfx/pokemon/zol/front.animated.2bpp.lz"
 ZolBackPic:          INCBIN "gfx/pokemon/zol/back.2bpp.lz"
+GelsFrontPic::        INCBIN "gfx/pokemon/gels/front.animated.2bpp.lz"
+GelsBackPic::      INCBIN "gfx/pokemon/gels/back.2bpp.lz"
 
 ; Sections "Pics 20" to "Pics 24" are not used for any graphics,
 ; but entries for their banks exist in FixPicBank (see engine/gfx/load_pics.asm).

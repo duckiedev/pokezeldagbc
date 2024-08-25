@@ -8,7 +8,6 @@ MapSetupScripts:
 	dw MapSetupScript_Door
 	dw MapSetupScript_Fall
 	dw MapSetupScript_Connection
-	dw MapSetupScript_LinkReturn
 	dw MapSetupScript_Train
 	dw MapSetupScript_Submenu
 	dw MapSetupScript_BadWarp
@@ -136,25 +135,6 @@ MapSetupScript_ReloadMap:
 	mapsetup FadeInFromWhite
 	mapsetup ActivateMapAnims
 	mapsetup LoadWildMonData
-	db -1 ; end
-
-MapSetupScript_LinkReturn:
-	mapsetup FadeMapMusicAndPalettes
-	mapsetup DisableLCD
-	mapsetup InitSound
-	mapsetup HandleNewMap
-	mapsetup LoadBlockData
-	mapsetup BufferScreen
-	mapsetup LoadMapGraphics
-	mapsetup LoadMapTimeOfDay
-	mapsetup EnableLCD
-	mapsetup LoadMapPalettes
-	mapsetup RefreshMapSprites
-	mapsetup PlayMapMusicBike
-	mapsetup FadeInFromWhite
-	mapsetup ActivateMapAnims
-	mapsetup LoadWildMonData
-	mapsetup EnableTextAcceleration
 	db -1 ; end
 
 MapSetupScript_Continue:

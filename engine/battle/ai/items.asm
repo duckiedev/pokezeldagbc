@@ -5,10 +5,6 @@ AI_SwitchOrTryItem:
 	dec a
 	ret z
 
-	ld a, [wLinkMode]
-	and a
-	ret nz
-
 	farcall CheckEnemyLockedIn
 	ret nz
 
@@ -20,18 +16,13 @@ AI_SwitchOrTryItem:
 	and a
 	jr nz, DontSwitch
 
-	; always load the first trainer class in wTrainerClass for Battle Tower trainers
 	ld hl, TrainerClassAttributes + TRNATTR_AI_ITEM_SWITCH
-	ld a, [wInBattleTowerBattle]
-	and a
-	jr nz, .ok
 
 	ld a, [wTrainerClass]
 	dec a
 	ld bc, NUM_TRAINER_ATTRIBUTES
 	call AddNTimes
 
-.ok
 	bit SWITCH_OFTEN_F, [hl]
 	jp nz, SwitchOften
 	bit SWITCH_RARELY_F, [hl]
@@ -153,10 +144,6 @@ CheckSubstatusCantRun: ; unreferenced
 	ret
 
 AI_TryItem:
-	; items are not allowed in the Battle Tower
-	ld a, [wInBattleTowerBattle]
-	and a
-	ret nz
 
 	ld a, [wEnemyTrainerItem1]
 	ld b, a
@@ -705,9 +692,6 @@ AI_Switch:
 	farcall ResetBattleParticipants
 	xor a
 	ld [wBattleHasJustStarted], a
-	ld a, [wLinkMode]
-	and a
-	ret nz
 	scf
 	ret
 

@@ -50,9 +50,9 @@ HeroesCave03_MapEvents:
 	def_coord_events
 
 	def_bg_events
-	bg_event  9,  2, BGEVENT_IFNOTSET, HeroesCave03CheckBush
+	bg_event 11,  4, BGEVENT_IFNOTSET, HeroesCave03CheckBush
 	
 	def_object_events
 	object_event 11,  2, SPRITE_ZOL, SPRITEMOVEDATA_WANDER, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_OWMON, 3, HeroesCave03RoamingMonZol01, -1
 	object_event 12,  8, SPRITE_ZOL, SPRITEMOVEDATA_WANDER, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_OWMON, 3, HeroesCave03RoamingMonZol01, -1
-	object_event  1,  7, SPRITE_ZOL, SPRITEMOVEDATA_WANDER, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_OWMON, 3, HeroesCave03RoamingMonZol01, -1
+	object_event  1,  6, SPRITE_ZOL, SPRITEMOVEDATA_WANDER, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_OWMON, 3, HeroesCave03RoamingMonZol01, -1

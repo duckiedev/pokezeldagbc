@@ -266,7 +266,6 @@ ENDM
 	map_const GOLDENROD_DEPT_STORE_ROOF,                    8,  4 ; 18
 	map_const GOLDENROD_GAME_CORNER,                       10,  7 ; 19
 	map_const GOLDENROD_POKECENTER_1F,                      5,  4 ; 20
-	map_const POKECOM_CENTER_ADMIN_OFFICE_MOBILE,          16, 16 ; 21
 	map_const ILEX_FOREST_AZALEA_GATE,                      5,  4 ; 22
 	map_const ROUTE_34_ILEX_FOREST_GATE,                    5,  4 ; 23
 	map_const DAY_CARE,                                     5,  4 ; 24
@@ -372,11 +371,7 @@ ENDM
 
 	newgroup CABLE_CLUB                                           ; 20
 	map_const POKECENTER_2F,                                8,  4 ;  1
-	map_const TRADE_CENTER,                                 5,  4 ;  2
-	map_const COLOSSEUM,                                    5,  4 ;  3
-	map_const TIME_CAPSULE,                                 5,  4 ;  4
-	map_const MOBILE_TRADE_ROOM,                            5,  4 ;  5
-	map_const MOBILE_BATTLE_ROOM,                           5,  4 ;  6
+	map_const COLOSSEUM,                                    5,  4 ;  2
 	endgroup
 
 	newgroup CELADON                                              ; 21
@@ -418,12 +413,6 @@ ENDM
 	map_const CIANWOOD_PHOTO_STUDIO,                        4,  4 ;  8
 	map_const CIANWOOD_LUGIA_SPEECH_HOUSE,                  4,  4 ;  9
 	map_const POKE_SEERS_HOUSE,                             4,  4 ; 10
-	map_const BATTLE_TOWER_1F,                              8,  5 ; 11
-	map_const BATTLE_TOWER_BATTLE_ROOM,                     4,  4 ; 12
-	map_const BATTLE_TOWER_ELEVATOR,                        2,  2 ; 13
-	map_const BATTLE_TOWER_HALLWAY,                        11,  2 ; 14
-	map_const ROUTE_40_BATTLE_TOWER_GATE,                   5,  4 ; 15
-	map_const BATTLE_TOWER_OUTSIDE,                        10, 14 ; 16
 	endgroup
 
 	newgroup VIRIDIAN                                             ; 23
@@ -513,6 +502,7 @@ ENDM
 	
 	newgroup CAVE												  ; 29
 	map_const CAVE_H8,										6,  5 ;  1
+	map_const GATE_OF_TIME,									6,  5 ;  2
 	endgroup
 	
 	newgroup HEROES_CAVE										  ; 30

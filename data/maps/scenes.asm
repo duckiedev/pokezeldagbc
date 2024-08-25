@@ -6,9 +6,7 @@ ENDM
 
 MapScenes::
 	scene_var POKECENTER_2F,                               wPokecenter2FSceneID
-	scene_var TRADE_CENTER,                                wTradeCenterSceneID
 	scene_var COLOSSEUM,                                   wColosseumSceneID
-	scene_var TIME_CAPSULE,                                wTimeCapsuleSceneID
 	scene_var POWER_PLANT,                                 wPowerPlantSceneID
 	scene_var CERULEAN_GYM,                                wCeruleanGymSceneID
 	scene_var ROUTE_25,                                    wRoute25SceneID
@@ -46,10 +44,6 @@ MapScenes::
 	scene_var MAHOGANY_TOWN,                               wMahoganyTownSceneID
 	scene_var ROUTE_42,                                    wRoute42SceneID
 	scene_var CIANWOOD_CITY,                               wCianwoodCitySceneID
-	scene_var BATTLE_TOWER_1F,                             wBattleTower1FSceneID
-	scene_var BATTLE_TOWER_BATTLE_ROOM,                    wBattleTowerBattleRoomSceneID
-	scene_var BATTLE_TOWER_ELEVATOR,                       wBattleTowerElevatorSceneID
-	scene_var BATTLE_TOWER_HALLWAY,                        wBattleTowerHallwaySceneID
 	scene_var ROUTE_43_GATE,                               wRoute43GateSceneID
 	scene_var MOUNT_MOON,                                  wMountMoonSceneID
 	scene_var SPROUT_TOWER_3F,                             wSproutTower3FSceneID
@@ -77,7 +71,5 @@ MapScenes::
 	scene_var FAST_SHIP_1F,                                wFastShip1FSceneID
 	scene_var FAST_SHIP_B1F,                               wFastShipB1FSceneID
 	scene_var MOUNT_MOON_SQUARE,                           wMountMoonSquareSceneID
-	scene_var MOBILE_TRADE_ROOM,                           wMobileTradeRoomSceneID
-	scene_var MOBILE_BATTLE_ROOM,                          wMobileBattleRoomSceneID
 	scene_var CAVE_H8,		                               wCaveH8SceneID
 	db -1 ; end

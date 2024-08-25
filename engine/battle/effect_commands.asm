@@ -9,19 +9,7 @@ DoPlayerTurn:
 
 DoEnemyTurn:
 	call SetEnemyTurn
-
-	ld a, [wLinkMode]
-	and a
-	jr z, DoTurn
-
-	ld a, [wBattleAction]
-	cp BATTLEACTION_STRUGGLE
-	jr z, DoTurn
-	cp BATTLEACTION_SWITCH1
-	ret nc
-
 	; fallthrough
-
 DoTurn:
 ; Read in and execute the user's move effects for this turn.
 
@@ -261,7 +249,7 @@ BattleCommand_CheckTurn:
 	call FarPlayBattleAnimation
 
 	; 50% chance of hitting itself
-	call BattleRandom
+	call Random
 	cp 50 percent + 1
 	jr nc, .not_confused
 
@@ -289,7 +277,7 @@ BattleCommand_CheckTurn:
 	call FarPlayBattleAnimation
 
 	; 50% chance of infatuation
-	call BattleRandom
+	call Random
 	cp 50 percent + 1
 	jr c, .not_infatuated
 
@@ -321,7 +309,7 @@ BattleCommand_CheckTurn:
 	ret z
 
 	; 25% chance to be fully paralyzed
-	call BattleRandom
+	call Random
 	cp 25 percent
 	ret nc
 
@@ -490,7 +478,7 @@ CheckEnemyTurn:
 	call FarPlayBattleAnimation
 
 	; 50% chance of hitting itself
-	call BattleRandom
+	call Random
 	cp 50 percent + 1
 	jr nc, .not_confused
 
@@ -537,7 +525,7 @@ CheckEnemyTurn:
 	call FarPlayBattleAnimation
 
 	; 50% chance of infatuation
-	call BattleRandom
+	call Random
 	cp 50 percent + 1
 	jr c, .not_infatuated
 
@@ -570,7 +558,7 @@ CheckEnemyTurn:
 	ret z
 
 	; 25% chance to be fully paralyzed
-	call BattleRandom
+	call Random
 	cp 25 percent
 	ret nc
 
@@ -645,16 +633,6 @@ BattleCommand_CheckObedience:
 	xor a
 	ld [wAlreadyDisobeyed], a
 
-	; No obedience in link battles
-	; (since no handling exists for enemy)
-	ld a, [wLinkMode]
-	and a
-	ret nz
-
-	ld a, [wInBattleTowerBattle]
-	and a
-	ret nz
-
 	; If the Pokémon's Trainer ID doesn't match the player's,
 	; some conditions need to be met.
 	ld a, MON_OT_ID
@@ -721,7 +699,7 @@ BattleCommand_CheckObedience:
 
 ; Random number from 0 to obedience level + monster level
 .rand1
-	call BattleRandom
+	call Random
 	swap a
 	cp b
 	jr nc, .rand1
@@ -738,7 +716,7 @@ BattleCommand_CheckObedience:
 
 ; Another random number from 0 to obedience level + monster level
 .rand2
-	call BattleRandom
+	call Random
 	cp b
 	jr nc, .rand2
 
@@ -754,7 +732,7 @@ BattleCommand_CheckObedience:
 	ld b, a
 
 ; The chance of napping is the difference out of 256.
-	call BattleRandom
+	call Random
 	swap a
 	sub b
 	jr c, .Nap
@@ -769,7 +747,7 @@ BattleCommand_CheckObedience:
 	jp .EndDisobedience
 
 .Nap:
-	call BattleRandom
+	call Random
 	add a
 	swap a
 	and SLP_MASK
@@ -782,7 +760,7 @@ BattleCommand_CheckObedience:
 
 .DoNothing:
 	; 4 random choices
-	call BattleRandom
+	call Random
 	and %11
 
 	ld hl, LoafingAroundText
@@ -860,7 +838,7 @@ BattleCommand_CheckObedience:
 	push af
 
 .RandomMove:
-	call BattleRandom
+	call Random
 	maskbits NUM_MOVES
 
 	cp b
@@ -1198,7 +1176,7 @@ BattleCommand_Critical:
 	ld hl, CriticalHitChances
 	ld b, 0
 	add hl, bc
-	call BattleRandom
+	call Random
 	cp [hl]
 	ret nc
 	ld a, 1
@@ -1521,7 +1499,7 @@ BattleCommand_DamageVariation:
 
 ; Multiply by 85-100%...
 .loop
-	call BattleRandom
+	call Random
 	rrca
 	cp 85 percent + 1
 	jr c, .loop
@@ -1602,7 +1580,7 @@ BattleCommand_CheckHit:
 	cp -1
 	jr z, .Hit
 
-	call BattleRandom
+	call Random
 	cp b
 	jr nc, .Miss
 
@@ -1865,7 +1843,7 @@ BattleCommand_EffectChance:
 	sub 100 percent
 	; if chance was 100%, RNG won't be called (carry not set)
 	; Thus chance will be subtracted from 0, guaranteeing a carry
-	call c, BattleRandom
+	call c, Random
 	cp [hl]
 	pop hl
 	ret c
@@ -2127,7 +2105,7 @@ BattleCommand_ApplyDamage:
 	ld b, 0
 	jr nz, .damage
 
-	call BattleRandom
+	call Random
 	cp c
 	jr nc, .damage
 	call BattleCommand_FalseSwipe
@@ -3198,7 +3176,7 @@ BattleCommand_ConstantDamage:
 	add b
 	ld b, a
 .psywave_loop
-	call BattleRandom
+	call Random
 	and a
 	jr z, .psywave_loop
 	cp b
@@ -3635,13 +3613,9 @@ BattleCommand_SleepTarget:
 
 	call AnimateCurrentMove
 	ld b, SLP_MASK
-	ld a, [wInBattleTowerBattle]
-	and a
-	jr z, .random_loop
-	ld b, %011
 
 .random_loop
-	call BattleRandom
+	call Random
 	and b
 	jr z, .random_loop
 	cp SLP_MASK
@@ -4684,7 +4658,7 @@ BattleCommand_TriStatusChance:
 	call BattleCommand_EffectChance
 .loop
 	; 1/3 chance of each status
-	call BattleRandom
+	call Random
 	swap a
 	and %11
 	jr z, .loop
@@ -4863,7 +4837,7 @@ BattleCommand_CheckRampage:
 	jr nz, .continue_rampage
 
 	set SUBSTATUS_CONFUSED, [hl]
-	call BattleRandom
+	call Random
 	and %00000001
 	inc a
 	inc a
@@ -4890,7 +4864,7 @@ BattleCommand_Rampage:
 	call GetBattleVarAddr
 	set SUBSTATUS_RAMPAGE, [hl]
 ; Rampage for 1 or 2 more turns
-	call BattleRandom
+	call Random
 	and %00000001
 	inc a
 	ld [de], a
@@ -4935,7 +4909,7 @@ BattleCommand_ForceSwitch:
 	ld c, a
 	inc c
 .random_loop_wild
-	call BattleRandom
+	call Random
 	cp c
 	jr nc, .random_loop_wild
 	srl b
@@ -4978,7 +4952,7 @@ BattleCommand_ForceSwitch:
 	ld c, a
 ; select a random enemy mon to switch to
 .random_loop_trainer
-	call BattleRandom
+	call Random
 	and $7
 	cp b
 	jr nc, .random_loop_trainer
@@ -5026,7 +5000,7 @@ BattleCommand_ForceSwitch:
 	ld c, a
 	inc c
 .wild_random_loop_playeristarget
-	call BattleRandom
+	call Random
 	cp c
 	jr nc, .wild_random_loop_playeristarget
 
@@ -5072,7 +5046,7 @@ BattleCommand_ForceSwitch:
 	ld a, [wCurBattleMon]
 	ld c, a
 .random_loop_trainer_playeristarget
-	call BattleRandom
+	call Random
 	and $7
 	cp b
 	jr nc, .random_loop_trainer_playeristarget
@@ -5184,7 +5158,7 @@ BattleCommand_EndLoop:
 	cp EFFECT_TRIPLE_KICK
 	jr nz, .not_triple_kick
 .reject_triple_kick_sample
-	call BattleRandom
+	call Random
 	and $3
 	jr z, .reject_triple_kick_sample
 	dec a
@@ -5220,11 +5194,11 @@ BattleCommand_EndLoop:
 	ret
  
 .not_triple_kick
-	call BattleRandom
+	call Random
 	and $3
 	cp 2
 	jr c, .got_number_hits
-	call BattleRandom
+	call Random
 	and $3
 .got_number_hits
 	inc a
@@ -5359,7 +5333,7 @@ BattleCommand_HeldFlinch:
 	ld d, h
 	ld e, l
 	call GetUserItem
-	call BattleRandom
+	call Random
 	cp c
 	ret nc
 	call EndRechargeOpp
@@ -5580,7 +5554,7 @@ BattleCommand_TrapTarget:
 	call GetBattleVar
 	bit SUBSTATUS_SUBSTITUTE, a
 	ret nz
-	call BattleRandom
+	call Random
 	; trapped for 2-5 turns
 	and %11
 	inc a
@@ -5735,7 +5709,7 @@ BattleCommand_FinishConfusingTarget:
 .got_confuse_count
 	set SUBSTATUS_CONFUSED, [hl]
 	; confused for 2-5 turns
-	call BattleRandom
+	call Random
 	and %11
 	inc a
 	inc a
@@ -6369,11 +6343,6 @@ BattleCommand_TimeBasedHealContinue:
 	call CompareBytes
 	pop bc
 	jr z, .Full
-
-; Don't factor in time of day in link battles.
-	ld a, [wLinkMode]
-	and a
-	jr nz, .Weather
 
 	ld a, [wTimeOfDay]
 	cp b

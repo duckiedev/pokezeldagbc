@@ -190,7 +190,7 @@ GoldenrodGroupSprites:
 OlivineGroupSprites:
 ; Route38, Route39, OlivineCity
 CianwoodGroupSprites:
-; Route40, Route41, CianwoodCity, BattleTowerOutside
+; Route40, Route41, CianwoodCity
 	db SPRITE_POKEFAN_M
 	db SPRITE_LASS
 	db SPRITE_BEAUTY

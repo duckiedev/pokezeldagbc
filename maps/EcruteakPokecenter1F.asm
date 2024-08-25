@@ -50,7 +50,6 @@ EcruteakPokcenter1FBillActivatesTimeCapsuleScript:
 	playsound SFX_EXIT_BUILDING
 	disappear ECRUTEAKPOKECENTER1F_BILL
 	clearevent EVENT_MET_BILL
-	setflag ENGINE_TIME_CAPSULE
 	setscene SCENE_ECRUTEAKPOKECENTER1F_NOOP
 	waitsfx
 	end
@@ -59,12 +58,7 @@ EcruteakPokecenter1FNurseScript:
 	jumpstd PokecenterNurseScript
 
 EcruteakPokecenter1FPokefanMScript:
-	special CheckMobileAdapterStatusSpecial
-	iftrue .mobile
 	jumptextfaceplayer EcruteakPokecenter1FPokefanMText
-
-.mobile
-	jumptextfaceplayer EcruteakPokecenter1FPokefanMTextMobile
 
 EcruteakPokecenter1FCooltrainerFScript:
 	jumptextfaceplayer EcruteakPokecenter1FCooltrainerFText
@@ -167,22 +161,6 @@ EcruteakPokecenter1FPokefanMText:
 	para "marvelous. Just"
 	line "like the way they"
 	cont "use their #MON."
-	done
-
-EcruteakPokecenter1FPokefanMTextMobile:
-	text "You must be hoping"
-	line "to battle more"
-
-	para "people, right?"
-	line "There's apparently"
-
-	para "some place where"
-	line "trainers gather."
-
-	para "Where, you ask?"
-
-	para "It's a little past"
-	line "OLIVINE CITY."
 	done
 
 EcruteakPokecenter1FCooltrainerFText:

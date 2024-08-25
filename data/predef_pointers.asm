@@ -23,7 +23,6 @@ PredefPointers::
 	add_predef CalcMonStatC
 	add_predef CanLearnTMHMMove
 	add_predef GetTMHMMove
-	add_predef LinkTextboxAtHL
 	add_predef PrintMoveDescription
 	add_predef UpdatePlayerHUD
 	add_predef PlaceGraphic
@@ -73,6 +72,5 @@ PredefPointers::
 	add_predef GetTrainerPic
 	add_predef DecompressGet2bpp
 	add_predef CheckTypeMatchup
-	add_predef ConvertMon_1to2
 	add_predef NewPokedexEntry
 	add_predef PlaceStatusString

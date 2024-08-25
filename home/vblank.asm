@@ -41,7 +41,6 @@ VBlankHandlers:
 	dw VBlank_Cutscene
 	dw VBlank_SoundOnly
 	dw VBlank_CutsceneCGB
-	dw VBlank_Serial
 	dw VBlank_Credits
 	dw VBlank_DMATransfer
 	dw VBlank_Normal ; unused
@@ -201,10 +200,8 @@ VBlank_Cutscene::
 	; enable lcd stat
 	ld a, 1 << LCD_STAT
 	ldh [rIE], a
-	; rerequest serial int if applicable (still disabled)
 	; request lcd stat
 	ld a, b
-	and 1 << SERIAL
 	or 1 << LCD_STAT
 	ldh [rIF], a
 
@@ -310,37 +307,6 @@ VBlank_CutsceneCGB::
 	; request ints
 	ld a, b
 	ldh [rIF], a
-	ret
-
-VBlank_Serial::
-; bg map
-; tiles
-; oam
-; joypad
-; serial
-; sound
-
-	ldh a, [hROMBank]
-	ldh [hROMBankBackup], a
-
-	call UpdateBGMap
-	call Serve2bppRequest
-
-	call hTransferShadowOAM
-
-	call UpdateJoypad
-
-	xor a
-	ld [wVBlankOccurred], a
-
-	call AskSerial
-
-	ld a, BANK(_UpdateSound)
-	rst Bankswitch
-	call _UpdateSound
-
-	ldh a, [hROMBankBackup]
-	rst Bankswitch
 	ret
 
 VBlank_Credits::

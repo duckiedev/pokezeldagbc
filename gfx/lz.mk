@@ -14,9 +14,6 @@ gfx/intro/%.lz: LZFLAGS += --align 4
 gfx/intro/suicune_close.2bpp.lz: LZFLAGS += --method 2 --align 4
 gfx/intro/unown_back.2bpp.lz: LZFLAGS += --method 2 --align 4
 
-gfx/mobile/mobile_trade.%.lz: LZFLAGS += --align 4
-gfx/mobile/mobile_trade_sprites.2bpp.lz: LZFLAGS += --align 4
-
 gfx/new_game/shrink1.2bpp.lz: LZFLAGS += --align 4
 gfx/new_game/shrink2.2bpp.lz: LZFLAGS += --align 4
 
@@ -51,7 +48,6 @@ gfx/splash/ditto.2bpp.lz: LZFLAGS += --method 2 --align 4
 
 gfx/tilesets/%.lz: LZFLAGS += --align 4
 gfx/tilesets/aerodactyl_word_room.2bpp.lz: LZFLAGS = --compressor null --method 1 --align 1
-gfx/tilesets/battle_tower_outside.2bpp.lz: LZFLAGS = --compressor null --method 1 --align 1
 gfx/tilesets/beta_word_room.2bpp.lz: LZFLAGS = --compressor null --method 1 --align 1
 gfx/tilesets/ho_oh_word_room.2bpp.lz: LZFLAGS = --compressor null --method 1 --align 1
 gfx/tilesets/house.2bpp.lz: LZFLAGS += --method 2 --align 4

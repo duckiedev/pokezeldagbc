@@ -30,7 +30,6 @@ EngineFlags:
 	engine_flag wStatusFlags, STATUSFLAGS_CAUGHT_POKERUS_F
 	engine_flag wStatusFlags, STATUSFLAGS_ROCKET_SIGNAL_F
 	engine_flag wStatusFlags, STATUSFLAGS_HALL_OF_FAME_F
-	engine_flag wStatusFlags, STATUSFLAGS_MAIN_MENU_MOBILE_CHOICES_F
 
 	engine_flag wStatusFlags2, STATUSFLAGS2_BUG_CONTEST_TIMER_F
 	engine_flag wStatusFlags2, STATUSFLAGS2_SAFARI_GAME_F
@@ -108,7 +107,6 @@ EngineFlags:
 	engine_flag wDailyFlags1, DAILYFLAGS1_KURT_MAKING_BALLS_F
 	engine_flag wDailyFlags1, DAILYFLAGS1_BUG_CONTEST_F
 	engine_flag wDailyFlags1, DAILYFLAGS1_FISH_SWARM_F
-	engine_flag wDailyFlags1, DAILYFLAGS1_TIME_CAPSULE_F
 	engine_flag wDailyFlags1, DAILYFLAGS1_ALL_FRUIT_TREES_F
 	engine_flag wDailyFlags1, DAILYFLAGS1_GOT_SHUCKIE_TODAY_F
 	engine_flag wDailyFlags1, DAILYFLAGS1_GOLDENROD_UNDERGROUND_BARGAIN_F
@@ -125,8 +123,6 @@ EngineFlags:
 
 	engine_flag wSwarmFlags, SWARMFLAGS_BUENAS_PASSWORD_F
 	engine_flag wSwarmFlags, SWARMFLAGS_GOLDENROD_DEPT_STORE_SALE_F
-
-	engine_flag wGameTimerPaused, GAME_TIMER_MOBILE_F
 
 	engine_flag wPlayerGender, PLAYERGENDER_FEMALE_F
 

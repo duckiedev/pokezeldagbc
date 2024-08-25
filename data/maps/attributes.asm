@@ -563,7 +563,6 @@ ENDM
 	map_attributes GoldenrodDeptStoreRoof, GOLDENROD_DEPT_STORE_ROOF, $24, 0
 	map_attributes GoldenrodGameCorner, GOLDENROD_GAME_CORNER, $00, 0
 	map_attributes GoldenrodPokecenter1F, GOLDENROD_POKECENTER_1F, $00, 0
-	map_attributes PokecomCenterAdminOfficeMobile, POKECOM_CENTER_ADMIN_OFFICE_MOBILE, $00, 0
 	map_attributes IlexForestAzaleaGate, ILEX_FOREST_AZALEA_GATE, $00, 0
 	map_attributes Route34IlexForestGate, ROUTE_34_ILEX_FOREST_GATE, $00, 0
 	map_attributes DayCare, DAY_CARE, $00, 0
@@ -623,11 +622,7 @@ ENDM
 	map_attributes SilverCavePokecenter1F, SILVER_CAVE_POKECENTER_1F, $00, 0
 	map_attributes Route28SteelWingHouse, ROUTE_28_STEEL_WING_HOUSE, $00, 0
 	map_attributes Pokecenter2F, POKECENTER_2F, $00, 0
-	map_attributes TradeCenter, TRADE_CENTER, $00, 0
 	map_attributes Colosseum, COLOSSEUM, $00, 0
-	map_attributes TimeCapsule, TIME_CAPSULE, $00, 0
-	map_attributes MobileTradeRoom, MOBILE_TRADE_ROOM, $00, 0
-	map_attributes MobileBattleRoom, MOBILE_BATTLE_ROOM, $00, 0
 	map_attributes CeladonDeptStore1F, CELADON_DEPT_STORE_1F, $00, 0
 	map_attributes CeladonDeptStore2F, CELADON_DEPT_STORE_2F, $00, 0
 	map_attributes CeladonDeptStore3F, CELADON_DEPT_STORE_3F, $00, 0
@@ -656,12 +651,6 @@ ENDM
 	map_attributes CianwoodPhotoStudio, CIANWOOD_PHOTO_STUDIO, $00, 0
 	map_attributes CianwoodLugiaSpeechHouse, CIANWOOD_LUGIA_SPEECH_HOUSE, $00, 0
 	map_attributes PokeSeersHouse, POKE_SEERS_HOUSE, $00, 0
-	map_attributes BattleTower1F, BATTLE_TOWER_1F, $00, 0
-	map_attributes BattleTowerBattleRoom, BATTLE_TOWER_BATTLE_ROOM, $00, 0
-	map_attributes BattleTowerElevator, BATTLE_TOWER_ELEVATOR, $00, 0
-	map_attributes BattleTowerHallway, BATTLE_TOWER_HALLWAY, $00, 0
-	map_attributes Route40BattleTowerGate, ROUTE_40_BATTLE_TOWER_GATE, $00, 0
-	map_attributes BattleTowerOutside, BATTLE_TOWER_OUTSIDE, $05, 0
 	map_attributes ViridianGym, VIRIDIAN_GYM, $00, 0
 	map_attributes ViridianNicknameSpeechHouse, VIRIDIAN_NICKNAME_SPEECH_HOUSE, $00, 0
 	map_attributes TrainerHouse1F, TRAINER_HOUSE_1F, $00, 0
@@ -766,6 +755,8 @@ ENDM
 	connection west, BeachAreaO8, BEACH_AREA_O8, 0
 	
 	map_attributes CaveH8, CAVE_H8, $16, 0								; CaveH8
+
+	map_attributes GateOfTime, GATE_OF_TIME, $00, 0						; GateOfTime
 
 	map_attributes HeroesCave01, HEROES_CAVE_01, $16, 0
 	map_attributes HeroesCave02, HEROES_CAVE_02, $16, 0

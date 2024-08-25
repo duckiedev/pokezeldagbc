@@ -45,9 +45,6 @@ INCBIN "gfx/font/space.2bpp"
 TextboxSpaceUniqueGFX:
 INCBIN "gfx/font/space_font.2bpp"
 
-MobilePhoneTilesGFX:
-INCBIN "gfx/mobile/phone_tiles.2bpp"
-
 FontsExtra2_UpArrowGFX:
 INCBIN "gfx/font/up_arrow.2bpp"
 

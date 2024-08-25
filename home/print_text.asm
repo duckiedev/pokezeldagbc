@@ -25,7 +25,7 @@ PrintLetterDelay::
 	ld a, [hl]
 	push af
 
-; orginally turned oam update off...
+; originally turned oam update off...
 ;	ld a, 1
 	ld [hl], a
 
@@ -103,10 +103,6 @@ CopyDataUntil::
 
 PrintNum::
 	homecall _PrintNum
-	ret
-
-MobilePrintNum::
-	homecall _MobilePrintNum
 	ret
 
 FarPrintText::

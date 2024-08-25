@@ -21,9 +21,7 @@ rom_obj := \
 	gfx/misc.o \
 	gfx/pics.o \
 	gfx/sprites.o \
-	gfx/tilesets.o \
-	lib/mobile/main.o \
-	lib/mobile/mail.o
+	gfx/tilesets.o 
 
 pokecrystal_obj         := $(rom_obj:.o=.o)
 pokecrystal11_obj       := $(rom_obj:.o=11.o)
@@ -163,7 +161,6 @@ pokecrystal11_vc_opt    = -Cjv -t PM_CRYSTAL -i BYTE -n 1 -k 01 -l 0x33 -m 0x10 
 %.gbc: $$(%_obj) layout.link
 	$(RGBLINK) -n $*.sym -m $*.map -l layout.link -o $@ $(filter %.o,$^)
 	$(RGBFIX) $($*_opt) $@
-	tools/stadium $@
 
 
 ### LZ compression rules
@@ -207,8 +204,6 @@ gfx/pokedex/slowpoke.2bpp: tools/gfx += --trim-whitespace
 
 gfx/pokegear/pokegear.2bpp: rgbgfx += -x2
 gfx/pokegear/pokegear_sprites.2bpp: tools/gfx += --trim-whitespace
-
-gfx/mystery_gift/mystery_gift.2bpp: tools/gfx += --trim-whitespace
 
 gfx/title/crystal.2bpp: tools/gfx += --interleave --png=$<
 gfx/title/old_fg.2bpp: tools/gfx += --interleave --png=$<
@@ -263,18 +258,6 @@ gfx/font/unused_bold_font.1bpp: tools/gfx += --trim-whitespace
 
 gfx/sgb/sgb_border.2bpp: tools/gfx += --trim-whitespace
 gfx/sgb/sgb_border.sgb.tilemap: gfx/sgb/sgb_border.bin ; tr < $< -d '\000' > $@
-
-gfx/mobile/ascii_font.2bpp: tools/gfx += --trim-whitespace
-gfx/mobile/dialpad.2bpp: tools/gfx += --trim-whitespace
-gfx/mobile/dialpad_cursor.2bpp: tools/gfx += --trim-whitespace
-gfx/mobile/electro_ball.2bpp: tools/gfx += --remove-duplicates --remove-xflip --preserve=0x39
-gfx/mobile/mobile_splash.2bpp: tools/gfx += --remove-duplicates --remove-xflip
-gfx/mobile/card.2bpp: tools/gfx += --trim-whitespace
-gfx/mobile/card_2.2bpp: tools/gfx += --trim-whitespace
-gfx/mobile/card_folder.2bpp: tools/gfx += --trim-whitespace
-gfx/mobile/phone_tiles.2bpp: tools/gfx += --remove-whitespace
-gfx/mobile/pichu_animated.2bpp: tools/gfx += --trim-whitespace
-gfx/mobile/stadium2_n64.2bpp: tools/gfx += --trim-whitespace
 
 
 ### Catch-all graphics rules

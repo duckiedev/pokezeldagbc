@@ -77,73 +77,6 @@ HDMATransferTilemapAndAttrmap_Overworld::
 
 	ret
 
-Mobile_HDMATransferTilemapAndAttrmap_Overworld:
-	ld hl, HDMATransferTilemapAndAttrmap_Overworld ; useless
-	ld hl, .Function
-	jp CallInSafeGFXMode
-
-.Function:
-	decoord 0, 0, wAttrmap
-	ld hl, wScratchAttrmap
-	call PadAttrmapForHDMATransfer
-	decoord 0, 0
-	ld hl, wScratchTilemap
-	call PadTilemapForHDMATransfer
-	call DelayFrame
-
-	di
-	ldh a, [rVBK]
-	push af
-	ld a, $1
-	ldh [rVBK], a
-	ld hl, wScratchAttrmap
-	call HDMATransfer_NoDI
-	ld a, $0
-	ldh [rVBK], a
-	ld hl, wScratchTilemap
-	call HDMATransfer_NoDI
-	pop af
-	ldh [rVBK], a
-	ei
-
-	ret
-
-Function1040d4: ; unreferenced
-	ld hl, .Function
-	jp CallInSafeGFXMode
-
-.Function
-	ld a, $1
-	ldh [rVBK], a
-	ld a, BANK(w3_d800)
-	ldh [rSVBK], a
-	ld de, w3_d800
-	ldh a, [hBGMapAddress + 1]
-	ldh [rHDMA1], a
-	ldh a, [hBGMapAddress]
-	ldh [rHDMA2], a
-	ld a, d
-	ldh [rHDMA3], a
-	ld a, e
-	ldh [rHDMA4], a
-	ld a, $23
-	ldh [hDMATransfer], a
-	call WaitDMATransfer
-	ret
-
-Function1040fb: ; unreferenced
-	ld hl, .Function
-	jp CallInSafeGFXMode
-
-.Function
-	ld a, $1
-	ldh [rVBK], a
-	ld a, BANK(w3_d800)
-	ldh [rSVBK], a
-	ld hl, w3_d800
-	call HDMATransferToWRAMBank3
-	ret
-
 _HDMATransferTilemapAndAttrmap_Menu::
 	ld hl, .Function
 	jp CallInSafeGFXMode
@@ -174,32 +107,6 @@ _HDMATransferTilemapAndAttrmap_Menu::
 	pop af
 	ldh [rVBK], a
 	ei
-	ret
-
-Mobile_HDMATransferTilemapAndAttrmap_Menu:
-	ld hl, .Function
-	jp CallInSafeGFXMode
-
-.Function:
-	; Transfer wAttrmap and Tilemap to BGMap
-	; Fill vBGAttrs with $00
-	; Fill vBGTiles with $ff
-	decoord 0, 0, wAttrmap
-	ld hl, wScratchAttrmap
-	call PadAttrmapForHDMATransfer
-	ld c, $ff
-	decoord 0, 0
-	ld hl, wScratchTilemap
-	call PadMapForHDMATransfer
-
-	ld a, $1
-	ldh [rVBK], a
-	ld hl, wScratchAttrmap
-	call HDMATransfer_WaitForScanline128_toBGMap
-	ld a, $0
-	ldh [rVBK], a
-	ld hl, wScratchTilemap
-	call HDMATransfer_WaitForScanline128_toBGMap
 	ret
 
 CallInSafeGFXMode:

@@ -515,17 +515,6 @@ YoungsterSamuelBeatenText:
 	line "passing stranger!"
 	done
 
-YoungsterSamuelMobileText: ; unreferenced
-	text "Have you been to"
-	line "GOLDENROD CITY?"
-
-	para "Weren't you amazed"
-	line "by how they've"
-
-	para "changed the"
-	line "#MON CENTER?"
-	done
-
 YoungsterSamuelAfterText:
 	text "I'm going to train"
 	line "even harder."

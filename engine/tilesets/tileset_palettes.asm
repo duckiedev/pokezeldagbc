@@ -2,8 +2,6 @@ LoadSpecialMapPalette:
 	ld a, [wMapTileset]
 	cp TILESET_POKECOM_CENTER
 	jr z, .pokecom_2f
-	cp TILESET_BATTLE_TOWER_INSIDE
-	jr z, .battle_tower_inside
 	cp TILESET_ICE_PATH
 	jr z, .ice_path
 	cp TILESET_HOUSE
@@ -11,22 +9,19 @@ LoadSpecialMapPalette:
 	cp TILESET_RADIO_TOWER
 	jr z, .radio_tower
 	cp TILESET_MANSION
-	jr z, .mansion_mobile
+	jr z, .mansion
 	cp TILESET_OVERWORLD_MAIN
 	jr z, .overworld_main
 	cp TILESET_OVERWORLD_MAIN_TWO
 	jr z, .overworld_main
 	cp TILESET_CAVE_MAIN
 	jr z, .cave_main
+	cp TILESET_GATE_OF_TIME
+	jr z, .gate_of_time
 	jr .do_nothing
 
 .pokecom_2f
 	call LoadPokeComPalette
-	scf
-	ret
-
-.battle_tower_inside
-	call LoadBattleTowerInsidePalette
 	scf
 	ret
 
@@ -49,7 +44,7 @@ LoadSpecialMapPalette:
 	scf
 	ret
 
-.mansion_mobile
+.mansion
 	call LoadMansionPalette
 	scf
 	ret
@@ -61,6 +56,11 @@ LoadSpecialMapPalette:
 
 .cave_main
 	call LoadCaveMainPalette
+	scf
+	ret
+
+.gate_of_time
+	call LoadGateOfTimePalette
 	scf
 	ret
 
@@ -78,17 +78,6 @@ LoadPokeComPalette:
 
 PokeComPalette:
 INCLUDE "gfx/tilesets/pokecom_center.pal"
-
-LoadBattleTowerInsidePalette:
-	ld a, BANK(wBGPals1)
-	ld de, wBGPals1
-	ld hl, BattleTowerInsidePalette
-	ld bc, 8 palettes
-	call FarCopyWRAM
-	ret
-
-BattleTowerInsidePalette:
-INCLUDE "gfx/tilesets/battle_tower_inside.pal"
 
 LoadIcePathPalette:
 	ld a, BANK(wBGPals1)
@@ -171,3 +160,13 @@ LoadCaveMainPalette:
 
 CaveMainPalette:
 INCLUDE "gfx/tilesets/cave_main.pal"
+
+LoadGateOfTimePalette:
+	ld a, BANK(wBGPals1)
+	ld de, wBGPals1
+	ld hl, GateOfTimePalette
+	ld bc, 8 palettes
+	jp FarCopyWRAM
+
+GateOfTimePalette:
+INCLUDE "gfx/tilesets/gate_of_time.pal"

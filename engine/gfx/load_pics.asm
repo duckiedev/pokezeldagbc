@@ -81,7 +81,21 @@ _GetFrontpic:
 	and $f
 	ld b, a
 	push bc
+
+	; Check if wEnemyMonUseFormPics is set to 1
+	ld a, [wEnemyMonUseFormPics]
+	cp 1
+	jr z, .form_changed
+
 	call GetFrontpicPointer
+	jr .continue
+
+.form_changed
+	; Call the new function if wEnemyMonUseFormPics is set to 1
+	call GetFormFrontpicPointer 
+
+.continue
+
 	ld a, BANK(wDecompressEnemyFrontpic)
 	ldh [rSVBK], a
 	ld a, b
@@ -126,6 +140,20 @@ GetFrontpicPointer:
 	pop bc
 	ret
 
+GetFormFrontpicPointer:
+	; Load the bank byte from wBaseUnknown2
+	ld a, [wBaseUnknown2]
+	ld b, a
+
+	; Load the pointer to the form front pic from wBaseUnusedFrontpic
+	ld hl, wBaseUnusedFrontpic
+	ld a, [hl]
+	inc hl
+	ld h, [hl]
+	ld l, a
+
+	ret
+
 GetMonBackpic:
 	ld a, [wCurPartySpecies]
 	call IsAPokemon
@@ -161,6 +189,7 @@ GetMonBackpic:
 	inc hl
 	ld a, d
 	call GetFarWord
+.continue
 	ld de, wDecompressScratch
 	pop af
 	call FarDecompress
@@ -174,24 +203,6 @@ GetMonBackpic:
 	call Get2bpp
 	pop af
 	ldh [rSVBK], a
-	ret
-
-GSIntro_GetMonFrontpic: ; unreferenced
-	ld a, c
-	push de
-	ld hl, PokemonPicPointers
-	dec a
-	ld bc, 6
-	call AddNTimes
-	ld a, BANK(PokemonPicPointers)
-	call GetFarByte
-	push af
-	inc hl
-	ld a, BANK(PokemonPicPointers)
-	call GetFarWord
-	pop af
-	pop de
-	call FarDecompress
 	ret
 
 GetTrainerPic:

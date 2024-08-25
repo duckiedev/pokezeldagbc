@@ -8,11 +8,10 @@
 	const MAPSETUP_DOOR       ; f5
 	const MAPSETUP_FALL       ; f6
 	const MAPSETUP_CONNECTION ; f7
-	const MAPSETUP_LINKRETURN ; f8
-	const MAPSETUP_TRAIN      ; f9
-	const MAPSETUP_SUBMENU    ; fa
-	const MAPSETUP_BADWARP    ; fb
-	const MAPSETUP_FLY        ; fc
+	const MAPSETUP_TRAIN      ; f8
+	const MAPSETUP_SUBMENU    ; f9
+	const MAPSETUP_BADWARP    ; fa
+	const MAPSETUP_FLY        ; fb
 DEF NUM_MAPSETUP_SCRIPTS EQU const_value - $f1
 
 ; callback types

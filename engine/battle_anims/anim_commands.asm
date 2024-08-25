@@ -385,34 +385,35 @@ BattleAnimCommands::
 	assert_table_length $100 - FIRST_BATTLE_ANIM_CMD
 
 BattleAnimCmd_ZolToGels:
-    ldh a, [rSVBK]
-    push af
-    ld a, BANK(GelsFrontpic) ; Load the bank for GelsFrontpic and GelsBackpic
-    ldh [rSVBK], a
+	; force species to the correct one because idk why it reads 00...
+	ld a, $FD
+	ld [wCurPartySpecies], a
 
+	; set that enemy is using form pic...
+	ld a, 1
+	ld 	[wEnemyMonUseFormPics], a
+
+	; determine if we're loading the new back or front pic
     ldh a, [hBattleTurn]
     and a
-    jr z, .frontpic
+    jr nz, .backpic
 
 .frontpic
-    ; Load GelsFrontpic
-    ld de, vTiles2 tile $00
-    ld hl, GelsFrontpic
-	ld c, 7 * 7
-    predef DecompressGet2bpp
-    jr .done
-
-    ; Load GelsBackpic
-    ld de, vTiles2 tile $30
-    ld hl, GelsBackpic
-	ld c, 6 * 6
-
-    predef DecompressGet2bpp
-
-.done
-    pop af
-    ldh [rSVBK], a
+	ld de, vTiles2
+	predef GetAnimatedFrontpic
+	hlcoord 12, 0
+	lb bc, 7, 7
+	predef PlaceGraphic
     ret
+
+; Load GelsBackpic
+.backpic
+    ld de, vTiles2 tile $30
+	predef GetAnimatedFrontpic
+    ld hl, GelsBackPic
+	ld c, 6 * 6
+	ret
+
 
 BattleAnimCmd_EB:
 BattleAnimCmd_EC:
