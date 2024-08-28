@@ -215,7 +215,7 @@ GetSGBLayout::
 
 SetHPPal::
 ; Set palette for hp bar pixel length e at hl.
-	call GetHPPal
+	ld d, HP_RED
 	ld [hl], d
 	ret
 

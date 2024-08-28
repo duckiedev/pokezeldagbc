@@ -2341,11 +2341,11 @@ BattleCommand_CheckFaint:
 	ldh a, [hBattleTurn]
 	and a
 	ld hl, wEnemyMonMaxHP + 1
-	bccoord 2, 2 ; hp bar
+	bccoord 0, 2 ; hp bar
 	ld a, 0
 	jr nz, .got_max_hp
 	ld hl, wBattleMonMaxHP + 1
-	bccoord 10, 9 ; hp bar
+	bccoord 9, 10 ; hp bar
 	ld a, 1
 
 .got_max_hp
@@ -3436,7 +3436,7 @@ endc
 	ld a, [hl]
 	ld [wHPBuffer3], a
 
-	hlcoord 2, 2
+	hlcoord 0, 2
 	xor a
 	ld [wWhichHPBar], a
 	predef AnimateHPBar
@@ -3496,7 +3496,7 @@ DoPlayerDamage:
 	ld a, [hl]
 	ld [wHPBuffer1], a
 
-	hlcoord 10, 9
+	hlcoord 9, 10
 	ld a, 1
 	ld [wWhichHPBar], a
 	predef AnimateHPBar
@@ -3872,10 +3872,10 @@ SapHealth:
 .finish
 	ldh a, [hBattleTurn]
 	and a
-	hlcoord 10, 9
+	hlcoord 9, 10
 	ld a, $1
 	jr z, .hp_bar
-	hlcoord 2, 2
+	hlcoord 0, 2
 	xor a
 .hp_bar
 	ld [wWhichHPBar], a
@@ -4941,8 +4941,8 @@ BattleCommand_ForceSwitch:
 	call AnimateCurrentMove
 	ld c, $14
 	call DelayFrames
-	hlcoord 1, 0
-	lb bc, 4, 10
+	hlcoord 0, 0
+	lb bc, 4, 11
 	call ClearBox
 	ld c, 20
 	call DelayFrames
@@ -5640,12 +5640,12 @@ BattleCommand_Recoil:
 	ld [hli], a
 	ld [hl], a
 .dont_ko
-	hlcoord 10, 9
+	hlcoord 9, 10
 	ldh a, [hBattleTurn]
 	and a
 	ld a, 1
 	jr z, .animate_hp_bar
-	hlcoord 2, 2
+	hlcoord 0, 2
 	xor a
 .animate_hp_bar
 	ld [wWhichHPBar], a

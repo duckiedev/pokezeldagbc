@@ -586,7 +586,7 @@ LoadPinkPage:
 	dec b
 	jr nz, .vertical_divider
 	ld de, .ExpPointStr
-	hlcoord 10, 9
+	hlcoord 9, 10
 	call PlaceString
 	hlcoord 17, 14
 	call .PrintNextLevel

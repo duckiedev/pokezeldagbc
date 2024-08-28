@@ -10,7 +10,7 @@ BattleCommand_PainSplit:
 	call .PlayerShareHP
 	ld a, $1
 	ld [wWhichHPBar], a
-	hlcoord 10, 9
+	hlcoord 9, 10
 	predef AnimateHPBar
 	ld hl, wEnemyMonHP
 	ld a, [hli]
@@ -25,7 +25,7 @@ BattleCommand_PainSplit:
 	xor a
 	ld [wWhichHPBar], a
 	call ResetDamage
-	hlcoord 2, 2
+	hlcoord 0, 2
 	predef AnimateHPBar
 	farcall _UpdateBattleHUDs
 

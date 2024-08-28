@@ -15,7 +15,6 @@ INCBIN "gfx/frames/6.1bpp"
 INCBIN "gfx/frames/7.1bpp"
 INCBIN "gfx/frames/8.1bpp"
 	assert_table_length NUM_FRAMES
-INCBIN "gfx/frames/9.1bpp" ; unused
 
 StatsScreenPageTilesGFX:
 INCBIN "gfx/stats/stats_tiles.2bpp"
@@ -31,12 +30,6 @@ INCBIN "gfx/battle/expbar.2bpp"
 
 TownMapGFX:
 INCBIN "gfx/pokegear/town_map.2bpp.lz"
-
-UnusedWeekdayKanjiGFX: ; unreferenced
-INCBIN "gfx/font/unused_weekday_kanji.2bpp"
-
-UnusedBoldFontGFX: ; unreferenced
-INCBIN "gfx/font/unused_bold_font.1bpp"
 
 TextboxSpaceGFX:
 ; StatsScreen_LoadTextboxSpaceGFX reads 2bpp; LoadFrame reads first half as 1bpp

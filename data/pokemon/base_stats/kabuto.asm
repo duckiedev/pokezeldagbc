@@ -8,11 +8,11 @@
 	db 119 ; base exp
 	db NO_ITEM, NO_ITEM ; items
 	db GENDER_F12_5 ; gender ratio
-	db 100 ; unknown 1
+	db 1 ; hearts (more than 1 is considered a boss)
 	db 30 ; step cycles to hatch
-	db 5 ; unknown 2
+	db 5 ; form pic bank
 	INCBIN "gfx/pokemon/kabuto/front.dimensions"
-	dw NULL, NULL ; unused (beta front/back pics)
+	dw NULL, NULL ; Form pics
 	db GROWTH_MEDIUM_FAST ; growth rate
 	dn EGG_WATER_1, EGG_WATER_3 ; egg groups
 

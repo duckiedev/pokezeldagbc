@@ -8,11 +8,11 @@
 	db 200 ; base exp
 	db MOOMOO_MILK, MOOMOO_MILK ; items
 	db GENDER_F100 ; gender ratio
-	db 100 ; unknown 1
+	db 1 ; hearts (more than 1 is considered a boss)
 	db 20 ; step cycles to hatch
-	db 5 ; unknown 2
+	db 5 ; form pic bank
 	INCBIN "gfx/pokemon/miltank/front.dimensions"
-	dw NULL, NULL ; unused (beta front/back pics)
+	dw NULL, NULL ; Form pics
 	db GROWTH_SLOW ; growth rate
 	dn EGG_GROUND, EGG_GROUND ; egg groups
 

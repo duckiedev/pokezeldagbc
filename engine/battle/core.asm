@@ -85,19 +85,6 @@ DoBattle:
 	call LoadTilemapToTempTilemap
 	call SetPlayerTurn
 	call SpikesDamage
-	xor a
-	and a
-	jr z, .not_linked_2
-	xor a
-	ld [wEnemySwitchMonIndex], a
-	call NewEnemyMonStatus
-	call ResetEnemyStatLevels
-	call BreakAttraction
-	call EnemySwitch
-	call SetEnemyTurn
-	call SpikesDamage
-
-.not_linked_2
 	jp BattleTurn
 
 .tutorial_debug
@@ -1821,12 +1808,12 @@ UpdateHPBarBattleHuds:
 	jp UpdateBattleHuds
 
 UpdateHPBar:
-	hlcoord 10, 9
+	hlcoord 9, 10
 	ldh a, [hBattleTurn]
 	and a
 	ld a, 1
 	jr z, .ok
-	hlcoord 2, 2
+	hlcoord 0, 2
 	xor a
 .ok
 	push bc
@@ -2148,8 +2135,8 @@ FaintEnemyPokemon:
 	call EnemyMonFaintedAnimation
 	ld de, SFX_FAINT
 	call PlaySFX
-	hlcoord 1, 0
-	lb bc, 4, 10
+	hlcoord 0, 0
+	lb bc, 5, 11
 	call ClearBox
 	ld hl, BattleText_EnemyMonFainted
 	jp StdBattleTextbox
@@ -3231,8 +3218,8 @@ ClearEnemyMonBox:
 	ldh [hBGMapMode], a
 	call ExitMenu
 	call ClearSprites
-	hlcoord 1, 0
-	lb bc, 4, 10
+	hlcoord 0, 0
+	lb bc, 4, 11
 	call ClearBox
 	call WaitBGMap
 	jp FinishBattleAnim
@@ -3979,9 +3966,9 @@ HandleHPHealingItem:
 	ldh a, [hBattleTurn]
 	ld [wWhichHPBar], a
 	and a
-	hlcoord 2, 2
+	hlcoord 0, 2
 	jr z, .got_hp_bar_coords
-	hlcoord 10, 9
+	hlcoord 9, 10
 
 .got_hp_bar_coords
 	ld [wWhichHPBar], a
@@ -4222,17 +4209,13 @@ DrawPlayerHUD:
 
 	; Clear the area
 	hlcoord 9, 7
-	lb bc, 5, 11
+	lb bc, 5, 10
 	call ClearBox
 
-	farcall DrawPlayerHUDBorder
-
-	hlcoord 18, 9
-	ld [hl], $73 ; vertical bar
 	call PrintPlayerHUD
 
 	; HP bar
-	hlcoord 10, 9
+	hlcoord 9, 10
 	ld b, 1
 	xor a ; PARTYMON
 	ld [wMonType], a
@@ -4246,7 +4229,36 @@ DrawPlayerHUD:
 	ld d, h
 	ld e, l
 
-	hlcoord 10, 11
+	; draw exp bar frame
+	;outside
+	; top-left
+	hlcoord 18, 7
+	ld a, $BC
+	ld [hli], a 
+	; top
+	inc a
+	ld [hl], a
+	; left edge 1
+	hlcoord 18, 8
+	ld [hl], $C0 
+	; left edge 2
+	hlcoord 18, 9
+	ld [hl], $C0
+	; left edge hp bar
+	hlcoord 18, 10
+	ld [hl], $BB
+
+	; bottom-left tile
+	hlcoord 18, 11
+	ld a, $be
+	ld [hli], a
+	; bottom
+	inc a
+	ld [hl], a
+
+	;hlcoord 19, 16
+	;ld [hl], $41 ; right exp bar end cap
+	hlcoord 19, 8
 	ld a, [wTempMonLevel]
 	ld b, a
 	call FillInExpBar
@@ -4283,7 +4295,7 @@ CheckDanger:
 
 PrintPlayerHUD:
 	ld de, wBattleMonNickname
-	hlcoord 10, 7
+	hlcoord 10, 8
 	call Battle_DummyFunction
 	call PlaceString
 
@@ -4313,6 +4325,9 @@ PrintPlayerHUD:
 	pop hl
 	dec hl
 
+	ld a, [wBaseHeartsMax]
+	call DrawPlayerHearts
+
 	ld a, TEMPMON
 	ld [wMonType], a
 	callfar GetGender
@@ -4323,9 +4338,9 @@ PrintPlayerHUD:
 	ld a, "♀"
 
 .got_gender_char
-	hlcoord 17, 8
+	hlcoord 14, 9
 	ld [hl], a
-	hlcoord 14, 8
+	hlcoord 15, 9
 	push af ; back up gender
 	push hl
 	ld de, wBattleMonStatus
@@ -4358,11 +4373,9 @@ DrawEnemyHUD:
 	xor a
 	ldh [hBGMapMode], a
 
-	hlcoord 1, 0
+	hlcoord 0, 0
 	lb bc, 4, 11
 	call ClearBox
-
-	farcall DrawEnemyHUDBorder
 
 	ld a, [wTempEnemyMonSpecies]
 	ld [wCurSpecies], a
@@ -4389,6 +4402,9 @@ DrawEnemyHUD:
 	ld a, [hl]
 	ld [de], a
 
+	ld a, [wBaseHeartsMax]
+	call DrawEnemyHearts
+
 	ld a, TEMPMON
 	ld [wMonType], a
 	callfar GetGender
@@ -4399,10 +4415,10 @@ DrawEnemyHUD:
 	ld a, "♀"
 
 .got_gender
-	hlcoord 9, 1
+	hlcoord 6, 1
 	ld [hl], a
 
-	hlcoord 6, 1
+	hlcoord 7 , 1
 	push af
 	push hl
 	ld de, wEnemyMonStatus
@@ -4481,7 +4497,7 @@ DrawEnemyHUD:
 .draw_bar
 	xor a
 	ld [wWhichHPBar], a
-	hlcoord 2, 2
+	hlcoord 0, 2
 	ld b, 0
 	call DrawBattleHPBar
 	ret
@@ -6958,7 +6974,7 @@ AnimateExpBar:
 	inc b
 	push bc
 	push de
-	hlcoord 17, 11
+	hlcoord 19, 10
 	call PlaceExpBar
 	pop de
 	ld a, $1
@@ -6974,7 +6990,7 @@ AnimateExpBar:
 	inc b
 	push bc
 	push de
-	hlcoord 17, 11
+	hlcoord 19, 10
 	call PlaceExpBar
 	pop de
 	ld a, $1
@@ -7159,14 +7175,14 @@ FillInExpBar:
 	push hl
 	call CalcExpBar
 	pop hl
-	ld de, 7
-	add hl, de
+	;ld de, 2
+	;add hl, de
 	jp PlaceExpBar
 
 CalcExpBar:
 ; Calculate the percent exp between this level and the next
 ; Level in b
-	push de
+	push de ; store de for later
 	ld d, b
 	push de
 	callfar CalcExpAtLevel
@@ -7263,14 +7279,17 @@ CalcExpBar:
 	ret
 
 PlaceExpBar:
-	ld c, $8 ; number of tiles
+	;push de
+	ld c, $3 ; number of tiles
 .loop1
-	ld a, b
-	sub $8
-	jr c, .next
-	ld b, a
-	ld a, $6a ; full bar
-	ld [hld], a
+	ld a, b ; load the percentage of experience left into a
+	sub $8 ; subtract 9 from it
+	jr c, .next ; jump to .next if a was less than $8 before the subtraction.
+	ld b, a ; load the amount with 8 subtracted from it to b again
+	ld a, $c9 ; full bar
+    ld [hl], a
+    ld de, $14 ; move down one row (32 tiles)
+    add hl, de
 	dec c
 	jr z, .finish
 	jr .loop1
@@ -7282,15 +7301,18 @@ PlaceExpBar:
 	jr .skip
 
 .loop2
-	ld a, $62 ; empty bar
+	ld a, $C1 ; empty bar
 
 .skip
-	ld [hld], a
-	ld a, $62 ; empty bar
+    ld [hl], a
+    ld de, $14 ; move down one row (32 tiles)
+    add hl, de
+	;ld a, $C1 ; empty bar
 	dec c
 	jr nz, .loop2
 
 .finish
+	;pop de
 	ret
 
 GetBattleMonBackpic:
@@ -7408,8 +7430,8 @@ BattleIntro:
 	hlcoord 9, 7
 	lb bc, 5, 11
 	call ClearBox
-	hlcoord 1, 0
-	lb bc, 4, 10
+	hlcoord 0, 0
+	lb bc, 4, 11
 	call ClearBox
 	call ClearSprites
 	ld a, [wBattleMode]

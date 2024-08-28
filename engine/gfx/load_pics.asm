@@ -141,12 +141,12 @@ GetFrontpicPointer:
 	ret
 
 GetFormFrontpicPointer:
-	; Load the bank byte from wBaseUnknown2
-	ld a, [wBaseUnknown2]
+	; Load the bank byte from wBaseFormPicBank
+	ld a, [wBaseFormPicBank]
 	ld b, a
 
-	; Load the pointer to the form front pic from wBaseUnusedFrontpic
-	ld hl, wBaseUnusedFrontpic
+	; Load the pointer to the form front pic from wBaseFormFrontpic
+	ld hl, wBaseFormFrontpic
 	ld a, [hl]
 	inc hl
 	ld h, [hl]

@@ -26,7 +26,7 @@ DrawHP:
 	xor a
 	ld c, a
 	ld e, a
-	ld a, 6
+	ld a, 8
 	ld d, a
 	jp .fainted
 
@@ -44,7 +44,7 @@ DrawHP:
 
 .not_boxmon
 	predef ComputeHPBarPixels
-	ld a, 6
+	ld a, 8
 	ld d, a
 	ld c, a
 

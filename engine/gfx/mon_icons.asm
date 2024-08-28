@@ -277,7 +277,7 @@ SetPartyMonIconAnimSpeed:
 
 .getspeed
 	farcall PlacePartymonHPBar
-	call GetHPPal
+	call SetHPPal
 	ld e, d
 	ld d, 0
 	ld hl, .speeds

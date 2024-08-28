@@ -77,8 +77,8 @@ LoadHPBar:
 	lb bc, BANK(HPExpBarBorderGFX), 6
 	call Get1bppViaHDMA
 	ld de, ExpBarGFX
-	ld hl, vTiles2 tile $55
-	lb bc, BANK(ExpBarGFX), 9
+	ld hl, vTiles0 tile $BB
+	lb bc, BANK(ExpBarGFX), 15
 	call Get2bppViaHDMA
 	ret
 

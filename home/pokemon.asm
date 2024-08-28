@@ -23,10 +23,8 @@ DrawBattleHPBar::
 	push de
 	push bc
 
-; Place 'HP:'
-	ld a, $60
-	ld [hli], a
-	ld a, $61
+; Place '-'
+	ld a, $6B
 	ld [hli], a
 
 ; Draw a template
@@ -36,9 +34,12 @@ DrawBattleHPBar::
 	ld [hli], a
 	dec d
 	jr nz, .template
-	ld a, $6b ; bar end
-	add b
+	ld a, [hl]			; skip redrawing "-" for player's hud
+	cp $bb				; if it's already part of the exp bar
+	jr z, .skip
+	ld a, $6B ; bar end
 	ld [hl], a
+.skip
 	pop hl
 
 ; Safety check # pixels
@@ -269,7 +270,7 @@ GetBaseData::
 ; Beta front and back sprites
 ; (see pokegold-spaceworld's data/pokemon/base_stats/*)
 	ld b, b
-	ld hl, wBaseUnusedFrontpic
+	ld hl, wBaseFormFrontpic
 	ld [hl], e
 	inc hl
 	ld [hl], d
@@ -313,3 +314,40 @@ GetNickname::
 	pop bc
 	pop hl
 	ret
+
+DrawPlayerHearts::
+	; needs the wBaseHeartsMax in a
+	ld [wBattleMonHeartsMax], a
+	ld [wBattleMonHeartsCurrent], a
+	hlcoord 10, 9
+    ld a, [wBattleMonHeartsCurrent]
+    ld b, a ; Store current hearts in b
+    ld a, [wBattleMonHeartsMax]
+    ld c, a ; Store max hearts in c
+	jr DrawCurrentHeartsLoop
+
+DrawEnemyHearts::
+	; needs the wBaseHeartsMax in a
+	ld [wEnemyMonHeartsMax], a
+	ld [wEnemyMonHeartsCurrent], a
+	hlcoord 1, 1
+    ld a, [wEnemyMonHeartsCurrent]
+    ld b, a ; Store current hearts in b
+    ld a, [wEnemyMonHeartsMax]
+    ld c, a ; Store max hearts in c
+
+DrawCurrentHeartsLoop:
+    ld a, $60 ; Tile ID for current heart
+    ld d, $61 ; Tile ID for max heart
+    ld e, b
+    cp e
+    jr nc, DrawMaxHearts
+    ld a, d
+
+DrawMaxHearts:
+    ld [hl], a
+    inc hl
+    dec c
+    jr nz, DrawCurrentHeartsLoop
+
+    ret

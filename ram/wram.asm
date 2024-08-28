@@ -1941,12 +1941,12 @@ wBaseItems::
 wBaseItem1:: db
 wBaseItem2:: db
 wBaseGender:: db
-wBaseUnknown1:: db
+wBaseHeartsMax:: db
 wBaseEggSteps:: db
-wBaseUnknown2:: db
+wBaseFormPicBank:: db
 wBasePicSize:: db
-wBaseUnusedFrontpic:: dw
-wBaseUnusedBackpic:: dw
+wBaseFormFrontpic:: dw
+wBaseFormBackpic:: dw
 wBaseGrowthRate:: db
 wBaseEggGroups:: db
 wBaseTMHM:: flag_array NUM_TM_HM_TUTOR
@@ -1981,9 +1981,7 @@ wChosenCableClubRoom::
 wBreedingCompatibility::
 wMoveGrammar::
 wApplyStatLevelMultipliersToEnemy::
-wUsePPUp::
-	db
-
+wUsePPUp:: db
 wFailedToFlee:: db
 wNumFleeAttempts:: db
 wMonTriedToEvolve:: db
@@ -2047,11 +2045,14 @@ wDudeNumBalls:: db
 wDudeBalls:: ds 2 * 4 + 1
 ENDU
 
-	ds 5
+wBattleMonHeartsMax:: db
+wBattleMonHeartsCurrent:: db
+wEnemyMonHeartsMax:: db
+wEnemyMonHeartsCurrent:: db
+wPlaceHeartsX:: db
+wPlaceHeartsY:: db
 
 wBattleAction:: db
-
-	ds 1
 
 wMapStatus:: db
 wMapEventStatus:: db
@@ -2075,7 +2076,9 @@ wScriptPos:: dw
 
 wScriptStackSize:: db
 wScriptStack:: ds 3 * 5
-	ds 1
+
+wPlaceHeartsDirection:: db	
+
 wScriptDelay:: db
 
 wDeferredScriptBank::
