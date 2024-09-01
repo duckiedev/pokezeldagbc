@@ -206,7 +206,6 @@ INCLUDE "engine/events/lucky_number.asm"
 INCLUDE "engine/pokemon/caught_data.asm"
 INCLUDE "engine/pokemon/search_party.asm"
 INCLUDE "engine/pokemon/stats_screen.asm"
-INCLUDE "engine/events/catch_tutorial.asm"
 INCLUDE "engine/movie/evolution_animation.asm"
 INCLUDE "engine/movie/init_hof_credits.asm"
 INCLUDE "engine/battle/sliding_intro.asm"
@@ -541,7 +540,6 @@ SECTION "bank77", ROMX
 INCLUDE "engine/rtc/print_hours_mins.asm"
 INCLUDE "engine/events/diploma.asm"
 INCLUDE "engine/pokedex/pokedex_3.asm"
-INCLUDE "engine/events/catch_tutorial_input.asm"
 INCLUDE "engine/pokegear/townmap_convertlinebreakcharacters.asm"
 
 
