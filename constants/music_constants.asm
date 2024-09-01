@@ -89,20 +89,18 @@
 	const MUSIC_RUINS_OF_ALPH_INTERIOR       ; 55
 	const MUSIC_ROCKET_OVERTURE              ; 56
 	const MUSIC_DANCING_HALL                 ; 57
-	const MUSIC_BUG_CATCHING_CONTEST_RANKING ; 58
-	const MUSIC_BUG_CATCHING_CONTEST         ; 59
-	const MUSIC_LAKE_OF_RAGE_ROCKET_RADIO    ; 5a
-	const MUSIC_POST_CREDITS                 ; 5b
+	const MUSIC_LAKE_OF_RAGE_ROCKET_RADIO    ; 58
+	const MUSIC_POST_CREDITS                 ; 59
 ; new to Crystal
-	const MUSIC_CLAIR                        ; 5c
-	const MUSIC_BUENAS_PASSWORD              ; 5d
-	const MUSIC_MYSTICALMAN_ENCOUNTER        ; 5e
-	const MUSIC_CRYSTAL_OPENING              ; 5f
-	const MUSIC_SUICUNE_BATTLE               ; 60
+	const MUSIC_CLAIR                        ; 5a
+	const MUSIC_BUENAS_PASSWORD              ; 5b
+	const MUSIC_MYSTICALMAN_ENCOUNTER        ; 5c
+	const MUSIC_CRYSTAL_OPENING              ; 5d
+	const MUSIC_SUICUNE_BATTLE               ; 5e
 ; new songs
-	const MUSIC_ZELDA_TITLE					 ; 61
-	const MUSIC_CAVE_THEME					 ; 62
-	const MUSIC_GATE_OF_TIME				 ; 63
+	const MUSIC_ZELDA_TITLE					 ; 5f
+	const MUSIC_CAVE_THEME					 ; 60
+	const MUSIC_GATE_OF_TIME				 ; 61
 DEF NUM_MUSIC_SONGS EQU const_value
 
 ; GetMapMusic picks music for these values (see home/map.asm)

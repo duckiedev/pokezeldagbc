@@ -1004,17 +1004,6 @@ _AskFloorElevatorText::
 	text "Which floor?"
 	done
 
-_BugCatchingContestTimeUpText::
-	text "ANNOUNCER: BEEEP!"
-
-	para "Time's up!"
-	done
-
-_BugCatchingContestIsOverText::
-	text "ANNOUNCER: The"
-	line "Contest is over!"
-	done
-
 _RepelWoreOffText::
 	text "REPEL's effect"
 	line "wore off."

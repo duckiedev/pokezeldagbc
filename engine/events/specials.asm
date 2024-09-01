@@ -117,12 +117,6 @@ PlayersHousePC:
 	text_far _ReceiveItemText
 	text_end
 
-BugContestJudging:
-	farcall _BugContestJudging
-	ld a, b
-	ld [wScriptVar], a
-	ret
-
 MapRadio:
 	ld a, [wScriptVar]
 	ld e, a

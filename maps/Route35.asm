@@ -399,11 +399,8 @@ BugCatcherArnieBeatenText:
 	done
 
 BugCatcherArnieAfterBattleText:
-	text "My VENONAT won me"
-	line "the Bug-Catching"
-
-	para "Contest at the"
-	line "NATIONAL PARK."
+	text "My VENONAT is my"
+	line "best friend!"
 	done
 
 BugCatcherArnieYanmaText:

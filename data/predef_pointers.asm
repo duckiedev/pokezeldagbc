@@ -53,7 +53,6 @@ PredefPointers::
 	add_predef PrintMonTypes
 	add_predef GetUnownLetter
 	add_predef LoadPoisonBGPals
-	add_predef DummyPredef2F
 	add_predef InitSGBBorder
 	add_predef LoadSGBLayout
 	add_predef Pokedex_GetArea
@@ -62,8 +61,6 @@ PredefPointers::
 	add_predef DummyPredef35
 	add_predef DummyPredef36
 	add_predef PlayBattleAnim
-	add_predef DummyPredef38
-	add_predef DummyPredef39
 	add_predef DummyPredef3A
 	add_predef PartyMonItemName
 	add_predef GetMonFrontpic

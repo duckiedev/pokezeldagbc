@@ -56,21 +56,6 @@ DerekHangUpText:
 	line "again!"
 	done
 
-DerekBugCatchingContestText:
-	text "Did you remember?"
-	line "The Bug-Catching"
-	cont "Contest is today."
-
-	para "You're going to"
-	line "go, aren't you?"
-
-	para "I think I'll"
-	line "participate with"
-
-	para "PIKACHU to show"
-	line "off its cuteness."
-	done
-
 DerekFoundItemText:
 	text "I'd like you to"
 	line "have a NUGGET."

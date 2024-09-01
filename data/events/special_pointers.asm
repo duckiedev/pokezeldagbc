@@ -10,11 +10,6 @@ SpecialsPointers::
 	add_special WarpToSpawnPoint
 
 ; Map events
-	add_special BugContestJudging
-	add_special CheckPartyFullAfterContest
-	add_special ContestDropOffMons
-	add_special ContestReturnMons
-	add_special GiveParkBalls
 	add_special CheckMagikarpLength
 	add_special MagikarpHouseSign
 	add_special HealParty ; this is both a special and a predef
@@ -59,7 +54,6 @@ SpecialsPointers::
 	add_special UnusedCheckUnusedTwoDayTimer ; unused
 	add_special DayCareMon1
 	add_special DayCareMon2
-	add_special SelectRandomBugContestContestants
 	add_special ActivateFishingSwarm
 	add_special ToggleMaptileDecorations
 	add_special ToggleDecorationsVisibility

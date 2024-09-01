@@ -91,8 +91,6 @@ Music:
 	dba Music_RuinsOfAlphInterior
 	dba Music_RocketTheme
 	dba Music_DancingHall
-	dba Music_ContestResults
-	dba Music_BugCatchingContest
 	dba Music_LakeOfRageRocketRadio
 	dba Music_PostCredits
 ; new to Crystal

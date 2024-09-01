@@ -464,31 +464,10 @@ endr
 	ret
 
 CheckTimeEvents:
-	ld hl, wStatusFlags2
-	bit STATUSFLAGS2_BUG_CONTEST_TIMER_F, [hl]
-	jr z, .do_daily
-
-	farcall CheckBugContestTimer
-	jr c, .end_bug_contest
-	xor a
-	ret
-
-.do_daily
 	farcall CheckDailyResetTimer
 	farcall CheckPokerusTick
 	farcall CheckPhoneCall
 	ret c
-
-.nothing
-	xor a
-	ret
-
-.end_bug_contest
-	ld a, BANK(BugCatchingContestOverScript)
-	ld hl, BugCatchingContestOverScript
-	call CallScript
-	scf
-	ret
 
 OWPlayerInput:
 	call PlayerMovement
@@ -1041,7 +1020,6 @@ INCLUDE "engine/overworld/scripting.asm"
 WarpToSpawnPoint::
 	ld hl, wStatusFlags2
 	res STATUSFLAGS2_SAFARI_GAME_F, [hl]
-	res STATUSFLAGS2_BUG_CONTEST_TIMER_F, [hl]
 	ret
 
 RunMemScript::
@@ -1149,17 +1127,9 @@ RandomEncounter::
 	jr c, .nope
 	call CanEncounterWildMon
 	jr nc, .nope
-	ld hl, wStatusFlags2
-	bit STATUSFLAGS2_BUG_CONTEST_TIMER_F, [hl]
-	jr nz, .bug_contest
 	farcall TryWildEncounter
 	jr nz, .nope
 	jr .ok
-
-.bug_contest
-	call _TryWildEncounter_BugContest
-	jr nc, .nope
-	jr .ok_bug_contest
 
 .nope
 	ld a, 1
@@ -1169,11 +1139,6 @@ RandomEncounter::
 .ok
 	ld a, BANK(WildBattleScript)
 	ld hl, WildBattleScript
-	jr .done
-
-.ok_bug_contest
-	ld a, BANK(BugCatchingContestBattleScript)
-	ld hl, BugCatchingContestBattleScript
 	jr .done
 
 .done
@@ -1209,86 +1174,6 @@ CanEncounterWildMon::
 .no
 	and a
 	ret
-
-_TryWildEncounter_BugContest:
-	call TryWildEncounter_BugContest
-	ret nc
-	call ChooseWildEncounter_BugContest
-	farcall CheckRepelEffect
-	ret
-
-ChooseWildEncounter_BugContest::
-; Pick a random mon out of ContestMons.
-
-.loop
-	call Random
-	cp 100 << 1
-	jr nc, .loop
-	srl a
-
-	ld hl, ContestMons
-	ld de, 4
-.CheckMon:
-	sub [hl]
-	jr c, .GotMon
-	add hl, de
-	jr .CheckMon
-
-.GotMon:
-	inc hl
-
-; Species
-	ld a, [hli]
-	ld [wTempWildMonSpecies], a
-
-; Min level
-	ld a, [hli]
-	ld d, a
-
-; Max level
-	ld a, [hl]
-
-	sub d
-	jr nz, .RandomLevel
-
-; If min and max are the same.
-	ld a, d
-	jr .GotLevel
-
-.RandomLevel:
-; Get a random level between the min and max.
-	ld c, a
-	inc c
-	call Random
-	ldh a, [hRandomAdd]
-	call SimpleDivide
-	add d
-
-.GotLevel:
-	ld [wCurPartyLevel], a
-
-	xor a
-	ret
-
-TryWildEncounter_BugContest:
-	ld a, [wPlayerTileCollision]
-	call CheckSuperTallGrassTile
-	ld b, 40 percent
-	jr z, .ok
-	ld b, 20 percent
-
-.ok
-	farcall ApplyMusicEffectOnEncounterRate
-	farcall ApplyCleanseTagEffectOnEncounterRate
-	call Random
-	ldh a, [hRandomAdd]
-	cp b
-	ret c
-	ld a, 1
-	and a
-	ret
-
-INCLUDE "data/wild/bug_contest_mons.asm"
 
 DoBikeStep::
 	nop

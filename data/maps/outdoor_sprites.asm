@@ -259,7 +259,7 @@ SilverGroupSprites:
 	db 0 ; end
 
 DungeonsGroupSprites:
-; NationalPark, NationalParkBugContest, RuinsOfAlphOutside
+; NationalPark, RuinsOfAlphOutside
 	db SPRITE_LASS
 	db SPRITE_POKEFAN_F
 	db SPRITE_TEACHER

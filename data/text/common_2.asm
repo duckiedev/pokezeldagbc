@@ -814,89 +814,6 @@ _PCCantTakeText::
 	line "more #MON."
 	prompt
 
-_ContestCaughtMonText::
-	text "Caught @"
-	text_ram wStringBuffer1
-	text "!"
-	prompt
-
-_ContestAskSwitchText::
-	text "Switch #MON?"
-	done
-
-_ContestAlreadyCaughtText::
-	text "You already caught"
-	line "a @"
-	text_ram wStringBuffer1
-	text "."
-	prompt
-
-_ContestJudging_FirstPlaceText::
-	text "This Bug-Catching"
-	line "Contest winner is@"
-	text_pause
-	text "…"
-
-	para "@"
-	text_ram wBugContestWinnerName
-	text ","
-	line "who caught a"
-	cont "@"
-	text_ram wStringBuffer1
-	text "!@"
-	text_end
-
-_ContestJudging_FirstPlaceScoreText::
-	text_start
-
-	para "The winning score"
-	line "was @"
-	text_decimal wBugContestFirstPlaceScore, 2, 3
-	text " points!"
-	prompt
-
-_ContestJudging_SecondPlaceText::
-	text "Placing second was"
-	line "@"
-	text_ram wBugContestWinnerName
-	text ","
-
-	para "who caught a"
-	line "@"
-	text_ram wStringBuffer1
-	text "!@"
-	text_end
-
-_ContestJudging_SecondPlaceScoreText::
-	text_start
-
-	para "The score was"
-	line "@"
-	text_decimal wBugContestSecondPlaceScore, 2, 3
-	text " points!"
-	prompt
-
-_ContestJudging_ThirdPlaceText::
-	text "Placing third was"
-	line "@"
-	text_ram wBugContestWinnerName
-	text ","
-
-	para "who caught a"
-	line "@"
-	text_ram wStringBuffer1
-	text "!@"
-	text_end
-
-_ContestJudging_ThirdPlaceScoreText::
-	text_start
-
-	para "The score was"
-	line "@"
-	text_decimal wBugContestThirdPlaceScore, 2, 3
-	text " points!"
-	prompt
-
 _MagikarpGuruMeasureText::
 	text "Let me measure"
 	line "that MAGIKARP."
@@ -1213,11 +1130,6 @@ _MemoryGameYeahText::
 
 _MemoryGameDarnText::
 	text "Darn…"
-	done
-
-_StartMenuContestEndText::
-	text "Would you like to"
-	line "end the Contest?"
 	done
 
 _ItemsTossOutHowManyText::

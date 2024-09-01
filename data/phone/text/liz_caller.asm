@@ -215,27 +215,6 @@ LizWhitneyGossipText:
 	line "totally talented."
 	done
 
-LizBugCatchingContestGossipText:
-	text "Listen, listen!"
-
-	para "Have you ever"
-	line "taken part in a"
-
-	para "Bug-Catching"
-	line "Contest at the"
-	cont "NATIONAL PARK?"
-
-	para "I did once, but"
-	line "all I could catch"
-	cont "was a CATERPIE."
-
-	para "But guess what!"
-
-	para "I won with that"
-	line "CATERPIE. Isn't"
-	cont "that great?"
-	done
-
 LizBeautifulTrainerGossipText:
 	text "Listen, listen!"
 

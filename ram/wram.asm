@@ -1189,19 +1189,6 @@ wTempMail:: mailmsg wTempMail
 
 SECTION UNION "Miscellaneous WRAM 1", WRAMX
 
-; bug-catching contest
-wBugContestResults::
-	bugcontestwinner wBugContestFirstPlace
-	bugcontestwinner wBugContestSecondPlace
-	bugcontestwinner wBugContestThirdPlace
-wBugContestWinnersEnd::
-	bugcontestwinner wBugContestTemp
-	ds 4
-wBugContestWinnerName:: ds NAME_LENGTH
-
-
-SECTION UNION "Miscellaneous WRAM 1", WRAMX
-
 ; mart items
 wMartItem1BCD:: ds 3
 wMartItem2BCD:: ds 3
@@ -2102,10 +2089,7 @@ wTimeCyclesSinceLastCall:: db
 wReceiveCallDelay_MinsRemaining:: db
 wReceiveCallDelay_StartTime:: ds 3
 
-	ds 3
-
-wBugContestMinsRemaining:: db
-wBugContestSecsRemaining:: db
+	ds 5
 
 wEnemyMonUseFormPics:: db
 wCurPartyMonUseFormPics:: db
@@ -2218,13 +2202,13 @@ wStatusFlags::
 ; bit 4: rocket signal
 ; bit 5: wild encounters on/off
 ; bit 6: hall of fame
-; bit 7: bug contest on
+; bit 7: unused
 	db
 
 wStatusFlags2::
 ; bit 0: rockets
 ; bit 1: safari game (unused)
-; bit 2: bug contest timer
+; bit 2: unused
 ; bit 3: unused
 ; bit 4: bike shop call
 ; bit 5: can use sweet scent
@@ -2459,8 +2443,7 @@ wFruitTreeFlags:: flag_array NUM_FRUIT_TREES
 wLuckyNumberDayTimer:: dw
 	ds 2
 wSpecialPhoneCallID:: db
-	ds 3
-wBugContestStartTime:: ds 4 ; day, hour, min, sec
+	ds 7
 wUnusedTwoDayTimerOn:: db
 wUnusedTwoDayTimer:: db
 wUnusedTwoDayTimerStartDate:: db
@@ -2602,8 +2585,7 @@ wEggMonNickname:: ds MON_NAME_LENGTH
 wEggMonOT:: ds NAME_LENGTH
 wEggMon:: box_struct wEggMon
 
-wBugContestSecondPartySpecies:: db
-wContestMon:: party_struct wContestMon
+	ds 49
 
 wDunsparceMapGroup:: db
 wDunsparceMapNumber:: db

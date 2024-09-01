@@ -127,9 +127,6 @@ BattleTurn:
 	xor a
 	ldh [hInMenu], a
 .loop
-	call CheckContestBattleOver
-	jp c, .quit
-
 	xor a
 	ld [wPlayerIsSwitching], a
 	ld [wEnemyIsSwitching], a
@@ -466,24 +463,6 @@ DetermineMoveOrder:
 	ret
 
 .enemy_first
-	and a
-	ret
-
-CheckContestBattleOver:
-	ld a, [wBattleType]
-	cp BATTLETYPE_CONTEST
-	jr nz, .contest_not_over
-	ld a, [wParkBallsRemaining]
-	and a
-	jr nz, .contest_not_over
-	ld a, [wBattleResult]
-	and BATTLERESULT_BITMASK
-	add DRAW
-	ld [wBattleResult], a
-	scf
-	ret
-
-.contest_not_over
 	and a
 	ret
 
@@ -3354,8 +3333,6 @@ TryToRunAwayFromBattle:
 	ld a, [wBattleType]
 	cp BATTLETYPE_DEBUG
 	jp z, .can_escape
-	cp BATTLETYPE_CONTEST
-	jp z, .can_escape
 	cp BATTLETYPE_TRAP
 	jp z, .cant_escape
 	cp BATTLETYPE_CELEBI
@@ -4532,28 +4509,8 @@ BattleMenu:
 .ok
 
 .loop
-	ld a, [wBattleType]
-	cp BATTLETYPE_CONTEST
-	jr nz, .not_contest
-	farcall ContestBattleMenu
-	jr .next
-.not_contest
 	call LoadBattleMenu2
 	ret c
-
-.next
-	ld a, $1
-	ldh [hBGMapMode], a
-	ld a, [wBattleMenuCursorPosition]
-	cp $1
-	jp z, BattleMenu_Fight
-	cp $3
-	jp z, BattleMenu_Pack
-	cp $2
-	jp z, BattleMenu_PKMN
-	cp $4
-	jp z, BattleMenu_Run
-	jr .loop
 
 BattleMenu_Fight:
 	xor a
@@ -4570,22 +4527,10 @@ LoadBattleMenu2:
 BattleMenu_Pack:
 	call LoadStandardMenuHeader
 
-	ld a, [wBattleType]
-	cp BATTLETYPE_CONTEST
-	jr z, .contest
-
 	farcall BattlePack
 	ld a, [wBattlePlayerAction]
 	and a ; BATTLEPLAYERACTION_USEMOVE?
 	jr z, .didnt_use_item
-	jr .got_item
-
-.contest
-	ld a, PARK_BALL
-	ld [wCurItem], a
-	call DoItemEffect
-
-.got_item
 	call .UseItem
 	ret
 

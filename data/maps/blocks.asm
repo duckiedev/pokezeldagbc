@@ -391,7 +391,6 @@ UnionCave1F_Blocks:
 	INCBIN "maps/UnionCave1F.ablk"
 
 NationalPark_Blocks:
-NationalParkBugContest_Blocks:
 	INCBIN "maps/NationalPark.ablk"
 
 Route5UndergroundPathEntrance_Blocks:

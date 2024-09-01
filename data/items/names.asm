@@ -176,7 +176,7 @@ ItemNames::
 	li "GOLD BERRY"
 	li "SQUIRTBOTTLE"
 	li "TERU-SAMA"
-	li "PARK BALL"
+	li "TERU-SAMA"
 	li "RAINBOW WING"
 	li "TERU-SAMA"
 	li "BRICK PIECE"
