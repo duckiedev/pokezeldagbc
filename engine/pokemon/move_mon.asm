@@ -251,7 +251,13 @@ endr
 	; Status
 	ld [de], a
 	inc de
-	; Unused
+
+	; Hearts
+	ld a, [wBaseHeartsMax]
+	ld [de], a
+	inc de
+
+	; Max Hearts
 	ld [de], a
 	inc de
 
@@ -315,10 +321,17 @@ endr
 	ld a, [hli]
 	ld [de], a
 	inc de
-	; Copy EnemyMonUnused
+
+	; copy wEnemyMonHearts
 	ld a, [hli]
 	ld [de], a
 	inc de
+
+	; copy wEnemyMonMaxHearts
+	ld a, [hli]
+	ld [de], a
+	inc de
+
 	; Copy wEnemyMonHP
 	ld a, [hli]
 	ld [de], a

@@ -214,10 +214,6 @@ PokeBallEffect:
 	dec a
 	jp nz, UseBallInTrainerBattle
 
-	ld a, [wBattleType]
-	cp BATTLETYPE_TUTORIAL
-	jr z, .room_in_party
-
 	ld a, [wPartyCount]
 	cp PARTY_LENGTH
 	jr nz, .room_in_party
@@ -242,9 +238,6 @@ PokeBallEffect:
 
 	ld a, [wEnemyMonCatchRate]
 	ld b, a
-	ld a, [wBattleType]
-	cp BATTLETYPE_TUTORIAL
-	jp z, .catch_without_fail
 	ld a, [wCurItem]
 	cp MASTER_BALL
 	jp z, .catch_without_fail
@@ -491,9 +484,6 @@ PokeBallEffect:
 	ld [wWildMon], a
 	ld [wCurPartySpecies], a
 	ld [wTempSpecies], a
-	ld a, [wBattleType]
-	cp BATTLETYPE_TUTORIAL
-	jp z, .FinishTutorial
 
 	ld hl, Text_GotchaMonWasCaught
 	call PrintText
@@ -682,17 +672,11 @@ PokeBallEffect:
 	call LoadStandardFont
 	jr .return_from_capture
 
-.FinishTutorial:
-	ld hl, Text_GotchaMonWasCaught
-
 .shake_and_break_free
 	call PrintText
 	call ClearSprites
 
 .return_from_capture
-	ld a, [wBattleType]
-	cp BATTLETYPE_TUTORIAL
-	ret z
 	cp BATTLETYPE_DEBUG
 	ret z
 

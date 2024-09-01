@@ -45,9 +45,7 @@ DoBattle:
 	call SafeLoadTempTilemapToTilemap
 	ld a, [wBattleType]
 	cp BATTLETYPE_DEBUG
-	jp z, .tutorial_debug
-	cp BATTLETYPE_TUTORIAL
-	jp z, .tutorial_debug
+	jp z, .debug
 	xor a
 	ld [wCurPartyMon], a
 .loop2
@@ -87,7 +85,7 @@ DoBattle:
 	call SpikesDamage
 	jp BattleTurn
 
-.tutorial_debug
+.debug
 	jp BattleMenu
 
 WildFled_EnemyFled:
@@ -3581,60 +3579,6 @@ ResetPlayerStatLevels:
 	jr nz, .loop
 	ret
 
-InitEnemyMon:
-	ld a, [wCurPartyMon]
-	ld hl, wOTPartyMon1Species
-	call GetPartyLocation
-	ld de, wEnemyMonSpecies
-	ld bc, MON_OT_ID
-	call CopyBytes
-	ld bc, MON_DVS - MON_OT_ID
-	add hl, bc
-	ld de, wEnemyMonDVs
-	ld bc, MON_POKERUS - MON_DVS
-	call CopyBytes
-	inc hl
-	inc hl
-	inc hl
-	ld de, wEnemyMonLevel
-	ld bc, PARTYMON_STRUCT_LENGTH - MON_LEVEL
-	call CopyBytes
-	ld a, [wEnemyMonSpecies]
-	ld [wCurSpecies], a
-	call GetBaseData
-	ld hl, wOTPartyMonNicknames
-	ld a, [wCurPartyMon]
-	call SkipNames
-	ld de, wEnemyMonNickname
-	ld bc, MON_NAME_LENGTH
-	call CopyBytes
-	ld hl, wEnemyMonAttack
-	ld de, wEnemyStats
-	ld bc, PARTYMON_STRUCT_LENGTH - MON_ATK
-	call CopyBytes
-	call ApplyStatusEffectOnEnemyStats
-	ld hl, wBaseType1
-	ld de, wEnemyMonType1
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hl]
-	ld [de], a
-	; The enemy mon's base Sp. Def isn't needed since its base
-	; Sp. Atk is also used to calculate Sp. Def stat experience.
-	ld hl, wBaseStats
-	ld de, wEnemyMonBaseStats
-	ld b, NUM_STATS - 1
-.loop
-	ld a, [hli]
-	ld [de], a
-	inc de
-	dec b
-	jr nz, .loop
-	ld a, [wCurPartyMon]
-	ld [wCurOTMon], a
-	ret
-
 SwitchPlayerMon:
 	call ClearSprites
 	ld a, [wCurBattleMon]
@@ -4322,8 +4266,8 @@ PrintPlayerHUD:
 	pop hl
 	dec hl
 
-	ld a, [wBaseHeartsMax]
-	call DrawPlayerHearts
+	;ld a, [wBaseHeartsMax]
+	;call DrawPlayerHearts
 
 	ld a, TEMPMON
 	ld [wMonType], a
@@ -4523,8 +4467,6 @@ BattleMenu:
 	ld a, [wBattleType]
 	cp BATTLETYPE_DEBUG
 	jr z, .ok
-	cp BATTLETYPE_TUTORIAL
-	jr z, .ok
 	call EmptyBattleTextbox
 	call UpdateBattleHuds
 	call EmptyBattleTextbox
@@ -4532,12 +4474,6 @@ BattleMenu:
 .ok
 
 .loop
-	; Auto input: choose "ITEM"
-	ld a, [wInputType]
-	or a
-	jr z, .skip_dude_pack_select
-	farcall _DudeAutoInput_DownA
-.skip_dude_pack_select
 	call LoadBattleMenu2
 	ret c
 
@@ -4570,24 +4506,10 @@ LoadBattleMenu2:
 BattleMenu_Pack:
 	call LoadStandardMenuHeader
 
-	ld a, [wBattleType]
-	cp BATTLETYPE_TUTORIAL
-	jr z, .tutorial
-
 	farcall BattlePack
 	ld a, [wBattlePlayerAction]
 	and a ; BATTLEPLAYERACTION_USEMOVE?
 	jr z, .didnt_use_item
-	jr .got_item
-
-.tutorial
-	farcall TutorialPack
-	ld a, POKE_BALL
-	ld [wCurItem], a
-	call DoItemEffect
-	jr .got_item
-
-.got_item
 	call .UseItem
 	ret
 
@@ -4624,22 +4546,7 @@ BattleMenu_Pack:
 	call _LoadBattleFontsHPBar
 	call ClearSprites
 	ld a, [wBattleType]
-	cp BATTLETYPE_TUTORIAL
-	jr z, .tutorial2
 	call GetBattleMonBackpic
-
-.tutorial2
-	call GetEnemyMonFrontpic
-	ld a, $1
-	ld [wMenuCursorY], a
-	call ExitMenu
-	call UpdateBattleHUDs
-	call WaitBGMap
-	call LoadTilemapToTempTilemap
-	call ClearWindowData
-	call FinishBattleAnim
-	and a
-	ret
 
 .run
 	xor a
@@ -5459,7 +5366,7 @@ CheckEnemyLockedIn:
 LoadEnemyMon:
 ; Initialize enemy monster parameters
 ; To do this we pull the species from wTempEnemyMonSpecies
-
+ld b, b
 ; Clear the whole enemy mon struct (wEnemyMon)
 	xor a
 	ld hl, wEnemyMonSpecies
@@ -5682,9 +5589,14 @@ LoadEnemyMon:
 	ld hl, wEnemyMonStatus
 	ld [hli], a
 
-; Unused byte
+; Hearts
 	xor a
+	;ld a, [wEnemyMonHearts]
 	ld [hli], a
+
+; Max Hearts
+	;ld a, [wEnemyMonMaxHearts]
+	;ld [hli], a
 
 ; Full HP..
 	ld a, [wEnemyMonMaxHP]
@@ -7461,6 +7373,7 @@ InitEnemyTrainer:
 	ret
 
 InitEnemyWildmon:
+	ld b, b
 	ld a, WILD_BATTLE
 	ld [wBattleMode], a
 	call LoadEnemyMon
@@ -7797,13 +7710,6 @@ InitBattleDisplay:
 
 GetTrainerBackpic:
 ; Load the player character's backpic (6x6) into VRAM starting from vTiles2 tile $31.
-
-; Special exception for Dude.
-	ld b, BANK(DudeBackpic)
-	ld hl, DudeBackpic
-	ld a, [wBattleType]
-	cp BATTLETYPE_TUTORIAL
-	jr z, .Decompress
 
 ; What gender are we?
 	ld a, [wPlayerSpriteSetupFlags]

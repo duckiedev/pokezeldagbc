@@ -279,8 +279,6 @@ wBattleMonNickname:: ds MON_NAME_LENGTH
 
 wBattleMon:: battle_struct wBattleMon
 
-	ds 2
-
 wWildMon:: db
 	ds 1
 
@@ -552,12 +550,6 @@ wTimeSetBufferEnd::
 NEXTU
 ; hall of fame temp struct
 wHallOfFameTemp:: hall_of_fame wHallOfFameTemp
-
-NEXTU
-; odd egg
-wOddEgg:: party_struct wOddEgg
-wOddEggName:: ds MON_NAME_LENGTH
-wOddEggOT:: ds NAME_LENGTH
 
 NEXTU
 ; debug mon color picker
@@ -1161,7 +1153,7 @@ SECTION UNION "Miscellaneous WRAM 1", WRAMX
 wBufferMonNickname:: ds MON_NAME_LENGTH
 wBufferMonOT:: ds NAME_LENGTH
 wBufferMon:: party_struct wBufferMon
-	ds 8
+	ds 6
 wMonOrItemNameBuffer:: ds NAME_LENGTH
 	ds NAME_LENGTH
 
@@ -1185,19 +1177,6 @@ SECTION UNION "Miscellaneous WRAM 1", WRAMX
 
 ; mail temp storage
 wTempMail:: mailmsg wTempMail
-
-
-SECTION UNION "Miscellaneous WRAM 1", WRAMX
-
-; bug-catching contest
-wBugContestResults::
-	bugcontestwinner wBugContestFirstPlace
-	bugcontestwinner wBugContestSecondPlace
-	bugcontestwinner wBugContestThirdPlace
-wBugContestWinnersEnd::
-	bugcontestwinner wBugContestTemp
-	ds 4
-wBugContestWinnerName:: ds NAME_LENGTH
 
 
 SECTION UNION "Miscellaneous WRAM 1", WRAMX
@@ -1648,7 +1627,13 @@ wPokemonWithdrawDepositParameter::
 wItemQuantityChange:: db
 wItemQuantity:: db
 
-wTempMon:: party_struct wTempMon
+wEnemyMon:: battle_struct wEnemyMon
+wEnemyMonBaseStats:: ds NUM_EXP_STATS
+wEnemyMonCatchRate:: db
+wEnemyMonBaseExp::   db
+wEnemyMonEnd::
+
+	ds 8
 
 wSpriteFlags:: db
 
@@ -1880,18 +1865,13 @@ wCurEnemyItem:: db
 NEXTU
 ; miscellaneous words
 wBuySellItemPrice:: dw
-	ds 2
-wMagikarpLength:: dw
+	ds 4
 ENDU
 
 wTempEnemyMonSpecies::  db
 wTempBattleMonSpecies:: db
 
-wEnemyMon:: battle_struct wEnemyMon
-wEnemyMonBaseStats:: ds NUM_EXP_STATS
-wEnemyMonCatchRate:: db
-wEnemyMonBaseExp::   db
-wEnemyMonEnd::
+	ds 39
 
 wBattleMode::
 ; 0: overworld
@@ -1993,64 +1973,8 @@ wTimeOfDay:: db
 
 SECTION "Enemy Party", WRAMX
 
-UNION
 wPokedexShowPointerAddr:: dw
 wPokedexShowPointerBank:: db
-	ds 5
-
-NEXTU
-wUnusedEggHatchFlag:: db
-
-NEXTU
-; enemy party
-wOTPartyData::
-wOTPlayerName:: ds NAME_LENGTH
-wOTPlayerID:: dw
-	ds 8
-wOTPartyCount::   db
-wOTPartySpecies:: ds PARTY_LENGTH
-wOTPartyEnd::     db ; older code doesn't check PartyCount
-ENDU
-
-UNION
-; ot party mons
-wOTPartyMons::
-; wOTPartyMon1 - wOTPartyMon6
-for n, 1, PARTY_LENGTH + 1
-wOTPartyMon{d:n}:: party_struct wOTPartyMon{d:n}
-endr
-
-wOTPartyMonOTs::
-; wOTPartyMon1OT - wOTPartyMon6OT
-for n, 1, PARTY_LENGTH + 1
-wOTPartyMon{d:n}OT:: ds NAME_LENGTH
-endr
-
-wOTPartyMonNicknames::
-; wOTPartyMon1Nickname - wOTPartyMon6Nickname
-for n, 1, PARTY_LENGTH + 1
-wOTPartyMon{d:n}Nickname:: ds MON_NAME_LENGTH
-endr
-wOTPartyDataEnd::
-
-NEXTU
-; catch tutorial dude pack
-wDudeNumItems:: db
-wDudeItems:: ds 2 * 4 + 1
-
-wDudeNumKeyItems:: db
-wDudeKeyItems:: ds 18 + 1
-
-wDudeNumBalls:: db
-wDudeBalls:: ds 2 * 4 + 1
-ENDU
-
-wBattleMonHeartsMax:: db
-wBattleMonHeartsCurrent:: db
-wEnemyMonHeartsMax:: db
-wEnemyMonHeartsCurrent:: db
-wPlaceHeartsX:: db
-wPlaceHeartsY:: db
 
 wBattleAction:: db
 
@@ -2087,14 +2011,12 @@ wScriptTextBank::
 wDeferredScriptAddr::
 wScriptTextAddr::
 	dw
-	ds 1
 wWildEncounterCooldown:: db
 
 wXYComparePointer:: dw
-	ds 4
 
 wBattleScriptFlags:: db
-	ds 1
+
 wPlayerSpriteSetupFlags::
 ; bit 7: if set, cancel wPlayerAction
 ; bit 6: RefreshMapSprites doesn't reload player sprite
@@ -2107,23 +2029,14 @@ wMapReentryScriptQueueFlag:: db
 wMapReentryScriptBank:: db
 wMapReentryScriptAddress:: dw
 
-	ds 4
-
 wTimeCyclesSinceLastCall:: db
 wReceiveCallDelay_MinsRemaining:: db
 wReceiveCallDelay_StartTime:: ds 3
-
-	ds 3
-
-wBugContestMinsRemaining:: db
-wBugContestSecsRemaining:: db
 
 wEnemyMonUseFormPics:: db
 wCurPartyMonUseFormPics:: db
 
 wMapStatusEnd::
-
-	ds 2
 
 wCrystalData::
 wPlayerGender::
@@ -2131,15 +2044,9 @@ wPlayerGender::
 ;	0 male
 ;	1 female
 	db
-wd473:: ds 1
-wd474:: ds 1
-wd475:: ds 1
-wd476:: ds 1
-wd477:: ds 1
-wd478:: ds 1
 wCrystalDataEnd::
 
-wd479:: ds 2
+	ds 8
 
 wGameData::
 wPlayerData::
@@ -2162,8 +2069,6 @@ wStartSecond:: db
 
 wRTC:: ds 4
 
-	ds 4
-
 wDST::
 ; bit 7: dst
 	db
@@ -2175,11 +2080,7 @@ wGameTimeMinutes:: db
 wGameTimeSeconds:: db
 wGameTimeFrames::  db
 
-	ds 2
-
 wCurDay:: db
-
-	ds 1
 
 wObjectFollow_Leader:: db
 wObjectFollow_Follower:: db
@@ -2211,7 +2112,6 @@ wObjectMasks:: ds NUM_OBJECTS
 wVariableSprites:: ds $100 - SPRITE_VARS
 
 wEnteredMapFromContinue:: db
-	ds 2
 wTimeOfDayPal:: db
 	ds 4
 wTimeOfDayPalFlags:: db
@@ -2229,13 +2129,13 @@ wStatusFlags::
 ; bit 4: rocket signal
 ; bit 5: wild encounters on/off
 ; bit 6: hall of fame
-; bit 7: bug contest on
+; bit 7: unused
 	db
 
 wStatusFlags2::
 ; bit 0: rockets
 ; bit 1: safari game (unused)
-; bit 2: bug contest timer
+; bit 2: unused
 ; bit 3: unused
 ; bit 4: bike shop call
 ; bit 5: can use sweet scent
@@ -2399,14 +2299,16 @@ wWiltonFightCount::  db
 wParryFightCount::   db
 wErinFightCount::    db
 
-	ds 104
+wTempMon:: party_struct wTempMon
+
+	ds 55
 
 wEventFlags:: flag_array NUM_EVENTS
 
 wCurBox:: db
 
-	ds 2
-
+wHPPalIndex:: db
+	ds 1
 wBoxNames:: ds BOX_NAME_LENGTH * NUM_BOXES
 
 wCelebiEvent::
@@ -2470,12 +2372,9 @@ wFruitTreeFlags:: flag_array NUM_FRUIT_TREES
 wLuckyNumberDayTimer:: dw
 	ds 2
 wSpecialPhoneCallID:: db
-	ds 3
-wBugContestStartTime:: ds 4 ; day, hour, min, sec
-wUnusedTwoDayTimerOn:: db
-wUnusedTwoDayTimer:: db
-wUnusedTwoDayTimerStartDate:: db
-	ds 14
+
+	ds 24
+
 wBuenasPassword:: db
 wBlueCardBalance:: db
 wDailyRematchFlags:: ds 4
@@ -2495,8 +2394,6 @@ wPoisonStepCount:: db
 	ds 2
 wHappinessStepCount:: db
 	ds 1
-
-wParkBallsRemaining::
 wSafariBallsRemaining:: db
 wSafariTimeRemaining:: dw
 
@@ -2542,6 +2439,35 @@ wScreenSave:: ds SCREEN_META_WIDTH * SCREEN_META_HEIGHT
 
 wCurMapDataEnd::
 
+SECTION "OT Trainer Party", WRAMX
+; enemy party
+wOTPartyData::
+wOTPlayerName:: ds NAME_LENGTH
+wOTPlayerID:: dw
+
+wOTPartyCount::   db
+wOTPartySpecies:: ds PARTY_LENGTH
+wOTPartyEnd::     db ; older code doesn't check PartyCount
+
+; ot party mons
+wOTPartyMons::
+; wOTPartyMon1 - wOTPartyMon6
+for n, 1, PARTY_LENGTH + 1
+wOTPartyMon{d:n}:: party_struct wOTPartyMon{d:n}
+endr
+
+wOTPartyMonOTs::
+; wOTPartyMon1OT - wOTPartyMon6OT
+for n, 1, PARTY_LENGTH + 1
+wOTPartyMon{d:n}OT:: ds NAME_LENGTH
+endr
+
+wOTPartyMonNicknames::
+; wOTPartyMon1Nickname - wOTPartyMon6Nickname
+for n, 1, PARTY_LENGTH + 1
+wOTPartyMon{d:n}Nickname:: ds MON_NAME_LENGTH
+endr
+wOTPartyDataEnd::
 
 SECTION "Party", WRAMX
 
@@ -2613,8 +2539,7 @@ wEggMonNickname:: ds MON_NAME_LENGTH
 wEggMonOT:: ds NAME_LENGTH
 wEggMon:: box_struct wEggMon
 
-wBugContestSecondPartySpecies:: db
-wContestMon:: party_struct wContestMon
+	ds 48
 
 wDunsparceMapGroup:: db
 wDunsparceMapNumber:: db
@@ -2629,9 +2554,7 @@ wRoamMons_CurMapGroup:: db
 wRoamMons_LastMapNumber:: db
 wRoamMons_LastMapGroup:: db
 
-wBestMagikarpLengthFeet:: db
-wBestMagikarpLengthInches:: db
-wMagikarpRecordHoldersName:: ds NAME_LENGTH
+	ds 13
 
 wPokemonDataEnd::
 wGameDataEnd::
@@ -2642,6 +2565,7 @@ SECTION "Pic Animations", WRAMX
 wTempTilemap::
 ; 20x18 grid of 8x8 tiles
 	ds SCREEN_WIDTH * SCREEN_HEIGHT
+
 
 SECTION "Surrounding Data", WRAMX
 
@@ -2766,10 +2690,6 @@ wScratchAttrmap:: ds BG_MAP_WIDTH * BG_MAP_HEIGHT
 NEXTU
 wDecompressScratch:: ds $80 tiles
 wDecompressEnemyFrontpic:: ds $80 tiles
-
-NEXTU
-; unidentified uses
-w6_d000:: ds $1000
 ENDU
 
 
