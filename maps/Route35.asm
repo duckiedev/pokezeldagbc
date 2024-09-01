@@ -402,7 +402,7 @@ BugCatcherArnieAfterBattleText:
 	text "My VENONAT won me"
 	line "the Bug-Catching"
 
-	para "Contest at the"
+	para "at the"
 	line "NATIONAL PARK."
 	done
 

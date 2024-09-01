@@ -162,7 +162,6 @@ _ResetWRAM:
 	ld [wRoamMon3MapNumber], a
 
 	call LoadOrRegenerateLuckyIDNumber
-	call InitializeMagikarpHouse
 
 	xor a
 	ld [wMonType], a
@@ -240,19 +239,6 @@ SetDefaultBoxNames:
 
 .Box:
 	db "BOX@"
-
-InitializeMagikarpHouse:
-	ld hl, wBestMagikarpLengthFeet
-	ld a, $3
-	ld [hli], a
-	ld a, $6
-	ld [hli], a
-	ld de, .Ralph
-	call CopyName2
-	ret
-
-.Ralph:
-	db "RALPH@"
 
 InitializeNPCNames:
 	ld hl, .Rival

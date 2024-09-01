@@ -113,34 +113,33 @@ PlacePartyNicknames:
 
 PlacePartyHPBar:
 	xor a
-	ld [wSGBPals], a
+	ld [wHPPalIndex], a
 	ld a, [wPartyCount]
 	and a
 	ret z
 	ld c, a
-	ld b, 0
+	ld b, $0
 	hlcoord 11, 2
 .loop
 	push bc
 	push hl
 	call PartyMenuCheckEgg
-	jr z, .skip
+	jr nz, .skip
 	push hl
 	call PlacePartymonHPBar
 	pop hl
 	ld d, $6
-	ld b, $0
 	call DrawBattleHPBar
 	ld hl, wHPPals
-	ld a, [wSGBPals]
+	ld a, [wHPPalIndex]
 	ld c, a
-	ld b, 0
+	ld b, $0
 	add hl, bc
 	call SetHPPal
 	ld b, SCGB_PARTY_MENU_HP_BARS
 	call GetSGBLayout
 .skip
-	ld hl, wSGBPals
+	ld hl, wHPPalIndex
 	inc [hl]
 	pop hl
 	ld de, 2 * SCREEN_WIDTH
@@ -149,8 +148,6 @@ PlacePartyHPBar:
 	inc b
 	dec c
 	jr nz, .loop
-	ld b, SCGB_PARTY_MENU
-	call GetSGBLayout
 	ret
 
 PlacePartymonHPBar:

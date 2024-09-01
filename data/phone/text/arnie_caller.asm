@@ -38,17 +38,6 @@ ArnieLostAMonText:
 ArnieBattleRematchText:
 	text "Hey, let's battle"
 	line "our #MON!"
-
-	para "I won't lose to"
-	line "you battling or in"
-
-	para "the Bug-Catching"
-	line "Contest!"
-
-	para "I'll be here on"
-	line "@"
-	text_ram wStringBuffer5
-	text "!"
 	done
 
 ArnieHangUpText:

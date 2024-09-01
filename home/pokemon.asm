@@ -244,11 +244,6 @@ GetBaseData::
 	ld a, BANK(BaseData)
 	rst Bankswitch
 
-; Egg doesn't have BaseData
-	ld a, [wCurSpecies]
-	cp EGG
-	jr z, .egg
-
 ; Get BaseData
 	dec a
 	ld bc, BASE_DATA_SIZE
@@ -257,15 +252,6 @@ GetBaseData::
 	ld de, wCurBaseData
 	ld bc, BASE_DATA_SIZE
 	call CopyBytes
-	jr .end
-
-.egg
-	ld de, UnusedEggPic
-
-; Sprite dimensions
-	ld b, $55 ; 5x5
-	ld hl, wBasePicSize
-	ld [hl], b
 
 ; Beta front and back sprites
 ; (see pokegold-spaceworld's data/pokemon/base_stats/*)

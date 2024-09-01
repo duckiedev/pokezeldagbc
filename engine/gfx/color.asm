@@ -76,160 +76,11 @@ Unused_CheckShininess:
 	and a
 	ret
 
-SGB_ApplyCreditsPals: ; unreferenced
-	push de
-	push bc
-	ld hl, PalPacket_Pal01
-	ld de, wSGBPals
-	ld bc, PALPACKET_LENGTH
-	call CopyBytes
-	pop bc
-	pop de
-	ld a, c
-	ld [wSGBPals + 3], a
-	ld a, b
-	ld [wSGBPals + 4], a
-	ld a, e
-	ld [wSGBPals + 5], a
-	ld a, d
-	ld [wSGBPals + 6], a
-	ld hl, wSGBPals
-	call PushSGBPals
-	ld hl, BlkPacket_AllPal0
-	call PushSGBPals
-	ret
-
 InitPartyMenuPalettes:
 	ld hl, PalPacket_PartyMenu + 1
 	call CopyFourPalettes
 	call InitPartyMenuOBPals
 	call WipeAttrmap
-	ret
-
-; SGB layout for SCGB_PARTY_MENU_HP_BARS
-SGB_ApplyPartyMenuHPPals:
-	ld hl, wHPPals
-	ld a, [wSGBPals]
-	ld e, a
-	ld d, 0
-	add hl, de
-	ld e, l
-	ld d, h
-	ld a, [de]
-	and a
-	ld e, $5
-	jr z, .okay
-	dec a
-	ld e, $a
-	jr z, .okay
-	ld e, $f
-.okay
-	push de
-	ld hl, wSGBPals + 10
-	ld bc, $6
-	ld a, [wSGBPals]
-	call AddNTimes
-	pop de
-	ld [hl], e
-	ret
-
-Intro_LoadMagikarpPalettes: ; unreferenced
-	call CheckCGB
-	ret z
-
-; CGB only
-	ld hl, .MagikarpBGPal
-	ld de, wBGPals1
-	ld bc, 1 palettes
-	ld a, BANK(wBGPals1)
-	call FarCopyWRAM
-
-	ld hl, .MagikarpOBPal
-	ld de, wOBPals1
-	ld bc, 1 palettes
-	ld a, BANK(wOBPals1)
-	call FarCopyWRAM
-
-	call ApplyPals
-	ld a, TRUE
-	ldh [hCGBPalUpdate], a
-	ret
-
-.MagikarpBGPal:
-INCLUDE "gfx/intro/gs_magikarp_bg.pal"
-
-.MagikarpOBPal:
-INCLUDE "gfx/intro/gs_magikarp_ob.pal"
-
-Intro_LoadAllPal0: ; unreferenced
-	call CheckCGB
-	ret nz
-	ldh a, [hSGB]
-	and a
-	ret z
-	ld hl, BlkPacket_AllPal0
-	jp PushSGBPals
-
-Intro_LoadBetaIntroVenusaurPalettes: ; unreferenced
-	call CheckCGB
-	jr nz, .cgb
-	ldh a, [hSGB]
-	and a
-	ret z
-	ld hl, PalPacket_BetaIntroVenusaur
-	jp PushSGBPals
-
-.cgb
-	ld de, wOBPals1
-	ld a, PREDEFPAL_BETA_INTRO_VENUSAUR
-	call GetPredefPal
-	jp LoadHLPaletteIntoDE
-
-Intro_LoadPackPalettes: ; unreferenced
-	call CheckCGB
-	jr nz, .cgb
-	ldh a, [hSGB]
-	and a
-	ret z
-	ld hl, PalPacket_Pack
-	jp PushSGBPals
-
-.cgb
-	ld de, wOBPals1
-	ld a, PREDEFPAL_PACK
-	call GetPredefPal
-	jp LoadHLPaletteIntoDE
-
-GSIntro_LoadMonPalette: ; unreferenced
-	call CheckCGB
-	jr nz, .cgb
-	ldh a, [hSGB]
-	and a
-	ret z
-	ld a, c
-	push af
-	ld hl, PalPacket_Pal01
-	ld de, wSGBPals
-	ld bc, PALPACKET_LENGTH
-	call CopyBytes
-	pop af
-	call GetMonPalettePointer
-	ld a, [hli]
-	ld [wSGBPals + 3], a
-	ld a, [hli]
-	ld [wSGBPals + 4], a
-	ld a, [hli]
-	ld [wSGBPals + 5], a
-	ld a, [hl]
-	ld [wSGBPals + 6], a
-	ld hl, wSGBPals
-	jp PushSGBPals
-
-.cgb
-	ld de, wOBPals1
-	ld a, c
-	call GetMonPalettePointer
-	call LoadPalette_White_Col1_Col2_Black
 	ret
 
 LoadTrainerClassPaletteAsNthBGPal:
@@ -402,31 +253,6 @@ LoadMailPalettes:
 	add hl, hl
 	ld de, .MailPals
 	add hl, de
-	call CheckCGB
-	jr nz, .cgb
-	push hl
-	ld hl, PalPacket_Pal01
-	ld de, wSGBPals
-	ld bc, PALPACKET_LENGTH
-	call CopyBytes
-	pop hl
-	inc hl
-	inc hl
-	ld a, [hli]
-	ld [wSGBPals + 3], a
-	ld a, [hli]
-	ld [wSGBPals + 4], a
-	ld a, [hli]
-	ld [wSGBPals + 5], a
-	ld a, [hli]
-	ld [wSGBPals + 6], a
-	ld hl, wSGBPals
-	call PushSGBPals
-	ld hl, BlkPacket_AllPal0
-	call PushSGBPals
-	ret
-
-.cgb
 	ld de, wBGPals1
 	ld bc, 1 palettes
 	ld a, BANK(wBGPals1)
@@ -628,9 +454,9 @@ ApplyAttrmap:
 ; CGB layout for SCGB_PARTY_MENU_HP_BARS
 CGB_ApplyPartyMenuHPPals:
 	ld hl, wHPPals
-	ld a, [wSGBPals]
+	ld a, [wHPPalIndex]
 	ld e, a
-	ld d, 0
+	ld d, $0
 	add hl, de
 	ld e, l
 	ld d, h
@@ -639,7 +465,7 @@ CGB_ApplyPartyMenuHPPals:
 	ld e, a
 	hlcoord 11, 2, wAttrmap
 	ld bc, 2 * SCREEN_WIDTH
-	ld a, [wSGBPals]
+	ld a, [wHPPalIndex]
 .loop
 	and a
 	jr z, .done
@@ -649,8 +475,7 @@ CGB_ApplyPartyMenuHPPals:
 .done
 	lb bc, 2, 8
 	ld a, e
-	call FillBoxCGB
-	ret
+	jp FillBoxWithByte
 
 InitPartyMenuOBPals:
 	ld hl, PartyMenuOBPals

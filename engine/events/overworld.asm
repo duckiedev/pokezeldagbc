@@ -712,7 +712,6 @@ FlyFunction:
 	callasm HideSprites
 	special UpdateTimePals
 	callasm FlyFromAnim
-	farscall Script_AbortBugContest
 	special WarpToSpawnPoint
 	callasm SkipUpdateMapSprites
 	loadvar VAR_MOVEMENT, PLAYER_NORMAL
@@ -954,7 +953,6 @@ EscapeRopeOrDig:
 	closetext
 	playsound SFX_WARP_TO
 	applymovement PLAYER, .DigOut
-	farscall Script_AbortBugContest
 	special WarpToSpawnPoint
 	loadvar VAR_MOVEMENT, PLAYER_NORMAL
 	newloadmap MAPSETUP_DOOR
@@ -1039,7 +1037,6 @@ TeleportFunction:
 	closetext
 	playsound SFX_WARP_TO
 	applymovement PLAYER, .TeleportFrom
-	farscall Script_AbortBugContest
 	special WarpToSpawnPoint
 	loadvar VAR_MOVEMENT, PLAYER_NORMAL
 	newloadmap MAPSETUP_TELEPORT

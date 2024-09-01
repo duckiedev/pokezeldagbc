@@ -214,68 +214,11 @@ MartSignText:
 	para "#MON MART"
 	done
 
-ContestResults_ReadyToJudgeText:
-	text "We will now judge"
-	line "the #MON you've"
-	cont "caught."
-
-	para "<……>"
-	line "<……>"
-
-	para "We have chosen the"
-	line "winners!"
-
-	para "Are you ready for"
-	line "this?"
-	done
-
-ContestResults_PlayerWonAPrizeText:
-	text "<PLAYER>, the No.@"
-	text_ram wStringBuffer3
-	text_start
-	line "finisher, wins"
-	cont "@"
-	text_ram wStringBuffer4
-	text "!"
-	done
-
 ReceivedItemText:
 	text "<PLAYER> received"
 	line "@"
 	text_ram wStringBuffer4
 	text "."
-	done
-
-ContestResults_JoinUsNextTimeText:
-	text "Please join us for"
-	line "the next Contest!"
-	done
-
-ContestResults_ConsolationPrizeText:
-	text "Everyone else gets"
-	line "a BERRY as a con-"
-	cont "solation prize!"
-	done
-
-ContestResults_DidNotWinText:
-	text "We hope you do"
-	line "better next time."
-	done
-
-ContestResults_ReturnPartyText:
-	text "We'll return the"
-	line "#MON we kept"
-
-	para "for you."
-	line "Here you go!"
-	done
-
-ContestResults_PartyFullText:
-	text "Your party's full,"
-	line "so the #MON was"
-
-	para "sent to your BOX"
-	line "in BILL's PC."
 	done
 
 GymStatue_CityGymText:
@@ -338,17 +281,6 @@ CoinVendor_CoinCaseFullText:
 CoinVendor_CancelText:
 	text "No coins for you?"
 	line "Come again!"
-	done
-
-BugContestPrizeNoRoomText:
-	text "Oh? Your PACK is"
-	line "full."
-
-	para "We'll keep this"
-	line "for you today, so"
-
-	para "come back when you"
-	line "make room for it."
 	done
 
 HappinessText3:

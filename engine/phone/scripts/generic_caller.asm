@@ -854,21 +854,6 @@ PhoneScriptRareWildMon:
 	special RandomUnseenWildMon
 	end
 
-PhoneScript_BugCatchingContest:
-	readvar VAR_CALLERID
-	ifequal PHONE_BUG_CATCHER_WADE, .Wade
-	ifequal PHONE_POKEFANM_DEREK, .Derek
-
-.Wade:
-	farwritetext WadeBugCatchingContestText
-	promptbutton
-	sjump PhoneScript_HangUpText_Male
-
-.Derek:
-	farwritetext DerekBugCatchingContestText
-	promptbutton
-	sjump PhoneScript_HangUpText_Male
-
 IrwinRocketRumorScript:
 	farwritetext IrwinRocketTakeoverRumorText
 	promptbutton

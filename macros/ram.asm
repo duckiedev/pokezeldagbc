@@ -44,38 +44,6 @@ MACRO party_struct
 \1StructEnd::
 ENDM
 
-MACRO red_box_struct
-\1Species::    db
-\1HP::         dw
-\1BoxLevel::   db
-\1Status::     db
-\1Type::
-\1Type1::      db
-\1Type2::      db
-\1CatchRate::  db
-\1Moves::      ds NUM_MOVES
-\1ID::         dw
-\1Exp::        ds 3
-\1HPExp::      dw
-\1AttackExp::  dw
-\1DefenseExp:: dw
-\1SpeedExp::   dw
-\1SpecialExp:: dw
-\1DVs::        dw
-\1PP::         ds NUM_MOVES
-ENDM
-
-MACRO red_party_struct
-	red_box_struct \1
-\1Level::      db
-\1Stats::
-\1MaxHP::      dw
-\1Attack::     dw
-\1Defense::    dw
-\1Speed::      dw
-\1Special::    dw
-ENDM
-
 MACRO battle_struct
 \1Species::   db
 \1Item::      db
@@ -195,16 +163,6 @@ MACRO mailmsg
 \1End::
 ENDM
 
-MACRO mailmsg_jp
-\1Message::    ds MAIL_MSG_LENGTH
-\1MessageEnd:: db
-\1Author::     ds NAME_LENGTH_JAPANESE - 1
-\1AuthorID::   dw
-\1Species::    db
-\1Type::       db
-\1End::
-ENDM
-
 MACRO roam_struct
 \1Species::   db
 \1Level::     db
@@ -212,12 +170,6 @@ MACRO roam_struct
 \1MapNumber:: db
 \1HP::        db
 \1DVs::       dw
-ENDM
-
-MACRO bugcontestwinner
-\1WinnerID:: db
-\1Mon::      db
-\1Score::    dw
 ENDM
 
 MACRO hof_mon

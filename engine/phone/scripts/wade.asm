@@ -14,19 +14,7 @@ WadePhoneCalleeScript:
 
 .NotTuesday:
 	farscall PhoneScript_Random2
-	ifequal 0, .NoContest
-	checkflag ENGINE_DAILY_BUG_CONTEST
-	iftrue .NoContest
-	readvar VAR_WEEKDAY
-	ifequal TUESDAY, .ContestToday
-	ifequal THURSDAY, .ContestToday
-	ifequal SATURDAY, .ContestToday
-
-.NoContest:
 	farsjump WadeNoBerriesScript
-
-.ContestToday:
-	farsjump PhoneScript_BugCatchingContest
 
 .WantsBattle:
 	getlandmarkname STRING_BUFFER_5, LANDMARK_ROUTE_31
@@ -40,15 +28,6 @@ WadePhoneCallerScript:
 	gettrainername STRING_BUFFER_3, BUG_CATCHER, WADE1
 	farscall PhoneScript_GreetPhone_Male
 	farscall PhoneScript_Random2
-	ifequal 0, .NoContest
-	checkflag ENGINE_DAILY_BUG_CONTEST
-	iftrue .NoContest
-	readvar VAR_WEEKDAY
-	ifequal TUESDAY, .ContestToday
-	ifequal THURSDAY, .ContestToday
-	ifequal SATURDAY, .ContestToday
-
-.NoContest:
 	checkflag ENGINE_WADE_READY_FOR_REMATCH
 	iftrue .next
 	checkflag ENGINE_WADE_TUESDAY_NIGHT
@@ -66,9 +45,6 @@ WadePhoneCallerScript:
 	farscall PhoneScript_Random3
 	ifequal 0, WadeFoundRare
 	farsjump Phone_GenericCall_Male
-
-.ContestToday:
-	farsjump PhoneScript_BugCatchingContest
 
 WadeTuesdayNight:
 	setflag ENGINE_WADE_TUESDAY_NIGHT

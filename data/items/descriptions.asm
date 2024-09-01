@@ -177,7 +177,7 @@ ItemDescriptions:
 	dw GoldBerryDesc
 	dw SquirtBottleDesc
 	dw TeruSama23Desc
-	dw ParkBallDesc
+	dw TeruSama23Desc
 	dw RainbowWingDesc
 	dw TeruSama24Desc
 	dw BrickPieceDesc
@@ -933,10 +933,6 @@ SquirtBottleDesc:
 
 TeruSama23Desc:
 	db   "?@"
-
-ParkBallDesc:
-	db   "The Bug-Catching"
-	next "Contest BALL.@"
 
 RainbowWingDesc:
 	db   "A mystical feather"

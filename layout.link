@@ -73,7 +73,6 @@ ROMX $13
 	"bank13_2"
 ROMX $14
 	"bank14"
-	"Unused Egg Pic"
 ROMX $15
 	"Map Scripts 1"
 ROMX $16
@@ -279,8 +278,6 @@ ROMX $77
 ROMX $78
 	"Debug Room"
 	"Tileset Data 8"
-ROMX $7e
-	"Crystal Events"
 WRAM0
 	"Stack"
 	"Audio RAM"

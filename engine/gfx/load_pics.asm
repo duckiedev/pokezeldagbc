@@ -95,7 +95,6 @@ _GetFrontpic:
 	call GetFormFrontpicPointer 
 
 .continue
-
 	ld a, BANK(wDecompressEnemyFrontpic)
 	ldh [rSVBK], a
 	ld a, b

@@ -59,7 +59,6 @@ INCLUDE "audio/music/lakeofragerocketradio.asm"
 INCLUDE "audio/music/magnettrain.asm"
 INCLUDE "audio/music/lavendertown.asm"
 INCLUDE "audio/music/dancinghall.asm"
-INCLUDE "audio/music/contestresults.asm"
 INCLUDE "audio/music/route30.asm"
 
 
@@ -122,7 +121,6 @@ assert BANK(Music_LookRocket) == BANK(Music_RocketTheme)
 INCLUDE "audio/music/mainmenu.asm"
 INCLUDE "audio/music/lookkimonogirl.asm"
 INCLUDE "audio/music/pokeflutechannel.asm"
-INCLUDE "audio/music/bugcatchingcontest.asm"
 
 
 SECTION "Songs 5", ROMX

@@ -129,8 +129,6 @@ BattleTurn:
 	xor a
 	ldh [hInMenu], a
 .loop
-	call CheckContestBattleOver
-	jp c, .quit
 
 	xor a
 	ld [wPlayerIsSwitching], a
@@ -468,24 +466,6 @@ DetermineMoveOrder:
 	ret
 
 .enemy_first
-	and a
-	ret
-
-CheckContestBattleOver:
-	ld a, [wBattleType]
-	cp BATTLETYPE_CONTEST
-	jr nz, .contest_not_over
-	ld a, [wParkBallsRemaining]
-	and a
-	jr nz, .contest_not_over
-	ld a, [wBattleResult]
-	and BATTLERESULT_BITMASK
-	add DRAW
-	ld [wBattleResult], a
-	scf
-	ret
-
-.contest_not_over
 	and a
 	ret
 
@@ -1831,10 +1811,16 @@ HandleEnemyMonFaint:
 	; if they are, check to see if they're already in the GEL form
 	ld a, [wEnemyMonStatus]
 	and 1 << FRM
-	jr nz, ContinueFaintProcess
-	jr z, HandleEnemyZolTransform
-	; fallthrough
+	jp z, HandleEnemyZolTransform
+
 ContinueFaintProcess:
+	ld a, [wEnemyMonHearts]
+	dec a
+	ld [wEnemyMonHearts], a
+	cp 0
+	jr nz, HandleEnemyMonLostHeartAlive
+
+	call UpdateEnemyHearts
 	call FaintEnemyPokemon
 	ld hl, wBattleMonHP
 	ld a, [hli]
@@ -1900,6 +1886,12 @@ ContinueFaintProcess:
 	ld [wBattlePlayerAction], a
 	ret
 
+HandleEnemyMonLostHeartAlive:
+	call UpdateEnemyHearts
+	call HandleEnemyRestoreAllHP
+	call HandleEnemyTurnReset
+	ret
+
 HandleEnemyZolTransform:
 	; set the status
 	ld a, BATTLE_VARS_STATUS_OPP
@@ -1910,7 +1902,10 @@ HandleEnemyZolTransform:
 	; play the animation
 	ld de, ANIM_ZOLGEL_EXPLODE
 	call z, Call_PlayBattleAnim_OnlyIfVisible
+	call HandleEnemyRestoreAllHP
+	call ContinueEnemyZolTransform
 
+HandleEnemyRestoreAllHP:
 	; restore health
 	ld a, $1
 	ldh [hBGMapMode], a
@@ -1924,6 +1919,10 @@ HandleEnemyZolTransform:
 	ld c, a
 	call RestoreHP
 
+ContinueEnemyZolTransform:
+	ld a, [wCurSpecies]
+	cp ZOL
+	ret nz
 	; change the name
 	ld de, .GelsName
 	ld hl, wEnemyMonNickname
@@ -1934,8 +1933,10 @@ HandleEnemyZolTransform:
 	call StdBattleTextbox
 
 	; increase evasion and speed
+.GelsName
+	db "GELS@@@@@@@"
 
-
+HandleEnemyTurnReset:
 	; reset turn and begin battle again
 	call SetEnemyTurn
 	call SpikesDamage
@@ -1944,8 +1945,6 @@ HandleEnemyZolTransform:
 	ld [wBattlePlayerAction], a
 	inc a
 	ret
-.GelsName
-	db "GELS@@@@@@@"
 
 DoubleSwitch:
 	call ClearSprites
@@ -3356,8 +3355,6 @@ TryToRunAwayFromBattle:
 	ld a, [wBattleType]
 	cp BATTLETYPE_DEBUG
 	jp z, .can_escape
-	cp BATTLETYPE_CONTEST
-	jp z, .can_escape
 	cp BATTLETYPE_TRAP
 	jp z, .cant_escape
 	cp BATTLETYPE_CELEBI
@@ -4402,7 +4399,6 @@ DrawEnemyHUD:
 	ld a, [hl]
 	ld [de], a
 
-	ld a, [wBaseHeartsMax]
 	call DrawEnemyHearts
 
 	ld a, TEMPMON
@@ -4536,13 +4532,6 @@ BattleMenu:
 .ok
 
 .loop
-	ld a, [wBattleType]
-	cp BATTLETYPE_CONTEST
-	jr nz, .not_contest
-	farcall ContestBattleMenu
-	jr .next
-.not_contest
-
 	; Auto input: choose "ITEM"
 	ld a, [wInputType]
 	or a
@@ -4584,8 +4573,6 @@ BattleMenu_Pack:
 	ld a, [wBattleType]
 	cp BATTLETYPE_TUTORIAL
 	jr z, .tutorial
-	cp BATTLETYPE_CONTEST
-	jr z, .contest
 
 	farcall BattlePack
 	ld a, [wBattlePlayerAction]
@@ -4599,11 +4586,6 @@ BattleMenu_Pack:
 	ld [wCurItem], a
 	call DoItemEffect
 	jr .got_item
-
-.contest
-	ld a, PARK_BALL
-	ld [wCurItem], a
-	call DoItemEffect
 
 .got_item
 	call .UseItem
@@ -5649,7 +5631,7 @@ LoadEnemyMon:
 ; Unown
 	ld a, [wTempEnemyMonSpecies]
 	cp UNOWN
-	jr nz, .Magikarp
+	ret nz
 
 ; Get letter based on DVs
 	ld hl, wEnemyMonDVs
@@ -5657,63 +5639,6 @@ LoadEnemyMon:
 ; Can't use any letters that haven't been unlocked
 ; If combined with forced shiny battletype, causes an infinite loop
 	call CheckUnownLetter
-	jr c, .GenerateDVs ; try again
-
-.Magikarp:
-; These filters are untranslated.
-; They expect at wMagikarpLength a 2-byte value in mm,
-; but the value is in feet and inches (one byte each).
-
-; The first filter is supposed to make very large Magikarp even rarer,
-; by targeting those 1600 mm (= 5'3") or larger.
-; After the conversion to feet, it is unable to target any,
-; since the largest possible Magikarp is 5'3", and $0503 = 1283 mm.
-	ld a, [wTempEnemyMonSpecies]
-	cp MAGIKARP
-	jr nz, .Happiness
-
-; Get Magikarp's length
-	ld de, wEnemyMonDVs
-	ld bc, wPlayerID
-	callfar CalcMagikarpLength
-
-; No reason to keep going if length > 1536 mm (i.e. if HIGH(length) > 6 feet)
-	ld a, [wMagikarpLength]
-	cp 5
-	jr nz, .CheckMagikarpArea
-
-; 5% chance of skipping both size checks
-	call BattleRandom
-	cp 5 percent
-	jr c, .CheckMagikarpArea
-; Try again if length >= 1616 mm (i.e. if LOW(length) >= 4 inches)
-	ld a, [wMagikarpLength + 1]
-	cp 4
-	jr nc, .GenerateDVs
-
-; 20% chance of skipping this check
-	call BattleRandom
-	cp 20 percent - 1
-	jr c, .CheckMagikarpArea
-; Try again if length >= 1600 mm (i.e. if LOW(length) >= 3 inches)
-	ld a, [wMagikarpLength + 1]
-	cp 3
-	jr nc, .GenerateDVs
-
-.CheckMagikarpArea:
-	ld a, [wMapGroup]
-	cp GROUP_LAKE_OF_RAGE
-	jr nz, .Happiness
-	ld a, [wMapNumber]
-	cp MAP_LAKE_OF_RAGE
-	jr nz, .Happiness
-; 40% chance of not flooring
-	call BattleRandom
-	cp 39 percent + 1
-	jr c, .Happiness
-; Try again if length < 1024 mm (i.e. if HIGH(length) < 3 feet)
-	ld a, [wMagikarpLength]
-	cp 3
 	jr c, .GenerateDVs ; try again
 
 ; Finally done with DVs

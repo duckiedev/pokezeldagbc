@@ -131,15 +131,6 @@ LakeOfRageSign:
 MagikarpHouseSignScript:
 	opentext
 	writetext FishingGurusHouseSignText
-	checkevent EVENT_CLEARED_ROCKET_HIDEOUT
-	iftrue .MagikarpLengthRecord
-	waitbutton
-	closetext
-	end
-
-.MagikarpLengthRecord:
-	promptbutton
-	special MagikarpHouseSign
 	closetext
 	end
 

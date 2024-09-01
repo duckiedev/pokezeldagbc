@@ -38,6 +38,7 @@ DEF BASE_AI_SWITCH_SCORE EQU 10
 	const ACCURACY
 	const EVASION
 	const ABILITY ; used for BattleCommand_Curse
+	const HEARTS
 DEF NUM_LEVEL_STATS EQU const_value
 
 ; move struct members (see data/moves/moves.asm)
@@ -90,7 +91,6 @@ DEF SPDSPCDV_SHINY EQU $AA
 	const BATTLETYPE_TUTORIAL
 	const BATTLETYPE_FISH
 	const BATTLETYPE_ROAMING
-	const BATTLETYPE_CONTEST
 	const BATTLETYPE_FORCESHINY
 	const BATTLETYPE_TREE
 	const BATTLETYPE_TRAP

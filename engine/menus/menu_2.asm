@@ -142,68 +142,6 @@ StartMenu_PrintSafariGameStatus: ; unreferenced
 .booru_ko
 	db "ボール　　　こ@"
 
-StartMenu_DrawBugContestStatusBox:
-	hlcoord 0, 0
-	ld b, 5
-	ld c, 17
-	call Textbox
-	ret
-
-StartMenu_PrintBugContestStatus:
-	ld hl, wOptions
-	ld a, [hl]
-	push af
-	set NO_TEXT_SCROLL, [hl]
-	call StartMenu_DrawBugContestStatusBox
-	hlcoord 1, 5
-	ld de, .BallsString
-	call PlaceString
-	hlcoord 8, 5
-	ld de, wParkBallsRemaining
-	lb bc, PRINTNUM_LEFTALIGN | 1, 2
-	call PrintNum
-	hlcoord 1, 1
-	ld de, .CaughtString
-	call PlaceString
-	ld a, [wContestMon]
-	and a
-	ld de, .NoneString
-	jr z, .no_contest_mon
-	ld [wNamedObjectIndex], a
-	call GetPokemonName
-
-.no_contest_mon
-	hlcoord 8, 1
-	call PlaceString
-	ld a, [wContestMon]
-	and a
-	jr z, .skip_level
-	hlcoord 1, 3
-	ld de, .LevelString
-	call PlaceString
-	ld a, [wContestMonLevel]
-	ld h, b
-	ld l, c
-	inc hl
-	ld c, 3
-	call Print8BitNumLeftAlign
-
-.skip_level
-	pop af
-	ld [wOptions], a
-	ret
-
-.BallsJPString: ; unreferenced
-	db "ボール　　　こ@"
-.CaughtString:
-	db "CAUGHT@"
-.BallsString:
-	db "BALLS:@"
-.NoneString:
-	db "None@"
-.LevelString:
-	db "LEVEL@"
-
 FindApricornsInBag:
 ; Checks the bag for Apricorns.
 	ld hl, wKurtApricornCount

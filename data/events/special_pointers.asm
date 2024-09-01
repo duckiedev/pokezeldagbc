@@ -10,13 +10,6 @@ SpecialsPointers::
 	add_special WarpToSpawnPoint
 
 ; Map events
-	add_special BugContestJudging
-	add_special CheckPartyFullAfterContest
-	add_special ContestDropOffMons
-	add_special ContestReturnMons
-	add_special GiveParkBalls
-	add_special CheckMagikarpLength
-	add_special MagikarpHouseSign
 	add_special HealParty ; this is both a special and a predef
 	add_special PokemonCenterPC
 	add_special PlayersHousePC
@@ -59,7 +52,6 @@ SpecialsPointers::
 	add_special UnusedCheckUnusedTwoDayTimer ; unused
 	add_special DayCareMon1
 	add_special DayCareMon2
-	add_special SelectRandomBugContestContestants
 	add_special ActivateFishingSwarm
 	add_special ToggleMaptileDecorations
 	add_special ToggleDecorationsVisibility
@@ -96,7 +88,6 @@ SpecialsPointers::
 	add_special Diploma
 
 ; Crystal only
-	add_special GiveOddEgg
 	add_special Reset ; bank 0
 	add_special MoveTutor
 	add_special OmanyteChamber

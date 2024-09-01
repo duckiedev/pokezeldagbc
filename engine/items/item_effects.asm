@@ -190,7 +190,7 @@ ItemEffects:
 	dw RestoreHPEffect     ; GOLD_BERRY
 	dw SquirtbottleEffect  ; SQUIRTBOTTLE
 	dw NoEffect            ; ITEM_B0
-	dw PokeBallEffect      ; PARK_BALL
+	dw NoEffect      	   ; ITEM_B1
 	dw NoEffect            ; RAINBOW_WING
 	dw NoEffect            ; ITEM_B3
 	assert_table_length ITEM_B3
@@ -230,12 +230,10 @@ PokeBallEffect:
 	jp z, Ball_BoxIsFullMessage
 
 .room_in_party
-; BUG: Using a Park Ball in non-Contest battles has a corrupt animation (see docs/bugs_and_glitches.md)
 	xor a
 	ld [wWildMon], a
 	ld a, [wBattleType]
-	cp BATTLETYPE_CONTEST
-	call nz, ReturnToBattle_UseBall
+	call ReturnToBattle_UseBall
 
 	ld hl, wOptions
 	res NO_TEXT_SCROLL, [hl]
@@ -542,8 +540,6 @@ PokeBallEffect:
 
 .skip_pokedex
 	ld a, [wBattleType]
-	cp BATTLETYPE_CONTEST
-	jp z, .catch_bug_contest_mon
 	cp BATTLETYPE_CELEBI
 	jr nz, .not_celebi
 	ld hl, wBattleResult
@@ -686,10 +682,6 @@ PokeBallEffect:
 	call LoadStandardFont
 	jr .return_from_capture
 
-.catch_bug_contest_mon
-	farcall BugContest_SetCaughtContestMon
-	jr .return_from_capture
-
 .FinishTutorial:
 	ld hl, Text_GotchaMonWasCaught
 
@@ -703,8 +695,6 @@ PokeBallEffect:
 	ret z
 	cp BATTLETYPE_DEBUG
 	ret z
-	cp BATTLETYPE_CONTEST
-	jr z, .used_park_ball
 
 	ld a, [wWildMon]
 	and a
@@ -719,11 +709,6 @@ PokeBallEffect:
 	ld [wItemQuantityChange], a
 	jp TossItem
 
-.used_park_ball
-	ld hl, wParkBallsRemaining
-	dec [hl]
-	ret
-
 BallMultiplierFunctionTable:
 ; table of routines that increase or decrease the catch rate based on
 ; which ball is used in a certain situation.
@@ -736,7 +721,6 @@ BallMultiplierFunctionTable:
 	dbw FAST_BALL,   FastBallMultiplier
 	dbw MOON_BALL,   MoonBallMultiplier
 	dbw LOVE_BALL,   LoveBallMultiplier
-	dbw PARK_BALL,   ParkBallMultiplier
 	db -1 ; end
 
 UltraBallMultiplier:
@@ -748,7 +732,6 @@ UltraBallMultiplier:
 
 SafariBallMultiplier:
 GreatBallMultiplier:
-ParkBallMultiplier:
 ; multiply catch rate by 1.5
 	ld a, b
 	srl a

@@ -62,16 +62,15 @@ DEF STRING_BUFFER_LENGTH EQU 19
 	const VAR_UNOWNCOUNT       ; 0e
 	const VAR_ENVIRONMENT      ; 0f
 	const VAR_BOXSPACE         ; 10
-	const VAR_CONTESTMINUTES   ; 11
-	const VAR_XCOORD           ; 12
-	const VAR_YCOORD           ; 13
-	const VAR_SPECIALPHONECALL ; 14
-	const VAR_BT_WIN_STREAK    ; 15
-	const VAR_KURT_APRICORNS   ; 16
-	const VAR_CALLERID         ; 17
-	const VAR_BLUECARDBALANCE  ; 18
-	const VAR_BUENASPASSWORD   ; 19
-	const VAR_KENJI_BREAK      ; 1a
+	const VAR_XCOORD           ; 11
+	const VAR_YCOORD           ; 12
+	const VAR_SPECIALPHONECALL ; 13
+	const VAR_BT_WIN_STREAK    ; 14
+	const VAR_KURT_APRICORNS   ; 15
+	const VAR_CALLERID         ; 16
+	const VAR_BLUECARDBALANCE  ; 17
+	const VAR_BUENASPASSWORD   ; 18
+	const VAR_KENJI_BREAK      ; 19
 DEF NUM_VARS EQU const_value
 
 ; variable action types
@@ -271,13 +270,6 @@ DEF NUM_DECODESCS EQU const_value
 	const GBCHECK_SGB ; 1
 	const GBCHECK_CGB ; 2
 
-; CheckMagikarpLength return values
-	const_def
-	const MAGIKARPLENGTH_NOT_MAGIKARP ; 0
-	const MAGIKARPLENGTH_REFUSED      ; 1
-	const MAGIKARPLENGTH_TOO_SHORT    ; 2
-	const MAGIKARPLENGTH_BEAT_RECORD  ; 3
-
 ; ReturnShuckie return values
 	const_def
 	const SHUCKIE_WRONG_MON ; 0
@@ -285,20 +277,6 @@ DEF NUM_DECODESCS EQU const_value
 	const SHUCKIE_RETURNED  ; 2
 	const SHUCKIE_HAPPY     ; 3
 	const SHUCKIE_FAINTED   ; 4
-
-; CheckPartyFullAfterContest return values
-	const_def
-	const BUGCONTEST_CAUGHT_MON ; 0
-	const BUGCONTEST_BOXED_MON  ; 1
-	const BUGCONTEST_NO_CATCH   ; 2
-
-; Bug-Catching Contest values
-DEF BUG_CONTEST_BALLS EQU 20
-DEF BUG_CONTEST_MINUTES EQU 20
-DEF BUG_CONTEST_SECONDS EQU 0
-DEF BUG_CONTEST_PLAYER EQU 1
-DEF NUM_BUG_CONTESTANTS EQU 10 ; not counting the player
-DEF BUG_CONTESTANT_SIZE EQU 4
 
 ; HealMachineAnim setval arguments
 ; HealMachineAnim.Pointers indexes (see engine/events/heal_machine_anim.asm)
