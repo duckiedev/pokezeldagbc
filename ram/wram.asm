@@ -831,9 +831,9 @@ wEnemyHPPal:: db
 wHPPals:: ds PARTY_LENGTH
 wCurHPPal:: db
 
-	ds 7
+wHPPalIndex:: db
 
-wSGBPals:: ds 48
+	ds 54
 
 wAttrmap::
 ; 20x18 grid of bg tile attributes for 8x8 tiles
