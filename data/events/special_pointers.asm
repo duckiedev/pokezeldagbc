@@ -87,7 +87,6 @@ SpecialsPointers::
 	add_special Diploma
 
 ; Crystal only
-	add_special GiveOddEgg
 	add_special Reset ; bank 0
 	add_special MoveTutor
 	add_special OmanyteChamber

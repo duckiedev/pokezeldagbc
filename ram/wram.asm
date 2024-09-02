@@ -554,12 +554,6 @@ NEXTU
 wHallOfFameTemp:: hall_of_fame wHallOfFameTemp
 
 NEXTU
-; odd egg
-wOddEgg:: party_struct wOddEgg
-wOddEggName:: ds MON_NAME_LENGTH
-wOddEggOT:: ds NAME_LENGTH
-
-NEXTU
 ; debug mon color picker
 wDebugMiddleColors::
 wDebugLightColor:: ds 2
@@ -819,8 +813,7 @@ NEXTU
 ; credits
 wCreditsPos:: dw
 wCreditsTimer:: db
-
-wTempOddEggNickname:: ds MON_NAME_LENGTH
+	ds 11
 ENDU
 
 wDefaultSGBLayout:: db
@@ -1983,9 +1976,6 @@ UNION
 wPokedexShowPointerAddr:: dw
 wPokedexShowPointerBank:: db
 	ds 5
-
-NEXTU
-wUnusedEggHatchFlag:: db
 
 NEXTU
 ; enemy party

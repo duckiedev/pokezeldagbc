@@ -542,8 +542,3 @@ SECTION "Debug Room", ROMX
 if DEF(_DEBUG)
 INCLUDE "engine/debug/debug_room.asm"
 endc
-
-
-SECTION "Crystal Events", ROMX
-
-INCLUDE "engine/events/odd_egg.asm"
