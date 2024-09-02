@@ -3559,60 +3559,6 @@ ResetPlayerStatLevels:
 	jr nz, .loop
 	ret
 
-InitEnemyMon:
-	ld a, [wCurPartyMon]
-	ld hl, wOTPartyMon1Species
-	call GetPartyLocation
-	ld de, wEnemyMonSpecies
-	ld bc, MON_OT_ID
-	call CopyBytes
-	ld bc, MON_DVS - MON_OT_ID
-	add hl, bc
-	ld de, wEnemyMonDVs
-	ld bc, MON_POKERUS - MON_DVS
-	call CopyBytes
-	inc hl
-	inc hl
-	inc hl
-	ld de, wEnemyMonLevel
-	ld bc, PARTYMON_STRUCT_LENGTH - MON_LEVEL
-	call CopyBytes
-	ld a, [wEnemyMonSpecies]
-	ld [wCurSpecies], a
-	call GetBaseData
-	ld hl, wOTPartyMonNicknames
-	ld a, [wCurPartyMon]
-	call SkipNames
-	ld de, wEnemyMonNickname
-	ld bc, MON_NAME_LENGTH
-	call CopyBytes
-	ld hl, wEnemyMonAttack
-	ld de, wEnemyStats
-	ld bc, PARTYMON_STRUCT_LENGTH - MON_ATK
-	call CopyBytes
-	call ApplyStatusEffectOnEnemyStats
-	ld hl, wBaseType1
-	ld de, wEnemyMonType1
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hl]
-	ld [de], a
-	; The enemy mon's base Sp. Def isn't needed since its base
-	; Sp. Atk is also used to calculate Sp. Def stat experience.
-	ld hl, wBaseStats
-	ld de, wEnemyMonBaseStats
-	ld b, NUM_STATS - 1
-.loop
-	ld a, [hli]
-	ld [de], a
-	inc de
-	dec b
-	jr nz, .loop
-	ld a, [wCurPartyMon]
-	ld [wCurOTMon], a
-	ret
-
 SwitchPlayerMon:
 	call ClearSprites
 	ld a, [wCurBattleMon]
