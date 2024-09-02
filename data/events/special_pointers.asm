@@ -10,8 +10,6 @@ SpecialsPointers::
 	add_special WarpToSpawnPoint
 
 ; Map events
-	add_special CheckMagikarpLength
-	add_special MagikarpHouseSign
 	add_special HealParty ; this is both a special and a predef
 	add_special PokemonCenterPC
 	add_special PlayersHousePC

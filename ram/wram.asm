@@ -1867,8 +1867,7 @@ wCurEnemyItem:: db
 NEXTU
 ; miscellaneous words
 wBuySellItemPrice:: dw
-	ds 2
-wMagikarpLength:: dw
+	ds 5
 ENDU
 
 wTempEnemyMonSpecies::  db
@@ -2600,9 +2599,7 @@ wRoamMons_CurMapGroup:: db
 wRoamMons_LastMapNumber:: db
 wRoamMons_LastMapGroup:: db
 
-wBestMagikarpLengthFeet:: db
-wBestMagikarpLengthInches:: db
-wMagikarpRecordHoldersName:: ds NAME_LENGTH
+	ds 13
 
 wPokemonDataEnd::
 wGameDataEnd::

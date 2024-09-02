@@ -5559,7 +5559,7 @@ LoadEnemyMon:
 ; Unown
 	ld a, [wTempEnemyMonSpecies]
 	cp UNOWN
-	jr nz, .Magikarp
+	jr nz, .Happiness
 
 ; Get letter based on DVs
 	ld hl, wEnemyMonDVs
@@ -5567,63 +5567,6 @@ LoadEnemyMon:
 ; Can't use any letters that haven't been unlocked
 ; If combined with forced shiny battletype, causes an infinite loop
 	call CheckUnownLetter
-	jr c, .GenerateDVs ; try again
-
-.Magikarp:
-; These filters are untranslated.
-; They expect at wMagikarpLength a 2-byte value in mm,
-; but the value is in feet and inches (one byte each).
-
-; The first filter is supposed to make very large Magikarp even rarer,
-; by targeting those 1600 mm (= 5'3") or larger.
-; After the conversion to feet, it is unable to target any,
-; since the largest possible Magikarp is 5'3", and $0503 = 1283 mm.
-	ld a, [wTempEnemyMonSpecies]
-	cp MAGIKARP
-	jr nz, .Happiness
-
-; Get Magikarp's length
-	ld de, wEnemyMonDVs
-	ld bc, wPlayerID
-	callfar CalcMagikarpLength
-
-; No reason to keep going if length > 1536 mm (i.e. if HIGH(length) > 6 feet)
-	ld a, [wMagikarpLength]
-	cp 5
-	jr nz, .CheckMagikarpArea
-
-; 5% chance of skipping both size checks
-	call BattleRandom
-	cp 5 percent
-	jr c, .CheckMagikarpArea
-; Try again if length >= 1616 mm (i.e. if LOW(length) >= 4 inches)
-	ld a, [wMagikarpLength + 1]
-	cp 4
-	jr nc, .GenerateDVs
-
-; 20% chance of skipping this check
-	call BattleRandom
-	cp 20 percent - 1
-	jr c, .CheckMagikarpArea
-; Try again if length >= 1600 mm (i.e. if LOW(length) >= 3 inches)
-	ld a, [wMagikarpLength + 1]
-	cp 3
-	jr nc, .GenerateDVs
-
-.CheckMagikarpArea:
-	ld a, [wMapGroup]
-	cp GROUP_LAKE_OF_RAGE
-	jr nz, .Happiness
-	ld a, [wMapNumber]
-	cp MAP_LAKE_OF_RAGE
-	jr nz, .Happiness
-; 40% chance of not flooring
-	call BattleRandom
-	cp 39 percent + 1
-	jr c, .Happiness
-; Try again if length < 1024 mm (i.e. if HIGH(length) < 3 feet)
-	ld a, [wMagikarpLength]
-	cp 3
 	jr c, .GenerateDVs ; try again
 
 ; Finally done with DVs
