@@ -2437,11 +2437,9 @@ wFruitTreeFlags:: flag_array NUM_FRUIT_TREES
 wLuckyNumberDayTimer:: dw
 	ds 2
 wSpecialPhoneCallID:: db
-	ds 7
-wUnusedTwoDayTimerOn:: db
-wUnusedTwoDayTimer:: db
-wUnusedTwoDayTimerStartDate:: db
-	ds 14
+
+	ds 24
+
 wBuenasPassword:: db
 wBlueCardBalance:: db
 wDailyRematchFlags:: ds 4
