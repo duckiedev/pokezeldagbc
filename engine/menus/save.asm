@@ -683,10 +683,7 @@ VerifyBackupChecksum:
 	ret
 
 _SaveData:
-	; This is called within two scenarios:
-	;   a) ErasePreviousSave (the process of erasing the save from a previous game file)
-	;   b) unused mobile functionality
-	; It is not part of a regular save.
+	; ErasePreviousSave (the process of erasing the save from a previous game file)
 
 	ld a, BANK(sCrystalData)
 	call OpenSRAM
@@ -694,15 +691,6 @@ _SaveData:
 	ld de, sCrystalData
 	ld bc, wCrystalDataEnd - wCrystalData
 	call CopyBytes
-
-	; This block originally had some mobile functionality, but since we're still in
-	; BANK(sCrystalData), it instead overwrites the sixteen wEventFlags starting at 1:s4_a60e with
-	; garbage from wd479. This isn't an issue, since ErasePreviousSave is followed by a regular
-	; save that unwrites the garbage.
-
-	ld hl, wd479
-	ld a, [hli]
-	ld a, [hli]
 
 	jp CloseSRAM
 
@@ -713,13 +701,6 @@ _LoadData:
 	ld de, wCrystalData
 	ld bc, wCrystalDataEnd - wCrystalData
 	call CopyBytes
-
-	; This block originally had some mobile functionality to mirror _SaveData above, but instead it
-	; (harmlessly) writes the aforementioned wEventFlags to the unused wd479.
-
-	ld hl, wd479
-	ld [hli], a
-	ld [hli], a
 
 	jp CloseSRAM
 

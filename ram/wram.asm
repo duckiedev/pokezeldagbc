@@ -2103,15 +2103,10 @@ wPlayerGender::
 ;	0 male
 ;	1 female
 	db
-wd473:: ds 1
-wd474:: ds 1
-wd475:: ds 1
-wd476:: ds 1
-wd477:: ds 1
-wd478:: ds 1
+	ds 6
 wCrystalDataEnd::
 
-wd479:: ds 2
+ds 2
 
 wGameData::
 wPlayerData::
