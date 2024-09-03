@@ -683,10 +683,7 @@ VerifyBackupChecksum:
 	ret
 
 _SaveData:
-	; This is called within two scenarios:
-	;   a) ErasePreviousSave (the process of erasing the save from a previous game file)
-	;   b) unused mobile functionality
-	; It is not part of a regular save.
+	; ErasePreviousSave (the process of erasing the save from a previous game file)
 
 	ld a, BANK(sCrystalData)
 	call OpenSRAM

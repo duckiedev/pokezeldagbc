@@ -127,7 +127,6 @@ BattleTurn:
 	xor a
 	ldh [hInMenu], a
 .loop
-
 	xor a
 	ld [wPlayerIsSwitching], a
 	ld [wEnemyIsSwitching], a
@@ -1816,9 +1815,11 @@ ContinueFaintProcess:
 	dec a
 	ld [wEnemyMonHearts], a
 	cp 0
+	push af
+	call UpdateEnemyHearts
+	pop af
 	jr nz, HandleEnemyMonLostHeartAlive
 
-	call UpdateEnemyHearts
 	call FaintEnemyPokemon
 	ld hl, wBattleMonHP
 	ld a, [hli]
@@ -1885,7 +1886,6 @@ ContinueFaintProcess:
 	ret
 
 HandleEnemyMonLostHeartAlive:
-	call UpdateEnemyHearts
 	call HandleEnemyRestoreAllHP
 	call HandleEnemyTurnReset
 	ret
@@ -1901,7 +1901,7 @@ HandleEnemyZolTransform:
 	ld de, ANIM_ZOLGEL_EXPLODE
 	call z, Call_PlayBattleAnim_OnlyIfVisible
 	call HandleEnemyRestoreAllHP
-	call ContinueEnemyZolTransform
+	jr ContinueEnemyZolTransform
 
 HandleEnemyRestoreAllHP:
 	; restore health
@@ -1916,11 +1916,9 @@ HandleEnemyRestoreAllHP:
 	ld [wHPBuffer1], a
 	ld c, a
 	call RestoreHP
+	ret
 
 ContinueEnemyZolTransform:
-	ld a, [wCurSpecies]
-	cp ZOL
-	ret nz
 	; change the name
 	ld de, .GelsName
 	ld hl, wEnemyMonNickname
@@ -3495,8 +3493,8 @@ TryToRunAwayFromBattle:
 	ret
 
 InitBattleMon:
-	ld a, MON_SPECIES
-	call GetPartyParamLocation
+	ld a, MON_SPECIES			; look for the location of the species
+	call GetPartyParamLocation	; in wCurPartyMon
 	ld de, wBattleMonSpecies
 	ld bc, MON_OT_ID
 	call CopyBytes
@@ -4266,8 +4264,7 @@ PrintPlayerHUD:
 	pop hl
 	dec hl
 
-	;ld a, [wBaseHeartsMax]
-	;call DrawPlayerHearts
+	call DrawPlayerHearts
 
 	ld a, TEMPMON
 	ld [wMonType], a
@@ -4476,20 +4473,6 @@ BattleMenu:
 .loop
 	call LoadBattleMenu2
 	ret c
-
-.next
-	ld a, $1
-	ldh [hBGMapMode], a
-	ld a, [wBattleMenuCursorPosition]
-	cp $1
-	jp z, BattleMenu_Fight
-	cp $3
-	jp z, BattleMenu_Pack
-	cp $2
-	jp z, BattleMenu_PKMN
-	cp $4
-	jp z, BattleMenu_Run
-	jr .loop
 
 BattleMenu_Fight:
 	xor a
@@ -5366,7 +5349,7 @@ CheckEnemyLockedIn:
 LoadEnemyMon:
 ; Initialize enemy monster parameters
 ; To do this we pull the species from wTempEnemyMonSpecies
-ld b, b
+
 ; Clear the whole enemy mon struct (wEnemyMon)
 	xor a
 	ld hl, wEnemyMonSpecies
@@ -5538,7 +5521,7 @@ ld b, b
 ; Unown
 	ld a, [wTempEnemyMonSpecies]
 	cp UNOWN
-	ret nz
+	jr nz, .Happiness
 
 ; Get letter based on DVs
 	ld hl, wEnemyMonDVs
@@ -5586,17 +5569,15 @@ ld b, b
 	xor a
 
 .UpdateStatus:
-	ld hl, wEnemyMonStatus
-	ld [hli], a
+	ld hl, wEnemyMonStatus		; hl = address of wEnemyMonStatus (battle_struct)
+	ld [hli], a					; wEnemyMonStatus = 0  move next to wEnemyMonHearts
 
 ; Hearts
-	xor a
-	;ld a, [wEnemyMonHearts]
+	ld a, [wBaseMaxHearts]		; 
 	ld [hli], a
 
 ; Max Hearts
-	;ld a, [wEnemyMonMaxHearts]
-	;ld [hli], a
+	ld [hli], a
 
 ; Full HP..
 	ld a, [wEnemyMonMaxHP]
@@ -5629,22 +5610,27 @@ ld b, b
 
 .OpponentParty:
 ; Get HP from the party struct
-	ld hl, (wOTPartyMon1HP + 1)
-	ld a, [wCurPartyMon]
-	call GetPartyLocation
-	ld a, [hld]
-	ld [wEnemyMonHP + 1], a
-	ld a, [hld]
-	ld [wEnemyMonHP], a
+	ld hl, (wOTPartyMon1HP + 1)		; hl = address of the max hp from the party struct
+	ld a, [wCurPartyMon] 			; a = active enemy mon
+	call GetPartyLocation 			; multiply hl by the active enemy's party position
+	ld a, [hld]						; a = value at max hp, move hl back 1 to hp
+	ld [wEnemyMonHP + 1], a 		; wEnemyMonMaxHP = max hp value
+	ld a, [hld]						; a = value at current hp, move hl back 1 to max hearts
+	ld [wEnemyMonHP], a				; wEnemyMonHP = current hp
 
 ; Make sure everything knows which monster the opponent is using
 	ld a, [wCurPartyMon]
 	ld [wCurOTMon], a
 
+; Get hearts from the party struct
+	ld a, [hld]						; a = max hearts, move hl back to current hearts
+	ld [wEnemyMonMaxHearts], a		; wEnemyMonMaxHearts = max hearts
+	ld a, [hld]						; a = current hearts, move hl back to status
+	ld [wEnemyMonHearts], a
+
 ; Get status from the party struct
-	dec hl
-	ld a, [hl] ; OTPartyMonStatus
-	ld [wEnemyMonStatus], a
+	ld a, [hl] ; OTPartyMonStatus	; a = hearts current
+	ld [wEnemyMonStatus], a			; set status to hearts current
 
 .Moves:
 	ld hl, wBaseType1
@@ -7373,7 +7359,6 @@ InitEnemyTrainer:
 	ret
 
 InitEnemyWildmon:
-	ld b, b
 	ld a, WILD_BATTLE
 	ld [wBattleMode], a
 	call LoadEnemyMon

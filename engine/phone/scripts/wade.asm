@@ -28,6 +28,7 @@ WadePhoneCallerScript:
 	gettrainername STRING_BUFFER_3, BUG_CATCHER, WADE1
 	farscall PhoneScript_GreetPhone_Male
 	farscall PhoneScript_Random2
+
 	checkflag ENGINE_WADE_READY_FOR_REMATCH
 	iftrue .next
 	checkflag ENGINE_WADE_TUESDAY_NIGHT

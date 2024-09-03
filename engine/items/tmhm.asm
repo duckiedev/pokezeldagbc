@@ -328,7 +328,6 @@ TMHM_ScrollPocket:
 	jp TMHM_ShowTMMoveDescription
 
 TMHM_DisplayPocketItems:
-
 	hlcoord 5, 2
 	lb bc, 10, 15
 	ld a, " "

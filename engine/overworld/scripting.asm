@@ -233,8 +233,8 @@ ScriptCommandTable:
 	dw Script_wait                       ; a6
 	dw Script_checksave                  ; a7
 	dw Script_owmonflagaction            ; a8
-	dw Script_owmonafterbattle			 ; a9
-	dw Script_playpcmwav				 ; aa
+	dw Script_owmonafterbattle           ; a9
+	dw Script_playpcmwav                 ; aa
 	assert_table_length NUM_EVENT_COMMANDS
 
 StartScript:

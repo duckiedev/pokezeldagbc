@@ -253,7 +253,7 @@ endr
 	inc de
 
 	; Hearts
-	ld a, [wBaseHeartsMax]
+	ld a, [wBaseMaxHearts]
 	ld [de], a
 	inc de
 
@@ -322,7 +322,7 @@ endr
 	ld [de], a
 	inc de
 
-	; copy wEnemyMonHearts
+	; Copy wEnemyMonHearts
 	ld a, [hli]
 	ld [de], a
 	inc de
@@ -813,7 +813,6 @@ RetrieveMonFromDayCareLady:
 	ld [wCurPartyLevel], a
 	ld a, PC_DEPOSIT
 	ld [wPokemonWithdrawDepositParameter], a
-	jp RetrieveBreedmon ; pointless
 
 RetrieveBreedmon:
 	ld hl, wPartyCount

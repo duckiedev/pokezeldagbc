@@ -15,6 +15,7 @@ EnemySwitch_TrainerHud:
 	jp ShowOTTrainerMonsRemaining
 
 ShowPlayerMonsRemaining:
+	ld b, b
 	call DrawPlayerPartyIconHUDBorder
 	ld hl, wPartyMon1HP
 	ld de, wPartyCount
@@ -77,6 +78,7 @@ StageBallTilesData:
 	jr z, .fainted
 
 .got_hp
+	dec hl
 	dec hl
 	dec hl
 	dec hl

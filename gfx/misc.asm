@@ -3,12 +3,14 @@ SECTION "Trainer Backpics", ROMX
 ChrisBackpic::
 INCBIN "gfx/player/chris_back.2bpp.lz"
 
+
 SECTION "Shrink Pics", ROMX
 
 Shrink1Pic::
 INCBIN "gfx/new_game/shrink1.2bpp.lz"
 Shrink2Pic::
 INCBIN "gfx/new_game/shrink2.2bpp.lz"
+
 
 SECTION "The End", ROMX
 

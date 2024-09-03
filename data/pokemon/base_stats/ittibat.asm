@@ -8,7 +8,7 @@
 	db 54 ; base exp
 	db NO_ITEM, NO_ITEM ; items
 	db GENDER_F50 ; gender ratio
-	db 3 ; hearts (more than 1 is considered a boss)
+	db 1 ; hearts (more than 1 is considered a boss)
 	db 15 ; step cycles to hatch
 	db 5 ; form pic bank
 	INCBIN "gfx/pokemon/ittibat/front.dimensions"

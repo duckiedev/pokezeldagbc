@@ -5,7 +5,6 @@ Route36NationalParkGate_MapScripts:
 
 	def_callbacks
 
-
 Route36NationalParkGate_MapEvents:
 	db 0, 0 ; filler
 

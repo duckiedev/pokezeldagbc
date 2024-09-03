@@ -190,7 +190,7 @@ ItemEffects:
 	dw RestoreHPEffect     ; GOLD_BERRY
 	dw SquirtbottleEffect  ; SQUIRTBOTTLE
 	dw NoEffect            ; ITEM_B0
-	dw NoEffect      	   ; ITEM_B1
+	dw NoEffect	           ; ITEM_B1
 	dw NoEffect            ; RAINBOW_WING
 	dw NoEffect            ; ITEM_B3
 	assert_table_length ITEM_B3
@@ -226,9 +226,6 @@ PokeBallEffect:
 	jp z, Ball_BoxIsFullMessage
 
 .room_in_party
-	xor a
-	ld [wWildMon], a
-	ld a, [wBattleType]
 	call ReturnToBattle_UseBall
 
 	ld hl, wOptions
@@ -529,7 +526,6 @@ PokeBallEffect:
 	predef NewPokedexEntry
 
 .skip_pokedex
-	ld a, [wBattleType]
 	cp BATTLETYPE_CELEBI
 	jr nz, .not_celebi
 	ld hl, wBattleResult

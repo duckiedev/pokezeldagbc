@@ -18,8 +18,6 @@ StartMenu::
 	farcall ReanchorBGMap_NoOAMUpdate
 
 	ld hl, .MenuHeader
-
-.GotMenuData:
 	call LoadMenuHeader
 	call .SetUpMenuItems
 	ld a, [wBattleMenuCursorPosition]
@@ -298,6 +296,7 @@ endr
 	call .AppendMenuList
 
 	ld a, STARTMENUITEM_SAVE
+.write
 	call .AppendMenuList
 .no_save
 

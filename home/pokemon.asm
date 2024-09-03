@@ -244,6 +244,8 @@ GetBaseData::
 	ld a, BANK(BaseData)
 	rst Bankswitch
 
+	ld a, [wCurSpecies]
+
 ; Get BaseData
 	dec a
 	ld bc, BASE_DATA_SIZE
@@ -253,19 +255,6 @@ GetBaseData::
 	ld bc, BASE_DATA_SIZE
 	call CopyBytes
 
-/*
-; Beta front and back sprites
-; (see pokegold-spaceworld's data/pokemon/base_stats/)
-	ld hl, wBaseFormFrontpic
-	ld [hl], e
-	inc hl
-	ld [hl], d
-	inc hl
-	ld [hl], e
-	inc hl
-	ld [hl], d
-*/
-.end
 ; Replace Pokedex # with species
 	ld a, [wCurSpecies]
 	ld [wBaseDexNo], a
@@ -307,15 +296,10 @@ UpdatePlayerHearts::
 	ld c, a ; Store max hearts in c
 	ld a, [wBattleMonHearts]
 	ld b, a ; Store current hearts in b
-
 	hlcoord 10, 9
-
 	jr HeartDrawLoop
 
 DrawEnemyHearts::
-	ld a, [wBaseHeartsMax]
-	ld [wEnemyMonMaxHearts], a
-	ld [wEnemyMonHearts], a
 UpdateEnemyHearts::
 	ld a, [wEnemyMonMaxHearts]
 	ld c, a ; Store max hearts in c
