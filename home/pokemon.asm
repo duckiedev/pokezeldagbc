@@ -291,38 +291,46 @@ GetNickname::
 	ret
 
 DrawPlayerHearts::
-	; needs the wBaseHeartsMax in a
-	ld [wBattleMonHeartsMax], a
-	ld [wBattleMonHeartsCurrent], a
+UpdatePlayerHearts::
+	ld a, [wBattleMonMaxHearts]
+	ld c, a ; Store max hearts in c
+	ld a, [wBattleMonHearts]
+	ld b, a ; Store current hearts in b
 	hlcoord 10, 9
-    ld a, [wBattleMonHeartsCurrent]
-    ld b, a ; Store current hearts in b
-    ld a, [wBattleMonHeartsMax]
-    ld c, a ; Store max hearts in c
-	jr DrawCurrentHeartsLoop
+	jr HeartDrawLoop
 
 DrawEnemyHearts::
-	; needs the wBaseHeartsMax in a
-	ld [wEnemyMonHeartsMax], a
-	ld [wEnemyMonHeartsCurrent], a
+UpdateEnemyHearts::
+	ld a, [wEnemyMonMaxHearts]
+	ld c, a ; Store max hearts in c
+	ld a, [wEnemyMonHearts]
+	ld b, a ; Store current hearts in b
+
+	; Set the starting coordinate
 	hlcoord 1, 1
-    ld a, [wEnemyMonHeartsCurrent]
-    ld b, a ; Store current hearts in b
-    ld a, [wEnemyMonHeartsMax]
-    ld c, a ; Store max hearts in c
 
-DrawCurrentHeartsLoop:
-    ld a, $60 ; Tile ID for current heart
-    ld d, $61 ; Tile ID for max heart
-    ld e, b
-    cp e
-    jr nc, DrawMaxHearts
-    ld a, d
+; while (b != 0)
+HeartDrawLoop:
+    ld a, c
+    or a
+    ret z
 
-DrawMaxHearts:
-    ld [hl], a
-    inc hl
-    dec c
-    jr nz, DrawCurrentHeartsLoop
+    ; Check if current hearts are greater than zero
+    ld a, b
+    or a
+    jr z, .empty_heart ; Jump to empty heart if b is 0
 
-    ret
+    ; Draw full heart
+    ld a, $60 ; Full heart tile
+    ld [hli], a
+    dec b ; Decrement current hearts
+    jr .decrement_c
+
+.empty_heart
+    ; Draw empty heart
+    ld a, $61 ; Empty heart tile
+    ld [hli], a
+
+.decrement_c
+    dec c ; Decrement max hearts
+    jr HeartDrawLoop

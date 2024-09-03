@@ -4,7 +4,7 @@ MACRO flag_array
 	ds ((\1) + 7) / 8
 ENDM
 
-MACRO box_struct
+MACRO box_struct			; 32 bytes
 \1Species::        db
 \1Item::           db
 \1Moves::          ds NUM_MOVES
@@ -29,10 +29,11 @@ MACRO box_struct
 \1BoxEnd::
 ENDM
 
-MACRO party_struct
+MACRO party_struct			; 32 bytes from box_struct + 17 bytes = 49 bytes (originally 48)
 	box_struct \1
 \1Status::         db
-\1Unused::         db
+\1Hearts::         db
+\1MaxHearts::	   db
 \1HP::             dw
 \1MaxHP::          dw
 \1Stats:: ; big endian
@@ -44,7 +45,7 @@ MACRO party_struct
 \1StructEnd::
 ENDM
 
-MACRO battle_struct
+MACRO battle_struct			; 34 bytes (originally 32)
 \1Species::   db
 \1Item::      db
 \1Moves::     ds NUM_MOVES
@@ -52,7 +53,9 @@ MACRO battle_struct
 \1PP::        ds NUM_MOVES
 \1Happiness:: db
 \1Level::     db
-\1Status::    ds 2
+\1Status::    db
+\1Hearts::	  db
+\1MaxHearts:: db
 \1HP::        dw
 \1MaxHP::     dw
 \1Stats:: ; big endian

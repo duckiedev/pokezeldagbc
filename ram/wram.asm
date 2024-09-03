@@ -1920,7 +1920,7 @@ wBaseItems::
 wBaseItem1:: db
 wBaseItem2:: db
 wBaseGender:: db
-wBaseHeartsMax:: db
+wBaseMaxHearts:: db
 wBaseEggSteps:: db
 wBaseFormPicBank:: db
 wBasePicSize:: db
@@ -2010,12 +2010,7 @@ endr
 wOTPartyDataEnd::
 ENDU
 
-wBattleMonHeartsMax:: db
-wBattleMonHeartsCurrent:: db
-wEnemyMonHeartsMax:: db
-wEnemyMonHeartsCurrent:: db
-wPlaceHeartsX:: db
-wPlaceHeartsY:: db
+	ds 6
 
 wBattleAction:: db
 
@@ -2717,10 +2712,6 @@ wScratchAttrmap:: ds BG_MAP_WIDTH * BG_MAP_HEIGHT
 NEXTU
 wDecompressScratch:: ds $80 tiles
 wDecompressEnemyFrontpic:: ds $80 tiles
-
-NEXTU
-; unidentified uses
-w6_d000:: ds $1000
 ENDU
 
 

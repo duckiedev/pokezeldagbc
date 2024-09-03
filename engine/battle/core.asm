@@ -1808,10 +1808,18 @@ HandleEnemyMonFaint:
 	; if they are, check to see if they're already in the GEL form
 	ld a, [wEnemyMonStatus]
 	and 1 << FRM
-	jr nz, ContinueFaintProcess
-	jr z, HandleEnemyZolTransform
-	; fallthrough
+	jp z, HandleEnemyZolTransform
+
 ContinueFaintProcess:
+	ld a, [wEnemyMonHearts]
+	dec a
+	ld [wEnemyMonHearts], a
+	cp 0
+	push af
+	call UpdateEnemyHearts
+	pop af
+	jr nz, HandleEnemyMonLostHeartAlive
+
 	call FaintEnemyPokemon
 	ld hl, wBattleMonHP
 	ld a, [hli]
@@ -1877,6 +1885,11 @@ ContinueFaintProcess:
 	ld [wBattlePlayerAction], a
 	ret
 
+HandleEnemyMonLostHeartAlive:
+	call HandleEnemyRestoreAllHP
+	call HandleEnemyTurnReset
+	ret
+
 HandleEnemyZolTransform:
 	; set the status
 	ld a, BATTLE_VARS_STATUS_OPP
@@ -1887,7 +1900,10 @@ HandleEnemyZolTransform:
 	; play the animation
 	ld de, ANIM_ZOLGEL_EXPLODE
 	call z, Call_PlayBattleAnim_OnlyIfVisible
+	call HandleEnemyRestoreAllHP
+	jr ContinueEnemyZolTransform
 
+HandleEnemyRestoreAllHP:
 	; restore health
 	ld a, $1
 	ldh [hBGMapMode], a
@@ -1900,7 +1916,9 @@ HandleEnemyZolTransform:
 	ld [wHPBuffer1], a
 	ld c, a
 	call RestoreHP
+	ret
 
+ContinueEnemyZolTransform:
 	; change the name
 	ld de, .GelsName
 	ld hl, wEnemyMonNickname
@@ -1911,8 +1929,10 @@ HandleEnemyZolTransform:
 	call StdBattleTextbox
 
 	; increase evasion and speed
+.GelsName
+	db "GELS@@@@@@@"
 
-
+HandleEnemyTurnReset:
 	; reset turn and begin battle again
 	call SetEnemyTurn
 	call SpikesDamage
@@ -1921,8 +1941,6 @@ HandleEnemyZolTransform:
 	ld [wBattlePlayerAction], a
 	inc a
 	ret
-.GelsName
-	db "GELS@@@@@@@"
 
 DoubleSwitch:
 	call ClearSprites
@@ -3475,8 +3493,8 @@ TryToRunAwayFromBattle:
 	ret
 
 InitBattleMon:
-	ld a, MON_SPECIES
-	call GetPartyParamLocation
+	ld a, MON_SPECIES			; look for the location of the species
+	call GetPartyParamLocation	; in wCurPartyMon
 	ld de, wBattleMonSpecies
 	ld bc, MON_OT_ID
 	call CopyBytes
@@ -4246,7 +4264,6 @@ PrintPlayerHUD:
 	pop hl
 	dec hl
 
-	ld a, [wBaseHeartsMax]
 	call DrawPlayerHearts
 
 	ld a, TEMPMON
@@ -4323,7 +4340,6 @@ DrawEnemyHUD:
 	ld a, [hl]
 	ld [de], a
 
-	ld a, [wBaseHeartsMax]
 	call DrawEnemyHearts
 
 	ld a, TEMPMON
@@ -5553,11 +5569,14 @@ LoadEnemyMon:
 	xor a
 
 .UpdateStatus:
-	ld hl, wEnemyMonStatus
+	ld hl, wEnemyMonStatus		; hl = address of wEnemyMonStatus (battle_struct)
+	ld [hli], a					; wEnemyMonStatus = 0  move next to wEnemyMonHearts
+
+; Hearts
+	ld a, [wBaseMaxHearts]		; 
 	ld [hli], a
 
-; Unused byte
-	xor a
+; Max Hearts
 	ld [hli], a
 
 ; Full HP..
@@ -5591,22 +5610,27 @@ LoadEnemyMon:
 
 .OpponentParty:
 ; Get HP from the party struct
-	ld hl, (wOTPartyMon1HP + 1)
-	ld a, [wCurPartyMon]
-	call GetPartyLocation
-	ld a, [hld]
-	ld [wEnemyMonHP + 1], a
-	ld a, [hld]
-	ld [wEnemyMonHP], a
+	ld hl, (wOTPartyMon1HP + 1)		; hl = address of the max hp from the party struct
+	ld a, [wCurPartyMon] 			; a = active enemy mon
+	call GetPartyLocation 			; multiply hl by the active enemy's party position
+	ld a, [hld]						; a = value at max hp, move hl back 1 to hp
+	ld [wEnemyMonHP + 1], a 		; wEnemyMonMaxHP = max hp value
+	ld a, [hld]						; a = value at current hp, move hl back 1 to max hearts
+	ld [wEnemyMonHP], a				; wEnemyMonHP = current hp
 
 ; Make sure everything knows which monster the opponent is using
 	ld a, [wCurPartyMon]
 	ld [wCurOTMon], a
 
+; Get hearts from the party struct
+	ld a, [hld]						; a = max hearts, move hl back to current hearts
+	ld [wEnemyMonMaxHearts], a		; wEnemyMonMaxHearts = max hearts
+	ld a, [hld]						; a = current hearts, move hl back to status
+	ld [wEnemyMonHearts], a
+
 ; Get status from the party struct
-	dec hl
-	ld a, [hl] ; OTPartyMonStatus
-	ld [wEnemyMonStatus], a
+	ld a, [hl] ; OTPartyMonStatus	; a = hearts current
+	ld [wEnemyMonStatus], a			; set status to hearts current
 
 .Moves:
 	ld hl, wBaseType1

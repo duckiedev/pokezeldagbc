@@ -77,17 +77,6 @@ SetEnemyTurn::
 	ldh [hBattleTurn], a
 	ret
 
-UpdateEnemyStatus::
-	ld a, [wCurOTMon]
-	ld hl, wOTPartyMon1Level
-	call GetPartyLocation
-
-	ld d, h
-	ld e, l
-	ld hl, wEnemyMonLevel
-	ld bc, wEnemyMonMaxHP - wEnemyMonLevel
-	jp CopyBytes
-
 UpdateOpponentInParty::
 	ldh a, [hBattleTurn]
 	and a
@@ -116,7 +105,7 @@ UpdateBattleMon::
 	jp CopyBytes
 
 UpdateEnemyMonInParty::
-; Update level, status, current HP
+; Update level, status, hearts, current HP
 
 ; No wildmons.
 	ld a, [wBattleMode]
