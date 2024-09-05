@@ -334,3 +334,9 @@ HeartDrawLoop:
 .decrement_c
     dec c ; Decrement max hearts
     jr HeartDrawLoop
+
+DrawBossIcon::
+	ld a, $70
+	hlcoord 0, 0
+	ld [hl], a
+	ret

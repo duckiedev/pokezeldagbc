@@ -4319,6 +4319,11 @@ DrawEnemyHUD:
 	ld [wCurSpecies], a
 	ld [wCurPartySpecies], a
 	call GetBaseData
+	ld a, [wBaseMaxHearts]
+	cp 3
+	jr c, .Continue
+	call DrawBossIcon
+.Continue
 	ld de, wEnemyMonNickname
 	hlcoord 1, 0
 	call Battle_DummyFunction
