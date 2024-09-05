@@ -71,10 +71,7 @@ wMusicFade::
 wMusicFadeCount:: db
 wMusicFadeID:: dw
 
-	ds 3
-
-wc0f3:: dw
-; needed by pcmwav
+	ds 4
 
 wCryPitch:: dw
 wCryLength:: dw
@@ -2166,8 +2163,7 @@ endr
 
 wCmdQueue:: ds CMDQUEUE_CAPACITY * CMDQUEUE_ENTRY_SIZE
 
-wRedrawRowOrColumnSrcTiles:: ds SCREEN_WIDTH * 2
-; needed by pcmwav
+	ds 40
 
 wMapObjects::
 wPlayerObject:: map_object wPlayer ; player is map object 0

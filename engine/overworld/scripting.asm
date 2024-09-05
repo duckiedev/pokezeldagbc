@@ -234,7 +234,6 @@ ScriptCommandTable:
 	dw Script_checksave                  ; a7
 	dw Script_owmonflagaction            ; a8
 	dw Script_owmonafterbattle           ; a9
-	dw Script_playpcmwav                 ; aa
 	assert_table_length NUM_EVENT_COMMANDS
 
 StartScript:
@@ -1157,12 +1156,6 @@ Script_owmonafterbattle:
 	ld a, [wSeenOWMonBank]
 	ld b, a
 	jp ScriptJump
-
-Script_playpcmwav:
-	;call GetScriptByte
-	;ldpcmwav e, a
-	;farcall PlayPCMSoundClip
-	ret
  
 Script_loadwildmon:
 	ld a, (1 << 7)
