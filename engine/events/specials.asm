@@ -155,6 +155,12 @@ UnusedMemoryGame:
 	call StartGameCornerGame
 	ret
 
+BreakoutGame:
+	ld a, Bank(_BreakoutGame)
+	ld hl, _BreakoutGame
+	call StartGameCornerGame
+	ret 
+
 StartGameCornerGame:
 	call FarQueueScript
 	call FadeToMenu

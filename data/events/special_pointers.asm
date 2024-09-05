@@ -26,6 +26,7 @@ SpecialsPointers::
 	add_special UnownPuzzle
 	add_special SlotMachine
 	add_special CardFlip
+	add_special BreakoutGame
 	add_special UnusedMemoryGame ; unused
 	add_special ClearBGPalettesBufferScreen ; unused
 	add_special FadeOutToWhite

@@ -400,6 +400,7 @@ SECTION "bank38", ROMX
 INCLUDE "engine/games/card_flip.asm"
 INCLUDE "engine/games/unown_puzzle.asm"
 INCLUDE "engine/games/memory_game.asm"
+INCLUDE "engine/games/breakout.asm"
 INCLUDE "engine/pokemon/bills_pc.asm"
 
 

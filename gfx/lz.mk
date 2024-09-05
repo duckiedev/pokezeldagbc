@@ -8,6 +8,8 @@ gfx/diploma/diploma.2bpp.lz: LZFLAGS += --method 8 --align 1
 
 gfx/memory_game/memory_game.2bpp.lz: LZFLAGS += --method 2 --align 4
 
+gfx/breakout/breakout.2bpp.lz: LZFLAGS += --method 2 --align 4
+
 gfx/intro/%.lz: LZFLAGS += --align 4
 gfx/intro/suicune_close.2bpp.lz: LZFLAGS += --method 2 --align 4
 gfx/intro/unown_back.2bpp.lz: LZFLAGS += --method 2 --align 4

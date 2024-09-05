@@ -24,6 +24,12 @@ HeroesCave01_MapScripts:
 ;	sjump HeroesCave01_ItsDangerousSpeechBox
 ;	end
 
+HeroesCave01_BreakoutGameTest:
+	reanchormap
+	special BreakoutGame
+	closetext
+	end
+
 HeroesCave01_MapEvents:
 	db 0, 0 ; filler
 
@@ -36,4 +42,4 @@ HeroesCave01_MapEvents:
 	def_bg_events
 	
 	def_object_events
-	object_event  6,  2, SPRITE_CAPTAIN_TOAD, SPRITEMOVEDATA_STILL, 1, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, -1, -1
+	object_event  6,  2, SPRITE_CAPTAIN_TOAD, SPRITEMOVEDATA_STILL, 1, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, HeroesCave01_BreakoutGameTest, -1

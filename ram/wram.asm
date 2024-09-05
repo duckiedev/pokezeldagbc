@@ -682,6 +682,24 @@ wBetaPokerSGBCol:: db
 wBetaPokerSGBRow:: db
 
 NEXTU
+; Breakout
+wBallDead:: db
+wLevelClear:: db
+wLives:: db
+wPaddleX:: db
+wFrameTick:: db
+ 
+;; Whether the ball is moving BALL_MOVE_LEFT, BALL_MOVE_RIGHT, BALL_MOVE_UP or BALL_MOVE_DOWN
+;; Note that a ball can be moving along the X axis (BALL_MOVE_LEFT, BALL_MOVE_RIGHT) and the
+;; Y axis (BALL_MOVE_UP, BALL_MOVE_DOWN) at the same time.
+wBallMoveState:: db
+
+;; If the ball is moving on the X axis, how many pixels velocity is it moving per frame?
+wBallVelocityX:: db
+;; If the ball is moving on the Y axis, how many pixels velocity is it moving per frame?
+wBallVelocityY:: db
+
+NEXTU
 ; unused memory game
 wMemoryGameCards:: ds 9 * 5
 wMemoryGameCardsEnd::
