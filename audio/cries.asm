@@ -2074,17 +2074,17 @@ Cry_Rattata_Ch8:
 	noise_note 8, 9, 1, 73
 	sound_ret
 
-Cry_HonedgeH:
+Cry_Honedge_H:
     channel_count 2
-    channel 5, Cry_HonedgeH_Ch5
-    channel 8, Cry_HonedgeH_Ch8
+    channel 5, Cry_Honedge_H_Ch5
+    channel 8, Cry_Honedge_H_Ch8
 
-Cry_HonedgeH_Ch5:
+Cry_Honedge_H_Ch5:
     square_note 9, 0, 0, 0  ; length, duty, volume, frequency
     square_note 6, 0, 7, 192
     sound_ret
 
-Cry_HonedgeH_Ch8:
+Cry_Honedge_H_Ch8:
     noise_note 1, 8, 0, 39  ; length, volume, fade, frequency
     noise_note 1, 8, 0, 55
     noise_note 1, 8, 0, 70

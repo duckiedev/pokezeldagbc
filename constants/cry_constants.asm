@@ -72,6 +72,6 @@
 	const CRY_AIPOM
 	const CRY_DUNSPARCE
 	const CRY_DONPHAN
-	const CRY_HONEDGEH
+	const CRY_HONEDGE_H
 
 DEF NUM_CRIES EQU const_value

@@ -318,7 +318,7 @@ DoPlayerMovement::
 	cp STANDING
 	jr z, .ensurewalk
 
-	ld a, PEGASUS_SHOES
+	ld a, POWRSNEAKERS
 	ld [wCurItem], a
 	ld hl, wNumItems
 	call CheckItem
