@@ -2023,6 +2023,8 @@ UsedVineWhipScript:
 	playsound SFX_VINE_WHIP
 	readvar VAR_FACING
 	if_equal DOWN, .down
+	if_equal RIGHT, .right
+	if_equal LEFT, .left
 .loop_up
 	applymovement PLAYER, .VineWhipUpStep
 	callasm .CheckContinueVineWhip
@@ -2037,7 +2039,22 @@ UsedVineWhipScript:
 	iffalse .loop_down
 	applymovement PLAYER, .VineWhipRemoveFixedFacing
 	end
-	
+.left:
+	applymovement PLAYER, .VineWhipFacingLeft
+.loop_left
+	applymovement PLAYER, .VineWhipLeftStep
+	callasm .CheckContinueVineWhip
+	iffalse .loop_left
+	applymovement PLAYER, .VineWhipRemoveFixedFacing
+	end
+.right:
+	applymovement PLAYER, .VineWhipFacingRight
+.loop_right
+	applymovement PLAYER, .VineWhipRightStep
+	callasm .CheckContinueVineWhip
+	iffalse .loop_right
+	applymovement PLAYER, .VineWhipRemoveFixedFacing
+	end
 .CheckContinueVineWhip:
 	xor a
 	ld [wScriptVar], a
@@ -2054,6 +2071,24 @@ UsedVineWhipScript:
 
 .VineWhipDownStep:
 	step DOWN
+	step_end
+
+.VineWhipLeftStep:
+	step LEFT
+	step_end
+
+.VineWhipFacingLeft:
+	turn_head LEFT
+	fix_facing
+	step_end
+	
+.VineWhipRightStep:
+	step RIGHT
+	step_end
+
+.VineWhipFacingRight:
+	turn_head RIGHT
+	fix_facing
 	step_end
 
 .VineWhipFixFacing:
