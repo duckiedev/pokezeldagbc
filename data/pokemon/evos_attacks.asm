@@ -1377,7 +1377,7 @@ ElectrodeEvosAttacks:
 
 BoombloomEvosAttacks:
 	db 0 ; no more evolutions
-	db 1, BARRAGE
+	db 1, BOMBARD
 	db 1, HYPNOSIS
 	db 7, REFLECT
 	db 13, LEECH_SEED

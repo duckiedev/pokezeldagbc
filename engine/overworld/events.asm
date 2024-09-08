@@ -987,9 +987,6 @@ PlayerEventScriptPointers:
 InvalidEventScript:
 	end
 
-UnusedPlayerEventScript: ; unreferenced
-	end
-
 HatchEggScript:
 	callasm OverworldHatchEgg
 	end

@@ -135,6 +135,7 @@ SpriteAnimOAMData:
 	spriteanimoam $00, .OAMData_GameFreakLogo4_11        ; SPRITE_ANIM_OAMSET_GAMEFREAK_LOGO_11
 	spriteanimoam $00, .OAMData_PartyMon				 ; SPRITE_ANIM_OAMSET_PARTY_MON_1
 	spriteanimoam $04, .OAMData_PartyMon				 ; SPRITE_ANIM_OAMSET_PARTY_MON_2
+	spriteanimoam $00, .OAMData_Bomb					 ; SPRITE_ANIM_OAMSET_BOMB
 	assert_table_length NUM_SPRITE_ANIM_OAMSETS
 
 .OAMData_1x1_Palette0:
@@ -980,3 +981,6 @@ SpriteAnimOAMData:
 	dbsprite -1,  0,  4,  0, $51, 1
 	dbsprite  0,  0,  4,  0, $52, 1
 	dbsprite  1,  0,  4,  0, $53, 1
+
+.OAMData_Bomb:
+	

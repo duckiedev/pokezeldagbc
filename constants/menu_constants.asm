@@ -56,14 +56,15 @@
 	const MONMENUITEM_MILKDRINK  ; 13
 	const MONMENUITEM_SWEETSCENT ; 14
 	const MONMENUITEM_VINEWHIP	 ; 15
+	const MONMENUITEM_BOMBARD	 ; 16
 	; options
-	const MONMENUITEM_STATS      ; 16
-	const MONMENUITEM_SWITCH     ; 17
-	const MONMENUITEM_ITEM       ; 18
-	const MONMENUITEM_CANCEL     ; 19
-	const MONMENUITEM_MOVE       ; 20
-	const MONMENUITEM_MAIL       ; 21
-	const MONMENUITEM_ERROR      ; 22
+	const MONMENUITEM_STATS      ; 17
+	const MONMENUITEM_SWITCH     ; 18
+	const MONMENUITEM_ITEM       ; 19
+	const MONMENUITEM_CANCEL     ; 20
+	const MONMENUITEM_MOVE       ; 21
+	const MONMENUITEM_MAIL       ; 22
+	const MONMENUITEM_ERROR      ; 23
 DEF NUM_MONMENUITEMS EQU const_value - 1
 
 ; MonMenuOptions categories

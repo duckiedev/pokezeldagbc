@@ -46,6 +46,7 @@ DoSpriteAnimFrame:
 	dw SpriteAnimFunc_IntroUnown
 	dw SpriteAnimFunc_IntroUnownF
 	dw SpriteAnimFunc_IntroSuicuneAway
+	dw SpriteAnimFunc_Bomb
 	assert_table_length NUM_SPRITE_ANIM_FUNCS
 
 SpriteAnimFunc_Null:
@@ -860,3 +861,5 @@ AnimSeqs_Sine:
 AnimSeqs_Cosine:
 	call Sprites_Cosine
 	ret
+
+SpriteAnimFunc_Bomb:

@@ -1712,10 +1712,6 @@ RodNothingText:
 	text_far _RodNothingText
 	text_end
 
-UnusedNothingHereText: ; unreferenced
-	text_far _UnusedNothingHereText
-	text_end
-
 BikeFunction:
 	call .TryBike
 	and $7f
@@ -1935,17 +1931,10 @@ VineWhipFunction:
 	dw .FailVineWhip
 
 .TryVineWhip:
-	;ld de, ENGINE_EARTHBADGE
-	;farcall CheckBadge
-	;jr c, .noearthbadge
 	call TryVineWhipMenu
 	jr c, .failed
 	ld a, $1
 	ret
-
-;.noearthbadge
-	;ld, a $80
-	;ret
 
 .failed
 	ld a, $2
@@ -2112,4 +2101,82 @@ UsedVineWhipText:
 CantVineWhipText:
 	text_far _CantVineWhipText
 	text_end
+
+BombardFunction:
+	call FieldMoveJumptableReset
+.loop
+	ld hl, .Jumptable
+	call FieldMoveJumptable
+	jr nc, .loop
+	and $7f
+	ld [wFieldMoveSucceeded], a
+	ret
+
+.Jumptable:
+	dw .TryBombard
+	dw .DoBombard
+	dw .FailBombard_Bike
+	dw .FailBombard_Surf
+
+.TryBombard:
+	ld a, [wPlayerState]
+	cp PLAYER_BIKE
+	jr z, .fail_bike
+	cp PLAYER_SURF
+	jr z, .fail_surf
+	cp PLAYER_SURF_PIKA
+	jr z, .fail_surf
+	ld a, $1
+	ret
+.fail_bike
+	ld a, $2
+	ret
+.fail_surf
+	ld a, $3
+	ret
+
+.DoBombard:
+	ld hl, BombardScript
+	call QueueScript
+	ld a, $81
+	ret
+
+.FailBombard_Bike:
+	ld hl, CantBombardOnBikeText
+	call MenuTextboxBackup
+	ld a, $80
+	ret
+
+.FailBombard_Surf:
+	ld hl, CantBombardOnWaterText
+	call MenuTextboxBackup
+	ld a, $80
+	ret
+
+BombardScript:
+	reloadmappart
+	special UpdateTimePals
+	callasm GetPartyNickname
+	writetext UsedBombardText
+	waitbutton
+	closetext
+	playsound SFX_STRENGTH
+	earthquake 50
+	pause 30
 	
+UsedBombardText:
+	text_ram wStringBuffer3
+	text " used"
+	line "EARTHQUAKE!"
+	done
+
+CantBombardOnBikeText:
+	text "It's unsafe to"
+	line "ride a bike in"
+	cont "an EARTHQUAKE!"
+	prompt
+
+CantBombardOnWaterText:
+	text "There's no earth"
+	line "to quake here!"
+	prompt

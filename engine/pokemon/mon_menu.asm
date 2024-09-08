@@ -141,6 +141,7 @@ PokemonActionSubmenu:
 	dbw MONMENUITEM_WATERFALL,  MonMenu_Waterfall
 	dbw MONMENUITEM_ROCKSMASH,  MonMenu_RockSmash
 	dbw MONMENUITEM_SWEETSCENT, MonMenu_SweetScent
+	dbw MONMENUITEM_BOMBARD,	MonMenu_Bombard
 	dbw MONMENUITEM_VINEWHIP,	MonMenu_VineWhip
 	dbw MONMENUITEM_STATS,      OpenPartyStats
 	dbw MONMENUITEM_SWITCH,     SwitchPartyMons
@@ -788,6 +789,19 @@ MonMenu_SweetScent:
 	
 MonMenu_VineWhip:
 	farcall VineWhipFunction
+	ld a, [wFieldMoveSucceeded]
+	cp $1
+	jr nz, .Fail
+	ld b, $4
+	ld a, $2
+	ret
+
+.Fail:
+	ld a, $3
+	ret
+
+MonMenu_Bombard:
+	farcall BombardFunction
 	ld a, [wFieldMoveSucceeded]
 	cp $1
 	jr nz, .Fail
