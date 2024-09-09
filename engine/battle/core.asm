@@ -1799,6 +1799,13 @@ UpdateHPBar:
 	pop bc
 	ret
 
+UpdateEXPBar:
+	hlcoord 19, 10
+	push bc
+	predef AnimateEXPBar
+	pop bc
+	ret
+
 HandleEnemyMonFaint:
 	; if the current enemy mon fainting isn't a ZOL, continue normal process
 	ld a, [wCurSpecies]
@@ -4161,47 +4168,22 @@ DrawPlayerHUD:
 	predef DrawPlayerHP
 
 	; Exp bar
-	push de
+	; frame
+	hlcoord 18, 7
+	predef DrawEXPBarFrame
+
+	; load the address of partymon's 1 experience into de
 	ld a, [wCurBattleMon]
 	ld hl, wPartyMon1Exp + 2
 	call GetPartyLocation
 	ld d, h
 	ld e, l
 
-	; draw exp bar frame
-	;outside
-	; top-left
-	hlcoord 18, 7
-	ld a, $BC
-	ld [hli], a 
-	; top
-	inc a
-	ld [hl], a
-	; left edge 1
-	hlcoord 18, 8
-	ld [hl], $C0 
-	; left edge 2
-	hlcoord 18, 9
-	ld [hl], $C0
-	; left edge hp bar
-	hlcoord 18, 10
-	ld [hl], $BB
-
-	; bottom-left tile
-	hlcoord 18, 11
-	ld a, $be
-	ld [hli], a
-	; bottom
-	inc a
-	ld [hl], a
-
-	;hlcoord 19, 16
-	;ld [hl], $41 ; right exp bar end cap
-	hlcoord 19, 8
+	; load the mon's level into b
 	ld a, [wTempMonLevel]
 	ld b, a
+	hlcoord 19, 8
 	call FillInExpBar
-	pop de
 	ret
 
 UpdatePlayerHPPal:
@@ -6346,7 +6328,7 @@ GiveExperiencePoints:; Give experience.
 	ld a, [wStringBuffer2]
 	ldh [hQuotient + 2], a
 	pop bc
-	call AnimateExpBar
+	predef AnimateEXPBar
 	push bc
 	call LoadTilemapToTempTilemap
 	pop bc
@@ -6654,7 +6636,7 @@ ExpPointsText:
 	text_far _ExpPointsText
 	text_end
 
-AnimateExpBar:
+/*AnimateExpBar:
 	push bc
 
 	ld hl, wCurPartyMon
@@ -6746,8 +6728,8 @@ AnimateExpBar:
 	ld [wBattleMonLevel], a
 	push de
 	call .PlayExpBarSound
-	ld c, $40
-	call .LoopBarAnimation
+	ld c, 24
+	predef AnimateEXPBar
 	call PrintPlayerHUD
 	ld hl, wBattleMonNickname
 	ld de, wStringBuffer1
@@ -6774,7 +6756,7 @@ AnimateExpBar:
 	pop bc
 	ld c, a
 	call .PlayExpBarSound
-	call .LoopBarAnimation
+	predef AnimateEXPBar
 	call TerminateExpBarSound
 	pop af
 	ldh [hProduct + 2], a
@@ -6839,7 +6821,7 @@ AnimateExpBar:
 	ld a, $1
 	ldh [hBGMapMode], a
 	ret
-
+*/
 SendOutMonText:
 ; Depending on the HP of the enemy mon, the game prints a different text
 	ld hl, wEnemyMonHP
@@ -7000,21 +6982,26 @@ ComeBackText:
 	text_end
 
 FillInExpBar:
+
 	push hl
 	call CalcExpBar
+	call CalcExpBarPixels
 	pop hl
-	;ld de, 2
-	;add hl, de
-	jp PlaceExpBar
+	ld d, EXP_BAR_LENGTH
+	hlcoord 19, 10
+	call DrawBattleEXPBar
+	ret
 
-CalcExpBar:
-; Calculate the percent exp between this level and the next
-; Level in b
-	push de ; store de for later
+CalcExpBar: ; outputs percentage in b
+	; Calculate the percent exp between this level and the next
+	; Level in b
+	push de
 	ld d, b
 	push de
 	callfar CalcExpAtLevel
 	pop de
+; set variables
+	ld [wCurEXPAnimNewEXP], a
 ; exp at current level gets pushed to the stack
 	ld hl, hMultiplicand
 	ld a, [hli]
@@ -7026,6 +7013,7 @@ CalcExpBar:
 ; next level
 	inc d
 	callfar CalcExpAtLevel
+	ld [wCurEXPAnimMaxEXP], a
 ; back up the next level exp, and subtract the two levels
 	ld hl, hMultiplicand + 2
 	ld a, [hl]
@@ -7071,7 +7059,7 @@ CalcExpBar:
 	ld [hld], a
 	xor a
 	ld [hl], a
-	ld a, 64
+	ld a, 24
 	ldh [hMultiplier], a
 	call Multiply
 	pop af
@@ -7101,23 +7089,33 @@ CalcExpBar:
 	call Divide
 	ldh a, [hQuotient + 3]
 	ld b, a
-	ld a, $40
+	ld a, 24
 	sub b
 	ld b, a
-	ret
+	ret 
 
+CalcExpBarPixels: ; converts percentage in b to pixels in b
+	ld a, b
+    ld c, EXP_BAR_LENGTH_PX
+    call SimpleMultiply
+    ld b, a
+    ld a, 100
+    ld c, a
+    ld a, b
+    call SimpleDivide
+    ld e, b ; e now contains the number of pixels to fill
+    ret
+
+	/*
 PlaceExpBar:
-	;push de
-	ld c, $3 ; number of tiles
+	ld c, $8 ; number of tiles
 .loop1
-	ld a, b ; load the percentage of experience left into a
-	sub $8 ; subtract 9 from it
-	jr c, .next ; jump to .next if a was less than $8 before the subtraction.
-	ld b, a ; load the amount with 8 subtracted from it to b again
-	ld a, $c9 ; full bar
-    ld [hl], a
-    ld de, $14 ; move down one row (32 tiles)
-    add hl, de
+	ld a, b
+	sub $8
+	jr c, .next
+	ld b, a
+	ld a, $6a ; full bar
+	ld [hld], a
 	dec c
 	jr z, .finish
 	jr .loop1
@@ -7129,19 +7127,17 @@ PlaceExpBar:
 	jr .skip
 
 .loop2
-	ld a, $C1 ; empty bar
+	ld a, $62 ; empty bar
 
 .skip
-    ld [hl], a
-    ld de, $14 ; move down one row (32 tiles)
-    add hl, de
-	;ld a, $C1 ; empty bar
+	ld [hld], a
+	ld a, $62 ; empty bar
 	dec c
 	jr nz, .loop2
 
 .finish
-	;pop de
 	ret
+*/
 
 GetBattleMonBackpic:
 	ld a, [wPlayerSubStatus4]

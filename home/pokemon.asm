@@ -76,6 +76,98 @@ DrawBattleHPBar::
 	pop hl
 	ret
 
+DrawEXPBarFrame::
+	push de
+	ld de, SCREEN_WIDTH
+	ld a, $BC
+	ld [hli], a 
+
+	; top
+	inc a
+	ld [hld], a
+
+	; left edge 1
+	add hl, de
+	ld [hl], $C0
+
+	; left edge 2
+	add hl, de
+	ld [hl], $C0
+
+	; left edge hp bar
+	add hl, de
+	ld [hl], $BB
+
+	; bottom-left tile
+	add hl, de
+	ld a, $BE
+	ld [hli], a
+
+	; bottom
+	inc a
+	ld [hl], a
+
+	pop de
+	ret
+
+DrawBattleEXPBar::
+; Draw an EXP bar d tiles long at hl
+; Fill it up to e pixels
+
+	push hl
+	push de
+	push bc
+
+; Draw a template
+	ld a, $C1 ; empty bar
+
+.template	
+	ld [hl], a
+	push bc
+	ld bc, -SCREEN_WIDTH
+	add hl, bc
+	pop bc
+	dec d
+	jr nz, .template
+
+; Safety check # pixels
+	ld a, e
+	and a
+	jr nz, .fill
+	jr .done
+	ld e, 1
+
+.fill
+; Keep drawing tiles until pixel length is reached
+	ld a, e
+	sub TILE_WIDTH
+	jr c, .lastbar
+
+	ld e, a
+	ld a, $C9 ; full bar
+	push bc
+	ld bc, -SCREEN_WIDTH
+	add hl, bc
+	pop bc
+	ld [hl], a
+	ld a, e
+	and a
+	jr z, .done
+	ld a, c
+	and a
+	jr c, .fill
+	ld e, $1
+.lastbar
+	ld a, $C1  ; empty bar
+	add e      ; + e
+	ld [hl], a
+
+.done
+	pop bc
+	pop de
+	pop hl
+	ret
+
 PrepMonFrontpic::
 	ld a, $1
 	ld [wBoxAlignment], a

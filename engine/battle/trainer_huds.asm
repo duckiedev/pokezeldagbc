@@ -14,8 +14,7 @@ EnemySwitch_TrainerHud:
 	call LoadBallIconGFX
 	jp ShowOTTrainerMonsRemaining
 
-ShowPlayerMonsRemaining:
-	ld b, b
+ShowPlayerMonsRemaining:	
 	call DrawPlayerPartyIconHUDBorder
 	ld hl, wPartyMon1HP
 	ld de, wPartyCount
