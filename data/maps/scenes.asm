@@ -72,4 +72,5 @@ MapScenes::
 	scene_var FAST_SHIP_B1F,                               wFastShipB1FSceneID
 	scene_var MOUNT_MOON_SQUARE,                           wMountMoonSquareSceneID
 	scene_var CAVE_H8,		                               wCaveH8SceneID
+	scene_var HEROES_CAVE_02,							   wHeroesCave02SceneID
 	db -1 ; end

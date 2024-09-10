@@ -2320,8 +2320,9 @@ wFastShip1FSceneID::                              db
 wFastShipB1FSceneID::                             db
 wMountMoonSquareSceneID::                         db
 wCaveH8SceneID::                                  db
+wHeroesCave02SceneID::							  db
 
-	ds 41
+	ds 40
 
 ; fight counts
 wJackFightCount::    db

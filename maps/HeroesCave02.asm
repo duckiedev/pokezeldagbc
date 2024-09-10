@@ -1,10 +1,38 @@
 	object_const_def
-	const HEROES_CAVE_02_ROAMINGMON_ITTIBAT
+	const HEROESCAVE02_ROAMINGMON_ITTIBAT
 
 HeroesCave02_MapScripts:
 	def_scene_scripts
-
+	scene_script HeroesCave02_EnterThenLockScene, SCENE_HEROESCAVE02_ENTERTHENLOCK
+	scene_script HeroesCave02_LockDoorsScene, SCENE_HEROESCAVE02_LOCK_DOORS
+	scene_script HeroesCave02NoopScene1, SCENE_HEROESCAVE02_NOOP
 	def_callbacks
+
+HeroesCave02_EnterThenLockScene:
+	sdefer HeroesCave02_LockDoorsScene
+	end
+
+HeroesCave02NoopScene1:
+	end
+
+HeroesCave02_LockDoorsScene:
+	playmusic MUSIC_NONE
+	;reanchormap
+	applymovement PLAYER, HeroesCave02_PlayerDoorStepMovement
+	playsound SFX_PLACE_PUZZLE_PIECE_DOWN
+	changeblock $6, $1, $35
+	changeblock $0, $5, $3D
+	changeblock $6, $9, $3B
+	waitsfx
+	reanchormap
+	special RestartMapMusic
+	;setevent EVENT_HEROESCAVE02
+	setscene SCENE_HEROESCAVE02_NOOP
+	end
+
+HeroesCave02_PlayerDoorStepMovement:
+	step RIGHT
+	step_end
 
 HeroesCave02RoamingMonIttibat01:
 	owmon ITTIBAT, 5, EVENT_BEAT_ITTIBAT_HEROES_CAVE_02, .Script
