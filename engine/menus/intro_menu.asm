@@ -9,9 +9,6 @@ Intro_MainMenu:
 	farcall MainMenu
 	jp StartTitleScreen
 
-IntroMenu_DummyFunction: ; unreferenced
-	ret
-
 PrintDayOfWeek:
 	push de
 	ld hl, .Days
@@ -76,12 +73,6 @@ PlayerProfileSetup:
 	farcall InitGender
 	ret
 
-if DEF(_DEBUG)
-DebugRoom: ; unreferenced
-	farcall _DebugRoom
-	ret
-endc
-
 ResetWRAM:
 	xor a
 	ldh [hBGMapMode], a
@@ -93,6 +84,10 @@ _ResetWRAM:
 	ld bc, wOptions - wShadowOAM
 	xor a
 	call ByteFill
+
+	; Set AskNickname to true
+	ld hl, wOptions
+	bit ASKNICKNAME, [hl]
 
 	ld hl, STARTOF(WRAMX)
 	ld bc, wGameData - STARTOF(WRAMX)
@@ -194,8 +189,6 @@ endc
 	call InitializeNPCNames
 
 	farcall InitDecorations
-
-	farcall DeletePartyMonMail
 
 	call ResetGameTime
 	ret

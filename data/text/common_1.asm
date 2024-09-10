@@ -1422,11 +1422,6 @@ _CantAcceptEggText::
 	line "accept an EGG."
 	prompt
 
-_RemoveMailText::
-	text "Remove MAIL before"
-	line "you come see me."
-	prompt
-
 _LastHealthyMonText::
 	text "If you give me"
 	line "that, what will"

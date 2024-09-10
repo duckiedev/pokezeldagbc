@@ -1,4 +1,137 @@
 DEF RANDY_OT_ID EQU 01001
+InsertPokemonIntoBox:
+	ld a, BANK(sBoxCount)
+	call OpenSRAM
+	ld hl, sBoxCount
+	call InsertSpeciesIntoBoxOrParty
+	ld a, [sBoxCount]
+	dec a
+	ld [wNextBoxOrPartyIndex], a
+	ld hl, sBoxMonNicknames
+	ld bc, MON_NAME_LENGTH
+	ld de, wBufferMonNickname
+	call InsertDataIntoBoxOrParty
+	ld a, [sBoxCount]
+	dec a
+	ld [wNextBoxOrPartyIndex], a
+	ld hl, sBoxMonOTs
+	ld bc, NAME_LENGTH
+	ld de, wBufferMonOT
+	call InsertDataIntoBoxOrParty
+	ld a, [sBoxCount]
+	dec a
+	ld [wNextBoxOrPartyIndex], a
+	ld hl, sBoxMons
+	ld bc, BOXMON_STRUCT_LENGTH
+	ld de, wBufferMon
+	call InsertDataIntoBoxOrParty
+	ld hl, wBufferMonMoves
+	ld de, wTempMonMoves
+	ld bc, NUM_MOVES
+	call CopyBytes
+	ld hl, wBufferMonPP
+	ld de, wTempMonPP
+	ld bc, NUM_MOVES
+	call CopyBytes
+	ld a, [wCurPartyMon]
+	ld b, a
+	farcall RestorePPOfDepositedPokemon
+	jp CloseSRAM
+
+InsertPokemonIntoParty:
+	ld hl, wPartyCount
+	call InsertSpeciesIntoBoxOrParty
+	ld a, [wPartyCount]
+	dec a
+	ld [wNextBoxOrPartyIndex], a
+	ld hl, wPartyMonNicknames
+	ld bc, MON_NAME_LENGTH
+	ld de, wBufferMonNickname
+	call InsertDataIntoBoxOrParty
+	ld a, [wPartyCount]
+	dec a
+	ld [wNextBoxOrPartyIndex], a
+	ld hl, wPartyMonOTs
+	ld bc, NAME_LENGTH
+	ld de, wBufferMonOT
+	call InsertDataIntoBoxOrParty
+	ld a, [wPartyCount]
+	dec a
+	ld [wNextBoxOrPartyIndex], a
+	ld hl, wPartyMons
+	ld bc, PARTYMON_STRUCT_LENGTH
+	ld de, wBufferMon
+	call InsertDataIntoBoxOrParty
+	ret
+
+InsertSpeciesIntoBoxOrParty:
+	inc [hl]
+	inc hl
+	ld a, [wCurPartyMon]
+	ld c, a
+	ld b, 0
+	add hl, bc
+	ld a, [wCurPartySpecies]
+	ld c, a
+.loop
+	ld a, [hl]
+	ld [hl], c
+	inc hl
+	inc c
+	ld c, a
+	jr nz, .loop
+	ret
+
+InsertDataIntoBoxOrParty:
+	push de
+	push hl
+	push bc
+	ld a, [wNextBoxOrPartyIndex]
+	dec a
+	call AddNTimes
+	push hl
+	add hl, bc
+	ld d, h
+	ld e, l
+	pop hl
+.loop
+	push bc
+	ld a, [wNextBoxOrPartyIndex]
+	ld b, a
+	ld a, [wCurPartyMon]
+	cp b
+	pop bc
+	jr z, .insert
+	push hl
+	push de
+	push bc
+	call CopyBytes
+	pop bc
+	pop de
+	pop hl
+	push hl
+	ld a, l
+	sub c
+	ld l, a
+	ld a, h
+	sbc b
+	ld h, a
+	pop de
+	ld a, [wNextBoxOrPartyIndex]
+	dec a
+	ld [wNextBoxOrPartyIndex], a
+	jr .loop
+
+.insert
+	pop bc
+	pop hl
+	ld a, [wCurPartyMon]
+	call AddNTimes
+	ld d, h
+	ld e, l
+	pop hl
+	call CopyBytes
+	ret
 
 TryAddMonToParty:
 ; Check if to copy wild mon or generate a new one
@@ -1351,44 +1484,7 @@ RemoveMonFromPartyOrBox:
 	ld bc, sBoxMonNicknamesEnd
 .party7
 	call CopyDataUntil
-	; Mail time!
 .finish
-	ld a, [wPokemonWithdrawDepositParameter]
-	and a
-	jp nz, CloseSRAM
-	; Shift mail
-	ld a, BANK(sPartyMail)
-	call OpenSRAM
-	; If this is the last mon in our party, no need to shift mail.
-	ld hl, wPartyCount
-	ld a, [wCurPartyMon]
-	cp [hl]
-	jr z, .close_sram
-	; Shift our mail messages up.
-	ld hl, sPartyMail
-	ld bc, MAIL_STRUCT_LENGTH
-	call AddNTimes
-	push hl
-	add hl, bc
-	pop de
-	ld a, [wCurPartyMon]
-	ld b, a
-.loop2
-	push bc
-	push hl
-	ld bc, MAIL_STRUCT_LENGTH
-	call CopyBytes
-	pop hl
-	push hl
-	ld bc, MAIL_STRUCT_LENGTH
-	add hl, bc
-	pop de
-	pop bc
-	inc b
-	ld a, [wPartyCount]
-	cp b
-	jr nz, .loop2
-.close_sram
 	jp CloseSRAM
 
 ComputeNPCTrademonStats:
@@ -1793,6 +1889,9 @@ GivePoke::
 .party
 	farcall SetCaughtData
 .set_caught_data
+	ld a, [wOptions]
+	bit ASKNICKNAME, a
+	jr z, .skip_nickname
 	farcall GiveANickname_YesNo
 	pop de
 	jr c, .skip_nickname

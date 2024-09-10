@@ -101,7 +101,6 @@ compare: $(roms) $(patches)
 tools:
 	$(MAKE) -C tools/
 
-
 RGBASMFLAGS = -Q8 -P includes.asm -Weverything -Wnumeric-string=2 -Wtruncation=1
 # Create a sym/map for debug purposes if `make` run with `DEBUG=1`
 ifeq ($(DEBUG),1)
@@ -190,12 +189,6 @@ gfx/pokemon/egg/unused_front.2bpp: rgbgfx += -Z
 
 gfx/new_game/shrink1.2bpp: rgbgfx += -Z
 gfx/new_game/shrink2.2bpp: rgbgfx += -Z
-
-gfx/mail/dragonite.1bpp: tools/gfx += --remove-whitespace
-gfx/mail/large_note.1bpp: tools/gfx += --remove-whitespace
-gfx/mail/surf_mail_border.1bpp: tools/gfx += --remove-whitespace
-gfx/mail/flower_mail_border.1bpp: tools/gfx += --remove-whitespace
-gfx/mail/litebluemail_border.1bpp: tools/gfx += --remove-whitespace
 
 gfx/pokedex/pokedex.2bpp: tools/gfx += --trim-whitespace
 gfx/pokedex/pokedex_sgb.2bpp: tools/gfx += --trim-whitespace

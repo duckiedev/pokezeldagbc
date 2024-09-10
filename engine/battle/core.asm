@@ -3156,9 +3156,6 @@ CheckWhetherToAskSwitch:
 	ld a, [wPartyCount]
 	dec a
 	jp z, .return_nc
-	ld a, [wOptions]
-	bit BATTLE_SHIFT, a
-	jr nz, .return_nc
 	ld a, [wCurPartyMon]
 	push af
 	ld a, [wCurBattleMon]

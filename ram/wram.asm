@@ -747,8 +747,7 @@ wBillsPC_LoadedBox:: db ; 0 if party, 1 - 14 if box, 15 if active box
 wBillsPC_BackupScrollPosition:: db
 wBillsPC_BackupCursorPosition:: db
 wBillsPC_BackupLoadedBox:: db
-wBillsPC_MonHasMail:: db
-	ds 5
+	ds 6
 wBillsPCDataEnd::
 
 
@@ -1126,8 +1125,8 @@ wOptions::
 ; bit 3: ?
 ; bit 4: no text delay
 ; bit 5: stereo off/on
-; bit 6: battle style shift/set
-; bit 7: battle scene off/on
+; bit 6: battle scene off/on
+; bit 7: ask nickname off/on
 	db
 wSaveFileExists:: db
 wTextboxFrame::
@@ -1187,12 +1186,6 @@ wSeerCaughtLevelString:: ds 4
 wSeerCaughtLevel:: db
 wSeerCaughtData:: db
 wSeerCaughtGender:: db
-
-
-SECTION UNION "Miscellaneous WRAM 1", WRAMX
-
-; mail temp storage
-wTempMail:: mailmsg wTempMail
 
 
 SECTION UNION "Miscellaneous WRAM 1", WRAMX
@@ -1305,21 +1298,13 @@ wSwitchItemBuffer:: ds 2 ; may store 1 or 2 bytes
 SECTION UNION "Miscellaneous WRAM 1", WRAMX
 
 ; switching pokemon in party
-; may store a name, partymon, or mail
+; may store a name or partymon
 wSwitchMonBuffer::
 UNION
 	ds NAME_LENGTH
 NEXTU
 	ds PARTYMON_STRUCT_LENGTH
-NEXTU
-	ds MAIL_STRUCT_LENGTH
 ENDU
-
-
-SECTION UNION "Miscellaneous WRAM 1", WRAMX
-
-; giving pokemon mail
-wMonMailMessageBuffer:: ds MAIL_MSG_LENGTH + 1
 
 
 SECTION UNION "Miscellaneous WRAM 1", WRAMX
@@ -1603,12 +1588,6 @@ NEXTU
 wCurElevatorCount:: db
 wCurElevatorFloors:: ds 15
 
-NEXTU
-; mailbox data
-wCurMessageScrollPosition:: db
-wCurMessageIndex:: db
-wMailboxCount:: db
-wMailboxItems:: ds MAILBOX_CAPACITY
 ENDU
 
 wListPointer:: dw
@@ -1649,7 +1628,7 @@ wSpriteFlags:: db
 
 wHandlePlayerStep:: db
 
-wCurIconMonHasItemOrMail:: db
+wCurIconMonHasItem:: db
 
 wPartyMenuActionText:: db
 
@@ -1837,11 +1816,6 @@ NEXTU
 ; withdraw/deposit items
 wPCItemQuantityChange:: db
 wPCItemQuantity:: db
-
-NEXTU
-; mail
-wCurMailAuthorID:: dw
-wCurMailIndex:: db
 
 NEXTU
 ; kurt

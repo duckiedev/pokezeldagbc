@@ -39,6 +39,7 @@ CaveH8_ItsDangerousSpeechBox:
 	end
 	
 CaveH8_HonedgeScript:
+	reanchormap
 	pokepic HONEDGE_H
 	cry HONEDGE_H
 	waitbutton

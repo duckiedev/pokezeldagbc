@@ -1,6 +1,6 @@
 DefaultOptions:
 ; wOptions: med text speed
-	db TEXT_DELAY_MED
+	db TEXT_DELAY_MED | (1 << ASKNICKNAME) | (1 << STEREO)
 ; wSaveFileExists: no
 	db FALSE
 ; wTextboxFrame: frame 1

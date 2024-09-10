@@ -10,7 +10,6 @@
 	const DAYCARETEXT_LAST_MON
 	const DAYCARETEXT_LAST_ALIVE_MON
 	const DAYCARETEXT_COME_BACK_LATER
-	const DAYCARETEXT_REMOVE_MAIL
 	const DAYCARETEXT_GENIUSES
 	const DAYCARETEXT_ASK_WITHDRAW
 	const DAYCARETEXT_WITHDRAW
@@ -128,13 +127,6 @@ DayCareAskDepositPokemon:
 	jr z, .Egg
 	farcall CheckCurPartyMonFainted
 	jr c, .OutOfUsableMons
-	ld hl, wPartyMon1Item
-	ld bc, PARTYMON_STRUCT_LENGTH
-	ld a, [wCurPartyMon]
-	call AddNTimes
-	ld d, [hl]
-	farcall ItemIsMail
-	jr c, .HoldingMail
 	ld hl, wPartyMonNicknames
 	ld a, [wCurPartyMon]
 	call GetNickname
@@ -160,15 +152,6 @@ DayCareAskDepositPokemon:
 	ld a, DAYCARETEXT_LAST_ALIVE_MON
 	scf
 	ret
-
-.HoldingMail:
-	ld a, DAYCARETEXT_REMOVE_MAIL
-	scf
-	ret
-
-.DaycareDummyText: ; unreferenced
-	text_far _DaycareDummyText
-	text_end
 
 DayCare_DepositPokemonText:
 	ld a, DAYCARETEXT_DEPOSIT
@@ -283,16 +266,15 @@ PrintDayCareText:
 	dw .OnlyOneMonText ; 07
 	dw .LastHealthyMonText ; 08
 	dw .ComeBackLaterText ; 09
-	dw .RemoveMailText ; 0a
-	dw .AreWeGeniusesText ; 0b
-	dw .YourMonHasGrownText ; 0c
-	dw .PerfectHeresYourMonText ; 0d
-	dw .GotBackMonText ; 0e
-	dw .BackAlreadyText ; 0f
-	dw .HaveNoRoomText ; 10
-	dw .NotEnoughMoneyText ; 11
-	dw .OhFineThenText ; 12
-	dw .ComeAgainText ; 13
+	dw .AreWeGeniusesText ; 0a
+	dw .YourMonHasGrownText ; 0b
+	dw .PerfectHeresYourMonText ; 0c
+	dw .GotBackMonText ; 0d
+	dw .BackAlreadyText ; 0e
+	dw .HaveNoRoomText ; 0f
+	dw .NotEnoughMoneyText ; 10
+	dw .OhFineThenText ; 11
+	dw .ComeAgainText ; 12
 
 .DayCareManIntroText:
 	text_far _DayCareManIntroText
@@ -320,10 +302,6 @@ PrintDayCareText:
 
 .CantAcceptEggText:
 	text_far _CantAcceptEggText
-	text_end
-
-.RemoveMailText:
-	text_far _RemoveMailText
 	text_end
 
 .LastHealthyMonText:

@@ -63,8 +63,7 @@
 	const MONMENUITEM_ITEM       ; 19
 	const MONMENUITEM_CANCEL     ; 20
 	const MONMENUITEM_MOVE       ; 21
-	const MONMENUITEM_MAIL       ; 22
-	const MONMENUITEM_ERROR      ; 23
+	const MONMENUITEM_ERROR      ; 22
 DEF NUM_MONMENUITEMS EQU const_value - 1
 
 ; MonMenuOptions categories

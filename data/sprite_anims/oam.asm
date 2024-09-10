@@ -68,8 +68,6 @@ SpriteAnimOAMData:
 	spriteanimoam $00, .OAMData_MagnetTrainRed           ; SPRITE_ANIM_OAMSET_EVOLUTION_BALL_OF_LIGHT_1
 	spriteanimoam $04, .OAMData_1x1_Palette0             ; SPRITE_ANIM_OAMSET_EVOLUTION_BALL_OF_LIGHT_2
 	spriteanimoam $00, .OAMData_RadioTuningKnob          ; SPRITE_ANIM_OAMSET_RADIO_TUNING_KNOB
-	spriteanimoam $00, .OAMData_PartyMonWithMail1        ; SPRITE_ANIM_OAMSET_PARTY_MON_WITH_MAIL_1
-	spriteanimoam $00, .OAMData_PartyMonWithMail2        ; SPRITE_ANIM_OAMSET_PARTY_MON_WITH_MAIL_2
 	spriteanimoam $00, .OAMData_PartyMonWithItem1        ; SPRITE_ANIM_OAMSET_PARTY_MON_WITH_ITEM_1
 	spriteanimoam $00, .OAMData_PartyMonWithItem2        ; SPRITE_ANIM_OAMSET_PARTY_MON_WITH_ITEM_2
 	spriteanimoam $00, .OAMData_MagnetTrainRed           ; SPRITE_ANIM_OAMSET_MAGNET_TRAIN_RED_1
@@ -307,20 +305,6 @@ SpriteAnimOAMData:
 	dbsprite  0, -1,  0,  0, $01, PAL_OW_RED | PRIORITY
 	dbsprite -1,  0,  0,  0, $02, PAL_OW_RED | PRIORITY
 	dbsprite  0,  0,  0,  0, $03, PAL_OW_RED | PRIORITY
-
-.OAMData_PartyMonWithMail1:
-	db 4
-	dbsprite -1, -1,  0,  0, $00, -1
-	dbsprite  0, -1,  0,  0, $01, -1
-	dbsprite -1,  0,  0,  0, $08, PAL_ICON_RED
-	dbsprite  0,  0,  0,  0, $03, -1
-
-.OAMData_PartyMonWithMail2:
-	db 4
-	dbsprite -1, -1,  0,  0, $04, -1
-	dbsprite  0, -1,  0,  0, $05, -1
-	dbsprite -1,  0,  0,  0, $08, PAL_ICON_RED
-	dbsprite  0,  0,  0,  0, $07, -1
 
 .OAMData_PartyMonWithItem1:
 	db 4

@@ -315,6 +315,9 @@ HatchEggs:
 	call AddNTimes
 	ld d, h
 	ld e, l
+	ld a, [wOptions]
+	bit ASKNICKNAME, a
+	jr z, .nonickname
 	push de
 	ld hl, .BreedAskNicknameText
 	call PrintText

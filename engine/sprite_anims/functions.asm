@@ -26,7 +26,6 @@ DoSpriteAnimFrame:
 	dw SpriteAnimFunc_SlotsGolem
 	dw SpriteAnimFunc_SlotsChansey
 	dw SpriteAnimFunc_SlotsChanseyEgg
-	dw SpriteAnimFunc_MailCursor
 	dw SpriteAnimFunc_UnusedCursor
 	dw SpriteAnimFunc_MemoryGameCursor
 	dw SpriteAnimFunc_PokegearArrow
@@ -213,10 +212,6 @@ SpriteAnimFunc_GSIntroHoOhLugia:
 
 SpriteAnimFunc_NamingScreenCursor:
 	callfar NamingScreen_AnimateCursor
-	ret
-
-SpriteAnimFunc_MailCursor:
-	callfar ComposeMail_AnimateCursor
 	ret
 
 SpriteAnimFunc_GameFreakLogo:

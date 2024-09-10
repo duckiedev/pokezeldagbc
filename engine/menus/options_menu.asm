@@ -2,10 +2,10 @@
 	const_def
 	const OPT_TEXT_SPEED    ; 0
 	const OPT_BATTLE_SCENE  ; 1
-	const OPT_BATTLE_STYLE  ; 2
+	const OPT_ASKNICKNAME	; 2
 	const OPT_SOUND         ; 3
 	const OPT_MENU_ACCOUNT  ; 4
-	const OPT_CANCEL        ; 6
+	const OPT_CANCEL        ; 5
 DEF NUM_OPTIONS EQU const_value ; 6
 
 _Option:
@@ -26,7 +26,7 @@ _Option:
 	ld [wJumptableIndex], a
 
 ; display the settings of each option when the menu is opened
-	ld c, NUM_OPTIONS - 2 ; omit frame type, the last option
+	ld c, NUM_OPTIONS ; omit frame type, the last option
 .print_text_loop
 	push bc
 	xor a
@@ -76,7 +76,7 @@ StringOptions:
 	db "        :<LF>"
 	db "BATTLE SCENE<LF>"
 	db "        :<LF>"
-	db "BATTLE STYLE<LF>"
+	db "ASK NICKNAME<LF>"
 	db "        :<LF>"
 	db "SOUND<LF>"
 	db "        :<LF>"
@@ -91,7 +91,7 @@ GetOptionPointer:
 ; entries correspond to OPT_* constants
 	dw Options_TextSpeed
 	dw Options_BattleScene
-	dw Options_BattleStyle
+	dw Options_AskNickname
 	dw Options_Sound
 	dw Options_MenuAccount
 	dw Options_Cancel
@@ -221,34 +221,34 @@ Options_BattleScene:
 .On:  db "ON @"
 .Off: db "OFF@"
 
-Options_BattleStyle:
+Options_AskNickname:
 	ld hl, wOptions
 	ldh a, [hJoyPressed]
 	bit D_LEFT_F, a
 	jr nz, .LeftPressed
 	bit D_RIGHT_F, a
 	jr z, .NonePressed
-	bit BATTLE_SHIFT, [hl]
-	jr nz, .ToggleShift
-	jr .ToggleSet
+	bit ASKNICKNAME, [hl]
+	jr nz, .ToggleOff
+	jr .ToggleOn
 
 .LeftPressed:
-	bit BATTLE_SHIFT, [hl]
-	jr z, .ToggleSet
-	jr .ToggleShift
+	bit ASKNICKNAME, [hl]
+	jr z, .ToggleOn
+	jr .ToggleOff
 
 .NonePressed:
-	bit BATTLE_SHIFT, [hl]
-	jr nz, .ToggleSet
+	bit ASKNICKNAME, [hl]
+	jr nz, .ToggleOn
 
-.ToggleShift:
-	res BATTLE_SHIFT, [hl]
-	ld de, .Shift
+.ToggleOff:
+	res ASKNICKNAME, [hl]
+	ld de, .Off
 	jr .Display
 
-.ToggleSet:
-	set BATTLE_SHIFT, [hl]
-	ld de, .Set
+.ToggleOn:
+	set ASKNICKNAME, [hl]
+	ld de, .On
 
 .Display:
 	hlcoord 11, 7
@@ -256,8 +256,8 @@ Options_BattleStyle:
 	and a
 	ret
 
-.Shift: db "SHIFT@"
-.Set:   db "SET  @"
+.Off: db "OFF@"
+.On:  db "ON @"
 
 Options_Sound:
 	ld hl, wOptions
@@ -383,10 +383,16 @@ OptionsControl:
 
 .UpPressed:
 	ld a, [hl]
-	ret
+	cp OPT_TEXT_SPEED
+	jr z, .CheckCancel
 
 .Decrease:
 	dec [hl]
+	scf
+	ret
+
+.CheckCancel:
+	ld [hl], OPT_CANCEL
 	scf
 	ret
 

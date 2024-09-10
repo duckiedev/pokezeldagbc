@@ -47,7 +47,7 @@ ChangeBoxSaveGame:
 	pop de
 	ret
 
-MoveMonWOMail_SaveGame:
+MoveMon_SaveGame:
 	call PauseGameLogic
 	push de
 	call SaveBox
@@ -58,7 +58,7 @@ MoveMonWOMail_SaveGame:
 	call ResumeGameLogic
 	ret
 
-MoveMonWOMail_InsertMon_SaveGame:
+MoveMon_InsertMon_SaveGame:
 	call PauseGameLogic
 	push de
 	call SaveBox
@@ -78,7 +78,6 @@ MoveMonWOMail_InsertMon_SaveGame:
 	call SaveBackupPlayerData
 	call SaveBackupPokemonData
 	call SaveBackupChecksum
-	farcall BackupPartyMonMail
 	farcall SaveRTC
 	call LoadBox
 	call ResumeGameLogic
@@ -88,8 +87,8 @@ MoveMonWOMail_InsertMon_SaveGame:
 	call DelayFrames
 	ret
 
-StartMoveMonWOMail_SaveGame:
-	ld hl, MoveMonWOMailSaveText
+StartMoveMon_SaveGame:
+	ld hl, MoveMonSaveText
 	call MenuTextbox
 	call YesNoBox
 	call ExitMenu
@@ -242,7 +241,6 @@ _SaveGameData:
 	call SaveBackupPokemonData
 	call SaveBackupChecksum
 	call UpdateStackTop
-	farcall BackupPartyMonMail
 	farcall SaveRTC
 	ret
 
@@ -468,7 +466,6 @@ TryLoadSaveFile:
 	call LoadPlayerData
 	call LoadPokemonData
 	call LoadBox
-	farcall RestorePartyMonMail
 	call ValidateBackupSave
 	call SaveBackupOptions
 	call SaveBackupPlayerData
@@ -483,7 +480,6 @@ TryLoadSaveFile:
 	call LoadBackupPlayerData
 	call LoadBackupPokemonData
 	call LoadBox
-	farcall RestorePartyMonMail
 	call ValidateSave
 	call SaveOptions
 	call SavePlayerData
@@ -960,6 +956,6 @@ ChangeBoxSaveText:
 	text_far _ChangeBoxSaveText
 	text_end
 
-MoveMonWOMailSaveText:
-	text_far _MoveMonWOMailSaveText
+MoveMonSaveText:
+	text_far _MoveMonSaveText
 	text_end

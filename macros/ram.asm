@@ -155,17 +155,6 @@ MACRO channel_struct
                       ds 1
 ENDM
 
-MACRO mailmsg
-\1Message::     ds MAIL_MSG_LENGTH
-\1MessageEnd::  db
-\1Author::      ds PLAYER_NAME_LENGTH
-\1Nationality:: dw
-\1AuthorID::    dw
-\1Species::     db
-\1Type::        db
-\1End::
-ENDM
-
 MACRO roam_struct
 \1Species::   db
 \1Level::     db

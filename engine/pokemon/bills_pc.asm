@@ -153,8 +153,6 @@ BillsPCDepositJumptable:
 	dw BillsPCDepositFuncCancel ; Cancel
 
 BillsPCDepositFuncDeposit:
-	call BillsPC_CheckMail_PreventBlackout
-	jp c, BillsPCDepositFuncCancel
 	call DepositPokemon
 	jr c, .box_full
 	ld a, $0
@@ -181,8 +179,6 @@ BillsPCDepositFuncStats:
 	ret
 
 BillsPCDepositFuncRelease:
-	call BillsPC_CheckMail_PreventBlackout
-	jr c, BillsPCDepositFuncCancel
 	call BillsPC_IsMonAnEgg
 	jr c, BillsPCDepositFuncCancel
 	ld a, [wMenuCursorY]
@@ -410,8 +406,6 @@ BillsPC_Withdraw:
 	dw .cancel ; Cancel
 
 .withdraw
-	call BillsPC_CheckMail_PreventBlackout
-	jp c, .cancel
 	call TryWithdrawPokemon
 	jr c, .FailedWithdraw
 	ld a, $0
@@ -492,7 +486,7 @@ BillsPC_Withdraw:
 	db "RELEASE@"
 	db "CANCEL@"
 
-_MovePKMNWithoutMail:
+_MovePKMN:
 	ld hl, wOptions
 	ld a, [hl]
 	push af
@@ -542,7 +536,7 @@ _MovePKMNWithoutMail:
 	dw .Init
 	dw .Joypad
 	dw .PrepSubmenu
-	dw .MoveMonWOMailSubmenu
+	dw .MoveMonSubmenu
 	dw .PrepInsertCursor
 	dw .Joypad2
 	dw BillsPC_EndJumptableLoop
@@ -557,7 +551,7 @@ _MovePKMNWithoutMail:
 	ld a, 5
 	ld [wBillsPC_NumMonsOnScreen], a
 	call BillsPC_RefreshTextboxes
-	call BillsPC_MoveMonWOMail_BoxNameAndArrows
+	call BillsPC_MoveMon_BoxNameAndArrows
 	call PCMonInfo
 	ld a, $ff
 	ld [wCurPartySpecies], a
@@ -576,7 +570,7 @@ _MovePKMNWithoutMail:
 	ld a, [hl]
 	and A_BUTTON
 	jr nz, .a_button
-	call MoveMonWithoutMail_DPad
+	call MoveMon_DPad
 	jr c, .d_pad
 	and a
 	ret z
@@ -634,7 +628,7 @@ _MovePKMNWithoutMail:
 	call BillsPC_IncrementJumptableIndex
 	ret
 
-.MoveMonWOMailSubmenu:
+.MoveMonSubmenu:
 	ld hl, .MenuHeader
 	call CopyMenuHeader
 	ld a, [wMenuCursorY]
@@ -660,8 +654,6 @@ _MovePKMNWithoutMail:
 	dw .Cancel
 
 .Move:
-	call BillsPC_CheckMail_PreventBlackout
-	jp c, .Cancel
 	ld a, [wBillsPC_ScrollPosition]
 	ld [wBillsPC_BackupScrollPosition], a
 	ld a, [wBillsPC_CursorPosition]
@@ -710,7 +702,7 @@ _MovePKMNWithoutMail:
 	ld a, $5
 	ld [wBillsPC_NumMonsOnScreen], a
 	call BillsPC_RefreshTextboxes
-	call BillsPC_MoveMonWOMail_BoxNameAndArrows
+	call BillsPC_MoveMon_BoxNameAndArrows
 	call ClearSprites
 	call BillsPC_UpdateInsertCursor
 	call WaitBGMap
@@ -725,7 +717,7 @@ _MovePKMNWithoutMail:
 	ld a, [hl]
 	and A_BUTTON
 	jr nz, .a_button_2
-	call MoveMonWithoutMail_DPad_2
+	call MoveMon_DPad_2
 	jr c, .dpad_2
 	and a
 	ret z
@@ -750,7 +742,7 @@ _MovePKMNWithoutMail:
 .a_button_2
 	call BillsPC_CheckSpaceInDestination
 	jr c, .no_space
-	call MovePKMNWithoutMail_InsertMon
+	call MovePKMN_InsertMon
 	ld a, $0
 	ld [wJumptableIndex], a
 	ret
@@ -835,7 +827,7 @@ Withdraw_UpDown:
 .empty
 	jp BillsPC_JoypadDidNothing
 
-MoveMonWithoutMail_DPad:
+MoveMon_DPad:
 	ld hl, hJoyLast
 	ld a, [wBillsPC_NumMonsOnScreen]
 	ld d, a
@@ -859,7 +851,7 @@ MoveMonWithoutMail_DPad:
 	jr nz, BillsPC_PressRight
 	jr BillsPC_JoypadDidNothing
 
-MoveMonWithoutMail_DPad_2:
+MoveMon_DPad_2:
 	ld hl, hJoyLast
 	ld a, [wBillsPC_NumMonsOnScreen]
 	ld d, a
@@ -969,7 +961,7 @@ BillsPC_PlaceString:
 	call PlaceString
 	ret
 
-BillsPC_MoveMonWOMail_BoxNameAndArrows:
+BillsPC_MoveMon_BoxNameAndArrows:
 	call BillsPC_BoxName
 	hlcoord 8, 1
 	ld [hl], $5f
@@ -1065,8 +1057,6 @@ PCMonInfo:
 	call GetBaseData
 	ld de, vTiles2 tile $00
 	predef GetMonFrontpic
-	xor a
-	ld [wBillsPC_MonHasMail], a
 	ld a, [wCurPartySpecies]
 	ld [wTempSpecies], a
 	cp EGG
@@ -1095,16 +1085,7 @@ PCMonInfo:
 	and a
 	ret z
 
-	ld d, a
-	callfar ItemIsMail
-	jr c, .mail
 	ld a, $5d ; item icon
-	jr .printitem
-.mail
-	ld a, $1
-	ld [wBillsPC_MonHasMail], a
-	ld a, $5c ; mail icon
-.printitem
 	hlcoord 7, 12
 	ld [hl], a
 	ret
@@ -1591,46 +1572,6 @@ BillsPC_CheckSpaceInDestination:
 	scf
 	ret
 
-BillsPC_CheckMail_PreventBlackout:
-	ld a, [wBillsPC_LoadedBox]
-	and a
-	jr nz, .Okay
-	ld a, [wBillsPC_NumMonsInBox]
-	cp $3
-	jr c, .ItsYourLastPokemon
-	ld a, [wBillsPC_CursorPosition]
-	ld hl, wBillsPC_ScrollPosition
-	add [hl]
-	ld [wCurPartyMon], a
-	farcall CheckCurPartyMonFainted
-	jr c, .AllOthersFainted
-	ld a, [wBillsPC_MonHasMail]
-	and a
-	jr nz, .HasMail
-.Okay:
-	and a
-	ret
-
-.HasMail:
-	ld de, PCString_RemoveMail
-	jr .NotOkay
-
-.AllOthersFainted:
-	ld de, PCString_NoMoreUsablePKMN
-	jr .NotOkay
-
-.ItsYourLastPokemon:
-	ld de, PCString_ItsYourLastPKMN
-.NotOkay:
-	call BillsPC_PlaceString
-	ld de, SFX_WRONG
-	call WaitPlaySFX
-	call WaitSFX
-	ld c, 50
-	call DelayFrames
-	scf
-	ret
-
 BillsPC_IsMonAnEgg:
 	ld a, [wCurPartySpecies]
 	cp EGG
@@ -1918,7 +1859,7 @@ ReleasePKMN_ByePKMN:
 	call DelayFrames
 	ret
 
-MovePKMNWithoutMail_InsertMon:
+MovePKMN_InsertMon:
 	push hl
 	push de
 	push bc
@@ -1963,7 +1904,7 @@ MovePKMNWithoutMail_InsertMon:
 .dw_return
 	pop af
 	ld e, a
-	farcall MoveMonWOMail_InsertMon_SaveGame
+	farcall MoveMon_InsertMon_SaveGame
 	ret
 
 .Saving_LeaveOn:
@@ -2040,7 +1981,7 @@ MovePKMNWithoutMail_InsertMon:
 	ld a, [wBillsPC_BackupLoadedBox]
 	dec a
 	ld e, a
-	farcall MoveMonWOMail_SaveGame
+	farcall MoveMon_SaveGame
 	ld a, [wBillsPC_BackupCursorPosition]
 	ld hl, wBillsPC_BackupScrollPosition
 	add [hl]
@@ -2067,7 +2008,7 @@ MovePKMNWithoutMail_InsertMon:
 	ld a, [wBillsPC_LoadedBox]
 	dec a
 	ld e, a
-	farcall MoveMonWOMail_SaveGame
+	farcall MoveMon_SaveGame
 	ld a, [wBillsPC_CursorPosition]
 	ld hl, wBillsPC_ScrollPosition
 	add [hl]
@@ -2185,10 +2126,6 @@ BillsPC_InitGFX:
 	call ByteFill
 	call LoadStandardFont
 	call LoadFontsBattleExtra
-	ld hl, PCMailGFX
-	ld de, vTiles2 tile $5c
-	ld bc, 4 tiles
-	call CopyBytes
 	ld hl, PCSelectLZ
 	ld de, vTiles0 tile $00
 	call Decompress
@@ -2198,7 +2135,6 @@ BillsPC_InitGFX:
 	ret
 
 PCSelectLZ: INCBIN "gfx/pc/pc.2bpp.lz"
-PCMailGFX:  INCBIN "gfx/pc/pc_mail.2bpp"
 
 PCString_ChooseaPKMN: db "Choose a <PK><MN>.@"
 PCString_WhatsUp: db "What's up?@"
@@ -2207,12 +2143,10 @@ PCString_MoveToWhere: db "Move to where?@"
 PCString_ItsYourLastPKMN: db "It's your last <PK><MN>!@"
 PCString_TheresNoRoom: db "There's no room!@"
 PCString_NoMoreUsablePKMN: db "No more usable <PK><MN>!@"
-PCString_RemoveMail: db "Remove MAIL.@"
 PCString_ReleasedPKMN: db "Released <PK><MN>.@"
 PCString_Bye: db "Bye,@"
 PCString_Stored: db "Stored @"
 PCString_Got: db "Got @"
-PCString_Non: db "Non.@" ; unreferenced
 PCString_BoxFull: db "The BOX is full.@"
 PCString_PartyFull: db "The party's full!@"
 PCString_NoReleasingEGGS: db "No releasing EGGS!@"

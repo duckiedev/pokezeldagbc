@@ -3,7 +3,6 @@
 	const SLOWPOKEWELLB1F_ROCKET2
 	const SLOWPOKEWELLB1F_ROCKET3
 	const SLOWPOKEWELLB1F_ROCKET_GIRL
-	const SLOWPOKEWELLB1F_SLOWPOKE1
 	const SLOWPOKEWELLB1F_SLOWPOKE2
 	const SLOWPOKEWELLB1F_KURT
 	const SLOWPOKEWELLB1F_BOULDER
@@ -88,22 +87,6 @@ TrainerGruntF1:
 	endifjustbattled
 	opentext
 	writetext GruntF1AfterBattleText
-	waitbutton
-	closetext
-	end
-
-SlowpokeWellB1FSlowpokeWithMailScript:
-	faceplayer
-	opentext
-	cry SLOWPOKE
-	writetext SlowpokeWellB1FSlowpokeWithMailText
-	yesorno
-	iftrue .ReadMail
-	closetext
-	end
-
-.ReadMail:
-	writetext SlowpokeWellB1FSlowpokeMailText
 	waitbutton
 	closetext
 	end
@@ -291,27 +274,6 @@ GruntF1AfterBattleText:
 	line "selling them?"
 	done
 
-SlowpokeWellB1FSlowpokeWithMailText:
-	text "A SLOWPOKE with"
-	line "its TAIL cut off…"
-
-	para "Huh? It has MAIL."
-	line "Read it?"
-	done
-
-SlowpokeWellB1FSlowpokeMailText:
-	text "<PLAYER> read the"
-	line "MAIL."
-
-	para "Be good and look"
-	line "after the house"
-
-	para "with Grandpa and"
-	line "SLOWPOKE."
-
-	para "Love, Dad"
-	done
-
 SlowpokeWellB1FTaillessSlowpokeText:
 	text "A SLOWPOKE with"
 	line "its TAIL cut off…"
@@ -333,7 +295,6 @@ SlowpokeWellB1F_MapEvents:
 	object_event  5,  2, SPRITE_ROCKET, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_TRAINER, 1, TrainerGruntM1, EVENT_SLOWPOKE_WELL_ROCKETS
 	object_event  5,  6, SPRITE_ROCKET, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, OBJECTTYPE_TRAINER, 2, TrainerGruntM2, EVENT_SLOWPOKE_WELL_ROCKETS
 	object_event 10,  4, SPRITE_ROCKET_GIRL, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 4, TrainerGruntF1, EVENT_SLOWPOKE_WELL_ROCKETS
-	object_event  7,  4, SPRITE_SLOWPOKE, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, SlowpokeWellB1FSlowpokeWithMailScript, EVENT_SLOWPOKE_WELL_SLOWPOKES
 	object_event  6,  2, SPRITE_SLOWPOKE, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, SlowpokeWellB1FTaillessSlowpokeScript, EVENT_SLOWPOKE_WELL_SLOWPOKES
 	object_event 16, 14, SPRITE_KURT, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, SlowpokeWellB1FKurtScript, EVENT_SLOWPOKE_WELL_KURT
 	object_event  3,  2, SPRITE_BOULDER, SPRITEMOVEDATA_STRENGTH_BOULDER, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, SlowpokeWellB1FBoulder, -1

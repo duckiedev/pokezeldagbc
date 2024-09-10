@@ -53,7 +53,7 @@ LoadPartyMenuMonIconColors:
 	ld hl, wPartyMon1Item
 	call GetPartyLocation
 	ld a, [hl]
-	ld [wCurIconMonHasItemOrMail], a
+	ld [wCurIconMonHasItem], a
 
 	ld hl, wPartySpecies
 	add hl, de
@@ -81,9 +81,9 @@ LoadPartyMenuMonIconColors:
 	ld [hl], a ; bottom right
 	pop hl
 	ld d, a
-	ld a, [wCurIconMonHasItemOrMail]
+	ld a, [wCurIconMonHasItem]
 	and a
-	ld a, PAL_OW_RED ; item or mail color
+	ld a, PAL_OW_RED ; item color
 	jr nz, .ok
 	ld a, d
 .ok
@@ -171,16 +171,6 @@ Unused_GetPartyMenuMonIcon:
 	ld a, [hl]
 	and a
 	jr z, .no_item
-	push hl
-	push bc
-	ld d, a
-	callfar ItemIsMail
-	pop bc
-	pop hl
-	jr c, .not_mail
-	ld a, $06
-	jr .got_tile
-.not_mail
 	ld a, $05
 	; fallthrough
 
@@ -208,19 +198,7 @@ PartyMenu_InitAnimatedMonIcon:
 	ld a, [hl]
 	and a
 	ret z
-	push hl
-	push bc
-	ld d, a
-	callfar ItemIsMail
-	pop bc
-	pop hl
-	jr c, .mail
 	ld a, SPRITE_ANIM_FRAMESET_PARTY_MON_WITH_ITEM
-	jr .okay
-
-.mail
-	ld a, SPRITE_ANIM_FRAMESET_PARTY_MON_WITH_MAIL
-.okay
 	ld hl, SPRITEANIMSTRUCT_FRAMESET_ID
 	add hl, bc
 	ld [hl], a
@@ -393,7 +371,6 @@ GetIconGFX:
 	ret
 
 HeldItemIcons:
-INCBIN "gfx/stats/mail.2bpp"
 INCBIN "gfx/stats/item.2bpp"
 
 GetIcon_de:
