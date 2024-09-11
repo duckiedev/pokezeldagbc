@@ -118,13 +118,13 @@ PlacePartyHPBar:
 	and a
 	ret z
 	ld c, a
-	ld b, $0
+	ld b, 0
 	hlcoord 11, 2
 .loop
 	push bc
 	push hl
 	call PartyMenuCheckEgg
-	jr nz, .skip
+	jr z, .skip
 	push hl
 	call PlacePartymonHPBar
 	pop hl
@@ -148,6 +148,8 @@ PlacePartyHPBar:
 	inc b
 	dec c
 	jr nz, .loop
+	ld b, SCGB_PARTY_MENU
+	call GetSGBLayout
 	ret
 
 PlacePartymonHPBar:

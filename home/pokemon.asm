@@ -24,10 +24,14 @@ DrawBattleHPBar::
 	push bc
 
 ; Place '-'
+	ld a, [wBattleMode]
+	dec a
+	jr nz, .template_start
 	ld a, $6B
 	ld [hli], a
 
 ; Draw a template
+.template_start
 	push hl
 	ld a, $62 ; empty bar
 .template
@@ -37,6 +41,9 @@ DrawBattleHPBar::
 	ld a, [hl]			; skip redrawing "-" for player's hud
 	cp $bb				; if it's already part of the exp bar
 	jr z, .skip
+	ld a, [wBattleMode]
+	dec a
+	jr nz, .skip
 	ld a, $6B ; bar end
 	ld [hl], a
 .skip

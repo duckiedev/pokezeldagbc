@@ -157,39 +157,6 @@ endc
 	call StatsScreen_SetJumptableIndex
 	ret
 
-if DEF(_DEBUG)
-.hatch
-	ld a, [wMonType]
-	or a
-	jr nz, .skip
-	push bc
-	push de
-	push hl
-	ld a, [wCurPartyMon]
-	ld bc, PARTYMON_STRUCT_LENGTH
-	ld hl, wPartyMon1Happiness
-	call AddNTimes
-	ld [hl], 1
-	ld a, 1
-	ld [wTempMonHappiness], a
-	ld a, 127
-	ld [wStepCount], a
-	ld de, .HatchSoonString
-	hlcoord 8, 17
-	call PlaceString
-	ld hl, wStatsScreenFlags
-	set 5, [hl]
-	pop hl
-	pop de
-	pop bc
-.skip
-	xor a
-	jp StatsScreen_JoypadAction
-
-.HatchSoonString:
-	db "▶HATCH SOON!@"
-endc
-
 StatsScreen_LoadPage:
 	call StatsScreen_LoadGFX
 	ld hl, wStatsScreenFlags
@@ -442,19 +409,6 @@ StatsScreen_InitUpperHalf:
 	dw wOTPartyMonNicknames
 	dw sBoxMonNicknames
 	dw wBufferMonNickname
-
-StatsScreen_PlaceVerticalDivider: ; unreferenced
-; The Japanese stats screen has a vertical divider.
-	hlcoord 7, 0
-	ld bc, SCREEN_WIDTH
-	ld d, SCREEN_HEIGHT
-.loop
-	ld a, $31 ; vertical divider
-	ld [hl], a
-	add hl, bc
-	dec d
-	jr nz, .loop
-	ret
 
 StatsScreen_PlaceHorizontalDivider:
 	hlcoord 0, 7
@@ -894,7 +848,6 @@ StatsScreen_GetAnimationParam:
 
 .Tempmon:
 	ld bc, wTempMonSpecies
-	jr .CheckEggFaintedFrzSlp ; utterly pointless
 
 .CheckEggFaintedFrzSlp:
 	ld a, [wCurPartySpecies]
@@ -939,9 +892,6 @@ StatsScreen_LoadTextboxSpaceGFX:
 	pop de
 	pop hl
 	ret
-
-StatsScreenSpaceGFX: ; unreferenced
-INCBIN "gfx/font/space.2bpp"
 
 EggStatsScreen:
 	xor a
@@ -1093,8 +1043,6 @@ StatsScreen_LoadPageIndicators:
 CopyNickname:
 	ld de, wStringBuffer1
 	ld bc, MON_NAME_LENGTH
-	jr .okay ; utterly pointless
-.okay
 	ld a, [wMonType]
 	cp BOXMON
 	jr nz, .partymon
@@ -1113,19 +1061,19 @@ CopyNickname:
 	ret
 
 GetNicknamePointer:
-	ld a, [wMonType]
-	add a
-	ld c, a
-	ld b, 0
-	add hl, bc
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	ld a, [wMonType]
-	cp TEMPMON
-	ret z
-	ld a, [wCurPartyMon]
-	jp SkipNames
+	ld a, [wMonType] ; 2
+	add a ; multiply by 2 to get 4
+	ld c, a ; load 4 into c
+	ld b, 0 ; load 0 into b, bc = 0004
+	add hl, bc ; add 0004 to 4EE9, hl = 4EED
+	ld a, [hli] ; store value at 4EED (7C) to a and increase hl to 4EEE
+	ld h, [hl] ; store value at 4EEE (B0) to h
+	ld l, a ; store 7C to l, hl = b07c. 01:b07c is the address for sBoxMonNickname1
+	ld a, [wMonType] ; load 2 to a
+	cp TEMPMON ; if its TEMPMON
+	ret z ; return
+	ld a, [wCurPartyMon] ; otherwise store wCurPartyMon in a (0) and
+	jp SkipNames ; skip to the right party member's name (0)
 
 CheckFaintedFrzSlp:
 	ld hl, MON_HP

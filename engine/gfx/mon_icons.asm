@@ -155,33 +155,6 @@ LoadMenuMonIcon:
 	dw MoveList_InitAnimatedMonIcon     ; MONICON_MOVES
 	dw Trade_LoadMonIconGFX             ; MONICON_TRADE
 
-Unused_GetPartyMenuMonIcon:
-	call InitPartyMenuIcon
-	call .GetPartyMonItemGFX
-	call SetPartyMonIconAnimSpeed
-	ret
-
-.GetPartyMonItemGFX:
-	push bc
-	ldh a, [hObjectStructIndex]
-	ld hl, wPartyMon1Item
-	ld bc, PARTYMON_STRUCT_LENGTH
-	call AddNTimes
-	pop bc
-	ld a, [hl]
-	and a
-	jr z, .no_item
-	ld a, $05
-	; fallthrough
-
-.no_item
-	ld a, $04
-.got_tile
-	ld hl, SPRITEANIMSTRUCT_FRAMESET_ID
-	add hl, bc
-	ld [hl], a
-	ret
-
 PartyMenu_InitAnimatedMonIcon:
 	call InitPartyMenuIcon
 	call .SpawnItemIcon
@@ -347,30 +320,19 @@ FlyFunction_GetMonIcon:
 	farcall SetFirstOBJPalette
 	ret
 
-GetMonIconDE: ; unreferenced
-	push de
-	ld a, [wTempIconSpecies]
-	call ReadMonMenuIcon
-	ld [wCurIcon], a
-	pop de
-	call GetIcon_de
-	ret
-
 GetMemIconGFX:
 	ld a, [wCurIconTile]
 GetIconGFX:
 	call GetIcon_a
 	ld de, 8 tiles
 	add hl, de
-	ld de, HeldItemIcons
-	lb bc, BANK(HeldItemIcons), 2
+	ld de, HeldItemIcon
+	ld b, BANK(HeldItemIcon)
+	ld c, 1
 	call Request2bpp
-	ld a, [wCurIconTile]
-	add 10
-	ld [wCurIconTile], a
 	ret
 
-HeldItemIcons:
+HeldItemIcon:
 INCBIN "gfx/stats/item.2bpp"
 
 GetIcon_de:

@@ -436,7 +436,7 @@ CGB_ApplyPartyMenuHPPals:
 	ld hl, wHPPals
 	ld a, [wHPPalIndex]
 	ld e, a
-	ld d, $0
+	ld d, 0
 	add hl, de
 	ld e, l
 	ld d, h
@@ -519,52 +519,8 @@ GetMonPalettePointer:
 	call _GetMonPalettePointer
 	ret
 
-CGBCopyBattleObjectPals: ; unreferenced
-; dummied out
-	ret
-	call CheckCGB
-	ret z
-	ld hl, BattleObjectPals
-	ld a, (1 << rOBPI_AUTO_INCREMENT) | $10
-	ldh [rOBPI], a
-	ld c, 6 palettes
-.loop
-	ld a, [hli]
-	ldh [rOBPD], a
-	dec c
-	jr nz, .loop
-	ld hl, BattleObjectPals
-	ld de, wOBPals1 palette PAL_BATTLE_OB_GRAY
-	ld bc, 2 palettes
-	ld a, BANK(wOBPals1)
-	call FarCopyWRAM
-	ret
-
 BattleObjectPals:
 INCLUDE "gfx/battle_anims/battle_anims.pal"
-
-CGBCopyTwoPredefObjectPals: ; unreferenced
-	call CheckCGB
-	ret z
-	ld a, (1 << rOBPI_AUTO_INCREMENT) | $10
-	ldh [rOBPI], a
-	ld a, PREDEFPAL_TRADE_TUBE
-	call GetPredefPal
-	call .PushPalette
-	ld a, PREDEFPAL_RB_GREENMON
-	call GetPredefPal
-	call .PushPalette
-	ret
-
-.PushPalette:
-	ld c, 1 palettes
-.loop
-	ld a, [hli]
-	ldh [rOBPD], a
-	dec c
-	jr nz, .loop
-	ret
-
 _GetMonPalettePointer:
 	ld l, a
 	ld h, 0
@@ -1166,6 +1122,19 @@ endr
 
 INCLUDE "data/maps/environment_colors.asm"
 
+; Input: E must contain the offset of the selected palette from PartyMenuOBPals.
+SetFirstOBJPalette::
+	ld hl, PartyMenuOBPals
+	ld d, 0
+	add hl, de
+ 	ld de, wOBPals1
+	ld bc, 1 palettes
+	ld a, BANK(wOBPals1)
+	call FarCopyWRAM
+	ld a, TRUE
+ 	ldh [hCGBPalUpdate], a
+ 	jp ApplyPals
+
 PartyMenuBGPalette:
 INCLUDE "gfx/stats/party_menu_bg.pal"
 
@@ -1186,9 +1155,6 @@ INCLUDE "gfx/diploma/diploma.pal"
 PartyMenuOBPals:
 INCLUDE "gfx/stats/party_menu_ob.pal"
 
-UnusedBattleObjectPals: ; unreferenced
-INCLUDE "gfx/battle_anims/unused_battle_anims.pal"
-
 UnusedGSTitleBGPals:
 INCLUDE "gfx/title/unused_gs_bg.pal"
 
@@ -1200,19 +1166,6 @@ INCLUDE "gfx/pokegear/pokegear.pal"
 
 FemalePokegearPals:
 INCLUDE "gfx/pokegear/pokegear_f.pal"
-
-; Input: E must contain the offset of the selected palette from PartyMenuOBPals.
-SetFirstOBJPalette::
-	ld hl, PartyMenuOBPals
-	ld d, 0
-	add hl, de
- 	ld de, wOBPals1
-	ld bc, 1 palettes
-	ld a, BANK(wOBPals1)
-	call FarCopyWRAM
-	ld a, TRUE
- 	ldh [hCGBPalUpdate], a
- 	jp ApplyPals
 
 BetaPokerPals:
 INCLUDE "gfx/beta_poker/beta_poker.pal"

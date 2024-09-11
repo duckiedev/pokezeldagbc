@@ -143,6 +143,15 @@ GetMonSubmenuItems:
 	dec c
 	jr nz, .loop
 
+.skip_moves
+	ld a, MONMENUITEM_STATS
+	call AddMonMenuItem
+	ld a, MONMENUITEM_SWITCH
+	call AddMonMenuItem
+	ld a, MONMENUITEM_MOVE
+	call AddMonMenuItem
+	ld a, MONMENUITEM_ITEM
+
 .ok
 	call AddMonMenuItem
 
