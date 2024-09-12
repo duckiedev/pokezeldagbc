@@ -231,15 +231,10 @@ SetPartyMonIconAnimSpeed:
 	call SetHPPal
 	ld e, d
 	ld d, 0
-	ld hl, .speeds
+	ld hl, $00
 	add hl, de
 	ld b, [hl]
 	ret
-
-.speeds
-	db $00 ; HP_GREEN
-	db $40 ; HP_YELLOW
-	db $80 ; HP_RED
 
 NamingScreen_InitAnimatedMonIcon:
 	ld hl, wTempMonDVs

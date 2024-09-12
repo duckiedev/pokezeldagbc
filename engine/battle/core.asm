@@ -4188,27 +4188,45 @@ UpdatePlayerHPPal:
 	jp UpdateHPPal
 
 CheckDanger:
+	; check if hp is 0
 	ld hl, wBattleMonHP
 	ld a, [hli]
 	or [hl]
 	jr z, .no_danger
-	ld a, [wBattleLowHealthAlarm]
-	and a
-	jr nz, .done
-	ld a, [wPlayerHPPal]
-	cp HP_RED
-	jr z, .danger
 
-.no_danger
-	ld hl, wLowHealthAlarm
-	res DANGER_ON_F, [hl]
-	jr .done
+	; check if wram set
+    ld a, [wBattleLowHealthAlarm]
+    and a
+	ret nz
+
+	; check percentage
+	ld hl, wBattleMonHP
+	ld a, [hli]
+	ld b, a
+	ld c, [hl]
+	ld hl, wBattleMonMaxHP
+	ld a, [hli]
+	ld d, a
+	ld e, [hl]
+	farcall ComputeHPBarPixels
+	; get percentage of hp bar pixel length e
+	ld a, e
+	cp (HP_BAR_LENGTH_PX * 21 / 100) ; 10
+	jr nc, .no_danger
+
+	; check if we still have hearts left
+	ld a, [wBattleMonHearts]
+    cp 1
+    jr nz, .no_danger
 
 .danger
 	ld hl, wLowHealthAlarm
 	set DANGER_ON_F, [hl]
+	ret
 
-.done
+.no_danger
+	ld hl, wLowHealthAlarm
+	res DANGER_ON_F, [hl]
 	ret
 
 PrintPlayerHUD:
