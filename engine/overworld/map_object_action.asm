@@ -52,18 +52,15 @@ SetFacingStepAction:
 
 	ld hl, OBJECT_STEP_FRAME
 	add hl, bc
+	inc [hl]
 	ld a, [hl]
-	inc a
-	and %00001111
-	ld [hl], a
 
 	rrca
 	rrca
-	maskbits NUM_DIRECTIONS
+	rrca 
+	and %11
 	ld d, a
-
 	call GetSpriteDirection
-	or FACING_STEP_DOWN_0 ; useless
 	or d
 	ld hl, OBJECT_FACING
 	add hl, bc

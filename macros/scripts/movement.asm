@@ -127,7 +127,7 @@ ENDM
 	const movement_step_wait_end ; $48
 MACRO step_wait_end
 	db movement_step_wait_end
-	db \1 ; length
+	;db \1 ; length
 ENDM
 
 	const movement_remove_object ; $49

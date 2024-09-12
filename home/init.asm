@@ -145,19 +145,15 @@ Init::
 
 	ldh a, [hCGB]
 	and a
-	jr z, .no_double_speed
-	call NormalSpeed
-.no_double_speed
+	call nz, DoubleSpeed
 
 	xor a
 	ldh [rIF], a
-	ld a, IE_DEFAULT
+	ld a, 1 << VBLANK
 	ldh [rIE], a
 	ei
 
 	call DelayFrame
-
-	predef InitSGBBorder
 
 	call InitSound
 	xor a

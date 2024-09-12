@@ -530,7 +530,7 @@ TrainerWalkToPlayer:
 	call DecrementMovementBufferCount
 
 .TerminateStep:
-	ld a, movement_step_end
+	ld a, movement_step_wait_end
 	call AppendToMovementBuffer
 	ret
 
