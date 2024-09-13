@@ -400,15 +400,15 @@ StepVectors:
 	db -1,  0, 32, 1
 	db  1,  0, 32, 1
 	; normal
-	db  0,  1, 16, 1
-	db  0, -1, 16, 1
-	db -1,  0, 16, 1
-	db  1,  0, 16, 1
+	db  0,  1, 16, 2
+	db  0, -1, 16, 2
+	db -1,  0, 16, 2
+	db  1,  0, 16, 2
 	; fast
-	db  0,  4,  4, 4
-	db  0, -4,  4, 4
-	db -4,  0,  4, 4
-	db  4,  0,  4, 4
+	db  0,  4,  4, 8
+	db  0, -4,  4, 8
+	db -4,  0,  4, 8
+	db  4,  0,  4, 8
 
 GetStepVectorSign:
 	add a
@@ -1286,10 +1286,10 @@ StepFunction_TeleportFrom:
 	ld [hl], 0
 	ld hl, OBJECT_JUMP_HEIGHT
 	add hl, bc
-	ld [hl], $20
+	ld [hl], $10
 	ld hl, OBJECT_STEP_DURATION
 	add hl, bc
-	ld [hl], 32
+	ld [hl], 16
 	ld hl, OBJECT_FLAGS2
 	add hl, bc
 	res OVERHEAD_F, [hl]
@@ -1357,7 +1357,7 @@ StepFunction_TeleportTo:
 	ld [hl], 0
 	ld hl, OBJECT_STEP_DURATION
 	add hl, bc
-	ld [hl], 32
+	ld [hl], 16
 	call ObjectStep_IncAnonJumptableIndex
 	ret
 
@@ -1888,8 +1888,8 @@ UpdateJumpPosition:
 	ret
 
 .y_offsets:
-	db  -4,  -6,  -8, -10, -11, -12, -12, -12
-	db -11, -10,  -9,  -8,  -6,  -4,   0,   0
+	db -4, -5, -6, -7, -8, -9, -10, -11, -11, -12, -12, -12, -12, -12, -12, -12
+	db -11, -11, -10, -10, -9, -9, -8, -7, -7, -6, -5, -5, -4, -2, -1, 0
 
 GetPlayerNextMovementIndex:
 ; copy [wPlayerNextMovement] to [wPlayerMovement]

@@ -30,7 +30,6 @@ SetFacingStanding:
 
 SetFacingCurrent:
 	call GetSpriteDirection
-	or FACING_STEP_DOWN_0 ; useless
 	ld hl, OBJECT_FACING
 	add hl, bc
 	ld [hl], a
@@ -111,7 +110,6 @@ SetFacingBumpAction:
 	ld d, a
 
 	call GetSpriteDirection
-	or FACING_STEP_DOWN_0 ; useless
 	or d
 	ld hl, OBJECT_FACING
 	add hl, bc
@@ -123,7 +121,6 @@ SetFacingCounterclockwiseSpin:
 	ld hl, OBJECT_DIRECTION
 	add hl, bc
 	ld a, [hl]
-	or FACING_STEP_DOWN_0 ; useless
 	ld hl, OBJECT_FACING
 	add hl, bc
 	ld [hl], a
@@ -136,7 +133,7 @@ SetFacingCounterclockwiseSpin2:
 CounterclockwiseSpinAction:
 ; Here, OBJECT_STEP_FRAME consists of two 2-bit components,
 ; using only bits 0,1 and 4,5.
-; bits 0,1 is a timer (4 overworld frames)
+; bits 0,1 is a timer (6 overworld frames)
 ; bits 4,5 determines the facing - the direction is counterclockwise.
 	ld hl, OBJECT_STEP_FRAME
 	add hl, bc
@@ -148,7 +145,7 @@ CounterclockwiseSpinAction:
 	inc a
 	and %00001111
 	ld d, a
-	cp 4
+	cp 6
 	jr c, .ok
 
 	ld d, 0
