@@ -72,5 +72,3 @@ PredefPointers::
 	add_predef NewPokedexEntry
 	add_predef PlaceStatusString
 	add_predef DrawEXPBarFrame
-	add_predef DrawBattleEXPBar
-	add_predef AnimateEXPBar

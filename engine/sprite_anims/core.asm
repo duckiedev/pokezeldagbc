@@ -549,13 +549,7 @@ Sprites_Sine:
 	calc_sine_wave
 
 AnimateEndOfExpBar:
-	ldh a, [hSGB]
 	ld de, EndOfExpBarGFX
-	and a
-	jr z, .load
-	ld de, SGBEndOfExpBarGFX
-
-.load
 	ld hl, vTiles0 tile $00
 	lb bc, BANK(EndOfExpBarGFX), 1
 	call Request2bpp
@@ -593,7 +587,7 @@ AnimateEndOfExpBar:
 	call Sprites_Sine
 	pop hl
 	pop de
-	add 13 * TILE_WIDTH
+	add 11 * TILE_WIDTH
 	ld [hli], a ; y
 
 	pop af
@@ -602,19 +596,17 @@ AnimateEndOfExpBar:
 	call Sprites_Cosine
 	pop hl
 	pop de
-	add 10 * TILE_WIDTH + 4
+	add 17 * TILE_WIDTH
 	ld [hli], a ; x
 
 	ld a, $0
 	ld [hli], a ; tile id
-	ld a, PAL_BATTLE_OB_BLUE
+	ld a, PAL_BATTLE_OB_YELLOW
 	ld [hli], a ; attributes
 	jr .anim_loop
 
 EndOfExpBarGFX:
 INCBIN "gfx/battle/expbarend.2bpp"
-SGBEndOfExpBarGFX:
-INCBIN "gfx/battle/expbarend_sgb.2bpp"
 
 ClearSpriteAnims2:
 	push hl
