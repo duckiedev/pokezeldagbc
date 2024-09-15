@@ -1058,7 +1058,7 @@ Sfx_3rdPlace_Ch5:
 	note D_, 6
 	sound_ret
 
-	toggle_sfx ; unused
+	
 
 Sfx_3rdPlace_Ch6:
 	toggle_sfx
@@ -1075,7 +1075,7 @@ Sfx_3rdPlace_Ch6:
 	note G_, 6
 	sound_ret
 
-	toggle_sfx ; unused
+	
 
 Sfx_3rdPlace_Ch7:
 	toggle_sfx
@@ -1092,7 +1092,7 @@ Sfx_3rdPlace_Ch7:
 	note B_, 6
 	sound_ret
 
-	toggle_sfx ; unused
+	
 
 Sfx_GetEgg:
 	channel_count 4
@@ -1131,7 +1131,7 @@ Sfx_GetEgg_Ch5:
 	rest 9
 	sound_ret
 
-	toggle_sfx ; unused
+	
 
 Sfx_GetEgg_Ch6:
 	toggle_sfx
@@ -1160,7 +1160,7 @@ Sfx_GetEgg_Ch6:
 	rest 9
 	sound_ret
 
-	toggle_sfx ; unused
+	
 
 Sfx_GetEgg_Ch7:
 	toggle_sfx
@@ -1179,7 +1179,7 @@ Sfx_GetEgg_Ch7:
 	rest 9
 	sound_ret
 
-	toggle_sfx ; unused
+	
 
 Sfx_GetEgg_Ch8:
 	toggle_sfx
@@ -1191,7 +1191,7 @@ Sfx_GetEgg_Ch8:
 	rest 12
 	sound_ret
 
-	toggle_sfx ; unused
+	
 
 Sfx_MoveDeleted:
 	channel_count 4
@@ -1228,7 +1228,7 @@ Sfx_MoveDeleted_Ch5:
 	rest 6
 	sound_ret
 
-	toggle_sfx ; unused
+	
 
 Sfx_MoveDeleted_Ch6:
 	toggle_sfx
@@ -1264,7 +1264,7 @@ Sfx_MoveDeleted_Ch6:
 	rest 6
 	sound_ret
 
-	toggle_sfx ; unused
+	
 
 Sfx_MoveDeleted_Ch7:
 	toggle_sfx
@@ -1291,7 +1291,7 @@ Sfx_MoveDeleted_Ch7:
 	rest 6
 	sound_ret
 
-	toggle_sfx ; unused
+	
 
 Sfx_MoveDeleted_Ch8:
 	toggle_sfx
@@ -1303,7 +1303,7 @@ Sfx_MoveDeleted_Ch8:
 	rest 6
 	sound_ret
 
-	toggle_sfx ; unused
+	
 
 Sfx_2ndPlace:
 	channel_count 4
@@ -1344,7 +1344,7 @@ Sfx_2ndPlace_Ch5:
 	rest 6
 	sound_ret
 
-	toggle_sfx ; unused
+	
 
 Sfx_2ndPlace_Ch6:
 	toggle_sfx
@@ -1367,8 +1367,6 @@ Sfx_2ndPlace_Ch6:
 	note D_, 12
 	rest 6
 	sound_ret
-
-	toggle_sfx ; unused
 
 Sfx_2ndPlace_Ch7:
 	toggle_sfx
@@ -1406,7 +1404,7 @@ Sfx_2ndPlace_Ch7:
 	rest 6
 	sound_ret
 
-	toggle_sfx ; unused
+	
 
 Sfx_2ndPlace_Ch8:
 	toggle_sfx
@@ -1421,7 +1419,7 @@ Sfx_2ndPlace_Ch8:
 	rest 6
 	sound_ret
 
-	toggle_sfx ; unused
+	
 
 Sfx_1stPlace:
 	channel_count 4
@@ -1469,7 +1467,7 @@ Sfx_1stPlace_Ch5:
 	rest 6
 	sound_ret
 
-	toggle_sfx ; unused
+	
 
 Sfx_1stPlace_Ch6:
 	toggle_sfx
@@ -1493,7 +1491,7 @@ Sfx_1stPlace_Ch6:
 	rest 6
 	sound_ret
 
-	toggle_sfx ; unused
+	
 
 Sfx_1stPlace_Ch7:
 	toggle_sfx
@@ -1517,7 +1515,7 @@ Sfx_1stPlace_Ch7:
 	rest 6
 	sound_ret
 
-	toggle_sfx ; unused
+	
 
 Sfx_1stPlace_Ch8:
 	toggle_sfx
@@ -1538,7 +1536,7 @@ Sfx_1stPlace_Ch8:
 	rest 6
 	sound_ret
 
-	toggle_sfx ; unused
+	
 
 Sfx_ChooseACard:
 	channel_count 4
@@ -1591,7 +1589,7 @@ Sfx_ChooseACard_Ch5:
 	rest 12
 	sound_ret
 
-	toggle_sfx ; unused
+	
 
 Sfx_ChooseACard_Ch6:
 	toggle_sfx
@@ -1623,7 +1621,7 @@ Sfx_ChooseACard_Ch6:
 	rest 12
 	sound_ret
 
-	toggle_sfx ; unused
+	
 
 Sfx_ChooseACard_Ch7:
 	toggle_sfx
@@ -1659,7 +1657,7 @@ Sfx_ChooseACard_Ch7:
 	rest 12
 	sound_ret
 
-	toggle_sfx ; unused
+	
 
 Sfx_ChooseACard_Ch8:
 	toggle_sfx
@@ -1684,7 +1682,7 @@ Sfx_ChooseACard_Ch8:
 	note B_, 16
 	sound_ret
 
-	toggle_sfx ; unused
+	
 
 Sfx_GetTm:
 	channel_count 4
@@ -1717,7 +1715,7 @@ Sfx_GetTm_Ch5:
 	rest 6
 	sound_ret
 
-	toggle_sfx ; unused
+	
 
 Sfx_GetTm_Ch6:
 	toggle_sfx
@@ -1740,7 +1738,7 @@ Sfx_GetTm_Ch6:
 	rest 6
 	sound_ret
 
-	toggle_sfx ; unused
+	
 
 Sfx_GetTm_Ch7:
 	toggle_sfx
@@ -1771,7 +1769,7 @@ Sfx_GetTm_Ch7:
 	rest 6
 	sound_ret
 
-	toggle_sfx ; unused
+	
 
 Sfx_GetTm_Ch8:
 	toggle_sfx
@@ -1791,7 +1789,7 @@ Sfx_GetTm_Ch8:
 	rest 6
 	sound_ret
 
-	toggle_sfx ; unused
+	
 
 Sfx_GetBadge:
 	channel_count 4
@@ -1819,7 +1817,7 @@ Sfx_GetBadge_Ch5:
 	rest 6
 	sound_ret
 
-	toggle_sfx ; unused
+	
 
 .sub1:
 	rest 5
@@ -1890,7 +1888,7 @@ Sfx_GetBadge_Ch6:
 	rest 6
 	sound_ret
 
-	toggle_sfx ; unused
+	
 
 Sfx_GetBadge_Ch7:
 	toggle_sfx
@@ -1929,7 +1927,7 @@ Sfx_GetBadge_Ch7:
 	rest 6
 	sound_ret
 
-	toggle_sfx ; unused
+	
 
 Sfx_GetBadge_Ch8:
 	toggle_sfx
@@ -1955,7 +1953,7 @@ Sfx_GetBadge_Ch8:
 	rest 6
 	sound_ret
 
-	toggle_sfx ; unused
+	
 
 Sfx_QuitSlots:
 	channel_count 4
@@ -1994,7 +1992,7 @@ Sfx_QuitSlots_Ch5:
 	rest 6
 	sound_ret
 
-	toggle_sfx ; unused
+	
 
 Sfx_QuitSlots_Ch6:
 	toggle_sfx
@@ -2021,7 +2019,7 @@ Sfx_QuitSlots_Ch6:
 	rest 6
 	sound_ret
 
-	toggle_sfx ; unused
+	
 
 Sfx_QuitSlots_Ch7:
 	toggle_sfx
@@ -2052,7 +2050,7 @@ Sfx_QuitSlots_Ch7:
 	rest 6
 	sound_ret
 
-	toggle_sfx ; unused
+	
 
 Sfx_QuitSlots_Ch8:
 	toggle_sfx
@@ -2072,7 +2070,7 @@ Sfx_QuitSlots_Ch8:
 	rest 6
 	sound_ret
 
-	toggle_sfx ; unused
+	
 
 Sfx_Protect:
 	channel_count 2
@@ -2962,7 +2960,7 @@ Sfx_DexFanfareLessThan20_Ch5:
 	note D_, 6
 	sound_ret
 
-	toggle_sfx ; unused
+	
 
 Sfx_DexFanfareLessThan20_Ch6:
 	toggle_sfx
@@ -2981,7 +2979,7 @@ Sfx_DexFanfareLessThan20_Ch6:
 	note F#, 6
 	sound_ret
 
-	toggle_sfx ; unused
+	
 
 Sfx_DexFanfareLessThan20_Ch7:
 	toggle_sfx
@@ -3009,7 +3007,7 @@ Sfx_DexFanfareLessThan20_Ch7:
 	rest 6
 	sound_ret
 
-	toggle_sfx ; unused
+	
 
 Sfx_DexFanfareLessThan20_Ch8:
 	toggle_sfx
@@ -3020,7 +3018,7 @@ Sfx_DexFanfareLessThan20_Ch8:
 	rest 12
 	sound_ret
 
-	toggle_sfx ; unused
+	
 
 Sfx_DexFanfare140169:
 	channel_count 4
@@ -3056,7 +3054,7 @@ Sfx_DexFanfare140169_Ch5:
 	rest 8
 	sound_ret
 
-	toggle_sfx ; unused
+	
 
 Sfx_DexFanfare140169_Ch6:
 	toggle_sfx
@@ -3082,7 +3080,7 @@ Sfx_DexFanfare140169_Ch6:
 	rest 8
 	sound_ret
 
-	toggle_sfx ; unused
+	
 
 Sfx_DexFanfare140169_Ch7:
 	toggle_sfx
@@ -3116,7 +3114,7 @@ Sfx_DexFanfare140169_Ch7:
 	rest 4
 	sound_ret
 
-	toggle_sfx ; unused
+	
 
 Sfx_DexFanfare140169_Ch8:
 	toggle_sfx
@@ -3133,7 +3131,7 @@ Sfx_DexFanfare140169_Ch8:
 	note D_, 8
 	sound_ret
 
-	toggle_sfx ; unused
+	
 
 Sfx_DexFanfare170199:
 	channel_count 4
@@ -3169,7 +3167,7 @@ Sfx_DexFanfare170199_Ch5:
 	rest 4
 	sound_ret
 
-	toggle_sfx ; unused
+	
 
 Sfx_DexFanfare170199_Ch6:
 	toggle_sfx
@@ -3197,7 +3195,7 @@ Sfx_DexFanfare170199_Ch6:
 	rest 4
 	sound_ret
 
-	toggle_sfx ; unused
+	
 
 Sfx_DexFanfare170199_Ch7:
 	toggle_sfx
@@ -3225,7 +3223,7 @@ Sfx_DexFanfare170199_Ch7:
 	rest 4
 	sound_ret
 
-	toggle_sfx ; unused
+	
 
 Sfx_DexFanfare170199_Ch8:
 	toggle_sfx
@@ -3281,7 +3279,7 @@ Sfx_DexFanfare200229_Ch5:
 	rest 4
 	sound_ret
 
-	toggle_sfx ; unused
+	
 
 Sfx_DexFanfare200229_Ch6:
 	toggle_sfx
@@ -3304,7 +3302,7 @@ Sfx_DexFanfare200229_Ch6:
 	rest 4
 	sound_ret
 
-	toggle_sfx ; unused
+	
 
 Sfx_DexFanfare200229_Ch7:
 	toggle_sfx
@@ -3348,7 +3346,7 @@ Sfx_DexFanfare200229_Ch7:
 	rest 6
 	sound_ret
 
-	toggle_sfx ; unused
+	
 
 Sfx_DexFanfare200229_Ch8:
 	toggle_sfx
@@ -3377,7 +3375,7 @@ Sfx_DexFanfare200229_Ch8:
 	note B_, 12
 	sound_ret
 
-	toggle_sfx ; unused
+	
 
 Sfx_DexFanfare230Plus:
 	channel_count 4
@@ -3432,7 +3430,7 @@ Sfx_DexFanfare230Plus_Ch5:
 	rest 2
 	sound_ret
 
-	toggle_sfx ; unused
+	
 
 Sfx_DexFanfare230Plus_Ch6:
 	toggle_sfx
@@ -3467,7 +3465,7 @@ Sfx_DexFanfare230Plus_Ch6:
 	rest 2
 	sound_ret
 
-	toggle_sfx ; unused
+	
 
 Sfx_DexFanfare230Plus_Ch7:
 	toggle_sfx
@@ -3516,7 +3514,7 @@ Sfx_DexFanfare230Plus_Ch7:
 	rest 2
 	sound_ret
 
-	toggle_sfx ; unused
+	
 
 Sfx_DexFanfare230Plus_Ch8:
 	toggle_sfx
@@ -3552,7 +3550,7 @@ Sfx_DexFanfare230Plus_Ch8:
 	note D_, 6
 	sound_ret
 
-	toggle_sfx ; unused
+	
 
 Sfx_NotVeryEffective:
 	channel_count 1
