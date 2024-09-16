@@ -429,7 +429,7 @@ KurtsHouseBookshelf:
 	jumpstd DifficultBookshelfScript
 
 KurtsHouseRadio:
-	jumpstd Radio2Script
+	jumpstd Radio1Script
 
 KurtsHouseKurtExitHouseMovement:
 	big_step DOWN

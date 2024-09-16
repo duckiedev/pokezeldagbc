@@ -2301,17 +2301,17 @@ GetMapMusic::
 	jr .done
 
 GetMapTimeOfDay::
-	call GetPhoneServiceTimeOfDayByte
+	call GetUnusedFlagByteTimeOfDayByte
 	and $f
 	ret
 
-GetMapPhoneService::
-	call GetPhoneServiceTimeOfDayByte
+GetMapUnusedFlagByte::
+	call GetUnusedFlagByteTimeOfDayByte
 	and $f0
 	swap a
 	ret
 
-GetPhoneServiceTimeOfDayByte::
+GetUnusedFlagByteTimeOfDayByte::
 	push hl
 	push bc
 

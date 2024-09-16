@@ -185,8 +185,6 @@ gfx/pokemon/%/front.2bpp: rgbgfx += -c embedded
 
 gfx/trainers/%.2bpp: rgbgfx += -Z -c embedded
 
-gfx/pokemon/egg/unused_front.2bpp: rgbgfx += -Z
-
 gfx/new_game/shrink1.2bpp: rgbgfx += -Z
 gfx/new_game/shrink2.2bpp: rgbgfx += -Z
 

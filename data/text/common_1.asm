@@ -103,54 +103,6 @@ _CameToItsSensesText::
 	line "to its senses."
 	done
 
-_EnterNewPasscodeText::
-	text "Please enter any"
-	line "four-digit number."
-	done
-
-_ConfirmPasscodeText::
-	text "Enter the same"
-	line "number to confirm."
-	done
-
-_PasscodesNotSameText::
-	text "That's not the"
-	line "same number."
-	done
-
-_PasscodeSetText::
-	text "Your PASSCODE has"
-	line "been set."
-
-	para "Enter this number"
-	line "next time to open"
-	cont "the CARD FOLDER."
-
-	para ""
-	done
-
-_FourZerosInvalidText::
-	text "0000 is invalid!"
-
-	para ""
-	done
-
-_EnterPasscodeText::
-	text "Enter the CARD"
-	next "FOLDER PASSCODE."
-	done
-
-_IncorrectPasscodeText::
-	text "Incorrect"
-	line "PASSCODE!"
-
-	para ""
-	done
-
-_CardFolderOpenText::
-	text "CARD FOLDER open.@"
-	text_end
-
 _OakTimeWokeUpText::
 	text "<……><……><……><……><……><……>"
 	line "<……><……><……><……><……><……>"
@@ -291,37 +243,6 @@ _LookAdorableDecoText::
 _LookGiantDecoText::
 	text "A giant doll! It's"
 	line "fluffy and cuddly."
-	done
-
-_MomHiHowAreYouText::
-	text "Hi, <PLAYER>!"
-	line "How are you?"
-	prompt
-
-_MomFoundAnItemText::
-	text "I found a useful"
-	line "item shopping, so"
-	prompt
-
-_MomBoughtWithYourMoneyText::
-	text "I bought it with"
-	line "your money. Sorry!"
-	prompt
-
-_MomItsInPCText::
-	text "It's in your PC."
-	line "You'll like it!"
-	done
-
-_MomFoundADollText::
-	text "While shopping"
-	line "today, I saw this"
-	cont "adorable doll, so"
-	prompt
-
-_MomItsInYourRoomText::
-	text "It's in your room."
-	line "You'll love it!"
 	done
 
 _MonWasSentToText::
@@ -653,76 +574,6 @@ _BenFernText3B::
 	line "#MON Lullaby!"
 	done
 
-; Lucky Channel
-
-_LC_Text1::
-	text_start
-	line "REED: Yeehaw! How"
-	done
-
-_LC_Text2::
-	text_start
-	line "y'all doin' now?"
-	done
-
-_LC_Text3::
-	text_start
-	line "Whether you're up"
-	done
-
-_LC_Text4::
-	text_start
-	line "or way down low,"
-	done
-
-_LC_Text5::
-	text_start
-	line "don't you miss the"
-	done
-
-_LC_Text6::
-	text_start
-	line "LUCKY NUMBER SHOW!"
-	done
-
-_LC_Text7::
-	text_start
-	line "This week's Lucky"
-	done
-
-_LC_Text8::
-	text_start
-	line "Number is @"
-	text_pause
-	text_ram wStringBuffer1
-	text "!"
-	done
-
-_LC_Text9::
-	text_start
-	line "I'll repeat that!"
-	done
-
-_LC_Text10::
-	text_start
-	line "Match it and go to"
-	done
-
-_LC_Text11::
-	text_start
-	line "the RADIO TOWER!"
-	done
-
-_LC_DragText1::
-	text_start
-	line "…Repeating myself"
-	done
-
-_LC_DragText2::
-	text_start
-	line "gets to be a drag…"
-	done
-
 ; Places and People
 
 _PnP_Text1::
@@ -892,96 +743,6 @@ _RocketRadioText10::
 	text "Is he listening?"
 	done
 
-_BuenaRadioText1::
-	text_start
-	line "BUENA: BUENA here!"
-	done
-
-_BuenaRadioText2::
-	text_start
-	line "Today's password!"
-	done
-
-_BuenaRadioText3::
-	text_start
-	line "Let me think… It's"
-	done
-
-_BuenaRadioText4::
-	text_start
-	line "@"
-	text_ram wStringBuffer1
-	text "!"
-	done
-
-_BuenaRadioText5::
-	text_start
-	line "Don't forget it!"
-	done
-
-_BuenaRadioText6::
-	text_start
-	line "I'm in GOLDENROD's"
-	done
-
-_BuenaRadioText7::
-	text_start
-	line "RADIO TOWER!"
-	done
-
-_BuenaRadioMidnightText1::
-	text_start
-	line "BUENA: Oh my…"
-	done
-
-_BuenaRadioMidnightText2::
-	text_start
-	line "It's midnight! I"
-	done
-
-_BuenaRadioMidnightText3::
-	text_start
-	line "have to shut down!"
-	done
-
-_BuenaRadioMidnightText4::
-	text_start
-	line "Thanks for tuning"
-	done
-
-_BuenaRadioMidnightText5::
-	text_start
-	line "in to the end! But"
-	done
-
-_BuenaRadioMidnightText6::
-	text_start
-	line "don't stay up too"
-	done
-
-_BuenaRadioMidnightText7::
-	text_start
-	line "late! Presented to"
-	done
-
-_BuenaRadioMidnightText8::
-	text_start
-	line "you by DJ BUENA!"
-	done
-
-_BuenaRadioMidnightText9::
-	text "I'm outta here!"
-	done
-
-_BuenaRadioMidnightText10::
-	text "…"
-	done
-
-_BuenaOffTheAirText::
-	text_start
-	line ""
-	done
-
 _EnemyWithdrewText::
 	text "<ENEMY>"
 	line "withdrew"
@@ -1020,20 +781,6 @@ _ButNoSpaceText::
 	text "But <PLAYER> has"
 	line "no space left…"
 	done
-
-_JustSawSomeRareMonText::
-	text "I just saw some"
-	line "rare @"
-	text_ram wStringBuffer1
-	text " in"
-	cont "@"
-	text_ram wStringBuffer2
-	text "."
-
-	para "I'll call you if I"
-	line "see another rare"
-	cont "#MON, OK?"
-	prompt
 
 _SavingRecordText::
 	text "SAVING RECORD…"
@@ -1351,10 +1098,6 @@ _MomJustDoWhatYouCanText::
 	line "you can."
 	done
 
-_DaycareDummyText::
-	text_start
-	done
-
 _DayCareManIntroText::
 	text "I'm the DAY-CARE"
 	line "MAN. Want me to"
@@ -1551,20 +1294,4 @@ _NoRoomForEggText::
 	text "You have no room"
 	line "in your party."
 	cont "Come back later."
-	done
-
-_WhichMonPhotoText::
-	text "Which #MON"
-	line "should I photo-"
-	cont "graph?"
-	prompt
-
-_HoldStillText::
-	text "All righty. Hold"
-	line "still for a bit."
-	prompt
-
-_PrestoAllDoneText::
-	text "Presto! All done."
-	line "Come again, OK?"
 	done

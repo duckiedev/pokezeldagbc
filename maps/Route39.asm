@@ -1,6 +1,5 @@
 	object_const_def
 	const ROUTE39_SAILOR
-	const ROUTE39_POKEFAN_M
 	const ROUTE39_POKEFAN_F1
 	const ROUTE39_MILTANK1
 	const ROUTE39_MILTANK2
@@ -21,85 +20,6 @@ Route39Miltank:
 	cry MILTANK
 	waitbutton
 	closetext
-	end
-
-TrainerPokefanmDerek:
-	trainer POKEFANM, DEREK1, EVENT_BEAT_POKEFANM_DEREK, PokefanmDerekSeenText, PokefanmDerekBeatenText, 0, .Script
-
-.Script:
-	loadvar VAR_CALLERID, PHONE_POKEFANM_DEREK
-	endifjustbattled
-	opentext
-	checkflag ENGINE_DEREK_HAS_NUGGET
-	iftrue .HasNugget
-	checkcellnum PHONE_POKEFANM_DEREK
-	iftrue .NumberAccepted
-	checkpoke PIKACHU
-	iffalse .WantsPikachu
-	checkevent EVENT_DEREK_ASKED_FOR_PHONE_NUMBER
-	iftrue .AskedAlready
-	writetext PokefanMDerekText_NotBragging
-	promptbutton
-	setevent EVENT_DEREK_ASKED_FOR_PHONE_NUMBER
-	scall .AskNumber1
-	sjump .AskForNumber
-
-.AskedAlready:
-	scall .AskNumber2
-.AskForNumber:
-	askforphonenumber PHONE_POKEFANM_DEREK
-	ifequal PHONE_CONTACTS_FULL, .PhoneFull
-	ifequal PHONE_CONTACT_REFUSED, .NumberDeclined
-	gettrainername STRING_BUFFER_3, POKEFANM, DEREK1
-	scall .RegisteredNumber
-	sjump .NumberAccepted
-
-.HasNugget:
-	scall .Gift
-	verbosegiveitem NUGGET
-	iffalse .NoRoom
-	clearflag ENGINE_DEREK_HAS_NUGGET
-	sjump .NumberAccepted
-
-.NoRoom:
-	sjump .PackFull
-
-.WantsPikachu:
-	writetext PokefanMDerekPikachuIsItText
-	waitbutton
-	closetext
-	end
-
-.AskNumber1:
-	jumpstd AskNumber1MScript
-	end
-
-.AskNumber2:
-	jumpstd AskNumber2MScript
-	end
-
-.RegisteredNumber:
-	jumpstd RegisteredNumberMScript
-	end
-
-.NumberAccepted:
-	jumpstd NumberAcceptedMScript
-	end
-
-.NumberDeclined:
-	jumpstd NumberDeclinedMScript
-	end
-
-.PhoneFull:
-	jumpstd PhoneFullMScript
-	end
-
-.Gift:
-	jumpstd GiftMScript
-	end
-
-.PackFull:
-	jumpstd PackFullMScript
 	end
 
 TrainerPokefanfRuth:
@@ -204,28 +124,6 @@ SailorEugeneAfterBattleText:
 	para "They're my compan-"
 	line "ions on those long"
 	cont "voyages."
-	done
-
-PokefanmDerekSeenText:
-	text "This is a good"
-	line "time to brag about"
-	cont "my PIKACHU!"
-	done
-
-PokefanmDerekBeatenText:
-	text "I had no time to"
-	line "show off PIKACHU…"
-	done
-
-PokefanMDerekText_NotBragging:
-	text "I'm not listening"
-	line "to your bragging!"
-
-	para "We # FANS have"
-	line "a policy of not"
-
-	para "listening to other"
-	line "people brag!"
 	done
 
 PokefanfRuthSeenText:
@@ -358,7 +256,6 @@ Route39_MapEvents:
 
 	def_object_events
 	object_event 13, 29, SPRITE_SAILOR, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 5, TrainerSailorEugene, -1
-	object_event 10, 22, SPRITE_POKEFAN_M, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 4, TrainerPokefanmDerek, -1
 	object_event 11, 19, SPRITE_POKEFAN_F, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 4, TrainerPokefanfRuth, -1
 	object_event  3, 12, SPRITE_TAUROS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route39Miltank, -1
 	object_event  6, 11, SPRITE_TAUROS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route39Miltank, -1

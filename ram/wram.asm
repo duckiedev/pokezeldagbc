@@ -606,11 +606,7 @@ endc
 
 NEXTU
 ; pokegear
-wPokegearPhoneDisplayPosition:: db
-wPokegearPhoneCursorPosition:: db
-wPokegearPhoneScrollPosition:: db
-wPokegearPhoneSelectedPerson:: db
-wPokegearPhoneSubmenuCursor:: db
+	ds 5
 wPokegearMapCursorObjectPointer:: dw
 wPokegearMapCursorLandmark:: db
 wPokegearMapPlayerIconLandmark:: db
@@ -1219,13 +1215,6 @@ ENDU
 
 SECTION UNION "Miscellaneous WRAM 1", WRAMX
 
-; phone call data
-wPhoneScriptBank:: db
-wPhoneCaller:: dw
-
-
-SECTION UNION "Miscellaneous WRAM 1", WRAMX
-
 ; radio data
 wCurRadioLine:: db
 wNextRadioLine:: db
@@ -1234,12 +1223,6 @@ wNumRadioLinesPrinted:: db
 wOaksPKMNTalkSegmentCounter:: db
 	ds 5
 wRadioText:: ds 2 * SCREEN_WIDTH
-
-
-SECTION UNION "Miscellaneous WRAM 1", WRAMX
-
-; lucky number show
-wLuckyNumberDigitsBuffer:: ds 5
 
 
 SECTION UNION "Miscellaneous WRAM 1", WRAMX
@@ -1467,18 +1450,6 @@ NEXTU
 ; std script buffer
 	ds 1
 wJumpStdScriptBuffer:: ds 3
-
-NEXTU
-; phone script data
-wCheckedTime:: db
-wPhoneListIndex:: db
-wNumAvailableCallers:: db
-wAvailableCallers:: ds CONTACT_LIST_SIZE
-
-NEXTU
-; phone caller contact
-	ds 1
-wCallerContact:: ds PHONE_CONTACT_SIZE
 
 NEXTU
 ; backup menu data
@@ -1767,10 +1738,6 @@ NEXTU
 wPPUpPPBuffer:: ds NUM_MOVES
 
 NEXTU
-; lucky number show
-wMonIDDigitsBuffer:: ds 5
-
-NEXTU
 ; mon submenu
 wMonSubmenuCount:: db
 wMonSubmenuItems:: ds NUM_MONMENU_ITEMS + 1
@@ -1839,7 +1806,6 @@ wRestartClockMin::  db
 NEXTU
 ; miscellaneous bytes
 wSkipMovesBeforeLevelUp::
-wRegisteredPhoneNumbers::
 wListMovesLineSpacing:: db
 wSwitchMonTo:: db
 wSwitchMonFrom:: db
@@ -2226,7 +2192,7 @@ wPCItems:: ds MAX_PC_ITEMS * 2 + 1
 wPokegearFlags::
 ; bit 0: map
 ; bit 1: radio
-; bit 2: phone
+; bit 2: unused
 ; bit 3: expn
 ; bit 7: on/off
 	db
@@ -2322,35 +2288,7 @@ wMountMoonSquareSceneID::                         db
 wCaveH8SceneID::                                  db
 wHeroesCave02SceneID::							  db
 
-	ds 40
-
-; fight counts
-wJackFightCount::    db
-wHueyFightCount::    db
-wGavenFightCount::   db
-wBethFightCount::    db
-wJoseFightCount::    db
-wReenaFightCount::   db
-wJoeyFightCount::    db
-wWadeFightCount::    db
-wRalphFightCount::   db
-wLizFightCount::     db
-wAnthonyFightCount:: db
-wToddFightCount::    db
-wGinaFightCount::    db
-wArnieFightCount::   db
-wAlanFightCount::    db
-wDanaFightCount::    db
-wChadFightCount::    db
-wTullyFightCount::   db
-wBrentFightCount::   db
-wTiffanyFightCount:: db
-wVanceFightCount::   db
-wWiltonFightCount::  db
-wParryFightCount::   db
-wErinFightCount::    db
-
-	ds 104
+	ds 168
 
 wEventFlags:: flag_array NUM_EVENTS
 
@@ -2375,7 +2313,8 @@ wBikeFlags::
 
 wCurMapSceneScriptPointer:: dw
 
-wCurCaller:: dw
+	ds 2
+
 wCurMapWarpEventCount:: db
 wCurMapWarpEventsPointer:: dw
 wCurMapCoordEventCount:: db
@@ -2416,20 +2355,8 @@ wTimerEventStartDay:: db
 
 wFruitTreeFlags:: flag_array NUM_FRUIT_TREES
 
-	ds 2
+	ds 47
 
-wLuckyNumberDayTimer:: dw
-	ds 2
-wSpecialPhoneCallID:: db
-
-	ds 24
-
-wBuenasPassword:: db
-wBlueCardBalance:: db
-wDailyRematchFlags:: ds 4
-wDailyPhoneItemFlags:: ds 4
-wDailyPhoneTimeOfDayFlags:: ds 4
-wKenjiBreakTimer:: ds 2 ; Kenji
 wYanmaMapGroup:: db
 wYanmaMapNumber:: db
 wPlayerMonSelection:: ds 3
@@ -2448,13 +2375,7 @@ wParkBallsRemaining::
 wSafariBallsRemaining:: db
 wSafariTimeRemaining:: dw
 
-wPhoneList:: ds CONTACT_LIST_SIZE + 1
-
-	ds 22
-
-wLuckyNumberShowFlag:: db
-	ds 1
-wLuckyIDNumber:: dw
+	ds 37
 
 wRepelEffect:: db ; If a Repel is in use, it contains the nr of steps it's still active
 wBikeStep:: dw

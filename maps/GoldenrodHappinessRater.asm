@@ -67,7 +67,7 @@ HappinessRatersHouseBookshelf:
 	jumpstd DifficultBookshelfScript
 
 HappinessRatersHouseRadio:
-	jumpstd Radio2Script
+	jumpstd Radio1Script
 
 GoldenrodHappinessRaterTeacherText:
 	text "If you treat your"

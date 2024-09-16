@@ -40,7 +40,6 @@ PredefPointers::
 	add_predef CopyMonToTempMon
 	add_predef ListMoves
 	add_predef PlaceNonFaintStatus
-	add_predef Unused_PlaceEnemyHPLevel
 	add_predef ListMovePP
 	add_predef GetGender
 	add_predef StatsScreenInit
@@ -56,12 +55,10 @@ PredefPointers::
 	add_predef InitSGBBorder
 	add_predef LoadSGBLayout
 	add_predef Pokedex_GetArea
-	add_predef Unused_CheckShininess
 	add_predef DoBattleTransition
 	add_predef DummyPredef35
 	add_predef DummyPredef36
 	add_predef PlayBattleAnim
-	add_predef DummyPredef3A
 	add_predef PartyMonItemName
 	add_predef GetMonFrontpic
 	add_predef GetMonBackpic

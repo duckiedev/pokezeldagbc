@@ -53,7 +53,7 @@ EcruteakHistoryBook:
 	end
 
 ItemFinderHouseRadio:
-	jumpstd Radio2Script
+	jumpstd Radio1Script
 
 EcruteakItemfinderAdventureText:
 	text "Ah. You're on an"

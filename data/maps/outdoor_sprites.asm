@@ -315,7 +315,7 @@ ForestGroupSprites:
 	db SPRITE_YOUNGSTER
 	db SPRITE_LASS
 	db SPRITE_TEACHER
-	db SPRITE_BUENA
+	db SPRITE_KAREN
 	db SPRITE_SUPER_NERD
 	; 2 non-walking sprites
 	db SPRITE_POKE_BALL
@@ -344,7 +344,7 @@ HeroesCaveGroupSprites:
 	db SPRITE_YOUNGSTER
 	db SPRITE_LASS
 	db SPRITE_TEACHER
-	db SPRITE_BUENA
+	db SPRITE_KAREN
 	db SPRITE_SUPER_NERD
 	; 2 non-walking sprites
 	db SPRITE_POKE_BALL

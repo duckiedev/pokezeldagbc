@@ -1,11 +1,9 @@
 	object_const_def
 	const ROUTE32_FISHER1
-	const ROUTE32_FISHER2
 	const ROUTE32_FISHER3
 	const ROUTE32_YOUNGSTER1
 	const ROUTE32_YOUNGSTER2
 	const ROUTE32_YOUNGSTER3
-	const ROUTE32_LASS1
 	const ROUTE32_COOLTRAINER_M
 	const ROUTE32_YOUNGSTER4
 	const ROUTE32_FISHER4
@@ -53,12 +51,6 @@ Route32CooltrainerMContinueScene:
 	checkevent EVENT_GOT_TOGEPI_EGG_FROM_ELMS_AIDE
 	iftrue .GiveMiracleSeed
 	writetext Route32CooltrainerMText_AideIsWaiting
-	waitbutton
-	closetext
-	end
-
-.GoToSproutTower: ; unreferenced
-	writetext Route32CooltrainerMText_UnusedSproutTower
 	waitbutton
 	closetext
 	end
@@ -163,131 +155,6 @@ TrainerFisherJustin:
 	closetext
 	end
 
-TrainerFisherRalph1:
-	trainer FISHER, RALPH1, EVENT_BEAT_FISHER_RALPH, FisherRalph1SeenText, FisherRalph1BeatenText, 0, .Script
-
-.Script:
-	loadvar VAR_CALLERID, PHONE_FISHER_RALPH
-	endifjustbattled
-	opentext
-	checkflag ENGINE_RALPH_READY_FOR_REMATCH
-	iftrue .Rematch
-	checkflag ENGINE_QWILFISH_SWARM
-	iftrue .Swarm
-	checkcellnum PHONE_FISHER_RALPH
-	iftrue .NumberAccepted
-	checkevent EVENT_RALPH_ASKED_FOR_PHONE_NUMBER
-	iftrue .AskAgain
-	writetext FisherRalphAfterText
-	promptbutton
-	setevent EVENT_RALPH_ASKED_FOR_PHONE_NUMBER
-	scall .AskNumber1
-	sjump .AskForNumber
-
-.AskAgain:
-	scall .AskNumber2
-.AskForNumber:
-	askforphonenumber PHONE_FISHER_RALPH
-	ifequal PHONE_CONTACTS_FULL, .PhoneFull
-	ifequal PHONE_CONTACT_REFUSED, .NumberDeclined
-	gettrainername STRING_BUFFER_3, FISHER, RALPH1
-	scall .RegisteredNumber
-	sjump .NumberAccepted
-
-.Rematch:
-	scall .RematchStd
-	winlosstext FisherRalph1BeatenText, 0
-	readmem wRalphFightCount
-	ifequal 4, .Fight4
-	ifequal 3, .Fight3
-	ifequal 2, .Fight2
-	ifequal 1, .Fight1
-	ifequal 0, .LoadFight0
-.Fight4:
-	checkevent EVENT_RESTORED_POWER_TO_KANTO
-	iftrue .LoadFight4
-.Fight3:
-	checkevent EVENT_BEAT_ELITE_FOUR
-	iftrue .LoadFight3
-.Fight2:
-	checkflag ENGINE_FLYPOINT_LAKE_OF_RAGE
-	iftrue .LoadFight2
-.Fight1:
-	checkflag ENGINE_FLYPOINT_ECRUTEAK
-	iftrue .LoadFight1
-.LoadFight0:
-	loadtrainer FISHER, RALPH1
-	startbattle
-	reloadmapafterbattle
-	loadmem wRalphFightCount, 1
-	clearflag ENGINE_RALPH_READY_FOR_REMATCH
-	end
-
-.LoadFight1:
-	loadtrainer FISHER, RALPH2
-	startbattle
-	reloadmapafterbattle
-	loadmem wRalphFightCount, 2
-	clearflag ENGINE_RALPH_READY_FOR_REMATCH
-	end
-
-.LoadFight2:
-	loadtrainer FISHER, RALPH3
-	startbattle
-	reloadmapafterbattle
-	loadmem wRalphFightCount, 3
-	clearflag ENGINE_RALPH_READY_FOR_REMATCH
-	end
-
-.LoadFight3:
-	loadtrainer FISHER, RALPH4
-	startbattle
-	reloadmapafterbattle
-	loadmem wRalphFightCount, 4
-	clearflag ENGINE_RALPH_READY_FOR_REMATCH
-	end
-
-.LoadFight4:
-	loadtrainer FISHER, RALPH5
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_RALPH_READY_FOR_REMATCH
-	end
-
-.Swarm:
-	writetext FisherRalphSwarmText
-	waitbutton
-	closetext
-	end
-
-.AskNumber1:
-	jumpstd AskNumber1MScript
-	end
-
-.AskNumber2:
-	jumpstd AskNumber2MScript
-	end
-
-.RegisteredNumber:
-	jumpstd RegisteredNumberMScript
-	end
-
-.NumberAccepted:
-	jumpstd NumberAcceptedMScript
-	end
-
-.NumberDeclined:
-	jumpstd NumberDeclinedMScript
-	end
-
-.PhoneFull:
-	jumpstd PhoneFullMScript
-	end
-
-.RematchStd:
-	jumpstd RematchMScript
-	end
-
 TrainerFisherHenry:
 	trainer FISHER, HENRY, EVENT_BEAT_FISHER_HENRY, FisherHenrySeenText, FisherHenryBeatenText, 0, .Script
 
@@ -297,123 +164,6 @@ TrainerFisherHenry:
 	writetext FisherHenryAfterText
 	waitbutton
 	closetext
-	end
-
-TrainerPicnickerLiz1:
-	trainer PICNICKER, LIZ1, EVENT_BEAT_PICNICKER_LIZ, PicnickerLiz1SeenText, PicnickerLiz1BeatenText, 0, .Script
-
-.Script:
-	loadvar VAR_CALLERID, PHONE_PICNICKER_LIZ
-	endifjustbattled
-	opentext
-	checkflag ENGINE_LIZ_READY_FOR_REMATCH
-	iftrue .Rematch
-	checkcellnum PHONE_PICNICKER_LIZ
-	iftrue .NumberAccepted
-	checkevent EVENT_LIZ_ASKED_FOR_PHONE_NUMBER
-	iftrue .AskAgain
-	writetext PicnickerLiz1AfterText
-	promptbutton
-	setevent EVENT_LIZ_ASKED_FOR_PHONE_NUMBER
-	scall .AskNumber1
-	sjump .AskForNumber
-
-.AskAgain:
-	scall .AskNumber2
-.AskForNumber:
-	askforphonenumber PHONE_PICNICKER_LIZ
-	ifequal PHONE_CONTACTS_FULL, .PhoneFull
-	ifequal PHONE_CONTACT_REFUSED, .NumberDeclined
-	gettrainername STRING_BUFFER_3, PICNICKER, LIZ1
-	scall .RegisteredNumber
-	sjump .NumberAccepted
-
-.Rematch:
-	scall .RematchStd
-	winlosstext PicnickerLiz1BeatenText, 0
-	readmem wLizFightCount
-	ifequal 4, .Fight4
-	ifequal 3, .Fight3
-	ifequal 2, .Fight2
-	ifequal 1, .Fight1
-	ifequal 0, .LoadFight0
-.Fight4:
-	checkevent EVENT_BEAT_ELITE_FOUR
-	iftrue .LoadFight4
-.Fight3:
-	checkevent EVENT_CLEARED_RADIO_TOWER
-	iftrue .LoadFight3
-.Fight2:
-	checkevent EVENT_CLEARED_ROCKET_HIDEOUT
-	iftrue .LoadFight2
-.Fight1:
-	checkflag ENGINE_FLYPOINT_ECRUTEAK
-	iftrue .LoadFight1
-.LoadFight0:
-	loadtrainer PICNICKER, LIZ1
-	startbattle
-	reloadmapafterbattle
-	loadmem wLizFightCount, 1
-	clearflag ENGINE_LIZ_READY_FOR_REMATCH
-	end
-
-.LoadFight1:
-	loadtrainer PICNICKER, LIZ2
-	startbattle
-	reloadmapafterbattle
-	loadmem wLizFightCount, 2
-	clearflag ENGINE_LIZ_READY_FOR_REMATCH
-	end
-
-.LoadFight2:
-	loadtrainer PICNICKER, LIZ3
-	startbattle
-	reloadmapafterbattle
-	loadmem wLizFightCount, 3
-	clearflag ENGINE_LIZ_READY_FOR_REMATCH
-	end
-
-.LoadFight3:
-	loadtrainer PICNICKER, LIZ4
-	startbattle
-	reloadmapafterbattle
-	loadmem wLizFightCount, 4
-	clearflag ENGINE_LIZ_READY_FOR_REMATCH
-	end
-
-.LoadFight4:
-	loadtrainer PICNICKER, LIZ5
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_LIZ_READY_FOR_REMATCH
-	end
-
-.AskNumber1:
-	jumpstd AskNumber1FScript
-	end
-
-.AskNumber2:
-	jumpstd AskNumber2FScript
-	end
-
-.RegisteredNumber:
-	jumpstd RegisteredNumberFScript
-	end
-
-.NumberAccepted:
-	jumpstd NumberAcceptedFScript
-	end
-
-.NumberDeclined:
-	jumpstd NumberDeclinedFScript
-	end
-
-.PhoneFull:
-	jumpstd PhoneFullFScript
-	end
-
-.RematchStd:
-	jumpstd RematchFScript
 	end
 
 TrainerYoungsterAlbert:
@@ -645,78 +395,6 @@ FisherJustinAfterText:
 	line "MON is the same."
 	done
 
-FisherRalph1SeenText:
-	text "I'm really good at"
-	line "both fishing and"
-	cont "#MON."
-
-	para "I'm not about to"
-	line "lose to any kid!"
-	done
-
-FisherRalph1BeatenText:
-	text "Tch! I tried to"
-	line "rush things…"
-	done
-
-FisherRalphAfterText:
-	text "Fishing is a life-"
-	line "long passion."
-
-	para "#MON are life-"
-	line "long friends!"
-	done
-
-FisherRalphSwarmText:
-	text "One, two, three…"
-	line "Muahahaha, what a"
-
-	para "great haul!"
-	line "I'm done! Go ahead"
-
-	para "and catch as many"
-	line "as you can, kid!"
-	done
-
-Route32UnusedFisher1SeenText: ; unreferenced
-	text "I keep catching"
-	line "the same #MON…"
-
-	para "Maybe a battle"
-	line "will turn things"
-	cont "around for me."
-	done
-
-Route32UnusedFisher1BeatenText: ; unreferenced
-	text "Nothing ever goes"
-	line "right for me now…"
-	done
-
-Route32UnusedFisher1AfterText: ; unreferenced
-	text "How come the guy"
-	line "next to me catches"
-	cont "good #MON?"
-	done
-
-Route32UnusedFisher2SeenText: ; unreferenced
-	text "Heh, I'm on a roll"
-	line "today. How about a"
-	cont "battle, kid?"
-	done
-
-Route32UnusedFisher2BeatenText: ; unreferenced
-	text "Oof. I wasn't"
-	line "lucky that time."
-	done
-
-Route32UnusedFisher2AfterText: ; unreferenced
-	text "You have to have a"
-	line "good ROD if you"
-
-	para "want to catch good"
-	line "#MON."
-	done
-
 FisherHenrySeenText:
 	text "My #MON?"
 	line "Freshly caught!"
@@ -791,27 +469,6 @@ CamperRolandAfterText:
 	cont "avoid eye contact."
 	done
 
-PicnickerLiz1SeenText:
-	text "Uh-huh. Yeah, and"
-	line "you know…"
-
-	para "Pardon? Battle?"
-	line "I'm on the phone."
-
-	para "Oh, all right. But"
-	line "make it fast."
-	done
-
-PicnickerLiz1BeatenText:
-	text "Oh! I've got to"
-	line "relieve my anger!"
-	done
-
-PicnickerLiz1AfterText:
-	text "I was having a"
-	line "nice chat too."
-	done
-
 BirdKeeperPeterSeenText:
 	text "That BADGE! It's"
 	line "from VIOLET CITY!"
@@ -828,12 +485,6 @@ BirdKeeperPeterAfterText:
 	text "I should train"
 	line "again at the GYM"
 	cont "in VIOLET CITY."
-	done
-
-Route32UnusedText: ; unreferenced
-	text "The fishermen"
-	line "yelled at me for"
-	cont "bugging them…"
 	done
 
 Text_RoarIntro:
@@ -943,12 +594,10 @@ Route32_MapEvents:
 
 	def_object_events
 	object_event  8, 49, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_TRAINER, 1, TrainerFisherJustin, -1
-	object_event 12, 56, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_TRAINER, 3, TrainerFisherRalph1, -1
 	object_event  6, 48, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_TRAINER, 1, TrainerFisherHenry, -1
 	object_event 12, 22, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 3, TrainerYoungsterAlbert, -1
 	object_event  4, 63, SPRITE_YOUNGSTER, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 3, TrainerYoungsterGordon, -1
 	object_event  3, 45, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_TRAINER, 3, TrainerCamperRoland, -1
-	object_event 10, 30, SPRITE_LASS, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_TRAINER, 1, TrainerPicnickerLiz1, -1
 	object_event 19,  8, SPRITE_COOLTRAINER_M, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route32CooltrainerMScript, -1
 	object_event 11, 82, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 3, TrainerBirdKeeperPeter, -1
 	object_event  7, 70, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, SlowpokeTailSalesmanScript, EVENT_SLOWPOKE_WELL_ROCKETS

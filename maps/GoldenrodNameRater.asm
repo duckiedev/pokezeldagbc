@@ -18,7 +18,7 @@ GoldenrodNameRaterBookshelf:
 	jumpstd DifficultBookshelfScript
 
 GoldenrodNameRaterRadio:
-	jumpstd Radio2Script
+	jumpstd Radio1Script
 
 GoldenrodNameRater_MapEvents:
 	db 0, 0 ; filler

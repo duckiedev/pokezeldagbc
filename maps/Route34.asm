@@ -1,8 +1,6 @@
 	object_const_def
-	const ROUTE34_YOUNGSTER1
 	const ROUTE34_YOUNGSTER2
 	const ROUTE34_YOUNGSTER3
-	const ROUTE34_LASS
 	const ROUTE34_OFFICER
 	const ROUTE34_POKEFAN_M
 	const ROUTE34_GRAMPS
@@ -83,269 +81,6 @@ DayCareMon2Script:
 	opentext
 	special DayCareMon2
 	closetext
-	end
-
-TrainerCamperTodd1:
-	trainer CAMPER, TODD1, EVENT_BEAT_CAMPER_TODD, CamperTodd1SeenText, CamperTodd1BeatenText, 0, .Script
-
-.Script:
-	loadvar VAR_CALLERID, PHONE_CAMPER_TODD
-	endifjustbattled
-	opentext
-	checkflag ENGINE_TODD_READY_FOR_REMATCH
-	iftrue .Rematch
-	checkflag ENGINE_GOLDENROD_DEPT_STORE_SALE_IS_ON
-	iftrue .SaleIsOn
-	checkcellnum PHONE_CAMPER_TODD
-	iftrue .NumberAccepted
-	checkevent EVENT_TODD_ASKED_FOR_PHONE_NUMBER
-	iftrue .AskAgain
-	writetext CamperTodd1AfterText
-	promptbutton
-	setevent EVENT_TODD_ASKED_FOR_PHONE_NUMBER
-	scall .AskNumber
-	sjump .FinishAsk
-
-.AskAgain:
-	scall .AskNumber2
-.FinishAsk:
-	askforphonenumber PHONE_CAMPER_TODD
-	ifequal PHONE_CONTACTS_FULL, .PhoneFull
-	ifequal PHONE_CONTACT_REFUSED, .NumberDeclined
-	gettrainername STRING_BUFFER_3, CAMPER, TODD1
-	scall .RegisteredNumber
-	sjump .NumberAccepted
-
-.Rematch:
-	scall .RematchStd
-	winlosstext CamperTodd1BeatenText, 0
-	readmem wToddFightCount
-	ifequal 4, .Fight4
-	ifequal 3, .Fight3
-	ifequal 2, .Fight2
-	ifequal 1, .Fight1
-	ifequal 0, .LoadFight0
-.Fight4:
-	checkevent EVENT_RESTORED_POWER_TO_KANTO
-	iftrue .LoadFight4
-.Fight3:
-	checkevent EVENT_BEAT_ELITE_FOUR
-	iftrue .LoadFight3
-.Fight2:
-	checkflag ENGINE_FLYPOINT_BLACKTHORN
-	iftrue .LoadFight2
-.Fight1:
-	checkflag ENGINE_FLYPOINT_CIANWOOD
-	iftrue .LoadFight1
-.LoadFight0:
-	loadtrainer CAMPER, TODD1
-	startbattle
-	reloadmapafterbattle
-	loadmem wToddFightCount, 1
-	clearflag ENGINE_TODD_READY_FOR_REMATCH
-	end
-
-.LoadFight1:
-	loadtrainer CAMPER, TODD2
-	startbattle
-	reloadmapafterbattle
-	loadmem wToddFightCount, 2
-	clearflag ENGINE_TODD_READY_FOR_REMATCH
-	end
-
-.LoadFight2:
-	loadtrainer CAMPER, TODD3
-	startbattle
-	reloadmapafterbattle
-	loadmem wToddFightCount, 3
-	clearflag ENGINE_TODD_READY_FOR_REMATCH
-	end
-
-.LoadFight3:
-	loadtrainer CAMPER, TODD4
-	startbattle
-	reloadmapafterbattle
-	loadmem wToddFightCount, 4
-	clearflag ENGINE_TODD_READY_FOR_REMATCH
-	end
-
-.LoadFight4:
-	loadtrainer CAMPER, TODD5
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_TODD_READY_FOR_REMATCH
-	end
-
-.SaleIsOn:
-	writetext CamperToddSaleText
-	waitbutton
-	closetext
-	end
-
-.AskNumber:
-	jumpstd AskNumber1MScript
-	end
-
-.AskNumber2:
-	jumpstd AskNumber2MScript
-	end
-
-.RegisteredNumber:
-	jumpstd RegisteredNumberMScript
-	end
-
-.NumberAccepted:
-	jumpstd NumberAcceptedMScript
-	end
-
-.NumberDeclined:
-	jumpstd NumberDeclinedMScript
-	end
-
-.PhoneFull:
-	jumpstd PhoneFullMScript
-	end
-
-.RematchStd:
-	jumpstd RematchMScript
-	end
-
-TrainerPicnickerGina1:
-	trainer PICNICKER, GINA1, EVENT_BEAT_PICNICKER_GINA, PicnickerGina1SeenText, PicnickerGina1BeatenText, 0, .Script
-
-.Script:
-	loadvar VAR_CALLERID, PHONE_PICNICKER_GINA
-	endifjustbattled
-	opentext
-	checkflag ENGINE_GINA_READY_FOR_REMATCH
-	iftrue .Rematch
-	checkflag ENGINE_GINA_HAS_LEAF_STONE
-	iftrue .LeafStone
-	checkcellnum PHONE_PICNICKER_GINA
-	iftrue .NumberAccepted
-	checkevent EVENT_GINA_ASKED_FOR_PHONE_NUMBER
-	iftrue .AskAgain
-	writetext PicnickerGina1AfterText
-	promptbutton
-	setevent EVENT_GINA_ASKED_FOR_PHONE_NUMBER
-	scall .AskNumber1
-	sjump .FinishAsk
-
-.AskAgain:
-	scall .AskNumber2
-.FinishAsk:
-	askforphonenumber PHONE_PICNICKER_GINA
-	ifequal PHONE_CONTACTS_FULL, .PhoneFull
-	ifequal PHONE_CONTACT_REFUSED, .NumberDeclined
-	gettrainername STRING_BUFFER_3, PICNICKER, GINA1
-	scall .RegisteredNumber
-	sjump .NumberAccepted
-
-.Rematch:
-	scall .RematchStd
-	winlosstext PicnickerGina1BeatenText, 0
-	readmem wGinaFightCount
-	ifequal 4, .Fight4
-	ifequal 3, .Fight3
-	ifequal 2, .Fight2
-	ifequal 1, .Fight1
-	ifequal 0, .LoadFight0
-.Fight4:
-	checkevent EVENT_RESTORED_POWER_TO_KANTO
-	iftrue .LoadFight4
-.Fight3:
-	checkevent EVENT_BEAT_ELITE_FOUR
-	iftrue .LoadFight3
-.Fight2:
-	checkevent EVENT_CLEARED_RADIO_TOWER
-	iftrue .LoadFight2
-.Fight1:
-	checkflag ENGINE_FLYPOINT_MAHOGANY
-	iftrue .LoadFight1
-.LoadFight0:
-	loadtrainer PICNICKER, GINA1
-	startbattle
-	reloadmapafterbattle
-	loadmem wGinaFightCount, 1
-	clearflag ENGINE_GINA_READY_FOR_REMATCH
-	end
-
-.LoadFight1:
-	loadtrainer PICNICKER, GINA2
-	startbattle
-	reloadmapafterbattle
-	loadmem wGinaFightCount, 2
-	clearflag ENGINE_GINA_READY_FOR_REMATCH
-	end
-
-.LoadFight2:
-	loadtrainer PICNICKER, GINA3
-	startbattle
-	reloadmapafterbattle
-	loadmem wGinaFightCount, 3
-	clearflag ENGINE_GINA_READY_FOR_REMATCH
-	end
-
-.LoadFight3:
-	loadtrainer PICNICKER, GINA4
-	startbattle
-	reloadmapafterbattle
-	loadmem wGinaFightCount, 4
-	clearflag ENGINE_GINA_READY_FOR_REMATCH
-	end
-
-.LoadFight4:
-	loadtrainer PICNICKER, GINA5
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_GINA_READY_FOR_REMATCH
-	end
-
-.LeafStone:
-	scall .Gift
-	verbosegiveitem LEAF_STONE
-	iffalse .BagFull
-	clearflag ENGINE_GINA_HAS_LEAF_STONE
-	setevent EVENT_GINA_GAVE_LEAF_STONE
-	sjump .NumberAccepted
-
-.BagFull:
-	sjump .PackFull
-
-.AskNumber1:
-	jumpstd AskNumber1FScript
-	end
-
-.AskNumber2:
-	jumpstd AskNumber2FScript
-	end
-
-.RegisteredNumber:
-	jumpstd RegisteredNumberFScript
-	end
-
-.NumberAccepted:
-	jumpstd NumberAcceptedFScript
-	end
-
-.NumberDeclined:
-	jumpstd NumberDeclinedFScript
-	end
-
-.PhoneFull:
-	jumpstd PhoneFullFScript
-	end
-
-.RematchStd:
-	jumpstd RematchFScript
-	end
-
-.Gift:
-	jumpstd GiftFScript
-	end
-
-.PackFull:
-	jumpstd PackFullFScript
 	end
 
 OfficerKeithScript:
@@ -470,9 +205,6 @@ TrainerCooltrainerfKate:
 	closetext
 	end
 
-Route34IlexForestSign: ; unreferenced
-	jumptext Route34IlexForestSignText
-
 Route34Sign:
 	jumptext Route34SignText
 
@@ -538,53 +270,6 @@ YoungsterIanAfterText:
 	text "I'm trying hard so"
 	line "I can be the star"
 	cont "in my class."
-	done
-
-CamperTodd1SeenText:
-	text "I'm confident in"
-	line "my ability to"
-	cont "raise #MON."
-
-	para "Want to see?"
-	done
-
-CamperTodd1BeatenText:
-	text "Did I screw up my"
-	line "training?"
-	done
-
-CamperTodd1AfterText:
-	text "Maybe I should"
-	line "take one to a DAY-"
-
-	para "CARE. Or maybe use"
-	line "some items…"
-	done
-
-CamperToddSaleText:
-	text "Shopping under the"
-	line "sky!"
-
-	para "It feels so nice"
-	line "up on a rooftop."
-	done
-
-PicnickerGina1SeenText:
-	text "Are you a trainer?"
-
-	para "Let's have a"
-	line "practice battle."
-	done
-
-PicnickerGina1BeatenText:
-	text "Oh, no! I just"
-	line "can't win…"
-	done
-
-PicnickerGina1AfterText:
-	text "You're too strong"
-	line "to be a practice"
-	cont "partner."
 	done
 
 OfficerKeithSeenText:
@@ -767,10 +452,8 @@ Route34_MapEvents:
 	bg_event 17, 19, BGEVENT_ITEM, Route34HiddenSuperPotion
 
 	def_object_events
-	object_event 13,  7, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_TRAINER, 5, TrainerCamperTodd1, -1
 	object_event 15, 32, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 3, TrainerYoungsterSamuel, -1
 	object_event 11, 20, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 3, TrainerYoungsterIan, -1
-	object_event 10, 26, SPRITE_LASS, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_TRAINER, 3, TrainerPicnickerGina1, -1
 	object_event  9, 11, SPRITE_OFFICER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, OfficerKeithScript, -1
 	object_event 18, 28, SPRITE_POKEFAN_M, SPRITEMOVEDATA_SPINCOUNTERCLOCKWISE, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 3, TrainerPokefanmBrandon, -1
 	object_event 15, 16, SPRITE_GRAMPS, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, DayCareManScript_Outside, EVENT_DAY_CARE_MAN_ON_ROUTE_34

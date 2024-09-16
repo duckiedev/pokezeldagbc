@@ -80,7 +80,7 @@ FlowerShopShelf2: ; unreferenced
 	jumpstd MagazineBookshelfScript
 
 FlowerShopRadio: ; unreferenced
-	jumpstd Radio2Script
+	jumpstd Radio1Script
 
 GoldenrodFlowerShopTeacherMySisterWentToSeeWigglyTreeRoute36Text:
 	text "Have you seen that"

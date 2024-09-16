@@ -8,9 +8,7 @@ SECTION "SRAM Bank 0", SRAM
 ds $661
 
 sRTCStatusFlags:: db
-	ds 7
-sLuckyNumberDay:: db
-sLuckyIDNumber::  dw
+	ds 10
 
 
 SECTION "Backup Save", SRAM

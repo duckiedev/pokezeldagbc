@@ -25,7 +25,6 @@ GoldenrodBikeShopClerkScript:
 	playsound SFX_KEY_ITEM
 	waitsfx
 	itemnotify
-	setflag ENGINE_BIKE_SHOP_CALL_ENABLED
 	setevent EVENT_GOT_BICYCLE
 .GotBicycle:
 	writetext GoldenrodBikeShopClerkFirstRateBikesText
@@ -38,9 +37,6 @@ GoldenrodBikeShopClerkScript:
 	waitbutton
 	closetext
 	end
-
-GoldenrodBikeShopJustReleasedCompactBike: ; unreferenced
-	jumptext GoldenrodBikeShopJustReleasedCompactBikeText
 
 GoldenrodBikeShopBicycle:
 	jumptext GoldenrodBikeShopBicycleText
@@ -58,12 +54,7 @@ GoldenrodBikeShopClerkIntroText:
 	done
 
 GoldenrodBikeShopClerkAgreedText:
-	text "Really? Great!"
-
-	para "Give me your name"
-	line "and phone number,"
-
-	para "and I'll loan you"
+	text "I'll loan you"
 	line "a BICYCLE."
 	done
 

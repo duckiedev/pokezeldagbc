@@ -197,7 +197,7 @@ DEF SPAWN_RED   EQU 2
 	const STATUSFLAGS2_ROCKETS_IN_RADIO_TOWER_F ; 0
 	const STATUSFLAGS2_SAFARI_GAME_F            ; 1
 	const STATUSFLAGS2_UNUSED_3_F               ; 2
-	const STATUSFLAGS2_BIKE_SHOP_CALL_F         ; 3
+	const STATUSFLAGS2_UNUSED_4_F	            ; 3
 	const STATUSFLAGS2_UNUSED_5_F               ; 4
 	const STATUSFLAGS2_REACHED_GOLDENROD_F      ; 5
 	const STATUSFLAGS2_ROCKETS_IN_MAHOGANY_F    ; 6
@@ -239,7 +239,7 @@ DEF NUM_BADGES       EQU NUM_JOHTO_BADGES + NUM_KANTO_BADGES
 	const_def
 	const POKEGEAR_MAP_CARD_F   ; 0
 	const POKEGEAR_RADIO_CARD_F ; 1
-	const POKEGEAR_PHONE_CARD_F ; 2
+	const_skip				    ; 2
 	const POKEGEAR_EXPN_CARD_F  ; 3
 	const_skip 3
 	const POKEGEAR_OBTAINED_F   ; 7
@@ -283,17 +283,14 @@ DEF CELEBIEVENT_FOREST_IS_RESTLESS_F EQU 2
 	const DAILYFLAGS2_DAISYS_GROOMING_F                   ; 4
 	const DAILYFLAGS2_INDIGO_PLATEAU_RIVAL_FIGHT_F        ; 5
 	const DAILYFLAGS2_MOVE_TUTOR_F                        ; 6
-	const DAILYFLAGS2_BUENAS_PASSWORD_F                   ; 7
+	const DAILYFLAGS2_UNUSED_F                            ; 7
 
 ; wSwarmFlags::
 	const_def
-	const SWARMFLAGS_BUENAS_PASSWORD_F           ; 0
+	const SWARMFLAGS_UNUSED_F                    ; 0
 	const SWARMFLAGS_GOLDENROD_DEPT_STORE_SALE_F ; 1
 	const SWARMFLAGS_DUNSPARCE_SWARM_F           ; 2
 	const SWARMFLAGS_YANMA_SWARM_F               ; 3
-
-; wLuckyNumberShowFlag::
-DEF LUCKYNUMBERSHOW_GAME_OVER_F EQU 0
 
 ; wDayCareMan::
 DEF DAYCAREMAN_HAS_MON_F         EQU 0

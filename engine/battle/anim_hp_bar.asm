@@ -2,6 +2,7 @@ _AnimateHPBar:
 	call .IsMaximumMoreThan48Pixels
 	jr c, .MoreThan48Pixels
 	call .ComputePixels
+	ld b, b
 .ShortAnimLoop:
 	push bc
 	push hl

@@ -103,14 +103,6 @@ _ObjectEventText::
 	text "Object event"
 	done
 
-_BGEventText::
-	text "BG event"
-	done
-
-_CoordinatesEventText::
-	text "Coordinates event"
-	done
-
 _ReceivedItemText::
 	text "<PLAYER> received"
 	line "@"
@@ -570,33 +562,6 @@ _SlotsDarnText::
 	text "Darn!"
 	done
 
-_PhoneWrongNumberText::
-	text "Huh? Sorry, wrong"
-	line "number!"
-	done
-
-_PhoneClickText::
-	text "Click!"
-	done
-
-_PhoneEllipseText::
-	text "<……>"
-	done
-
-_PhoneOutOfAreaText::
-	text "That number is out"
-	line "of the area."
-	done
-
-_PhoneJustTalkToThemText::
-	text "Just go talk to"
-	line "that person!"
-	done
-
-_PhoneThankYouText::
-	text "Thank you!"
-	done
-
 _PasswordAskResetText::
 	text "Password OK."
 	line "Select CONTINUE &"
@@ -737,125 +702,9 @@ _GearTodayText::
 	text_today
 	text_end
 
-_GearEllipseText::
-	text "<……>"
-	done
-
-_GearOutOfServiceText::
-	text "You're out of the"
-	line "service area."
-	prompt
-
-_PokegearAskWhoCallText::
-	text "Whom do you want"
-	line "to call?"
-	done
-
 _PokegearPressButtonText::
 	text "Press any button"
 	line "to exit."
-	done
-
-_PokegearAskDeleteText::
-	text "Delete this stored"
-	line "phone number?"
-	done
-
-_BuenaAskWhichPrizeText::
-	text "Which prize would"
-	line "you like?"
-	done
-
-_BuenaIsThatRightText::
-	text_ram wStringBuffer1
-	text "?"
-	line "Is that right?"
-	done
-
-_BuenaHereYouGoText::
-	text "Here you go!"
-
-	para ""
-	done
-
-_BuenaNotEnoughPointsText::
-	text "You don't have"
-	line "enough points."
-
-	para ""
-	done
-
-_BuenaNoRoomText::
-	text "You have no room"
-	line "for it."
-
-	para ""
-	done
-
-_BuenaComeAgainText::
-	text "Oh. Please come"
-	line "back again!"
-	done
-
-_BTExcuseMeText::
-	text "Excuse me!"
-
-	para ""
-	done
-
-_ExcuseMeYoureNotReadyText::
-	text "Excuse me."
-	line "You're not ready."
-
-	para ""
-	done
-
-_NeedAtLeastThreeMonText::
-	text "You need at least"
-	line "three #MON."
-
-	para ""
-	done
-
-_EggDoesNotQualifyText::
-	text "Sorry, an EGG"
-	line "doesn't qualify."
-
-	para ""
-	done
-
-_OnlyThreeMonMayBeEnteredText::
-	text "Only three #MON"
-	line "may be entered."
-
-	para ""
-	done
-
-_TheMonMustAllBeDifferentKindsText::
-	text "The @"
-	text_ram wStringBuffer2
-	text " #MON"
-	line "must all be"
-	cont "different kinds."
-
-	para ""
-	done
-
-_TheMonMustNotHoldTheSameItemsText::
-	text "The @"
-	text_ram wStringBuffer2
-	text " #MON"
-	line "must not hold the"
-	cont "same items."
-
-	para ""
-	done
-
-_YouCantTakeAnEggText::
-	text "You can't take an"
-	line "EGG!"
-
-	para ""
 	done
 
 _BallDodgedText::
@@ -962,13 +811,6 @@ Text_PlayedPokeFlute::
 	line "# FLUTE.@"
 	text_promptbutton
 	text_end
-
-_BlueCardBalanceText::
-	text "You now have"
-	line "@"
-	text_decimal wBlueCardBalance, 1, 2
-	text " points."
-	done
 
 _CoinCaseCountText::
 	text "Coins:"

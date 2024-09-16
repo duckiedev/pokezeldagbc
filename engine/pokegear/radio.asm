@@ -24,100 +24,62 @@ RadioJumptable:
 	dw OaksPKMNTalk1     ; $00
 	dw PokedexShow1      ; $01
 	dw BenMonMusic1      ; $02
-	dw LuckyNumberShow1  ; $03
-	dw BuenasPassword1   ; $04
-	dw PeoplePlaces1     ; $05
-	dw FernMonMusic1     ; $06
-	dw RocketRadio1      ; $07
-	dw PokeFluteRadio    ; $08
-	dw UnownRadio        ; $09
-	dw EvolutionRadio    ; $0a
+	dw PeoplePlaces1     ; $04
+	dw FernMonMusic1     ; $05
+	dw RocketRadio1      ; $06
+	dw PokeFluteRadio    ; $07
+	dw UnownRadio        ; $08
+	dw EvolutionRadio    ; $00
 	assert_table_length NUM_RADIO_CHANNELS
 ; OaksPKMNTalk
-	dw OaksPKMNTalk2     ; $0b
-	dw OaksPKMNTalk3     ; $0c
-	dw OaksPKMNTalk4     ; $0d
-	dw OaksPKMNTalk5     ; $0e
-	dw OaksPKMNTalk6     ; $0f
-	dw OaksPKMNTalk7     ; $10
-	dw OaksPKMNTalk8     ; $11
-	dw OaksPKMNTalk9     ; $12
-	dw PokedexShow2      ; $13
-	dw PokedexShow3      ; $14
-	dw PokedexShow4      ; $15
-	dw PokedexShow5      ; $16
+	dw OaksPKMNTalk2     ; $0a
+	dw OaksPKMNTalk3     ; $0b
+	dw OaksPKMNTalk4     ; $0c
+	dw OaksPKMNTalk5     ; $0d
+	dw OaksPKMNTalk6     ; $0e
+	dw OaksPKMNTalk7     ; $0f
+	dw OaksPKMNTalk8     ; $10
+	dw OaksPKMNTalk9     ; $11
+	dw PokedexShow2      ; $12
+	dw PokedexShow3      ; $13
+	dw PokedexShow4      ; $14
+	dw PokedexShow5      ; $15
 ; Ben Music
-	dw BenMonMusic2      ; $17
-	dw BenMonMusic3      ; $18
-	dw BenFernMusic4     ; $19
-	dw BenFernMusic5     ; $1a
-	dw BenFernMusic6     ; $1b
-	dw BenFernMusic7     ; $1c
-	dw FernMonMusic2     ; $1d
-; Lucky Number Show
-	dw LuckyNumberShow2  ; $1e
-	dw LuckyNumberShow3  ; $1f
-	dw LuckyNumberShow4  ; $20
-	dw LuckyNumberShow5  ; $21
-	dw LuckyNumberShow6  ; $22
-	dw LuckyNumberShow7  ; $23
-	dw LuckyNumberShow8  ; $24
-	dw LuckyNumberShow9  ; $25
-	dw LuckyNumberShow10 ; $26
-	dw LuckyNumberShow11 ; $27
-	dw LuckyNumberShow12 ; $28
-	dw LuckyNumberShow13 ; $29
-	dw LuckyNumberShow14 ; $2a
-	dw LuckyNumberShow15 ; $2b
+	dw BenMonMusic2      ; $16
+	dw BenMonMusic3      ; $17
+	dw BenFernMusic4     ; $18
+	dw BenFernMusic5     ; $19
+	dw BenFernMusic6     ; $1a
+	dw BenFernMusic7     ; $1b
+	dw FernMonMusic2     ; $1c
 ; People & Places
-	dw PeoplePlaces2     ; $2c
-	dw PeoplePlaces3     ; $2d
-	dw PeoplePlaces4     ; $2e
-	dw PeoplePlaces5     ; $2f
-	dw PeoplePlaces6     ; $30
-	dw PeoplePlaces7     ; $31
+	dw PeoplePlaces2     ; $1d
+	dw PeoplePlaces3     ; $1e
+	dw PeoplePlaces4     ; $1f
+	dw PeoplePlaces5     ; $20
+	dw PeoplePlaces6     ; $21
+	dw PeoplePlaces7     ; $22
 ; Rocket Radio
-	dw RocketRadio2      ; $32
-	dw RocketRadio3      ; $33
-	dw RocketRadio4      ; $34
-	dw RocketRadio5      ; $35
-	dw RocketRadio6      ; $36
-	dw RocketRadio7      ; $37
-	dw RocketRadio8      ; $38
-	dw RocketRadio9      ; $39
-	dw RocketRadio10     ; $3a
+	dw RocketRadio2      ; $23
+	dw RocketRadio3      ; $24
+	dw RocketRadio4      ; $25
+	dw RocketRadio5      ; $26
+	dw RocketRadio6      ; $27
+	dw RocketRadio7      ; $28
+	dw RocketRadio8      ; $29
+	dw RocketRadio9      ; $2a
+	dw RocketRadio10     ; $2b
 ; More Pokemon Channel stuff
-	dw OaksPKMNTalk10    ; $3b
-	dw OaksPKMNTalk11    ; $3c
-	dw OaksPKMNTalk12    ; $3d
-	dw OaksPKMNTalk13    ; $3e
-	dw OaksPKMNTalk14    ; $3f
-; Buenas Password
-	dw BuenasPassword2   ; $40
-	dw BuenasPassword3   ; $41
-	dw BuenasPassword4   ; $42
-	dw BuenasPassword5   ; $43
-	dw BuenasPassword6   ; $44
-	dw BuenasPassword7   ; $45
-	dw BuenasPassword8   ; $46
-	dw BuenasPassword9   ; $47
-	dw BuenasPassword10  ; $48
-	dw BuenasPassword11  ; $49
-	dw BuenasPassword12  ; $4a
-	dw BuenasPassword13  ; $4b
-	dw BuenasPassword14  ; $4c
-	dw BuenasPassword15  ; $4d
-	dw BuenasPassword16  ; $4e
-	dw BuenasPassword17  ; $4f
-	dw BuenasPassword18  ; $50
-	dw BuenasPassword19  ; $51
-	dw BuenasPassword20  ; $52
-	dw BuenasPassword21  ; $53
-	dw RadioScroll       ; $54
+	dw OaksPKMNTalk10    ; $2c
+	dw OaksPKMNTalk11    ; $2d
+	dw OaksPKMNTalk12    ; $2e
+	dw OaksPKMNTalk13    ; $2f
+	dw OaksPKMNTalk14    ; $30
+	dw RadioScroll       ; $31
 ; More Pokemon Channel stuff
-	dw PokedexShow6      ; $55
-	dw PokedexShow7      ; $56
-	dw PokedexShow8      ; $57
+	dw PokedexShow6      ; $32
+	dw PokedexShow7      ; $33
+	dw PokedexShow8      ; $34
 	assert_table_length NUM_RADIO_SEGMENTS
 
 PrintRadioLine:
@@ -914,149 +876,6 @@ BenFernText3B:
 	text_far _BenFernText3B
 	text_end
 
-LuckyNumberShow1:
-	call StartRadioStation
-	callfar CheckLuckyNumberShowFlag
-	jr nc, .dontreset
-	callfar ResetLuckyNumberShowFlag
-.dontreset
-	ld hl, LC_Text1
-	ld a, LUCKY_NUMBER_SHOW_2
-	jp NextRadioLine
-
-LuckyNumberShow2:
-	ld hl, LC_Text2
-	ld a, LUCKY_NUMBER_SHOW_3
-	jp NextRadioLine
-
-LuckyNumberShow3:
-	ld hl, LC_Text3
-	ld a, LUCKY_NUMBER_SHOW_4
-	jp NextRadioLine
-
-LuckyNumberShow4:
-	ld hl, LC_Text4
-	ld a, LUCKY_NUMBER_SHOW_5
-	jp NextRadioLine
-
-LuckyNumberShow5:
-	ld hl, LC_Text5
-	ld a, LUCKY_NUMBER_SHOW_6
-	jp NextRadioLine
-
-LuckyNumberShow6:
-	ld hl, LC_Text6
-	ld a, LUCKY_NUMBER_SHOW_7
-	jp NextRadioLine
-
-LuckyNumberShow7:
-	ld hl, LC_Text7
-	ld a, LUCKY_NUMBER_SHOW_8
-	jp NextRadioLine
-
-LuckyNumberShow8:
-	ld hl, wStringBuffer1
-	ld de, wLuckyIDNumber
-	lb bc, PRINTNUM_LEADINGZEROS | 2, 5
-	call PrintNum
-	ld a, "@"
-	ld [wStringBuffer1 + 5], a
-	ld hl, LC_Text8
-	ld a, LUCKY_NUMBER_SHOW_9
-	jp NextRadioLine
-
-LuckyNumberShow9:
-	ld hl, LC_Text9
-	ld a, LUCKY_NUMBER_SHOW_10
-	jp NextRadioLine
-
-LuckyNumberShow10:
-	ld hl, LC_Text7
-	ld a, LUCKY_NUMBER_SHOW_11
-	jp NextRadioLine
-
-LuckyNumberShow11:
-	ld hl, LC_Text8
-	ld a, LUCKY_NUMBER_SHOW_12
-	jp NextRadioLine
-
-LuckyNumberShow12:
-	ld hl, LC_Text10
-	ld a, LUCKY_NUMBER_SHOW_13
-	jp NextRadioLine
-
-LuckyNumberShow13:
-	ld hl, LC_Text11
-	call Random
-	and a
-	ld a, LUCKY_CHANNEL
-	jr nz, .okay
-	ld a, LUCKY_NUMBER_SHOW_14
-.okay
-	jp NextRadioLine
-
-LuckyNumberShow14:
-	ld hl, LC_DragText1
-	ld a, LUCKY_NUMBER_SHOW_15
-	jp NextRadioLine
-
-LuckyNumberShow15:
-	ld hl, LC_DragText2
-	ld a, LUCKY_CHANNEL
-	jp NextRadioLine
-
-LC_Text1:
-	text_far _LC_Text1
-	text_end
-
-LC_Text2:
-	text_far _LC_Text2
-	text_end
-
-LC_Text3:
-	text_far _LC_Text3
-	text_end
-
-LC_Text4:
-	text_far _LC_Text4
-	text_end
-
-LC_Text5:
-	text_far _LC_Text5
-	text_end
-
-LC_Text6:
-	text_far _LC_Text6
-	text_end
-
-LC_Text7:
-	text_far _LC_Text7
-	text_end
-
-LC_Text8:
-	text_far _LC_Text8
-	text_end
-
-LC_Text9:
-	text_far _LC_Text9
-	text_end
-
-LC_Text10:
-	text_far _LC_Text10
-	text_end
-
-LC_Text11:
-	text_far _LC_Text11
-	text_end
-
-LC_DragText1:
-	text_far _LC_DragText1
-	text_end
-
-LC_DragText2:
-	text_far _LC_DragText2
-	text_end
-
 PeoplePlaces1:
 	call StartRadioStation
 	ld hl, PnP_Text1
@@ -1421,369 +1240,6 @@ EvolutionRadio:
 	ld a, 1
 	ld [wNumRadioLinesPrinted], a
 	ret
-
-BuenasPassword1:
-; Determine if we need to be here
-	call BuenasPasswordCheckTime
-	jp nc, .PlayPassword
-	ld a, [wNumRadioLinesPrinted]
-	and a
-	jp z, BuenasPassword20
-	jp BuenasPassword8
-
-.PlayPassword:
-	call StartRadioStation
-	ldh a, [hBGMapMode]
-	push af
-	xor a
-	ldh [hBGMapMode], a
-	ld de, BuenasPasswordChannelName
-	hlcoord 2, 9
-	call PlaceString
-	pop af
-	ldh [hBGMapMode], a
-	ld hl, BuenaRadioText1
-	ld a, BUENAS_PASSWORD_2
-	jp NextRadioLine
-
-BuenasPassword2:
-	ld hl, BuenaRadioText2
-	ld a, BUENAS_PASSWORD_3
-	jp NextRadioLine
-
-BuenasPassword3:
-	call BuenasPasswordCheckTime
-	ld hl, BuenaRadioText3
-	jp c, BuenasPasswordAfterMidnight
-	ld a, BUENAS_PASSWORD_4
-	jp NextRadioLine
-
-BuenasPassword4:
-	call BuenasPasswordCheckTime
-	jp c, BuenasPassword8
-	ld a, [wBuenasPassword]
-; If we already generated the password today, we don't need to generate a new one.
-	ld hl, wDailyFlags2
-	bit DAILYFLAGS2_BUENAS_PASSWORD_F, [hl]
-	jr nz, .AlreadyGotIt
-; There are only 11 groups to choose from.
-.greater_than_11
-	call Random
-	maskbits NUM_PASSWORD_CATEGORIES
-	cp NUM_PASSWORD_CATEGORIES
-	jr nc, .greater_than_11
-; Store it in the high nybble of e.
-	swap a
-	ld e, a
-; For each group, choose one of the three passwords.
-.greater_than_three
-	call Random
-	maskbits NUM_PASSWORDS_PER_CATEGORY
-	cp NUM_PASSWORDS_PER_CATEGORY
-	jr nc, .greater_than_three
-; The high nybble of wBuenasPassword will now contain the password group index, and the low nybble contains the actual password.
-	add e
-	ld [wBuenasPassword], a
-; Set the flag so that we don't generate a new password this week.
-	ld hl, wDailyFlags2
-	set DAILYFLAGS2_BUENAS_PASSWORD_F, [hl]
-.AlreadyGotIt:
-	ld c, a
-	call GetBuenasPassword
-	ld hl, BuenaRadioText4
-	ld a, BUENAS_PASSWORD_5
-	jp NextRadioLine
-
-GetBuenasPassword:
-; The password indices are held in c.  High nybble contains the group index, low nybble contains the word index.
-; Load the password group pointer in hl.
-	ld a, c
-	swap a
-	and $f
-	ld hl, BuenasPasswordTable
-	ld d, 0
-	ld e, a
-	add hl, de
-	add hl, de
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-; Get the password type and store it in b.
-	ld a, [hli]
-	ld b, a
-	push hl
-	inc hl
-; Get the password index.
-	ld a, c
-	and $f
-	ld c, a
-	push hl
-	ld hl, .StringFunctionJumptable
-	ld e, b
-	add hl, de
-	add hl, de
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	pop de ; de now contains the pointer to the value of this week's password, in Blue Card Points.
-	call _hl_
-	pop hl
-	ld c, [hl]
-	ret
-
-.StringFunctionJumptable:
-; entries correspond to BUENA_* constants
-	table_width 2, GetBuenasPassword.StringFunctionJumptable
-	dw .Mon       ; BUENA_MON
-	dw .Item      ; BUENA_ITEM
-	dw .Move      ; BUENA_MOVE
-	dw .RawString ; BUENA_STRING
-	assert_table_length NUM_BUENA_FUNCTIONS
-
-.Mon:
-	call .GetTheIndex
-	call GetPokemonName
-	ret
-
-.Item:
-	call .GetTheIndex
-	call GetItemName
-	ret
-
-.Move:
-	call .GetTheIndex
-	call GetMoveName
-	ret
-
-.GetTheIndex:
-	ld h, 0
-	ld l, c
-	add hl, de
-	ld a, [hl]
-	ld [wNamedObjectIndex], a
-	ret
-
-.RawString:
-; Get the string from the table...
-	ld a, c
-	and a
-	jr z, .skip
-.read_loop
-	ld a, [de]
-	inc de
-	cp "@"
-	jr nz, .read_loop
-	dec c
-	jr nz, .read_loop
-; ... and copy it into wStringBuffer1.
-.skip
-	ld hl, wStringBuffer1
-.copy_loop
-	ld a, [de]
-	inc de
-	ld [hli], a
-	cp "@"
-	jr nz, .copy_loop
-	ld de, wStringBuffer1
-	ret
-
-INCLUDE "data/radio/buenas_passwords.asm"
-
-BuenasPassword5:
-	ld hl, BuenaRadioText5
-	ld a, BUENAS_PASSWORD_6
-	jp NextRadioLine
-
-BuenasPassword6:
-	ld hl, BuenaRadioText6
-	ld a, BUENAS_PASSWORD_7
-	jp NextRadioLine
-
-BuenasPassword7:
-	call BuenasPasswordCheckTime
-	ld hl, BuenaRadioText7
-	jr c, BuenasPasswordAfterMidnight
-	ld a, BUENAS_PASSWORD
-	jp NextRadioLine
-
-BuenasPasswordAfterMidnight:
-	push hl
-	ld hl, wDailyFlags2
-	res DAILYFLAGS2_BUENAS_PASSWORD_F, [hl]
-	pop hl
-	ld a, BUENAS_PASSWORD_8
-	jp NextRadioLine
-
-BuenasPassword8:
-	ld hl, wDailyFlags2
-	res DAILYFLAGS2_BUENAS_PASSWORD_F, [hl]
-	ld hl, BuenaRadioMidnightText10
-	ld a, BUENAS_PASSWORD_9
-	jp NextRadioLine
-
-BuenasPassword9:
-	ld hl, BuenaRadioMidnightText1
-	ld a, BUENAS_PASSWORD_10
-	jp NextRadioLine
-
-BuenasPassword10:
-	ld hl, BuenaRadioMidnightText2
-	ld a, BUENAS_PASSWORD_11
-	jp NextRadioLine
-
-BuenasPassword11:
-	ld hl, BuenaRadioMidnightText3
-	ld a, BUENAS_PASSWORD_12
-	jp NextRadioLine
-
-BuenasPassword12:
-	ld hl, BuenaRadioMidnightText4
-	ld a, BUENAS_PASSWORD_13
-	jp NextRadioLine
-
-BuenasPassword13:
-	ld hl, BuenaRadioMidnightText5
-	ld a, BUENAS_PASSWORD_14
-	jp NextRadioLine
-
-BuenasPassword14:
-	ld hl, BuenaRadioMidnightText6
-	ld a, BUENAS_PASSWORD_15
-	jp NextRadioLine
-
-BuenasPassword15:
-	ld hl, BuenaRadioMidnightText7
-	ld a, BUENAS_PASSWORD_16
-	jp NextRadioLine
-
-BuenasPassword16:
-	ld hl, BuenaRadioMidnightText8
-	ld a, BUENAS_PASSWORD_17
-	jp NextRadioLine
-
-BuenasPassword17:
-	ld hl, BuenaRadioMidnightText9
-	ld a, BUENAS_PASSWORD_18
-	jp NextRadioLine
-
-BuenasPassword18:
-	ld hl, BuenaRadioMidnightText10
-	ld a, BUENAS_PASSWORD_19
-	jp NextRadioLine
-
-BuenasPassword19:
-	ld hl, BuenaRadioMidnightText10
-	ld a, BUENAS_PASSWORD_20
-	jp NextRadioLine
-
-BuenasPassword20:
-	ldh a, [hBGMapMode]
-	push af
-	farcall NoRadioMusic
-	farcall NoRadioName
-	pop af
-	ldh [hBGMapMode], a
-	ld hl, wDailyFlags2
-	res DAILYFLAGS2_BUENAS_PASSWORD_F, [hl]
-	ld a, BUENAS_PASSWORD
-	ld [wCurRadioLine], a
-	xor a
-	ld [wNumRadioLinesPrinted], a
-	ld hl, BuenaOffTheAirText
-	ld a, BUENAS_PASSWORD_21
-	jp NextRadioLine
-
-BuenasPassword21:
-	ld a, BUENAS_PASSWORD
-	ld [wCurRadioLine], a
-	xor a
-	ld [wNumRadioLinesPrinted], a
-	call BuenasPasswordCheckTime
-	jp nc, BuenasPassword1
-	ld hl, BuenaOffTheAirText
-	ld a, BUENAS_PASSWORD_21
-	jp NextRadioLine
-
-BuenasPasswordCheckTime:
-	call UpdateTime
-	ldh a, [hHours]
-	cp NITE_HOUR
-	ret
-
-BuenasPasswordChannelName:
-	db "BUENA'S PASSWORD@"
-
-BuenaRadioText1:
-	text_far _BuenaRadioText1
-	text_end
-
-BuenaRadioText2:
-	text_far _BuenaRadioText2
-	text_end
-
-BuenaRadioText3:
-	text_far _BuenaRadioText3
-	text_end
-
-BuenaRadioText4:
-	text_far _BuenaRadioText4
-	text_end
-
-BuenaRadioText5:
-	text_far _BuenaRadioText5
-	text_end
-
-BuenaRadioText6:
-	text_far _BuenaRadioText6
-	text_end
-
-BuenaRadioText7:
-	text_far _BuenaRadioText7
-	text_end
-
-BuenaRadioMidnightText1:
-	text_far _BuenaRadioMidnightText1
-	text_end
-
-BuenaRadioMidnightText2:
-	text_far _BuenaRadioMidnightText2
-	text_end
-
-BuenaRadioMidnightText3:
-	text_far _BuenaRadioMidnightText3
-	text_end
-
-BuenaRadioMidnightText4:
-	text_far _BuenaRadioMidnightText4
-	text_end
-
-BuenaRadioMidnightText5:
-	text_far _BuenaRadioMidnightText5
-	text_end
-
-BuenaRadioMidnightText6:
-	text_far _BuenaRadioMidnightText6
-	text_end
-
-BuenaRadioMidnightText7:
-	text_far _BuenaRadioMidnightText7
-	text_end
-
-BuenaRadioMidnightText8:
-	text_far _BuenaRadioMidnightText8
-	text_end
-
-BuenaRadioMidnightText9:
-	text_far _BuenaRadioMidnightText9
-	text_end
-
-BuenaRadioMidnightText10:
-	text_far _BuenaRadioMidnightText10
-	text_end
-
-BuenaOffTheAirText:
-	text_far _BuenaOffTheAirText
-	text_end
 
 CopyRadioTextToRAM:
 	ld a, [hl]

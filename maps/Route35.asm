@@ -5,8 +5,6 @@
 	const ROUTE35_LASS2
 	const ROUTE35_YOUNGSTER3
 	const ROUTE35_FISHER
-	const ROUTE35_BUG_CATCHER
-	const ROUTE35_SUPER_NERD
 	const ROUTE35_OFFICER
 	const ROUTE35_FRUIT_TREE
 	const ROUTE35_POKE_BALL
@@ -25,61 +23,6 @@ TrainerBirdKeeperBryan:
 	writetext BirdKeeperBryanAfterBattleText
 	waitbutton
 	closetext
-	end
-
-TrainerJugglerIrwin:
-	trainer JUGGLER, IRWIN1, EVENT_BEAT_JUGGLER_IRWIN, JugglerIrwin1SeenText, JugglerIrwin1BeatenText, 0, .Script
-
-.Script:
-	loadvar VAR_CALLERID, PHONE_JUGGLER_IRWIN
-	endifjustbattled
-	opentext
-	checkcellnum PHONE_JUGGLER_IRWIN
-	iftrue Route35NumberAcceptedM
-	checkevent EVENT_IRWIN_ASKED_FOR_PHONE_NUMBER
-	iftrue .AskedAlready
-	writetext JugglerIrwinAfterBattleText
-	promptbutton
-	setevent EVENT_IRWIN_ASKED_FOR_PHONE_NUMBER
-	scall Route35AskNumber1M
-	sjump .AskForNumber
-
-.AskedAlready:
-	scall Route35AskNumber2M
-.AskForNumber:
-	askforphonenumber PHONE_JUGGLER_IRWIN
-	ifequal PHONE_CONTACTS_FULL, Route35PhoneFullM
-	ifequal PHONE_CONTACT_REFUSED, Route35NumberDeclinedM
-	gettrainername STRING_BUFFER_3, JUGGLER, IRWIN1
-	scall Route35RegisteredNumberM
-	sjump Route35NumberAcceptedM
-
-Route35AskNumber1M:
-	jumpstd AskNumber1MScript
-	end
-
-Route35AskNumber2M:
-	jumpstd AskNumber2MScript
-	end
-
-Route35RegisteredNumberM:
-	jumpstd RegisteredNumberMScript
-	end
-
-Route35NumberAcceptedM:
-	jumpstd NumberAcceptedMScript
-	end
-
-Route35NumberDeclinedM:
-	jumpstd NumberDeclinedMScript
-	end
-
-Route35PhoneFullM:
-	jumpstd PhoneFullMScript
-	end
-
-Route35RematchM:
-	jumpstd RematchMScript
 	end
 
 TrainerCamperIvan:
@@ -122,103 +65,6 @@ TrainerPicnickerKim:
 	endifjustbattled
 	opentext
 	writetext PicnickerKimAfterBattleText
-	waitbutton
-	closetext
-	end
-
-TrainerBugCatcherArnie:
-	trainer BUG_CATCHER, ARNIE1, EVENT_BEAT_BUG_CATCHER_ARNIE, BugCatcherArnieSeenText, BugCatcherArnieBeatenText, 0, .Script
-
-.Script:
-	loadvar VAR_CALLERID, PHONE_BUG_CATCHER_ARNIE
-	endifjustbattled
-	opentext
-	checkflag ENGINE_ARNIE_READY_FOR_REMATCH
-	iftrue .WantsBattle
-	checkflag ENGINE_YANMA_SWARM
-	iftrue .YanmaSwarming
-	checkcellnum PHONE_BUG_CATCHER_ARNIE
-	iftrue Route35NumberAcceptedM
-	checkevent EVENT_ARNIE_ASKED_FOR_PHONE_NUMBER
-	iftrue .AskedAlready
-	writetext BugCatcherArnieAfterBattleText
-	promptbutton
-	setevent EVENT_ARNIE_ASKED_FOR_PHONE_NUMBER
-	scall Route35AskNumber1M
-	sjump .AskForNumber
-
-.AskedAlready:
-	scall Route35AskNumber2M
-.AskForNumber:
-	askforphonenumber PHONE_BUG_CATCHER_ARNIE
-	ifequal PHONE_CONTACTS_FULL, Route35PhoneFullM
-	ifequal PHONE_CONTACT_REFUSED, Route35NumberDeclinedM
-	gettrainername STRING_BUFFER_3, BUG_CATCHER, ARNIE1
-	scall Route35RegisteredNumberM
-	sjump Route35NumberAcceptedM
-
-.WantsBattle:
-	scall Route35RematchM
-	winlosstext BugCatcherArnieBeatenText, 0
-	readmem wArnieFightCount
-	ifequal 4, .Fight4
-	ifequal 3, .Fight3
-	ifequal 2, .Fight2
-	ifequal 1, .Fight1
-	ifequal 0, .LoadFight0
-.Fight4:
-	checkevent EVENT_RESTORED_POWER_TO_KANTO
-	iftrue .LoadFight4
-.Fight3:
-	checkevent EVENT_BEAT_ELITE_FOUR
-	iftrue .LoadFight3
-.Fight2:
-	checkflag ENGINE_FLYPOINT_BLACKTHORN
-	iftrue .LoadFight2
-.Fight1:
-	checkflag ENGINE_FLYPOINT_LAKE_OF_RAGE
-	iftrue .LoadFight1
-.LoadFight0:
-	loadtrainer BUG_CATCHER, ARNIE1
-	startbattle
-	reloadmapafterbattle
-	loadmem wArnieFightCount, 1
-	clearflag ENGINE_ARNIE_READY_FOR_REMATCH
-	end
-
-.LoadFight1:
-	loadtrainer BUG_CATCHER, ARNIE2
-	startbattle
-	reloadmapafterbattle
-	loadmem wArnieFightCount, 2
-	clearflag ENGINE_ARNIE_READY_FOR_REMATCH
-	end
-
-.LoadFight2:
-	loadtrainer BUG_CATCHER, ARNIE3
-	startbattle
-	reloadmapafterbattle
-	loadmem wArnieFightCount, 3
-	clearflag ENGINE_ARNIE_READY_FOR_REMATCH
-	end
-
-.LoadFight3:
-	loadtrainer BUG_CATCHER, ARNIE4
-	startbattle
-	reloadmapafterbattle
-	loadmem wArnieFightCount, 4
-	clearflag ENGINE_ARNIE_READY_FOR_REMATCH
-	end
-
-.LoadFight4:
-	loadtrainer BUG_CATCHER, ARNIE5
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_ARNIE_READY_FOR_REMATCH
-	end
-
-.YanmaSwarming:
-	writetext BugCatcherArnieYanmaText
 	waitbutton
 	closetext
 	end
@@ -368,49 +214,6 @@ BirdKeeperBryanAfterBattleText:
 	line "custom BALL."
 	done
 
-JugglerIrwin1SeenText:
-	text "Behold my graceful"
-	line "BALL dexterity!"
-	done
-
-JugglerIrwin1BeatenText:
-	text "Whew! That was a"
-	line "jolt!"
-	done
-
-JugglerIrwinAfterBattleText:
-	text "I was going to"
-	line "dazzle you with my"
-	cont "prize #MON."
-
-	para "But your prowess"
-	line "electrified me!"
-	done
-
-BugCatcherArnieSeenText:
-	text "I'll go anywhere"
-	line "if bug #MON"
-	cont "appear there."
-	done
-
-BugCatcherArnieBeatenText:
-	text "Huh? I shouldn't"
-	line "have lost that…"
-	done
-
-BugCatcherArnieAfterBattleText:
-	text "My VENONAT is my"
-	line "best friend!"
-	done
-
-BugCatcherArnieYanmaText:
-	text "Wow… Look at all"
-	line "those YANMA!"
-
-	para "I'm so blown away,"
-	line "I can't move."
-	done
-
 FirebreatherWaltSeenText:
 	text "I'm practicing my"
 	line "fire breathing."
@@ -478,8 +281,6 @@ Route35_MapEvents:
 	object_event 10, 26, SPRITE_LASS, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_TRAINER, 1, TrainerPicnickerKim, -1
 	object_event 14, 28, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 0, TrainerBirdKeeperBryan, -1
 	object_event  2, 10, SPRITE_FISHER, SPRITEMOVEDATA_SPINCOUNTERCLOCKWISE, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 2, TrainerFirebreatherWalt, -1
-	object_event 16,  7, SPRITE_BUG_CATCHER, SPRITEMOVEDATA_STANDING_DOWN, 2, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_TRAINER, 3, TrainerBugCatcherArnie, -1
-	object_event  5, 10, SPRITE_SUPER_NERD, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 2, TrainerJugglerIrwin, -1
 	object_event  5,  6, SPRITE_OFFICER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, TrainerOfficerDirk, -1
 	object_event  2, 25, SPRITE_FRUIT_TREE, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route35FruitTree, -1
 	object_event 13, 16, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, Route35TMRollout, EVENT_ROUTE_35_TM_ROLLOUT

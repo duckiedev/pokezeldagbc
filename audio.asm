@@ -125,21 +125,15 @@ INCLUDE "audio/music/pokeflutechannel.asm"
 
 SECTION "Songs 5", ROMX
 
-; FREE SPACE
-INCLUDE "audio/music/buenaspassword.asm"
 INCLUDE "audio/music/lookmysticalman.asm"
 INCLUDE "audio/music/crystalopening.asm"
-; FREE SPACE
 INCLUDE "audio/music/suicunebattle.asm"
-; FREE SPACE
-; FREE SPACE
 
 
 SECTION "Extra Songs 1", ROMX
 
 INCLUDE "audio/music/credits.asm"
 INCLUDE "audio/music/clair.asm"
-; FREE SPACE
 
 
 SECTION "Extra Songs 2", ROMX

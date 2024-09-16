@@ -104,14 +104,6 @@ ElmCheckEverstone:
 	iftrue ElmScript_CallYou
 	checkevent EVENT_SHOWED_TOGEPI_TO_ELM
 	iftrue ElmGiveEverstoneScript
-	checkevent EVENT_TOLD_ELM_ABOUT_TOGEPI_OVER_THE_PHONE
-	iffalse ElmCheckTogepiEgg
-	setval TOGEPI
-	special FindPartyMonThatSpeciesYourTrainerID
-	iftrue ShowElmTogepiScript
-	setval TOGETIC
-	special FindPartyMonThatSpeciesYourTrainerID
-	iftrue ShowElmTogepiScript
 	writetext ElmThoughtEggHatchedText
 	waitbutton
 	closetext
@@ -250,17 +242,6 @@ DidntChooseStarterScript:
 
 ElmDirectionsScript:
 	turnobject PLAYER, UP
-	opentext
-	writetext ElmDirectionsText1
-	waitbutton
-	closetext
-	addcellnum PHONE_ELM
-	opentext
-	writetext GotElmsNumberText
-	playsound SFX_REGISTER_PHONE_NUMBER
-	waitsfx
-	waitbutton
-	closetext
 	turnobject ELMSLAB_ELM, LEFT
 	opentext
 	writetext ElmDirectionsText2
@@ -892,26 +873,6 @@ ReceivedStarterText:
 	text "!"
 	done
 
-ElmDirectionsText1:
-	text "MR.#MON lives a"
-	line "little bit beyond"
-
-	para "CHERRYGROVE, the"
-	line "next city over."
-
-	para "It's almost a"
-	line "direct route"
-
-	para "there, so you"
-	line "can't miss it."
-
-	para "But just in case,"
-	line "here's my phone"
-
-	para "number. Call me if"
-	line "anything comes up!"
-	done
-
 ElmDirectionsText2:
 	text "If your #MON is"
 	line "hurt, you should"
@@ -926,11 +887,6 @@ ElmDirectionsText2:
 ElmDirectionsText3:
 	text "<PLAY_G>, I'm"
 	line "counting on you!"
-	done
-
-GotElmsNumberText:
-	text "<PLAYER> got ELM's"
-	line "phone number."
 	done
 
 ElmDescribesMrPokemonText:

@@ -20,7 +20,7 @@ GoldenrodPPSpeechHouseBookshelf1:
 	jumpstd MagazineBookshelfScript
 
 GoldenrodPPSpeechHouseRadio:
-	jumpstd Radio2Script
+	jumpstd Radio1Script
 
 GoldenrodPPSpeechHouseFisherText:
 	text "Once while I was"

@@ -73,7 +73,7 @@ CharcoalKilnBookshelf:
 	jumpstd MagazineBookshelfScript
 
 CharcoalKilnRadio:
-	jumpstd Radio2Script
+	jumpstd Radio1Script
 
 CharcoalKilnBossText1:
 	text "All the SLOWPOKE"

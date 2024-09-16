@@ -1,5 +1,4 @@
 	object_const_def
-	const ROUTE42_FISHER
 	const ROUTE42_POKEFAN_M
 	const ROUTE42_SUPER_NERD
 	const ROUTE42_FRUIT_TREE1
@@ -32,132 +31,6 @@ Route42SuicuneScript:
 	setscene SCENE_ROUTE42_NOOP
 	clearevent EVENT_SAW_SUICUNE_ON_ROUTE_36
 	setmapscene ROUTE_36, SCENE_ROUTE36_SUICUNE
-	end
-
-TrainerFisherTully:
-	trainer FISHER, TULLY1, EVENT_BEAT_FISHER_TULLY, FisherTullySeenText, FisherTullyBeatenText, 0, .Script
-
-.Script:
-	loadvar VAR_CALLERID, PHONE_FISHER_TULLY
-	endifjustbattled
-	opentext
-	checkflag ENGINE_TULLY_READY_FOR_REMATCH
-	iftrue .WantsBattle
-	checkflag ENGINE_TULLY_HAS_WATER_STONE
-	iftrue .HasWaterStone
-	checkcellnum PHONE_FISHER_TULLY
-	iftrue .NumberAccepted
-	checkevent EVENT_TULLY_ASKED_FOR_PHONE_NUMBER
-	iftrue .AskedAlready
-	writetext FisherTullyAfterBattleText
-	promptbutton
-	setevent EVENT_TULLY_ASKED_FOR_PHONE_NUMBER
-	scall .AskNumber1
-	sjump .AskForNumber
-
-.AskedAlready:
-	scall .AskNumber2
-.AskForNumber:
-	askforphonenumber PHONE_FISHER_TULLY
-	ifequal PHONE_CONTACTS_FULL, .PhoneFull
-	ifequal PHONE_CONTACT_REFUSED, .NumberDeclined
-	gettrainername STRING_BUFFER_3, FISHER, TULLY1
-	scall .RegisteredNumber
-	sjump .NumberAccepted
-
-.WantsBattle:
-	scall .Rematch
-	winlosstext FisherTullyBeatenText, 0
-	readmem wTullyFightCount
-	ifequal 3, .Fight3
-	ifequal 2, .Fight2
-	ifequal 1, .Fight1
-	ifequal 0, .LoadFight0
-.Fight3:
-	checkevent EVENT_RESTORED_POWER_TO_KANTO
-	iftrue .LoadFight3
-.Fight2:
-	checkevent EVENT_BEAT_ELITE_FOUR
-	iftrue .LoadFight2
-.Fight1:
-	checkevent EVENT_CLEARED_ROCKET_HIDEOUT
-	iftrue .LoadFight1
-.LoadFight0:
-	loadtrainer FISHER, TULLY1
-	startbattle
-	reloadmapafterbattle
-	loadmem wTullyFightCount, 1
-	clearflag ENGINE_TULLY_READY_FOR_REMATCH
-	end
-
-.LoadFight1:
-	loadtrainer FISHER, TULLY2
-	startbattle
-	reloadmapafterbattle
-	loadmem wTullyFightCount, 2
-	clearflag ENGINE_TULLY_READY_FOR_REMATCH
-	end
-
-.LoadFight2:
-	loadtrainer FISHER, TULLY3
-	startbattle
-	reloadmapafterbattle
-	loadmem wTullyFightCount, 3
-	clearflag ENGINE_TULLY_READY_FOR_REMATCH
-	end
-
-.LoadFight3:
-	loadtrainer FISHER, TULLY4
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_TULLY_READY_FOR_REMATCH
-	end
-
-.HasWaterStone:
-	scall .Gift
-	verbosegiveitem WATER_STONE
-	iffalse .NoRoom
-	clearflag ENGINE_TULLY_HAS_WATER_STONE
-	setevent EVENT_TULLY_GAVE_WATER_STONE
-	sjump .NumberAccepted
-
-.NoRoom:
-	sjump .PackFull
-
-.AskNumber1:
-	jumpstd AskNumber1MScript
-	end
-
-.AskNumber2:
-	jumpstd AskNumber2MScript
-	end
-
-.RegisteredNumber:
-	jumpstd RegisteredNumberMScript
-	end
-
-.NumberAccepted:
-	jumpstd NumberAcceptedMScript
-	end
-
-.NumberDeclined:
-	jumpstd NumberDeclinedMScript
-	end
-
-.PhoneFull:
-	jumpstd PhoneFullMScript
-	end
-
-.Rematch:
-	jumpstd RematchMScript
-	end
-
-.Gift:
-	jumpstd GiftMScript
-	end
-
-.PackFull:
-	jumpstd PackFullMScript
 	end
 
 TrainerPokemaniacShane:
@@ -222,28 +95,6 @@ Route42SuicuneMovement:
 	fast_jump_step RIGHT
 	remove_sliding
 	step_end
-
-FisherTullySeenText:
-	text "Let me demonstrate"
-	line "the power of the"
-	cont "#MON I caught!"
-	done
-
-FisherTullyBeatenText:
-	text "What? That's not"
-	line "right."
-	done
-
-FisherTullyAfterBattleText:
-	text "I want to become"
-	line "the trainer CHAMP"
-
-	para "using the #MON"
-	line "I caught."
-
-	para "That's the best"
-	line "part of fishing!"
-	done
 
 HikerBenjaminSeenText:
 	text "Ah, it's good to"
@@ -337,7 +188,6 @@ Route42_MapEvents:
 	bg_event 16, 11, BGEVENT_ITEM, Route42HiddenMaxPotion
 
 	def_object_events
-	object_event 40, 10, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_TRAINER, 1, TrainerFisherTully, -1
 	object_event 51,  9, SPRITE_POKEFAN_M, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_TRAINER, 3, TrainerHikerBenjamin, -1
 	object_event 47,  8, SPRITE_SUPER_NERD, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 3, TrainerPokemaniacShane, -1
 	object_event 27, 16, SPRITE_FRUIT_TREE, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route42FruitTree1, -1

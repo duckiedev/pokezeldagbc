@@ -20,12 +20,6 @@ ENDM
 ; trainer constants are Trainers indexes, for the sub-tables of TrainerGroups (see data/trainers/parties.asm)
 DEF CHRIS EQU __trainer_class__
 	trainerclass TRAINER_NONE ; 0
-	const PHONECONTACT_MOM
-	const PHONECONTACT_BIKESHOP
-	const PHONECONTACT_BILL
-	const PHONECONTACT_ELM
-	const PHONECONTACT_BUENA
-DEF NUM_NONTRAINER_PHONECONTACTS EQU const_value - 1
 
 DEF KRIS EQU __trainer_class__
 	trainerclass FALKNER ; 1
@@ -525,14 +519,14 @@ DEF KRIS EQU __trainer_class__
 	const IRWIN4 ; unused
 
 	trainerclass BLACKBELT_T ; 32
-	const KENJI1 ; unused
+	const_skip
 	const YOSHI
-	const KENJI2 ; unused
+	const_skip
 	const LAO
 	const NOB
 	const KIYO
 	const LUNG
-	const KENJI3
+	const_skip
 	const WAI
 
 	trainerclass EXECUTIVEM ; 33

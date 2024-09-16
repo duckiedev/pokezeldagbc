@@ -264,22 +264,19 @@ MACRO checkcoins
 	dw \1 ; coins
 ENDM
 
-	const addcellnum_command ; $28
-MACRO addcellnum
-	db addcellnum_command
-	db \1 ; person
+	const unused_28_command ; $28
+MACRO unused_28
+	db unused_28_command
 ENDM
 
-	const delcellnum_command ; $29
-MACRO delcellnum
-	db delcellnum_command
-	db \1 ; person
+	const unused_29_command ; $29
+MACRO unused_29
+	db unused_29_command
 ENDM
 
-	const checkcellnum_command ; $2a
-MACRO checkcellnum
-	db checkcellnum_command
-	db \1 ; person
+	const unused_2a_command ; $2a
+MACRO unused_2a
+	db unused_2a_command
 ENDM
 
 	const checktime_command ; $2b
@@ -924,21 +921,19 @@ MACRO trade
 	db \1 ; trade_id
 ENDM
 
-	const askforphonenumber_command ; $97
-MACRO askforphonenumber
-	db askforphonenumber_command
-	db \1 ; number
+	const unused_97_command ; $97
+MACRO unused_97
+	db unused_97_command
 ENDM
 
-	const phonecall_command ; $98
-MACRO phonecall
-	db phonecall_command
-	dw \1 ; caller_name
+	const unused_98_command ; $98
+MACRO unused_98
+	db unused_98_command
 ENDM
 
-	const hangup_command ; $99
-MACRO hangup
-	db hangup_command
+	const unused_99_command ; $99
+MACRO unused_99
+	db unused_99_command
 ENDM
 
 	const describedecoration_command ; $9a
@@ -953,15 +948,14 @@ MACRO fruittree
 	db \1 ; tree_id
 ENDM
 
-	const specialphonecall_command ; $9c
-MACRO specialphonecall
-	db specialphonecall_command
-	dw \1 ; call_id
+	const unused_9c_command ; $9c
+MACRO unused_9c
+	db unused_9c_command
 ENDM
 
-	const checkphonecall_command ; $9d
-MACRO checkphonecall
-	db checkphonecall_command
+	const unused_9d_command ; $9d
+MACRO unused_9d
+	db unused_9d_command
 ENDM
 
 	const verbosegiveitem_command ; $9e

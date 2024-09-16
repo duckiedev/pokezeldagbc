@@ -1816,7 +1816,7 @@ ContinueFaintProcess:
 	ld [wEnemyMonHearts], a
 	cp 0
 	push af
-	call UpdateEnemyHearts
+	call DrawEnemyHearts
 	pop af
 	jr nz, HandleEnemyMonLostHeartAlive
 

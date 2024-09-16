@@ -332,7 +332,6 @@ GetNickname::
 	ret
 
 DrawPlayerHearts::
-UpdatePlayerHearts::
 	ld a, [wBattleMonMaxHearts]
 	ld c, a ; Store max hearts in c
 	ld a, [wBattleMonHearts]
@@ -341,7 +340,6 @@ UpdatePlayerHearts::
 	jr HeartDrawLoop
 
 DrawEnemyHearts::
-UpdateEnemyHearts::
 	ld a, [wEnemyMonMaxHearts]
 	ld c, a ; Store max hearts in c
 	ld a, [wEnemyMonHearts]

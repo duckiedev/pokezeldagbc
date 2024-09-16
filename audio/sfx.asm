@@ -954,87 +954,6 @@ Sfx_Fanfare:
 	channel 6, Sfx_Fanfare_Ch6
 	channel 8, Sfx_Fanfare_Ch8
 
-Sfx_RegisterPhoneNumber:
-	channel_count 4
-	channel 5, Sfx_RegisterPhoneNumber_Ch5
-	channel 6, Sfx_RegisterPhoneNumber_Ch6
-	channel 7, Sfx_RegisterPhoneNumber_Ch7
-	channel 8, Sfx_RegisterPhoneNumber_Ch8
-
-Sfx_RegisterPhoneNumber_Ch5:
-	toggle_sfx
-	tempo 124
-	volume 7, 7
-	duty_cycle 3
-	note_type 12, 10, 2
-	rest 2
-	octave 3
-	note C_, 4
-	note G#, 4
-	octave 4
-	note C_, 2
-	octave 3
-	note F_, 1
-	note G#, 2
-	note C_, 1
-	note F_, 2
-	note A#, 3
-	octave 4
-	note C#, 3
-	note C_, 2
-	rest 8
-	sound_ret
-
-Sfx_RegisterPhoneNumber_Ch6:
-	toggle_sfx
-	duty_cycle 3
-	note_type 12, 12, 2
-	rest 2
-	octave 4
-	note D#, 2
-	note C#, 2
-	note C_, 2
-	note D#, 2
-	note F_, 2
-	rest 1
-	note G#, 3
-	octave 5
-	note C_, 2
-	note D#, 3
-	octave 4
-	note G_, 3
-	note G#, 2
-	rest 8
-	sound_ret
-
-Sfx_RegisterPhoneNumber_Ch7:
-	toggle_sfx
-	note_type 12, 2, 5
-	rest 2
-	octave 3
-	note D#, 7
-	rest 1
-	note G#, 2
-	rest 1
-	note C_, 2
-	rest 1
-	note G#, 2
-	note G_, 2
-	rest 1
-	note A#, 3
-	note G#, 2
-	rest 8
-	sound_ret
-
-Sfx_RegisterPhoneNumber_Ch8:
-	toggle_sfx
-	sfx_toggle_noise 4
-	drum_speed 12
-	note C_, 2
-	rest 16
-	rest 16
-	sound_ret
-
 Sfx_3rdPlace:
 	channel_count 3
 	channel 5, Sfx_3rdPlace_Ch5
@@ -1057,8 +976,6 @@ Sfx_3rdPlace_Ch5:
 	note C_, 1
 	note D_, 6
 	sound_ret
-
-	
 
 Sfx_3rdPlace_Ch6:
 	toggle_sfx
@@ -3244,8 +3161,6 @@ Sfx_DexFanfare170199_Ch8:
 	drum_speed 12
 	note B_, 16
 	sound_ret
-
-	db sound_loop_cmd ; unused
 
 Sfx_DexFanfare200229:
 	channel_count 4

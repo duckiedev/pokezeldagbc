@@ -1,13 +1,3 @@
-_NoPhotoText::
-	text "Oh, no picture?"
-	line "Come again, OK?"
-	done
-
-_EggPhotoText::
-	text "An EGG? My talent"
-	line "is worth more…"
-	done
-
 _NameRaterHelloText::
 	text "Hello, hello! I'm"
 	line "the NAME RATER."
@@ -481,14 +471,6 @@ _PoisonFaintText::
 	line "fainted!"
 	prompt
 
-_PoisonWhiteoutText::
-	text "<PLAYER> is out of"
-	line "useable #MON!"
-
-	para "<PLAYER> whited"
-	line "out!"
-	prompt
-
 _UseSweetScentText::
 	text_ram wStringBuffer3
 	text " used"
@@ -770,30 +752,6 @@ _PCCantDepositLastMonText::
 _PCCantTakeText::
 	text "You can't take any"
 	line "more #MON."
-	prompt
-
-_LuckyNumberMatchPartyText::
-	text "Congratulations!"
-
-	para "We have a match"
-	line "with the ID number"
-
-	para "of @"
-	text_ram wStringBuffer1
-	text " in"
-	line "your party."
-	prompt
-
-_LuckyNumberMatchPCText::
-	text "Congratulations!"
-
-	para "We have a match"
-	line "with the ID number"
-
-	para "of @"
-	text_ram wStringBuffer1
-	text " in"
-	line "your PC BOX."
 	prompt
 
 _CaughtAskNicknameText::

@@ -493,13 +493,13 @@ If <code><i>item_id</i></code> = `USE_SCRIPT_VAR`, then it uses `[wScriptVar]` i
 ## `$96`: <code>trade <i>trade_id</i></code>
 
 
-## `$97`: <code>askforphonenumber <i>contact_id</i></code>
+## `$97`: `unused`
 
 
-## `$98`: <code>phonecall <i>call_id</i></code>
+## `$98`: `unused`
 
 
-## `$99`: `hangup`
+## `$99`: `unused`
 
 
 ## `$9A`: <code>describedecoration <i>byte</i></code>
@@ -508,10 +508,10 @@ If <code><i>item_id</i></code> = `USE_SCRIPT_VAR`, then it uses `[wScriptVar]` i
 ## `$9B`: <code>fruittree <i>tree_id</i></code>
 
 
-## `$9C`: <code>specialphonecall <i>call_id</i></code>
+## `$9C`: `unused`
 
 
-## `$9D`: `checkphonecall`
+## `$9D`: `unused`
 
 
 ## `$9E`: <code>verbosegiveitem <i>item_id</i>[, <i>quantity</i>=1]</code>

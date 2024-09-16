@@ -140,9 +140,6 @@ RadioTerminator::
 
 PrintText::
 	call SetUpTextbox
-	; fallthrough
-
-BuenaPrintText::
 	push hl
 	hlcoord TEXTBOX_INNERX, TEXTBOX_INNERY
 	lb bc, TEXTBOX_INNERH - 1, TEXTBOX_INNERW
@@ -587,9 +584,6 @@ Text_WaitBGMap::
 	pop af
 	ldh [hOAMUpdate], a
 	pop bc
-	ret
-
-Diacritic::
 	ret
 
 LoadBlinkingCursor::

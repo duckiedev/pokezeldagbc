@@ -22,12 +22,6 @@ DEF STRING_BUFFER_LENGTH EQU 19
 	const HAVE_AMOUNT ; 1
 	const HAVE_LESS   ; 2
 
-; askforphonenumber return values
-	const_def
-	const PHONE_CONTACT_GOT     ; 0
-	const PHONE_CONTACTS_FULL   ; 1
-	const PHONE_CONTACT_REFUSED ; 2
-
 ; trainertext arguments
 	const_def
 	const TRAINERTEXT_SEEN
@@ -56,13 +50,10 @@ DEF STRING_BUFFER_LENGTH EQU 19
 	const VAR_BOXSPACE         ; 10
 	const VAR_XCOORD           ; 11
 	const VAR_YCOORD           ; 12
-	const VAR_SPECIALPHONECALL ; 13
+	const_skip				   ; 13
 	const VAR_BT_WIN_STREAK    ; 14
 	const VAR_KURT_APRICORNS   ; 15
-	const VAR_CALLERID         ; 16
-	const VAR_BLUECARDBALANCE  ; 17
-	const VAR_BUENASPASSWORD   ; 18
-	const VAR_KENJI_BREAK      ; 19
+	const_skip                 ; 16
 DEF NUM_VARS EQU const_value
 
 ; variable action types

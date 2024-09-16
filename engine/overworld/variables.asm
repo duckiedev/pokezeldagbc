@@ -57,12 +57,7 @@ _GetVarAction::
 	dwb .BoxFreeSpace,                  RETVAR_EXECUTE
 	dwb wXCoord,                        RETVAR_STRBUF2
 	dwb wYCoord,                        RETVAR_STRBUF2
-	dwb wSpecialPhoneCallID,            RETVAR_STRBUF2
 	dwb wKurtApricornQuantity,          RETVAR_STRBUF2
-	dwb wCurCaller,                     RETVAR_ADDR_DE
-	dwb wBlueCardBalance,               RETVAR_ADDR_DE
-	dwb wBuenasPassword,                RETVAR_ADDR_DE
-	dwb wKenjiBreakTimer,               RETVAR_STRBUF2
 	dwb NULL,                           RETVAR_STRBUF2
 
 .CountCaughtMons:

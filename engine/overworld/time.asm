@@ -4,7 +4,6 @@ _InitializeStartDay:
 
 ClearDailyTimers:
 	xor a
-	ld [wLuckyNumberDayTimer], a
 	ld [wDailyResetTimer], a
 	ret
 
@@ -109,35 +108,6 @@ CheckDailyResetTimer::
 	ld [hli], a ; wDailyFlags2
 	ld [hli], a ; wSwarmFlags
 	ld [hl], a  ; wSwarmFlags + 1
-	ld hl, wDailyRematchFlags
-rept 4
-	ld [hli], a
-endr
-	ld hl, wDailyPhoneItemFlags
-rept 4
-	ld [hli], a
-endr
-	ld hl, wDailyPhoneTimeOfDayFlags
-rept 4
-	ld [hli], a
-endr
-	ld hl, wKenjiBreakTimer
-	ld a, [hl]
-	and a
-	jr z, .RestartKenjiBreakCountdown
-	dec [hl]
-	jr nz, .DontRestartKenjiBreakCountdown
-.RestartKenjiBreakCountdown:
-	call SampleKenjiBreakCountdown
-.DontRestartKenjiBreakCountdown:
-	jr RestartDailyResetTimer
-
-SampleKenjiBreakCountdown:
-; Generate a random number between 3 and 6
-	call Random
-	and %11
-	add 3
-	ld [wKenjiBreakTimer], a
 	ret
 
 InitializeStartDay:
@@ -157,26 +127,6 @@ CheckPokerusTick::
 .done
 	xor a
 	ret
-
-RestartLuckyNumberCountdown:
-	call .GetDaysUntilNextFriday
-	ld hl, wLuckyNumberDayTimer
-	jp InitNDaysCountdown
-
-.GetDaysUntilNextFriday:
-	call GetWeekday
-	ld c, a
-	ld a, FRIDAY
-	sub c
-	jr z, .friday_saturday
-	ret nc
-
-.friday_saturday
-	add 7
-
-_CheckLuckyNumberShowFlag:
-	ld hl, wLuckyNumberDayTimer
-	jp CheckDayDependentEventHL
 
 UpdateTimeRemaining:
 ; If the amount of time elapsed exceeds the capacity of its

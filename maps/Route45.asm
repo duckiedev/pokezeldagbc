@@ -3,7 +3,6 @@
 	const ROUTE45_POKEFAN_M2
 	const ROUTE45_POKEFAN_M3
 	const ROUTE45_POKEFAN_M4
-	const ROUTE45_BLACK_BELT
 	const ROUTE45_COOLTRAINER_M
 	const ROUTE45_COOLTRAINER_F
 	const ROUTE45_FRUIT_TREE
@@ -17,110 +16,6 @@ Route45_MapScripts:
 	def_scene_scripts
 
 	def_callbacks
-
-TrainerBlackbeltKenji:
-	trainer BLACKBELT_T, KENJI3, EVENT_BEAT_BLACKBELT_KENJI, BlackbeltKenji3SeenText, BlackbeltKenji3BeatenText, 0, .Script
-
-.Script:
-	loadvar VAR_CALLERID, PHONE_BLACKBELT_KENJI
-	endifjustbattled
-	opentext
-	checkcellnum PHONE_BLACKBELT_KENJI
-	iftrue .Registered
-	checkevent EVENT_KENJI_ASKED_FOR_PHONE_NUMBER
-	iftrue .AskedAlready
-	special SampleKenjiBreakCountdown
-	writetext BlackbeltKenjiAfterBattleText
-	waitbutton
-	setevent EVENT_KENJI_ASKED_FOR_PHONE_NUMBER
-	scall Route45AskNumber1M
-	sjump .AskForNumber
-
-.AskedAlready:
-	scall Route45AskNumber2M
-.AskForNumber:
-	askforphonenumber PHONE_BLACKBELT_KENJI
-	ifequal PHONE_CONTACTS_FULL, Route45PhoneFullM
-	ifequal PHONE_CONTACT_REFUSED, Route45NumberDeclinedM
-	gettrainername STRING_BUFFER_3, BLACKBELT_T, KENJI3
-	scall Route45RegisteredNumberM
-	sjump Route45NumberAcceptedM
-
-.Registered:
-	readvar VAR_KENJI_BREAK
-	ifnotequal 1, Route45NumberAcceptedM
-	checktime MORN
-	iftrue .Morning
-	checktime NITE
-	iftrue .Night
-	checkevent EVENT_KENJI_ON_BREAK
-	iffalse Route45NumberAcceptedM
-	scall Route45GiftM
-	verbosegiveitem PP_UP
-	iffalse .NoRoom
-	clearevent EVENT_KENJI_ON_BREAK
-	special SampleKenjiBreakCountdown
-	sjump Route45NumberAcceptedM
-
-.Morning:
-	writetext BlackbeltKenjiMorningText
-	waitbutton
-	closetext
-	end
-
-.Night:
-	writetext BlackbeltKenjiNightText
-	waitbutton
-	closetext
-	end
-
-.NoRoom:
-	sjump Route45PackFullM
-
-Route45AskNumber1M:
-	jumpstd AskNumber1MScript
-	end
-
-Route45AskNumber2M:
-	jumpstd AskNumber2MScript
-	end
-
-Route45RegisteredNumberM:
-	jumpstd RegisteredNumberMScript
-	end
-
-Route45NumberAcceptedM:
-	jumpstd NumberAcceptedMScript
-	end
-
-Route45NumberDeclinedM:
-	jumpstd NumberDeclinedMScript
-	end
-
-Route45PhoneFullM:
-	jumpstd PhoneFullMScript
-	end
-
-Route45RematchM:
-	jumpstd RematchMScript
-	end
-
-Route45GiftM:
-	jumpstd GiftMScript
-	end
-
-Route45PackFullM:
-	jumpstd PackFullMScript
-	end
-
-HikerParryHasIron:
-	setevent EVENT_PARRY_IRON
-	jumpstd PackFullMScript
-	end
-
-Route45RematchGiftM:
-	jumpstd RematchGiftMScript
-	end
 
 TrainerHikerErik:
 	trainer HIKER, ERIK, EVENT_BEAT_HIKER_ERIK, HikerErikSeenText, HikerErikBeatenText, 0, .Script
@@ -143,92 +38,6 @@ TrainerHikerMichael:
 	waitbutton
 	closetext
 	end
-
-TrainerHikerParry:
-	trainer HIKER, PARRY3, EVENT_BEAT_HIKER_PARRY, HikerParry3SeenText, HikerParry3BeatenText, 0, .Script
-
-.Script:
-	loadvar VAR_CALLERID, PHONE_HIKER_PARRY
-	endifjustbattled
-	opentext
-	checkflag ENGINE_PARRY_READY_FOR_REMATCH
-	iftrue .WantsBattle
-	checkcellnum PHONE_HIKER_PARRY
-	iftrue Route45NumberAcceptedM
-	checkevent EVENT_PARRY_ASKED_FOR_PHONE_NUMBER
-	iftrue .AskedAlready
-	writetext HikerParryAfterBattleText
-	promptbutton
-	setevent EVENT_PARRY_ASKED_FOR_PHONE_NUMBER
-	scall Route45AskNumber1M
-	sjump .AskForNumber
-
-.AskedAlready:
-	scall Route45AskNumber2M
-.AskForNumber:
-	askforphonenumber PHONE_HIKER_PARRY
-	ifequal PHONE_CONTACTS_FULL, Route45PhoneFullM
-	ifequal PHONE_CONTACT_REFUSED, Route45NumberDeclinedM
-	gettrainername STRING_BUFFER_3, HIKER, PARRY1
-	scall Route45RegisteredNumberM
-	sjump Route45NumberAcceptedM
-
-.WantsBattle:
-	scall Route45RematchM
-	winlosstext HikerParry3BeatenText, 0
-	readmem wParryFightCount
-	ifequal 2, .Fight2
-	ifequal 1, .Fight1
-	ifequal 0, .LoadFight0
-.Fight2:
-	checkevent EVENT_RESTORED_POWER_TO_KANTO
-	iftrue .LoadFight2
-.Fight1:
-	checkevent EVENT_BEAT_ELITE_FOUR
-	iftrue .LoadFight1
-.LoadFight0:
-	loadtrainer HIKER, PARRY3
-	startbattle
-	reloadmapafterbattle
-	loadmem wParryFightCount, 1
-	clearflag ENGINE_PARRY_READY_FOR_REMATCH
-	end
-
-.LoadFight1:
-	loadtrainer HIKER, PARRY1
-	startbattle
-	reloadmapafterbattle
-	loadmem wParryFightCount, 2
-	clearflag ENGINE_PARRY_READY_FOR_REMATCH
-	end
-
-.LoadFight2:
-	loadtrainer HIKER, PARRY2
-	startbattle
-	reloadmapafterbattle
-	clearflag ENGINE_PARRY_READY_FOR_REMATCH
-	checkevent EVENT_PARRY_IRON
-	iftrue .HasIron
-	checkevent EVENT_GOT_IRON_FROM_PARRY
-	iftrue .GotIron
-	scall Route45RematchGiftM
-	verbosegiveitem IRON
-	iffalse HikerParryHasIron
-	setevent EVENT_GOT_IRON_FROM_PARRY
-	sjump Route45NumberAcceptedM
-
-.GotIron:
-	end
-
-.HasIron:
-	opentext
-	writetext HikerParryGivesIronText
-	waitbutton
-	verbosegiveitem IRON
-	iffalse HikerParryHasIron
-	clearevent EVENT_PARRY_IRON
-	setevent EVENT_GOT_IRON_FROM_PARRY
-	sjump Route45NumberAcceptedM
 
 TrainerHikerTimothy:
 	trainer HIKER, TIMOTHY, EVENT_BEAT_HIKER_TIMOTHY, HikerTimothySeenText, HikerTimothyBeatenText, 0, .Script
@@ -357,24 +166,6 @@ HikerMichaelAfterBattleText:
 	para "I can't help it!"
 	done
 
-HikerParry3SeenText:
-	text "My #MON are"
-	line "power packed!"
-	done
-
-HikerParry3BeatenText:
-	text "Wahahah! I'm the"
-	line "big loser!"
-	done
-
-HikerParryAfterBattleText:
-	text "I'm not much good"
-	line "at thinking, see?"
-
-	para "So, I just plow"
-	line "ahead with power!"
-	done
-
 HikerTimothySeenText:
 	text "Why do I climb"
 	line "mountains?"
@@ -413,44 +204,6 @@ HikerParryGivesIronText:
 
 	para "you couldn't take"
 	line "when we last met."
-	done
-
-BlackbeltKenji3SeenText:
-	text "I was training"
-	line "here alone."
-
-	para "Behold the fruits"
-	line "of my labor!"
-	done
-
-BlackbeltKenji3BeatenText:
-	text "Waaaargh!"
-	done
-
-BlackbeltKenjiAfterBattleText:
-	text "This calls for"
-	line "extreme measures."
-
-	para "I must take to the"
-	line "hills and train in"
-	cont "solitude."
-	done
-
-BlackbeltKenjiMorningText:
-	text "I'm going to train"
-	line "a bit more before"
-	cont "I break for lunch."
-	done
-
-BlackbeltKenjiNightText:
-	text "We had plenty of"
-	line "rest at lunch, so"
-
-	para "now we're all"
-	line "ready to go again!"
-
-	para "We're going to"
-	line "train again!"
 	done
 
 CooltrainermRyanSeenText:
@@ -544,9 +297,7 @@ Route45_MapEvents:
 	def_object_events
 	object_event 10, 16, SPRITE_POKEFAN_M, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_TRAINER, 1, TrainerHikerErik, -1
 	object_event 15, 65, SPRITE_POKEFAN_M, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_TRAINER, 2, TrainerHikerMichael, -1
-	object_event  5, 28, SPRITE_POKEFAN_M, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_TRAINER, 2, TrainerHikerParry, -1
 	object_event  9, 65, SPRITE_POKEFAN_M, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_TRAINER, 1, TrainerHikerTimothy, -1
-	object_event 11, 50, SPRITE_BLACK_BELT, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_TRAINER, 2, TrainerBlackbeltKenji, -1
 	object_event 17, 18, SPRITE_COOLTRAINER_M, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 1, TrainerCooltrainermRyan, -1
 	object_event  5, 36, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 3, TrainerCooltrainerfKelly, -1
 	object_event 16, 82, SPRITE_FRUIT_TREE, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Route45FruitTree, -1

@@ -104,9 +104,9 @@ ScriptCommandTable:
 	dw Script_givecoins                  ; 25
 	dw Script_takecoins                  ; 26
 	dw Script_checkcoins                 ; 27
-	dw Script_addcellnum                 ; 28
-	dw Script_delcellnum                 ; 29
-	dw Script_checkcellnum               ; 2a
+	dw Script_unused_28                  ; 28
+	dw Script_unused_29                  ; 29
+	dw Script_unused_2a                  ; 2a
 	dw Script_checktime                  ; 2b
 	dw Script_checkpoke                  ; 2c
 	dw Script_givepoke                   ; 2d
@@ -212,13 +212,13 @@ ScriptCommandTable:
 	dw Script_pokemart                   ; 93
 	dw Script_elevator                   ; 94
 	dw Script_trade                      ; 95
-	dw Script_askforphonenumber          ; 96
-	dw Script_phonecall                  ; 97
-	dw Script_hangup                     ; 98
-	dw Script_describedecoration         ; 99
+	dw Script_unused_96		             ; 96
+	dw Script_unused_97                  ; 97
+	dw Script_unused_98                  ; 98
+	dw Script_unused_99	                 ; 99
 	dw Script_fruittree                  ; 9a
-	dw Script_specialphonecall           ; 9b
-	dw Script_checkphonecall             ; 9c
+	dw Script_unused_9b                  ; 9b
+	dw Script_unused_9c                  ; 9c
 	dw Script_verbosegiveitem            ; 9d
 	dw Script_verbosegiveitemvar         ; 9e
 	dw Script_swarm                      ; 9f
@@ -452,6 +452,15 @@ Script_verbosegiveitem:
 	ld de, GiveItemScript
 	jp ScriptCall
 
+Script_unused_28:
+Script_unused_29:
+Script_unused_2a:
+Script_unused_96:
+Script_unused_97:
+Script_unused_98:
+Script_unused_99:
+Script_unused_9b:
+Script_unused_9c:
 GiveItemScript_DummyFunction:
 	ret
 
@@ -592,39 +601,6 @@ Script_trade:
 	call GetScriptByte
 	ld e, a
 	farcall NPCTrade
-	ret
-
-Script_phonecall:
-	call GetScriptByte
-	ld e, a
-	call GetScriptByte
-	ld d, a
-	ld a, [wScriptBank]
-	ld b, a
-	farcall PhoneCall
-	ret
-
-Script_hangup:
-	farcall HangUp
-	ret
-
-Script_askforphonenumber:
-	call YesNoBox
-	jr c, .refused
-	call GetScriptByte
-	ld c, a
-	farcall AddPhoneNumber
-	jr c, .phonefull
-	xor a ; PHONE_CONTACT_GOT
-	jr .done
-.phonefull
-	ld a, PHONE_CONTACTS_FULL
-	jr .done
-.refused
-	call GetScriptByte
-	ld a, PHONE_CONTACT_REFUSED
-.done
-	ld [wScriptVar], a
 	ret
 
 Script_describedecoration:
@@ -1196,16 +1172,12 @@ Script_reloadmapafterbattle:
 .notblackedout
 	bit 0, d
 	jr z, .was_wild
-	farcall MomTriesToBuySomething
 	jr .done
 
 .was_wild
 	ld a, [wBattleResult]
 	bit BATTLERESULT_BOX_FULL, a
-	jr z, .done
-	ld b, BANK(Script_SpecialBillCall)
-	ld de, Script_SpecialBillCall
-	farcall LoadMemScript
+
 .done
 	jp Script_reloadmap
 
@@ -1848,59 +1820,6 @@ Script_checkpoke:
 	call IsInArray
 	ret nc
 	ld a, TRUE
-	ld [wScriptVar], a
-	ret
-
-Script_addcellnum:
-	xor a
-	ld [wScriptVar], a
-	call GetScriptByte
-	ld c, a
-	farcall AddPhoneNumber
-	ret nc
-	ld a, TRUE
-	ld [wScriptVar], a
-	ret
-
-Script_delcellnum:
-	xor a
-	ld [wScriptVar], a
-	call GetScriptByte
-	ld c, a
-	farcall DelCellNum
-	ret nc
-	ld a, TRUE
-	ld [wScriptVar], a
-	ret
-
-Script_checkcellnum:
-; returns false if the cell number is not in your phone
-
-	xor a
-	ld [wScriptVar], a
-	call GetScriptByte
-	ld c, a
-	farcall CheckCellNum
-	ret nc
-	ld a, TRUE
-	ld [wScriptVar], a
-	ret
-
-Script_specialphonecall:
-	call GetScriptByte
-	ld [wSpecialPhoneCallID], a
-	call GetScriptByte
-	ld [wSpecialPhoneCallID + 1], a
-	ret
-
-Script_checkphonecall:
-; returns false if no special phone call is stored
-
-	ld a, [wSpecialPhoneCallID]
-	and a
-	jr z, .ok
-	ld a, TRUE
-.ok
 	ld [wScriptVar], a
 	ret
 

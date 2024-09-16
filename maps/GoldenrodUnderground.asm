@@ -503,10 +503,6 @@ PokemaniacDonaldAfterBattleText:
 	para "The HIKER on ROUTE"
 	line "33, ANTHONY, is a"
 	cont "good guy."
-
-	para "He'll phone you if"
-	line "he sees any rare"
-	cont "#MON."
 	done
 
 GoldenrodUndergroundTheDoorsLockedText:

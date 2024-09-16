@@ -116,7 +116,7 @@ ItemDescriptions:
 	dw SpellTagDesc
 	dw RageCandyBarDesc
 	dw GSBallDesc
-	dw BlueCardDesc
+	dw TeruSama1Desc
 	dw MiracleSeedDesc
 	dw ThickClubDesc
 	dw FocusBandDesc
@@ -706,10 +706,6 @@ RageCandyBarDesc:
 GSBallDesc:
 	db   "The mysterious"
 	next "BALL.@"
-
-BlueCardDesc:
-	db   "Card to save"
-	next "points.@"
 
 MiracleSeedDesc:
 	db   "Powers up grass-"

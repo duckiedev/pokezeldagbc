@@ -93,14 +93,13 @@
 	const MUSIC_POST_CREDITS                 ; 59
 ; new to Crystal
 	const MUSIC_CLAIR                        ; 5a
-	const MUSIC_BUENAS_PASSWORD              ; 5b
-	const MUSIC_MYSTICALMAN_ENCOUNTER        ; 5c
-	const MUSIC_CRYSTAL_OPENING              ; 5d
-	const MUSIC_SUICUNE_BATTLE               ; 5e
+	const MUSIC_MYSTICALMAN_ENCOUNTER        ; 5b
+	const MUSIC_CRYSTAL_OPENING              ; 5c
+	const MUSIC_SUICUNE_BATTLE               ; 5d
 ; new songs
-	const MUSIC_ZELDA_TITLE					 ; 5f
-	const MUSIC_CAVE_THEME					 ; 60
-	const MUSIC_GATE_OF_TIME				 ; 61
+	const MUSIC_ZELDA_TITLE					 ; 5e
+	const MUSIC_CAVE_THEME					 ; 5f
+	const MUSIC_GATE_OF_TIME				 ; 60
 DEF NUM_MUSIC_SONGS EQU const_value
 
 ; GetMapMusic picks music for these values (see home/map.asm)
