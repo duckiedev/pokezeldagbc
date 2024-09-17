@@ -922,10 +922,12 @@ Script_variablesprite:
 	call GetScriptByte
 	ld e, a
 	ld d, 0
+	ld [hUsedSpriteIndex], a
 	ld hl, wVariableSprites
 	add hl, de
 	call GetScriptByte
 	ld [hl], a
+	farcall ReloadSpriteIndex
 	ret
 
 Script_appear:
@@ -2244,11 +2246,6 @@ Script_wait:
 Script_checksave:
 	farcall CheckSave
 	ld a, c
-	ld [wScriptVar], a
-	ret
-
-Script_checkver_duplicate: ; unreferenced
-	ld a, [.gs_version]
 	ld [wScriptVar], a
 	ret
 
