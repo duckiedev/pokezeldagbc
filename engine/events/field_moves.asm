@@ -32,7 +32,7 @@ ShakeHeadbuttTree:
 	ld hl, vTiles0 tile FIELDMOVE_TREE
 	lb bc, BANK(HeadbuttTreeGFX), 8
 	call Request2bpp
-	call Cut_Headbutt_GetPixelFacing
+	call GetPixelFacing
 	ld a, SPRITE_ANIM_OBJ_HEADBUTT
 	call InitSpriteAnimStruct
 	ld hl, SPRITEANIMSTRUCT_TILE_ID
@@ -164,7 +164,7 @@ OWCutJumptable:
 	dw Cut_WaitAnimSFX
 
 Cut_SpawnAnimateTree:
-	call Cut_Headbutt_GetPixelFacing
+	call GetPixelFacing
 	ld a, SPRITE_ANIM_OBJ_CUT_TREE ; cut tree
 	call InitSpriteAnimStruct
 	ld hl, SPRITEANIMSTRUCT_TILE_ID
@@ -278,7 +278,7 @@ Cut_GetLeafSpawnCoords:
 	dbpixel 11, 10 ; facing right, bottom left
 	dbpixel 13, 10 ; facing right, bottom right
 
-Cut_Headbutt_GetPixelFacing:
+GetPixelFacing::
 	ld a, [wPlayerDirection]
 	and %00001100
 	srl a
