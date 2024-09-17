@@ -46,3 +46,40 @@ ReturnFarCall::
 
 FarCall_JumpToHL::
 	jp hl
+
+StackCallInWRAMBankA::
+	ldh [hTempBank], a
+	ld a, h
+	ldh [hFarCallSavedH], a
+	ld a, l
+	ldh [hFarCallSavedL], a
+	pop hl
+	ldh a, [rSVBK]
+	push af
+	ldh a, [hTempBank]
+	ldh [rSVBK], a
+	call RetrieveAHLAndCallFunction
+	ldh [hTempBank], a
+
+	; Preserve flags.
+	push af
+	push hl
+	ld hl, sp+$2 ; a flags
+	ld a, [hli]
+	inc l ; faster than inc hl (stack is always c000-c100...)
+	ld [hl], a ; write to flags
+	pop hl
+	pop af
+	pop af
+	ldh [rSVBK], a
+	ldh a, [hTempBank]
+	ret
+
+RetrieveAHLAndCallFunction:
+	push hl
+	ld hl, hFarCallSavedHL
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ldh a, [hFarCallSavedA]
+	ret

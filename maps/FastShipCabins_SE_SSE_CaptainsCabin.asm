@@ -16,9 +16,6 @@ FastShipCabins_SE_SSE_CaptainsCabin_MapScripts:
 
 	def_callbacks
 
-FastShipCabins_SE_SSE_CaptainsCabinNoopScene: ; unreferenced
-	end
-
 SSAquaCaptain:
 	faceplayer
 	opentext
@@ -46,7 +43,7 @@ SSAquaGranddaughterBefore:
 	writetext SSAquaGranddaughterHasToFindGrandpaText
 	waitbutton
 	closetext
-	special FadeOutToBlack
+	special FadeBlackQuickly
 	special ReloadSpritesNoPalettes
 	disappear FASTSHIPCABINS_SE_SSE_CAPTAINSCABIN_TWIN2
 	applymovement PLAYER, SSAquaCaptainsCabinWarpsToGrandpasCabinMovement
@@ -54,7 +51,10 @@ SSAquaGranddaughterBefore:
 	appear FASTSHIPCABINS_SE_SSE_CAPTAINSCABIN_TWIN1
 	turnobject PLAYER, UP
 	turnobject FASTSHIPCABINS_SE_SSE_CAPTAINSCABIN_TWIN1, UP
-	special FadeInFromBlack
+	loadmem wObject1Palette, 1
+	callasm SetBlackObjectPals
+	turnobject FASTSHIPCABINS_SE_SSE_CAPTAINSCABIN_GENTLEMAN, RIGHT
+	callasm FadeInPalettes_EnableDynNoApply
 	turnobject FASTSHIPCABINS_SE_SSE_CAPTAINSCABIN_GENTLEMAN, DOWN
 	showemote EMOTE_SHOCK, FASTSHIPCABINS_SE_SSE_CAPTAINSCABIN_GENTLEMAN, 15
 	applymovement FASTSHIPCABINS_SE_SSE_CAPTAINSCABIN_TWIN1, SSAquaGranddaughterEntersCabinMovement

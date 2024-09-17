@@ -94,6 +94,7 @@ _TimeOfDayPals::
 	ldh [rSVBK], a
 
 ; update palettes
+	farcall EnableDynPalUpdatesNoApply
 	call _UpdateTimePals
 	call DelayFrame
 
@@ -109,17 +110,17 @@ _TimeOfDayPals::
 _UpdateTimePals::
 	ld c, $9 ; normal
 	call GetTimePalFade
-	call DmgToCgbTimePals
+	jp DmgToCgbTimePals
+
+FadeInPalettes_EnableDynNoApply::
+	farcall EnableDynPalUpdatesNoApply
+	; fallthrough
+FadeInPalettes::
+	ld c, 10
+	jp FadePalettes
 	ret
 
-FadeInFromWhite::
-	ld c, $12
-	call GetTimePalFade
-	ld b, $4
-	call ConvertTimePalsDecHL
-	ret
-
-FadeOutToWhite::
+FadeOutPalettes::
 	call FillWhiteBGColor
 	ld c, $9
 	call GetTimePalFade
@@ -127,14 +128,14 @@ FadeOutToWhite::
 	call ConvertTimePalsIncHL
 	ret
 
-FadeInFromBlack:
+FadeInQuickly:
 	ld c, $0
 	call GetTimePalFade
 	ld b, $4
 	call ConvertTimePalsIncHL
 	ret
 
-FadeOutToBlack:
+FadeBlackQuickly:
 	ld c, $9
 	call GetTimePalFade
 	ld b, $4

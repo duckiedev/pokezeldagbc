@@ -10,7 +10,7 @@ PlayWhirlpoolSound:
 	ret
 
 BlindingFlash:
-	farcall FadeOutToWhite
+	farcall FadeOutPalettes
 	ld hl, wStatusFlags
 	set STATUSFLAGS_FLASH_F, [hl]
 	farcall ReplaceTimeOfDayPals
@@ -18,10 +18,11 @@ BlindingFlash:
 	ld b, SCGB_MAPPALS
 	call GetSGBLayout
 	farcall LoadOW_BGPal7
-	farcall FadeInFromWhite
+	farcall FadeInPalettes_EnableDynNoApply
 	ret
 
 ShakeHeadbuttTree:
+	farcall CopyBGGreenToOBPal7
 	farcall ClearSpriteAnims
 	ld de, CutGrassGFX
 	ld hl, vTiles0 tile FIELDMOVE_GRASS
@@ -388,6 +389,7 @@ endr
 
 FlyFunction_InitGFX:
 	callfar ClearSpriteAnims
+	call SetOWFlyMonColor
 	ld de, CutGrassGFX
 	ld hl, vTiles0 tile FIELDMOVE_GRASS
 	lb bc, BANK(CutGrassGFX), 4

@@ -684,6 +684,9 @@ StartTrainerBattle_LoadPokeBallGraphics:
 	call CopyBytes
 	pop af
 	ldh [rSVBK], a
+	farcall ClearSavedObjPals
+	farcall CheckForUsedObjPals
+	farcall _UpdateSprites
 	ld a, TRUE
 	ldh [hCGBPalUpdate], a
 	call DelayFrame

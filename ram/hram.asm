@@ -154,6 +154,11 @@ hDebugRoomMenuPage::
 endc
 hClockResetTrigger:: db
 
-	ds 19
+hFarCallSavedA:: db
+hFarCallSavedHL::
+hFarCallSavedL:: db
+hFarCallSavedH:: db
+
+	ds 15
 
 ENDSECTION

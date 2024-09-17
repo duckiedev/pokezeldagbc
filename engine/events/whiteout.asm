@@ -9,7 +9,7 @@ OverworldWhiteoutScript::
 Script_Whiteout:
 	writetext .WhitedOutText
 	waitbutton
-	special FadeOutToWhite
+	special FadeOutPalettes
 	pause 40
 	special HealParty
 	callasm HalveMoney
@@ -23,11 +23,12 @@ Script_Whiteout:
 	text_end
 
 OverworldBGMap:
-	call ClearPalettes
-	call ClearScreen
-	call WaitBGMap2
-	call HideSprites
-	call RotateThreePalettesLeft
+	farcall FadeOutPalettes
+	call ClearTilemap
+	call ClearSprites
+	ld a, CGB_PLAIN
+	call GetSGBLayout
+	jp SetDefaultBGPAndOBP
 	ret
 
 BattleBGMap:

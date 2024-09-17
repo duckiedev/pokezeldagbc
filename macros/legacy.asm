@@ -379,7 +379,3 @@ DEF happinesschecknpc     EQUS "HappinessCheckScript"
 ; constants/charmap.asm
 charmap "%", "<BSP>"
 charmap "¯", "<WBR>"
-
-; constants/sprite_constants.asm
-DEF PAL_NPC_SILVER EQUS "PAL_NPC_EMOTE"
-DEF PAL_OW_SILVER  EQUS "PAL_OW_EMOTE"

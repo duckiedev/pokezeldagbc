@@ -276,6 +276,8 @@ GetPredefPal:
 	ret
 
 LoadHLPaletteIntoDE:
+	ld c, 1 palettes
+LoadHLBytesIntoDE:
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK(wOBPals1)
@@ -1016,15 +1018,21 @@ LoadMapPals:
 	ldh [rSVBK], a
 
 .got_pals
-	ld a, [wTimeOfDayPal]
-	maskbits NUM_DAYTIMES
-	ld bc, 8 palettes
-	ld hl, MapObjectPals
-	call AddNTimes
-	ld de, wOBPals1
-	ld bc, 8 palettes
+	ldh a, [rSVBK]
+	push af
 	ld a, BANK(wOBPals1)
-	call FarCopyWRAM
+	ldh [rSVBK], a
+	ld hl, wOBPals1
+	ld bc, 8 palettes
+	ld a, $ff
+	call ByteFill
+	ld hl, wOBPals2
+	ld bc, 8 palettes
+	ld a, $ff
+	call ByteFill
+	pop af
+	ldh [rSVBK], a
+	farcall ClearSavedObjPals
 
 	ld a, [wEnvironment]
 	cp TOWN
@@ -1140,9 +1148,6 @@ INCLUDE "gfx/stats/party_menu_bg.pal"
 
 TilesetBGPalette:
 INCLUDE "gfx/tilesets/bg_tiles.pal"
-
-MapObjectPals::
-INCLUDE "gfx/overworld/npc_sprites.pal"
 
 RoofPals:
 	table_width PAL_COLOR_SIZE * 2 * 2, RoofPals

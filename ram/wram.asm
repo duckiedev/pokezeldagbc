@@ -131,7 +131,9 @@ wUnusedScriptByte:: db
 
 wMapTimeOfDay:: db
 
-	ds 5
+wPalFlags:: db
+
+	ds 4
 
 wPrevDexEntry:: db
 wDisableTextAcceleration:: db
@@ -233,7 +235,14 @@ wGlobalAnimXOffset:: db
 
 wSpriteAnimDataEnd::
 
-	ds 63
+wUsedObjectPals:: db
+for n, 8
+wLoadedObjPal{d:n}:: db
+endr
+wNeededPalIndex:: db
+wEmotePal:: db
+
+	ds 51
 
 
 SECTION "Sprites", WRAM0
@@ -1088,7 +1097,12 @@ wGameTimerPaused::
 ; bit 0: game timer paused
 	db
 
-	ds 1
+wPalFadeMode::
+; bit 0-1: which (0: everything, 1: BG, 2: OBJ)
+; bit 2: perform a smooth dark flash
+; bit 3: partial fade (fade b of c frames)
+; bit 4: skip the last palette
+	db
 
 wJoypadDisable::
 ; bits 4, 6, or 7 can be used to disable joypad input
@@ -1097,7 +1111,9 @@ wJoypadDisable::
 ; bit 7: ongoing sgb data transfer
 	db
 
-	ds 3
+wPalFadeDelayFrames:: db
+wPalFadeDelay:: db
+	ds 1
 
 wFXAnimID:: dw
 

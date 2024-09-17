@@ -69,7 +69,7 @@ PushWindow::
 
 ExitMenu::
 	push af
-	callfar _ExitMenu
+	farcall _ExitMenu
 	pop af
 	ret
 

@@ -29,10 +29,10 @@ SpecialsPointers::
 	add_special BreakoutGame
 	add_special UnusedMemoryGame ; unused
 	add_special ClearBGPalettesBufferScreen ; unused
-	add_special FadeOutToWhite
-	add_special FadeOutToBlack
-	add_special FadeInFromWhite
-	add_special FadeInFromBlack
+	add_special FadeOutPalettes
+	add_special FadeBlackQuickly
+	add_special FadeInPalettes
+	add_special FadeInQuickly
 	add_special ReloadSpritesNoPalettes ; bank 0
 	add_special ClearBGPalettes ; bank 0
 	add_special UpdateTimePals ; bank 0
@@ -92,9 +92,10 @@ SpecialsPointers::
 	add_special GiveDratini
 	add_special BeastsCheck
 	add_special MonCheck
-	add_special SetPlayerPalette
 	add_special RefreshSprites
 	add_special LoadMapPalettes
 
 	add_special InitialSetDSTFlag
 	add_special InitialClearDSTFlag
+
+	add_special FadeInPalettes_EnableDynNoApply

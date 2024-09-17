@@ -131,18 +131,16 @@ StartMenu::
 	jr .ReturnEnd2
 
 .ReturnRedraw:
-	call .Clear
-	jp .Reopen
-
-.Clear:
+	farcall ClearSavedObjPals
+	farcall DisableDynPalUpdates
 	call ClearBGPalettes
 	call Call_ExitMenu
 	call ReloadTilesetAndPalettes
 	call .DrawMenuAccount
 	call DrawVariableLengthMenuBox
 	call UpdateSprites
-	call GSReloadPalettes
 	call FinishExitMenu
+	jp .Reopen
 	ret
 
 .MenuHeader:

@@ -33,8 +33,8 @@ MapSetupCommands:
 	add_mapsetup LoadMapAttributes ; 1a
 	add_mapsetup LoadMapAttributes_SkipObjects ; 1b
 	add_mapsetup ClearBGPalettes ; 1c
-	add_mapsetup FadeOutToWhite ; 1d
-	add_mapsetup FadeInFromWhite ; 1e
+	add_mapsetup FadeOutPalettes ; 1d
+	add_mapsetup FadeInPalettes ; 1e
 	add_mapsetup GetMapScreenCoords ; 1f
 	add_mapsetup GetWarpDestCoords ; 20
 	add_mapsetup SpawnInFacingDown ; 21
@@ -50,3 +50,6 @@ MapSetupCommands:
 	add_mapsetup ApplyMapPalettes ; 2b
 	add_mapsetup EnableTextAcceleration ; 2c
 	add_mapsetup InitMapNameSign ; 2d
+	add_mapsetup DisableDynPalUpdates ; 2e
+	add_mapsetup EnableDynPalUpdates ; 2f
+	add_mapsetup EnableDynPalUpdatesNoApply ; 30

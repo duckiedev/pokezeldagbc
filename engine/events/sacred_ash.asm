@@ -49,12 +49,12 @@ SacredAshScript:
 	special HealParty
 	refreshmap
 	playsound SFX_WARP_TO
-	special FadeOutToWhite
-	special FadeInFromWhite
-	special FadeOutToWhite
-	special FadeInFromWhite
-	special FadeOutToWhite
-	special FadeInFromWhite
+rept 3
+	special FadeOutPalettes
+	special LoadMapPalettes
+	special FadeInPalettes_EnableDynNoApply
+	special FadeInPalettes
+endr
 	waitsfx
 	writetext .UseSacredAshText
 	playsound SFX_CAUGHT_MON

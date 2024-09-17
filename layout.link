@@ -35,6 +35,8 @@ ROMX $04
 	"bank4"
 ROMX $05
 	"bank5"
+	"Dynamic Pals System"
+	"Fade System"
 ROMX $06
 	"Tileset Data 1"
 ROMX $07

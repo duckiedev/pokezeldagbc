@@ -140,17 +140,14 @@ UnusedWait30Frames: ; unreferenced
 HandleMap:
 	call ResetOverworldDelay
 	call HandleMapTimeAndJoypad
-	farcall HandleCmdQueue ; no need to farcall
+	call HandleCmdQueue ; no need to farcall
 	call MapEvents
 
 ; Not immediately entering a connected map will cause problems.
 	ld a, [wMapStatus]
 	cp MAPSTATUS_HANDLE
 	ret nz
-	call DoBackgroundEvents
 
-; fallthrough
-DoBackgroundEvents:
 	call HandleMapObjects
 	call NextOverworldFrame
 	call HandleMapBackground
@@ -536,7 +533,6 @@ TryObjectEvent:
 	ld hl, MAPOBJECT_TYPE
 	add hl, bc
 	ld a, [hl]
-	and MAPOBJECT_TYPE_MASK
 
 	push bc
 	ld de, 3
