@@ -651,8 +651,8 @@ NamePlayer:
 	dec a
 	jr z, .NewName
 	call StorePlayerName
-	farcall ApplyMonOrTrainerPals
-	farcall MovePlayerPicLeft
+	;farcall ApplyMonOrTrainerPals
+	;farcall MovePlayerPicLeft
 	ret
 
 .NewName:
