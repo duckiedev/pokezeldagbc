@@ -132,6 +132,7 @@ SpriteAnimOAMData:
 	spriteanimoam $00, .OAMData_PartyMon				 ; SPRITE_ANIM_OAMSET_PARTY_MON_1
 	spriteanimoam $04, .OAMData_PartyMon				 ; SPRITE_ANIM_OAMSET_PARTY_MON_2
 	spriteanimoam $00, .OAMData_Bomb					 ; SPRITE_ANIM_OAMSET_BOMB
+	spriteanimoam $00, .OAMData_TreasureItem			 ; SPRITE_ANIM_OAMSET_TREASUREITEM
 	assert_table_length NUM_SPRITE_ANIM_OAMSETS
 
 .OAMData_1x1_Palette0:
@@ -972,4 +973,9 @@ SpriteAnimOAMData:
 	dbsprite  1,  0,  4,  0, $53, 1
 
 .OAMData_Bomb:
-	
+	db 1
+
+.OAMData_TreasureItem:
+	db 2
+	dbsprite 0, -1,  0,  0, $00, PAL_OW_RED
+	dbsprite 0,  0,  0,  0, $01, PAL_OW_RED

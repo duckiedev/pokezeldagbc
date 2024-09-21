@@ -72,6 +72,7 @@ DEF NUM_SPRITEANIMDICT_ENTRIES EQU 10
 	const SPRITE_ANIM_OBJ_INTRO_SUICUNE_AWAY        ; 23
 	const SPRITE_ANIM_OBJ_CELEBI                    ; 24
 	const SPRITE_ANIM_OBJ_BOMB						; 25
+	const SPRITE_ANIM_OBJ_TREASUREITEM              ; 26
 DEF NUM_SPRITE_ANIM_OBJS EQU const_value
 
 ; DoSpriteAnimFrame.Jumptable indexes (see engine/sprite_anims/functions.asm)
@@ -108,6 +109,7 @@ DEF NUM_SPRITE_ANIM_OBJS EQU const_value
 	const SPRITE_ANIM_FUNC_INTRO_UNOWN_F             ; 1e
 	const SPRITE_ANIM_FUNC_INTRO_SUICUNE_AWAY        ; 1f
 	const SPRITE_ANIM_FUNC_BOMB						 ; 20
+	const SPRITE_ANIM_FUNC_TREASUREITEM				 ; 21
 DEF NUM_SPRITE_ANIM_FUNCS EQU const_value
 
 ; SpriteAnimFrameData indexes (see data/sprite_anims/framesets.asm)
@@ -163,6 +165,7 @@ DEF NUM_SPRITE_ANIM_FUNCS EQU const_value
 	const SPRITE_ANIM_FRAMESET_CELEBI_LEFT               ; 30
 	const SPRITE_ANIM_FRAMESET_CELEBI_RIGHT              ; 31
 	const SPRITE_ANIM_FRAMESET_BOMB						 ; 32
+	const SPRITE_ANIM_FRAMESET_TREASUREITEM				 ; 33
 DEF NUM_SPRITE_ANIM_FRAMESETS EQU const_value
 
 ; SpriteAnimOAMData indexes (see data/sprite_anims/oam.asm)
@@ -292,6 +295,7 @@ DEF NUM_SPRITE_ANIM_FRAMESETS EQU const_value
 	const SPRITE_ANIM_OAMSET_PARTY_MON_1                 ; 7c
 	const SPRITE_ANIM_OAMSET_PARTY_MON_2                 ; 7d
 	const SPRITE_ANIM_OAMSET_BOMB						 ; 7e
+	const SPRITE_ANIM_OAMSET_TREASUREITEM				 ; 7f
 DEF NUM_SPRITE_ANIM_OAMSETS EQU const_value
 
 assert NUM_SPRITE_ANIM_OAMSETS <= FIRST_OAM_CMD, \

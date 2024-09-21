@@ -140,7 +140,7 @@ UnusedWait30Frames: ; unreferenced
 HandleMap:
 	call ResetOverworldDelay
 	call HandleMapTimeAndJoypad
-	call HandleCmdQueue ; no need to farcall
+	call HandleCmdQueue
 	call MapEvents
 
 ; Not immediately entering a connected map will cause problems.
@@ -557,8 +557,8 @@ ObjectEventTypeArray:
 	dbw OBJECTTYPE_ITEMBALL, .itemball
 	dbw OBJECTTYPE_TRAINER, .trainer
 	; the remaining four are dummy events
-	dbw OBJECTTYPE_TRAINER, .three
 	dbw OBJECTTYPE_OWMON, .owmon
+	dbw OBJECTTYPE_TREASURECHEST, .treasurechest
 	dbw OBJECTTYPE_5, .five
 	dbw OBJECTTYPE_6, .six
 	assert_table_length NUM_OBJECT_TYPES
@@ -594,13 +594,23 @@ ObjectEventTypeArray:
 	scf
 	ret
 
-.three
-	xor a
-	ret
-
 .owmon
 	call TalkToOWMon
 	ld a, PLAYEREVENT_TALKTOOWMON
+	scf
+	ret
+
+.treasurechest
+	ld hl, MAPOBJECT_SCRIPT_POINTER
+	add hl, bc
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	call GetMapScriptsBank
+	ld de, wTreasureChestData
+	ld bc, wTreasureChestDataEnd - wTreasureChestData
+	call FarCopyBytes
+	ld a, PLAYEREVENT_TREASURECHEST
 	scf
 	ret
 
@@ -964,6 +974,7 @@ PlayerEventScriptPointers:
 	dba ChangeDirectionScript   ; PLAYEREVENT_JOYCHANGEFACING
 	dba SeenByOWMonScript       ; PLAYEREVENT_SEENBYOWMON
 	dba TalkToOWMonScript       ; PLAYEREVENT_TALKTOOWMON
+	dba TreasureChestScript		; PLAYEREVENT_TREASURECHEST
 	dba InvalidEventScript      ; (NUM_PLAYER_EVENTS)
 	assert_table_length NUM_PLAYER_EVENTS + 1
 

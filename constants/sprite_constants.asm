@@ -108,6 +108,7 @@
 	const SPRITE_ZOL ; 68
 	const SPRITE_CHRIS_RUN ; 69
 	const SPRITE_KRIS_RUN ; 6A
+	const SPRITE_NOTHING ; 6B
 DEF NUM_OVERWORLD_SPRITES EQU const_value - 1
 
 ; SpriteMons indexes (see data/sprites/sprite_mons.asm)

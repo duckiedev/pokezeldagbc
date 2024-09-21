@@ -49,6 +49,7 @@ ROMX $08
 	"Egg Moves"
 ROMX $09
 	"bank9"
+	"Item Icons 1"
 ROMX $0a
 	"bankA"
 	"Trainer Backpics"

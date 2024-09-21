@@ -165,6 +165,15 @@ MACRO itemball
 	endc
 ENDM
 
+MACRO treasurechest
+;\1: item: from constants/item_constants.asm
+;\2: event: 
+;\3: openedblock: map block showing the chest opened
+	db \1
+	dw \2
+	db \3
+ENDM
+
 MACRO hiddenitem
 ;\1: item: from constants/item_constants.asm
 ;\2: flag: an EVENT_* constant

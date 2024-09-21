@@ -52,6 +52,7 @@ SpriteAnimFrameData:
 	dw .Frameset_CelebiLeft
 	dw .Frameset_CelebiRight
 	dw .Frameset_Bomb
+	dw .Frameset_TreasureItem
 	assert_table_length NUM_SPRITE_ANIM_FRAMESETS
 
 .Frameset_00:
@@ -343,4 +344,7 @@ SpriteAnimFrameData:
 .Frameset_Bomb:
 	oamframe SPRITE_ANIM_OAMSET_BOMB,  8
 	oamend
-	
+
+.Frameset_TreasureItem:
+	oamframe SPRITE_ANIM_OAMSET_TREASUREITEM,  1
+	oamend

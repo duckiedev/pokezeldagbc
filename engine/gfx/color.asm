@@ -76,6 +76,22 @@ Unused_CheckShininess:
 	and a
 	ret
 
+LoadItemIconPalette:
+	ld a, [wCurSpecies]
+	ld bc, ItemIconPalettes
+LoadIconPalette:
+	ld l, a
+	ld h, 0
+	add hl, hl
+	add hl, hl
+	add hl, bc
+	ld de, wBGPals1 palette 7 + 2
+	ld bc, 4
+	call FarCopyColorWRAM
+	ld hl, BlackPalette
+	ld bc, 2
+	jp FarCopyColorWRAM
+	
 InitPartyMenuPalettes:
 	ld hl, PalPacket_PartyMenu + 1
 	call CopyFourPalettes
@@ -1129,6 +1145,8 @@ endr
 	call FarCopyWRAM
 
 INCLUDE "data/maps/environment_colors.asm"
+
+INCLUDE "engine/gfx/palettes.asm"
 
 ; Input: E must contain the offset of the selected palette from PartyMenuOBPals.
 SetFirstOBJPalette::

@@ -76,9 +76,9 @@ CaveH8CheckBush:
 	iffalse .skip
 	closetext
 	callasm OWCutAnimation
+	reanchormap
 	changeblock $8, $3, $15
 	refreshmap
-	reanchormap
 	playsound SFX_SOLVE_PUZZLE
 	waitsfx
 .skip

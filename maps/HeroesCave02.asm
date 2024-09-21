@@ -56,7 +56,7 @@ HeroesCave02RoamingMonIttibat01:
 	end
 
 HeroesCave02TreasureChest:
-	treasurechest TREASUREITEM_BIGRUPEE, EVENT_TREASURECHEST_HEROESCAVE02, $4a
+	treasurechest BIG_RUPEE, EVENT_TREASURECHEST_HEROESCAVE02, $4a
 	
 HeroesCave02_MapEvents:
 	db 0, 0 ; filler
@@ -69,7 +69,8 @@ HeroesCave02_MapEvents:
 	def_coord_events
 
 	def_bg_events
-	bg_event 12,  5, BGEVENT_TREASURECHEST, HeroesCave02TreasureChest
 	
 	def_object_events
 	object_event  5,  5, SPRITE_ITTIBAT, SPRITEMOVEDATA_WANDER, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_OWMON, 3, HeroesCave02RoamingMonIttibat01, -1
+	object_event 12,  5, SPRITE_NOTHING, SPRITEMOVEDATA_STILL,  0, 0, -1, -1,           -1, OBJECTTYPE_TREASURECHEST, 0, HeroesCave02TreasureChest, EVENT_TREASURECHEST_HEROESCAVE02
+

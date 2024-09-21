@@ -46,6 +46,7 @@ DoSpriteAnimFrame:
 	dw SpriteAnimFunc_IntroUnownF
 	dw SpriteAnimFunc_IntroSuicuneAway
 	dw SpriteAnimFunc_Bomb
+	dw SpriteAnimFunc_TreasureItem
 	assert_table_length NUM_SPRITE_ANIM_FUNCS
 
 SpriteAnimFunc_Null:
@@ -858,3 +859,12 @@ AnimSeqs_Cosine:
 	ret
 
 SpriteAnimFunc_Bomb:
+	ret
+
+SpriteAnimFunc_TreasureItem:
+
+	ld hl, SPRITEANIMSTRUCT_YCOORD
+	add hl, bc
+	dec [hl]
+
+	ret

@@ -1407,6 +1407,14 @@ wItemBallQuantity:: db
 wItemBallDataEnd::
 
 NEXTU
+; treasure chest data
+wTreasureChestData::
+wTreasureChestItemID:: db
+wTreasureChestEvent:: dw
+wTreasureChestOpenBlock:: db
+wTreasureChestDataEnd::
+
+NEXTU
 ; hidden item data
 wHiddenItemData::
 wHiddenItemEvent:: dw
