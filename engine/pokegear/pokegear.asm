@@ -722,20 +722,6 @@ PokegearRadio_Joypad:
 	set 7, [hl]
 	ret
 
-GetAMPMHours: ; unreferenced
-	ldh a, [hHours]
-	cp NOON_HOUR
-	jr c, .am
-	sub NOON_HOUR
-	ld [wTempByteValue], a
-	scf
-	ret
-
-.am
-	ld [wTempByteValue], a
-	and a
-	ret
-
 Pokegear_SwitchPage:
 	ld de, SFX_TEXT_PRINT_DONE
 	call PlaySFX

@@ -2025,7 +2025,7 @@ Script_writecmdqueue:
 	ld d, a
 	ld a, [wScriptBank]
 	ld b, a
-	farcall WriteCmdQueue ; no need to farcall
+	call WriteCmdQueue
 	ret
 
 Script_delcmdqueue:
@@ -2033,7 +2033,7 @@ Script_delcmdqueue:
 	ld [wScriptVar], a
 	call GetScriptByte
 	ld b, a
-	farcall DelCmdQueue ; no need to farcall
+	call DelCmdQueue
 	ret c
 	ld a, TRUE
 	ld [wScriptVar], a
