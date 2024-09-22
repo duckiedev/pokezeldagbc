@@ -862,9 +862,7 @@ SpriteAnimFunc_Bomb:
 	ret
 
 SpriteAnimFunc_TreasureItem:
-
 	ld hl, SPRITEANIMSTRUCT_YCOORD
 	add hl, bc
 	dec [hl]
-
 	ret

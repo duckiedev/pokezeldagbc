@@ -85,7 +85,7 @@ LoadIconPalette:
 	add hl, hl
 	add hl, hl
 	add hl, bc
-	ld de, wBGPals1 palette 7 + 2
+	ld de, wOBPals1 palette 7 + 2
 	ld bc, 4
 	call FarCopyColorWRAM
 	ld hl, BlackPalette

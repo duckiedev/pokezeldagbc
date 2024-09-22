@@ -1,22 +1,24 @@
-DEF TREASURECHESTITEM EQU $84
+DEF TREASURECHESTITEM EQU $70
 
 TreasureChestScript::
 	reanchormap
 	callasm OpenChestBlockSwap
 	refreshmap
-	; play sound effects
 	playsound SFX_PLACE_PUZZLE_PIECE_DOWN
 	callasm TreasureItemAnim
+	waitsfx
 	playsound SFX_GET_ITEM
 	waitsfx
 	readmem wTreasureChestItemID
 	giveitem ITEM_FROM_MEM
+	readmem wTreasureChestItemID
 	getitemname STRING_BUFFER_3, USE_SCRIPT_VAR
 	writetext .GotItemText
 	waitbutton
-	; wait
-	; sprite disappear
+	callasm TreasureItem_Remove
+	refreshmap
 	end
+
 .GotItemText:
 	text "You got a"
 	line "@"
@@ -87,7 +89,7 @@ TreasureItem_FrameTimer:
 	ld hl, wFrameCounter
 	ld a, [hl]
 	and a
-	jr z, .exit
+	jr z, .stop
 	dec [hl]
 	cp $40
 	ret c
@@ -96,18 +98,18 @@ TreasureItem_FrameTimer:
 	ld de, SFX_FLY
 	call PlaySFX
 	ret
-
-.exit
-	ld b, b
+.stop 
 	ld hl, wJumptableIndex
 	set 7, [hl]
+	ret 
+
+TreasureItem_Remove:
 	farcall ClearSpriteAnims
 	ld hl, wShadowOAMSprite36
 	ld bc, wShadowOAMEnd - wShadowOAMSprite36
 	xor a
 	call ByteFill
 	call UpdatePlayerSprite
-	call LoadStandardFont
 	ret
 
 SetupLoadItemIcon:
