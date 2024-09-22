@@ -77,7 +77,7 @@ Unused_CheckShininess:
 	ret
 
 LoadItemIconPalette:
-	ld a, [wCurSpecies]
+	ld a, [wTreasureChestItemID]
 	ld bc, ItemIconPalettes
 LoadIconPalette:
 	ld l, a
