@@ -44,7 +44,7 @@
 
 ; Actual characters (from other graphics files)
 
-	charmap " ",		 $7f ; gfx/frames/space.png
+	charmap " ",		 $7f ;
 
 	; needed for StatsScreen_PlaceShinyIcon and PrintPartyMonPage1
 	charmap "⁂",         $3f ; gfx/stats/stats_tiles.png, tile 14

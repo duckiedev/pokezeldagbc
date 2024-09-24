@@ -40,7 +40,6 @@ NewGame_ClearTilemapEtc:
 	xor a
 	ldh [hMapAnims], a
 	call ClearTilemap
-	call LoadFontsExtra
 	call LoadStandardFont
 	call ClearWindowData
 	ret
@@ -397,7 +396,6 @@ DisplayNormalContinueData:
 	call Continue_LoadMenuHeader
 	call Continue_DisplayBadgesDexPlayerName
 	call Continue_PrintGameTime
-	call LoadFontsExtra
 	call UpdateSprites
 	ret
 
@@ -405,7 +403,6 @@ DisplayContinueDataWithRTCError:
 	call Continue_LoadMenuHeader
 	call Continue_DisplayBadgesDexPlayerName
 	call Continue_UnknownGameTime
-	call LoadFontsExtra
 	call UpdateSprites
 	ret
 
@@ -664,7 +661,6 @@ NamePlayer:
 	call FadeToWhite
 	call ClearTilemap
 
-	call LoadFontsExtra
 	call WaitBGMap
 
 	xor a
@@ -742,7 +738,6 @@ ShrinkPlayer:
 	call DelayFrames
 
 	call Intro_PlacePlayerSprite
-	call LoadFontsExtra
 
 	ld c, 50
 	call DelayFrames
@@ -1164,7 +1159,6 @@ ResetClock:
 
 Copyright:
 	call ClearTilemap
-	call LoadFontsExtra
 	ld de, CopyrightGFX
 	ld hl, vTiles2 tile $60
 	lb bc, BANK(CopyrightGFX), 29

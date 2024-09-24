@@ -317,7 +317,7 @@ PadTilemapForHDMATransfer:
 	jr PadMapForHDMATransfer
 
 PadAttrmapForHDMATransfer:
-	ld c, $0
+	ld c, $c1
 
 PadMapForHDMATransfer:
 ; pad a 20x18 map to 32x18 for HDMA transfer

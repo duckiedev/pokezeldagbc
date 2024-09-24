@@ -40,18 +40,6 @@ DEF TEXT_DELAY_FAST EQU %001 ; 1
 DEF TEXT_DELAY_MED  EQU %011 ; 3
 DEF TEXT_DELAY_SLOW EQU %101 ; 5
 
-; wTextboxFrame::
-	const_def
-	const FRAME_1 ; 0
-	const FRAME_2 ; 1
-	const FRAME_3 ; 2
-	const FRAME_4 ; 3
-	const FRAME_5 ; 4
-	const FRAME_6 ; 5
-	const FRAME_7 ; 6
-	const FRAME_8 ; 7
-DEF NUM_FRAMES EQU const_value
-
 ; wTextboxFlags::
 	const_def
 	const FAST_TEXT_DELAY_F ; 0

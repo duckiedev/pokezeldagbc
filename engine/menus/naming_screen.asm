@@ -817,7 +817,6 @@ LoadNamingScreenGFX:
 	call ClearSprites
 	callfar ClearSpriteAnims
 	call LoadStandardFont
-	call LoadFontsExtra
 
 	ld de, NamingScreenGFX_MiddleLine
 	ld hl, vTiles0 tile NAMINGSCREEN_MIDDLELINE

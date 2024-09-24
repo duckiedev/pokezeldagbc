@@ -3,8 +3,8 @@ DefaultOptions:
 	db TEXT_DELAY_MED | (1 << ASKNICKNAME) | (1 << STEREO)
 ; wSaveFileExists: no
 	db FALSE
-; wTextboxFrame: frame 1
-	db FRAME_1
+; Unused option
+	db $00
 ; wTextboxFlags: use text speed
 	db 1 << FAST_TEXT_DELAY_F
 ; wOptions2: menu account on

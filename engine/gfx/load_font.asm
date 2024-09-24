@@ -26,34 +26,11 @@ _LoadStandardFont::
 	call Get2bpp
 	ret
 
-_LoadFontsExtra1::
-	jr LoadFrame
-
-_LoadFontsExtra2::
-	ret
-
 _LoadFontsBattleExtra::
 	ld de, FontBattleExtra
 	ld hl, vTiles2 tile $60
 	lb bc, BANK(FontBattleExtra), 25
 	call Get2bppViaHDMA
-	jr LoadFrame
-
-LoadFrame:
-	ld a, [wTextboxFrame]
-	maskbits NUM_FRAMES
-	ld bc, TEXTBOX_FRAME_TILES * LEN_1BPP_TILE
-	ld hl, Frames
-	call AddNTimes
-	ld d, h
-	ld e, l
-	ld hl, vTiles0 tile "┌" ; $ba
-	lb bc, BANK(Frames), TEXTBOX_FRAME_TILES ; "┌" to "┘"
-	call Get1bppViaHDMA
-	ld hl, vTiles2 tile $D7 ; $7f
-	ld de, TextboxSpaceUniqueGFX
-	lb bc, BANK(TextboxSpaceUniqueGFX), 1
-	call Get1bppViaHDMA
 	ret
 
 LoadBattleFontsHPBar:
@@ -65,7 +42,6 @@ LoadBattleFontsHPBar:
 	ld de, FontBattleExtra + 16 tiles ; "<DO>"
 	lb bc, BANK(FontBattleExtra), 3 ; "<DO>" to "『"
 	call Get2bppViaHDMA
-	call LoadFrame
 
 LoadHPBar:
 	ld de, EnemyHPBarBorderGFX

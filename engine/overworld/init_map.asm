@@ -22,6 +22,8 @@ ReanchorBGMap_NoOAMUpdate::
 	ret
 
 .ReanchorBGMap:
+	ld hl, rIE
+	res LCD_STAT, [hl]
 	xor a
 	ldh [hLCDCPointer], a
 	ldh [hBGMapMode], a
@@ -70,7 +72,6 @@ LoadFonts_NoOAMUpdate::
 	ret
 
 .LoadGFX:
-	call LoadFontsExtra
 	ld a, $90
 	ldh [hWY], a
 	call SafeUpdateSprites

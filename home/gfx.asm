@@ -94,11 +94,6 @@ LoadFontsBattleExtra::
 	farcall _LoadFontsBattleExtra
 	ret
 
-LoadFontsExtra::
-	farcall _LoadFontsExtra1
-	farcall _LoadFontsExtra2
-	ret
-
 DecompressRequest2bpp::
 	push de
 	ld a, BANK(sScratch)

@@ -1141,9 +1141,9 @@ wOptions::
 ; bit 7: ask nickname off/on
 	db
 wSaveFileExists:: db
-wTextboxFrame::
-; bits 0-2: textbox frame 0-7
-	db
+
+	ds 1
+
 wTextboxFlags::
 ; bit 0: 1-frame text delay
 ; bit 4: no text delay
