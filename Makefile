@@ -180,25 +180,25 @@ gfx/pokemon/%/front.animated.2bpp: gfx/pokemon/%/front.2bpp gfx/pokemon/%/front.
 
 ### Misc file-specific graphics rules
 
-gfx/pokemon/%/back.2bpp: rgbgfx += -Z -c embedded
-gfx/pokemon/%/front.2bpp: rgbgfx += -c embedded
+gfx/pokemon/%/back.2bpp: rgbgfx += --columns --colors embedded
+gfx/pokemon/%/front.2bpp: rgbgfx += --colors embedded
 
-gfx/trainers/%.2bpp: rgbgfx += -Z -c embedded
+gfx/trainers/%.2bpp: rgbgfx += --columns --colors embedded
 
-gfx/new_game/shrink1.2bpp: rgbgfx += -Z
-gfx/new_game/shrink2.2bpp: rgbgfx += -Z
+gfx/new_game/shrink1.2bpp: rgbgfx += --columns
+gfx/new_game/shrink2.2bpp: rgbgfx += --columns
 
 gfx/pokedex/pokedex.2bpp: tools/gfx += --trim-whitespace
 gfx/pokedex/pokedex_sgb.2bpp: tools/gfx += --trim-whitespace
-gfx/pokedex/question_mark.2bpp: rgbgfx += -Z
+gfx/pokedex/question_mark.2bpp: rgbgfx += --columns
 gfx/pokedex/slowpoke.2bpp: tools/gfx += --trim-whitespace
 
-gfx/pokegear/pokegear.2bpp: rgbgfx += -x2
+gfx/pokegear/pokegear.2bpp: rgbgfx += --trim-end 2
 gfx/pokegear/pokegear_sprites.2bpp: tools/gfx += --trim-whitespace
 
 gfx/title/crystal.2bpp: tools/gfx += --interleave --png=$<
 gfx/title/old_fg.2bpp: tools/gfx += --interleave --png=$<
-gfx/title/logo.2bpp: rgbgfx += -x 4
+gfx/title/logo.2bpp: rgbgfx += --trim-end 4
 
 gfx/trade/ball.2bpp: tools/gfx += --remove-whitespace
 gfx/trade/game_boy.2bpp: tools/gfx += --remove-duplicates --preserve=0x23,0x27
@@ -229,13 +229,13 @@ gfx/battle_anims/rocks.2bpp: tools/gfx += --remove-whitespace
 gfx/battle_anims/skyattack.2bpp: tools/gfx += --remove-whitespace
 gfx/battle_anims/status.2bpp: tools/gfx += --remove-whitespace
 
-gfx/player/chris.2bpp: rgbgfx += -Z
-gfx/player/chris_back.2bpp: rgbgfx += -Z
-gfx/player/kris.2bpp: rgbgfx += -Z
-gfx/player/kris_back.2bpp: rgbgfx += -Z
+gfx/player/chris.2bpp: rgbgfx += --columns
+gfx/player/chris_back.2bpp: rgbgfx += --columns
+gfx/player/kris.2bpp: rgbgfx += --columns
+gfx/player/kris_back.2bpp: rgbgfx += --columns
 
-gfx/trainer_card/chris_card.2bpp: rgbgfx += -Z
-gfx/trainer_card/kris_card.2bpp: rgbgfx += -Z
+gfx/trainer_card/chris_card.2bpp: rgbgfx += --columns
+gfx/trainer_card/kris_card.2bpp: rgbgfx += --columns
 gfx/trainer_card/leaders.2bpp: tools/gfx += --trim-whitespace
 
 gfx/overworld/chris_fish.2bpp: tools/gfx += --trim-whitespace
@@ -257,12 +257,12 @@ gfx/sgb/sgb_border.sgb.tilemap: gfx/sgb/sgb_border.bin ; tr < $< -d '\000' > $@
 		tools/gfx $(tools/gfx) -o $@ $@)
 
 %.1bpp: %.png
-	$(RGBGFX) $(rgbgfx) -d1 -o $@ $<
+	$(RGBGFX) $(rgbgfx) --depth 1 -o $@ $<
 	$(if $(tools/gfx),\
-		tools/gfx $(tools/gfx) -d1 -o $@ $@)
+		tools/gfx $(tools/gfx) --depth 1 -o $@ $@)
 
 %.gbcpal: %.png
-	$(RGBGFX) -c embedded -p $@ $<
+	$(RGBGFX) --colors embedded -p $@ $<
 
 %.dimensions: %.png
 	tools/png_dimensions $< $@
