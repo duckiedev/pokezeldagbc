@@ -147,6 +147,10 @@ INCLUDE "audio/music/zeldatitle.asm"
 INCLUDE "audio/music/cavetheme.asm"
 INCLUDE "audio/music/gateoftime.asm"
 
+SECTION "Ocarina Sounds", ROMX
+
+INCLUDE "audio/music/ocarina_notes.asm"
+
 
 SECTION "Sound Effects", ROMX
 

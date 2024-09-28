@@ -102,4 +102,10 @@ Music:
 	dba Music_ZeldaTitle
 	dba Music_CaveTheme
 	dba Music_GateOfTime
+; ocarina notes
+	dba Music_OcarinaNoteB5
+	dba Music_OcarinaNoteA5
+	dba Music_OcarinaNoteF5
+	dba Music_OcarinaNoteD5
+	dba Music_OcarinaNoteB4
 	assert_table_length NUM_MUSIC_SONGS

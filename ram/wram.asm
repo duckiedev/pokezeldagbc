@@ -242,7 +242,10 @@ endr
 wNeededPalIndex:: db
 wEmotePal:: db
 
-	ds 51
+wOcarinaTempNotes:: ds OCARINA_MAX_SONG_LENGTH + 1
+wOcarinaTempNotesEnd::
+
+	ds 44
 
 
 SECTION "Sprites", WRAM0

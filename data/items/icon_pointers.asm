@@ -100,7 +100,7 @@ ItemIconPointers:
     dba NoItemIcon ; $61
     dba NoItemIcon ; $62
     dba NoItemIcon ; $63
-    dba NoItemIcon ; $64
+    dba KinstoneOcarinaIcon ; $64
     dba NoItemIcon ; $65
     dba NoItemIcon ; $66
     dba NoItemIcon ; $67

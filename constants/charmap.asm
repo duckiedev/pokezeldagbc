@@ -119,6 +119,13 @@
 	charmap "└",         $be
 	charmap "┘",         $bf
 
+	charmap "<NOTE>",    $c0
+	charmap "<UP>",		 $c1
+	charmap "<DOWN>",	 $c2
+	charmap "<LEFT>",	 $c3
+	charmap "<RIGHT>",	 $c4
+	charmap "<A>",		 $c5
+
 	charmap "′",         $ce
 	charmap "″",         $cf
 

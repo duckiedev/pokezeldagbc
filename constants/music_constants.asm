@@ -100,6 +100,12 @@
 	const MUSIC_ZELDA_TITLE					 ; 5e
 	const MUSIC_CAVE_THEME					 ; 5f
 	const MUSIC_GATE_OF_TIME				 ; 60
+; ocarina notes
+	const MUSIC_OCARINA_NOTE_B5 			 ; 61
+	const MUSIC_OCARINA_NOTE_A5				 ; 62
+	const MUSIC_OCARINA_NOTE_F5				 ; 63
+	const MUSIC_OCARINA_NOTE_D5			     ; 64
+	const MUSIC_OCARINA_NOTE_B4				 ; 65
 DEF NUM_MUSIC_SONGS EQU const_value
 
 ; GetMapMusic picks music for these values (see home/map.asm)

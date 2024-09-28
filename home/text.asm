@@ -649,6 +649,7 @@ DoTextUntilTerminator::
 	cp TX_END
 	ret z
 	call .TextCommand
+	; play sound here?
 	jr DoTextUntilTerminator
 
 .TextCommand:
