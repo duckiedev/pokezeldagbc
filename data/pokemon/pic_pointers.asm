@@ -192,7 +192,7 @@ PokemonPicPointers::
 	dba_pics HoppipFrontpic, HoppipBackpic
 	dba_pics SkiploomFrontpic, SkiploomBackpic
 	dba_pics JumpluffFrontpic, JumpluffBackpic
-	dba_pics AipomFrontpic, AipomBackpic
+	dba_pics IgnizolFrontpic, IgnizolBackpic
 	dba_pics SunkernFrontpic, SunkernBackpic
 	dba_pics SunfloraFrontpic, SunfloraBackpic
 	dba_pics YanmaFrontpic, YanmaBackpic

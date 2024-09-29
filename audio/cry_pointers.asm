@@ -66,7 +66,7 @@ Cries:
 	dba Cry_Ampharos
 	dba Cry_Magcargo
 	dba Cry_Pichu
-	dba Cry_Aipom
+	dba Cry_Ignizol
 	dba Cry_Dunsparce
 	dba Cry_Donphan
 	dba Cry_Honedge_H

@@ -11,7 +11,7 @@ AsleepTreeMonsNite:
 	db EKANS
 	db BOOMBLOOM
 	db LEDYBA
-	db AIPOM
+	db IGNIZOL
 	db -1 ; end
 
 AsleepTreeMonsDay:

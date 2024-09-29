@@ -224,7 +224,7 @@ INCBIN "gfx/footprints/politoed.1bpp"
 INCBIN "gfx/footprints/hoppip.1bpp"     
 INCBIN "gfx/footprints/skiploom.1bpp"   
 INCBIN "gfx/footprints/jumpluff.1bpp"   
-INCBIN "gfx/footprints/aipom.1bpp"      
+INCBIN "gfx/footprints/ignizol.1bpp"      
 INCBIN "gfx/footprints/sunkern.1bpp"    
 INCBIN "gfx/footprints/sunflora.1bpp"   
 ; 193-200

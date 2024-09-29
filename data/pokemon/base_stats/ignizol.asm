@@ -1,17 +1,17 @@
-	db AIPOM ; 190
+	db IGNIZOL ; 190
 
-	db  55,  70,  55,  85,  40,  55
+	db 135,  40,  40,   5,  85,  85
 	;   hp  atk  def  spd  sat  sdf
 
-	db NORMAL, NORMAL ; type
-	db 45 ; catch rate
-	db 94 ; base exp
+	db NORMAL, FIRE ; type
+	db 100 ; catch rate
+	db 75 ; base exp
 	db NO_ITEM, NO_ITEM ; items
 	db GENDER_F50 ; gender ratio
 	db 1 ; hearts (more than 1 is considered a boss)
 	db 20 ; step cycles to hatch
-	db 5 ; form pic bank
-	INCBIN "gfx/pokemon/aipom/front.dimensions"
+	db 0 ; form pic bank
+	INCBIN "gfx/pokemon/ignizol/front.dimensions"
 	dw NULL, NULL ; Form pics
 	db GROWTH_FAST ; growth rate
 	dn EGG_GROUND, EGG_GROUND ; egg groups

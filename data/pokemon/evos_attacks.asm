@@ -2567,14 +2567,14 @@ JumpluffEvosAttacks:
 	db 44, MEGA_DRAIN
 	db 0 ; no more level-up moves
 
-AipomEvosAttacks:
+IgnizolEvosAttacks:
 	db 0 ; no more evolutions
-	db 1, SCRATCH
-	db 1, TAIL_WHIP
-	db 6, SAND_ATTACK
-	db 12, BATON_PASS
-	db 19, FURY_SWIPES
-	db 27, SWIFT
+	db 1, TACKLE
+	db 1, EMBER
+	;db 6, SAND_ATTACK
+	;db 12, BATON_PASS
+	;db 19, FURY_SWIPES
+	;db 27, SWIFT
 	db 36, SCREECH
 	db 46, AGILITY
 	db 0 ; no more level-up moves

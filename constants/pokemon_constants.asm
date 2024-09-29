@@ -58,7 +58,7 @@
 	const NINETALES  ; 26
 	const JIGGLYPUFF ; 27
 	const WIGGLYTUFF ; 28
-	const ITTIBAT      ; 29
+	const ITTIBAT    ; 29
 	const GOLBAT     ; 2a
 	const ODDISH     ; 2b
 	const GLOOM      ; 2c
@@ -208,7 +208,7 @@ DEF JOHTO_POKEMON EQU const_value
 	const HOPPIP     ; bb
 	const SKIPLOOM   ; bc
 	const JUMPLUFF   ; bd
-	const AIPOM      ; be
+	const IGNIZOL    ; be
 	const SUNKERN    ; bf
 	const SUNFLORA   ; c0
 	const YANMA      ; c1
