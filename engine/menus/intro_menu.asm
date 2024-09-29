@@ -186,8 +186,6 @@ endc
 
 	call InitializeNPCNames
 
-	farcall InitDecorations
-
 	call ResetGameTime
 	ret
 

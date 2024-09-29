@@ -53,8 +53,6 @@ SpecialsPointers::
 	add_special DayCareMon1
 	add_special DayCareMon2
 	add_special ActivateFishingSwarm
-	add_special ToggleMaptileDecorations
-	add_special ToggleDecorationsVisibility
 	add_special GiveShuckle
 	add_special ReturnShuckie
 	add_special BillsGrandfather

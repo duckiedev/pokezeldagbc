@@ -167,8 +167,6 @@ ItemDescriptions:
 	dw FriendBallDesc
 	dw MoonBallDesc
 	dw LoveBallDesc
-	dw NormalBoxDesc
-	dw GorgeousBoxDesc
 	dw SunStoneDesc
 	dw PolkadotBowDesc
 	dw TeruSama22Desc
@@ -256,6 +254,8 @@ ItemDescriptions:
 	dw TeruSama30Desc
 	dw TeruSama31Desc
 	dw TeruSama32Desc
+	dw TeruSama33Desc
+	dw TeruSama33Desc
 	dw TeruSama33Desc
 	assert_table_length $ff
 
@@ -888,14 +888,6 @@ MoonBallDesc:
 LoveBallDesc:
 	db   "For catching the"
 	next "opposite gender.@"
-
-NormalBoxDesc:
-	db   "Open it and see"
-	next "what's inside.@"
-
-GorgeousBoxDesc:
-	db   "Open it and see"
-	next "what's inside.@"
 
 SunStoneDesc:
 	db   "Evolves certain"

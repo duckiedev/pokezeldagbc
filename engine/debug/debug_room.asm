@@ -12,22 +12,21 @@ DEF DEBUGROOMMENU_NUM_PAGES EQU const_value
 	const DEBUGROOMMENUITEM_POKEMON_GET  ; 02
 	const DEBUGROOMMENUITEM_POKEDEX_COMP ; 03
 	const DEBUGROOMMENUITEM_TIMER_RESET  ; 04
-	const DEBUGROOMMENUITEM_DECORATE_ALL ; 05
-	const DEBUGROOMMENUITEM_ITEM_GET     ; 06
-	const DEBUGROOMMENUITEM_RTC_EDIT     ; 07
-	const DEBUGROOMMENUITEM_NEXT         ; 08
-	const DEBUGROOMMENUITEM_GB_ID_SET    ; 09
-	const DEBUGROOMMENUITEM_BTL_REC_CLR  ; 0a
-	const DEBUGROOMMENUITEM_POKEDEX_CLR  ; 0b
-	const DEBUGROOMMENUITEM_HALT_CHK_CLR ; 0c
-	const DEBUGROOMMENUITEM_BATTLE_SKIP  ; 0d
-	const DEBUGROOMMENUITEM_HOF_CLEAR    ; 0e
-	const DEBUGROOMMENUITEM_ROM_CHECKSUM ; 0f
-	const DEBUGROOMMENUITEM_TEL_DEBUG    ; 10
-	const DEBUGROOMMENUITEM_SUM_RECALC   ; 11
-	const DEBUGROOMMENUITEM_RAM_FLAG_CLR ; 12
-	const DEBUGROOMMENUITEM_CHANGE_SEX   ; 13
-	const DEBUGROOMMENUITEM_BT_BUG_POKE  ; 14
+	const DEBUGROOMMENUITEM_ITEM_GET     ; 05
+	const DEBUGROOMMENUITEM_RTC_EDIT     ; 06
+	const DEBUGROOMMENUITEM_NEXT         ; 07
+	const DEBUGROOMMENUITEM_GB_ID_SET    ; 08
+	const DEBUGROOMMENUITEM_BTL_REC_CLR  ; 09
+	const DEBUGROOMMENUITEM_POKEDEX_CLR  ; 0a
+	const DEBUGROOMMENUITEM_HALT_CHK_CLR ; 0b
+	const DEBUGROOMMENUITEM_BATTLE_SKIP  ; 0c
+	const DEBUGROOMMENUITEM_HOF_CLEAR    ; 0d
+	const DEBUGROOMMENUITEM_ROM_CHECKSUM ; 0e
+	const DEBUGROOMMENUITEM_TEL_DEBUG    ; 0f
+	const DEBUGROOMMENUITEM_SUM_RECALC   ; 10
+	const DEBUGROOMMENUITEM_RAM_FLAG_CLR ; 11
+	const DEBUGROOMMENUITEM_CHANGE_SEX   ; 12
+	const DEBUGROOMMENUITEM_BT_BUG_POKE  ; 13
 
 _DebugRoom:
 	ldh a, [hJoyDown]
@@ -92,7 +91,6 @@ _DebugRoom:
 	db "#MON GET!@"
 	db "#DEX COMP@"
 	db "TIMER RESET@"
-	db "DECORATE ALL@"
 	db "ITEM GET!@"
 	db "RTC EDIT@"
 	db "NEXT@"
@@ -116,7 +114,6 @@ _DebugRoom:
 	dw DebugRoomMenu_PokemonGet
 	dw DebugRoomMenu_PokedexComp
 	dw DebugRoomMenu_TimerReset
-	dw DebugRoomMenu_DecorateAll
 	dw DebugRoomMenu_ItemGet
 	dw DebugRoomMenu_RTCEdit
 	dw DebugRoomMenu_Next
@@ -153,7 +150,6 @@ _DebugRoom:
 	db DEBUGROOMMENUITEM_ITEM_GET
 	db DEBUGROOMMENUITEM_POKEDEX_COMP
 	db DEBUGROOMMENUITEM_POKEDEX_CLR
-	db DEBUGROOMMENUITEM_DECORATE_ALL
 	db DEBUGROOMMENUITEM_HOF_CLEAR
 	db DEBUGROOMMENUITEM_ROM_CHECKSUM
 	db DEBUGROOMMENUITEM_NEXT
@@ -510,30 +506,6 @@ DebugRoom_PrintRAMFlag:
 DebugRoomMenu_SumRecalc:
 	call YesNoBox
 	ret c
-	call DebugRoom_SaveChecksum
-	ret
-
-DebugRoomMenu_DecorateAll:
-	call YesNoBox
-	ret c
-	ld a, BANK(sPlayerData)
-	call OpenSRAM
-	ld hl, sPlayerData + (wEventFlags - wPlayerData)
-	ld de, EVENT_DECO_BED_1 ; the first EVENT_DECO_* constant
-	ld b, SET_FLAG
-	ld c, EVENT_DECO_BIG_LAPRAS_DOLL - EVENT_DECO_BED_1 + 1
-.loop
-	push bc
-	push de
-	push hl
-	call FlagAction
-	pop hl
-	pop de
-	pop bc
-	inc de
-	dec c
-	jr nz, .loop
-	call CloseSRAM
 	call DebugRoom_SaveChecksum
 	ret
 

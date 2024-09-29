@@ -189,6 +189,4 @@ ItemIconPointers:
     dba NoItemIcon ; $BA
     dba NoItemIcon ; $BB
     dba NoItemIcon ; $BC
-    dba NoItemIcon ; $BD
-    dba NoItemIcon ; $BE
     assert_table_length NUM_ITEMS + 1

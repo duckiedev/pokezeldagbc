@@ -1330,17 +1330,6 @@ wTempPokedexCaughtCount:: db
 
 SECTION UNION "Miscellaneous WRAM 1", WRAMX
 
-; player's room pc
-UNION
-wDecoNameBuffer:: ds ITEM_NAME_LENGTH
-NEXTU
-wNumOwnedDecoCategories:: db
-wOwnedDecoCategories:: ds 16
-ENDU
-
-
-SECTION UNION "Miscellaneous WRAM 1", WRAMX
-
 ; trade
 wCurTradePartyMon:: db
 wCurOTTradePartyMon:: db
@@ -1796,15 +1785,6 @@ NEXTU
 wHealMachineAnimType::  db
 wHealMachineTempOBP1::  db
 wHealMachineAnimState:: db
-
-NEXTU
-; decorations
-wCurDecoration::          db
-wSelectedDecorationSide:: db
-wSelectedDecoration::     db
-wOtherDecoration::        db
-wChangedDecorations::     db
-wCurDecorationCategory::  db
 
 NEXTU
 ; withdraw/deposit items
@@ -2355,17 +2335,7 @@ wCurMapSceneScriptsPointer:: dw
 wCurMapCallbackCount:: db
 wCurMapCallbacksPointer:: dw
 
-	ds 2
-
-; Sprite id of each decoration
-wDecoBed::           db
-wDecoCarpet::        db
-wDecoPlant::         db
-wDecoPoster::        db
-wDecoConsole::       db
-wDecoLeftOrnament::  db
-wDecoRightOrnament:: db
-wDecoBigDoll::       db
+	ds 10
 
 ; Items bought from Mom
 wWhichMomItem:: db

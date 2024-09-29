@@ -37,26 +37,25 @@ ENDM
 	ow_npc_pal_const WHITE             ; 0b
 	ow_npc_pal_const BLACK             ; 0c
 	ow_npc_pal_const POKE_BALL         ; 0d (red)
-	ow_npc_pal_const DECO_ITEM         ; 0e (blue)
-	ow_npc_pal_const KEY_ITEM          ; 0f (green)
+	ow_npc_pal_const KEY_ITEM          ; 0e (green)
 DEF NUM_OW_TIME_OF_DAY_PALS EQU const_value
-	ow_npc_pal_const EMOTE_GRAY        ; 10
-	ow_npc_pal_const EMOTE_BLACK       ; 11
-	ow_npc_pal_const EMOTE_GREEN       ; 12
-	ow_npc_pal_const EMOTE_PURPLE      ; 13
-	ow_npc_pal_const EMOTE_RED         ; 14
-	ow_npc_pal_const EMOTE_ORANGE      ; 15
-	ow_npc_pal_const EMOTE_BLUE        ; 16
+	ow_npc_pal_const EMOTE_GRAY        ; 0f
+	ow_npc_pal_const EMOTE_BLACK       ; 10
+	ow_npc_pal_const EMOTE_GREEN       ; 11
+	ow_npc_pal_const EMOTE_PURPLE      ; 12
+	ow_npc_pal_const EMOTE_RED         ; 13
+	ow_npc_pal_const EMOTE_ORANGE      ; 14
+	ow_npc_pal_const EMOTE_BLUE        ; 15
 DEF NUM_OW_INDIVIDUAL_PALS EQU const_value - NUM_OW_TIME_OF_DAY_PALS
 DEF FIRST_COPY_BG_PAL EQU const_value
-	ow_npc_pal_const COPY_BG_GRAY      ; 17
-	ow_npc_pal_const COPY_BG_RED       ; 18
-	ow_npc_pal_const COPY_BG_GREEN     ; 19
-	ow_npc_pal_const COPY_BG_WATER     ; 1a
-	ow_npc_pal_const COPY_BG_YELLOW    ; 1b
-	ow_npc_pal_const COPY_BG_BROWN     ; 1c
-	ow_npc_pal_const COPY_BG_ROOF      ; 1d
-	ow_npc_pal_const COPY_BG_TEXT      ; 1e
+	ow_npc_pal_const COPY_BG_GRAY      ; 16
+	ow_npc_pal_const COPY_BG_RED       ; 17
+	ow_npc_pal_const COPY_BG_GREEN     ; 18
+	ow_npc_pal_const COPY_BG_WATER     ; 19
+	ow_npc_pal_const COPY_BG_YELLOW    ; 1a
+	ow_npc_pal_const COPY_BG_BROWN     ; 1b
+	ow_npc_pal_const COPY_BG_ROOF      ; 1c
+	ow_npc_pal_const COPY_BG_TEXT      ; 1d
 DEF NUM_OW_BG_COPY_PALS EQU const_value - NUM_OW_INDIVIDUAL_PALS
 DEF NUM_OW_PALS EQU const_value
 

@@ -172,30 +172,28 @@
 	const FRIEND_BALL  ; a4
 	const MOON_BALL    ; a5
 	const LOVE_BALL    ; a6
-	const NORMAL_BOX   ; a7
-	const GORGEOUS_BOX ; a8
-	const SUN_STONE    ; a9
-	const POLKADOT_BOW ; aa
-	const ITEM_AB      ; ab
-	const UP_GRADE     ; ac
-	const BERRY        ; ad
-	const GOLD_BERRY   ; ae
-	const SQUIRTBOTTLE ; af
-	const ITEM_B0      ; b0
-	const ITEM_B1      ; b1
-	const RAINBOW_WING ; b2
-	const ITEM_B3      ; b3
-	const BRICK_PIECE  ; b4
-	const ITEM_B5      ; b5
-	const ITEM_B6	   ; b6
-	const ITEM_B7	   ; b7
-	const ITEM_B8	   ; b8
-	const ITEM_B9      ; b9
-	const ITEM_BA      ; ba
-	const ITEM_BB	   ; bb
-	const ITEM_BC	   ; bc
-	const ITEM_BD	   ; bd
-	const ITEM_BE      ; be
+	const SUN_STONE    ; a7
+	const POLKADOT_BOW ; a8
+	const ITEM_AB      ; a9
+	const UP_GRADE     ; aa
+	const BERRY        ; ab
+	const GOLD_BERRY   ; ac
+	const SQUIRTBOTTLE ; ad
+	const ITEM_B0      ; ae
+	const ITEM_B1      ; af
+	const RAINBOW_WING ; b0
+	const ITEM_B3      ; b1
+	const BRICK_PIECE  ; b2
+	const ITEM_B5      ; b3
+	const ITEM_B6	   ; b4
+	const ITEM_B7	   ; b5
+	const ITEM_B8	   ; b6
+	const ITEM_B9      ; b7
+	const ITEM_BA      ; b8
+	const ITEM_BB	   ; b9
+	const ITEM_BC	   ; ba
+	const ITEM_BD	   ; bb
+	const ITEM_BE      ; bc
 DEF NUM_ITEMS EQU const_value - 1
 
 DEF __tmhm_value__ = 1
