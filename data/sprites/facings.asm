@@ -35,6 +35,7 @@ Facings:
 	dw FacingGrass2
 	dw FacingSplash1
 	dw FacingSplash2
+	dw FacingOcarina
 	assert_table_length NUM_FACINGS
 	dw 0 ; end
 
@@ -248,3 +249,10 @@ FacingSplash2:
 	db 2 ; #
 	db 9, -1, ABSOLUTE_TILE_ID, $ff
 	db 9,  9, ABSOLUTE_TILE_ID | X_FLIP, $ff
+
+FacingOcarina:
+	db 4 ; #
+	db  0,  0, 0, $02
+	db  0,  8, 0, $03
+	db  8,  0, 0, $06
+	db  8,  8, 0, $07

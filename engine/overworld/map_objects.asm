@@ -513,18 +513,6 @@ ObjectStep_AnonJumptable:
 	rst JumpTable
 	ret
 
-ObjectStep_GetAnonJumptableIndex: ; unreferenced
-	ld hl, OBJECT_STEP_INDEX
-	add hl, bc
-	ld a, [hl]
-	ret
-
-ObjectStep_SetAnonJumptableIndex: ; unreferenced
-	ld hl, OBJECT_STEP_INDEX
-	add hl, bc
-	ld [hl], a
-	ret
-
 StepFunction_Reset:
 	ld hl, OBJECT_MAP_X
 	add hl, bc

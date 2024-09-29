@@ -256,6 +256,7 @@ DEF NUM_STEP_TYPES EQU const_value
 	const OBJECT_ACTION_GRASS_SHAKE   ; 0f
 	const OBJECT_ACTION_SKYFALL       ; 10
 	const OBJECT_ACTION_PUDDLE_SPLASH ; 11
+	const OBJECT_ACTION_OCARINA		  ; 12
 DEF NUM_OBJECT_ACTIONS EQU const_value
 
 ; Facings indexes (see data/sprites/facings.asm)
@@ -294,6 +295,7 @@ DEF NUM_OBJECT_ACTIONS EQU const_value
 	const FACING_GRASS_2        ; 1f
 	const FACING_SPLASH_1		; 20
 	const FACING_SPLASH_2		; 21
+	const FACING_OCARINA		; 22
 DEF NUM_FACINGS EQU const_value
 
 ; DoPlayerMovement.DoStep arguments (see engine/overworld/player_movement.asm)

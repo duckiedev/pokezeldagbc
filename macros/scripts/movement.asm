@@ -219,4 +219,9 @@ MACRO skyfall_top
 	db movement_skyfall_top
 ENDM
 
+	const movement_play_ocarina ; $5a
+MACRO play_ocarina
+	db movement_play_ocarina
+ENDM
+
 DEF NUM_MOVEMENT_CMDS EQU const_value

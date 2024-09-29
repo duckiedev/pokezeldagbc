@@ -4,7 +4,11 @@ OcarinaFunction:
     ret 
 
 Script_OcarinaFromMenu:
-    ; change player animation (look at prism's hold up pokeball animation)
+    refreshmap
+	loadmem hBGMapMode, $0
+	special UpdateTimePals
+	callasm LoadOcarinaGFX
+	applymovement PLAYER, MovementData_PlayOcarina
 Script_Ocarina:
     special FadeOutMusic
     ;opentext
@@ -14,23 +18,28 @@ Script_Ocarina:
     ; if didn't play a known song, start over HERE
     ; if player cancelled out of it, close text.
     refreshmap
+    callasm PutTheRodAway
+	applymovement PLAYER, MovementData_PlayOcarina
     special RestartMapMusic
     end
+
+MovementData_PlayOcarina:
+    play_ocarina
+    step_end
 
 InitOcarina:
     xor a
 	ldh [hBGMapMode], a
+    ; textbox
 	hlcoord 1, 1
 	lb bc, 4, 16
 	call Textbox
-	hlcoord 1, 2
+    ; music note
+	hlcoord 2, 2
 	ld de, .music_note
 	call PlaceString
-    ; print music note
-    ;ld de, 
-    ;hlcoord 2, 12
-	;call PlaceString
-	call UpdateSprites
+
+	;call UpdateSprites
 	call CGBOnly_CopyTilemapAtOnce
     ; initialize song wram
     ld a, "@"
@@ -38,7 +47,7 @@ InitOcarina:
     call DelayFrame
 .loop
 	ld de, wOcarinaTempNotes
-	hlcoord 3, 2
+	hlcoord 4, 2
 	call PlaceString
 	;call UpdateSprites
 	call CGBOnly_CopyTilemapAtOnce
@@ -148,9 +157,52 @@ ResetOcarina:
     ld hl, wOcarinaTempNotes
     ld [hl], a
 	ld de, .reset_characters
-	hlcoord 3, 2
+	hlcoord 4, 2
 	call PlaceString
     pop bc
     jr AddChar
 .reset_characters
     db "      @"
+
+LoadOcarinaGFX:
+    ldh a, [rVBK]
+    push af
+    ld a, $1
+    ldh [rVBK], a
+
+    ld de, OcarinaGFX
+    ld a, [wPlayerGender]
+    bit PLAYERGENDER_FEMALE_F, a
+    jr z, .got_gender
+    ld de, KrisOcarinaGFX
+.got_gender
+
+    ld hl, vTiles0 tile $02
+    call .LoadGFX
+    ld hl, vTiles0 tile $06
+    call .LoadGFX
+    ld hl, vTiles0 tile $0a
+    call .LoadGFX
+    ld hl, vTiles0 tile $fc
+    call .LoadGFX
+
+    pop af
+    ldh [rVBK], a
+    ret
+
+.LoadGFX:
+    lb bc, BANK(OcarinaGFX), 2
+    push de
+    call Get2bpp
+    pop de
+    ld hl, 2 tiles
+    add hl, de
+    ld d, h
+    ld e, l
+    ret
+
+OcarinaGFX:
+INCBIN "gfx/overworld/chris_ocarina.2bpp"
+
+KrisOcarinaGFX:
+INCBIN "gfx/overworld/kris_ocarina.2bpp"

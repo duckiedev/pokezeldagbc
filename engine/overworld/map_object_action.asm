@@ -20,6 +20,7 @@ ObjectActionPairPointers:
 	dw SetFacingGrassShake,            SetFacingStanding
 	dw SetFacingSkyfall,               SetFacingCurrent
 	dw SetFacingPuddleSplash,		   SetFacingStanding
+	dw SetFacingOcarina,			   SetFacingOcarina
 	assert_table_length NUM_OBJECT_ACTIONS
 
 SetFacingStanding:
@@ -305,5 +306,12 @@ SetFacingPuddleSplash:
 	inc a ; FACING_SPLASH_2
 	assert FACING_SPLASH_1 + 1 == FACING_SPLASH_2
 .ok
+	ld [hl], a
+	ret
+
+SetFacingOcarina:
+	ld a, FACING_OCARINA
+	ld hl, OBJECT_FACING
+	add hl, bc
 	ld [hl], a
 	ret
