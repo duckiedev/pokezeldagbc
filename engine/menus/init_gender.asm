@@ -4,7 +4,9 @@ InitCrystalData:
 	ret
 
 InitGender:
-	call InitGenderScreen
+	jp InitCrystalData
+
+	/*call InitGenderScreen
 	call LoadGenderScreenPal
 	call LoadGenderScreenLightBlueTile
 	call WaitBGMap2
@@ -21,7 +23,7 @@ InitGender:
 	ld [wPlayerGender], a
 	ld c, 10
 	call DelayFrames
-	ret
+	ret*/
 
 .MenuHeader:
 	db MENU_BACKUP_TILES ; flags
