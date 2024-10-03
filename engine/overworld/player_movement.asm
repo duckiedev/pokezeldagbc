@@ -318,11 +318,12 @@ DoPlayerMovement::
 	cp STANDING
 	jr z, .ensurewalk
 
-	ld a, POWRSNEAKERS
-	ld [wCurItem], a
-	ld hl, wNumItems
-	call CheckItem
-	jr nz, .ensurewalk
+	ld de, EVENT_GOT_POWERSNEAKERS
+	ld b, CHECK_FLAG
+	call EventFlagAction
+	ld a, c
+	and a
+	jr z, .ensurewalk
 	
 	ldh a, [hJoypadDown]
 	and B_BUTTON
