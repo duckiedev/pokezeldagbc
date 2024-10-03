@@ -833,7 +833,7 @@ _MovementSpinRepeat:
 	ld hl, OBJECT_RANGE
 	add hl, bc
 	ld a, [hl]
-	ld a, $10
+	ld a, $20
 	ld hl, OBJECT_STEP_DURATION
 	add hl, bc
 	ld [hl], a
@@ -892,7 +892,7 @@ MovementFunction_Shadow:
 	ld a, [hl]
 	inc a
 	add a
-	add 0
+	add a
 	ld hl, OBJECT_STEP_DURATION
 	add hl, bc
 	ld [hl], a
@@ -949,6 +949,7 @@ MovementFunction_BoulderDust:
 	ld a, [hl]
 	inc a
 	add a
+	add a
 	ld hl, OBJECT_STEP_DURATION
 	add hl, bc
 	ld [hl], a
@@ -993,6 +994,7 @@ ContinueMovement_Grass_Puddle:
 	add hl, de
 	ld a, [hl]
 	add -1
+	add a
 	ld hl, OBJECT_STEP_DURATION
 	add hl, bc
 	ld [hl], a
@@ -2484,11 +2486,24 @@ CheckObjectCoveredByTextbox:
 	ret
 
 HandleNPCStep::
-	call ResetStepVector
-	call DoStepsForAllObjects
+	call .ResetStepVector
+	ld bc, wObjectStructs
+	xor a
+.loop
+	ldh [hMapObjectIndex], a
+	call DoesObjectHaveASprite
+	call nz, HandleObjectStep
+	ld hl, OBJECT_LENGTH
+	add hl, bc
+	ld b, h
+	ld c, l
+	ldh a, [hMapObjectIndex]
+	inc a
+	cp NUM_OBJECT_STRUCTS
+	jr nz, .loop
 	ret
 
-ResetStepVector:
+.ResetStepVector
 	xor a
 	ld [wPlayerStepVectorX], a
 	ld [wPlayerStepVectorY], a
@@ -2499,24 +2514,6 @@ ResetStepVector:
 	ret nz
 	dec a
 	ld [wPlayerStepDirection], a
-	ret
-
-DoStepsForAllObjects:
-	ld bc, wObjectStructs
-	xor a
-.loop
-	ldh [hMapObjectIndex], a
-	call DoesObjectHaveASprite
-	call nz, HandleObjectStep
-.next
-	ld hl, OBJECT_LENGTH
-	add hl, bc
-	ld b, h
-	ld c, l
-	ldh a, [hMapObjectIndex]
-	inc a
-	cp NUM_OBJECT_STRUCTS
-	jr nz, .loop
 	ret
 
 RefreshPlayerSprite:
@@ -2706,7 +2703,7 @@ UnfreezeObject: ; unreferenced
 	res FROZEN_F, [hl]
 	ret
 
-ResetObject:
+ResetObject::
 	ld hl, OBJECT_MAP_OBJECT_INDEX
 	add hl, bc
 	ld a, [hl]

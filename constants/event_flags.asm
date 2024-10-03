@@ -62,7 +62,7 @@
 	const EVENT_KURT_GAVE_YOU_LURE_BALL
 	const EVENT_INITIALIZED_EVENTS
 	const EVENT_JASMINE_EXPLAINED_AMPHYS_SICKNESS
-	const_skip ; unused
+	const EVENT_GOT_POWERSNEAKERS
 	const_skip ; unused
 	const EVENT_LAKE_OF_RAGE_ELIXIR_ON_STANDBY
 	const_skip ; unused

@@ -159,6 +159,8 @@ hFarCallSavedHL::
 hFarCallSavedL:: db
 hFarCallSavedH:: db
 
-	ds 15
+hDelayFrameLY:: db
+
+	ds 14
 
 ENDSECTION
