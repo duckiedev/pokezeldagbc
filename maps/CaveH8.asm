@@ -53,12 +53,16 @@ CaveH8_HonedgeScript:
 	waitbutton
 	closetext
 	disappear CAVEH8_HONEDGE
+	applymovement CAVEH8_OLDMAN, .leave
 	disappear CAVEH8_OLDMAN
 	opentext
 	givepoke HONEDGE_H, 5, BERRY
 	closetext
 	setscene SCENE_CAVEH8_CANT_LEAVE
 	end
+.leave
+	return_dig 73
+	step_wait_end
 
 CaveH8CheckBush:
 	conditional_event EVENT_CAVEH8_HIDDEN_DOOR_REVEALED, .Script
