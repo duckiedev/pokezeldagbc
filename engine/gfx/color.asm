@@ -107,7 +107,7 @@ LoadTrainerClassPaletteAsNthBGPal:
 
 LoadMonPaletteAsNthBGPal:
 	ld a, [wCurPartySpecies]
-	call _GetMonPalettePointer
+	call GetMonPalettePointer
 	ld a, e
 	bit 7, a
 	jr z, LoadNthMiddleBGPal
@@ -132,38 +132,7 @@ LoadNthMiddleBGPal:
 	ld e, l
 	ld d, h
 	pop hl
-	call LoadPalette_White_Col1_Col2_Black
-	ret
-
-LoadBetaPokerPalettes: ; unreferenced
-	ldh a, [hCGB]
-	and a
-	jr nz, .cgb
-	ld hl, wBetaPokerSGBPals
-	jp PushSGBPals
-
-.cgb
-	ld a, [wBetaPokerSGBCol]
-	ld c, a
-	ld a, [wBetaPokerSGBRow]
-	hlcoord 0, 0, wAttrmap
-	ld de, SCREEN_WIDTH
-.loop
-	and a
-	jr z, .done
-	add hl, de
-	dec a
-	jr .loop
-
-.done
-	ld b, 0
-	add hl, bc
-	lb bc, 6, 4
-	ld a, [wBetaPokerSGBAttr]
-	and $3
-	call FillBoxCGB
-	call CopyTilemapAtOnce
-	ret
+	jp LoadPalette_White_Col1_Col2_Black
 
 ApplyMonOrTrainerPals:
 	call CheckCGB
@@ -184,8 +153,7 @@ ApplyMonOrTrainerPals:
 	call LoadPalette_White_Col1_Col2_Black
 	call WipeAttrmap
 	call ApplyAttrmap
-	call ApplyPals
-	ret
+	jp ApplyPals
 
 ApplyHPBarPals:
 	ld a, [wWhichHPBar]
@@ -234,8 +202,7 @@ ApplyHPBarPals:
 .done
 	lb bc, 2, 8
 	ld a, e
-	call FillBoxCGB
-	ret
+	jp FillBoxCGB
 
 LoadStatsScreenPals:
 	call CheckCGB
@@ -298,7 +265,6 @@ LoadHLBytesIntoDE:
 	push af
 	ld a, BANK(wOBPals1)
 	ldh [rSVBK], a
-	ld c, 1 palettes
 .loop
 	ld a, [hli]
 	ld [de], a
@@ -396,16 +362,14 @@ WipeAttrmap:
 	hlcoord 0, 0, wAttrmap
 	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
 	xor a
-	call ByteFill
-	ret
+	jp ByteFill
 
 ApplyPals:
 	ld hl, wBGPals1
 	ld de, wBGPals2
 	ld bc, 16 palettes
 	ld a, BANK(wGBCPalettes)
-	call FarCopyWRAM
-	ret
+	jp FarCopyWRAM
 
 ApplyAttrmap:
 	ldh a, [rLCDC]
@@ -445,7 +409,7 @@ ApplyAttrmap:
 	ld e, a
 	dec b
 	jr nz, .row
-	ld a, $0
+	xor a
 	ldh [rVBK], a
 	ret
 
@@ -480,8 +444,33 @@ InitPartyMenuOBPals:
 	ld de, wOBPals1
 	ld bc, 8 palettes
 	ld a, BANK(wOBPals1)
+	jp FarCopyWRAM
+
+SetFirstOBJPalette::
+; input: e must contain the offset of the selected palette from PartyMenuOBPals
+	ld hl, PartyMenuOBPals
+	ld d, 0
+	add hl, de
+	ld de, wOBPals1
+	ld bc, 1 palettes
+	ld a, BANK(wOBPals1)
 	call FarCopyWRAM
-	ret
+	ld a, TRUE
+	ldh [hCGBPalUpdate], a
+	jp ApplyPals
+
+SetSecondOBJPalette::
+; input: e must contain the offset of the selected palette from PartyMenuOBPals
+	ld hl, PartyMenuOBPals
+	ld d, 0
+	add hl, de
+	ld de, wOBPals1 palette 1
+	ld bc, 1 palettes
+	ld a, BANK(wOBPals1)
+	call FarCopyWRAM
+	ld a, TRUE
+	ldh [hCGBPalUpdate], a
+	jp ApplyPals
 
 GetBattlemonBackpicPalettePointer:
 	push de
@@ -505,7 +494,7 @@ GetEnemyFrontpicPalettePointer:
 
 GetPlayerOrMonPalettePointer:
 	and a
-	jp nz, GetMonNormalOrShinyPalettePointer
+	jr nz, GetMonNormalOrShinyPalettePointer
 	ld a, [wPlayerSpriteSetupFlags]
 	bit PLAYERSPRITESETUP_FEMALE_TO_MALE_F, a
 	jr nz, .male
@@ -521,7 +510,7 @@ GetPlayerOrMonPalettePointer:
 
 GetFrontpicPalettePointer:
 	and a
-	jp nz, GetMonNormalOrShinyPalettePointer
+	jr nz, GetMonNormalOrShinyPalettePointer
 	ld a, [wTrainerClass]
 
 GetTrainerPalettePointer:
@@ -533,13 +522,9 @@ GetTrainerPalettePointer:
 	add hl, bc
 	ret
 
-GetMonPalettePointer:
-	call _GetMonPalettePointer
-	ret
-
 BattleObjectPals:
 INCLUDE "gfx/battle_anims/battle_anims.pal"
-_GetMonPalettePointer:
+GetMonPalettePointer:
 	ld l, a
 	ld h, 0
 	add hl, hl
@@ -551,7 +536,7 @@ _GetMonPalettePointer:
 
 GetMonNormalOrShinyPalettePointer:
 	push bc
-	call _GetMonPalettePointer
+	call GetMonPalettePointer
 	pop bc
 	push hl
 	call CheckShininess
@@ -643,8 +628,7 @@ InitSGBBorder:
 .skip
 	pop af
 	ld [wJoypadDisable], a
-	ei
-	ret
+	reti
 
 InitCGBPals::
 	call CheckCGB
@@ -735,8 +719,7 @@ PushSGBBorder:
 	push de
 	call SGBBorder_YetMorePalPushing
 	pop hl
-	call SGBBorder_MorePalPushing
-	ret
+	jp SGBBorder_MorePalPushing
 
 .LoadSGBBorderPointers:
 	ld hl, SGBBorderGFX
@@ -747,16 +730,15 @@ SGB_ClearVRAM:
 	ld hl, STARTOF(VRAM)
 	ld bc, SIZEOF(VRAM)
 	xor a
-	call ByteFill
-	ret
+	jp ByteFill
 
 PushSGBBorderPalsAndWait:
 	ld hl, MltReq2Packet
 	call _PushSGBPals
 	call SGBDelayCycles
 	ldh a, [rJOYP]
-	and $3
-	cp $3
+	or ~$3
+	inc a
 	jr nz, .carry
 	ld a, $20
 	ldh [rJOYP], a
@@ -783,8 +765,8 @@ endr
 	call SGBDelayCycles
 	call SGBDelayCycles
 	ldh a, [rJOYP]
-	and $3
-	cp $3
+	or ~$3
+	inc a
 	jr nz, .carry
 	call .FinalPush
 	and a
@@ -1043,12 +1025,13 @@ LoadMapPals:
 	ret nz
 .outside
 	ld a, [wMapGroup]
-	ld l, a
-	ld h, 0
-	add hl, hl
-	add hl, hl
-	add hl, hl
-	ld de, RoofPals
+	add a
+	add a
+	ld e, a
+	ld d, 0
+	ld hl, RoofPals
+	add hl, de
+	add hl, de
 	add hl, de
 	ld a, [wTimeOfDayPal]
 	maskbits NUM_DAYTIMES
@@ -1133,19 +1116,6 @@ endr
 INCLUDE "data/maps/environment_colors.asm"
 
 INCLUDE "engine/gfx/palettes.asm"
-
-; Input: E must contain the offset of the selected palette from PartyMenuOBPals.
-SetFirstOBJPalette::
-	ld hl, PartyMenuOBPals
-	ld d, 0
-	add hl, de
- 	ld de, wOBPals1
-	ld bc, 1 palettes
-	ld a, BANK(wOBPals1)
-	call FarCopyWRAM
-	ld a, TRUE
- 	ldh [hCGBPalUpdate], a
- 	jp ApplyPals
 
 PartyMenuBGPalette:
 INCLUDE "gfx/stats/party_menu_bg.pal"

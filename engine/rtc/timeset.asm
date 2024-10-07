@@ -3,6 +3,20 @@ DEF TIMESET_DOWN_ARROW EQU "♀" ; $f5
 
 InitClock:
 ; Ask the player to set the time.
+	ld a, 8 ; default hour = 10 AM
+	ld [wInitHourBuffer], a
+	ld a, [wInitMinuteBuffer]
+	xor a
+	ld [wTempDayOfWeek], a
+	ld a, [wTempDayOfWeek]
+	call InitDayOfWeek
+	ld a, [wDST]
+	res 7, a
+	ld [wDST], a
+	ret	
+
+_InitClock:
+; Ask the player to set the time.
 	ldh a, [hInMenu]
 	push af
 	ld a, $1
