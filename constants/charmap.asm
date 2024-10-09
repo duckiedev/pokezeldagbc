@@ -165,12 +165,13 @@
 	charmap "▶",         $e6
 	charmap "▼",         $e7
 
-	charmap "<NOTE>",    $c0
-	charmap "<UP>",		 $c1
-	charmap "<DOWN>",	 $c2
-	charmap "<LEFT>",	 $c3
-	charmap "<RIGHT>",	 $c4
-	charmap "<A>",		 $c5
+	charmap "<NOTE>",    $e8
+	charmap "<UP>",		 $e9
+	charmap "<DOWN>",	 $ea
+	charmap "<LEFT>",	 $eb
+	charmap "<RIGHT>",	 $ec
+	charmap "<A>",		 $ed
+	charmap "<B>",		 $ee
 
 	charmap "■",         $ef
 	charmap "<BORDER>",  $ef

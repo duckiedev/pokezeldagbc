@@ -39,7 +39,7 @@ DrawBattleHPBar::
 	dec d
 	jr nz, .template
 	ld a, [hl]			; skip redrawing "-" for player's hud
-	cp $bb				; if it's already part of the exp bar
+	cp $f0				; if it's already part of the exp bar
 	jr z, .skip
 	ld a, [wBattleMode]
 	dec a
@@ -86,7 +86,7 @@ DrawBattleHPBar::
 DrawEXPBarFrame::
 	push de
 	ld de, SCREEN_WIDTH
-	ld a, $BC
+	ld a, $f1
 	ld [hli], a 
 
 	; top
@@ -95,19 +95,19 @@ DrawEXPBarFrame::
 
 	; left edge 1
 	add hl, de
-	ld [hl], $C0
+	ld [hl], $f5
 
 	; left edge 2
 	add hl, de
-	ld [hl], $C0
+	ld [hl], $f5
 
 	; left edge hp bar
 	add hl, de
-	ld [hl], $BB
+	ld [hl], $f0
 
 	; bottom-left tile
 	add hl, de
-	ld a, $BE
+	ld a, $f3
 	ld [hli], a
 
 	; bottom

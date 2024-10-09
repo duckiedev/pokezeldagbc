@@ -4432,6 +4432,8 @@ DrawEnemyHUD:
 	hlcoord 0, 2
 	ld b, 0
 	call DrawBattleHPBar
+.draw_song
+	call DrawEnemySong
 	ret
 
 UpdateEnemyHPPal:
@@ -4447,6 +4449,19 @@ UpdateHPPal:
 	ret z
 	jp FinishBattleAnim
 
+DrawEnemySong:
+	; ignore if its a trainer battle
+	;ld a, [wBattleMode]
+	;cp TRAINER_BATTLE
+	;ret nz
+
+	hlcoord 1, 3
+	ld de, wBattleEnemySong
+	call PlaceString
+	ret
+	; based on stored wram value of percentage of hp left
+	; song needs to be generated at the beginning of battle and stored in wram
+	
 Battle_DummyFunction:
 ; called before placing either battler's nickname in the HUD
 	ret
@@ -5511,6 +5526,33 @@ LoadEnemyMon:
 	dec a
 	jr nz, .Happiness
 
+; Initialize Wild Pokemon's Song
+.InitSong:
+	ld a, [wEnemyMonMaxHearts]
+    add a, 2       ; increment hearts by 2
+    cp 6
+    jr c, .within_limit
+    ld a, 6        ; cap the total length at 6
+.within_limit:
+    ld b, a        ; store the length in b
+	ld hl, wBattleEnemySong
+
+.char_loop:
+    call Random               ; call an existing random routine to modify a
+    and 7                  ; limit the random value to 0-7
+    cp 5
+    jr c, .pick_char          ; skip invalid values (6 and 7)
+
+    ; fetch random character from charmap
+.pick_char:
+    add a, $e8                ; offset to the charmap range
+    ld [hli], a  ; store the character in wBattleEnemySong and increment
+    dec b
+    jr nz, .char_loop
+
+    ; add the '@' symbol at the end
+    ld a, "@"
+    ld [hl], a
 ; Species-specfic:
 
 ; Unown
@@ -7099,7 +7141,7 @@ PlaceExpBar:
 	sub $8			; subtract 8 (TILE_WIDTH)
 	jr c, .next  	; check if the result is negative, if it is, there's no more pixels to check and draw, so jump to next
 	ld b, a			; load the newly updated amount back into b
-	ld a, $c9 	 	; load a full bar tile since 8 pixels of the bar so far are being accounted for
+	ld a, $fe 	 	; load a full bar tile since 8 pixels of the bar so far are being accounted for
 	ld [hl], a		; draw the full bar tile at the provided location in vram
 	move_hl_row_last
 	dec c			; decrement the number of bar tiles to process
@@ -7109,16 +7151,16 @@ PlaceExpBar:
 .next
 	add $8			; add 8 back to the number of pixels left to check
 	jr z, .loop2 	; if we're exactly at 0, jump to loop2
-	add $c0 		; tile to the left of small exp bar tile
+	add $f5 		; tile to the left of small exp bar tile
 	jr .skip
 
 .loop2
-	ld a, $c1 ; empty bar
+	ld a, $f6 ; empty bar
 
 .skip
 	ld [hl], a
 	move_hl_row_last
-	ld a, $c1 ; empty bar
+	ld a, $f6 ; empty bar
 	dec c
 	jr nz, .loop2
 
