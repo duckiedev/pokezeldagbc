@@ -1087,9 +1087,9 @@ PlaceMoveData:
 	ret
 
 String_MoveType_Top:
-	db "┌─────┐@"
+	db "<BORDER><BORDER><BORDER><BORDER><BORDER><BORDER><BORDER><BORDER>@"
 String_MoveType_Bottom:
-	db "│TYPE/└@"
+	db "<BORDER>TYPE/<BORDER>@"
 String_MoveAtk:
 	db "ATK/@"
 String_MoveNoPower:

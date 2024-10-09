@@ -18,7 +18,7 @@ Get2bppOptionalHDMA: ; unreferenced
 _LoadStandardFont::
 	ld de, Font
 	ld hl, vTiles1
-	lb bc, BANK(Font), $80
+	lb bc, BANK(Font), $70
 	call Get2bpp
 	ld de, TextboxSpaceUniqueGFX
 	ld hl, vTiles2 tile " "

@@ -1203,9 +1203,9 @@ BillsPC_RefreshTextboxes:
 	call Textbox
 
 	hlcoord 8, 2
-	ld [hl], "└"
+	ld [hl], "<BORDER>"
 	hlcoord 19, 2
-	ld [hl], "┘"
+	ld [hl], "<BORDER>"
 
 	ld a, [wBillsPC_ScrollPosition]
 	ld e, a

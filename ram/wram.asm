@@ -730,6 +730,7 @@ SECTION "Unused Map Buffer", WRAM0
 ; See wMapBuffer in pokegold-spaceworld's wram.asm.
 wUnusedMapBuffer:: ds 24
 wUnusedMapBufferEnd::
+;wUnusedMapBufferEnabled:: ds 1
 
 
 SECTION UNION "Overworld Map", WRAM0
@@ -2120,7 +2121,9 @@ wCurEXPAnimDeltaEXP:: dw
 wCurEXPAnimLowEXP::   db
 wCurEXPAnimHighEXP::  db
 
-	ds 28
+wBattleEnemySong:: ds 6
+
+	ds 22
 
 wMapObjects::
 wPlayerObject:: map_object wPlayer ; player is map object 0

@@ -706,7 +706,6 @@ LoadBluePage:
 	ld hl, .OTNamePointers
 	call GetNicknamePointer
 	call CopyNickname
-	farcall CorrectNickErrors
 	hlcoord 2, 13
 	call PlaceString
 	ld a, [wTempMonCaughtGender]

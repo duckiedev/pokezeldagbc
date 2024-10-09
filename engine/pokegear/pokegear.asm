@@ -463,9 +463,6 @@ Pokegear_UpdateClock:
 	call PrintTextboxTextAt
 	ret
 
-	db "ごぜん@"
-	db "ごご@"
-
 .GearTodayText:
 	text_far _GearTodayText
 	text_end

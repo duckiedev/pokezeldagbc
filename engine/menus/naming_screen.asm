@@ -79,7 +79,6 @@ NamingScreen:
 	dw .Rival
 	dw .Mom
 	dw .Box
-	dw .Tomodachi
 	dw .Pokemon
 	dw .Pokemon
 
@@ -179,16 +178,6 @@ NamingScreen:
 
 .BoxNameString:
 	db "BOX NAME?@"
-
-.Tomodachi:
-	hlcoord 3, 2
-	ld de, .oTomodachi_no_namae_sutoringu
-	call PlaceString
-	call .StoreSpriteIconParams
-	ret
-
-.oTomodachi_no_namae_sutoringu
-	db "おともだち　の　なまえは？@"
 
 .LoadSprite:
 	push de

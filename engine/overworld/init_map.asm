@@ -50,8 +50,7 @@ ReanchorBGMap_NoOAMUpdate::
 	xor a
 	ldh [hSCX], a
 	ldh [hSCY], a
-	call ApplyBGMapAnchorToObjects
-	ret
+	jp ApplyBGMapAnchorToObjects
 
 .LoadBGMapAddrIntoHRAM:
 	ldh [hBGMapAddress + 1], a

@@ -138,9 +138,9 @@ StartMenu_PrintSafariGameStatus: ; unreferenced
 	ret
 
 .slash_500
-	db "／５００@"
+	db "/500"
 .booru_ko
-	db "ボール　　　こ@"
+	db "Balls: @"
 
 FindApricornsInBag:
 ; Checks the bag for Apricorns.

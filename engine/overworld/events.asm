@@ -132,11 +132,6 @@ EnterMap:
 	ld [wMapStatus], a
 	ret
 
-UnusedWait30Frames: ; unreferenced
-	ld c, 30
-	call DelayFrames
-	ret
-
 HandleMap:
 	call HandleMapTimeAndJoypad
 	call HandleCmdQueue
@@ -149,9 +144,7 @@ HandleMap:
 	call HandleMapObjects
 	call NextOverworldFrame
 	call HandleMapBackground
-	call CheckPlayerState
-	xor a
-	ret
+	jp CheckPlayerState
 
 MapEvents:
 	ld a, [wMapEventStatus]
@@ -179,14 +172,12 @@ HandleMapTimeAndJoypad:
 
 	call UpdateTime
 	call GetJoypad
-	call TimeOfDayPals
-	ret
+	jp TimeOfDayPals
 
 HandleMapObjects:
 	farcall HandleNPCStep
 	farcall _HandlePlayerStep
-	call _CheckObjectEnteringVisibleRange
-	ret
+	jp _CheckObjectEnteringVisibleRange
 
 HandleMapBackground:
 	farcall _UpdateSprites
@@ -332,8 +323,7 @@ CheckTileEvent:
 	call CheckStepCountEnabled
 	jr z, .step_count_disabled
 
-	call CountStep
-	ret c
+	jp CountStep
 
 .step_count_disabled
 	call CheckWildEncountersEnabled
@@ -341,7 +331,6 @@ CheckTileEvent:
 
 	call RandomEncounter
 	ret c
-	jr .ok ; pointless
 
 .ok
 	xor a
@@ -400,10 +389,7 @@ SetMinTwoStepWildEncounterCooldown:
 	ret
 
 Dummy_CheckEnabledMapEventsBit5:
-	call CheckEnabledMapEventsBit5
-	ret z
-	call SetXYCompareFlags
-	ret
+	jp CheckEnabledMapEventsBit5
 
 RunSceneScript:
 	ld a, [wCurMapSceneScriptCount]
@@ -563,8 +549,7 @@ ObjectEventTypeArray:
 	ld h, [hl]
 	ld l, a
 	call GetMapScriptsBank
-	call CallScript
-	ret
+	jp CallScript
 
 .itemball
 	ld hl, MAPOBJECT_SCRIPT_POINTER
@@ -759,12 +744,7 @@ PlayerMovementPointers:
 
 .normal:
 .finish:
-	xor a
-	ld c, a
-	ret
-
 .jump:
-	call SetMinTwoStepWildEncounterCooldown
 	xor a
 	ld c, a
 	ret
@@ -903,11 +883,6 @@ CountStep:
 
 .hatch
 	ld a, PLAYEREVENT_HATCH
-	scf
-	ret
-
-.whiteout ; unreferenced
-	ld a, PLAYEREVENT_WHITEOUT
 	scf
 	ret
 

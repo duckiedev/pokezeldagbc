@@ -332,7 +332,7 @@ HandleBerserkGene:
 	jr z, .set_confuse_count
 	ld hl, wEnemyConfuseCount
 .set_confuse_count
-	call BattleRandom
+	call Random
 	and %11
 	add 2
 	ld [hl], a
@@ -388,7 +388,7 @@ DetermineMoveOrder:
 	cp BATTLEPLAYERACTION_SWITCH
 	jr nz, .switch
 
-	call BattleRandom
+	call Random
 	cp 50 percent + 1
 	jp c, .player_first
 	jp .enemy_first
@@ -420,7 +420,7 @@ DetermineMoveOrder:
 	ld a, b
 	cp HELD_QUICK_CLAW
 	jr z, .both_have_quick_claw
-	call BattleRandom
+	call Random
 	cp e
 	jr nc, .speed_check
 	jp .player_first
@@ -429,16 +429,16 @@ DetermineMoveOrder:
 	ld a, b
 	cp HELD_QUICK_CLAW
 	jr nz, .speed_check
-	call BattleRandom
+	call Random
 	cp c
 	jr nc, .speed_check
 	jp .enemy_first
 
 .both_have_quick_claw
-	call BattleRandom
+	call Random
 	cp c
 	jp c, .enemy_first
-	call BattleRandom
+	call Random
 	cp e
 	jp c, .player_first
 	jr .speed_check
@@ -453,7 +453,7 @@ DetermineMoveOrder:
 	jp .enemy_first
 
 .speed_tie
-	call BattleRandom
+	call Random
 	cp 50 percent + 1
 	jp c, .player_first
 	jp .enemy_first
@@ -662,7 +662,7 @@ TryEnemyFlee:
 	call IsInArray
 	jr c, .Flee
 
-	call BattleRandom
+	call Random
 	ld b, a
 	cp 50 percent + 1
 	jr nc, .Stay
@@ -1372,7 +1372,7 @@ HandleDefrost:
 	and a
 	ret nz
 
-	call BattleRandom
+	call Random
 	cp 10 percent
 	ret nc
 	xor a
@@ -1393,7 +1393,7 @@ HandleDefrost:
 	ld a, [wEnemyJustGotFrozen]
 	and a
 	ret nz
-	call BattleRandom
+	call Random
 	cp 10 percent
 	ret nc
 	xor a
@@ -3082,7 +3082,7 @@ ScoreMonTypeMatchups:
 .loop5
 	ld a, [wOTPartyCount]
 	ld b, a
-	call BattleRandom
+	call Random
 	and $7
 	cp b
 	jr nc, .loop5
@@ -3444,7 +3444,7 @@ TryToRunAwayFromBattle:
 	jr .loop
 
 .cant_escape_2
-	call BattleRandom
+	call Random
 	ld b, a
 	ldh a, [hQuotient + 3]
 	cp b
@@ -5253,7 +5253,7 @@ ParseEnemyAction:
 ; wild
 .loop2
 	ld hl, wEnemyMonMoves
-	call BattleRandom
+	call Random
 	maskbits NUM_MOVES
 	ld c, a
 	ld b, 0
@@ -5391,13 +5391,13 @@ LoadEnemyMon:
 ;     2% Item2
 
 ; 25% chance of getting an item
-	call BattleRandom
+	call Random
 	cp 75 percent + 1
 	ld a, NO_ITEM
 	jr c, .UpdateItem
 
 ; From there, an 8% chance for Item2
-	call BattleRandom
+	call Random
 	cp 8 percent ; 8% of 25% = 2% Item2
 	ld a, [wBaseItem1]
 	jr nc, .UpdateItem
@@ -5471,10 +5471,10 @@ LoadEnemyMon:
 ; (HP is initialized at the end of the battle)
 	call GetRoamMonDVs
 	inc hl
-	call BattleRandom
+	call Random
 	ld [hld], a
 	ld c, a
-	call BattleRandom
+	call Random
 	ld [hl], a
 	ld b, a
 ; We're done with DVs
@@ -5494,9 +5494,9 @@ LoadEnemyMon:
 
 .GenerateDVs:
 ; Generate new random DVs
-	call BattleRandom
+	call Random
 	ld b, a
-	call BattleRandom
+	call Random
 	ld c, a
 
 .UpdateDVs:
@@ -6167,9 +6167,6 @@ EmptyBattleTextbox:
 
 .empty:
 	text_end
-
-_BattleRandom::
-	jp Random
 
 Call_PlayBattleAnim_OnlyIfVisible:
 	ld a, BATTLE_VARS_SUBSTATUS3
@@ -7537,7 +7534,7 @@ BattleEnd_HandleRoamMons:
 	ret
 
 .not_roaming
-	call BattleRandom
+	call Random
 	and $f
 	ret nz
 
