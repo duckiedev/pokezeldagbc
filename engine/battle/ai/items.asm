@@ -24,11 +24,11 @@ AI_SwitchOrTryItem:
 	call AddNTimes
 
 	bit SWITCH_OFTEN_F, [hl]
-	jp nz, SwitchOften
+	jr nz, SwitchOften
 	bit SWITCH_RARELY_F, [hl]
-	jp nz, SwitchRarely
+	jr nz, SwitchRarely
 	bit SWITCH_SOMETIMES_F, [hl]
-	jp nz, SwitchSometimes
+	jr nz, SwitchSometimes
 	; fallthrough
 
 DontSwitch:
@@ -39,14 +39,14 @@ SwitchOften:
 	callfar CheckAbleToSwitch
 	ld a, [wEnemySwitchMonParam]
 	and $f0
-	jp z, DontSwitch
+	jr z, DontSwitch
 
 	cp $10
 	jr nz, .not_10
 	call Random
 	cp 50 percent + 1
 	jr c, .switch
-	jp DontSwitch
+	jr DontSwitch
 .not_10
 
 	cp $20
@@ -54,13 +54,13 @@ SwitchOften:
 	call Random
 	cp 79 percent - 1
 	jr c, .switch
-	jp DontSwitch
+	jr DontSwitch
 .not_20
 
 	; $30
 	call Random
 	cp 4 percent
-	jp c, DontSwitch
+	jr c, DontSwitch
 
 .switch
 	ld a, [wEnemySwitchMonParam]
@@ -68,20 +68,20 @@ SwitchOften:
 	inc a
 	; In register 'a' is the number (1-6) of the mon to switch to
 	ld [wEnemySwitchMonIndex], a
-	jp AI_TrySwitch
+	jmp AI_TrySwitch
 
 SwitchRarely:
 	callfar CheckAbleToSwitch
 	ld a, [wEnemySwitchMonParam]
 	and $f0
-	jp z, DontSwitch
+	jr z, DontSwitch
 
 	cp $10
 	jr nz, .not_10
 	call Random
 	cp 8 percent
 	jr c, .switch
-	jp DontSwitch
+	jr DontSwitch
 .not_10
 
 	cp $20
@@ -89,33 +89,33 @@ SwitchRarely:
 	call Random
 	cp 12 percent
 	jr c, .switch
-	jp DontSwitch
+	jr DontSwitch
 .not_20
 
 	; $30
 	call Random
 	cp 79 percent - 1
-	jp c, DontSwitch
+	jr c, DontSwitch
 
 .switch
 	ld a, [wEnemySwitchMonParam]
 	and $f
 	inc a
 	ld [wEnemySwitchMonIndex], a
-	jp AI_TrySwitch
+	jmp AI_TrySwitch
 
 SwitchSometimes:
 	callfar CheckAbleToSwitch
 	ld a, [wEnemySwitchMonParam]
 	and $f0
-	jp z, DontSwitch
+	jmp z, DontSwitch
 
 	cp $10
 	jr nz, .not_10
 	call Random
 	cp 20 percent - 1
 	jr c, .switch
-	jp DontSwitch
+	jmp DontSwitch
 .not_10
 
 	cp $20
@@ -123,20 +123,20 @@ SwitchSometimes:
 	call Random
 	cp 50 percent + 1
 	jr c, .switch
-	jp DontSwitch
+	jmp DontSwitch
 .not_20
 
 	; $30
 	call Random
 	cp 20 percent - 1
-	jp c, DontSwitch
+	jmp c, DontSwitch
 
 .switch
 	ld a, [wEnemySwitchMonParam]
 	and $f
 	inc a
 	ld [wEnemySwitchMonIndex], a
-	jp AI_TrySwitch
+	jmp AI_TrySwitch
 
 CheckSubstatusCantRun: ; unreferenced
 	ld a, [wEnemySubStatus5]
@@ -274,25 +274,25 @@ AI_Items:
 
 .FullHeal:
 	call .Status
-	jp c, .DontUse
+	jmp c, .DontUse
 	call EnemyUsedFullHeal
-	jp .Use
+	jmp .Use
 
 .Status:
 	ld a, [wEnemyMonStatus]
 	and a
-	jp z, .DontUse
+	jmp z, .DontUse
 
 	ld a, [bc]
 	bit CONTEXT_USE_F, a
 	jr nz, .StatusCheckContext
 	ld a, [bc]
 	bit ALWAYS_USE_F, a
-	jp nz, .Use
+	jmp nz, .Use
 	call Random
 	cp 20 percent - 1
-	jp c, .Use
-	jp .DontUse
+	jmp c, .Use
+	jmp .DontUse
 
 .StatusCheckContext:
 	ld a, [wEnemySubStatus5]
@@ -303,130 +303,130 @@ AI_Items:
 	jr c, .FailToxicCheck
 	call Random
 	cp 50 percent + 1
-	jp c, .Use
+	jmp c, .Use
 .FailToxicCheck:
 	ld a, [wEnemyMonStatus]
 	and 1 << FRZ | SLP_MASK
-	jp z, .DontUse
-	jp .Use
+	jmp z, .DontUse
+	jmp .Use
 
 .FullRestore:
 	call .HealItem
-	jp nc, .UseFullRestore
+	jr nc, .UseFullRestore
 	ld a, [bc]
 	bit CONTEXT_USE_F, a
-	jp z, .DontUse
+	jmp z, .DontUse
 	call .Status
-	jp c, .DontUse
+	jmp c, .DontUse
 
 .UseFullRestore:
 	call EnemyUsedFullRestore
-	jp .Use
+	jmp .Use
 
 .MaxPotion:
 	call .HealItem
-	jp c, .DontUse
+	jmp c, .DontUse
 	call EnemyUsedMaxPotion
-	jp .Use
+	jmp .Use
 
 .HealItem:
 	ld a, [bc]
 	bit CONTEXT_USE_F, a
 	jr nz, .CheckHalfOrQuarterHP
 	callfar AICheckEnemyHalfHP
-	jp c, .DontUse
+	jmp c, .DontUse
 	ld a, [bc]
 	bit UNKNOWN_USE_F, a
-	jp nz, .CheckQuarterHP
+	jr nz, .CheckQuarterHP
 	callfar AICheckEnemyQuarterHP
-	jp nc, .UseHealItem
+	jr nc, .UseHealItem
 	call Random
 	cp 50 percent + 1
-	jp c, .UseHealItem
-	jp .DontUse
+	jr c, .UseHealItem
+	jmp .DontUse
 
 .CheckQuarterHP:
 	callfar AICheckEnemyQuarterHP
-	jp c, .DontUse
+	jmp c, .DontUse
 	call Random
 	cp 20 percent - 1
-	jp c, .DontUse
+	jmp c, .DontUse
 	jr .UseHealItem
 
 .CheckHalfOrQuarterHP:
 	callfar AICheckEnemyHalfHP
-	jp c, .DontUse
+	jmp c, .DontUse
 	callfar AICheckEnemyQuarterHP
-	jp nc, .UseHealItem
+	jr nc, .UseHealItem
 	call Random
 	cp 20 percent - 1
-	jp nc, .DontUse
+	jmp nc, .DontUse
 
 .UseHealItem:
-	jp .Use
+	jmp .Use
 
 .HyperPotion:
 	call .HealItem
-	jp c, .DontUse
+	jmp c, .DontUse
 	ld b, 200
 	call EnemyUsedHyperPotion
-	jp .Use
+	jmp .Use
 
 .SuperPotion:
 	call .HealItem
-	jp c, .DontUse
+	jmp c, .DontUse
 	ld b, 50
 	call EnemyUsedSuperPotion
-	jp .Use
+	jmp .Use
 
 .Potion:
 	call .HealItem
-	jp c, .DontUse
+	jr c, .DontUse
 	ld b, 20
 	call EnemyUsedPotion
-	jp .Use
+	jr .Use
 
 .XAccuracy:
 	call .XItem
-	jp c, .DontUse
+	jr c, .DontUse
 	call EnemyUsedXAccuracy
-	jp .Use
+	jr .Use
 
 .GuardSpec:
 	call .XItem
-	jp c, .DontUse
+	jr c, .DontUse
 	call EnemyUsedGuardSpec
-	jp .Use
+	jr .Use
 
 .DireHit:
 	call .XItem
-	jp c, .DontUse
+	jr c, .DontUse
 	call EnemyUsedDireHit
-	jp .Use
+	jr .Use
 
 .XAttack:
 	call .XItem
-	jp c, .DontUse
+	jr c, .DontUse
 	call EnemyUsedXAttack
-	jp .Use
+	jr .Use
 
 .XDefend:
 	call .XItem
-	jp c, .DontUse
+	jr c, .DontUse
 	call EnemyUsedXDefend
-	jp .Use
+	jr .Use
 
 .XSpeed:
 	call .XItem
-	jp c, .DontUse
+	jr c, .DontUse
 	call EnemyUsedXSpeed
-	jp .Use
+	jr .Use
 
 .XSpecial:
 	call .XItem
-	jp c, .DontUse
+	jr c, .DontUse
 	call EnemyUsedXSpecial
-	jp .Use
+	jr .Use
 
 .XItem:
 	ld a, [wEnemyTurnsTaken]
@@ -434,25 +434,25 @@ AI_Items:
 	jr nz, .notfirstturnout
 	ld a, [bc]
 	bit ALWAYS_USE_F, a
-	jp nz, .Use
+	jr nz, .Use
 	call Random
 	cp 50 percent + 1
-	jp c, .DontUse
+	jr c, .DontUse
 	ld a, [bc]
 	bit CONTEXT_USE_F, a
-	jp nz, .Use
+	jr nz, .Use
 	call Random
 	cp 50 percent + 1
-	jp c, .DontUse
-	jp .Use
+	jr c, .DontUse
+	jr .Use
 .notfirstturnout
 	ld a, [bc]
 	bit ALWAYS_USE_F, a
-	jp z, .DontUse
+	jr z, .DontUse
 	call Random
 	cp 20 percent - 1
-	jp nc, .DontUse
-	jp .Use
+	jr nc, .DontUse
+	jr .Use
 
 .DontUse:
 	scf
@@ -483,7 +483,7 @@ EnemyUsedFullHeal:
 	call AIUsedItemSound
 	call AI_HealStatus
 	ld a, FULL_HEAL
-	jp PrintText_UsedItemOn_AND_AIUpdateHUD
+	jmp PrintText_UsedItemOn_AND_AIUpdateHUD
 
 EnemyUsedMaxPotion:
 	ld a, MAX_POTION
@@ -577,7 +577,7 @@ EnemyPotionFinish:
 	ld [wWhichHPBar], a
 	call AIUsedItemSound
 	predef AnimateHPBar
-	jp AIUpdateHUD
+	jmp AIUpdateHUD
 
 AI_TrySwitch:
 ; Determine whether the AI can switch based on how many Pokemon are still alive.
@@ -603,7 +603,7 @@ AI_TrySwitch:
 
 	ld a, d
 	cp 2
-	jp nc, AI_Switch
+	jr nc, AI_Switch
 	and a
 	ret
 
@@ -673,53 +673,21 @@ EnemyUsedXAccuracy:
 	ld hl, wEnemySubStatus4
 	set SUBSTATUS_X_ACCURACY, [hl]
 	ld a, X_ACCURACY
-	jp PrintText_UsedItemOn_AND_AIUpdateHUD
+	jr PrintText_UsedItemOn_AND_AIUpdateHUD
 
 EnemyUsedGuardSpec:
 	call AIUsedItemSound
 	ld hl, wEnemySubStatus4
 	set SUBSTATUS_MIST, [hl]
 	ld a, GUARD_SPEC
-	jp PrintText_UsedItemOn_AND_AIUpdateHUD
+	jr PrintText_UsedItemOn_AND_AIUpdateHUD
 
 EnemyUsedDireHit:
 	call AIUsedItemSound
 	ld hl, wEnemySubStatus4
 	set SUBSTATUS_FOCUS_ENERGY, [hl]
 	ld a, DIRE_HIT
-	jp PrintText_UsedItemOn_AND_AIUpdateHUD
-
-AICheckEnemyFractionMaxHP: ; unreferenced
-; Input: a = divisor
-; Work: bc = [wEnemyMonMaxHP] / a
-; Work: de = [wEnemyMonHP]
-; Output:
-; -  c, nz if [wEnemyMonHP] > [wEnemyMonMaxHP] / a
-; - nc,  z if [wEnemyMonHP] = [wEnemyMonMaxHP] / a
-; - nc, nz if [wEnemyMonHP] < [wEnemyMonMaxHP] / a
-	ldh [hDivisor], a
-	ld hl, wEnemyMonMaxHP
-	ld a, [hli]
-	ldh [hDividend], a
-	ld a, [hl]
-	ldh [hDividend + 1], a
-	ld b, 2
-	call Divide
-	ldh a, [hQuotient + 3]
-	ld c, a
-	ldh a, [hQuotient + 2]
-	ld b, a
-	ld hl, wEnemyMonHP + 1
-	ld a, [hld]
-	ld e, a
-	ld a, [hl]
-	ld d, a
-	ld a, d
-	sub b
-	ret nz
-	ld a, e
-	sub c
-	ret
+	jr PrintText_UsedItemOn_AND_AIUpdateHUD
 
 EnemyUsedXAttack:
 	ld b, ATTACK
@@ -749,14 +717,14 @@ EnemyUsedXItem:
 	call PrintText_UsedItemOn
 	pop bc
 	farcall RaiseStat
-	jp AIUpdateHUD
+	jmp AIUpdateHUD
 
 ; Parameter
 ; a = ITEM_CONSTANT
 PrintText_UsedItemOn_AND_AIUpdateHUD:
 	ld [wCurEnemyItem], a
 	call PrintText_UsedItemOn
-	jp AIUpdateHUD
+	jmp AIUpdateHUD
 
 PrintText_UsedItemOn:
 	ld a, [wCurEnemyItem]
@@ -767,7 +735,7 @@ PrintText_UsedItemOn:
 	ld bc, ITEM_NAME_LENGTH
 	call CopyBytes
 	ld hl, EnemyUsedOnText
-	jp PrintText
+	jmp PrintText
 
 EnemyUsedOnText:
 	text_far _EnemyUsedOnText

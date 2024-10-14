@@ -66,7 +66,7 @@ _GetVarAction::
 	ld b, wEndPokedexCaught - wPokedexCaught
 	call CountSetBits
 	ld a, [wNumSetBits]
-	jp .loadstringbuffer2
+	jr .loadstringbuffer2
 
 .CountSeenMons:
 ; Seen mons.
@@ -74,7 +74,7 @@ _GetVarAction::
 	ld b, wEndPokedexSeen - wPokedexSeen
 	call CountSetBits
 	ld a, [wNumSetBits]
-	jp .loadstringbuffer2
+	jr .loadstringbuffer2
 
 .CountBadges:
 ; Number of owned badges.
@@ -82,7 +82,7 @@ _GetVarAction::
 	ld b, 2
 	call CountSetBits
 	ld a, [wNumSetBits]
-	jp .loadstringbuffer2
+	jr .loadstringbuffer2
 
 .PlayerFacing:
 ; The direction the player is facing.
@@ -90,18 +90,18 @@ _GetVarAction::
 	and $c
 	rrca
 	rrca
-	jp .loadstringbuffer2
+	jr .loadstringbuffer2
 
 .DayOfWeek:
 ; The day of the week.
 	call GetWeekday
-	jp .loadstringbuffer2
+	jr .loadstringbuffer2
 
 .UnownCaught:
 ; Number of unique Unown caught.
 	call .count_unown
 	ld a, b
-	jp .loadstringbuffer2
+	jr .loadstringbuffer2
 
 .count_unown
 	ld hl, wUnownDex
@@ -126,9 +126,9 @@ _GetVarAction::
 	ld b, a
 	call CloseSRAM
 	ld a, b
-	jp .loadstringbuffer2
+	jmp .loadstringbuffer2
 
 .BattleResult:
 	ld a, [wBattleResult]
 	and ~BATTLERESULT_BITMASK
-	jp .loadstringbuffer2
+	jmp .loadstringbuffer2

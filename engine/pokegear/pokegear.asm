@@ -893,19 +893,19 @@ RadioChannels:
 	jr nc, .NoSignal
 	ld a, [wTimeOfDay]
 	and a
-	jp z, LoadStation_PokedexShow
-	jp LoadStation_OaksPokemonTalk
+	jmp z, LoadStation_PokedexShow
+	jr LoadStation_OaksPokemonTalk
 
 .PokemonMusic:
 	call .InJohto
 	jr nc, .NoSignal
-	jp LoadStation_PokemonMusic
+	jmp LoadStation_PokemonMusic
 
 .RuinsOfAlphRadio:
 	ld a, [wPokegearMapPlayerIconLandmark]
 	cp LANDMARK_RUINS_OF_ALPH
 	jr nz, .NoSignal
-	jp LoadStation_UnownRadio
+	jmp LoadStation_UnownRadio
 
 .PlacesAndPeople:
 	call .InJohto
@@ -913,7 +913,7 @@ RadioChannels:
 	ld a, [wPokegearFlags]
 	bit POKEGEAR_EXPN_CARD_F, a
 	jr z, .NoSignal
-	jp LoadStation_PlacesAndPeople
+	jmp LoadStation_PlacesAndPeople
 
 .LetsAllSing:
 	call .InJohto
@@ -921,7 +921,7 @@ RadioChannels:
 	ld a, [wPokegearFlags]
 	bit POKEGEAR_EXPN_CARD_F, a
 	jr z, .NoSignal
-	jp LoadStation_LetsAllSing
+	jmp LoadStation_LetsAllSing
 
 .PokeFluteRadio:
 	call .InJohto
@@ -929,7 +929,7 @@ RadioChannels:
 	ld a, [wPokegearFlags]
 	bit POKEGEAR_EXPN_CARD_F, a
 	jr z, .NoSignal
-	jp LoadStation_PokeFluteRadio
+	jmp LoadStation_PokeFluteRadio
 
 .EvolutionRadio:
 ; This station airs in the Lake of Rage area when Team Rocket is still in Mahogany.
@@ -944,7 +944,7 @@ RadioChannels:
 	cp LANDMARK_LAKE_OF_RAGE
 	jr nz, .NoSignal
 .ok
-	jp LoadStation_EvolutionRadio
+	jmp LoadStation_EvolutionRadio
 
 .NoSignal:
 	call NoRadioStation
@@ -1386,11 +1386,11 @@ LoadStation_PokemonChannel:
 	call UpdateTime
 	ld a, [wTimeOfDay]
 	and a
-	jp z, LoadStation_PokedexShow
-	jp LoadStation_OaksPokemonTalk
+	jmp z, LoadStation_PokedexShow
+	jmp LoadStation_OaksPokemonTalk
 
 .kanto:
-	jp LoadStation_PlacesAndPeople
+	jmp LoadStation_PlacesAndPeople
 
 PokegearMap:
 	ld a, e

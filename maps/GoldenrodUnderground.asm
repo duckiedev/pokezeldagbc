@@ -1,6 +1,3 @@
-DEF GOLDENRODUNDERGROUND_OLDER_HAIRCUT_PRICE   EQU 500
-DEF GOLDENRODUNDERGROUND_YOUNGER_HAIRCUT_PRICE EQU 300
-
 	object_const_def
 	const GOLDENRODUNDERGROUND_SUPER_NERD1
 	const GOLDENRODUNDERGROUND_SUPER_NERD2
@@ -8,8 +5,6 @@ DEF GOLDENRODUNDERGROUND_YOUNGER_HAIRCUT_PRICE EQU 300
 	const GOLDENRODUNDERGROUND_SUPER_NERD4
 	const GOLDENRODUNDERGROUND_POKE_BALL
 	const GOLDENRODUNDERGROUND_GRAMPS
-	const GOLDENRODUNDERGROUND_OLDER_HAIRCUT_BROTHER
-	const GOLDENRODUNDERGROUND_YOUNGER_HAIRCUT_BROTHER
 	const GOLDENRODUNDERGROUND_GRANNY
 
 GoldenrodUnderground_MapScripts:
@@ -60,8 +55,6 @@ GoldenrodUndergroundCheckDayOfWeekCallback:
 
 ; Sunday
 	disappear GOLDENRODUNDERGROUND_GRAMPS
-	disappear GOLDENRODUNDERGROUND_OLDER_HAIRCUT_BROTHER
-	appear GOLDENRODUNDERGROUND_YOUNGER_HAIRCUT_BROTHER
 	appear GOLDENRODUNDERGROUND_GRANNY
 	endcallback
 
@@ -71,43 +64,31 @@ GoldenrodUndergroundCheckDayOfWeekCallback:
 	iffalse .NotMondayMorning
 	appear GOLDENRODUNDERGROUND_GRAMPS
 .NotMondayMorning:
-	disappear GOLDENRODUNDERGROUND_OLDER_HAIRCUT_BROTHER
-	disappear GOLDENRODUNDERGROUND_YOUNGER_HAIRCUT_BROTHER
 	disappear GOLDENRODUNDERGROUND_GRANNY
 	endcallback
 
 .Tuesday:
 	disappear GOLDENRODUNDERGROUND_GRAMPS
-	appear GOLDENRODUNDERGROUND_OLDER_HAIRCUT_BROTHER
-	disappear GOLDENRODUNDERGROUND_YOUNGER_HAIRCUT_BROTHER
 	disappear GOLDENRODUNDERGROUND_GRANNY
 	endcallback
 
 .Wednesday:
 	disappear GOLDENRODUNDERGROUND_GRAMPS
-	disappear GOLDENRODUNDERGROUND_OLDER_HAIRCUT_BROTHER
-	appear GOLDENRODUNDERGROUND_YOUNGER_HAIRCUT_BROTHER
 	disappear GOLDENRODUNDERGROUND_GRANNY
 	endcallback
 
 .Thursday:
 	disappear GOLDENRODUNDERGROUND_GRAMPS
-	appear GOLDENRODUNDERGROUND_OLDER_HAIRCUT_BROTHER
-	disappear GOLDENRODUNDERGROUND_YOUNGER_HAIRCUT_BROTHER
 	disappear GOLDENRODUNDERGROUND_GRANNY
 	endcallback
 
 .Friday:
 	disappear GOLDENRODUNDERGROUND_GRAMPS
-	disappear GOLDENRODUNDERGROUND_OLDER_HAIRCUT_BROTHER
-	appear GOLDENRODUNDERGROUND_YOUNGER_HAIRCUT_BROTHER
 	disappear GOLDENRODUNDERGROUND_GRANNY
 	endcallback
 
 .Saturday:
 	disappear GOLDENRODUNDERGROUND_GRAMPS
-	appear GOLDENRODUNDERGROUND_OLDER_HAIRCUT_BROTHER
-	disappear GOLDENRODUNDERGROUND_YOUNGER_HAIRCUT_BROTHER
 	appear GOLDENRODUNDERGROUND_GRANNY
 	endcallback
 
@@ -179,195 +160,6 @@ BargainMerchantScript:
 	checktime MORN
 	iffalse GoldenrodUndergroundScript_ShopClosed
 	pokemart MARTTYPE_BARGAIN, 0
-	closetext
-	end
-
-OlderHaircutBrotherScript:
-	opentext
-	readvar VAR_WEEKDAY
-	ifequal TUESDAY, .DoHaircut
-	ifequal THURSDAY, .DoHaircut
-	ifequal SATURDAY, .DoHaircut
-	sjump GoldenrodUndergroundScript_ShopClosed
-
-.DoHaircut:
-	checkflag ENGINE_GOLDENROD_UNDERGROUND_GOT_HAIRCUT
-	iftrue .AlreadyGotHaircut
-	special PlaceMoneyTopRight
-	writetext GoldenrodUndergroundOlderHaircutBrotherOfferHaircutText
-	yesorno
-	iffalse .Refused
-	checkmoney YOUR_MONEY, GOLDENRODUNDERGROUND_OLDER_HAIRCUT_PRICE
-	ifequal HAVE_LESS, .NotEnoughMoney
-	writetext GoldenrodUndergroundOlderHaircutBrotherAskWhichMonText
-	promptbutton
-	special OlderHaircutBrother
-	ifequal $0, .Refused
-	ifequal $1, .Refused
-	setflag ENGINE_GOLDENROD_UNDERGROUND_GOT_HAIRCUT
-	ifequal $2, .two
-	ifequal $3, .three
-	sjump .else
-
-.two
-	setevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_1
-	clearevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_2
-	clearevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_3
-	sjump .then
-
-.three
-	clearevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_1
-	setevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_2
-	clearevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_3
-	sjump .then
-
-.else
-	clearevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_1
-	clearevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_2
-	setevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_3
-	sjump .then
-
-.then
-	takemoney YOUR_MONEY, GOLDENRODUNDERGROUND_OLDER_HAIRCUT_PRICE
-	special PlaceMoneyTopRight
-	writetext GoldenrodUndergroundOlderHaircutBrotherWatchItBecomeBeautifulText
-	waitbutton
-	closetext
-	special FadeOutPalettes
-	special LoadMapPalettes
-	playmusic MUSIC_HEAL
-	pause 60
-	special FadeInPalettes_EnableDynNoApply
-	special RestartMapMusic
-	opentext
-	writetext GoldenrodUndergroundOlderHaircutBrotherAllDoneText
-	waitbutton
-	checkevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_1
-	iftrue EitherHaircutBrotherScript_SlightlyHappier
-	checkevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_2
-	iftrue EitherHaircutBrotherScript_Happier
-	sjump EitherHaircutBrotherScript_MuchHappier
-
-.Refused:
-	writetext GoldenrodUndergroundOlderHaircutBrotherThatsAShameText
-	waitbutton
-	closetext
-	end
-
-.NotEnoughMoney:
-	writetext GoldenrodUndergroundOlderHaircutBrotherYoullNeedMoreMoneyText
-	waitbutton
-	closetext
-	end
-
-.AlreadyGotHaircut:
-	writetext GoldenrodUndergroundOlderHaircutBrotherOneHaircutADayText
-	waitbutton
-	closetext
-	end
-
-YoungerHaircutBrotherScript:
-	opentext
-	readvar VAR_WEEKDAY
-	ifequal SUNDAY, .DoHaircut
-	ifequal WEDNESDAY, .DoHaircut
-	ifequal FRIDAY, .DoHaircut
-	sjump GoldenrodUndergroundScript_ShopClosed
-
-.DoHaircut:
-	checkflag ENGINE_GOLDENROD_UNDERGROUND_GOT_HAIRCUT
-	iftrue .AlreadyGotHaircut
-	special PlaceMoneyTopRight
-	writetext GoldenrodUndergroundYoungerHaircutBrotherOfferHaircutText
-	yesorno
-	iffalse .Refused
-	checkmoney YOUR_MONEY, GOLDENRODUNDERGROUND_YOUNGER_HAIRCUT_PRICE
-	ifequal HAVE_LESS, .NotEnoughMoney
-	writetext GoldenrodUndergroundYoungerHaircutBrotherAskWhichMonText
-	promptbutton
-	special YoungerHaircutBrother
-	ifequal $0, .Refused
-	ifequal $1, .Refused
-	setflag ENGINE_GOLDENROD_UNDERGROUND_GOT_HAIRCUT
-	ifequal $2, .two
-	ifequal $3, .three
-	sjump .else
-
-.two
-	setevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_1
-	clearevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_2
-	clearevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_3
-	sjump .then
-
-.three
-	clearevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_1
-	setevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_2
-	clearevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_3
-	sjump .then
-
-.else
-	clearevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_1
-	clearevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_2
-	setevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_3
-	sjump .then
-
-.then
-	takemoney YOUR_MONEY, GOLDENRODUNDERGROUND_YOUNGER_HAIRCUT_PRICE
-	special PlaceMoneyTopRight
-	writetext GoldenrodUndergroundYoungerHaircutBrotherIllMakeItLookCoolText
-	waitbutton
-	closetext
-	special FadeOutPalettes
-	special LoadMapPalettes
-	playmusic MUSIC_HEAL
-	pause 60
-	special FadeInPalettes_EnableDynNoApply
-	special RestartMapMusic
-	opentext
-	writetext GoldenrodUndergroundYoungerHaircutBrotherAllDoneText
-	waitbutton
-	checkevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_1
-	iftrue EitherHaircutBrotherScript_SlightlyHappier
-	checkevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_2
-	iftrue EitherHaircutBrotherScript_Happier
-	sjump EitherHaircutBrotherScript_MuchHappier
-
-.Refused:
-	writetext GoldenrodUndergroundYoungerHaircutBrotherHowDisappointingText
-	waitbutton
-	closetext
-	end
-
-.NotEnoughMoney:
-	writetext GoldenrodUndergroundYoungerHaircutBrotherShortOnFundsText
-	waitbutton
-	closetext
-	end
-
-.AlreadyGotHaircut:
-	writetext GoldenrodUndergroundYoungerHaircutBrotherOneHaircutADayText
-	waitbutton
-	closetext
-	end
-
-EitherHaircutBrotherScript_SlightlyHappier:
-	writetext HaircutBrosText_SlightlyHappier
-	special PlayCurMonCry
-	waitbutton
-	closetext
-	end
-
-EitherHaircutBrotherScript_Happier:
-	writetext HaircutBrosText_Happier
-	special PlayCurMonCry
-	waitbutton
-	closetext
-	end
-
-EitherHaircutBrotherScript_MuchHappier:
-	writetext HaircutBrosText_MuchHappier
-	special PlayCurMonCry
-	waitbutton
 	closetext
 	end
 
@@ -520,121 +312,6 @@ GoldenrodUndergroundBasementKeyOpenedDoorText:
 	line "opened the door."
 	done
 
-GoldenrodUndergroundOlderHaircutBrotherOfferHaircutText:
-	text "Welcome!"
-
-	para "I run the #MON"
-	line "SALON!"
-
-	para "I'm the older and"
-	line "better of the two"
-	cont "HAIRCUT BROTHERS."
-
-	para "I can make your"
-	line "#MON beautiful"
-	cont "for just ¥500."
-
-	para "Would you like me"
-	line "to do that?"
-	done
-
-GoldenrodUndergroundOlderHaircutBrotherAskWhichMonText:
-	text "Which #MON"
-	line "should I work on?"
-	done
-
-GoldenrodUndergroundOlderHaircutBrotherWatchItBecomeBeautifulText:
-	text "OK! Watch it"
-	line "become beautiful!"
-	done
-
-GoldenrodUndergroundOlderHaircutBrotherAllDoneText:
-	text "There! All done!"
-	done
-
-GoldenrodUndergroundOlderHaircutBrotherThatsAShameText:
-	text "Is that right?"
-	line "That's a shame!"
-	done
-
-GoldenrodUndergroundOlderHaircutBrotherYoullNeedMoreMoneyText:
-	text "You'll need more"
-	line "money than that."
-	done
-
-GoldenrodUndergroundOlderHaircutBrotherOneHaircutADayText:
-	text "I do only one"
-	line "haircut a day. I'm"
-	cont "done for today."
-	done
-
-GoldenrodUndergroundYoungerHaircutBrotherOfferHaircutText:
-	text "Welcome to the"
-	line "#MON SALON!"
-
-	para "I'm the younger"
-	line "and less expen-"
-	cont "sive of the two"
-	cont "HAIRCUT BROTHERS."
-
-	para "I'll spiff up your"
-	line "#MON for just"
-	cont "¥300."
-
-	para "So? How about it?"
-	done
-
-GoldenrodUndergroundYoungerHaircutBrotherAskWhichMonText:
-	text "OK, which #MON"
-	line "should I do?"
-	done
-
-GoldenrodUndergroundYoungerHaircutBrotherIllMakeItLookCoolText:
-	text "OK! I'll make it"
-	line "look cool!"
-	done
-
-GoldenrodUndergroundYoungerHaircutBrotherAllDoneText:
-	text "There we go!"
-	line "All done!"
-	done
-
-GoldenrodUndergroundYoungerHaircutBrotherHowDisappointingText:
-	text "No? "
-	line "How disappointing!"
-	done
-
-GoldenrodUndergroundYoungerHaircutBrotherShortOnFundsText:
-	text "You're a little"
-	line "short on funds."
-	done
-
-GoldenrodUndergroundYoungerHaircutBrotherOneHaircutADayText:
-	text "I can do only one"
-	line "haircut a day."
-
-	para "Sorry, but I'm all"
-	line "done for today."
-	done
-
-HaircutBrosText_SlightlyHappier:
-	text_ram wStringBuffer3
-	text " looks a"
-	line "little happier."
-	done
-
-HaircutBrosText_Happier:
-	text_ram wStringBuffer3
-	text " looks"
-	line "happy."
-	done
-
-HaircutBrosText_MuchHappier:
-	text_ram wStringBuffer3
-	text " looks"
-	line "delighted!"
-	done
-
 GoldenrodUndergroundWeAreNotOpenTodayText:
 	text "We're not open"
 	line "today."
@@ -672,6 +349,4 @@ GoldenrodUnderground_MapEvents:
 	object_event  2,  6, SPRITE_SUPER_NERD, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 3, TrainerPokemaniacDonald, -1
 	object_event  7, 25, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, GoldenrodUndergroundCoinCase, EVENT_GOLDENROD_UNDERGROUND_COIN_CASE
 	object_event  7, 11, SPRITE_GRAMPS, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_SCRIPT, 0, BargainMerchantScript, EVENT_GOLDENROD_UNDERGROUND_GRAMPS
-	object_event  7, 14, SPRITE_SUPER_NERD, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, OlderHaircutBrotherScript, EVENT_GOLDENROD_UNDERGROUND_OLDER_HAIRCUT_BROTHER
-	object_event  7, 15, SPRITE_SUPER_NERD, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, YoungerHaircutBrotherScript, EVENT_GOLDENROD_UNDERGROUND_YOUNGER_HAIRCUT_BROTHER
 	object_event  7, 21, SPRITE_GRANNY, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_SCRIPT, 0, BitterMerchantScript, EVENT_GOLDENROD_UNDERGROUND_GRANNY

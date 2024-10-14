@@ -132,7 +132,7 @@ _DepositPKMN:
 	ld a, [wMenuCursorY]
 	call StoreMenuCursorPosition
 	call VerticalMenu
-	jp c, BillsPCDepositFuncCancel
+	jmp c, BillsPCDepositFuncCancel
 	ld a, [wMenuCursorY]
 	dec a
 	and %11
@@ -385,7 +385,7 @@ BillsPC_Withdraw:
 	ld a, [wMenuCursorY]
 	call StoreMenuCursorPosition
 	call VerticalMenu
-	jp c, .cancel
+	jmp c, .cancel
 	ld a, [wMenuCursorY]
 	dec a
 	and %11
@@ -634,7 +634,7 @@ _MovePKMN:
 	ld a, [wMenuCursorY]
 	call StoreMenuCursorPosition
 	call VerticalMenu
-	jp c, .Cancel
+	jr c, .Cancel
 	ld a, [wMenuCursorY]
 	dec a
 	and %11
@@ -808,7 +808,7 @@ _StatsScreenDPad:
 	and D_DOWN
 	jr nz, BillsPC_PressDown
 .empty
-	jp BillsPC_JoypadDidNothing
+	jmp BillsPC_JoypadDidNothing
 
 Withdraw_UpDown:
 	ld hl, hJoyLast
@@ -825,7 +825,7 @@ Withdraw_UpDown:
 	and D_DOWN
 	jr nz, BillsPC_PressDown
 .empty
-	jp BillsPC_JoypadDidNothing
+	jmp BillsPC_JoypadDidNothing
 
 MoveMon_DPad:
 	ld hl, hJoyLast

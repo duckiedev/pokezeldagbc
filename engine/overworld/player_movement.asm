@@ -477,7 +477,7 @@ DoPlayerMovement::
 	ld a, [wWalkingDirection]
 	ld e, a
 	cp STANDING
-	jp z, .StandInPlace
+	jr z, .StandInPlace
 
 	add hl, de
 	ld a, [hl]

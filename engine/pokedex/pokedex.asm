@@ -1939,7 +1939,7 @@ Pokedex_DisplayTypeNotFoundMessage:
 Pokedex_UpdateCursorOAM:
 	ld a, [wCurDexMode]
 	cp DEXMODE_OLD
-	jp z, Pokedex_PutOldModeCursorOAM
+	jr z, Pokedex_PutOldModeCursorOAM
 	call Pokedex_PutNewModeABCModeCursorOAM
 	call Pokedex_PutScrollbarOAM
 	ret
@@ -2041,7 +2041,7 @@ Pokedex_PutNewModeABCModeCursorOAM:
 Pokedex_UpdateSearchResultsCursorOAM:
 	ld a, [wCurDexMode]
 	cp DEXMODE_OLD
-	jp z, Pokedex_PutOldModeCursorOAM
+	jmp z, Pokedex_PutOldModeCursorOAM
 	ld hl, .CursorOAM
 	call Pokedex_LoadCursorOAM
 	ret
@@ -2271,7 +2271,7 @@ Pokedex_ArrowCursorDelay:
 	ret
 
 Pokedex_FillBox:
-	jp FillBoxWithByte
+	jmp FillBoxWithByte
 
 Pokedex_BlackOutBG:
 	ldh a, [rSVBK]

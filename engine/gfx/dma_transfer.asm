@@ -1,6 +1,6 @@
 HDMATransferAttrmapAndTilemapToWRAMBank3::
 	ld hl, .Function
-	jp CallInSafeGFXMode
+	jmp CallInSafeGFXMode
 
 .Function:
 	decoord 0, 0, wAttrmap
@@ -9,33 +9,31 @@ HDMATransferAttrmapAndTilemapToWRAMBank3::
 	decoord 0, 0
 	ld hl, wScratchTilemap
 	call PadTilemapForHDMATransfer
-	ld a, $0
+	xor a
 	ldh [rVBK], a
 	ld hl, wScratchTilemap
 	call HDMATransferToWRAMBank3
 	ld a, $1
 	ldh [rVBK], a
 	ld hl, wScratchAttrmap
-	call HDMATransferToWRAMBank3
-	ret
+	jmp HDMATransferToWRAMBank3
 
 HDMATransferTilemapToWRAMBank3::
 	ld hl, .Function
-	jp CallInSafeGFXMode
+	jmp CallInSafeGFXMode
 
 .Function:
 	decoord 0, 0
 	ld hl, wScratchTilemap
 	call PadTilemapForHDMATransfer
-	ld a, $0
+	xor a
 	ldh [rVBK], a
 	ld hl, wScratchTilemap
-	call HDMATransferToWRAMBank3
-	ret
+	jmp HDMATransferToWRAMBank3
 
 HDMATransferAttrmapToWRAMBank3:
 	ld hl, .Function
-	jp CallInSafeGFXMode
+	jr CallInSafeGFXMode
 
 .Function:
 	decoord 0, 0, wAttrmap
@@ -44,12 +42,11 @@ HDMATransferAttrmapToWRAMBank3:
 	ld a, $1
 	ldh [rVBK], a
 	ld hl, wScratchAttrmap
-	call HDMATransferToWRAMBank3
-	ret
+	jmp HDMATransferToWRAMBank3
 
 HDMATransferTilemapAndAttrmap_Overworld::
 	ld hl, .Function
-	jp CallInSafeGFXMode
+	jr CallInSafeGFXMode
 
 .Function:
 	decoord 0, 0, wAttrmap
@@ -67,19 +64,17 @@ HDMATransferTilemapAndAttrmap_Overworld::
 	ldh [rVBK], a
 	ld hl, wScratchAttrmap
 	call HDMATransfer_WaitForScanline128_toBGMap
-	ld a, $0
+	xor a
 	ldh [rVBK], a
 	ld hl, wScratchTilemap
 	call HDMATransfer_WaitForScanline128_toBGMap
 	pop af
 	ldh [rVBK], a
-	ei
-
-	ret
+	reti
 
 _HDMATransferTilemapAndAttrmap_Menu::
 	ld hl, .Function
-	jp CallInSafeGFXMode
+	jr CallInSafeGFXMode
 
 .Function:
 	; Transfer wAttrmap and Tilemap to BGMap
@@ -100,14 +95,13 @@ _HDMATransferTilemapAndAttrmap_Menu::
 	ldh [rVBK], a
 	ld hl, wScratchAttrmap
 	call HDMATransfer_WaitForScanline124_toBGMap
-	ld a, $0
+	xor a
 	ldh [rVBK], a
 	ld hl, wScratchTilemap
 	call HDMATransfer_WaitForScanline124_toBGMap
 	pop af
 	ldh [rVBK], a
-	ei
-	ret
+	reti
 
 CallInSafeGFXMode:
 	ldh a, [hBGMapMode]
@@ -241,63 +235,41 @@ HDMATransfer_WaitForScanline124:
 HDMATransfer_WaitForScanline128:
 	ld b, $7f
 _continue_HDMATransfer:
-; a lot of waiting around for hardware registers
-	; [rHDMA1, rHDMA2] = hl & $fff0
+	; LY magic
 	ld a, h
 	ldh [rHDMA1], a
 	ld a, l
 	and $f0 ; high nybble
 	ldh [rHDMA2], a
-	; [rHDMA3, rHDMA4] = de & $1ff0
 	ld a, d
 	and $1f ; lower 5 bits
 	ldh [rHDMA3], a
 	ld a, e
 	and $f0 ; high nybble
 	ldh [rHDMA4], a
-	; e = c | %10000000
-	ld a, c
-	dec c
-	or $80
-	ld e, a
-	; d = b - c + 1
-	ld a, b
-	sub c
-	ld d, a
-	; while [rLY] >= d: pass
-.ly_loop
+	dec c ; c = number of LYs needed
+	ld e, c
+	set 7, e ; hblank dma transfers
 	ldh a, [rLY]
-	cp d
-	jr nc, .ly_loop
+	add c ; calculate end LY
+	cp b ; is the end LY greater than the max LY
+	call nc, DI_DelayFrame ; if so, delay a frame to reset the LY
 
-	di
-	; while [rSTAT] & 3: pass
-.rstat_loop_1
-	ldh a, [rSTAT]
-	and $3
-	jr nz, .rstat_loop_1
-	; while not [rSTAT] & 3: pass
-.rstat_loop_2
-	ldh a, [rSTAT]
-	and $3
-	jr z, .rstat_loop_2
-	; load the 5th byte of HDMA
-	ld a, e
-	ldh [rHDMA5], a
-	; wait until rLY advances (c + 1) times
-	ldh a, [rLY]
-	inc c
-	ld hl, rLY
-.final_ly_loop
-	cp [hl]
-	jr z, .final_ly_loop
-	ld a, [hl]
-	dec c
-	jr nz, .final_ly_loop
+	lb bc, %11, LOW(rSTAT)
+	.noHBlankWait
+	ldh a, [c]
+	and b
+	jr z, .noHBlankWait
+	.hBlankWaitLoop
+	ldh a, [c]
+	and b
+	jr nz, .hBlankWaitLoop
 	ld hl, rHDMA5
-	res 7, [hl]
-	ei
-
+	ld [hl], e
+	ld a, $ff
+	.waitForHDMA
+	cp [hl]
+	jr nz, .waitForHDMA
 	ret
 
 _LoadHDMAParameters:
@@ -317,7 +289,7 @@ PadTilemapForHDMATransfer:
 	jr PadMapForHDMATransfer
 
 PadAttrmapForHDMATransfer:
-	ld c, $c1
+	ld c, $0
 
 PadMapForHDMATransfer:
 ; pad a 20x18 map to 32x18 for HDMA transfer
@@ -405,8 +377,8 @@ HDMATransfer1bpp::
 .loop
 	ld a, c
 	cp $10
-	jp c, .bankswitch
-	jp z, .bankswitch
+	jr c, .bankswitch
+	jr z, .bankswitch
 	push bc
 	push hl
 	push de
@@ -466,7 +438,7 @@ HDMATransfer1bpp::
 
 HDMATransfer_OnlyTopFourRows:
 	ld hl, .Function
-	jp CallInSafeGFXMode
+	jmp CallInSafeGFXMode
 
 .Function:
 	ld hl, wScratchTilemap
@@ -481,13 +453,12 @@ HDMATransfer_OnlyTopFourRows:
 	ld hl, wScratchTilemap + $80
 	debgcoord 0, 0, vBGMap1
 	call HDMATransfer_WaitForScanline128
-	ld a, $0
+	xor a
 	ldh [rVBK], a
 	ld c, $8
 	ld hl, wScratchTilemap
 	debgcoord 0, 0, vBGMap1
-	call HDMATransfer_WaitForScanline128
-	ret
+	jmp HDMATransfer_WaitForScanline128
 
 .Copy:
 	ld b, 4
@@ -502,9 +473,25 @@ HDMATransfer_OnlyTopFourRows:
 	ld a, l
 	add BG_MAP_WIDTH - SCREEN_WIDTH
 	ld l, a
-	ld a, h
-	adc 0
+	adc h
+	sub l
 	ld h, a
 	dec b
 	jr nz, .outer_loop
+	ret
+
+DI_DelayFrame:
+	; I have no idea of what's going on here, but this function is being called while not in di mode
+	; this is a duct-tape fix and should probably be replaced eventually
+	ldh a, [rLY]
+	push bc
+	ld b, a
+.loop
+	ldh a, [rLY]
+	and a
+	jr z, .done
+	cp b
+	jr nc, .loop
+.done
+	pop bc
 	ret

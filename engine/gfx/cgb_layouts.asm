@@ -12,7 +12,7 @@ LoadSGBLayoutCGB:
 	ld a, [wDefaultSGBLayout]
 .not_default
 	cp SCGB_PARTY_MENU_HP_BARS
-	jp z, CGB_ApplyPartyMenuHPPals
+	jmp z, CGB_ApplyPartyMenuHPPals
 	call ResetBGPals
 	ld l, a
 	ld h, 0
@@ -956,7 +956,7 @@ _CGB_Plain:
 	call LoadHLBytesIntoDE
 
 	call WipeAttrmap
-	jp ApplyAttrmap
+	jmp ApplyAttrmap
 
 Gen1DiplomaPalette:
 INCLUDE "gfx/diploma/plain.pal" ; todo: replace this polished port

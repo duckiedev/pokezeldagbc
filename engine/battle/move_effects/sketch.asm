@@ -2,12 +2,12 @@ BattleCommand_Sketch:
 	call ClearLastMove
 ; If the opponent has a substitute up, fail.
 	call CheckSubstituteOpp
-	jp nz, .fail
+	jmp nz, .fail
 ; If the user is transformed, fail.
 	ld a, BATTLE_VARS_SUBSTATUS5
 	call GetBattleVarAddr
 	bit SUBSTATUS_TRANSFORMED, [hl]
-	jp nz, .fail
+	jr nz, .fail
 ; Get the user's moveset in its party struct.
 ; This move replacement shall be permanent.
 ; Pointer will be in de.
@@ -100,8 +100,8 @@ BattleCommand_Sketch:
 	call AnimateCurrentMove
 
 	ld hl, SketchedText
-	jp StdBattleTextbox
+	jmp StdBattleTextbox
 
 .fail
 	call AnimateFailedMove
-	jp PrintDidntAffect
+	jmp PrintDidntAffect

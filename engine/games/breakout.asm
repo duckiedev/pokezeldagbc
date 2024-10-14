@@ -82,12 +82,12 @@ MACRO CheckGameState
         ld a, [wBallDead]
         ld b, 1
         cp a, b
-        jp z, BallDead
+        jmp z, BallDead
 
         ld a, [wLevelClear]
         ld b, 1
         cp a, b
-        jp z, NextLevel
+        jmp z, NextLevel
 ENDM
 */
 
@@ -207,7 +207,7 @@ BounceOnTop:
 	call GetTileByPixel ; Returns tile address in hl
 	ld a, [hl]
 	call IsWallTile
-	jp nz, BounceOnRight
+	jmp nz, BounceOnRight
 	ld a, 1
 	ld [wBallMomentumY], a
 
@@ -222,7 +222,7 @@ BounceOnRight:
 	call GetTileByPixel
 	ld a, [hl]
 	call IsWallTile
-	jp nz, BounceOnLeft
+	jmp nz, BounceOnLeft
 	ld a, -1
 	ld [wBallMomentumX], a
 
@@ -236,7 +236,7 @@ BounceOnLeft:
 	call GetTileByPixel
 	ld a, [hl]
 	call IsWallTile
-	jp nz, BounceOnBottom
+	jmp nz, BounceOnBottom
 	ld a, 1
 	ld [wBallMomentumX], a
 
@@ -250,7 +250,7 @@ BounceOnBottom:
 	call GetTileByPixel
 	ld a, [hl]
 	call IsWallTile
-	jp nz, BounceDone
+	jmp nz, BounceDone
 	ld a, -1
 	ld [wBallMomentumY], a
 BounceDone:
@@ -289,22 +289,22 @@ Left:
 	dec a
 	; If we've already hit the edge of the playfield, don't move.
 	cp a, 15
-	jp z, Main
+	jmp z, Main
 	ld [wShadowOAMSprite00XCoord], a
-	jp Main
+	jmp Main
 CheckRight:
 	ld a, [hJoyDown]
 	and a, D_RIGHT
-	jp z, Main
+	jmp z, Main
 Right:
 	; Move the paddle one pixel to the right.
 	ld a, [wShadowOAMSprite00XCoord]
 	inc a
 	; If we've already hit the edge of the playfield, don't move.
 	cp a, 105
-	jp z, Main
+	jmp z, Main
 	ld [wShadowOAMSprite00XCoord], a
-	jp Main
+	jmp Main
 
 ResetFrameCounter:
 	; Initialize global variables

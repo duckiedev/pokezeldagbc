@@ -582,20 +582,20 @@ MovementFunction_RandomWalkY:
 	call Random
 	ldh a, [hRandomAdd]
 	and %00000001
-	jp _RandomWalkContinue
+	jmp _RandomWalkContinue
 
 MovementFunction_RandomWalkX:
 	call Random
 	ldh a, [hRandomAdd]
 	and %00000001
 	or  %00000010
-	jp _RandomWalkContinue
+	jmp _RandomWalkContinue
 
 MovementFunction_RandomWalkXY:
 	call Random
 	ldh a, [hRandomAdd]
 	and %00000011
-	jp _RandomWalkContinue
+	jmp _RandomWalkContinue
 
 MovementFunction_RandomSpinSlow:
 	call Random
@@ -604,7 +604,7 @@ MovementFunction_RandomSpinSlow:
 	ld hl, OBJECT_DIRECTION
 	add hl, bc
 	ld [hl], a
-	jp RandomStepDuration_Slow
+	jmp RandomStepDuration_Slow
 
 MovementFunction_RandomSpinFast:
 	ld hl, OBJECT_DIRECTION
@@ -620,7 +620,7 @@ MovementFunction_RandomSpinFast:
 	xor %00001100
 .keep
 	ld [hl], a
-	jp RandomStepDuration_Fast
+	jmp RandomStepDuration_Fast
 
 MovementFunction_Standing:
 	call CopyLastCoordsToCoords
@@ -635,39 +635,39 @@ MovementFunction_Standing:
 
 MovementFunction_ObeyDPad:
 	ld hl, GetPlayerNextMovementIndex
-	jp HandleMovementData
+	jmp HandleMovementData
 
 MovementFunction_Indexed1:
 	ld hl, GetIndexedMovementIndex1
-	jp HandleMovementData
+	jmp HandleMovementData
 
 MovementFunction_Indexed2:
 	ld hl, GetIndexedMovementIndex2
-	jp HandleMovementData
+	jmp HandleMovementData
 
 MovementFunction_0a:
-	jp _GetMovementObject
+	jmp _GetMovementObject
 
 MovementFunction_0b:
-	jp _GetMovementObject
+	jmp _GetMovementObject
 
 MovementFunction_0c:
-	jp _GetMovementObject
+	jmp _GetMovementObject
 
 MovementFunction_0d:
 	ld hl, GetPlayerNextMovementIndex
-	jp HandleMovementData
+	jmp HandleMovementData
 
 MovementFunction_0e:
-	jp _GetMovementObject
+	jmp _GetMovementObject
 
 MovementFunction_Follow:
 	ld hl, GetFollowerNextMovementIndex
-	jp HandleMovementData
+	jmp HandleMovementData
 
 MovementFunction_Script:
 	ld hl, GetMovementIndex
-	jp HandleMovementData
+	jmp HandleMovementData
 
 MovementFunction_Strength:
 	call ObjectMovement_AnonJumptable
@@ -769,7 +769,7 @@ MovementFunction_FollowNotExact:
 	and %00001100
 	or d
 	pop bc
-	jp NormalStep
+	jmp NormalStep
 
 .standing
 	pop bc
@@ -1496,7 +1496,7 @@ StepFunction_GotBite:
 
 StepFunction_RockSmash:
 	call .Step
-	jp WaitStep_InPlace
+	jmp WaitStep_InPlace
 
 .Step:
 	ld hl, OBJECT_STEP_DURATION
@@ -1524,7 +1524,7 @@ StepFunction_DigTo:
 	ld hl, OBJECT_ACTION
 	add hl, bc
 	ld [hl], a
-	jp WaitStep_InPlace
+	jmp WaitStep_InPlace
 
 StepFunction_Sleep:
 	ld hl, OBJECT_WALKING
@@ -1547,7 +1547,7 @@ StepFunction_Delete:
 	add hl, bc
 	dec [hl]
 	ret nz
-	jp DeleteMapObject
+	jmp DeleteMapObject
 
 StepFunction_Bump:
 	ld hl, OBJECT_STEP_DURATION
@@ -1604,7 +1604,7 @@ StepFunction_ContinueWalk:
 	dec [hl]
 	ret nz
 	call CopyCoordsTileToLastCoordsTile
-	jp RandomStepDuration_Slow
+	jmp RandomStepDuration_Slow
 
 StepFunction_PlayerWalk:
 	call ObjectStep_AnonJumptable
@@ -1742,7 +1742,7 @@ StepFunction_TrackingObject:
 	dec [hl]
 	ret nz
 .nope
-	jp DeleteMapObject
+	jmp DeleteMapObject
 
 StepFunction_14:
 StepFunction_ScreenShake:
@@ -1929,7 +1929,7 @@ GetIndexedMovementIndex2:
 
 _GetMovementObject:
 	ld hl, GetMovementObject
-	jp HandleMovementData
+	jr HandleMovementData
 
 GetMovementObject:
 	ld a, [wMovementObject]
@@ -2113,7 +2113,7 @@ SplashPuddle:
 	call InitTempObject
 	pop bc
 	ld de, SFX_PUDDLE
-	jp PlaySFX
+	jmp PlaySFX
 
 .PuddleObject:
 	; vtile, palette, movement
@@ -2379,7 +2379,7 @@ CheckObjectCoveredByTextbox:
 	cp $f0
 	jr nc, .ok1
 	cp SCREEN_WIDTH_PX
-	jp nc, .nope
+	jmp nc, .nope
 .ok1
 ; Account for objects currently moving left/right.
 	and %00000111
@@ -2708,7 +2708,7 @@ ResetObject::
 	add hl, bc
 	ld a, [hl]
 	cp -1
-	jp z, .set_standing
+	jr z, .set_standing
 	push bc
 	call GetMapObject
 	ld hl, MAPOBJECT_MOVEMENT
@@ -2971,9 +2971,9 @@ InitSprites:
 	add hl, bc
 	ld a, [hl]
 	cp STANDING
-	jp z, .done
+	jr z, .done
 	cp NUM_FACINGS
-	jp nc, .done
+	jr nc, .done
 	ld l, a
 	ld h, 0
 	add hl, hl

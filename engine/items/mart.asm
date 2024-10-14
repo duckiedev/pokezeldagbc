@@ -376,17 +376,17 @@ MartAskPurchaseQuantity:
 	inc hl
 	ld a, [hl]
 	and a
-	jp z, StandardMartAskPurchaseQuantity
+	jmp z, StandardMartAskPurchaseQuantity
 	cp 1
-	jp z, BargainShopAskPurchaseQuantity
-	jp RooftopSaleAskPurchaseQuantity
+	jmp z, BargainShopAskPurchaseQuantity
+	jmp RooftopSaleAskPurchaseQuantity
 
 .PurchaseQuantityOfTM:
 	push de
 	ld hl, wNumItems
 	call CheckItem
 	pop de
-	jp c, .AlreadyHaveTM
+	jr c, .AlreadyHaveTM
 	farcall GetItemPrice
 	ld a, d
 	ld [wBuySellItemPrice + 0], a
@@ -755,7 +755,7 @@ SellMenu:
 	farcall DepositSellPack
 	ld a, [wPackUsedItem]
 	and a
-	jp z, .quit
+	jr z, .quit
 	call .TryToSellItem
 	jr .loop
 

@@ -243,7 +243,7 @@ StoreSwarmMapIndices::
 CheckPokerus:
 ; Check if a monster in your party has Pokerus
 	farcall _CheckPokerus
-	jp ScriptReturnCarry
+	jr ScriptReturnCarry
 
 SnorlaxAwake:
 ; Check if the Poké Flute channel is playing, and if the player is standing
@@ -297,7 +297,7 @@ SnorlaxAwake:
 
 PlayCurMonCry:
 	ld a, [wCurPartySpecies]
-	jp PlayMonCry
+	jmp PlayMonCry
 
 GameboyCheck:
 	ldh a, [hCGB]

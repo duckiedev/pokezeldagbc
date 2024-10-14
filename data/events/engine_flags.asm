@@ -107,9 +107,9 @@ EngineFlags:
 
 	engine_flag wDailyFlags2, DAILYFLAGS2_MT_MOON_SQUARE_CLEFAIRY_F
 	engine_flag wDailyFlags2, DAILYFLAGS2_UNION_CAVE_LAPRAS_F
-	engine_flag wDailyFlags2, DAILYFLAGS2_GOLDENROD_UNDERGROUND_GOT_HAIRCUT_F
+	engine_flag wDailyFlags2, DAILYFLAGS2_UNUSED_F
 	engine_flag wDailyFlags2, DAILYFLAGS2_GOLDENROD_DEPT_STORE_TM27_RETURN_F
-	engine_flag wDailyFlags2, DAILYFLAGS2_DAISYS_GROOMING_F
+	engine_flag wDailyFlags2, DAILYFLAGS2_UNUSED_F
 	engine_flag wDailyFlags2, DAILYFLAGS2_INDIGO_PLATEAU_RIVAL_FIGHT_F
 	engine_flag wDailyFlags2, DAILYFLAGS2_MOVE_TUTOR_F
 	engine_flag wDailyFlags2, DAILYFLAGS2_UNUSED_F

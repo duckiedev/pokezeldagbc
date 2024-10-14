@@ -280,9 +280,9 @@ DEF CELEBIEVENT_FOREST_IS_RESTLESS_F EQU 2
 	const_def
 	const DAILYFLAGS2_MT_MOON_SQUARE_CLEFAIRY_F           ; 0
 	const DAILYFLAGS2_UNION_CAVE_LAPRAS_F                 ; 1
-	const DAILYFLAGS2_GOLDENROD_UNDERGROUND_GOT_HAIRCUT_F ; 2
+	const_skip 											  ; 2
 	const DAILYFLAGS2_GOLDENROD_DEPT_STORE_TM27_RETURN_F  ; 3
-	const DAILYFLAGS2_DAISYS_GROOMING_F                   ; 4
+	const_skip               							  ; 4
 	const DAILYFLAGS2_INDIGO_PLATEAU_RIVAL_FIGHT_F        ; 5
 	const DAILYFLAGS2_MOVE_TUTOR_F                        ; 6
 	const DAILYFLAGS2_UNUSED_F                            ; 7

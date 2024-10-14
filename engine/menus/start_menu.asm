@@ -139,7 +139,7 @@ StartMenu::
 	call DrawVariableLengthMenuBox
 	call UpdateSprites
 	call FinishExitMenu
-	jp .Reopen
+	jmp .Reopen
 	ret
 
 .MenuHeader:
@@ -323,14 +323,14 @@ endr
 	ret
 
 .DrawMenuAccount:
-	jp ._DrawMenuAccount
+	jr ._DrawMenuAccount
 
 .PrintMenuAccount:
 	call .IsMenuAccountOn
 	ret z
 	call ._DrawMenuAccount
 	decoord 0, 14
-	jp .MenuDesc
+	jmp .MenuDesc
 
 ._DrawMenuAccount:
 	call .IsMenuAccountOn
@@ -341,7 +341,7 @@ endr
 	hlcoord 0, 13
 	ld b, 3
 	ld c, 8
-	jp TextboxPalette
+	jmp TextboxPalette
 
 .IsMenuAccountOn:
 	ld a, [wOptions2]

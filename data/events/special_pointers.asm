@@ -55,7 +55,6 @@ SpecialsPointers::
 	add_special ActivateFishingSwarm
 	add_special GiveShuckle
 	add_special ReturnShuckie
-	add_special BillsGrandfather
 	add_special CheckPokerus
 	add_special DisplayCoinCaseBalance
 	add_special DisplayMoneyAndCoinBalance
@@ -67,9 +66,6 @@ SpecialsPointers::
 	add_special LoadUsedSpritesGFX
 	add_special PlaySlowCry
 	add_special SnorlaxAwake
-	add_special OlderHaircutBrother
-	add_special YoungerHaircutBrother
-	add_special DaisysGrooming
 	add_special PlayCurMonCry
 	add_special ProfOaksPCBoot
 	add_special GameboyCheck

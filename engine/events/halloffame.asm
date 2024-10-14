@@ -67,7 +67,7 @@ HallOfFame_FadeOutMusic:
 	ldh [hMapAnims], a
 	farcall InitDisplayForHallOfFame
 	ld c, 100
-	jp DelayFrames
+	jmp DelayFrames
 
 HallOfFame_PlayMusicDE:
 	push de

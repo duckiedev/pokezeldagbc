@@ -27,7 +27,7 @@ EvolveAfterBattle_MasterLoop:
 	inc hl
 	ld a, [hl]
 	cp $ff
-	jp z, .ReturnToMap
+	jmp z, .ReturnToMap
 
 	ld [wEvolutionOldSpecies], a
 
@@ -39,7 +39,7 @@ EvolveAfterBattle_MasterLoop:
 	call EvoFlagAction
 	ld a, c
 	and a
-	jp z, EvolveAfterBattle_MasterLoop
+	jr z, EvolveAfterBattle_MasterLoop
 
 	ld a, [wEvolutionOldSpecies]
 	dec a
@@ -70,15 +70,15 @@ EvolveAfterBattle_MasterLoop:
 
 	ld a, b
 	cp EVOLVE_ITEM
-	jp z, .item
+	jmp z, .item
 
 	ld a, [wForceEvolution]
 	and a
-	jp nz, .dont_evolve_2
+	jmp nz, .dont_evolve_2
 
 	ld a, b
 	cp EVOLVE_LEVEL
-	jp z, .level
+	jmp z, .level
 
 	cp EVOLVE_HAPPINESS
 	jr z, .happiness
@@ -86,10 +86,10 @@ EvolveAfterBattle_MasterLoop:
 ; EVOLVE_STAT
 	ld a, [wTempMonLevel]
 	cp [hl]
-	jp c, .dont_evolve_1
+	jmp c, .dont_evolve_1
 
 	call IsMonHoldingEverstone
-	jp z, .dont_evolve_1
+	jmp z, .dont_evolve_1
 
 	push hl
 	ld de, wTempMonAttack
@@ -106,7 +106,7 @@ EvolveAfterBattle_MasterLoop:
 
 	inc hl
 	cp [hl]
-	jp nz, .dont_evolve_2
+	jmp nz, .dont_evolve_2
 
 	inc hl
 	jr .proceed
@@ -114,10 +114,10 @@ EvolveAfterBattle_MasterLoop:
 .happiness
 	ld a, [wTempMonHappiness]
 	cp HAPPINESS_TO_EVOLVE
-	jp c, .dont_evolve_2
+	jmp c, .dont_evolve_2
 
 	call IsMonHoldingEverstone
-	jp z, .dont_evolve_2
+	jmp z, .dont_evolve_2
 
 	ld a, [hli]
 	cp TR_ANYTIME
@@ -128,19 +128,19 @@ EvolveAfterBattle_MasterLoop:
 ; TR_NITE
 	ld a, [wTimeOfDay]
 	cp NITE_F
-	jp nz, .dont_evolve_3
+	jmp nz, .dont_evolve_3
 	jr .proceed
 
 .happiness_daylight
 	ld a, [wTimeOfDay]
 	cp NITE_F
-	jp z, .dont_evolve_3
+	jmp z, .dont_evolve_3
 	jr .proceed
 
 .trade
 
 	call IsMonHoldingEverstone
-	jp z, .dont_evolve_2
+	jmp z, .dont_evolve_2
 
 	ld a, [hli]
 	ld b, a
@@ -149,7 +149,7 @@ EvolveAfterBattle_MasterLoop:
 
 	ld a, [wTempMonItem]
 	cp b
-	jp nz, .dont_evolve_3
+	jmp nz, .dont_evolve_3
 
 	xor a
 	ld [wTempMonItem], a
@@ -160,11 +160,11 @@ EvolveAfterBattle_MasterLoop:
 	ld b, a
 	ld a, [wCurItem]
 	cp b
-	jp nz, .dont_evolve_3
+	jmp nz, .dont_evolve_3
 
 	ld a, [wForceEvolution]
 	and a
-	jp z, .dont_evolve_3
+	jmp z, .dont_evolve_3
 	jr .proceed
 
 .level
@@ -172,9 +172,9 @@ EvolveAfterBattle_MasterLoop:
 	ld b, a
 	ld a, [wTempMonLevel]
 	cp b
-	jp c, .dont_evolve_3
+	jmp c, .dont_evolve_3
 	call IsMonHoldingEverstone
-	jp z, .dont_evolve_3
+	jmp z, .dont_evolve_3
 
 .proceed
 	ld a, [wTempMonLevel]
@@ -211,7 +211,7 @@ EvolveAfterBattle_MasterLoop:
 	push af
 	call ClearSprites
 	pop af
-	jp c, CancelEvolution
+	jmp c, CancelEvolution
 
 	ld hl, CongratulationsYourPokemonText
 	call PrintText
@@ -302,7 +302,7 @@ EvolveAfterBattle_MasterLoop:
 	push hl
 	ld l, e
 	ld h, d
-	jp EvolveAfterBattle_MasterLoop
+	jmp EvolveAfterBattle_MasterLoop
 
 .dont_evolve_1
 	inc hl
@@ -310,7 +310,7 @@ EvolveAfterBattle_MasterLoop:
 	inc hl
 .dont_evolve_3
 	inc hl
-	jp .loop
+	jmp .loop
 
 .ReturnToMap:
 	pop de
@@ -354,14 +354,14 @@ UpdateSpeciesNameIfNotNicknamed:
 	ld hl, wStringBuffer1
 	pop de
 	ld bc, MON_NAME_LENGTH
-	jp CopyBytes
+	jmp CopyBytes
 
 CancelEvolution:
 	ld hl, StoppedEvolvingText
 	call PrintText
 	call ClearTilemap
 	pop hl
-	jp EvolveAfterBattle_MasterLoop
+	jmp EvolveAfterBattle_MasterLoop
 
 IsMonHoldingEverstone:
 	push hl
@@ -484,11 +484,11 @@ FillMoves:
 .GetLevel:
 	ld a, [hli]
 	and a
-	jp z, .done
+	jr z, .done
 	ld b, a
 	ld a, [wCurPartyLevel]
 	cp b
-	jp c, .done
+	jr c, .done
 	ld a, [wSkipMovesBeforeLevelUp]
 	and a
 	jr z, .CheckMove

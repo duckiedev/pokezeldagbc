@@ -63,7 +63,7 @@ ReadTrainerParty:
 	jp hl
 
 .done
-	jp ComputeTrainerReward
+	jmp ComputeTrainerReward
 
 .cal2
 	jr .done
@@ -311,7 +311,7 @@ ComputeTrainerReward:
 
 Battle_GetTrainerName::
 	ld hl, wOTPlayerName
-	jp nz, CopyTrainerName
+	jr nz, CopyTrainerName
 
 	ld a, [wOtherTrainerID]
 	ld b, a

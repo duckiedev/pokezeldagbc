@@ -1,11 +1,11 @@
 BattleCommand_BatonPass:
 	ldh a, [hBattleTurn]
 	and a
-	jp nz, .Enemy
+	jr nz, .Enemy
 
 ; Need something to switch to
 	call CheckAnyOtherAlivePartyMons
-	jp z, FailedBatonPass
+	jr z, FailedBatonPass
 
 	call UpdateBattleMonInParty
 	call AnimateCurrentMove
@@ -41,10 +41,10 @@ BattleCommand_BatonPass:
 ; Wildmons don't have anything to switch to
 	ld a, [wBattleMode]
 	dec a ; WILDMON
-	jp z, FailedBatonPass
+	jr z, FailedBatonPass
 
 	call CheckAnyOtherAliveEnemyMons
-	jp z, FailedBatonPass
+	jr z, FailedBatonPass
 
 	call UpdateEnemyMonInParty
 	call AnimateCurrentMove
@@ -68,7 +68,7 @@ BattleCommand_BatonPass:
 
 FailedBatonPass:
 	call AnimateFailedMove
-	jp PrintButItFailed
+	jmp PrintButItFailed
 
 ResetBatonPassStatus:
 ; Reset status changes that aren't passed by Baton Pass.

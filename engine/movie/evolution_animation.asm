@@ -156,12 +156,12 @@ EvolutionAnimation:
 
 .GetSGBLayout:
 	ld b, SCGB_EVOLUTION
-	jp GetSGBLayout
+	jmp GetSGBLayout
 
 .PlaceFrontpic:
 	call GetBaseData
 	hlcoord 7, 2
-	jp PrepMonFrontpic
+	jmp PrepMonFrontpic
 
 .LoadFrontpic:
 	call GetBaseData

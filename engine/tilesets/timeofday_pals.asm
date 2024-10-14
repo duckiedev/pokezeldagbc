@@ -110,14 +110,14 @@ _TimeOfDayPals::
 _UpdateTimePals::
 	ld c, $9 ; normal
 	call GetTimePalFade
-	jp DmgToCgbTimePals
+	jmp DmgToCgbTimePals
 
 FadeInPalettes_EnableDynNoApply::
 	farcall EnableDynPalUpdatesNoApply
 	; fallthrough
 FadeInPalettes::
 	ld c, 10
-	jp FadePalettes
+	jmp FadePalettes
 	ret
 
 FadeOutPalettes::

@@ -326,7 +326,7 @@ EraseHallOfFame:
 	ld bc, sHallOfFameEnd - sHallOfFame
 	xor a
 	call ByteFill
-	jp CloseSRAM
+	jmp CloseSRAM
 
 SaveData:
 	call _SaveData
@@ -346,7 +346,7 @@ ValidateSave:
 	ld [sCheckValue1], a
 	ld a, SAVE_CHECK_VALUE_2
 	ld [sCheckValue2], a
-	jp CloseSRAM
+	jmp CloseSRAM
 
 SaveOptions:
 	ld a, BANK(sOptions)
@@ -358,7 +358,7 @@ SaveOptions:
 	ld a, [wOptions]
 	and ~(1 << NO_TEXT_SCROLL)
 	ld [sOptions], a
-	jp CloseSRAM
+	jmp CloseSRAM
 
 SavePlayerData:
 	ld a, BANK(sPlayerData)
@@ -371,7 +371,7 @@ SavePlayerData:
 	ld de, sCurMapData
 	ld bc, wCurMapDataEnd - wCurMapData
 	call CopyBytes
-	jp CloseSRAM
+	jmp CloseSRAM
 
 SavePokemonData:
 	ld a, BANK(sPokemonData)
@@ -686,7 +686,7 @@ _SaveData:
 	ld bc, wCrystalDataEnd - wCrystalData
 	call CopyBytes
 
-	jp CloseSRAM
+	jmp CloseSRAM
 
 _LoadData:
 	ld a, BANK(sCrystalData)
@@ -696,7 +696,7 @@ _LoadData:
 	ld bc, wCrystalDataEnd - wCrystalData
 	call CopyBytes
 
-	jp CloseSRAM
+	jmp CloseSRAM
 
 GetBoxAddress:
 	ld a, [wCurBox]

@@ -146,7 +146,7 @@ LoadOverworldMainPalette:
 	ld de, wBGPals1
 	ld hl, OverworldMainPalette
 	ld bc, 8 palettes
-	jp FarCopyWRAM
+	jmp FarCopyWRAM
 	
 OverworldMainPalette:
 INCLUDE "gfx/tilesets/overworld_main.pal"
@@ -156,7 +156,7 @@ LoadCaveMainPalette:
 	ld de, wBGPals1
 	ld hl, CaveMainPalette
 	ld bc, 8 palettes
-	jp FarCopyWRAM
+	jmp FarCopyWRAM
 
 CaveMainPalette:
 INCLUDE "gfx/tilesets/cave_main.pal"
@@ -166,7 +166,7 @@ LoadGateOfTimePalette:
 	ld de, wBGPals1
 	ld hl, GateOfTimePalette
 	ld bc, 8 palettes
-	jp FarCopyWRAM
+	jmp FarCopyWRAM
 
 GateOfTimePalette:
 INCLUDE "gfx/tilesets/gate_of_time.pal"

@@ -144,7 +144,7 @@ HandleMap:
 	call HandleMapObjects
 	call NextOverworldFrame
 	call HandleMapBackground
-	jp CheckPlayerState
+	jr CheckPlayerState
 
 MapEvents:
 	ld a, [wMapEventStatus]
@@ -160,7 +160,7 @@ NextOverworldFrame:
 	; of a busy LY overflow, perform that now.
 	ld a, [hDelayFrameLY]
 	inc a
-	jp nz, DelayFrame
+	jmp nz, DelayFrame
 	xor a
 	ld [hDelayFrameLY], a
 	ret
@@ -172,12 +172,12 @@ HandleMapTimeAndJoypad:
 
 	call UpdateTime
 	call GetJoypad
-	jp TimeOfDayPals
+	jmp TimeOfDayPals
 
 HandleMapObjects:
 	farcall HandleNPCStep
 	farcall _HandlePlayerStep
-	jp _CheckObjectEnteringVisibleRange
+	jr _CheckObjectEnteringVisibleRange
 
 HandleMapBackground:
 	farcall _UpdateSprites
@@ -340,7 +340,7 @@ CheckTileEvent:
 	call CheckStepCountEnabled
 	jr z, .step_count_disabled
 
-	jp CountStep
+	jmp CountStep
 
 .step_count_disabled
 	call CheckWildEncountersEnabled
@@ -406,7 +406,7 @@ SetMinTwoStepWildEncounterCooldown:
 	ret
 
 Dummy_CheckEnabledMapEventsBit5:
-	jp CheckEnabledMapEventsBit5
+	jmp CheckEnabledMapEventsBit5
 
 RunSceneScript:
 	ld a, [wCurMapSceneScriptCount]
@@ -566,7 +566,7 @@ ObjectEventTypeArray:
 	ld h, [hl]
 	ld l, a
 	call GetMapScriptsBank
-	jp CallScript
+	jmp CallScript
 
 .itemball
 	ld hl, MAPOBJECT_SCRIPT_POINTER
@@ -661,7 +661,7 @@ BGEventJumptable:
 	ld a, [wPlayerDirection]
 	and %1100
 	cp b
-	jp nz, .dontread
+	jr nz, .dontread
 .read:
 	call PlayTalkObject
 	ld hl, wCurBGEventScriptAddr
@@ -675,7 +675,7 @@ BGEventJumptable:
 
 .itemifset:
 	call CheckBGEventFlag
-	jp nz, .dontread
+	jr nz, .dontread
 	call PlayTalkObject
 	call GetMapScriptsBank
 	ld de, wHiddenItemData
@@ -1026,7 +1026,7 @@ RenderRunThroughGrass:
 	add hl, bc
 	ld a, $0a
 	call QueueVolatileTiles
-	jp FinishVolatileTiles
+	jmp FinishVolatileTiles
 
 SwapGrassCollision:
 	ld a, [wPlayerMapX]
@@ -1035,7 +1035,7 @@ SwapGrassCollision:
 	ld e, a
 	ld a, COLL_FLOOR
 	ld [wSetTileCollisionType], a
-	jp SetCoordTileCollision
+	jmp SetCoordTileCollision
 
 INCLUDE "engine/overworld/scripting.asm"
 

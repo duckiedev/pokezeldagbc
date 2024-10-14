@@ -10,7 +10,6 @@ INCLUDE "data/items/attributes.asm"
 INCLUDE "engine/overworld/npc_movement.asm"
 INCLUDE "engine/events/happiness_egg.asm"
 INCLUDE "engine/events/shuckle.asm"
-INCLUDE "engine/events/haircut.asm"
 INCLUDE "engine/events/treasure_chest.asm"
 
 

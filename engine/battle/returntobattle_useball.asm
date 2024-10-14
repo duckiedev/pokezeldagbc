@@ -9,4 +9,4 @@ _ReturnToBattle_UseBall:
 	call CloseWindow
 	call LoadStandardMenuHeader
 	call WaitBGMap
-	jp SetDefaultBGPAndOBP
+	jmp SetDefaultBGPAndOBP

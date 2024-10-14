@@ -1,2 +1,2 @@
 LoadSGBLayout:
-	jp LoadSGBLayoutCGB
+	jmp LoadSGBLayoutCGB

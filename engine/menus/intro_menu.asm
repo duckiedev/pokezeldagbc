@@ -7,7 +7,7 @@ Intro_MainMenu:
 	ld [wMapMusic], a
 	call PlayMusic
 	farcall MainMenu
-	jp StartTitleScreen
+	jmp StartTitleScreen
 
 PrintDayOfWeek:
 	push de
@@ -68,7 +68,7 @@ NewGame:
 
 	ld a, MAPSETUP_WARP
 	ldh [hMapEntryMethod], a
-	jp FinishContinueFunction
+	jmp FinishContinueFunction
 
 PlayerProfileSetup:
 	farcall InitGender
@@ -304,7 +304,7 @@ Continue:
 	jr z, .SpawnAfterE4
 	ld a, MAPSETUP_CONTINUE
 	ldh [hMapEntryMethod], a
-	jp FinishContinueFunction
+	jr FinishContinueFunction
 
 .FailToLoad:
 	ret
@@ -313,7 +313,7 @@ Continue:
 	ld a, SPAWN_NEW_BARK
 	ld [wDefaultSpawnpoint], a
 	call PostCreditsSpawn
-	jp FinishContinueFunction
+	jr FinishContinueFunction
 
 SpawnAfterRed:
 	ld a, SPAWN_MT_SILVER
@@ -368,7 +368,7 @@ FinishContinueFunction:
 	ld a, [wSpawnAfterChampion]
 	cp SPAWN_RED
 	jr z, .AfterRed
-	jp Reset
+	jmp Reset
 
 .AfterRed:
 	call SpawnAfterRed
@@ -495,7 +495,7 @@ Continue_DisplayBadgeCount:
 	pop hl
 	ld de, wNumSetBits
 	lb bc, 1, 2
-	jp PrintNum
+	jmp PrintNum
 
 Continue_DisplayPokedexNumCaught:
 	ld a, [wStatusFlags]
@@ -512,7 +512,7 @@ endc
 	pop hl
 	ld de, wNumSetBits
 	lb bc, 1, 3
-	jp PrintNum
+	jmp PrintNum
 
 Continue_DisplayGameTime:
 	ld de, wGameTimeHours
@@ -522,7 +522,7 @@ Continue_DisplayGameTime:
 	inc hl
 	ld de, wGameTimeMinutes
 	lb bc, PRINTNUM_LEADINGZEROS | 1, 2
-	jp PrintNum
+	jmp PrintNum
 
 OakSpeech:
 	farcall InitClock
@@ -1134,11 +1134,11 @@ TitleScreenEnd:
 
 DeleteSaveData:
 	farcall _DeleteSaveData
-	jp Init
+	jmp Init
 
 ResetClock:
 	farcall _ResetClock
-	jp Init
+	jmp Init
 
 Copyright:
 	call ClearTilemap
@@ -1148,7 +1148,7 @@ Copyright:
 	call Request2bpp
 	hlcoord 2, 7
 	ld de, CopyrightString
-	jp PlaceString
+	jmp PlaceString
 
 CopyrightString:
 	; ©1995-2001 Nintendo
@@ -1180,4 +1180,4 @@ GameInit::
 	ld a, $90
 	ldh [hWY], a
 	call WaitBGMap
-	jp IntroSequence
+	jmp IntroSequence

@@ -4,7 +4,7 @@ InitCrystalData:
 	ret
 
 InitGender:
-	jp InitCrystalData
+	jr InitCrystalData
 
 	/*call InitGenderScreen
 	call LoadGenderScreenPal

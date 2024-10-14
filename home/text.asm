@@ -31,7 +31,7 @@ ClearTilemap::
 	ldh a, [rLCDC]
 	bit rLCDC_ENABLE, a
 	ret z
-	jp WaitBGMap
+	jmp WaitBGMap
 
 ClearScreen::
 	ld a, PAL_BG_TEXT
@@ -123,13 +123,13 @@ SpeechTextbox::
 	hlcoord TEXTBOX_X, TEXTBOX_Y
 	ld b, TEXTBOX_INNERH
 	ld c, TEXTBOX_INNERW
-	jp Textbox
+	jr Textbox
 	
 .battle
 	hlcoord TEXTBOX_BATTLE_X, TEXTBOX_BATTLE_Y
 	ld b, TEXTBOX_BATTLE_INNERH
 	ld c, TEXTBOX_BATTLE_INNERW
-	jp Textbox
+	jr Textbox
 
 RadioTerminator::
 	ld hl, .stop
@@ -185,7 +185,7 @@ PlaceNextChar::
 
 NextChar::
 	inc de
-	jp PlaceNextChar
+	jr PlaceNextChar
 
 CheckDict::
 MACRO dict
@@ -242,7 +242,7 @@ ENDM
 
 	ld [hli], a
 	call PrintLetterDelay
-	jp NextChar
+	jmp NextChar
 
 MACRO print_name
 	push de
@@ -328,7 +328,7 @@ PlaceCommandCharacter::
 	ld h, b
 	ld l, c
 	pop de
-	jp NextChar
+	jmp NextChar
 
 TMCharText::      db "TM@"
 TrainerCharText:: db "TRAINER@"
@@ -346,14 +346,14 @@ NextLineChar::
 	ld bc, SCREEN_WIDTH * 2
 	add hl, bc
 	push hl
-	jp NextChar
+	jmp NextChar
 
 LineFeedChar::
 	pop hl
 	ld bc, SCREEN_WIDTH
 	add hl, bc
 	push hl
-	jp NextChar
+	jmp NextChar
 
 CarriageReturnChar::
 	pop hl
@@ -394,7 +394,7 @@ CarriageReturnChar::
 	ld b, 0
 	add hl, bc
 	push hl
-	jp NextChar
+	jmp NextChar
 
 LineChar::
 	pop hl
@@ -402,13 +402,13 @@ LineChar::
 	and a
 	jr nz, .battle
 	hlcoord TEXTBOX_INNERX, TEXTBOX_INNERY + 2
-	jp .continue
+	jr .continue
 .battle
 	hlcoord TEXTBOX_BATTLE_INNERX, TEXTBOX_BATTLE_INNERY + 1
 
 .continue
 	push hl
-	jp NextChar
+	jmp NextChar
 
 Paragraph::
 	push de
@@ -423,7 +423,7 @@ Paragraph::
 	call DelayFrames
 	hlcoord TEXTBOX_INNERX, TEXTBOX_INNERY
 	pop de
-	jp NextChar
+	jmp NextChar
 
 _ContText::
 	call LoadBlinkingCursor
@@ -436,7 +436,7 @@ _ContTextNoPause::
 	call TextScroll
 	call TextScroll
 	hlcoord TEXTBOX_INNERX, TEXTBOX_INNERY + 2
-	jp .continue
+	jr .continue
 
 .battle
 	;call TextScrollBattle
@@ -445,7 +445,7 @@ _ContTextNoPause::
 
 .continue
 	pop de
-	jp NextChar
+	jmp NextChar
 
 ContText::
 	push de
@@ -456,7 +456,7 @@ ContText::
 	ld h, b
 	ld l, c
 	pop de
-	jp NextChar
+	jmp NextChar
 
 .cont: db "<_CONT>@"
 
@@ -486,7 +486,7 @@ NullChar::
 	ld a, "?"
 	ld [hli], a
 	call PrintLetterDelay
-	jp NextChar
+	jmp NextChar
 
 TextScroll::
 	hlcoord TEXTBOX_INNERX, TEXTBOX_INNERY
@@ -646,7 +646,7 @@ DoTextUntilTerminator::
 	pop bc
 	pop hl
 
-	; jp de
+	; jmp de
 	push de
 	ret
 

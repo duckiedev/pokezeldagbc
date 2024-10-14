@@ -218,7 +218,7 @@ SetHPPal::
 	ld d, HP_RED
 	ld [hl], d
 	ret
-
+/*
 SetEnemySongChars::
 ; Set number of song characters drawn for hp bar pixel length e at a.
 	call GetEnemySongChars
@@ -238,3 +238,4 @@ GetEnemySongChars::
 	assert HP_YELLOW + 1 == HP_RED
 	inc d
 	ret
+*/
