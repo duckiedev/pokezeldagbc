@@ -4450,18 +4450,26 @@ UpdateHPPal:
 	jp FinishBattleAnim
 
 DrawEnemySong:
+	ld b, b
 	; ignore if its a trainer battle
-	;ld a, [wBattleMode]
-	;cp TRAINER_BATTLE
-	;ret nz
+	ld a, [wBattleMode]
+	cp TRAINER_BATTLE
+	ret nz
 
+	; draw single note symbol
+	hlcoord 0, 3
+	ld de, .music_note
+	call PlaceString
+
+	; draw notes from the song
 	hlcoord 1, 3
 	ld de, wBattleEnemySong
 	call PlaceString
 	ret
 	; based on stored wram value of percentage of hp left
-	; song needs to be generated at the beginning of battle and stored in wram
-	
+.music_note
+	db "<NOTE>@"
+
 Battle_DummyFunction:
 ; called before placing either battler's nickname in the HUD
 	ret
@@ -5529,7 +5537,7 @@ LoadEnemyMon:
 ; Initialize Wild Pokemon's Song
 .InitSong:
 	ld a, [wEnemyMonMaxHearts]
-    add a, 2       ; increment hearts by 2
+    add a, 3       ; increment hearts by 2
     cp 6
     jr c, .within_limit
     ld a, 6        ; cap the total length at 6
@@ -5538,14 +5546,14 @@ LoadEnemyMon:
 	ld hl, wBattleEnemySong
 
 .char_loop:
-    call Random               ; call an existing random routine to modify a
-    and 7                  ; limit the random value to 0-7
-    cp 5
+    call Random            ; call an existing random routine to modify a
+    and 5                  ; limit the random value to 0-5
+    ;cp 5
     jr c, .pick_char          ; skip invalid values (6 and 7)
 
     ; fetch random character from charmap
 .pick_char:
-    add a, $e8                ; offset to the charmap range
+    add a, $e9                ; offset to the charmap range
     ld [hli], a  ; store the character in wBattleEnemySong and increment
     dec b
     jr nz, .char_loop

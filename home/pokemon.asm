@@ -27,7 +27,7 @@ DrawBattleHPBar::
 	ld a, [wBattleMode]
 	dec a
 	jr nz, .template_start
-	ld a, $6B
+	ld a, "-"
 	ld [hli], a
 
 ; Draw a template

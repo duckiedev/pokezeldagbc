@@ -320,6 +320,23 @@ CheckTileEvent:
 	jr c, .coord_event
 
 .coord_events_disabled
+	ld hl, wPlayerStepFlags
+	bit PLAYERSTEP_STOP_F, [hl]
+	jr z, .no_tile_effects
+
+	; only check if player is running
+	ld a, [wPlayerState]
+	cp PLAYER_RUN
+	jr nz, .no_tile_effects
+
+	ld a, [wPlayerTileCollision]
+	call CheckGrassTile
+	jr nz, .no_tile_effects
+
+	call RenderRunThroughGrass
+	call SwapGrassCollision
+
+.no_tile_effects
 	call CheckStepCountEnabled
 	jr z, .step_count_disabled
 
@@ -980,6 +997,45 @@ ChangeDirectionScript:
 	callasm UnfreezeAllObjects
 	callasm EnableWildEncounters
 	end
+
+RenderRunThroughGrass:
+	call GetBGMapPlayerOffset
+
+	push hl
+	; assume tiles are standard grass: tile $0A, BGP2, bank 0;
+	; write cut grass with same palette and bank
+
+; horizontal
+	ld bc, BG_MAP_WIDTH
+	add hl, bc
+	ld a, $0a
+	call QueueVolatileTiles
+	inc hl
+	ld a, $0a
+	call QueueVolatileTiles
+
+	pop hl
+.vertical
+
+	ld a, $0a
+	call QueueVolatileTiles
+	inc hl
+	ld a, $0a
+	call QueueVolatileTiles
+	ld bc, BG_MAP_WIDTH - 1
+	add hl, bc
+	ld a, $0a
+	call QueueVolatileTiles
+	jp FinishVolatileTiles
+
+SwapGrassCollision:
+	ld a, [wPlayerMapX]
+	ld d, a
+	ld a, [wPlayerMapY]
+	ld e, a
+	ld a, COLL_FLOOR
+	ld [wSetTileCollisionType], a
+	jp SetCoordTileCollision
 
 INCLUDE "engine/overworld/scripting.asm"
 

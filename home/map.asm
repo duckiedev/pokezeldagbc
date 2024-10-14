@@ -1816,6 +1816,49 @@ GetCoordTileCollision::
 	ld a, -1
 	ret
 
+SetCoordTileCollision::
+; Set the collision byte for tile d, e
+	call GetBlockLocation
+	ld a, [hl]
+	and a
+	ret z
+	ld l, a
+	ld h, 0
+	add hl, hl
+	add hl, hl
+	ld a, [wTilesetCollisionAddress]
+	ld c, a
+	ld a, [wTilesetCollisionAddress + 1]
+	ld b, a
+	add hl, bc
+	rr d
+	jr nc, .nocarry
+	inc hl
+
+.nocarry
+	rr e
+	jr nc, .nocarry2
+	inc hl
+	inc hl
+
+.nocarry2
+; Switch to the correct bank
+	ld a, [wTilesetCollisionBank]
+	ldh [hTempBank], a
+	ldh a, [hROMBank]
+	push af
+	ldh a, [hTempBank]
+	rst Bankswitch
+
+	; Set the collision byte
+	ld a, [wSetTileCollisionType]  ; Load the desired collision byte value into 'a'
+	ld [hl], a
+
+	; Switch back to the previous bank
+	pop af
+	rst Bankswitch
+	ret
+
 GetBlockLocation::
 	ld a, [wMapWidth]
 	add 6
