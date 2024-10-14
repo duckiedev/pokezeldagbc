@@ -4433,13 +4433,10 @@ DrawEnemyHUD:
 	ld b, 0
 	call DrawBattleHPBar
 .draw_song
-	call DrawEnemySong
-	ret
+	jr DrawEnemySong
 
 UpdateEnemyHPPal:
 	ld hl, wEnemyHPPal
-	call UpdateHPPal
-	ret
 
 UpdateHPPal:
 	ld b, [hl]
@@ -4450,11 +4447,33 @@ UpdateHPPal:
 	jmp FinishBattleAnim
 
 DrawEnemySong:
-	ld b, b
+
+	ld de, EVENT_GOT_KINSTONE_OCARINA
+	ld b, CHECK_FLAG
+	call EventFlagAction
+	ld a, c
+	and a
+	ret nz
+
 	; ignore if its a trainer battle
 	ld a, [wBattleMode]
 	cp TRAINER_BATTLE
-	ret nz
+	ret z
+
+	; check percentage
+	ld hl, wEnemyMonHP
+	ld a, [hli]
+	ld b, a
+	ld c, [hl]
+	ld hl, wEnemyMonMaxHP
+	ld a, [hli]
+	ld d, a
+	ld e, [hl]
+	farcall ComputeHPBarPixels
+	; get percentage of hp bar pixel length e
+	ld a, e
+	cp (HP_BAR_LENGTH_PX * 25 / 100)
+	ret nc
 
 	; draw single note symbol
 	hlcoord 0, 3
@@ -5563,6 +5582,7 @@ LoadEnemyMon:
     ld [hl], a
 ; Species-specfic:
 
+.Continue
 ; Unown
 	ld a, [wTempEnemyMonSpecies]
 	cp UNOWN

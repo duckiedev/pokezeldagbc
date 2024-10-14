@@ -23,4 +23,4 @@ ForestAreaH8_MapEvents:
 	def_bg_events
 	
 	def_object_events
-	object_event  6, 1, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, ForestAreaH8Ocarina, EVENT_ROUTE_45_NUGGET
+	object_event  6, 1, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, ForestAreaH8Ocarina, EVENT_GOT_KINSTONE_OCARINA
