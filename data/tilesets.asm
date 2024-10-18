@@ -49,4 +49,7 @@ Tilesets::
 	tileset TilesetOverworldMainTwo
 	tileset TilesetCaveMain
 	tileset TilesetGateOfTime
+	tileset TilesetSidescrollTest
+	tileset TilesetForestGateSidescrolling
+	tileset TilesetDebugMap
 	assert_table_length NUM_TILESETS + 1

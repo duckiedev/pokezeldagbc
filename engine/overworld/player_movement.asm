@@ -99,6 +99,14 @@ DoPlayerMovement::
 	ld a, [wWalkingIntoEdgeWarp]
 	and a
 	jr nz, .CantMove
+	call GetMapSidescrollingByte
+	and a
+	jr z, .notSidescroll
+	ld a, [wWalkingTileCollision]
+	ld hl, .SidescrollFaceUpEmptyTiles
+	call IsInArray
+	jr c, .Standing
+.notSidescroll:
 	call .BumpSound
 .CantMove:
 	call ._WalkInPlace
@@ -109,6 +117,13 @@ DoPlayerMovement::
 	call .StandInPlace
 	xor a
 	ret
+
+.SidescrollFaceUpEmptyTiles
+; todo: figure out if there are any tiles missing from here
+	db $07
+	db $15
+	db $27
+	db -1
 
 .CheckTile:
 ; Tiles such as waterfalls and warps move the player

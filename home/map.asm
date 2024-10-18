@@ -2348,24 +2348,27 @@ GetMapMusic::
 	jr .done
 
 GetMapTimeOfDay::
-	call GetUnusedFlagByteTimeOfDayByte
+	call GetMapSidescrollingTimeOfDayByte
 	and $f
 	ret
 
-GetMapUnusedFlagByte::
-	call GetUnusedFlagByteTimeOfDayByte
+GetMapSidescrollingByte::
+	call GetMapSidescrollingTimeOfDayByte
 	and $f0
 	swap a
 	ret
 
-GetUnusedFlagByteTimeOfDayByte::
+GetMapSidescrollingTimeOfDayByte::
+
 	push hl
 	push bc
+	push de
 
 	ld de, MAP_PALETTE
 	call GetMapField
 	ld a, c
 
+	pop de
 	pop bc
 	pop hl
 	ret

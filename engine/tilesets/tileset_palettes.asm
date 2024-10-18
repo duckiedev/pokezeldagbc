@@ -18,6 +18,10 @@ LoadSpecialMapPalette:
 	jr z, .cave_main
 	cp TILESET_GATE_OF_TIME
 	jr z, .gate_of_time
+	cp TILESET_SIDESCROLLTEST
+	jr z, .sidescrolltest
+	cp TILESET_DEBUG_MAP
+	jr z, .debug_map
 	jr .do_nothing
 
 .pokecom_2f
@@ -61,6 +65,21 @@ LoadSpecialMapPalette:
 
 .gate_of_time
 	call LoadGateOfTimePalette
+	scf
+	ret
+
+.sidescrolltest
+	call LoadSidescrollTestPalette
+	scf 
+	ret
+
+.forest_gate_sidescrolling
+	call LoadForestGateSidescrollingPalette
+	scf 
+	ret 
+
+.debug_map
+	call LoadDebugMapPalette
 	scf
 	ret
 
@@ -170,3 +189,33 @@ LoadGateOfTimePalette:
 
 GateOfTimePalette:
 INCLUDE "gfx/tilesets/gate_of_time.pal"
+
+LoadSidescrollTestPalette:
+	ld a, BANK(wBGPals1)
+	ld de, wBGPals1
+	ld hl, SidescrollTestPalette
+	ld bc, 8 palettes
+	jmp FarCopyWRAM
+
+SidescrollTestPalette:
+INCLUDE "gfx/tilesets/sidescrolltest.pal"
+
+LoadForestGateSidescrollingPalette:
+	ld a, BANK(wBGPals1)
+	ld de, wBGPals1
+	ld hl, ForestGateSidescrollingPalette
+	ld bc, 8 palettes
+	jmp FarCopyWRAM
+
+ForestGateSidescrollingPalette:
+INCLUDE "gfx/tilesets/forest_gate_sidescrolling.pal"
+
+LoadDebugMapPalette:
+	ld a, BANK(wBGPals1)
+	ld de, wBGPals1
+	ld hl, DebugMapPalette
+	ld bc, 8 palettes
+	jmp FarCopyWRAM
+
+DebugMapPalette:
+INCLUDE "gfx/tilesets/debug_map.pal"

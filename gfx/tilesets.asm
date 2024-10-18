@@ -460,6 +460,7 @@ INCLUDE "data/tilesets/overworld_main_two_collision.asm"
 TilesetOverworldMainTwoAttr::
 INCBIN "data/tilesets/overworld_main_two_attributes.bin"
 
+
 SECTION "Tileset Data 15", ROMX
 
 TilesetCaveMainGFX::
@@ -485,3 +486,42 @@ INCLUDE "data/tilesets/gate_of_time_collision.asm"
 
 TilesetGateOfTimeAttr::
 INCBIN "data/tilesets/gate_of_time_attributes.bin"
+
+
+SECTION "Tileset Data 16", ROMX
+
+TilesetSidescrollTestGFX::
+INCBIN "gfx/tilesets/sidescrolltest.2bpp.lz"
+
+TilesetSidescrollTestMeta::
+INCBIN "data/tilesets/sidescrolltest_metatiles.bin"
+
+TilesetSidescrollTestColl::
+INCLUDE "data/tilesets/sidescrolltest_collision.asm"
+
+TilesetSidescrollTestAttr::
+INCBIN "data/tilesets/sidescrolltest_attributes.bin"
+
+TilesetForestGateSidescrollingGFX::
+INCBIN "gfx/tilesets/forest_gate_sidescrolling.2bpp.lz"
+
+TilesetForestGateSidescrollingMeta::
+INCBIN "data/tilesets/forest_gate_sidescrolling_metatiles.bin"
+
+TilesetForestGateSidescrollingColl::
+INCLUDE "data/tilesets/forest_gate_sidescrolling_collision.asm"
+
+TilesetForestGateSidescrollingAttr::
+INCBIN "data/tilesets/forest_gate_sidescrolling_attributes.bin"
+
+TilesetDebugMapGFX::
+INCBIN "gfx/tilesets/debug_map.2bpp.lz"
+
+TilesetDebugMapMeta::
+INCBIN "data/tilesets/debug_map_metatiles.bin"
+
+TilesetDebugMapColl::
+INCLUDE "data/tilesets/debug_map_collision.asm"
+
+TilesetDebugMapAttr::
+INCBIN "data/tilesets/debug_map_attributes.bin"

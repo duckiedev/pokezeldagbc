@@ -121,3 +121,7 @@
 ; group 30 (Heroes Cave)
 	RGB 21,21,21, 11,11,11 ; morn/day
 	RGB 21,21,21, 11,11,11 ; nite
+
+; group 31 (Test Maps)
+	RGB 21,21,21, 11,11,11 ; morn/day
+	RGB 21,21,21, 11,11,11 ; nite

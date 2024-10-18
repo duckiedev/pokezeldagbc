@@ -479,7 +479,7 @@ ENDM
 	newgroup FOREST												  ; 27
 	map_const FOREST_AREA_H8,								5,  5 ;  1
 	map_const FOREST_ZONE_01,							   19,  9 ;  2
-
+	map_const FOREST_GATE_01,							   10,  4 ;  3
 	endgroup
 	
 	newgroup BEACH												  ; 28
@@ -508,6 +508,11 @@ ENDM
 	map_const HEROES_CAVE_01,								7,  5 ;  1
 	map_const HEROES_CAVE_02,								7,  5 ;  2
 	map_const HEROES_CAVE_03,								7,  5 ;  3
+	endgroup
+
+	newgroup TEST_MAPS										  	  ; 31	
+	map_const SIDESCROLLTEST,	                           10,  3 ;  1
+	map_const DEBUG_MAP,                             	   11, 11 ;  2
 	endgroup
 
 DEF NUM_MAP_GROUPS EQU const_value ; 30

@@ -63,7 +63,7 @@ NewGame:
 	ld a, LANDMARK_NEW_BARK_TOWN
 	ld [wPrevLandmark], a
 
-	ld a, SPAWN_FOREST_START
+	ld a, SPAWN_DEBUG_START
 	ld [wDefaultSpawnpoint], a
 
 	ld a, MAPSETUP_WARP

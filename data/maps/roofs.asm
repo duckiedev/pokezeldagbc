@@ -42,6 +42,7 @@ MapGroupRoofs:
 	db -1			  ; 28 (Beach)
 	db -1			  ; 29 (Cave)
 	db -1			  ; 30 (Heroes Cave)
+	db -1			  ; 31 (Test Maps)
 	assert_table_length NUM_MAP_GROUPS + 1
 
 Roofs:

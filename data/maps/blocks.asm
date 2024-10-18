@@ -911,6 +911,9 @@ ForestAreaH8_Blocks:
 ForestZone01_Blocks:
 	INCBIN "maps/ForestZone01.ablk"
 
+ForestGate01_Blocks:
+	INCBIN "maps/ForestGate01.ablk"
+
 BeachAreaJ8_Blocks:
 	INCBIN "maps/BeachAreaJ8.ablk"
 
@@ -971,4 +974,8 @@ HeroesCave02_Blocks:
 HeroesCave03_Blocks:
 	INCBIN "maps/HeroesCave03.ablk"
 
+SidescrollTest_Blocks:
+	INCBIN "maps/SidescrollTest.ablk"
+DebugMap_Blocks:
+	INCBIN "maps/DebugMap.ablk"
 ENDSECTION

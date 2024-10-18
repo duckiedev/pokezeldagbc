@@ -658,6 +658,7 @@ Movement_turn_step_right:
 	jr TurnStep
 
 TurnStep:
+	call PlayerSidescrollMovingDownOnLadderCheck
 	ld hl, OBJECT_1D ; new facing
 	add hl, bc
 	ld [hl], a

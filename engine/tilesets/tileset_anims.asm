@@ -201,6 +201,9 @@ TilesetKabutoWordRoomAnim:
 TilesetOmanyteWordRoomAnim:
 TilesetAerodactylWordRoomAnim:
 TilesetGateOfTimeAnim:
+TilesetSidescrollTestAnim:
+TilesetForestGateSidescrollingAnim:
+TilesetDebugMapAnim:
 	dw NULL,  WaitTileAnimation
 	dw NULL,  WaitTileAnimation
 	dw NULL,  WaitTileAnimation

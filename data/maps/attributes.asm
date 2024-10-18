@@ -693,6 +693,7 @@ ENDM
 
 	map_attributes ForestAreaH8, FOREST_AREA_H8, $00, 0
 	map_attributes ForestZone01, FOREST_ZONE_01, $00, 0
+	map_attributes ForestGate01, FOREST_GATE_01, $00, 0
 
 	map_attributes BeachAreaJ8, BEACH_AREA_J8, $00, EAST
 	connection east, BeachAreaK8, BEACH_AREA_K8, 0
@@ -760,3 +761,6 @@ ENDM
 	map_attributes HeroesCave01, HEROES_CAVE_01, $16, 0
 	map_attributes HeroesCave02, HEROES_CAVE_02, $16, 0
 	map_attributes HeroesCave03, HEROES_CAVE_03, $16, 0
+
+	map_attributes SidescrollTest, SIDESCROLLTEST, $00, 0
+	map_attributes DebugMap,	DEBUG_MAP, $00, 0

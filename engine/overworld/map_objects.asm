@@ -213,7 +213,6 @@ CopyCoordsTileToLastCoordsTile:
 	ld hl, OBJECT_TILE_COLLISION
 	add hl, bc
 	ld a, [hl]
-	call UselessAndA
 	ret
 
 CopyLastCoordsToCoords:
@@ -244,12 +243,10 @@ UpdateTallGrassFlags:
 	ld hl, OBJECT_TILE_COLLISION
 	add hl, bc
 	ld a, [hl]
-	call UselessAndA
 	ret c ; never happens
 	ld hl, OBJECT_LAST_TILE
 	add hl, bc
 	ld a, [hl]
-	call UselessAndA
 	ret
 
 SetTallGrassFlags:
@@ -267,10 +264,6 @@ SetTallGrassFlags:
 	ld hl, OBJECT_FLAGS2
 	add hl, bc
 	res OVERHEAD_F, [hl]
-	ret
-
-UselessAndA:
-	and a
 	ret
 
 EndSpriteMovement:
@@ -300,6 +293,7 @@ InitStep:
 	add a
 	add a
 	and %00001100
+	call PlayerSidescrollMovingDownOnLadderCheck
 	ld hl, OBJECT_DIRECTION
 	add hl, bc
 	ld [hl], a
@@ -334,6 +328,33 @@ GetNextTile:
 	ld hl, OBJECT_TILE_COLLISION
 	add hl, bc
 	ld [hl], a
+	ret
+
+PlayerSidescrollMovingDownOnLadderCheck:
+	push de
+	ld d, a
+	call .PlayerSidescrollMovingDownOnLadderCheck
+	ld a, d
+	pop de
+	ret nz
+	ld a, OW_UP
+	ret
+
+.PlayerSidescrollMovingDownOnLadderCheck:
+	cp OW_DOWN					 ; return if we're not facing down
+	ret nz
+	call GetMapSidescrollingByte ; return if we're not on a sidescrolling map
+	and a
+	jp z, .not_sidescrolling
+	ldh a, [hMapObjectIndex]	 ; return if this isn't the player
+	and a
+	ret nz
+	ld a, [wTileDown]			 ; return if the tile below us is not $00?
+	and a
+	ret
+.not_sidescrolling:
+	xor a
+	inc a
 	ret
 
 AddStepVector:
@@ -436,19 +457,6 @@ UpdatePlayerStep:
 	set PLAYERSTEP_CONTINUE_F, [hl]
 	ret
 
-GetMapObjectField: ; unreferenced
-	push bc
-	ld e, a
-	ld d, 0
-	ld hl, OBJECT_MAP_OBJECT_INDEX
-	add hl, bc
-	ld a, [hl]
-	call GetMapObject
-	add hl, de
-	ld a, [hl]
-	pop bc
-	ret
-
 RestoreDefaultMovement:
 	ld hl, OBJECT_MAP_OBJECT_INDEX
 	add hl, bc
@@ -465,12 +473,6 @@ RestoreDefaultMovement:
 
 .ok
 	ld a, SPRITEMOVEDATA_STANDING_DOWN
-	ret
-
-ObjectMovement_ZeroAnonJumptableIndex: ; unreferenced
-	ld hl, OBJECT_MOVEMENT_INDEX
-	add hl, bc
-	ld [hl], 0
 	ret
 
 ObjectMovement_IncAnonJumptableIndex:
@@ -2964,6 +2966,13 @@ InitSprites:
 	add [hl]
 	add 12
 	ld e, a
+	call GetMapSidescrollingByte
+	and a
+	jr z, .continue
+	ld a, e
+	add 4
+	ld e, a
+.continue
 	ld a, [wPlayerBGMapOffsetY]
 	add e
 	ldh [hCurSpriteYPixel], a

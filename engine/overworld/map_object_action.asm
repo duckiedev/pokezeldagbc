@@ -30,7 +30,7 @@ SetFacingStanding:
 	ret
 
 SetFacingCurrent:
-	call GetSpriteDirection
+	call SidescrollGetSpriteDirection
 	ld hl, OBJECT_FACING
 	add hl, bc
 	ld [hl], a
@@ -60,7 +60,7 @@ SetFacingStepAction:
 	rrca 
 	and %11
 	ld d, a
-	call GetSpriteDirection
+	call SidescrollGetSpriteDirection
 	or d
 	ld hl, OBJECT_FACING
 	add hl, bc
@@ -86,7 +86,6 @@ SetFacingSkyfall:
 	ld d, a
 
 	call GetSpriteDirection
-	or FACING_STEP_DOWN_0 ; useless
 	or d
 	ld hl, OBJECT_FACING
 	add hl, bc

@@ -38,6 +38,9 @@
 	const TILESET_OVERWORLD_MAIN_TWO   ; 24
 	const TILESET_CAVE_MAIN			   ; 25
 	const TILESET_GATE_OF_TIME		   ; 26
+	const TILESET_SIDESCROLLTEST	   ; 27
+	const TILESET_FOREST_GATE_SIDESCROLLING ; 28
+	const TILESET_DEBUG_MAP			   ; 29
 DEF NUM_TILESETS EQU const_value - 1
 
 ; wTileset struct size

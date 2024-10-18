@@ -593,6 +593,7 @@ SetSpriteDirection::
 	ld [hl], a
 	ret
 
+SidescrollGetSpriteDirection::
 GetSpriteDirection::
 	ld hl, OBJECT_DIRECTION
 	add hl, bc
