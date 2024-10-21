@@ -5,22 +5,15 @@ HealParty:
 .loop
 	ld a, [hli]
 	cp -1
-	jr z, .done
-	cp EGG
-	jr z, .next
+	ret z
 
 	push hl
 	call HealPartyMon
 	pop hl
-
-.next
 	ld a, [wCurPartyMon]
 	inc a
 	ld [wCurPartyMon], a
 	jr .loop
-
-.done
-	ret
 
 HealPartyMon:
 	ld a, MON_SPECIES

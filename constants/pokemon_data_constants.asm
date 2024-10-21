@@ -21,13 +21,13 @@ DEF BASE_ITEM_1      rb
 DEF BASE_ITEM_2      rb
 DEF BASE_GENDER      rb
 DEF BASE_HEARTS      rb
-DEF BASE_EGG_STEPS   rb
+DEF BASE_UNUSED_1    rb
 DEF BASE_FORMPIC_BANK	rb
 DEF BASE_PIC_SIZE    rb
 DEF BASE_FORMFRONTPIC	rw
 DEF BASE_FORMBACKPIC	rw
 DEF BASE_GROWTH_RATE rb
-DEF BASE_EGG_GROUPS  rb
+DEF BASE_UNUSED_2   rb
 DEF BASE_TMHM        rb (NUM_TM_HM_TUTOR + 7) / 8
 DEF BASE_DATA_SIZE EQU _RS
 
@@ -50,24 +50,6 @@ DEF GENDER_UNKNOWN EQU -1
 	const GROWTH_FAST
 	const GROWTH_SLOW
 DEF NUM_GROWTH_RATES EQU const_value
-
-; wBaseEggGroups values
-	const_def 1
-	const EGG_MONSTER       ; 1
-	const EGG_WATER_1       ; 2 (Amphibian)
-	const EGG_BUG           ; 3
-	const EGG_FLYING        ; 4
-	const EGG_GROUND        ; 5 (Field)
-	const EGG_FAIRY         ; 6
-	const EGG_PLANT         ; 7 (Grass)
-	const EGG_HUMANSHAPE    ; 8 (Human-Like)
-	const EGG_WATER_3       ; 9 (Invertebrate)
-	const EGG_MINERAL       ; a
-	const EGG_INDETERMINATE ; b (Amorphous)
-	const EGG_WATER_2       ; c (Fish)
-	const EGG_DITTO         ; d
-	const EGG_DRAGON        ; e
-	const EGG_NONE          ; f (Undiscovered)
 
 ; pokedex entries (see data/pokemon/dex_entries.asm)
 DEF NUM_DEX_ENTRY_BANKS EQU 4
@@ -126,8 +108,6 @@ DEF CAUGHT_LOCATION_MASK EQU %01111111
 DEF CAUGHT_BY_UNKNOWN EQU 0
 DEF CAUGHT_BY_GIRL    EQU 1
 DEF CAUGHT_BY_BOY     EQU 2
-
-DEF CAUGHT_EGG_LEVEL EQU 1
 
 DEF MON_CRY_LENGTH EQU 6
 

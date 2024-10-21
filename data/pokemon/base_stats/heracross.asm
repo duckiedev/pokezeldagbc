@@ -9,12 +9,12 @@
 	db NO_ITEM, NO_ITEM ; items
 	db GENDER_F50 ; gender ratio
 	db 1 ; hearts (more than 1 is considered a boss)
-	db 25 ; step cycles to hatch
+    db 0 ; unused1
 	db 5 ; form pic bank
 	INCBIN "gfx/pokemon/heracross/front.dimensions"
 	dw NULL, NULL ; Form pics
 	db GROWTH_SLOW ; growth rate
-	dn EGG_BUG, EGG_BUG ; egg groups
+    db 0 ; unused2
 
 	; tm/hm learnset
 	tmhm HEADBUTT, CURSE, TOXIC, ROCK_SMASH, HIDDEN_POWER, SUNNY_DAY, SNORE, PROTECT, ENDURE, FRUSTRATION, EARTHQUAKE, RETURN, DOUBLE_TEAM, SWAGGER, SLEEP_TALK, DETECT, REST, ATTRACT, THIEF, FURY_CUTTER, CUT, STRENGTH

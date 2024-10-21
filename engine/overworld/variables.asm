@@ -52,7 +52,6 @@ _GetVarAction::
 	dwb .DayOfWeek,                     RETVAR_EXECUTE
 	dwb wMapGroup,                      RETVAR_STRBUF2
 	dwb wMapNumber,                     RETVAR_STRBUF2
-	dwb .UnownCaught,                   RETVAR_EXECUTE
 	dwb wEnvironment,                   RETVAR_STRBUF2
 	dwb .BoxFreeSpace,                  RETVAR_EXECUTE
 	dwb wXCoord,                        RETVAR_STRBUF2
@@ -96,25 +95,6 @@ _GetVarAction::
 ; The day of the week.
 	call GetWeekday
 	jr .loadstringbuffer2
-
-.UnownCaught:
-; Number of unique Unown caught.
-	call .count_unown
-	ld a, b
-	jr .loadstringbuffer2
-
-.count_unown
-	ld hl, wUnownDex
-	ld b, 0
-.loop
-	ld a, [hli]
-	and a
-	ret z
-	inc b
-	ld a, b
-	cp NUM_UNOWN
-	jr c, .loop
-	ret
 
 .BoxFreeSpace:
 ; Remaining slots in the current box.

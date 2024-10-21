@@ -9,29 +9,19 @@ EngineFlags:
 	table_width 3, EngineFlags
 
 	; pokegear
-	engine_flag wPokegearFlags, POKEGEAR_RADIO_CARD_F
 	engine_flag wPokegearFlags, POKEGEAR_MAP_CARD_F
 	engine_flag wPokegearFlags, POKEGEAR_EXPN_CARD_F
 	engine_flag wPokegearFlags, POKEGEAR_OBTAINED_F
-
-	; day-care
-	engine_flag wDayCareMan, DAYCAREMAN_HAS_EGG_F
-	engine_flag wDayCareMan, DAYCAREMAN_HAS_MON_F
-	engine_flag wDayCareLady, DAYCARELADY_HAS_MON_F
 
 	engine_flag wMomSavingMoney, MOM_SAVING_SOME_MONEY_F
 	engine_flag wMomSavingMoney, MOM_ACTIVE_F
 
 	engine_flag wStatusFlags, STATUSFLAGS_POKEDEX_F
-	engine_flag wStatusFlags, STATUSFLAGS_UNOWN_DEX_F
 	engine_flag wStatusFlags, STATUSFLAGS_CAUGHT_POKERUS_F
 	engine_flag wStatusFlags, STATUSFLAGS_ROCKET_SIGNAL_F
 	engine_flag wStatusFlags, STATUSFLAGS_HALL_OF_FAME_F
 
 	engine_flag wStatusFlags2, STATUSFLAGS2_SAFARI_GAME_F
-	engine_flag wStatusFlags2, STATUSFLAGS2_ROCKETS_IN_RADIO_TOWER_F
-	engine_flag wStatusFlags2, STATUSFLAGS2_UNUSED_4_F
-	engine_flag wStatusFlags2, STATUSFLAGS2_UNUSED_5_F
 	engine_flag wStatusFlags2, STATUSFLAGS2_REACHED_GOLDENROD_F
 	engine_flag wStatusFlags2, STATUSFLAGS2_ROCKETS_IN_MAHOGANY_F
 
@@ -56,16 +46,6 @@ EngineFlags:
 	engine_flag wKantoBadges, MARSHBADGE
 	engine_flag wKantoBadges, VOLCANOBADGE
 	engine_flag wKantoBadges, EARTHBADGE
-
-	; unown sets (see data/wild/unlocked_unowns.asm)
-	engine_flag wUnlockedUnowns, UNLOCKED_UNOWNS_A_TO_K_F
-	engine_flag wUnlockedUnowns, UNLOCKED_UNOWNS_L_TO_R_F
-	engine_flag wUnlockedUnowns, UNLOCKED_UNOWNS_S_TO_W_F
-	engine_flag wUnlockedUnowns, UNLOCKED_UNOWNS_X_TO_Z_F
-	engine_flag wUnlockedUnowns, 4 ; unused
-	engine_flag wUnlockedUnowns, 5 ; unused
-	engine_flag wUnlockedUnowns, 6 ; unused
-	engine_flag wUnlockedUnowns, 7 ; unused
 
 	; fly
 	engine_flag wVisitedSpawns, SPAWN_HOME
@@ -96,8 +76,6 @@ EngineFlags:
 	engine_flag wVisitedSpawns, SPAWN_MT_SILVER
 	engine_flag wVisitedSpawns, NUM_SPAWNS ; unused
 
-	engine_flag wStatusFlags2, STATUSFLAGS2_UNUSED_3_F
-
 	engine_flag wDailyFlags1, DAILYFLAGS1_KURT_MAKING_BALLS_F
 	engine_flag wDailyFlags1, DAILYFLAGS1_FISH_SWARM_F
 	engine_flag wDailyFlags1, DAILYFLAGS1_ALL_FRUIT_TREES_F
@@ -107,21 +85,15 @@ EngineFlags:
 
 	engine_flag wDailyFlags2, DAILYFLAGS2_MT_MOON_SQUARE_CLEFAIRY_F
 	engine_flag wDailyFlags2, DAILYFLAGS2_UNION_CAVE_LAPRAS_F
-	engine_flag wDailyFlags2, DAILYFLAGS2_UNUSED_F
 	engine_flag wDailyFlags2, DAILYFLAGS2_GOLDENROD_DEPT_STORE_TM27_RETURN_F
-	engine_flag wDailyFlags2, DAILYFLAGS2_UNUSED_F
 	engine_flag wDailyFlags2, DAILYFLAGS2_INDIGO_PLATEAU_RIVAL_FIGHT_F
 	engine_flag wDailyFlags2, DAILYFLAGS2_MOVE_TUTOR_F
-	engine_flag wDailyFlags2, DAILYFLAGS2_UNUSED_F
 
-	engine_flag wSwarmFlags, SWARMFLAGS_UNUSED_F
 	engine_flag wSwarmFlags, SWARMFLAGS_GOLDENROD_DEPT_STORE_SALE_F
 
 	engine_flag wPlayerGender, PLAYERGENDER_FEMALE_F
 
 	engine_flag wCelebiEvent, CELEBIEVENT_FOREST_IS_RESTLESS_F
-
-	engine_flag wPlayerSpriteSetupFlags, PLAYERSPRITESETUP_FEMALE_TO_MALE_F
 
 	engine_flag wSwarmFlags, SWARMFLAGS_DUNSPARCE_SWARM_F
 	engine_flag wSwarmFlags, SWARMFLAGS_YANMA_SWARM_F

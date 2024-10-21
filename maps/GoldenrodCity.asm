@@ -178,19 +178,6 @@ GoldenrodCityCooltrainerF1Script:
 	end
 
 GoldenrodCityCooltrainerF2Script:
-	faceplayer
-	opentext
-	checkflag ENGINE_RADIO_CARD
-	iftrue .GotRadioCard
-	writetext GoldenrodCityCooltrainerF2Text
-	waitbutton
-	closetext
-	end
-
-.GotRadioCard:
-	writetext GoldenrodCityCooltrainerF2Text_GotRadioCard
-	waitbutton
-	closetext
 	end
 
 GoldenrodCityYoungster2Script:

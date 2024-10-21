@@ -33,7 +33,6 @@ INCLUDE "engine/overworld/player_step.asm"
 INCLUDE "engine/battle/anim_hp_bar.asm"
 INCLUDE "engine/pokemon/move_mon.asm"
 INCLUDE "engine/pokemon/bills_pc_top.asm"
-INCLUDE "engine/pokemon/breedmon_level_growth.asm"
 INCLUDE "engine/items/item_effects.asm"
 INCLUDE "engine/battle_anims/pokeball_wobble.asm"
 INCLUDE "engine/pokemon/knows_move.asm"
@@ -74,8 +73,6 @@ INCLUDE "engine/items/mart.asm"
 INCLUDE "engine/events/money.asm"
 INCLUDE "data/items/marts.asm"
 INCLUDE "engine/events/mom.asm"
-INCLUDE "engine/events/daycare.asm"
-INCLUDE "engine/pokemon/breeding.asm"
 
 SECTION "Dynamic Pals System", ROMX
 
@@ -259,7 +256,6 @@ SECTION "Crystal Features 2", ROMX
 
 INCLUDE "engine/events/kurt.asm"
 INCLUDE "engine/gfx/player_gfx.asm"
-INCLUDE "engine/events/unown_walls.asm"
 INCLUDE "engine/events/dratini.asm"
 
 
@@ -288,7 +284,6 @@ INCLUDE "engine/events/map_name_sign.asm"
 INCLUDE "engine/events/checkforhiddenitems.asm"
 INCLUDE "engine/events/treemons.asm"
 INCLUDE "engine/events/fishing_gfx.asm"
-INCLUDE "engine/pokegear/radio.asm"
 
 
 SECTION "bank32", ROMX
@@ -328,7 +323,6 @@ INCLUDE "engine/gfx/load_font.asm"
 INCLUDE "engine/events/name_rater.asm"
 INCLUDE "engine/events/play_slow_cry.asm"
 INCLUDE "engine/pokedex/new_pokedex_entry.asm"
-INCLUDE "engine/pokedex/unown_dex.asm"
 INCLUDE "engine/battle/hidden_power.asm"
 INCLUDE "engine/battle/misc.asm"
 

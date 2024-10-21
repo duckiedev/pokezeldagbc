@@ -76,7 +76,6 @@
 	const MUSIC_ROCKET_HIDEOUT               ; 48
 	const MUSIC_DRAGONS_DEN                  ; 49
 	const MUSIC_JOHTO_WILD_BATTLE_NIGHT      ; 4a
-	const MUSIC_RUINS_OF_ALPH_RADIO          ; 4b
 	const MUSIC_CAPTURE                      ; 4c
 	const MUSIC_ROUTE_26                     ; 4d
 	const MUSIC_MOM                          ; 4e
@@ -89,29 +88,24 @@
 	const MUSIC_RUINS_OF_ALPH_INTERIOR       ; 55
 	const MUSIC_ROCKET_OVERTURE              ; 56
 	const MUSIC_DANCING_HALL                 ; 57
-	const MUSIC_LAKE_OF_RAGE_ROCKET_RADIO    ; 58
-	const MUSIC_POST_CREDITS                 ; 59
+	const MUSIC_POST_CREDITS                 ; 58
 ; new to Crystal
-	const MUSIC_CLAIR                        ; 5a
-	const MUSIC_MYSTICALMAN_ENCOUNTER        ; 5b
-	const MUSIC_CRYSTAL_OPENING              ; 5c
-	const MUSIC_SUICUNE_BATTLE               ; 5d
+	const MUSIC_CLAIR                        ; 59
+	const MUSIC_MYSTICALMAN_ENCOUNTER        ; 5a
+	const MUSIC_CRYSTAL_OPENING              ; 5b
+	const MUSIC_SUICUNE_BATTLE               ; 5c
 ; new songs
-	const MUSIC_ZELDA_TITLE					 ; 5e
-	const MUSIC_CAVE_THEME					 ; 5f
-	const MUSIC_GATE_OF_TIME				 ; 60
+	const MUSIC_ZELDA_TITLE					 ; 5d
+	const MUSIC_CAVE_THEME					 ; 5e
+	const MUSIC_GATE_OF_TIME				 ; 5f
 ; ocarina notes
-	const MUSIC_OCARINA_NOTE_B5 			 ; 61
-	const MUSIC_OCARINA_NOTE_A5				 ; 62
-	const MUSIC_OCARINA_NOTE_F5				 ; 63
-	const MUSIC_OCARINA_NOTE_D5			     ; 64
-	const MUSIC_OCARINA_NOTE_B4				 ; 65
+	const MUSIC_OCARINA_NOTE_B5 			 ; 60
+	const MUSIC_OCARINA_NOTE_A5				 ; 61
+	const MUSIC_OCARINA_NOTE_F5				 ; 62
+	const MUSIC_OCARINA_NOTE_D5			     ; 63
+	const MUSIC_OCARINA_NOTE_B4				 ; 64
 DEF NUM_MUSIC_SONGS EQU const_value
 
 ; GetMapMusic picks music for these values (see home/map.asm)
 DEF MUSIC_MAHOGANY_MART EQU $fc
 DEF MUSIC_RADIO_TOWER EQU $fd
-
-; ExitPokegearRadio_HandleMusic uses these values
-DEF RESTART_MAP_MUSIC EQU $fe
-DEF ENTER_MAP_MUSIC   EQU $ff

@@ -46,7 +46,6 @@ ROMX $07
 ROMX $08
 	"Clock Reset"
 	"Tileset Data 3"
-	"Egg Moves"
 ROMX $09
 	"bank9"
 	"Item Icons 1"
@@ -170,7 +169,6 @@ ROMX $48
 	"Pics 1"
 ROMX $49
 	org $4000
-	"Unown Pic Pointers"
 	"Pics 2"
 ROMX $4a
 	"Trainer Pic Pointers"
@@ -264,7 +262,6 @@ ROMX $74
 ROMX $75
 	"Maps"
 ROMX $77
-	"Unown Font"
 	"Tileset Data 7"
 	"bank77"
 	"Pokégear GFX"

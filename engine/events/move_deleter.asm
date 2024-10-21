@@ -7,9 +7,6 @@ MoveDeletion:
 	call PrintText
 	farcall SelectMonFromParty
 	jr c, .declined
-	ld a, [wCurPartySpecies]
-	cp EGG
-	jr z, .egg
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMon1Moves + 1
 	ld bc, PARTYMON_STRUCT_LENGTH
@@ -44,11 +41,6 @@ MoveDeletion:
 	call PrintText
 	ret
 
-.egg
-	ld hl, .EggText
-	call PrintText
-	ret
-
 .declined
 	ld hl, .DeleterNoComeAgainText
 	call PrintText
@@ -69,10 +61,6 @@ MoveDeletion:
 
 .DeleterForgotMoveText:
 	text_far _DeleterForgotMoveText
-	text_end
-
-.EggText:
-	text_far _DeleterEggText
 	text_end
 
 .DeleterNoComeAgainText:

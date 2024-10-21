@@ -195,18 +195,17 @@ PokemonCries::
 	mon_cry CRY_CLEFFA,       59,  200 ; HOPPIP
 	mon_cry CRY_CLEFFA,       39,  312 ; SKIPLOOM
 	mon_cry CRY_CLEFFA,        0,  384 ; JUMPLUFF
-	mon_cry CRY_IGNIZOL,       -81,  232 ; IGNIZOL
+	mon_cry CRY_IGNIZOL,     -81,  232 ; IGNIZOL
 	mon_cry CRY_MARILL,      299,  184 ; SUNKERN
 	mon_cry CRY_SUNFLORA,    -32,  384 ; SUNFLORA
 	mon_cry CRY_TOTODILE,     49,  200 ; YANMA
 	mon_cry CRY_WOOPER,      147,  175 ; WOOPER
 	mon_cry CRY_WOOPER,     -198,  320 ; QUAGSIRE
-	mon_cry CRY_IGNIZOL,       162,  320 ; ESPEON
+	mon_cry CRY_IGNIZOL,     162,  320 ; ESPEON
 	mon_cry CRY_VENONAT,    -233,  240 ; UMBREON
 	mon_cry CRY_MARILL,      -31,  384 ; MURKROW
 	mon_cry CRY_SLOWKING,    260,  512 ; SLOWKING
 	mon_cry CRY_HOOTHOOT,    304,  232 ; MISDREAVUS
-	mon_cry CRY_HOOTHOOT,    354,  256 ; UNOWN
 	mon_cry CRY_AMPHAROS,    635,  324 ; WOBBUFFET
 	mon_cry CRY_GIRAFARIG,    65,  512 ; GIRAFARIG
 	mon_cry CRY_SLOWKING,    128,  256 ; PINECO
@@ -239,9 +238,9 @@ PokemonCries::
 	mon_cry CRY_SENTRET,      72,  560 ; PHANPY
 	mon_cry CRY_DONPHAN,       0,  416 ; DONPHAN
 	mon_cry CRY_GIRAFARIG,   115,  576 ; PORYGON2
-	mon_cry CRY_IGNIZOL,      -352,  384 ; STANTLER
+	mon_cry CRY_IGNIZOL,    -352,  384 ; STANTLER
 	mon_cry CRY_PICHU,      -538,  496 ; SMEARGLE
-	mon_cry CRY_IGNIZOL,        44,  264 ; TYROGUE
+	mon_cry CRY_IGNIZOL,      44,  264 ; TYROGUE
 	mon_cry CRY_SLUGMA,        0,  256 ; HITMONTOP
 	mon_cry CRY_MARILL,      104,  256 ; SMOOCHUM
 	mon_cry CRY_SUNFLORA,   -728,  180 ; ELEKID
@@ -255,11 +254,8 @@ PokemonCries::
 	mon_cry CRY_SPINARAK,   -475,  336 ; PUPITAR
 	mon_cry CRY_RAIKOU,     -256,  384 ; TYRANITAR
 	mon_cry CRY_TYPHLOSION,    0,  256 ; LUGIA
-	mon_cry CRY_IGNIZOL,         0,  384 ; HO_OH
+	mon_cry CRY_IGNIZOL,       0,  384 ; HO_OH
 	mon_cry CRY_ENTEI,       330,  273 ; CELEBI
-	mon_cry CRY_HONEDGE_H,      0,    0 ; HONEDGE_H
+	mon_cry CRY_HONEDGE_H,     0,    0 ; HONEDGE_H
 	mon_cry CRY_PIDGEY,      255,  383 ; ZOL
 	assert_table_length NUM_POKEMON
-	mon_cry CRY_NIDORAN_M,     0,    0 ; 254
-	mon_cry CRY_NIDORAN_M,     0,    0 ; 255
-	assert_table_length $ff

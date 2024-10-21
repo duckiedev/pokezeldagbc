@@ -65,10 +65,10 @@ BillsMomScript:
 	closetext
 	end
 
-BillsSisterScript:
+BillsYoungerSisterScript:
 	faceplayer
 	opentext
-	writetext BillsSisterStorageSystemText
+	writetext BillsYoungerSisterStorageSystemText
 	waitbutton
 	closetext
 	end
@@ -78,9 +78,6 @@ BillsHouseBookshelf1:
 
 BillsHouseBookshelf2:
 	jumpstd MagazineBookshelfScript
-
-BillsHouseRadio:
-	jumpstd Radio1Script
 
 BillTakeThisEeveeText:
 	text "BILL: Hi, <PLAYER>!"
@@ -180,7 +177,7 @@ BillsMomText_AfterEcruteak:
 	line "father."
 	done
 
-BillsSisterRefusedNumberText:
+BillsYoungerSisterRefusedNumberText:
 	text "My brother made"
 	line "the PC #MON"
 	cont "storage system."
@@ -190,7 +187,7 @@ BillsSisterRefusedNumberText:
 	cont "number…"
 	done
 
-BillsSisterStorageSystemText:
+BillsYoungerSisterStorageSystemText:
 	text "My big brother"
 	line "BILL made the PC"
 
@@ -210,9 +207,8 @@ BillsFamilysHouse_MapEvents:
 	def_bg_events
 	bg_event  0,  1, BGEVENT_READ, BillsHouseBookshelf2
 	bg_event  1,  1, BGEVENT_READ, BillsHouseBookshelf1
-	bg_event  7,  1, BGEVENT_READ, BillsHouseRadio
 
 	def_object_events
 	object_event  2,  3, SPRITE_BILL, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, BillScript, EVENT_MET_BILL
 	object_event  5,  3, SPRITE_POKEFAN_F, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, BillsMomScript, -1
-	object_event  5,  4, SPRITE_TWIN, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, BillsSisterScript, -1
+	object_event  5,  4, SPRITE_TWIN, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, BillsYoungerSisterScript, -1

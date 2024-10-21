@@ -598,9 +598,9 @@ wDexArrowCursorPosIndex:: db
 wDexArrowCursorDelayCounter:: db
 wDexArrowCursorBlinkCounter:: db
 wDexSearchSlowpokeFrame:: db
-wUnlockedUnownMode:: db
-wDexCurUnownIndex:: db
-wDexUnownCount:: db
+
+	ds 3
+
 wDexConvertedMonType:: db ; mon type converted from dex search mon type
 wDexListingScrollOffsetBackup:: db
 wDexListingCursorBackup:: db
@@ -622,9 +622,7 @@ NEXTU
 wPokegearMapCursorObjectPointer:: dw
 wPokegearMapCursorLandmark:: db
 wPokegearMapPlayerIconLandmark:: db
-wPokegearRadioChannelBank:: db
-wPokegearRadioChannelAddr:: dw
-wPokegearRadioMusicPlaying:: db
+	ds 4
 
 NEXTU
 ; trade
@@ -1235,41 +1233,12 @@ ENDU
 
 SECTION UNION "Miscellaneous WRAM 1", WRAMX
 
-; radio data
-wCurRadioLine:: db
-wNextRadioLine:: db
-wRadioTextDelay:: db
-wNumRadioLinesPrinted:: db
-wOaksPKMNTalkSegmentCounter:: db
-	ds 5
-wRadioText:: ds 2 * SCREEN_WIDTH
-
-
-SECTION UNION "Miscellaneous WRAM 1", WRAMX
-
 ; movement buffer data
 wMovementBufferCount:: db
 wMovementBufferObject:: db
 wUnusedMovementBufferBank:: db
 wUnusedMovementBufferPointer:: dw
 wMovementBuffer:: ds 55
-
-
-SECTION UNION "Miscellaneous WRAM 1", WRAMX
-
-; box printing
-wWhichBoxMonToPrint:: db
-wFinishedPrintingBox:: db
-wAddrOfBoxToPrint:: dw
-wBankOfBoxToPrint:: db
-wWhichBoxToPrint:: db
-
-
-SECTION UNION "Miscellaneous WRAM 1", WRAMX
-
-; Unown printing
-wPrintedUnownTileSource:: ds 1 tiles
-wPrintedUnownTileDest:: ds 1 tiles
 
 
 SECTION UNION "Miscellaneous WRAM 1", WRAMX
@@ -1860,7 +1829,7 @@ wForcedSwitch:: db
 
 wTrainerClass:: db
 
-wUnownLetter:: db
+	ds 1
 
 wMoveSelectionMenuType:: db
 
@@ -1884,13 +1853,13 @@ wBaseItem1:: db
 wBaseItem2:: db
 wBaseGender:: db
 wBaseMaxHearts:: db
-wBaseEggSteps:: db
+wBaseUnused1:: db
 wBaseFormPicBank:: db
 wBasePicSize:: db
 wBaseFormFrontpic:: dw
 wBaseFormBackpic:: dw
 wBaseGrowthRate:: db
-wBaseEggGroups:: db
+wBaseUnused2:: db
 wBaseTMHM:: flag_array NUM_TM_HM_TUTOR
 wCurBaseDataEnd::
 	assert wCurBaseDataEnd - wCurBaseData == BASE_DATA_SIZE
@@ -2149,24 +2118,24 @@ wCurTimeOfDay:: db
 wSecretID:: dw
 wStatusFlags::
 ; bit 0: pokedex
-; bit 1: unown dex
-; bit 2: flash
-; bit 3: caught pokerus
-; bit 4: rocket signal
-; bit 5: wild encounters on/off
-; bit 6: hall of fame
+; bit 1: flash
+; bit 2: caught pokerus
+; bit 3: rocket signal
+; bit 4: wild encounters on/off
+; bit 5: hall of fame
+; bit 6: unused
 ; bit 7: unused
 	db
 
 wStatusFlags2::
 ; bit 0: rockets
 ; bit 1: safari game (unused)
-; bit 2: unused
-; bit 3: unused
-; bit 4: bike shop call
-; bit 5: can use sweet scent
-; bit 6: reached goldenrod
-; bit 7: rockets in mahogany
+; bit 2: bike shop call
+; bit 3: can use sweet scent
+; bit 4: reached goldenrod
+; bit 5: rockets in mahogany
+; bit 6: unused
+; bit 7: unused
 	db
 
 wMoney:: ds 3
@@ -2201,12 +2170,10 @@ wPCItems:: ds MAX_PC_ITEMS * 2 + 1
 
 wPokegearFlags::
 ; bit 0: map
-; bit 1: radio
-; bit 2: unused
-; bit 3: expn
-; bit 7: on/off
+; bit 1: expn
+; bit 2: on/off
 	db
-wRadioTuningKnob:: db
+	ds 1
 wLastDexMode:: db
 	ds 1
 wWhichRegisteredItem:: db
@@ -2448,16 +2415,7 @@ wEndPokedexCaught::
 wPokedexSeen:: flag_array NUM_POKEMON
 wEndPokedexSeen::
 
-wUnownDex:: ds NUM_UNOWN
-wUnlockedUnowns:: db
-wFirstUnownSeen:: db
-
-wDayCareMan::
-; bit 7: active
-; bit 6: egg ready
-; bit 5: monsters are compatible
-; bit 0: monster 1 in day-care
-	db
+	ds 29
 
 wBreedMon1Nickname:: ds MON_NAME_LENGTH
 wBreedMon1OT:: ds NAME_LENGTH
@@ -2468,8 +2426,8 @@ wDayCareLady::
 ; bit 0: monster 2 in day-care
 	db
 
-wStepsToEgg::
-	db
+	ds 1
+
 wBreedMotherOrNonDitto::
 ;  z: yes
 ; nz: no
@@ -2479,11 +2437,7 @@ wBreedMon2Nickname:: ds MON_NAME_LENGTH
 wBreedMon2OT:: ds NAME_LENGTH
 wBreedMon2:: box_struct wBreedMon2
 
-wEggMonNickname:: ds MON_NAME_LENGTH
-wEggMonOT:: ds NAME_LENGTH
-wEggMon:: box_struct wEggMon
-
-	ds 49
+	ds 103
 
 wDunsparceMapGroup:: db
 wDunsparceMapNumber:: db

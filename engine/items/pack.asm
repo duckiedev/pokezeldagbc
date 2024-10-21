@@ -562,7 +562,7 @@ RegisterItem:
 GiveItem:
 	ld a, [wPartyCount]
 	and a
-	jmp z, .NoPokemon
+	jr z, .NoPokemon
 	ld a, [wOptions]
 	push af
 	res NO_TEXT_SCROLL, a
@@ -573,7 +573,6 @@ GiveItem:
 	farcall LoadPartyMenuGFX
 	farcall InitPartyMenuWithCancel
 	farcall InitPartyMenuGFX
-.loop
 	farcall WritePartyMenuTilemap
 	farcall PlacePartyMenuText
 	call WaitBGMap
@@ -581,14 +580,6 @@ GiveItem:
 	call DelayFrame
 	farcall PartyMenuSelect
 	jr c, .finish
-	ld a, [wCurPartySpecies]
-	cp EGG
-	jr nz, .give
-	ld hl, .AnEggCantHoldAnItemText
-	call PrintText
-	jr .loop
-
-.give
 	ld a, [wJumptableIndex]
 	push af
 	ld a, [wPackJumptableIndex]
@@ -617,9 +608,6 @@ GiveItem:
 	ld hl, YouDontHaveAMonText
 	call Pack_PrintTextNoScroll
 	ret
-.AnEggCantHoldAnItemText:
-	text_far _AnEggCantHoldAnItemText
-	text_end
 
 QuitItemSubmenu:
 	ret

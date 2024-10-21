@@ -234,7 +234,6 @@ AlphabeticalPokedexOrder:
 	db TYRANITAR
 	db TYROGUE
 	db UMBREON
-	db UNOWN
 	db URSARING
 	db VAPOREON
 	db VENOMOTH

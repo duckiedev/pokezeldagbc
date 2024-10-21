@@ -13,16 +13,12 @@ SpecialsPointers::
 	add_special HealParty ; this is both a special and a predef
 	add_special PokemonCenterPC
 	add_special PlayersHousePC
-	add_special DayCareMan
-	add_special DayCareLady
-	add_special DayCareManOutside
 	add_special MoveDeletion
 	add_special BankOfMom
 	add_special MagnetTrain
 	add_special NameRival
 	add_special SetDayOfWeek
 	add_special OverworldTownMap
-	add_special MapRadio
 	add_special UnownPuzzle
 	add_special SlotMachine
 	add_special CardFlip
@@ -50,8 +46,6 @@ SpecialsPointers::
 	add_special FindPartyMonAtLeastThatHappy ; unused
 	add_special FindPartyMonThatSpecies
 	add_special FindPartyMonThatSpeciesYourTrainerID
-	add_special DayCareMon1
-	add_special DayCareMon2
 	add_special ActivateFishingSwarm
 	add_special GiveShuckle
 	add_special ReturnShuckie
@@ -62,7 +56,6 @@ SpecialsPointers::
 	add_special SelectApricornForKurt
 	add_special NameRater
 	add_special GetFirstPokemonHappiness
-	add_special CheckFirstMonIsEgg
 	add_special LoadUsedSpritesGFX
 	add_special PlaySlowCry
 	add_special SnorlaxAwake
@@ -77,9 +70,6 @@ SpecialsPointers::
 ; Crystal only
 	add_special Reset ; bank 0
 	add_special MoveTutor
-	add_special OmanyteChamber
-	add_special DisplayUnownWords
-	add_special HoOhChamber
 	add_special CelebiShrineEvent
 	add_special CheckCaughtCelebi
 	add_special PokeSeer

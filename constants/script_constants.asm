@@ -45,7 +45,7 @@ DEF STRING_BUFFER_LENGTH EQU 19
 	const VAR_WEEKDAY          ; 0b
 	const VAR_MAPGROUP         ; 0c
 	const VAR_MAPNUMBER        ; 0d
-	const VAR_UNOWNCOUNT       ; 0e
+	const_skip                 ; 0e
 	const VAR_ENVIRONMENT      ; 0f
 	const VAR_BOXSPACE         ; 10
 	const VAR_XCOORD           ; 11
@@ -72,7 +72,6 @@ DEF RETVAR_EXECUTE EQU 2 << 6
 	const PLAYEREVENT_WARP
 	const PLAYEREVENT_FALL
 	const PLAYEREVENT_WHITEOUT
-	const PLAYEREVENT_HATCH
 	const PLAYEREVENT_JOYCHANGEFACING
 	const PLAYEREVENT_SEENBYOWMON
 	const PLAYEREVENT_TALKTOOWMON
@@ -267,16 +266,6 @@ DEF NUM_FRUIT_TREES EQU const_value - 1
 	const UNOWNPUZZLE_AERODACTYL ; 2
 	const UNOWNPUZZLE_HO_OH      ; 3
 DEF NUM_UNOWN_PUZZLES EQU const_value
-
-; DisplayUnownWords setval arguments
-; UnownWalls and MenuHeaders_UnownWalls indexes (see data/events/unown_walls.asm)
-	const_def
-	const UNOWNWORDS_ESCAPE ; 0
-	const UNOWNWORDS_LIGHT  ; 1
-	const UNOWNWORDS_WATER  ; 2
-	const UNOWNWORDS_HO_OH  ; 3
-DEF NUM_UNOWN_WALLS EQU const_value
-DEF UNOWN_WALL_MENU_HEADER_SIZE EQU 5
 
 ; MoveTutor setval arguments
 	const_def 1

@@ -878,8 +878,6 @@ MoonBallMultiplier:
 	ret nz
 
 	inc hl
-	inc hl
-	inc hl
 
 	push bc
 	ld a, BANK("Evolutions and Attacks")
@@ -1647,16 +1645,6 @@ KinstoneOcarinaEffect:
 UseItem_SelectMon:
 	call .SelectMon
 	ret c
-
-	ld a, [wCurPartySpecies]
-	cp EGG
-	jr nz, .not_egg
-
-	call CantUseOnEggMessage
-	scf
-	ret
-
-.not_egg
 	and a
 	ret
 
@@ -2545,10 +2533,6 @@ Ball_BoxIsFullMessage:
 	ld [wItemEffectSucceeded], a
 	ret
 
-CantUseOnEggMessage:
-	ld hl, ItemCantUseOnEggText
-	jr CantUseItemMessage
-
 IsntTheTimeMessage:
 	ld hl, ItemOakWarningText
 	jr CantUseItemMessage
@@ -2565,10 +2549,6 @@ CantUseItemMessage:
 
 ItemLooksBitterText:
 	text_far _ItemLooksBitterText
-	text_end
-
-ItemCantUseOnEggText:
-	text_far _ItemCantUseOnEggText
 	text_end
 
 ItemOakWarningText:

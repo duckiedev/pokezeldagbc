@@ -3124,17 +3124,6 @@ LoadEnemyMonToSwitchTo:
 	call LoadEnemyMon
 
 	ld a, [wCurPartySpecies]
-	cp UNOWN
-	jr nz, .skip_unown
-	ld a, [wFirstUnownSeen]
-	and a
-	jr nz, .skip_unown
-	ld hl, wEnemyMonDVs
-	predef GetUnownLetter
-	ld a, [wUnownLetter]
-	ld [wFirstUnownSeen], a
-.skip_unown
-
 	ld hl, wEnemyMonHP
 	ld a, [hli]
 	ld [wEnemyHPAtTimeOfPlayerSwitch], a
@@ -3329,14 +3318,8 @@ CheckIfCurPartyMonIsFitToFight:
 	ld c, a
 	ld b, 0
 	add hl, bc
-	ld a, [hl]
-	cp EGG
-	ld hl, BattleText_AnEGGCantBattle
-	jr z, .print_textbox
 
 	ld hl, BattleText_TheresNoWillToBattle
-
-.print_textbox
 	call StdBattleTextbox
 
 .finish_fail
@@ -3595,7 +3578,6 @@ SwitchPlayerMon:
 
 SendOutPlayerMon:
 	ld hl, wBattleMonDVs
-	predef GetUnownLetter
 	hlcoord 1, 5
 	ld b, 7
 	ld c, 8
@@ -5467,7 +5449,7 @@ LoadEnemyMon:
 	inc de
 	ld a, [hl]
 	ld [de], a
-	jmp .Happiness
+	jr .Happiness
 
 .InitDVs:
 ; Trainer DVs
@@ -5580,23 +5562,6 @@ LoadEnemyMon:
     ; add the '@' symbol at the end
     ld a, "@"
     ld [hl], a
-; Species-specfic:
-
-.Continue
-; Unown
-	ld a, [wTempEnemyMonSpecies]
-	cp UNOWN
-	jr nz, .Happiness
-
-; Get letter based on DVs
-	ld hl, wEnemyMonDVs
-	predef GetUnownLetter
-; Can't use any letters that haven't been unlocked
-; If combined with forced shiny battletype, causes an infinite loop
-	call CheckUnownLetter
-	jr c, .GenerateDVs ; try again
-
-; Finally done with DVs
 
 .Happiness:
 ; Set happiness
@@ -5836,55 +5801,6 @@ CheckSleepingTreeMon:
 	ret
 
 INCLUDE "data/wild/treemons_asleep.asm"
-
-CheckUnownLetter:
-; Return carry if the Unown letter hasn't been unlocked yet
-
-	ld a, [wUnlockedUnowns]
-	ld c, a
-	ld de, 0
-
-.loop
-
-; Don't check this set unless it's been unlocked
-	srl c
-	jr nc, .next
-
-; Is our letter in the set?
-	ld hl, UnlockedUnownLetterSets
-	add hl, de
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-
-	push de
-	ld a, [wUnownLetter]
-	ld de, 1
-	push bc
-	call IsInArray
-	pop bc
-	pop de
-
-	jr c, .match
-
-.next
-; Make sure we haven't gone past the end of the table
-	inc e
-	inc e
-	ld a, e
-	cp NUM_UNLOCKED_UNOWN_SETS * 2
-	jr c, .loop
-
-; Hasn't been unlocked, or the letter is invalid
-	scf
-	ret
-
-.match
-; Valid letter
-	and a
-	ret
-
-INCLUDE "data/wild/unlocked_unowns.asm"
 
 BattleWinSlideInEnemyTrainerFrontpic:
 	xor a
@@ -7211,7 +7127,6 @@ DropPlayerSub:
 	ld a, [wBattleMonSpecies]
 	ld [wCurPartySpecies], a
 	ld hl, wBattleMonDVs
-	predef GetUnownLetter
 	ld de, vTiles2 tile $31
 	predef GetMonBackpic
 	pop af
@@ -7248,7 +7163,6 @@ DropEnemySub:
 	ld [wCurPartySpecies], a
 	call GetBaseData
 	ld hl, wEnemyMonDVs
-	predef GetUnownLetter
 	ld de, vTiles2
 	predef GetAnimatedFrontpic
 	pop af
@@ -7428,16 +7342,6 @@ InitEnemyWildmon:
 	ld bc, NUM_MOVES
 	call CopyBytes
 	ld hl, wEnemyMonDVs
-	predef GetUnownLetter
-	ld a, [wCurPartySpecies]
-	cp UNOWN
-	jr nz, .skip_unown
-	ld a, [wFirstUnownSeen]
-	and a
-	jr nz, .skip_unown
-	ld a, [wUnownLetter]
-	ld [wFirstUnownSeen], a
-.skip_unown
 	ld de, vTiles2
 	predef GetAnimatedFrontpic
 	xor a
@@ -7446,57 +7350,6 @@ InitEnemyWildmon:
 	hlcoord 12, 0
 	lb bc, 7, 7
 	predef PlaceGraphic
-	ret
-
-FillEnemyMovesFromMoveIndicesBuffer: ; unreferenced
-	ld hl, wEnemyMonMoves
-	ld de, wListMoves_MoveIndicesBuffer
-	ld b, NUM_MOVES
-.loop
-	ld a, [de]
-	inc de
-	ld [hli], a
-	and a
-	jr z, .clearpp
-
-	push bc
-	push hl
-
-	push hl
-	dec a
-	ld hl, Moves + MOVE_PP
-	ld bc, MOVE_LENGTH
-	call AddNTimes
-	ld a, BANK(Moves)
-	call GetFarByte
-	pop hl
-
-	ld bc, wEnemyMonPP - (wEnemyMonMoves + 1)
-	add hl, bc
-	ld [hl], a
-
-	pop hl
-	pop bc
-
-	dec b
-	jr nz, .loop
-	ret
-
-.clear
-	xor a
-	ld [hli], a
-
-.clearpp
-	push bc
-	push hl
-	ld bc, wEnemyMonPP - (wEnemyMonMoves + 1)
-	add hl, bc
-	xor a
-	ld [hl], a
-	pop hl
-	pop bc
-	dec b
-	jr nz, .clear
 	ret
 
 ExitBattle:

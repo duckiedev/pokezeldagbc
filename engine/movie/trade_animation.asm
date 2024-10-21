@@ -63,7 +63,6 @@ TradeAnimation:
 	tradeanim TradeAnim_WaitAnim
 	tradeanim TradeAnim_FrontpicScrollStart
 	tradeanim TradeAnim_AnimateFrontpic
-	tradeanim TradeAnim_Wait80IfOTEgg
 	tradeanim TradeAnim_TextboxScrollStart
 	tradeanim TradeAnim_TakeCareOfText
 	tradeanim TradeAnim_ScrollOutRight
@@ -97,7 +96,6 @@ TradeAnimationPlayer2:
 	tradeanim TradeAnim_WaitAnim
 	tradeanim TradeAnim_FrontpicScrollStart
 	tradeanim TradeAnim_AnimateFrontpic
-	tradeanim TradeAnim_Wait180IfOTEgg
 	tradeanim TradeAnim_TextboxScrollStart
 	tradeanim TradeAnim_TakeCareOfText
 	tradeanim TradeAnim_ScrollOutRight
@@ -286,8 +284,6 @@ DoTradeAnimation:
 	add_tradeanim TradeAnim_End                  ; 2b
 	add_tradeanim TradeAnim_AnimateFrontpic      ; 2c
 	add_tradeanim TradeAnim_Wait96               ; 2d
-	add_tradeanim TradeAnim_Wait80IfOTEgg        ; 2e
-	add_tradeanim TradeAnim_Wait180IfOTEgg       ; 2f
 
 TradeAnim_IncrementJumptableIndex:
 	ld hl, wJumptableIndex
@@ -808,7 +804,6 @@ TradeAnim_AnimateFrontpic:
 TradeAnim_GetFrontpic:
 	push de
 	push af
-	predef GetUnownLetter
 	pop af
 	ld [wCurPartySpecies], a
 	ld [wCurSpecies], a
@@ -866,31 +861,9 @@ TradeAnim_Wait96:
 	call TradeAnim_AdvanceScriptPointer
 	ret
 
-TradeAnim_Wait80IfOTEgg:
-	call IsOTTrademonEgg
-	ret nz
-	ld c, 80
-	call DelayFrames
-	ret
-
-TradeAnim_Wait180IfOTEgg:
-	call IsOTTrademonEgg
-	ret nz
-	ld c, 180
-	call DelayFrames
-	ret
-
-IsOTTrademonEgg:
-	call TradeAnim_AdvanceScriptPointer
-	ld a, [wOTTrademonSpecies]
-	cp EGG
-	ret
-
 ShowPlayerTrademonStats:
 	ld de, wPlayerTrademonSpecies
 	ld a, [de]
-	cp EGG
-	jr z, TrademonStats_Egg
 	call TrademonStats_MonTemplate
 	ld de, wPlayerTrademonSpecies
 	call TrademonStats_PrintSpeciesNumber
@@ -907,8 +880,6 @@ ShowPlayerTrademonStats:
 ShowOTTrademonStats:
 	ld de, wOTTrademonSpecies
 	ld a, [de]
-	cp EGG
-	jr z, TrademonStats_Egg
 	call TrademonStats_MonTemplate
 	ld de, wOTTrademonSpecies
 	call TrademonStats_PrintSpeciesNumber
@@ -941,26 +912,6 @@ TrademonStats_MonTemplate:
 	next ""
 	next "OT/"
 	next "<ID>№.@"
-
-TrademonStats_Egg:
-	call WaitTop
-	call TradeAnim_BlankTilemap
-	ld a, HIGH(vBGMap1)
-	ldh [hBGMapAddress + 1], a
-	hlcoord 3, 0
-	ld b, 6
-	ld c, 13
-	call Textbox
-	hlcoord 4, 2
-	ld de, .EggData
-	call PlaceString
-	call TrademonStats_WaitBGMap
-	ret
-
-.EggData:
-	db   "EGG"
-	next "OT/?????"
-	next "<ID>№.?????@"
 
 TrademonStats_WaitBGMap:
 	call WaitBGMap

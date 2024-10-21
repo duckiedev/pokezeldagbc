@@ -194,7 +194,6 @@ TryWildEncounter::
 
 .EncounterRate:
 	call GetMapEncounterRate
-	call ApplyMusicEffectOnEncounterRate
 	call ApplyCleanseTagEffectOnEncounterRate
 	call Random
 	cp b
@@ -211,23 +210,6 @@ GetMapEncounterRate:
 	ld b, 0
 	add hl, bc
 	ld b, [hl]
-	ret
-
-ApplyMusicEffectOnEncounterRate::
-; Pokemon March and Ruins of Alph signal double encounter rate.
-; Pokemon Lullaby halves encounter rate.
-	ld a, [wMapMusic]
-	cp MUSIC_POKEMON_MARCH
-	jr z, .double
-	cp MUSIC_RUINS_OF_ALPH_RADIO
-	jr z, .double
-	cp MUSIC_POKEMON_LULLABY
-	ret nz
-	srl b
-	ret
-
-.double
-	sla b
 	ret
 
 ApplyCleanseTagEffectOnEncounterRate::
@@ -319,15 +301,6 @@ ChooseWildEncounter:
 	ld a, b
 	call ValidateTempWildMonSpecies
 	jr c, .nowildbattle
-
-	cp UNOWN
-	jr nz, .done
-
-	ld a, [wUnlockedUnowns]
-	and a
-	jr z, .nowildbattle
-
-.done
 	jr .loadwildmon
 
 .nowildbattle

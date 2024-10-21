@@ -201,7 +201,6 @@ PokedexDataPointerTable:
 	dw MurkrowPokedexEntry
 	dw SlowkingPokedexEntry
 	dw MisdreavusPokedexEntry
-	dw UnownPokedexEntry
 	dw WobbuffetPokedexEntry
 	dw GirafarigPokedexEntry
 	dw PinecoPokedexEntry

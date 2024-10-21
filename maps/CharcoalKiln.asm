@@ -72,9 +72,6 @@ CharcoalKilnFarfetchd:
 CharcoalKilnBookshelf:
 	jumpstd MagazineBookshelfScript
 
-CharcoalKilnRadio:
-	jumpstd Radio1Script
-
 CharcoalKilnBossText1:
 	text "All the SLOWPOKE"
 	line "have disappeared"
@@ -158,7 +155,6 @@ CharcoalKiln_MapEvents:
 	def_bg_events
 	bg_event  0,  1, BGEVENT_READ, CharcoalKilnBookshelf
 	bg_event  1,  1, BGEVENT_READ, CharcoalKilnBookshelf
-	bg_event  7,  1, BGEVENT_READ, CharcoalKilnRadio
 
 	def_object_events
 	object_event  2,  3, SPRITE_BLACK_BELT, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, CharcoalKilnBoss, EVENT_CHARCOAL_KILN_BOSS

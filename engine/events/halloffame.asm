@@ -145,12 +145,6 @@ GetHallOfFameParty:
 	ld a, [hli]
 	cp -1
 	jr z, .done
-	cp EGG
-	jr nz, .mon
-	inc c
-	jr .next
-
-.mon
 	push hl
 	push de
 	push bc
@@ -231,7 +225,6 @@ AnimateHOFMonEntrance:
 	ld a, [hli]
 	ld [wTempMonDVs + 1], a
 	ld hl, wTempMonDVs
-	predef GetUnownLetter
 	hlcoord 0, 0
 	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
 	ld a, " "
@@ -459,14 +452,10 @@ DisplayHOFMon:
 	ld [wCurPartySpecies], a
 	ld [wTextDecimalByte], a
 	ld hl, wTempMonDVs
-	predef GetUnownLetter
 	xor a
 	ld [wBoxAlignment], a
 	hlcoord 6, 5
 	call _PrepMonFrontpic
-	ld a, [wCurPartySpecies]
-	cp EGG
-	jr z, .print_id_no
 	hlcoord 1, 13
 	ld a, "№"
 	ld [hli], a
@@ -596,8 +585,6 @@ HOF_AnimatePlayerPic:
 
 HOF_PlayCry::
 	ld a, [wCurPartySpecies]
-	cp EGG
-	jr z, .fail
 	call IsAPokemon
 	jr c, .fail
 	ld a, [wCurPartySpecies]

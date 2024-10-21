@@ -25,7 +25,6 @@ SpriteAnimFrameData:
 	dw .Frameset_TrademonIcon
 	dw .Frameset_TrademonBubble
 	dw .Frameset_EvolutionBallOfLight
-	dw .Frameset_RadioTuningKnob
 	dw .Frameset_MagnetTrain
 	dw .Frameset_Unused1C
 	dw .Frameset_Leaf
@@ -203,10 +202,6 @@ SpriteAnimFrameData:
 	oamframe SPRITE_ANIM_OAMSET_EVOLUTION_BALL_OF_LIGHT_2,  2
 	oamframe SPRITE_ANIM_OAMSET_EVOLUTION_BALL_OF_LIGHT_1,  2
 	oamframe SPRITE_ANIM_OAMSET_EVOLUTION_BALL_OF_LIGHT_2,  2
-	oamend
-
-.Frameset_RadioTuningKnob:
-	oamframe SPRITE_ANIM_OAMSET_RADIO_TUNING_KNOB, 32
 	oamend
 
 .Frameset_MagnetTrain:

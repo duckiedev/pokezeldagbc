@@ -397,29 +397,29 @@ JohtoGrassWildMons:
 	def_grass_wildmons RUINS_OF_ALPH_INNER_CHAMBER
 	db 6 percent, 6 percent, 6 percent ; encounter rates: morn/day/nite
 	; morn
-	db 5, UNOWN
-	db 5, UNOWN
-	db 5, UNOWN
-	db 5, UNOWN
-	db 5, UNOWN
-	db 5, UNOWN
-	db 5, UNOWN
+	db 5, NATU
+	db 5, NATU
+	db 5, NATU
+	db 5, NATU
+	db 5, NATU
+	db 5, NATU
+	db 5, NATU
 	; day
-	db 5, UNOWN
-	db 5, UNOWN
-	db 5, UNOWN
-	db 5, UNOWN
-	db 5, UNOWN
-	db 5, UNOWN
-	db 5, UNOWN
+	db 5, NATU
+	db 5, NATU
+	db 5, NATU
+	db 5, NATU
+	db 5, NATU
+	db 5, NATU
+	db 5, NATU
 	; nite
-	db 5, UNOWN
-	db 5, UNOWN
-	db 5, UNOWN
-	db 5, UNOWN
-	db 5, UNOWN
-	db 5, UNOWN
-	db 5, UNOWN
+	db 5, NATU
+	db 5, NATU
+	db 5, NATU
+	db 5, NATU
+	db 5, NATU
+	db 5, NATU
+	db 5, NATU
 	end_grass_wildmons
 
 	def_grass_wildmons UNION_CAVE_1F

@@ -205,7 +205,6 @@ MonMenuIconPals:
 	icon_pals BLUE, PURPLE  ; MURKROW
 	icon_pals PINK, BLUE    ; SLOWKING
 	icon_pals PURPLE, GREEN ; MISDREAVUS
-	icon_pals GRAY, BLUE    ; UNOWN
 	icon_pals BLUE, PURPLE  ; WOBBUFFET
 	icon_pals PINK, BLUE    ; GIRAFARIG
 	icon_pals GREEN, RED    ; PINECO

@@ -501,23 +501,7 @@ TinTower1FSage5Text3:
 	done
 
 TinTower1FSage6Text2:
-	text "Of the legendary"
-	line "#MON, SUICUNE"
-
-	para "is said to be the"
-	line "closest to HO-OH."
-
-	para "I hear there may"
-	line "also be a link to"
-
-	para "#MON known as"
-	line "UNOWN."
-
-	para "The #MON UNOWN"
-	line "must be sharing a"
-
-	para "cooperative bond"
-	line "with SUICUNE."
+	text "SUICUNE."
 	done
 
 TinTower1F_MapEvents:

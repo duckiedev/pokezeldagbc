@@ -229,21 +229,21 @@ ENDM
 MACRO givemoney
 	db givemoney_command
 	db \1 ; account
-	dt \2 ; money
+	bigdt \2 ; money
 ENDM
 
 	const takemoney_command ; $23
 MACRO takemoney
 	db takemoney_command
 	db \1 ; account
-	dt \2 ; money
+	bigdt \2 ; money
 ENDM
 
 	const checkmoney_command ; $24
 MACRO checkmoney
 	db checkmoney_command
 	db \1 ; account
-	dt \2 ; money
+	bigdt \2 ; money
 ENDM
 
 	const givecoins_command ; $25
@@ -295,13 +295,6 @@ MACRO givepoke
 			dw \6 ; ot_name_pointer
 		endc
 	endc
-ENDM
-
-	const giveegg_command ; $2e
-MACRO giveegg
-	db giveegg_command
-	db \1 ; pkmn
-	db \2 ; level
 ENDM
 
 	const checkevent_command ; $31

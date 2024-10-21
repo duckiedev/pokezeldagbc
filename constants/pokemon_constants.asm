@@ -3,7 +3,6 @@
 ; - PokemonNames (see data/pokemon/names.asm)
 ; - BaseData (see data/pokemon/base_stats.asm)
 ; - EvosAttacksPointers (see data/pokemon/evos_attacks_pointers.asm)
-; - EggMovePointers (see data/pokemon/egg_move_pointers.asm)
 ; - PokemonCries (see data/pokemon/cries.asm)
 ; - MonMenuIcons (see data/pokemon/menu_icons.asm)
 ; - PokemonPicPointers (see data/pokemon/pic_pointers.asm)
@@ -11,12 +10,7 @@
 ; - PokedexDataPointerTable (see data/pokemon/dex_entry_pointers.asm)
 ; - AlphabeticalPokedexOrder (see data/pokemon/dex_order_alpha.asm)
 ; - NewPokedexOrder (see data/pokemon/dex_order_new.asm)
-; - Pokered_MonIndices (see data/pokemon/gen1_order.asm)
 ; - Footprints (see gfx/footprints.asm)
-; - AnimationPointers (see gfx/pokemon/anim_pointers.asm)
-; - AnimationIdlePointers (see gfx/pokemon/idle_pointers.asm)
-; - BitmasksPointers (see gfx/pokemon/bitmask_pointers.asm)
-; - FramesPointers (see gfx/pokemon/frame_pointers.asm)
 	const_def 1
 	const BULBASAUR  ; 01
 	const IVYSAUR    ; 02
@@ -169,7 +163,6 @@
 	const DRAGONITE  ; 95
 	const MEWTWO     ; 96
 	const MEW        ; 97
-DEF JOHTO_POKEMON EQU const_value
 	const CHIKORITA  ; 98
 	const BAYLEEF    ; 99
 	const MEGANIUM   ; 9a
@@ -219,95 +212,56 @@ DEF JOHTO_POKEMON EQU const_value
 	const MURKROW    ; c6
 	const SLOWKING   ; c7
 	const MISDREAVUS ; c8
-	const UNOWN      ; c9
-	const WOBBUFFET  ; ca
-	const GIRAFARIG  ; cb
-	const PINECO     ; cc
-	const FORRETRESS ; cd
-	const DUNSPARCE  ; ce
-	const GLIGAR     ; cf
-	const STEELIX    ; d0
-	const SNUBBULL   ; d1
-	const GRANBULL   ; d2
-	const QWILFISH   ; d3
-	const SCIZOR     ; d4
-	const SHUCKLE    ; d5
-	const HERACROSS  ; d6
-	const SNEASEL    ; d7
-	const TEDDIURSA  ; d8
-	const URSARING   ; d9
-	const SLUGMA     ; da
-	const MAGCARGO   ; db
-	const SWINUB     ; dc
-	const PILOSWINE  ; dd
-	const CORSOLA    ; de
-	const REMORAID   ; df
-	const OCTILLERY  ; e0
-	const DELIBIRD   ; e1
-	const MANTINE    ; e2
-	const SKARMORY   ; e3
-	const HOUNDOUR   ; e4
-	const HOUNDOOM   ; e5
-	const KINGDRA    ; e6
-	const PHANPY     ; e7
-	const DONPHAN    ; e8
-	const PORYGON2   ; e9
-	const STANTLER   ; ea
-	const SMEARGLE   ; eb
-	const TYROGUE    ; ec
-	const HITMONTOP  ; ed
-	const SMOOCHUM   ; ee
-	const ELEKID     ; ef
-	const MAGBY      ; f0
-	const MILTANK    ; f1
-	const BLISSEY    ; f2
-	const RAIKOU     ; f3
-	const ENTEI      ; f4
-	const SUICUNE    ; f5
-	const LARVITAR   ; f6
-	const PUPITAR    ; f7
-	const TYRANITAR  ; f8
-	const LUGIA      ; f9
-	const HO_OH      ; fa
-	const CELEBI     ; fb
-	const HONEDGE_H  ; fc
-	const ZOL		 ; fd
+	const WOBBUFFET  ; c9
+	const GIRAFARIG  ; ca
+	const PINECO     ; cb
+	const FORRETRESS ; cc
+	const DUNSPARCE  ; cd
+	const GLIGAR     ; ce
+	const STEELIX    ; cf
+	const SNUBBULL   ; d0
+	const GRANBULL   ; d1
+	const QWILFISH   ; d2
+	const SCIZOR     ; d3
+	const SHUCKLE    ; d4
+	const HERACROSS  ; d5
+	const SNEASEL    ; d6
+	const TEDDIURSA  ; d7
+	const URSARING   ; d8
+	const SLUGMA     ; d9
+	const MAGCARGO   ; da
+	const SWINUB     ; db
+	const PILOSWINE  ; dc
+	const CORSOLA    ; dd
+	const REMORAID   ; de
+	const OCTILLERY  ; df
+	const DELIBIRD   ; e0
+	const MANTINE    ; e1
+	const SKARMORY   ; e2
+	const HOUNDOUR   ; e3
+	const HOUNDOOM   ; e4
+	const KINGDRA    ; e5
+	const PHANPY     ; e6
+	const DONPHAN    ; e7
+	const PORYGON2   ; e8
+	const STANTLER   ; e9
+	const SMEARGLE   ; ea
+	const TYROGUE    ; eb
+	const HITMONTOP  ; ec
+	const SMOOCHUM   ; ed
+	const ELEKID     ; ee
+	const MAGBY      ; ef
+	const MILTANK    ; f0
+	const BLISSEY    ; f1
+	const RAIKOU     ; f2
+	const ENTEI      ; f3
+	const SUICUNE    ; f4
+	const LARVITAR   ; f5
+	const PUPITAR    ; f6
+	const TYRANITAR  ; f7
+	const LUGIA      ; f8
+	const HO_OH      ; f9
+	const CELEBI     ; fa
+	const HONEDGE_H  ; fb
+	const ZOL		 ; fc
 DEF NUM_POKEMON EQU const_value - 1
-	const EGG        ; fe
-
-; Unown forms
-; indexes for:
-; - UnownWords (see data/pokemon/unown_words.asm)
-; - UnownPicPointers (see data/pokemon/unown_pic_pointers.asm)
-; - UnownAnimationPointers (see gfx/pokemon/unown_anim_pointers.asm)
-; - UnownAnimationIdlePointers (see gfx/pokemon/unown_idle_pointers.asm)
-; - UnownBitmasksPointers (see gfx/pokemon/unown_bitmask_pointers.asm)
-; - UnownFramesPointers (see gfx/pokemon/unown_frame_pointers.asm)
-	const_def 1
-	const UNOWN_A ;  1
-	const UNOWN_B ;  2
-	const UNOWN_C ;  3
-	const UNOWN_D ;  4
-	const UNOWN_E ;  5
-	const UNOWN_F ;  6
-	const UNOWN_G ;  7
-	const UNOWN_H ;  8
-	const UNOWN_I ;  9
-	const UNOWN_J ; 10
-	const UNOWN_K ; 11
-	const UNOWN_L ; 12
-	const UNOWN_M ; 13
-	const UNOWN_N ; 14
-	const UNOWN_O ; 15
-	const UNOWN_P ; 16
-	const UNOWN_Q ; 17
-	const UNOWN_R ; 18
-	const UNOWN_S ; 19
-	const UNOWN_T ; 20
-	const UNOWN_U ; 21
-	const UNOWN_V ; 22
-	const UNOWN_W ; 23
-	const UNOWN_X ; 24
-	const UNOWN_Y ; 25
-	const UNOWN_Z ; 26
-DEF NUM_UNOWN EQU const_value - 1 ; 26

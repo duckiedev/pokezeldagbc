@@ -191,7 +191,7 @@ MonMenuIcons:
 	db ICON_ODDISH      ; HOPPIP
 	db ICON_ODDISH      ; SKIPLOOM
 	db ICON_ODDISH      ; JUMPLUFF
-	db ICON_MONSTER     ; IGNIZOL
+	db ICON_BLOB	    ; IGNIZOL
 	db ICON_ODDISH      ; SUNKERN
 	db ICON_ODDISH      ; SUNFLORA
 	db ICON_BUG         ; YANMA
@@ -202,7 +202,6 @@ MonMenuIcons:
 	db ICON_BIRD        ; MURKROW
 	db ICON_SLOWPOKE    ; SLOWKING
 	db ICON_GHOST       ; MISDREAVUS
-	db ICON_UNOWN       ; UNOWN
 	db ICON_GHOST       ; WOBBUFFET
 	db ICON_EQUINE      ; GIRAFARIG
 	db ICON_BUG         ; PINECO

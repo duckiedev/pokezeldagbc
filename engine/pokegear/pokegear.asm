@@ -2,7 +2,6 @@
 	const_def
 	const POKEGEARCARD_CLOCK ; 0
 	const POKEGEARCARD_MAP   ; 1
-	const POKEGEARCARD_RADIO ; 2
 DEF NUM_POKEGEAR_CARDS EQU const_value
 
 ; PokegearJumptable.Jumptable indexes
@@ -14,8 +13,6 @@ DEF NUM_POKEGEAR_CARDS EQU const_value
 	const POKEGEARSTATE_JOHTOMAPJOYPAD  ; 4
 	const POKEGEARSTATE_KANTOMAPINIT    ; 5
 	const POKEGEARSTATE_KANTOMAPJOYPAD  ; 6
-	const POKEGEARSTATE_RADIOINIT       ; 7
-	const POKEGEARSTATE_RADIOJOYPAD     ; 8
 
 PokeGear:
 	ld hl, wOptions
@@ -60,7 +57,6 @@ PokeGear:
 	ldh [hBGMapAddress + 1], a
 	ld a, SCREEN_HEIGHT_PX
 	ldh [hWY], a
-	call ExitPokegearRadio_HandleMusic
 	ret
 
 .InitTilemap:
@@ -86,9 +82,6 @@ PokeGear:
 	ld [wPokegearCard], a ; POKEGEARCARD_CLOCK
 	ld [wPokegearMapRegion], a ; JOHTO_REGION
 	ld [wUnusedPokegearByte], a
-	ld [wPokegearRadioChannelBank], a
-	ld [wPokegearRadioChannelAddr], a
-	ld [wPokegearRadioChannelAddr + 1], a
 	call Pokegear_InitJumptableIndices
 	call InitPokegearTilemap
 	ld b, SCGB_POKEGEAR_PALS
@@ -176,7 +169,6 @@ AnimatePokegearModeIndicatorArrow:
 .XCoords:
 	db $00 ; POKEGEARCARD_CLOCK
 	db $10 ; POKEGEARCARD_MAP
-	db $20 ; POKEGEARCARD_RADIO
 
 TownMap_GetCurrentLandmark:
 	ld a, [wMapGroup]
@@ -293,7 +285,6 @@ InitPokegearTilemap:
 ; entries correspond to POKEGEARCARD_* constants
 	dw .Clock
 	dw .Map
-	dw .Radio
 
 .Clock:
 	ld de, ClockTilemapRLE
@@ -336,14 +327,6 @@ InitPokegearTilemap:
 	call PokegearMap_UpdateLandmarkName
 	ret
 
-.Radio:
-	ld de, RadioTilemapRLE
-	call Pokegear_LoadTilemapRLE
-	hlcoord 0, 12
-	lb bc, 4, 18
-	call Textbox
-	ret
-
 Pokegear_FinishTilemap:
 	hlcoord 0, 0
 	ld bc, $8
@@ -358,8 +341,6 @@ Pokegear_FinishTilemap:
 	bit POKEGEAR_MAP_CARD_F, a
 	call nz, .PlaceMapIcon
 	ld a, [de]
-	bit POKEGEAR_RADIO_CARD_F, a
-	call nz, .PlaceRadioIcon
 	hlcoord 0, 0
 	ld a, $46
 	call .PlacePokegearCardIcon
@@ -370,9 +351,6 @@ Pokegear_FinishTilemap:
 	ld a, $40
 	jr .PlacePokegearCardIcon
 
-.PlaceRadioIcon:
-	hlcoord 6, 0
-	ld a, $42
 .PlacePokegearCardIcon:
 	ld [hli], a
 	inc a
@@ -397,8 +375,6 @@ PokegearJumptable:
 	dw PokegearMap_JohtoMap
 	dw PokegearMap_Init
 	dw PokegearMap_KantoMap
-	dw PokegearRadio_Init
-	dw PokegearRadio_Joypad
 
 PokegearClock_Init:
 	call InitPokegearTilemap
@@ -406,7 +382,6 @@ PokegearClock_Init:
 	call PrintText
 	ld hl, wJumptableIndex
 	inc [hl]
-	call ExitPokegearRadio_HandleMusic
 	ret
 
 PokegearClock_Joypad:
@@ -420,17 +395,11 @@ PokegearClock_Joypad:
 	ret z
 	ld a, [wPokegearFlags]
 	bit POKEGEAR_MAP_CARD_F, a
-	jr z, .no_map_card
+	jr z, .done
 	ld c, POKEGEARSTATE_MAPCHECKREGION
 	ld b, POKEGEARCARD_MAP
 	jr .done
 
-.no_map_card
-	ld a, [wPokegearFlags]
-	bit POKEGEAR_RADIO_CARD_F, a
-	ret z
-	ld c, POKEGEARSTATE_RADIOINIT
-	ld b, POKEGEARCARD_RADIO
 .done
 	call Pokegear_SwitchPage
 	ret
@@ -482,7 +451,6 @@ PokegearMap_CheckRegion:
 	ld a, POKEGEARSTATE_KANTOMAPINIT
 .done
 	ld [wJumptableIndex], a
-	call ExitPokegearRadio_HandleMusic
 	ret
 
 PokegearMap_Init:
@@ -521,12 +489,7 @@ PokegearMap_ContinueMap:
 	ret
 
 .right
-	ld a, [wPokegearFlags]
-	bit POKEGEAR_RADIO_CARD_F, a
-	ret z
-	ld c, POKEGEARSTATE_RADIOINIT
-	ld b, POKEGEARCARD_RADIO
-	jr .done
+	ret
 
 .left
 	ld c, POKEGEARSTATE_CLOCKINIT
@@ -668,57 +631,6 @@ TownMap_GetKantoLandmarkLimits:
 	ld e, LANDMARK_VICTORY_ROAD
 	ret
 
-PokegearRadio_Init:
-	call InitPokegearTilemap
-	depixel 4, 10, 4, 4
-	ld a, SPRITE_ANIM_OBJ_RADIO_TUNING_KNOB
-	call InitSpriteAnimStruct
-	ld hl, SPRITEANIMSTRUCT_TILE_ID
-	add hl, bc
-	ld [hl], $08
-	call _UpdateRadioStation
-	ld hl, wJumptableIndex
-	inc [hl]
-	ret
-
-PokegearRadio_Joypad:
-	ld hl, hJoyLast
-	ld a, [hl]
-	and B_BUTTON
-	jr nz, .cancel
-	ld a, [hl]
-	and D_LEFT
-	jr nz, .left
-	ld a, [wPokegearRadioChannelAddr]
-	ld l, a
-	ld a, [wPokegearRadioChannelAddr + 1]
-	ld h, a
-	ld a, [wPokegearRadioChannelBank]
-	and a
-	ret z
-	rst FarCall
-	ret
-
-.left
-	ld a, [wPokegearFlags]
-	bit POKEGEAR_MAP_CARD_F, a
-	jr z, .no_map
-	ld c, POKEGEARSTATE_MAPCHECKREGION
-	ld b, POKEGEARCARD_MAP
-	jr .switch_page
-
-.no_map
-	ld c, POKEGEARSTATE_CLOCKINIT
-	ld b, POKEGEARCARD_CLOCK
-.switch_page
-	call Pokegear_SwitchPage
-	ret
-
-.cancel
-	ld hl, wJumptableIndex
-	set 7, [hl]
-	ret
-
 Pokegear_SwitchPage:
 	ld de, SFX_TEXT_PRINT_DONE
 	call PlaySFX
@@ -727,22 +639,6 @@ Pokegear_SwitchPage:
 	ld a, b
 	ld [wPokegearCard], a
 	call DeleteSpriteAnimStruct2ToEnd
-	ret
-
-ExitPokegearRadio_HandleMusic:
-	ld a, [wPokegearRadioMusicPlaying]
-	cp RESTART_MAP_MUSIC
-	jr z, .restart_map_music
-	cp ENTER_MAP_MUSIC
-	call z, PlayMapMusicBike
-	xor a
-	ld [wPokegearRadioMusicPlaying], a
-	ret
-
-.restart_map_music
-	call RestartMapMusic
-	xor a
-	ld [wPokegearRadioMusicPlaying], a
 	ret
 
 DeleteSpriteAnimStruct2ToEnd:
@@ -781,174 +677,9 @@ PokegearPressButtonText:
 PokegearSpritesGFX:
 INCBIN "gfx/pokegear/pokegear_sprites.2bpp.lz"
 
-RadioTilemapRLE:
-INCBIN "gfx/pokegear/radio.tilemap.rle"
 ClockTilemapRLE:
 INCBIN "gfx/pokegear/clock.tilemap.rle"
 
-_UpdateRadioStation:
-	jr UpdateRadioStation
-
-; called from engine/sprite_anims/functions.asm
-
-AnimateTuningKnob:
-	push bc
-	call .TuningKnob
-	pop bc
-	ld a, [wRadioTuningKnob]
-	ld hl, SPRITEANIMSTRUCT_XOFFSET
-	add hl, bc
-	ld [hl], a
-	ret
-
-.TuningKnob:
-	ld hl, hJoyLast
-	ld a, [hl]
-	and D_DOWN
-	jr nz, .down
-	ld a, [hl]
-	and D_UP
-	jr nz, .up
-	ret
-
-.down
-	ld hl, wRadioTuningKnob
-	ld a, [hl]
-	and a
-	ret z
-	dec [hl]
-	dec [hl]
-	jr .update
-
-.up
-	ld hl, wRadioTuningKnob
-	ld a, [hl]
-	cp 80
-	ret nc
-	inc [hl]
-	inc [hl]
-.update
-UpdateRadioStation:
-	ld hl, wRadioTuningKnob
-	ld d, [hl]
-	ld hl, RadioChannels
-.loop
-	ld a, [hli]
-	cp -1
-	jr z, .nostation
-	cp d
-	jr z, .foundstation
-	inc hl
-	inc hl
-	jr .loop
-
-.nostation
-	call NoRadioStation
-	ret
-
-.foundstation
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	ld de, .returnafterstation
-	push de
-	jp hl
-
-.returnafterstation
-	ld a, [wPokegearRadioChannelBank]
-	and a
-	ret z
-	xor a
-	ldh [hBGMapMode], a
-	hlcoord 2, 9
-	call PlaceString
-	ld a, $1
-	ldh [hBGMapMode], a
-	ret
-
-LoadPokegearRadioChannelPointer: ; unreferenced
-	ld [wPokegearRadioChannelBank], a
-	ld a, [hli]
-	ld [wPokegearRadioChannelAddr], a
-	ld a, [hli]
-	ld [wPokegearRadioChannelAddr + 1], a
-	ret
-
-RadioChannels:
-; entries correspond to constants/radio_constants.asm
-; frequency value given here = 4 × ingame_frequency − 2
-	dbw 16, .PKMNTalkAndPokedexShow ; 04.5
-	dbw 28, .PokemonMusic           ; 07.5
-	dbw 52, .RuinsOfAlphRadio       ; 13.5
-	dbw 64, .PlacesAndPeople        ; 16.5
-	dbw 72, .LetsAllSing            ; 18.5
-	dbw 78, .PokeFluteRadio         ; 20.0
-	dbw 80, .EvolutionRadio         ; 20.5
-	db -1
-
-.PKMNTalkAndPokedexShow:
-; Pokédex Show in the morning
-; Oak's Pokémon Talk in the afternoon and evening
-	call .InJohto
-	jr nc, .NoSignal
-	ld a, [wTimeOfDay]
-	and a
-	jmp z, LoadStation_PokedexShow
-	jr LoadStation_OaksPokemonTalk
-
-.PokemonMusic:
-	call .InJohto
-	jr nc, .NoSignal
-	jmp LoadStation_PokemonMusic
-
-.RuinsOfAlphRadio:
-	ld a, [wPokegearMapPlayerIconLandmark]
-	cp LANDMARK_RUINS_OF_ALPH
-	jr nz, .NoSignal
-	jmp LoadStation_UnownRadio
-
-.PlacesAndPeople:
-	call .InJohto
-	jr c, .NoSignal
-	ld a, [wPokegearFlags]
-	bit POKEGEAR_EXPN_CARD_F, a
-	jr z, .NoSignal
-	jmp LoadStation_PlacesAndPeople
-
-.LetsAllSing:
-	call .InJohto
-	jr c, .NoSignal
-	ld a, [wPokegearFlags]
-	bit POKEGEAR_EXPN_CARD_F, a
-	jr z, .NoSignal
-	jmp LoadStation_LetsAllSing
-
-.PokeFluteRadio:
-	call .InJohto
-	jr c, .NoSignal
-	ld a, [wPokegearFlags]
-	bit POKEGEAR_EXPN_CARD_F, a
-	jr z, .NoSignal
-	jmp LoadStation_PokeFluteRadio
-
-.EvolutionRadio:
-; This station airs in the Lake of Rage area when Team Rocket is still in Mahogany.
-	ld a, [wStatusFlags]
-	bit STATUSFLAGS_ROCKET_SIGNAL_F, a
-	jr z, .NoSignal
-	ld a, [wPokegearMapPlayerIconLandmark]
-	cp LANDMARK_MAHOGANY_TOWN
-	jr z, .ok
-	cp LANDMARK_ROUTE_43
-	jr z, .ok
-	cp LANDMARK_LAKE_OF_RAGE
-	jr nz, .NoSignal
-.ok
-	jmp LoadStation_EvolutionRadio
-
-.NoSignal:
-	call NoRadioStation
-	ret
 
 .InJohto:
 ; if in Johto or on the S.S. Aqua, set carry
@@ -965,177 +696,6 @@ RadioChannels:
 .johto
 	scf
 	ret
-
-LoadStation_OaksPokemonTalk:
-	xor a ; OAKS_POKEMON_TALK
-	ld [wCurRadioLine], a
-	ld [wNumRadioLinesPrinted], a
-	ld a, BANK(PlayRadioShow)
-	ld hl, PlayRadioShow
-	call Radio_BackUpFarCallParams
-	ld de, OaksPKMNTalkName
-	ret
-
-LoadStation_PokedexShow:
-	ld a, POKEDEX_SHOW
-	ld [wCurRadioLine], a
-	xor a
-	ld [wNumRadioLinesPrinted], a
-	ld a, BANK(PlayRadioShow)
-	ld hl, PlayRadioShow
-	call Radio_BackUpFarCallParams
-	ld de, PokedexShowName
-	ret
-
-LoadStation_PokemonMusic:
-	ld a, POKEMON_MUSIC
-	ld [wCurRadioLine], a
-	xor a
-	ld [wNumRadioLinesPrinted], a
-	ld a, BANK(PlayRadioShow)
-	ld hl, PlayRadioShow
-	call Radio_BackUpFarCallParams
-	ld de, PokemonMusicName
-	ret
-
-LoadStation_UnownRadio:
-	ld a, UNOWN_RADIO
-	ld [wCurRadioLine], a
-	xor a
-	ld [wNumRadioLinesPrinted], a
-	ld a, BANK(PlayRadioShow)
-	ld hl, PlayRadioShow
-	call Radio_BackUpFarCallParams
-	ld de, UnownStationName
-	ret
-
-LoadStation_PlacesAndPeople:
-	ld a, PLACES_AND_PEOPLE
-	ld [wCurRadioLine], a
-	xor a
-	ld [wNumRadioLinesPrinted], a
-	ld a, BANK(PlayRadioShow)
-	ld hl, PlayRadioShow
-	call Radio_BackUpFarCallParams
-	ld de, PlacesAndPeopleName
-	ret
-
-LoadStation_LetsAllSing:
-	ld a, LETS_ALL_SING
-	ld [wCurRadioLine], a
-	xor a
-	ld [wNumRadioLinesPrinted], a
-	ld a, BANK(PlayRadioShow)
-	ld hl, PlayRadioShow
-	call Radio_BackUpFarCallParams
-	ld de, LetsAllSingName
-	ret
-
-LoadStation_RocketRadio:
-	ld a, ROCKET_RADIO
-	ld [wCurRadioLine], a
-	xor a
-	ld [wNumRadioLinesPrinted], a
-	ld a, BANK(PlayRadioShow)
-	ld hl, PlayRadioShow
-	call Radio_BackUpFarCallParams
-	ld de, LetsAllSingName
-	ret
-
-LoadStation_PokeFluteRadio:
-	ld a, POKE_FLUTE_RADIO
-	ld [wCurRadioLine], a
-	xor a
-	ld [wNumRadioLinesPrinted], a
-	ld a, BANK(PlayRadioShow)
-	ld hl, PlayRadioShow
-	call Radio_BackUpFarCallParams
-	ld de, PokeFluteStationName
-	ret
-
-LoadStation_EvolutionRadio:
-	ld a, EVOLUTION_RADIO
-	ld [wCurRadioLine], a
-	xor a
-	ld [wNumRadioLinesPrinted], a
-	ld a, BANK(PlayRadioShow)
-	ld hl, PlayRadioShow
-	call Radio_BackUpFarCallParams
-	ld de, UnownStationName
-	ret
-
-DummyLoadStation: ; unreferenced
-	ret
-
-RadioMusicRestartDE:
-	push de
-	ld a, e
-	ld [wPokegearRadioMusicPlaying], a
-	ld de, MUSIC_NONE
-	call PlayMusic
-	pop de
-	ld a, e
-	ld [wMapMusic], a
-	call PlayMusic
-	ret
-
-RadioMusicRestartPokemonChannel:
-	push de
-	ld a, RESTART_MAP_MUSIC
-	ld [wPokegearRadioMusicPlaying], a
-	ld de, MUSIC_NONE
-	call PlayMusic
-	pop de
-	ld de, MUSIC_POKEMON_CHANNEL
-	call PlayMusic
-	ret
-
-Radio_BackUpFarCallParams:
-	ld [wPokegearRadioChannelBank], a
-	ld a, l
-	ld [wPokegearRadioChannelAddr], a
-	ld a, h
-	ld [wPokegearRadioChannelAddr + 1], a
-	ret
-
-NoRadioStation:
-	call NoRadioMusic
-	call NoRadioName
-; no radio channel
-	xor a
-	ld [wPokegearRadioChannelBank], a
-	ld [wPokegearRadioChannelAddr], a
-	ld [wPokegearRadioChannelAddr + 1], a
-	ld a, $1
-	ldh [hBGMapMode], a
-	ret
-
-NoRadioMusic:
-	ld de, MUSIC_NONE
-	call PlayMusic
-	ld a, ENTER_MAP_MUSIC
-	ld [wPokegearRadioMusicPlaying], a
-	ret
-
-NoRadioName:
-	xor a
-	ldh [hBGMapMode], a
-	hlcoord 1, 8
-	lb bc, 3, 18
-	call ClearBox
-	hlcoord 0, 12
-	lb bc, 4, 18
-	call Textbox
-	ret
-
-OaksPKMNTalkName:     db "OAK's <PK><MN> Talk@"
-PokedexShowName:      db "#DEX Show@"
-PokemonMusicName:     db "#MON Music@"
-UnownStationName:     db "?????@"
-
-PlacesAndPeopleName:  db "Places & People@"
-LetsAllSingName:      db "Let's All Sing!@"
-PokeFluteStationName: db "# FLUTE@"
 
 _TownMap:
 	ld hl, wOptions
@@ -1304,93 +864,6 @@ _TownMap:
 	call PokegearMap_UpdateLandmarkName
 	farcall TownMapPals
 	ret
-
-PlayRadio:
-	ld hl, wOptions
-	ld a, [hl]
-	push af
-	set NO_TEXT_SCROLL, [hl]
-	call .PlayStation
-	ld c, 100
-	call DelayFrames
-.loop
-	call JoyTextDelay
-	ldh a, [hJoyPressed]
-	and A_BUTTON | B_BUTTON
-	jr nz, .stop
-	ld a, [wPokegearRadioChannelAddr]
-	ld l, a
-	ld a, [wPokegearRadioChannelAddr + 1]
-	ld h, a
-	ld a, [wPokegearRadioChannelBank]
-	and a
-	jr z, .zero
-	rst FarCall
-.zero
-	call DelayFrame
-	jr .loop
-
-.stop
-	pop af
-	ld [wOptions], a
-	call ExitPokegearRadio_HandleMusic
-	ret
-
-.PlayStation:
-	ld a, ENTER_MAP_MUSIC
-	ld [wPokegearRadioMusicPlaying], a
-	ld hl, PlayRadioStationPointers
-	ld d, 0
-	add hl, de
-	add hl, de
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	ld de, .jump_return
-	push de
-	jp hl
-
-.jump_return
-	push de
-	hlcoord 0, 12
-	lb bc, 4, 18
-	call Textbox
-	hlcoord 1, 14
-	ld [hl], "“"
-	pop de
-	hlcoord 2, 14
-	call PlaceString
-	ld h, b
-	ld l, c
-	ld [hl], "”"
-	call WaitBGMap
-	ret
-
-PlayRadioStationPointers:
-; entries correspond to MAPRADIO_* constants
-	table_width 2, PlayRadioStationPointers
-	dw LoadStation_PokemonChannel
-	dw LoadStation_OaksPokemonTalk
-	dw LoadStation_PokedexShow
-	dw LoadStation_PokemonMusic
-	dw LoadStation_UnownRadio
-	dw LoadStation_PlacesAndPeople
-	dw LoadStation_LetsAllSing
-	dw LoadStation_RocketRadio
-	assert_table_length NUM_MAP_RADIO_STATIONS
-
-LoadStation_PokemonChannel:
-	call IsInJohto
-	and a
-	jr nz, .kanto
-	call UpdateTime
-	ld a, [wTimeOfDay]
-	and a
-	jmp z, LoadStation_PokedexShow
-	jmp LoadStation_OaksPokemonTalk
-
-.kanto:
-	jmp LoadStation_PlacesAndPeople
 
 PokegearMap:
 	ld a, e

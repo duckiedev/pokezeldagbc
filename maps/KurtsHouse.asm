@@ -428,9 +428,6 @@ KurtsHouseCelebiStatue:
 KurtsHouseBookshelf:
 	jumpstd DifficultBookshelfScript
 
-KurtsHouseRadio:
-	jumpstd Radio1Script
-
 KurtsHouseKurtExitHouseMovement:
 	big_step DOWN
 	big_step DOWN
@@ -684,7 +681,6 @@ KurtsHouse_MapEvents:
 	def_coord_events
 
 	def_bg_events
-	bg_event  6,  1, BGEVENT_READ, KurtsHouseRadio
 	bg_event  8,  0, BGEVENT_READ, KurtsHouseOakPhoto
 	bg_event  9,  0, BGEVENT_READ, KurtsHouseOakPhoto
 	bg_event  5,  1, BGEVENT_READ, KurtsHouseBookshelf

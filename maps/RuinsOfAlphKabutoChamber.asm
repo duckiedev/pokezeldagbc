@@ -63,7 +63,6 @@ RuinsOfAlphKabutoChamberPuzzle:
 .PuzzleComplete:
 	setevent EVENT_RUINS_OF_ALPH_INNER_CHAMBER_TOURISTS
 	setevent EVENT_SOLVED_KABUTO_PUZZLE
-	setflag ENGINE_UNLOCKED_UNOWNS_A_TO_K
 	setevent EVENT_RUINS_OF_ALPH_KABUTO_CHAMBER_RECEPTIONIST
 	setmapscene RUINS_OF_ALPH_INNER_CHAMBER, SCENE_RUINSOFALPHINNERCHAMBER_STRANGE_PRESENCE
 	earthquake 30
@@ -81,33 +80,6 @@ RuinsOfAlphKabutoChamberPuzzle:
 	end
 
 RuinsOfAlphKabutoChamberScientistScript:
-	faceplayer
-	opentext
-	readvar VAR_UNOWNCOUNT
-	ifequal NUM_UNOWN, .AllUnownCaught
-	checkevent EVENT_WALL_OPENED_IN_KABUTO_CHAMBER
-	iftrue .WallOpen
-	checkevent EVENT_SOLVED_KABUTO_PUZZLE
-	iffalse .PuzzleIncomplete
-	writetext RuinsOfAlphKabutoChamberScientistTremorText
-	promptbutton
-.PuzzleIncomplete:
-	writetext RuinsOfAlphKabutoChamberScientistCrypticText
-	waitbutton
-	closetext
-	turnobject RUINSOFALPHKABUTOCHAMBER_SCIENTIST, UP
-	end
-
-.WallOpen:
-	writetext RuinsOfAlphKabutoChamberScientistHoleText
-	waitbutton
-	closetext
-	end
-
-.AllUnownCaught:
-	writetext RuinsOfAlphResearchCenterScientist1Text_GotAllUnown
-	waitbutton
-	closetext
 	end
 
 RuinsOfAlphKabutoChamberAncientReplica:
@@ -117,21 +89,9 @@ RuinsOfAlphKabutoChamberDescriptionSign:
 	jumptext RuinsOfAlphKabutoChamberDescriptionText
 
 RuinsOfAlphKabutoChamberWallPatternLeft:
-	opentext
-	writetext RuinsOfAlphKabutoChamberWallPatternLeftText
-	setval UNOWNWORDS_ESCAPE
-	special DisplayUnownWords
-	closetext
 	end
 
 RuinsOfAlphKabutoChamberWallPatternRight:
-	checkevent EVENT_WALL_OPENED_IN_KABUTO_CHAMBER
-	iftrue .WallOpen
-	opentext
-	writetext RuinsOfAlphKabutoChamberWallPatternRightText
-	setval UNOWNWORDS_ESCAPE
-	special DisplayUnownWords
-	closetext
 	end
 
 .WallOpen:
@@ -221,10 +181,6 @@ RuinsOfAlphKabutoChamberUnusedText: ; unreferenced
 RuinsOfAlphKabutoChamberWallPatternLeftText:
 	text "Patterns appeared"
 	line "on the walls…"
-	done
-
-RuinsOfAlphKabutoChamberUnownText: ; unreferenced
-	text "It's UNOWN text!"
 	done
 
 RuinsOfAlphKabutoChamberWallPatternRightText:

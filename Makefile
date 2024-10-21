@@ -14,7 +14,6 @@ rom_obj := \
 	data/text/common.o \
 	data/maps/map_data.o \
 	data/pokemon/dex_entries.o \
-	data/pokemon/egg_moves.o \
 	data/pokemon/evos_attacks.o \
 	engine/movie/credits.o \
 	engine/overworld/events.o \
@@ -175,15 +174,45 @@ include gfx/lz.mk
 
 gfx/pokemon/%/front.animated.2bpp: gfx/pokemon/%/front.2bpp gfx/pokemon/%/front.dimensions
 	tools/pokemon_animation_graphics -o $@ $^
-	tools/trim_animation.sh $@ $(word 2,$^)
+gfx/pokemon/%/front.animated.tilemap: gfx/pokemon/%/front.2bpp gfx/pokemon/%/front.dimensions
+	tools/pokemon_animation_graphics -t $@ $^
+
+
+# Girafarig has a redundant tile after the end. It is used in two frames, so it must be injected into the generated graphics.
+# This is more involved, so it's hacked into pokemon_animation_graphics.
+gfx/pokemon/girafarig/front.animated.2bpp: gfx/pokemon/girafarig/front.2bpp gfx/pokemon/girafarig/front.dimensions
+	tools/pokemon_animation_graphics --girafarig -o $@ $^
+gfx/pokemon/girafarig/front.animated.tilemap: gfx/pokemon/girafarig/front.2bpp gfx/pokemon/girafarig/front.dimensions
+	tools/pokemon_animation_graphics --girafarig -t $@ $^
+
+
+### Pokemon and trainer sprite rules
+
+gfx/pokemon/%/back.2bpp: rgbgfx += --columns
+gfx/pokemon/%/back.2bpp: gfx/pokemon/%/back.png gfx/pokemon/%/normal.gbcpal
+	$(RGBGFX) $(rgbgfx) --colors gbc:$(word 2,$^) -o $@ $<
+gfx/pokemon/%/front.2bpp: gfx/pokemon/%/front.png gfx/pokemon/%/normal.gbcpal
+	$(RGBGFX) $(rgbgfx) --colors gbc:$(word 2,$^) -o $@ $<
+gfx/pokemon/%/normal.gbcpal: gfx/pokemon/%/front.gbcpal gfx/pokemon/%/back.gbcpal
+	tools/gbcpal $(tools/gbcpal) $@ $^
+
+gfx/trainers/%.2bpp: rgbgfx += --columns
+gfx/trainers/%.2bpp: gfx/trainers/%.png gfx/trainers/%.gbcpal
+	$(RGBGFX) $(rgbgfx) --colors gbc:$(word 2,$^) -o $@ $<
 
 
 ### Misc file-specific graphics rules
 
-gfx/pokemon/%/back.2bpp: rgbgfx += --columns --colors embedded
-gfx/pokemon/%/front.2bpp: rgbgfx += --colors embedded
+gfx/pokemon/spearow/normal.gbcpal: tools/gbcpal += --reverse
+gfx/pokemon/fearow/normal.gbcpal: tools/gbcpal += --reverse
+gfx/pokemon/farfetch_d/normal.gbcpal: tools/gbcpal += --reverse
+gfx/pokemon/hitmonlee/normal.gbcpal: tools/gbcpal += --reverse
+gfx/pokemon/scyther/normal.gbcpal: tools/gbcpal += --reverse
+gfx/pokemon/jynx/normal.gbcpal: tools/gbcpal += --reverse
+gfx/pokemon/porygon/normal.gbcpal: tools/gbcpal += --reverse
+gfx/pokemon/porygon2/normal.gbcpal: tools/gbcpal += --reverse
 
-gfx/trainers/%.2bpp: rgbgfx += --columns --colors embedded
+gfx/trainers/swimmer_m.gbcpal: tools/gbcpal += --reverse
 
 gfx/new_game/shrink1.2bpp: rgbgfx += --columns
 gfx/new_game/shrink2.2bpp: rgbgfx += --columns
@@ -254,15 +283,16 @@ gfx/sgb/sgb_border.sgb.tilemap: gfx/sgb/sgb_border.bin ; tr < $< -d '\000' > $@
 %.2bpp: %.png
 	$(RGBGFX) $(rgbgfx) -o $@ $<
 	$(if $(tools/gfx),\
-		tools/gfx $(tools/gfx) -o $@ $@)
+		tools/gfx $(tools/gfx) -o $@ $@ || $$($(RM) $@ && false))
 
 %.1bpp: %.png
 	$(RGBGFX) $(rgbgfx) --depth 1 -o $@ $<
 	$(if $(tools/gfx),\
-		tools/gfx $(tools/gfx) --depth 1 -o $@ $@)
+		tools/gfx $(tools/gfx) --depth 1 -o $@ $@ || $$($(RM) $@ && false))
 
 %.gbcpal: %.png
-	$(RGBGFX) --colors embedded -p $@ $<
+	$(RGBGFX) -p $@ $<
+	tools/gbcpal $(tools/gbcpal) $@ $@ || $$($(RM) $@ && false)
 
 %.dimensions: %.png
 	tools/png_dimensions $< $@

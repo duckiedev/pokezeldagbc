@@ -62,9 +62,6 @@ FindAtLeastThatHappy:
 	sla c
 	dec d
 	jr nz, .loop
-	call RetroactivelyIgnoreEggs
-	ld a, c
-	and a
 	ret
 
 FindAboveLevel:
@@ -91,9 +88,6 @@ FindAboveLevel:
 	sla c
 	dec d
 	jr nz, .loop
-	call RetroactivelyIgnoreEggs
-	ld a, c
-	and a
 	ret
 
 FindThatSpecies:
@@ -113,20 +107,3 @@ FindThatSpecies:
 	ld a, $1
 	and a
 	ret
-
-RetroactivelyIgnoreEggs:
-	ld e, %11111110
-	ld hl, wPartySpecies
-.loop
-	ld a, [hli]
-	cp -1
-	ret z
-	cp EGG
-	jr nz, .skip_notegg
-	ld a, c
-	and e
-	ld c, a
-
-.skip_notegg
-	rlc e
-	jr .loop

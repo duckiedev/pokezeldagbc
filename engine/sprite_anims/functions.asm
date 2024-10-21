@@ -33,7 +33,6 @@ DoSpriteAnimFrame:
 	dw SpriteAnimFunc_TradeTubeBulge
 	dw SpriteAnimFunc_TrademonInTube
 	dw SpriteAnimFunc_RevealNewMon
-	dw SpriteAnimFunc_RadioTuningKnob
 	dw SpriteAnimFunc_CutLeaves
 	dw SpriteAnimFunc_FlyFrom
 	dw SpriteAnimFunc_FlyLeaf
@@ -588,10 +587,6 @@ SpriteAnimFunc_RevealNewMon:
 
 .finish_EggShell
 	call DeinitializeSprite
-	ret
-
-SpriteAnimFunc_RadioTuningKnob:
-	callfar AnimateTuningKnob
 	ret
 
 SpriteAnimFunc_CutLeaves:

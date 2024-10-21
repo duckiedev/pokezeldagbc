@@ -20,7 +20,6 @@ RadioTower2FSuperNerdScript:
 RadioTower2FTeacherScript:
 	faceplayer
 	opentext
-	checkflag ENGINE_ROCKETS_IN_RADIO_TOWER
 	iftrue .Rockets
 	writetext RadioTower2FTeacherText
 	waitbutton

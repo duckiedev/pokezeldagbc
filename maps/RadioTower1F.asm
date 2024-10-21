@@ -13,7 +13,6 @@ RadioTower1F_MapScripts:
 RadioTower1FReceptionistScript:
 	faceplayer
 	opentext
-	checkflag ENGINE_ROCKETS_IN_RADIO_TOWER
 	iftrue .Rockets
 	writetext RadioTower1FReceptionistWelcomeText
 	waitbutton
@@ -27,69 +26,6 @@ RadioTower1FReceptionistScript:
 	end
 
 RadioTower1FRadioCardWomanScript:
-	faceplayer
-	opentext
-	checkflag ENGINE_RADIO_CARD
-	iftrue .GotCard
-	writetext RadioTower1FRadioCardWomanOfferQuizText
-	yesorno
-	iffalse .NoQuiz
-	writetext RadioTower1FRadioCardWomanQuestion1Text
-	yesorno
-	iffalse .WrongAnswer
-	playsound SFX_ELEVATOR_END
-	waitsfx
-	writetext RadioTower1FRadioCardWomanQuestion2Text
-	yesorno
-	iffalse .WrongAnswer
-	playsound SFX_ELEVATOR_END
-	waitsfx
-	writetext RadioTower1FRadioCardWomanQuestion3Text
-	yesorno
-	iftrue .WrongAnswer
-	playsound SFX_ELEVATOR_END
-	waitsfx
-	writetext RadioTower1FRadioCardWomanQuestion4Text
-	yesorno
-	iffalse .WrongAnswer
-	playsound SFX_ELEVATOR_END
-	waitsfx
-	writetext RadioTower1FRadioCardWomanQuestion5Text
-	yesorno
-	iftrue .WrongAnswer
-	playsound SFX_ELEVATOR_END
-	waitsfx
-	writetext RadioTower1FRadioCardWomanYouWinText
-	promptbutton
-	getstring STRING_BUFFER_4, .RadioCardText
-	scall .ReceiveItem
-	writetext RadioTower1FPokegearIsARadioText
-	promptbutton
-	setflag ENGINE_RADIO_CARD
-.GotCard:
-	writetext RadioTower1FRadioCardWomanTuneInText
-	waitbutton
-	closetext
-	end
-
-.RadioCardText:
-	db "RADIO CARD@"
-
-.ReceiveItem:
-	jumpstd ReceiveItemScript
-	end
-
-.WrongAnswer:
-	playsound SFX_WRONG
-	writetext RadioTower1FRadioCardWomanWrongAnswerText
-	waitbutton
-	closetext
-	end
-
-.NoQuiz:
-	writetext RadioTower1FRadioCardWomanNotTakingQuizText
-	waitbutton
-	closetext
 	end
 
 RadioTower1FLassScript:

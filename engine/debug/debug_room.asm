@@ -328,11 +328,6 @@ DebugRoomMenu_PokedexComp:
 	ld [sPlayerData + (wEndPokedexCaught - 1 - wPlayerData)], a
 	ld [sPlayerData + (wEndPokedexSeen - 1 - wPlayerData)], a
 	ld hl, sPlayerData + (wStatusFlags - wPlayerData)
-	set STATUSFLAGS_UNOWN_DEX_F, [hl]
-	ld a, UNOWN_A
-	ld [sGameData + (wFirstUnownSeen - wGameData)], a
-	ld hl, sGameData + (wUnownDex - wGameData)
-	ld b, NUM_UNOWN
 .loop2
 	ld [hli], a
 	inc a
@@ -348,15 +343,8 @@ DebugRoomMenu_PokedexClr:
 	ld a, BANK(sPlayerData)
 	call OpenSRAM
 	ld hl, sPlayerData + (wStatusFlags - wPlayerData)
-	res STATUSFLAGS_UNOWN_DEX_F, [hl]
 	ld hl, sPlayerData + (wPokedexCaught - wPlayerData)
 	ld bc, wEndPokedexSeen - wPokedexCaught
-	xor a
-	call ByteFill
-	ld hl, sGameData + (wUnownDex - wGameData)
-	ld bc, NUM_UNOWN
-	xor a
-	call ByteFill
 	call CloseSRAM
 	call DebugRoom_SaveChecksum
 	ret

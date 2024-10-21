@@ -179,8 +179,6 @@ BillsPCDepositFuncStats:
 	ret
 
 BillsPCDepositFuncRelease:
-	call BillsPC_IsMonAnEgg
-	jr c, BillsPCDepositFuncCancel
 	ld a, [wMenuCursorY]
 	push af
 	ld de, PCString_ReleasePKMN
@@ -433,8 +431,6 @@ BillsPC_Withdraw:
 .release
 	ld a, [wMenuCursorY]
 	push af
-	call BillsPC_IsMonAnEgg
-	jr c, .FailedRelease
 	ld de, PCString_ReleasePKMN
 	call BillsPC_PlaceString
 	call LoadStandardMenuHeader
@@ -1053,14 +1049,11 @@ PCMonInfo:
 	ld [wCurPartySpecies], a
 	ld [wCurSpecies], a
 	ld hl, wTempMonDVs
-	predef GetUnownLetter
 	call GetBaseData
 	ld de, vTiles2 tile $00
 	predef GetMonFrontpic
 	ld a, [wCurPartySpecies]
 	ld [wTempSpecies], a
-	cp EGG
-	ret z
 
 	call GetBasePokemonName
 	hlcoord 1, 14
@@ -1572,24 +1565,6 @@ BillsPC_CheckSpaceInDestination:
 	scf
 	ret
 
-BillsPC_IsMonAnEgg:
-	ld a, [wCurPartySpecies]
-	cp EGG
-	jr z, .egg
-	and a
-	ret
-
-.egg
-	ld de, PCString_NoReleasingEGGS
-	call BillsPC_PlaceString
-	ld de, SFX_WRONG
-	call WaitPlaySFX
-	call WaitSFX
-	ld c, 50
-	call DelayFrames
-	scf
-	ret
-
 BillsPC_StatsScreen:
 	call LowVolume
 	call BillsPC_CopyMon
@@ -1623,7 +1598,6 @@ StatsScreenDPad:
 	ld [wCurPartySpecies], a
 	ld [wCurSpecies], a
 	ld hl, wTempMonDVs
-	predef GetUnownLetter
 	call GetBaseData
 	call BillsPC_CopyMon
 .pressed_a_b_right_left
@@ -2149,7 +2123,6 @@ PCString_Stored: db "Stored @"
 PCString_Got: db "Got @"
 PCString_BoxFull: db "The BOX is full.@"
 PCString_PartyFull: db "The party's full!@"
-PCString_NoReleasingEGGS: db "No releasing EGGS!@"
 
 _ChangeBox:
 	call LoadStandardMenuHeader

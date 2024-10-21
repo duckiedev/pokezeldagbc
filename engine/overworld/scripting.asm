@@ -104,122 +104,121 @@ ScriptCommandTable:
 	dw Script_checktime                  ; 28
 	dw Script_checkpoke                  ; 29
 	dw Script_givepoke                   ; 2a
-	dw Script_giveegg                    ; 2b
-	dw Script_checkevent                 ; 2c
-	dw Script_clearevent                 ; 2d
-	dw Script_setevent                   ; 2e
-	dw Script_checkflag                  ; 2f
-	dw Script_clearflag                  ; 30
-	dw Script_setflag                    ; 31
-	dw Script_wildon                     ; 32
-	dw Script_wildoff                    ; 33
-	dw Script_xycompare                  ; 34
-	dw Script_warpmod                    ; 35
-	dw Script_blackoutmod                ; 36
-	dw Script_warp                       ; 37
-	dw Script_getmoney                   ; 38
-	dw Script_getcoins                   ; 39
-	dw Script_getnum                     ; 3a
-	dw Script_getmonname                 ; 3b
-	dw Script_getitemname                ; 3c
-	dw Script_getcurlandmarkname         ; 3d
-	dw Script_gettrainername             ; 3e
-	dw Script_getstring                  ; 3f
-	dw Script_itemnotify                 ; 40
-	dw Script_pocketisfull               ; 41
-	dw Script_opentext                   ; 42
-	dw Script_reanchormap                ; 43
-	dw Script_closetext                  ; 44
-	dw Script_writeunusedbyte            ; 45
-	dw Script_farwritetext               ; 46
-	dw Script_writetext                  ; 47
-	dw Script_repeattext                 ; 48
-	dw Script_yesorno                    ; 49
-	dw Script_loadmenu                   ; 4a
-	dw Script_closewindow                ; 4b
-	dw Script_jumptextfaceplayer         ; 4c
-	dw Script_farjumptext                ; 4d
-	dw Script_jumptext                   ; 4e
-	dw Script_waitbutton                 ; 4f
-	dw Script_promptbutton               ; 50
-	dw Script_pokepic                    ; 51
-	dw Script_closepokepic               ; 52
-	dw Script__2dmenu                    ; 53
-	dw Script_verticalmenu               ; 54
-	dw Script_loadpikachudata            ; 55
-	dw Script_randomwildmon              ; 56
-	dw Script_loadtemptrainer            ; 57
-	dw Script_loadwildmon                ; 58
-	dw Script_loadtrainer                ; 59
-	dw Script_startbattle                ; 5a
-	dw Script_reloadmapafterbattle       ; 5b
-	dw Script_trainertext                ; 5c
-	dw Script_trainerflagaction          ; 5d
-	dw Script_winlosstext                ; 5e
-	dw Script_scripttalkafter            ; 5f
-	dw Script_endifjustbattled           ; 60
-	dw Script_checkjustbattled           ; 61
-	dw Script_setlasttalked              ; 62
-	dw Script_applymovement              ; 63
-	dw Script_applymovementlasttalked    ; 64
-	dw Script_faceplayer                 ; 65
-	dw Script_faceobject                 ; 66
-	dw Script_variablesprite             ; 67
-	dw Script_disappear                  ; 68
-	dw Script_appear                     ; 69
-	dw Script_follow                     ; 6a
-	dw Script_stopfollow                 ; 6b
-	dw Script_moveobject                 ; 6c
-	dw Script_writeobjectxy              ; 6d
-	dw Script_loademote                  ; 6e
-	dw Script_showemote                  ; 6f
-	dw Script_turnobject                 ; 70
-	dw Script_follownotexact             ; 71
-	dw Script_earthquake                 ; 72
-	dw Script_changemapblocks            ; 73
-	dw Script_changeblock                ; 74
-	dw Script_reloadmap                  ; 75
-	dw Script_refreshmap                 ; 76
-	dw Script_writecmdqueue              ; 77
-	dw Script_delcmdqueue                ; 78
-	dw Script_playmusic                  ; 79
-	dw Script_encountermusic             ; 7a
-	dw Script_musicfadeout               ; 7b
-	dw Script_playmapmusic               ; 7c
-	dw Script_dontrestartmapmusic        ; 7d
-	dw Script_cry                        ; 7e
-	dw Script_playsound                  ; 7f
-	dw Script_waitsfx                    ; 80
-	dw Script_warpsound                  ; 81
-	dw Script_specialsound               ; 82
-	dw Script_autoinput                  ; 83
-	dw Script_newloadmap                 ; 84
-	dw Script_pause                      ; 85
-	dw Script_deactivatefacing           ; 86
-	dw Script_sdefer                     ; 87
-	dw Script_warpcheck                  ; 88
-	dw Script_stopandsjump               ; 89
-	dw Script_endcallback                ; 8a
-	dw Script_end                        ; 8b
-	dw Script_reloadend                  ; 8c
-	dw Script_endall                     ; 8d
-	dw Script_pokemart                   ; 8e
-	dw Script_elevator                   ; 8f
-	dw Script_trade                      ; 90
-	dw Script_fruittree                  ; 91
-	dw Script_verbosegiveitem            ; 92
-	dw Script_verbosegiveitemvar         ; 93
-	dw Script_swarm                      ; 94
-	dw Script_halloffame                 ; 95
-	dw Script_credits                    ; 96
-	dw Script_warpfacing                 ; 97
-	dw Script_getlandmarkname            ; 98
-	dw Script_gettrainerclassname        ; 99
-	dw Script_getname                    ; 9a
-	dw Script_wait                       ; 9b
-	dw Script_checksave                  ; 9c
-	dw Script_owmonflagaction            ; 9d
-	dw Script_owmonafterbattle           ; 9e	
+	dw Script_checkevent                 ; 2b
+	dw Script_clearevent                 ; 2c
+	dw Script_setevent                   ; 2d
+	dw Script_checkflag                  ; 2e
+	dw Script_clearflag                  ; 2f
+	dw Script_setflag                    ; 30
+	dw Script_wildon                     ; 31
+	dw Script_wildoff                    ; 32
+	dw Script_xycompare                  ; 33
+	dw Script_warpmod                    ; 34
+	dw Script_blackoutmod                ; 35
+	dw Script_warp                       ; 36
+	dw Script_getmoney                   ; 37
+	dw Script_getcoins                   ; 38
+	dw Script_getnum                     ; 39
+	dw Script_getmonname                 ; 3a
+	dw Script_getitemname                ; 3b
+	dw Script_getcurlandmarkname         ; 3c
+	dw Script_gettrainername             ; 3d
+	dw Script_getstring                  ; 3e
+	dw Script_itemnotify                 ; 3f
+	dw Script_pocketisfull               ; 40
+	dw Script_opentext                   ; 41
+	dw Script_reanchormap                ; 42
+	dw Script_closetext                  ; 43
+	dw Script_writeunusedbyte            ; 44
+	dw Script_farwritetext               ; 45
+	dw Script_writetext                  ; 46
+	dw Script_repeattext                 ; 47
+	dw Script_yesorno                    ; 48
+	dw Script_loadmenu                   ; 49
+	dw Script_closewindow                ; 4a
+	dw Script_jumptextfaceplayer         ; 4b
+	dw Script_farjumptext                ; 4c
+	dw Script_jumptext                   ; 4d
+	dw Script_waitbutton                 ; 4e
+	dw Script_promptbutton               ; 4f
+	dw Script_pokepic                    ; 50
+	dw Script_closepokepic               ; 51
+	dw Script__2dmenu                    ; 52
+	dw Script_verticalmenu               ; 53
+	dw Script_loadpikachudata            ; 54
+	dw Script_randomwildmon              ; 55
+	dw Script_loadtemptrainer            ; 56
+	dw Script_loadwildmon                ; 57
+	dw Script_loadtrainer                ; 58
+	dw Script_startbattle                ; 59
+	dw Script_reloadmapafterbattle       ; 5a
+	dw Script_trainertext                ; 5b
+	dw Script_trainerflagaction          ; 5c
+	dw Script_winlosstext                ; 5d
+	dw Script_scripttalkafter            ; 5e
+	dw Script_endifjustbattled           ; 5f
+	dw Script_checkjustbattled           ; 60
+	dw Script_setlasttalked              ; 61
+	dw Script_applymovement              ; 62
+	dw Script_applymovementlasttalked    ; 63
+	dw Script_faceplayer                 ; 64
+	dw Script_faceobject                 ; 65
+	dw Script_variablesprite             ; 66
+	dw Script_disappear                  ; 67
+	dw Script_appear                     ; 68
+	dw Script_follow                     ; 69
+	dw Script_stopfollow                 ; 6a
+	dw Script_moveobject                 ; 6b
+	dw Script_writeobjectxy              ; 6c
+	dw Script_loademote                  ; 6d
+	dw Script_showemote                  ; 6e
+	dw Script_turnobject                 ; 6f
+	dw Script_follownotexact             ; 70
+	dw Script_earthquake                 ; 71
+	dw Script_changemapblocks            ; 72
+	dw Script_changeblock                ; 73
+	dw Script_reloadmap                  ; 74
+	dw Script_refreshmap                 ; 75
+	dw Script_writecmdqueue              ; 76
+	dw Script_delcmdqueue                ; 77
+	dw Script_playmusic                  ; 78
+	dw Script_encountermusic             ; 79
+	dw Script_musicfadeout               ; 7a
+	dw Script_playmapmusic               ; 7b
+	dw Script_dontrestartmapmusic        ; 7c
+	dw Script_cry                        ; 7d
+	dw Script_playsound                  ; 7e
+	dw Script_waitsfx                    ; 7f
+	dw Script_warpsound                  ; 80
+	dw Script_specialsound               ; 81
+	dw Script_autoinput                  ; 82
+	dw Script_newloadmap                 ; 83
+	dw Script_pause                      ; 84
+	dw Script_deactivatefacing           ; 85
+	dw Script_sdefer                     ; 86
+	dw Script_warpcheck                  ; 87
+	dw Script_stopandsjump               ; 88
+	dw Script_endcallback                ; 89
+	dw Script_end                        ; 8a
+	dw Script_reloadend                  ; 8b
+	dw Script_endall                     ; 8c
+	dw Script_pokemart                   ; 8d
+	dw Script_elevator                   ; 8e
+	dw Script_trade                      ; 8f
+	dw Script_fruittree                  ; 90
+	dw Script_verbosegiveitem            ; 91
+	dw Script_verbosegiveitemvar         ; 92
+	dw Script_swarm                      ; 93
+	dw Script_halloffame                 ; 94
+	dw Script_credits                    ; 95
+	dw Script_warpfacing                 ; 96
+	dw Script_getlandmarkname            ; 97
+	dw Script_gettrainerclassname        ; 98
+	dw Script_getname                    ; 99
+	dw Script_wait                       ; 9a
+	dw Script_checksave                  ; 9b
+	dw Script_owmonflagaction            ; 9c
+	dw Script_owmonafterbattle           ; 9d
 	assert_table_length NUM_EVENT_COMMANDS
 
 StartScript:
@@ -1780,22 +1779,6 @@ Script_givepoke:
 .ok
 	farcall GivePoke
 	ld a, b
-	ld [wScriptVar], a
-	ret
-
-Script_giveegg:
-; if no room in the party, return 0 in wScriptVar; else, return 2
-
-	xor a ; PARTYMON
-	ld [wScriptVar], a
-	ld [wMonType], a
-	call GetScriptByte
-	ld [wCurPartySpecies], a
-	call GetScriptByte
-	ld [wCurPartyLevel], a
-	farcall GiveEgg
-	ret nc
-	ld a, 2
 	ld [wScriptVar], a
 	ret
 

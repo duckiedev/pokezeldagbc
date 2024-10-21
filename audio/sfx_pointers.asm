@@ -149,8 +149,6 @@ SFX:
 	dba Sfx_KeyItem
 	dba Sfx_Fanfare2
 	dba Sfx_3rdPlace
-	dba Sfx_GetEgg
-	dba Sfx_GetEgg
 	dba Sfx_MoveDeleted
 	dba Sfx_2ndPlace
 	dba Sfx_1stPlace
@@ -158,7 +156,6 @@ SFX:
 	dba Sfx_GetTm
 	dba Sfx_GetBadge
 	dba Sfx_QuitSlots
-	dba Sfx_EggCrack
 	dba Sfx_DexFanfareLessThan20
 	dba Sfx_DexFanfare140169
 	dba Sfx_DexFanfare170199
@@ -166,7 +163,6 @@ SFX:
 	dba Sfx_DexFanfare230Plus
 	dba Sfx_Evolved
 	dba Sfx_MasterBall
-	dba Sfx_EggHatch
 	dba Sfx_GsIntroCharizardFireball
 	dba Sfx_GsIntroPokemonAppears
 	dba Sfx_Flash

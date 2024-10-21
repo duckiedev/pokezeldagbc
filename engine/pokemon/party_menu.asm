@@ -123,8 +123,6 @@ PlacePartyHPBar:
 .loop
 	push bc
 	push hl
-	call PartyMenuCheckEgg
-	jr z, .skip
 	push hl
 	call PlacePartymonHPBar
 	pop hl
@@ -138,7 +136,6 @@ PlacePartyHPBar:
 	call SetHPPal
 	ld b, SCGB_PARTY_MENU_HP_BARS
 	call GetSGBLayout
-.skip
 	ld hl, wHPPalIndex
 	inc [hl]
 	pop hl
@@ -188,8 +185,6 @@ PlacePartyMenuHPDigits:
 .loop
 	push bc
 	push hl
-	call PartyMenuCheckEgg
-	jr z, .next
 	push hl
 	ld a, b
 	ld bc, PARTYMON_STRUCT_LENGTH
@@ -208,8 +203,6 @@ PlacePartyMenuHPDigits:
 	inc de
 	lb bc, 2, 3
 	call PrintNum
-
-.next
 	pop hl
 	ld de, 2 * SCREEN_WIDTH
 	add hl, de
@@ -229,8 +222,6 @@ PlacePartyMonLevel:
 .loop
 	push bc
 	push hl
-	call PartyMenuCheckEgg
-	jr z, .next
 	push hl
 	ld a, b
 	ld bc, PARTYMON_STRUCT_LENGTH
@@ -250,8 +241,6 @@ PlacePartyMonLevel:
 	lb bc, PRINTNUM_LEFTALIGN | 1, 3
 ; .okay
 	call PrintNum
-
-.next
 	pop hl
 	ld de, SCREEN_WIDTH * 2
 	add hl, de
@@ -271,8 +260,6 @@ PlacePartyMonStatus:
 .loop
 	push bc
 	push hl
-	call PartyMenuCheckEgg
-	jr z, .next
 	push hl
 	ld a, b
 	ld bc, PARTYMON_STRUCT_LENGTH
@@ -282,8 +269,6 @@ PlacePartyMonStatus:
 	ld d, h
 	pop hl
 	call PlaceStatusString
-
-.next
 	pop hl
 	ld de, SCREEN_WIDTH * 2
 	add hl, de
@@ -303,8 +288,6 @@ PlacePartyMonTMHMCompatibility:
 .loop
 	push bc
 	push hl
-	call PartyMenuCheckEgg
-	jr z, .next
 	push hl
 	ld hl, wPartySpecies
 	ld e, b
@@ -316,8 +299,6 @@ PlacePartyMonTMHMCompatibility:
 	pop hl
 	call .PlaceAbleNotAble
 	call PlaceString
-
-.next
 	pop hl
 	ld de, SCREEN_WIDTH * 2
 	add hl, de
@@ -354,8 +335,6 @@ PlacePartyMonEvoStoneCompatibility:
 .loop
 	push bc
 	push hl
-	call PartyMenuCheckEgg
-	jr z, .next
 	push hl
 	ld a, b
 	ld bc, PARTYMON_STRUCT_LENGTH
@@ -371,8 +350,6 @@ PlacePartyMonEvoStoneCompatibility:
 	call .DetermineCompatibility
 	pop hl
 	call PlaceString
-
-.next
 	pop hl
 	ld de, 2 * SCREEN_WIDTH
 	add hl, de
@@ -437,8 +414,6 @@ PlacePartyMonGender:
 .loop
 	push bc
 	push hl
-	call PartyMenuCheckEgg
-	jr z, .next
 	ld [wCurPartySpecies], a
 	push hl
 	ld a, b
@@ -455,8 +430,6 @@ PlacePartyMonGender:
 .got_gender
 	pop hl
 	call PlaceString
-
-.next
 	pop hl
 	ld de, 2 * SCREEN_WIDTH
 	add hl, de
@@ -474,17 +447,6 @@ PlacePartyMonGender:
 
 .unknown
 	db "…UNKNOWN@"
-
-PartyMenuCheckEgg:
-	ld a, LOW(wPartySpecies)
-	add b
-	ld e, a
-	ld a, HIGH(wPartySpecies)
-	adc 0
-	ld d, a
-	ld a, [de]
-	cp EGG
-	ret
 
 GetPartyMenuQualityIndexes:
 	ld a, [wPartyMenuActionText]

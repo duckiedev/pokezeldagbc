@@ -52,9 +52,6 @@ EcruteakHistoryBook:
 	closetext
 	end
 
-ItemFinderHouseRadio:
-	jumpstd Radio1Script
-
 EcruteakItemfinderAdventureText:
 	text "Ah. You're on an"
 	line "adventure with"
@@ -170,7 +167,6 @@ EcruteakItemfinderHouse_MapEvents:
 	def_coord_events
 
 	def_bg_events
-	bg_event  2,  1, BGEVENT_READ, ItemFinderHouseRadio
 
 	def_object_events
 	object_event  2,  3, SPRITE_COOLTRAINER_M, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, EcruteakItemfinderGuy, -1

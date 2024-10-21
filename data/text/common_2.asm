@@ -61,11 +61,6 @@ _NameRaterPerfectNameText::
 	line "with loving care."
 	done
 
-_NameRaterEggText::
-	text "Whoa… That's just"
-	line "an EGG."
-	done
-
 _NameRaterSameNameText::
 	text "It might look the"
 	line "same as before,"
@@ -495,11 +490,6 @@ _UseSacredAshText::
 	line "were all healed!"
 	done
 
-_AnEggCantHoldAnItemText::
-	text "An EGG can't hold"
-	line "an item."
-	prompt
-
 _PackNoItemText::
 	text "No items."
 	done
@@ -649,80 +639,6 @@ _MoveNameText::
 	text_ram wStringBuffer2
 	text "!"
 	done
-
-Text_BreedHuh::
-	text "Huh?"
-
-	para "@"
-	text_end
-
-_BreedClearboxText::
-	text_start
-	done
-
-_BreedEggHatchText::
-	text_ram wStringBuffer1
-	text " came"
-	line "out of its EGG!@"
-	sound_caught_mon
-	text_promptbutton
-	text_end
-
-_BreedAskNicknameText::
-	text "Give a nickname"
-	line "to @"
-	text_ram wStringBuffer1
-	text "?"
-	done
-
-_LeftWithDayCareLadyText::
-	text "It's @"
-	text_ram wBreedMon2Nickname
-	text_start
-	line "that was left with"
-	cont "the DAY-CARE LADY."
-	done
-
-_LeftWithDayCareManText::
-	text "It's @"
-	text_ram wBreedMon1Nickname
-	text_start
-	line "that was left with"
-	cont "the DAY-CARE MAN."
-	done
-
-_BreedBrimmingWithEnergyText::
-	text "It's brimming with"
-	line "energy."
-	prompt
-
-_BreedNoInterestText::
-	text "It has no interest"
-	line "in @"
-	text_ram wStringBuffer1
-	text "."
-	prompt
-
-_BreedAppearsToCareForText::
-	text "It appears to care"
-	line "for @"
-	text_ram wStringBuffer1
-	text "."
-	prompt
-
-_BreedFriendlyText::
-	text "It's friendly with"
-	line "@"
-	text_ram wStringBuffer1
-	text "."
-	prompt
-
-_BreedShowsInterestText::
-	text "It shows interest"
-	line "in @"
-	text_ram wStringBuffer1
-	text "."
-	prompt
 
 _WasSentToBillsPCText::
 	text_ram wStringBuffer1

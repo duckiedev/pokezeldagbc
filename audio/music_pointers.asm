@@ -78,7 +78,6 @@ Music:
 	dba Music_RocketHideout
 	dba Music_DragonsDen
 	dba Music_JohtoWildBattleNight
-	dba Music_RuinsOfAlphRadio
 	dba Music_SuccessfulCapture
 	dba Music_Route26
 	dba Music_Mom
@@ -91,7 +90,6 @@ Music:
 	dba Music_RuinsOfAlphInterior
 	dba Music_RocketTheme
 	dba Music_DancingHall
-	dba Music_LakeOfRageRocketRadio
 	dba Music_PostCredits
 ; new to Crystal
 	dba Music_Clair

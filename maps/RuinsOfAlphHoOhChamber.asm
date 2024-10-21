@@ -7,9 +7,6 @@ RuinsOfAlphHoOhChamber_MapScripts:
 	callback MAPCALLBACK_TILES, RuinsOfAlphHoOhChamberHiddenDoorsCallback
 
 RuinsOfAlphHoOhChamberCheckWallScene:
-	special HoOhChamber
-	checkevent EVENT_WALL_OPENED_IN_HO_OH_CHAMBER
-	iftrue .OpenWall
 	end
 
 .OpenWall:
@@ -57,7 +54,6 @@ RuinsOfAlphHoOhChamberPuzzle:
 .PuzzleComplete:
 	setevent EVENT_RUINS_OF_ALPH_INNER_CHAMBER_TOURISTS
 	setevent EVENT_SOLVED_HO_OH_PUZZLE
-	setflag ENGINE_UNLOCKED_UNOWNS_X_TO_Z
 	setmapscene RUINS_OF_ALPH_INNER_CHAMBER, SCENE_RUINSOFALPHINNERCHAMBER_STRANGE_PRESENCE
 	earthquake 30
 	showemote EMOTE_SHOCK, PLAYER, 15
@@ -80,11 +76,6 @@ RuinsOfAlphHoOhChamberDescriptionSign:
 	jumptext RuinsOfAlphHoOhChamberDescriptionText
 
 RuinsOfAlphHoOhChamberWallPatternLeft:
-	opentext
-	writetext RuinsOfAlphHoOhChamberWallPatternLeftText
-	setval UNOWNWORDS_HO_OH
-	special DisplayUnownWords
-	closetext
 	end
 
 RuinsOfAlphHoOhChamberWallPatternRight:
@@ -92,8 +83,6 @@ RuinsOfAlphHoOhChamberWallPatternRight:
 	iftrue .WallOpen
 	opentext
 	writetext RuinsOfAlphHoOhChamberWallPatternRightText
-	setval UNOWNWORDS_HO_OH
-	special DisplayUnownWords
 	closetext
 	end
 
@@ -111,10 +100,6 @@ RuinsOfAlphHoOhChamberSkyfallTopMovement:
 RuinsOfAlphHoOhChamberWallPatternLeftText:
 	text "Patterns appeared"
 	line "on the walls…"
-	done
-
-RuinsOfAlphHoOhChamberUnownText: ; unreferenced
-	text "It's UNOWN text!"
 	done
 
 RuinsOfAlphHoOhChamberWallPatternRightText:

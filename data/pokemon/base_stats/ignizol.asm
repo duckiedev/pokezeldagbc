@@ -9,12 +9,12 @@
 	db NO_ITEM, NO_ITEM ; items
 	db GENDER_F50 ; gender ratio
 	db 1 ; hearts (more than 1 is considered a boss)
-	db 20 ; step cycles to hatch
+    db 0 ; unused1
 	db 0 ; form pic bank
 	INCBIN "gfx/pokemon/ignizol/front.dimensions"
 	dw NULL, NULL ; Form pics
 	db GROWTH_FAST ; growth rate
-	dn EGG_GROUND, EGG_GROUND ; egg groups
+    db 0 ; unused2
 
 	; tm/hm learnset
 	tmhm DYNAMICPUNCH, HEADBUTT, CURSE, TOXIC, ZAP_CANNON, ROCK_SMASH, HIDDEN_POWER, SUNNY_DAY, SNORE, PROTECT, ENDURE, FRUSTRATION, IRON_TAIL, THUNDER, RETURN, SHADOW_BALL, MUD_SLAP, DOUBLE_TEAM, ICE_PUNCH, SWAGGER, SLEEP_TALK, SWIFT, DEFENSE_CURL, THUNDERPUNCH, DREAM_EATER, DETECT, REST, ATTRACT, THIEF, FIRE_PUNCH, FURY_CUTTER, NIGHTMARE, CUT, STRENGTH, THUNDERBOLT

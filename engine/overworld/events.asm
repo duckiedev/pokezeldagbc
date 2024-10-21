@@ -857,24 +857,10 @@ CountStep:
 	ld hl, wStepCount
 	inc [hl]
 	; Every 256 steps, increase the happiness of all your Pokemon.
-	jr nz, .skip_happiness
 
-	farcall StepHappiness
-
-.skip_happiness
-	; Every 256 steps, offset from the happiness incrementor by 128 steps,
-	; decrease the hatch counter of all your eggs until you reach the first
-	; one that is ready to hatch.
+	; Every 256 steps, offset from the happiness incrementor by 128 steps.
 	ld a, [wStepCount]
 	cp $80
-	jr nz, .skip_egg
-
-	farcall DoEggStep
-	jr nz, .hatch
-
-.skip_egg
-	; Increase the EXP of (both) DayCare Pokemon by 1.
-	farcall DayCareStep
 
 	; Every 4 steps, deal damage to all poisoned Pokemon.
 	ld hl, wPoisonStepCount
@@ -895,11 +881,6 @@ CountStep:
 
 .doscript
 	ld a, -1
-	scf
-	ret
-
-.hatch
-	ld a, PLAYEREVENT_HATCH
 	scf
 	ret
 
@@ -954,7 +935,6 @@ PlayerEventScriptPointers:
 	dba WarpToNewMapScript      ; PLAYEREVENT_WARP
 	dba FallIntoMapScript       ; PLAYEREVENT_FALL
 	dba OverworldWhiteoutScript ; PLAYEREVENT_WHITEOUT
-	dba HatchEggScript          ; PLAYEREVENT_HATCH
 	dba ChangeDirectionScript   ; PLAYEREVENT_JOYCHANGEFACING
 	dba SeenByOWMonScript       ; PLAYEREVENT_SEENBYOWMON
 	dba TalkToOWMonScript       ; PLAYEREVENT_TALKTOOWMON
@@ -963,10 +943,6 @@ PlayerEventScriptPointers:
 	assert_table_length NUM_PLAYER_EVENTS + 1
 
 InvalidEventScript:
-	end
-
-HatchEggScript:
-	callasm OverworldHatchEgg
 	end
 
 WarpToNewMapScript:

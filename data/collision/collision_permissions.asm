@@ -149,7 +149,7 @@ CollisionPermissionTable::
 	db WALL_TILE         ; COLL_BOOKSHELF
 	db WALL_TILE         ; 92
 	db WALL_TILE         ; COLL_PC
-	db WALL_TILE         ; COLL_RADIO
+	db WALL_TILE         ; 94
 	db WALL_TILE         ; COLL_TOWN_MAP
 	db WALL_TILE         ; COLL_MART_SHELF
 	db WALL_TILE         ; COLL_TV

@@ -67,7 +67,6 @@ SpriteAnimOAMData:
 	spriteanimoam $10, .OAMData_TradePoofBubble          ; SPRITE_ANIM_OAMSET_TRADEMON_BUBBLE
 	spriteanimoam $00, .OAMData_MagnetTrain              ; SPRITE_ANIM_OAMSET_EVOLUTION_BALL_OF_LIGHT_1
 	spriteanimoam $04, .OAMData_1x1_Palette0             ; SPRITE_ANIM_OAMSET_EVOLUTION_BALL_OF_LIGHT_2
-	spriteanimoam $00, .OAMData_RadioTuningKnob          ; SPRITE_ANIM_OAMSET_RADIO_TUNING_KNOB
 	spriteanimoam $00, .OAMData_PartyMonWithItem1        ; SPRITE_ANIM_OAMSET_PARTY_MON_WITH_ITEM_1
 	spriteanimoam $00, .OAMData_PartyMonWithItem2        ; SPRITE_ANIM_OAMSET_PARTY_MON_WITH_ITEM_2
 	spriteanimoam $00, .OAMData_MagnetTrain              ; SPRITE_ANIM_OAMSET_MAGNET_TRAIN_RED_1
@@ -489,12 +488,6 @@ SpriteAnimOAMData:
 	dbsprite -2,  0,  4,  4, $24, 6 | OBP_NUM
 	dbsprite -1,  0,  4,  4, $26, 6 | OBP_NUM
 	dbsprite  0,  0,  4,  4, $28, 6 | OBP_NUM
-
-.OAMData_RadioTuningKnob:
-	db 3
-	dbsprite -1, -2,  4,  4, $00, 0 | OBP_NUM
-	dbsprite -1, -1,  4,  4, $00, 0 | OBP_NUM
-	dbsprite -1,  0,  4,  4, $00, 0 | OBP_NUM
 
 .OAMData_Unused4B:
 	db 6

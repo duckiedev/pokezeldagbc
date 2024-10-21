@@ -203,7 +203,6 @@ PokemonPicPointers::
 	dba_pics MurkrowFrontpic, MurkrowBackpic
 	dba_pics SlowkingFrontpic, SlowkingBackpic
 	dba_pics MisdreavusFrontpic, MisdreavusBackpic
-	dba_pics ; Unown pics have their own table (see data/pokemon/unown_pic_pointers.asm)
 	dba_pics WobbuffetFrontpic, WobbuffetBackpic
 	dba_pics GirafarigFrontpic, GirafarigBackpic
 	dba_pics PinecoFrontpic, PinecoBackpic
@@ -257,6 +256,3 @@ PokemonPicPointers::
 	dba_pics HonedgeHFrontPic, HonedgeHBackPic
 	dba_pics ZolFrontPic, ZolBackPic
 	assert_table_length NUM_POKEMON
-	dba EggPic
-	dbw -1, -1 ; unused
-	assert_table_length EGG

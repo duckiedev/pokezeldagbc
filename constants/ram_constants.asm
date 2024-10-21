@@ -11,7 +11,7 @@ DEF AUTO_INPUT EQU $ff
 	const DEXMODE_NEW
 	const DEXMODE_OLD
 	const DEXMODE_ABC
-	const DEXMODE_UNOWN
+	const_skip ; unused
 
 ; wMonType::
 	const_def
@@ -82,8 +82,6 @@ DEF PC_WITHDRAW       EQU 0
 DEF PC_DEPOSIT        EQU 1
 DEF REMOVE_PARTY      EQU 0
 DEF REMOVE_BOX        EQU 1
-DEF DAY_CARE_WITHDRAW EQU 2
-DEF DAY_CARE_DEPOSIT  EQU 3
 
 ; wPlayerStepFlags::
 	const_def 4
@@ -173,22 +171,18 @@ DEF SPAWN_RED   EQU 2
 ; wStatusFlags::
 	const_def
 	const STATUSFLAGS_POKEDEX_F                  ; 0
-	const STATUSFLAGS_UNOWN_DEX_F                ; 1
-	const STATUSFLAGS_FLASH_F                    ; 2
-	const STATUSFLAGS_CAUGHT_POKERUS_F           ; 3
-	const STATUSFLAGS_ROCKET_SIGNAL_F            ; 4
-	const STATUSFLAGS_NO_WILD_ENCOUNTERS_F       ; 5
-	const STATUSFLAGS_HALL_OF_FAME_F             ; 6
+	const STATUSFLAGS_FLASH_F                    ; 1
+	const STATUSFLAGS_CAUGHT_POKERUS_F           ; 2
+	const STATUSFLAGS_ROCKET_SIGNAL_F            ; 3
+	const STATUSFLAGS_NO_WILD_ENCOUNTERS_F       ; 4
+	const STATUSFLAGS_HALL_OF_FAME_F             ; 5
 
 ; wStatusFlags2::
 	const_def
 	const STATUSFLAGS2_ROCKETS_IN_RADIO_TOWER_F ; 0
 	const STATUSFLAGS2_SAFARI_GAME_F            ; 1
-	const STATUSFLAGS2_UNUSED_3_F               ; 2
-	const STATUSFLAGS2_UNUSED_4_F	            ; 3
-	const STATUSFLAGS2_UNUSED_5_F               ; 4
-	const STATUSFLAGS2_REACHED_GOLDENROD_F      ; 5
-	const STATUSFLAGS2_ROCKETS_IN_MAHOGANY_F    ; 6
+	const STATUSFLAGS2_REACHED_GOLDENROD_F      ; 2
+	const STATUSFLAGS2_ROCKETS_IN_MAHOGANY_F    ; 3
 
 ; wMomSavingMoney::
 DEF MOM_SAVING_SOME_MONEY_F EQU 0
@@ -226,11 +220,8 @@ DEF NUM_BADGES       EQU NUM_JOHTO_BADGES + NUM_KANTO_BADGES
 ; wPokegearFlags::
 	const_def
 	const POKEGEAR_MAP_CARD_F   ; 0
-	const POKEGEAR_RADIO_CARD_F ; 1
-	const_skip				    ; 2
-	const POKEGEAR_EXPN_CARD_F  ; 3
-	const_skip 3
-	const POKEGEAR_OBTAINED_F   ; 7
+	const POKEGEAR_EXPN_CARD_F  ; 1
+	const POKEGEAR_OBTAINED_F   ; 2
 
 ; wWhichRegisteredItem::
 DEF REGISTERED_POCKET EQU %11000000
@@ -296,21 +287,12 @@ DEF CELEBIEVENT_FOREST_IS_RESTLESS_F EQU 2
 
 ; wDayCareMan::
 DEF DAYCAREMAN_HAS_MON_F         EQU 0
-DEF DAYCAREMAN_MONS_COMPATIBLE_F EQU 5
-DEF DAYCAREMAN_HAS_EGG_F         EQU 6
-DEF DAYCAREMAN_ACTIVE_F          EQU 7
+DEF DAYCAREMAN_MONS_COMPATIBLE_F EQU 1
+DEF DAYCAREMAN_ACTIVE_F          EQU 2
 
 ; wDayCareLady::
 DEF DAYCARELADY_HAS_MON_F        EQU 0
-DEF DAYCARELADY_ACTIVE_F         EQU 7
-
-; wUnlockedUnowns::
-	const_def
-	const UNLOCKED_UNOWNS_A_TO_K_F
-	const UNLOCKED_UNOWNS_L_TO_R_F
-	const UNLOCKED_UNOWNS_S_TO_W_F
-	const UNLOCKED_UNOWNS_X_TO_Z_F
-DEF NUM_UNLOCKED_UNOWN_SETS EQU const_value
+DEF DAYCARELADY_ACTIVE_F         EQU 1
 
 ; hVBlank::
 ; VBlankHandlers indexes (see home/vblank.asm)

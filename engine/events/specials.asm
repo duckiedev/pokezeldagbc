@@ -111,12 +111,6 @@ PlayersHousePC:
 	text_far _ReceiveItemText
 	text_end
 
-MapRadio:
-	ld a, [wScriptVar]
-	ld e, a
-	farcall PlayRadio
-	ret
-
 UnownPuzzle:
 	call FadeToMenu
 	farcall _UnownPuzzle

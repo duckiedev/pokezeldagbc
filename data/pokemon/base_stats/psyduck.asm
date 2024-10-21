@@ -9,12 +9,12 @@
 	db NO_ITEM, NO_ITEM ; items
 	db GENDER_F50 ; gender ratio
 	db 1 ; hearts (more than 1 is considered a boss)
-	db 20 ; step cycles to hatch
+    db 0 ; unused1
 	db 5 ; form pic bank
 	INCBIN "gfx/pokemon/psyduck/front.dimensions"
 	dw NULL, NULL ; Form pics
 	db GROWTH_MEDIUM_FAST ; growth rate
-	dn EGG_WATER_1, EGG_GROUND ; egg groups
+    db 0 ; unused2
 
 	; tm/hm learnset
 	tmhm DYNAMICPUNCH, HEADBUTT, CURSE, TOXIC, ROCK_SMASH, PSYCH_UP, HIDDEN_POWER, SNORE, BLIZZARD, ICY_WIND, PROTECT, RAIN_DANCE, ENDURE, FRUSTRATION, IRON_TAIL, RETURN, DIG, MUD_SLAP, DOUBLE_TEAM, ICE_PUNCH, SWAGGER, SLEEP_TALK, SWIFT, REST, ATTRACT, SURF, STRENGTH, FLASH, WHIRLPOOL, WATERFALL, ICE_BEAM

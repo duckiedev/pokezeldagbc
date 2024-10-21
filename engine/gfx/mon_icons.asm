@@ -461,17 +461,12 @@ HoldSwitchmonIcon:
 	ret
 
 ReadMonMenuIcon:
-	cp EGG
-	jr z, .egg
 	dec a
 	ld hl, MonMenuIcons
 	ld e, a
 	ld d, 0
 	add hl, de
 	ld a, [hl]
-	ret
-.egg
-	ld a, ICON_EGG
 	ret
 
 INCLUDE "data/pokemon/menu_icons.asm"

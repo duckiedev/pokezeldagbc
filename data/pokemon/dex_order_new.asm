@@ -62,7 +62,6 @@ NewPokedexOrder:
 	db GASTLY
 	db HAUNTER
 	db GENGAR
-	db UNOWN
 	db ONIX
 	db STEELIX
 	db BELLSPROUT

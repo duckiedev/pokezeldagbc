@@ -23,7 +23,6 @@ RuinsOfAlphInnerChamberStrangePresenceScript:
 	waitbutton
 	closetext
 	setscene SCENE_RUINSOFALPHINNERCHAMBER_NOOP
-	setevent EVENT_MADE_UNOWN_APPEAR_IN_RUINS
 	clearevent EVENT_RUINS_OF_ALPH_OUTSIDE_TOURIST_FISHER
 	end
 

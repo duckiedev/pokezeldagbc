@@ -3,16 +3,12 @@ _NameRater:
 	ld hl, NameRaterHelloText
 	call PrintText
 	call YesNoBox
-	jmp c, .cancel
+	jr c, .cancel
 ; Select a Pokemon from your party
 	ld hl, NameRaterWhichMonText
 	call PrintText
 	farcall SelectMonFromParty
 	jr c, .cancel
-; He can't rename an egg...
-	ld a, [wCurPartySpecies]
-	cp EGG
-	jr z, .egg
 ; ... or a Pokemon you got from a trade.
 	call GetCurNickname
 	call CheckIfMonIsYourOT
@@ -69,10 +65,6 @@ _NameRater:
 
 .cancel
 	ld hl, NameRaterComeAgainText
-	jr .done
-
-.egg
-	ld hl, NameRaterEggText
 
 .done
 	call PrintText
@@ -204,10 +196,6 @@ NameRaterComeAgainText:
 
 NameRaterPerfectNameText:
 	text_far _NameRaterPerfectNameText
-	text_end
-
-NameRaterEggText:
-	text_far _NameRaterEggText
 	text_end
 
 NameRaterSameNameText:

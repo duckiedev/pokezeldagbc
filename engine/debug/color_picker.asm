@@ -83,7 +83,7 @@ DebugColor_InitMonOrTrainerColor:
 
 DebugColor_InitMonColor:
 	ld de, wDebugOriginalColors
-	ld c, NUM_POKEMON + 1
+	ld c, NUM_POKEMON
 .loop
 	push bc
 	push hl
@@ -330,11 +330,6 @@ DebugColor_InitScreen:
 	jr nz, .trainer
 
 ; mon
-	ld a, UNOWN_A
-	ld [wUnownLetter], a
-	call GetPokemonName
-	hlcoord 4, 1
-	call PlaceString
 	xor a
 	ld [wBoxAlignment], a
 	hlcoord 12, 3

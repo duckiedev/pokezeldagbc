@@ -13,7 +13,6 @@ MahoganyRedGyaradosSpeechHouseBlackBeltScript:
 MahoganyRedGyaradosSpeechHouseTeacherScript:
 	faceplayer
 	opentext
-	checkflag ENGINE_ROCKETS_IN_RADIO_TOWER
 	iftrue .RocketsInRadioTower
 	writetext MahoganyRedGyaradosSpeechHouseTeacherText
 	waitbutton

@@ -41,55 +41,9 @@ Route32FriedaCallback:
 	endcallback
 
 Route32CooltrainerMScript:
-	faceplayer
-Route32CooltrainerMContinueScene:
-	opentext
-	checkevent EVENT_GOT_MIRACLE_SEED_IN_ROUTE_32
-	iftrue .GotMiracleSeed
-	checkflag ENGINE_ZEPHYRBADGE
-	iffalse .DontHaveZephyrBadge
-	checkevent EVENT_GOT_TOGEPI_EGG_FROM_ELMS_AIDE
-	iftrue .GiveMiracleSeed
-	writetext Route32CooltrainerMText_AideIsWaiting
-	waitbutton
-	closetext
-	end
-
-.GiveMiracleSeed:
-	writetext Route32CooltrainerMText_HaveThisSeed
-	promptbutton
-	verbosegiveitem MIRACLE_SEED
-	iffalse .BagFull
-	setevent EVENT_GOT_MIRACLE_SEED_IN_ROUTE_32
-	sjump .GotMiracleSeed
-
-.DontHaveZephyrBadge:
-	writetext Route32CooltrainerMText_VioletGym
-	waitbutton
-	closetext
-	end
-
-.GotMiracleSeed:
-	writetext Route32CooltrainerMText_ExperiencesShouldBeUseful
-	waitbutton
-.BagFull:
-	closetext
 	end
 
 Route32CooltrainerMStopsYouScene:
-	turnobject ROUTE32_COOLTRAINER_M, LEFT
-	turnobject PLAYER, RIGHT
-	opentext
-	writetext Route32CooltrainerMText_WhatsTheHurry
-	waitbutton
-	closetext
-	follow PLAYER, ROUTE32_COOLTRAINER_M
-	applymovement PLAYER, Movement_Route32CooltrainerMPushesYouBackToViolet
-	stopfollow
-	turnobject PLAYER, DOWN
-	scall Route32CooltrainerMContinueScene
-	applymovement ROUTE32_COOLTRAINER_M, Movement_Route32CooltrainerMReset1
-	applymovement ROUTE32_COOLTRAINER_M, Movement_Route32CooltrainerMReset2
 	end
 
 Route32RoarTMGuyScript:

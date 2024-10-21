@@ -9,15 +9,6 @@ Route31_MapScripts:
 	def_scene_scripts
 
 	def_callbacks
-	callback MAPCALLBACK_NEWMAP, Route31CheckMomCallCallback
-
-Route31CheckMomCallCallback:
-	checkevent EVENT_TALKED_TO_MOM_AFTER_MYSTERY_EGG_QUEST
-	iffalse .DoMomCall
-	endcallback
-
-.DoMomCall:
-	endcallback
 
 Route31YoungsterScript:
 	jumptextfaceplayer Route31YoungsterText

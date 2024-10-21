@@ -77,8 +77,6 @@ CheckPartyMove:
 	jr z, .no
 	cp -1
 	jr z, .no
-	cp EGG
-	jr z, .next
 
 	ld bc, PARTYMON_STRUCT_LENGTH
 	ld hl, wPartyMon1Moves
@@ -119,8 +117,6 @@ CheckPartyCanLearnMove:
 	and a
 	jr z, .no
 	cp -1
-	jr z, .no
-	cp EGG
 	jr z, .next
 
 	ld [wCurPartySpecies], a
@@ -392,7 +388,6 @@ FlashFunction:
 	farcall CheckBadge
 	jr c, .nozephyrbadge
 	push hl
-	farcall SpecialAerodactylChamber
 	pop hl
 	jr c, .useflash
 	ld a, [wTimeOfDayPalset]
@@ -911,7 +906,6 @@ EscapeRopeOrDig:
 	ret
 
 .escaperope
-	farcall SpecialKabutoChamber
 	ld hl, .UsedEscapeRopeScript
 	call QueueScript
 	ld a, $81

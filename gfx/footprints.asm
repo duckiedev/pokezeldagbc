@@ -236,8 +236,7 @@ INCBIN "gfx/footprints/umbreon.1bpp"
 INCBIN "gfx/footprints/murkrow.1bpp"    
 INCBIN "gfx/footprints/slowking.1bpp"   
 INCBIN "gfx/footprints/misdreavus.1bpp" 
-; 201-208
-INCBIN "gfx/footprints/unown.1bpp"      
+; 201-208 
 INCBIN "gfx/footprints/wobbuffet.1bpp"
 INCBIN "gfx/footprints/girafarig.1bpp"
 INCBIN "gfx/footprints/pineco.1bpp"     
@@ -295,9 +294,6 @@ INCBIN "gfx/footprints/lugia.1bpp"
 INCBIN "gfx/footprints/ho_oh.1bpp"      
 INCBIN "gfx/footprints/celebi.1bpp"     
 INCBIN "gfx/footprints/honedge_h.1bpp"        
-INCBIN "gfx/footprints/zol.1bpp"        
-INCBIN "gfx/footprints/254.1bpp"        
-INCBIN "gfx/footprints/255.1bpp"
-INCBIN "gfx/footprints/256.1bpp"
+INCBIN "gfx/footprints/zol.1bpp"
 
-	assert_table_length $100
+	assert_table_length NUM_POKEMON

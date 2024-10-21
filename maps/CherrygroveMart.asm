@@ -9,11 +9,6 @@ CherrygroveMart_MapScripts:
 	def_callbacks
 
 CherrygroveMartClerkScript:
-	opentext
-	checkevent EVENT_GAVE_MYSTERY_EGG_TO_ELM
-	iftrue .PokeBallsInStock
-	pokemart MARTTYPE_STANDARD, MART_CHERRYGROVE
-	closetext
 	end
 
 .PokeBallsInStock:
@@ -22,13 +17,6 @@ CherrygroveMartClerkScript:
 	end
 
 CherrygroveMartCooltrainerMScript:
-	faceplayer
-	opentext
-	checkevent EVENT_GAVE_MYSTERY_EGG_TO_ELM
-	iftrue .PokeBallsInStock
-	writetext CherrygroveMartCooltrainerMText
-	waitbutton
-	closetext
 	end
 
 .PokeBallsInStock:

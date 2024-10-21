@@ -9,12 +9,12 @@
 	db BURNT_BERRY, BURNT_BERRY ; items
 	db GENDER_F25 ; gender ratio
 	db 1 ; hearts (more than 1 is considered a boss)
-	db 25 ; step cycles to hatch
+    db 0 ; unused1
 	db 5 ; form pic bank
 	INCBIN "gfx/pokemon/magby/front.dimensions"
 	dw NULL, NULL ; Form pics
 	db GROWTH_MEDIUM_FAST ; growth rate
-	dn EGG_NONE, EGG_NONE ; egg groups
+    db 0 ; unused2
 
 	; tm/hm learnset
 	tmhm DYNAMICPUNCH, HEADBUTT, CURSE, TOXIC, HIDDEN_POWER, SUNNY_DAY, SNORE, PROTECT, ENDURE, FRUSTRATION, IRON_TAIL, RETURN, PSYCHIC_M, MUD_SLAP, DOUBLE_TEAM, SWAGGER, SLEEP_TALK, FIRE_BLAST, THUNDERPUNCH, DETECT, REST, ATTRACT, THIEF, FIRE_PUNCH, FLAMETHROWER

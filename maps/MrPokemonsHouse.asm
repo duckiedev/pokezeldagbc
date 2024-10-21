@@ -17,46 +17,9 @@ MrPokemonsHouseNoopScene:
 	end
 
 MrPokemonsHouseMrPokemonEventScript:
-	showemote EMOTE_SHOCK, MRPOKEMONSHOUSE_GENTLEMAN, 15
-	turnobject MRPOKEMONSHOUSE_GENTLEMAN, DOWN
-	opentext
-	writetext MrPokemonIntroText1
-	waitbutton
-	closetext
-	applymovement PLAYER, MrPokemonsHouse_PlayerWalksToMrPokemon
-	opentext
-	writetext MrPokemonIntroText2
-	promptbutton
-	waitsfx
-	giveitem MYSTERY_EGG
-	writetext MrPokemonsHouse_GotEggText
-	playsound SFX_KEY_ITEM
-	waitsfx
-	itemnotify
-	setevent EVENT_GOT_MYSTERY_EGG_FROM_MR_POKEMON
-	blackoutmod CHERRYGROVE_CITY
-	writetext MrPokemonIntroText3
-	promptbutton
-	turnobject MRPOKEMONSHOUSE_GENTLEMAN, RIGHT
-	writetext MrPokemonIntroText4
-	promptbutton
-	turnobject MRPOKEMONSHOUSE_GENTLEMAN, DOWN
-	turnobject MRPOKEMONSHOUSE_OAK, LEFT
-	writetext MrPokemonIntroText5
-	waitbutton
-	closetext
-	sjump MrPokemonsHouse_OakScript
+	end
 
 MrPokemonsHouse_MrPokemonScript:
-	faceplayer
-	opentext
-	checkitem RED_SCALE
-	iftrue .RedScale
-	checkevent EVENT_GAVE_MYSTERY_EGG_TO_ELM
-	iftrue .AlwaysNewDiscoveries
-	writetext MrPokemonText_ImDependingOnYou
-	waitbutton
-	closetext
 	end
 
 .AlwaysNewDiscoveries:
@@ -82,55 +45,6 @@ MrPokemonsHouse_MrPokemonScript:
 	end
 
 MrPokemonsHouse_OakScript:
-	playmusic MUSIC_PROF_OAK
-	applymovement MRPOKEMONSHOUSE_OAK, MrPokemonsHouse_OakWalksToPlayer
-	turnobject PLAYER, RIGHT
-	opentext
-	writetext MrPokemonsHouse_OakText1
-	promptbutton
-	waitsfx
-	writetext MrPokemonsHouse_GetDexText
-	playsound SFX_ITEM
-	waitsfx
-	setflag ENGINE_POKEDEX
-	writetext MrPokemonsHouse_OakText2
-	waitbutton
-	closetext
-	turnobject PLAYER, DOWN
-	applymovement MRPOKEMONSHOUSE_OAK, MrPokemonsHouse_OakExits
-	playsound SFX_EXIT_BUILDING
-	disappear MRPOKEMONSHOUSE_OAK
-	waitsfx
-	special RestartMapMusic
-	pause 15
-	turnobject PLAYER, UP
-	opentext
-	writetext MrPokemonsHouse_MrPokemonHealText
-	waitbutton
-	closetext
-	special FadeBlackQuickly
-	special ReloadSpritesNoPalettes
-	playmusic MUSIC_HEAL
-	special HealParty
-	pause 60
-	special FadeInQuickly
-	special RestartMapMusic
-	opentext
-	writetext MrPokemonText_ImDependingOnYou
-	waitbutton
-	closetext
-	setevent EVENT_RIVAL_NEW_BARK_TOWN
-	setevent EVENT_PLAYERS_HOUSE_1F_NEIGHBOR
-	clearevent EVENT_PLAYERS_NEIGHBORS_HOUSE_NEIGHBOR
-	setscene SCENE_MRPOKEMONSHOUSE_NOOP
-	setmapscene CHERRYGROVE_CITY, SCENE_CHERRYGROVECITY_MEET_RIVAL
-	setmapscene ELMS_LAB, SCENE_ELMSLAB_MEET_OFFICER
-	clearevent EVENT_COP_IN_ELMS_LAB
-	checkevent EVENT_GOT_TOTODILE_FROM_ELM
-	iftrue .RivalTakesChikorita
-	checkevent EVENT_GOT_HONEDGE
-	iftrue .RivalTakesCyndaquil
-	setevent EVENT_TOTODILE_POKEBALL_IN_ELMS_LAB
 	end
 
 .RivalTakesChikorita:
@@ -180,28 +94,6 @@ MrPokemonIntroText2:
 	text "This is what I"
 	line "want PROF.ELM to"
 	cont "examine."
-	done
-
-MrPokemonsHouse_GotEggText:
-	text "<PLAYER> received"
-	line "MYSTERY EGG."
-	done
-
-MrPokemonIntroText3:
-	text "I know a couple"
-	line "who run a #MON"
-	cont "DAY-CARE service."
-
-	para "They gave me that"
-	line "EGG."
-
-	para "I was intrigued,"
-	line "so I sent mail to"
-	cont "PROF.ELM."
-
-	para "For #MON evolu-"
-	line "tion, PROF.ELM is"
-	cont "the authority."
 	done
 
 MrPokemonIntroText4:

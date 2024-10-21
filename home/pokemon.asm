@@ -2,8 +2,6 @@ IsAPokemon::
 ; Return carry if species a is not a Pokemon.
 	and a
 	jr z, .NotAPokemon
-	cp EGG
-	jr z, .Pokemon
 	cp NUM_POKEMON + 1
 	jr c, .Pokemon
 

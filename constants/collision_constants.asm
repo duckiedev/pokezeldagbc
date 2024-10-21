@@ -84,7 +84,7 @@ DEF COLL_WARP_7F           EQU $7f ; unused
 DEF COLL_COUNTER           EQU $90
 DEF COLL_BOOKSHELF         EQU $91
 DEF COLL_PC                EQU $93
-DEF COLL_RADIO             EQU $94
+DEF COLL_94                EQU $94 ; unused
 DEF COLL_TOWN_MAP          EQU $95
 DEF COLL_MART_SHELF        EQU $96
 DEF COLL_TV                EQU $97

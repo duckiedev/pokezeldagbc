@@ -72,10 +72,6 @@ NewBarkTown_TeacherStopsYouScene2:
 NewBarkTownTeacherScript:
 	faceplayer
 	opentext
-	checkevent EVENT_TALKED_TO_MOM_AFTER_MYSTERY_EGG_QUEST
-	iftrue .CallMom
-	checkevent EVENT_GAVE_MYSTERY_EGG_TO_ELM
-	iftrue .TellMomYoureLeaving
 	checkevent EVENT_GOT_A_POKEMON_FROM_ELM
 	iftrue .MonIsAdorable
 	writetext Text_GearIsImpressive
@@ -85,18 +81,6 @@ NewBarkTownTeacherScript:
 
 .MonIsAdorable:
 	writetext Text_YourMonIsAdorable
-	waitbutton
-	closetext
-	end
-
-.TellMomYoureLeaving:
-	writetext Text_TellMomIfLeaving
-	waitbutton
-	closetext
-	end
-
-.CallMom:
-	writetext Text_CallMomOnGear
 	waitbutton
 	closetext
 	end

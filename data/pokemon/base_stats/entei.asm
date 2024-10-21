@@ -9,12 +9,12 @@
 	db NO_ITEM, NO_ITEM ; items
 	db GENDER_UNKNOWN ; gender ratio
 	db 1 ; hearts (more than 1 is considered a boss)
-	db 80 ; step cycles to hatch
+    db 0 ; unused1
 	db 5 ; form pic bank
 	INCBIN "gfx/pokemon/entei/front.dimensions"
 	dw NULL, NULL ; Form pics
 	db GROWTH_SLOW ; growth rate
-	dn EGG_NONE, EGG_NONE ; egg groups
+    db 0 ; unused2
 
 	; tm/hm learnset
 	tmhm HEADBUTT, CURSE, ROAR, TOXIC, ROCK_SMASH, PSYCH_UP, HIDDEN_POWER, SUNNY_DAY, SNORE, HYPER_BEAM, PROTECT, RAIN_DANCE, ENDURE, FRUSTRATION, SOLARBEAM, IRON_TAIL, RETURN, DIG, MUD_SLAP, DOUBLE_TEAM, SWAGGER, SLEEP_TALK, SANDSTORM, FIRE_BLAST, SWIFT, DETECT, REST, CUT, STRENGTH, FLASH, FLAMETHROWER

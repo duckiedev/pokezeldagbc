@@ -14,8 +14,6 @@ StdScripts::
 	add_stdscript TownMapScript
 	add_stdscript WindowScript
 	add_stdscript TVScript
-	add_stdscript HomepageScript ; unused
-	add_stdscript Radio1Script
 	add_stdscript TrashCanScript
 	add_stdscript StrengthBoulderScript
 	add_stdscript SmashRockScript
@@ -28,7 +26,6 @@ StdScripts::
 	add_stdscript GymStatue1Script
 	add_stdscript GymStatue2Script
 	add_stdscript ReceiveItemScript
-	add_stdscript ReceiveTogepiEggScript
 	add_stdscript PCScript
 	add_stdscript GameCornerCoinVendorScript
 	add_stdscript HappinessCheckScript
@@ -173,16 +170,6 @@ TVScript:
 	closetext
 	end
 
-HomepageScript:
-	farjumptext HomepageText
-
-Radio1Script:
-	opentext
-	setval MAPRADIO_POKEMON_CHANNEL
-	special MapRadio
-	closetext
-	end
-
 TrashCanScript:
 	farjumptext TrashCanText
 
@@ -258,7 +245,6 @@ GoldenrodRocketsScript:
 	end
 
 RadioTowerRocketsScript:
-	setflag ENGINE_ROCKETS_IN_RADIO_TOWER
 	setevent EVENT_GOLDENROD_CITY_CIVILIANS
 	setevent EVENT_RADIO_TOWER_BLACKBELT_BLOCKS_STAIRS
 	clearevent EVENT_RADIO_TOWER_ROCKET_TAKEOVER
@@ -289,13 +275,6 @@ ReceiveItemScript:
 	waitsfx
 	farwritetext ReceivedItemText
 	playsound SFX_ITEM
-	waitsfx
-	end
-
-ReceiveTogepiEggScript:
-	waitsfx
-	farwritetext ReceivedItemText
-	playsound SFX_GET_EGG
 	waitsfx
 	end
 

@@ -116,9 +116,6 @@ GetMonMenuString:
 
 GetMonSubmenuItems:
 	call ResetMonSubmenu
-	ld a, [wCurPartySpecies]
-	cp EGG
-	jr z, .egg
 	ld a, MON_MOVES
 	call GetPartyParamLocation
 	ld d, h
@@ -163,16 +160,6 @@ GetMonSubmenuItems:
 	call AddMonMenuItem
 
 .ok2
-	call TerminateMonSubmenu
-	ret
-
-.egg
-	ld a, MONMENUITEM_STATS
-	call AddMonMenuItem
-	ld a, MONMENUITEM_SWITCH
-	call AddMonMenuItem
-	ld a, MONMENUITEM_CANCEL
-	call AddMonMenuItem
 	call TerminateMonSubmenu
 	ret
 

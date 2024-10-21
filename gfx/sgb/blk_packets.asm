@@ -46,11 +46,6 @@ BlkPacket_Pokedex_PC:
 	attr_blk_data %111, 1,1,0, 01,01, 08,08 ; mon: pal 1
 	ds 8, 0
 
-BlkPacket_PokedexUnownMode:
-	attr_blk 1
-	attr_blk_data %111, 1,1,0, 07,05, 13,11 ; unown: pal 1
-	ds 8, 0
-
 BlkPacket_SlotMachine:
 	attr_blk 5
 	attr_blk_data %011, 1,1,0, 00,00, 19,11 ; "3" rows and top of screen: pal 1
@@ -58,17 +53,6 @@ BlkPacket_SlotMachine:
 	attr_blk_data %010, 3,3,0, 00,06, 19,07 ; "1" row: pal 3
 	attr_blk_data %011, 0,0,0, 04,04, 15,09 ; slot reels: pal 0
 	attr_blk_data %011, 0,0,0, 00,12, 19,17 ; text box: pal 0
-
-BlkPacket_PartyMenu: ; unreferenced
-	attr_blk 7
-	attr_blk_data %111, 0,0,1, 00,00, 02,12
-	attr_blk_data %010, 0,0,0, 12,00, 18,01
-	attr_blk_data %010, 0,0,0, 12,02, 18,03
-	attr_blk_data %010, 0,0,0, 12,04, 18,05
-	attr_blk_data %010, 0,0,0, 12,06, 18,07
-	attr_blk_data %010, 0,0,0, 12,08, 18,09
-	attr_blk_data %010, 0,0,0, 12,10, 18,11
-	ds 4, 0
 
 BlkPacket_GSTitleScreen:
 	attr_blk 3

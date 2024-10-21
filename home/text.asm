@@ -131,13 +131,6 @@ SpeechTextbox::
 	ld c, TEXTBOX_BATTLE_INNERW
 	jr Textbox
 
-RadioTerminator::
-	ld hl, .stop
-	ret
-
-.stop:
-	text_end
-
 PrintText::
 	call SetUpTextbox
 	push hl

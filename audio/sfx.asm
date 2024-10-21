@@ -1009,107 +1009,6 @@ Sfx_3rdPlace_Ch7:
 	note B_, 6
 	sound_ret
 
-	
-
-Sfx_GetEgg:
-	channel_count 4
-	channel 5, Sfx_GetEgg_Ch5
-	channel 6, Sfx_GetEgg_Ch6
-	channel 7, Sfx_GetEgg_Ch7
-	channel 8, Sfx_GetEgg_Ch8
-
-Sfx_GetEgg_Ch5:
-	toggle_sfx
-	tempo 120
-	volume 7, 7
-	vibrato 18, 3, 4
-	duty_cycle 2
-	note_type 8, 10, 1
-	rest 2
-	octave 3
-	note C_, 2
-	note F_, 2
-	note A_, 2
-	note F_, 2
-	note A#, 2
-	octave 4
-	note D_, 2
-	volume_envelope 10, 2
-	note F_, 6
-	volume_envelope 10, 1
-	duty_cycle 3
-	octave 3
-	note E_, 2
-	note G_, 2
-	octave 4
-	note C_, 2
-	volume_envelope 10, 4
-	note F_, 9
-	rest 9
-	sound_ret
-
-	
-
-Sfx_GetEgg_Ch6:
-	toggle_sfx
-	vibrato 18, 3, 4
-	duty_cycle 3
-	note_type 8, 12, 2
-	rest 2
-	octave 4
-	note F_, 2
-	rest 2
-	note A_, 2
-	volume_envelope 12, 1
-	note A#, 2
-	note A_, 2
-	note A#, 2
-	volume_envelope 12, 2
-	octave 5
-	note C_, 6
-	volume_envelope 12, 1
-	octave 4
-	note C_, 2
-	note E_, 2
-	note G_, 2
-	volume_envelope 12, 4
-	note A_, 9
-	rest 9
-	sound_ret
-
-	
-
-Sfx_GetEgg_Ch7:
-	toggle_sfx
-	note_type 8, 2, 5
-	rest 2
-	octave 3
-	note C_, 6
-	octave 2
-	note A#, 6
-	octave 3
-	note C_, 2
-	note F_, 2
-	note G_, 2
-	note A#, 6
-	note A_, 9
-	rest 9
-	sound_ret
-
-	
-
-Sfx_GetEgg_Ch8:
-	toggle_sfx
-	sfx_toggle_noise 4
-	drum_speed 8
-	rest 2
-	drum_speed 12
-	rest 16
-	rest 12
-	sound_ret
-
-	
-
 Sfx_MoveDeleted:
 	channel_count 4
 	channel 5, Sfx_MoveDeleted_Ch5
@@ -2684,21 +2583,6 @@ Sfx_BatonPass_Ch8:
 	noise_note 32, 15, 2, 32
 	sound_ret
 
-Sfx_EggCrack:
-	channel_count 1
-	channel 5, Sfx_EggCrack_Ch5
-
-Sfx_EggCrack_Ch5:
-	toggle_sfx
-	note_type 1, 15, 1
-	duty_cycle 0
-	octave 4
-	note D#, 1
-	note C_, 1
-	rest 1
-	note F#, 1
-	sound_ret
-
 Sfx_Evolved:
 	channel_count 1
 	channel 5, Sfx_Evolved_Ch5
@@ -2755,28 +2639,6 @@ Sfx_MasterBall_Ch5:
 	note D_, 2
 	note C#, 2
 	note C_, 2
-	sound_ret
-
-Sfx_EggHatch:
-	channel_count 1
-	channel 5, Sfx_EggHatch_Ch5
-
-Sfx_EggHatch_Ch5:
-	toggle_sfx
-	note_type 2, 15, 1
-	duty_cycle 2
-	octave 5
-	note E_, 1
-	note C_, 1
-	rest 1
-	note G_, 1
-	note D_, 1
-	volume_envelope 14, 2
-	note B_, 7
-	volume_envelope 8, 2
-	note B_, 7
-	volume_envelope 4, 2
-	note B_, 7
 	sound_ret
 
 Sfx_GsIntroCharizardFireball:

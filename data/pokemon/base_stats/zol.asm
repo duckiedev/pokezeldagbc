@@ -9,12 +9,12 @@
 	db NO_ITEM, NO_ITEM ; items
 	db GENDER_F50 ; gender ratio
 	db 1 ; hearts (more than 1 is considered a boss)
-	db 40 ; step cycles to hatch
+    db 0 ; unused1
 	db BANK("Pics 19") ; Form pics bank
 	INCBIN "gfx/pokemon/zol/front.dimensions"
 	dw GelsFrontPic, GelsBackPic ; Form pics
 	db GROWTH_SLOW ; growth rate
-	dn EGG_NONE, EGG_NONE ; egg groups
+    db 0 ; unused2
 
 	; tm/hm learnset
 	tmhm DYNAMICPUNCH, HEADBUTT, CURSE, ROLLOUT, TOXIC, ZAP_CANNON, ROCK_SMASH, PSYCH_UP, HIDDEN_POWER, SUNNY_DAY, SNORE, BLIZZARD, HYPER_BEAM, ICY_WIND, PROTECT, RAIN_DANCE, ENDURE, FRUSTRATION, SOLARBEAM, THUNDER, EARTHQUAKE, RETURN, PSYCHIC_M, SHADOW_BALL, MUD_SLAP, DOUBLE_TEAM, ICE_PUNCH, SWAGGER, SLEEP_TALK, SANDSTORM, FIRE_BLAST, DEFENSE_CURL, THUNDERPUNCH, REST, ATTRACT, FIRE_PUNCH, SURF, STRENGTH, FLAMETHROWER, THUNDERBOLT, ICE_BEAM

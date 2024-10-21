@@ -5,7 +5,6 @@
 	const SEER_TIME_LEVEL
 	const SEER_TRADED
 	const SEER_CANCEL
-	const SEER_EGG
 	const SEER_LEVEL_ONLY
 
 	const_def
@@ -24,10 +23,6 @@ PokeSeer:
 	farcall SelectMonFromParty
 	jr c, .cancel
 
-	ld a, [wCurPartySpecies]
-	cp EGG
-	jr z, .egg
-
 	call IsAPokemon
 	jr c, .no_mon
 
@@ -41,11 +36,6 @@ PokeSeer:
 	ret
 
 .no_mon
-	ret
-
-.egg
-	ld a, SEER_EGG
-	call PrintSeerText
 	ret
 
 SeerAction:
@@ -156,9 +146,6 @@ GetCaughtLevel:
 	ld a, [wSeerCaughtData]
 	and CAUGHT_LEVEL_MASK
 	jr z, .unknown
-	cp CAUGHT_EGG_LEVEL ; egg marker value
-	jr nz, .print
-	ld a, EGG_LEVEL ; egg hatch level
 
 .print
 	ld [wSeerCaughtLevel], a
@@ -293,7 +280,6 @@ SeerTexts:
 	dw SeerTimeLevelText
 	dw SeerTradeText
 	dw SeerDoNothingText
-	dw SeerEggText
 	dw SeerNoLocationText
 
 SeerSeeAllText:
@@ -318,10 +304,6 @@ SeerTradeText:
 
 SeerNoLocationText:
 	text_far _SeerNoLocationText
-	text_end
-
-SeerEggText:
-	text_far _SeerEggText
 	text_end
 
 SeerDoNothingText:

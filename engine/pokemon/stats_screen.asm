@@ -68,9 +68,7 @@ StatsScreenMain:
 
 StatsScreenPointerTable:
 	dw MonStatsInit       ; regular pokémon
-	dw EggStatsInit       ; egg
 	dw StatsScreenWaitCry
-	dw EggStatsJoypad
 	dw StatsScreen_LoadPage
 	dw StatsScreenWaitCry
 	dw MonStatsJoypad
@@ -114,46 +112,10 @@ MonStatsInit:
 	farcall HDMATransferTilemapToWRAMBank3
 	call StatsScreen_CopyToTempMon
 	ld a, [wCurPartySpecies]
-	cp EGG
-	jr z, .egg
 	call StatsScreen_InitUpperHalf
 	ld hl, wStatsScreenFlags
 	set 4, [hl]
 	ld h, 4
-	call StatsScreen_SetJumptableIndex
-	ret
-
-.egg
-	ld h, 1
-	call StatsScreen_SetJumptableIndex
-	ret
-
-EggStatsInit:
-	call EggStatsScreen
-	ld a, [wJumptableIndex]
-	inc a
-	ld [wJumptableIndex], a
-	ret
-
-EggStatsJoypad:
-	call StatsScreen_GetJoypad
-	jr nc, .check
-	ld h, 0
-	call StatsScreen_SetJumptableIndex
-	ret
-
-.check
-	bit A_BUTTON_F, a
-	jr nz, .quit
-if DEF(_DEBUG)
-	cp START
-	jr z, .hatch
-endc
-	and D_DOWN | D_UP | A_BUTTON | B_BUTTON
-	jmp StatsScreen_JoypadAction
-
-.quit
-	ld h, 7
 	call StatsScreen_SetJumptableIndex
 	ret
 
@@ -200,9 +162,6 @@ StatsScreen_CopyToTempMon:
 
 .not_tempmon
 	farcall CopyMonToTempMon
-	ld a, [wCurPartySpecies]
-	cp EGG
-	jr z, .done
 	ld a, [wMonType]
 	cp BOXMON
 	jr c, .done
@@ -737,61 +696,26 @@ OTString:
 
 StatsScreen_PlaceFrontpic:
 	ld hl, wTempMonDVs
-	predef GetUnownLetter
 	call StatsScreen_GetAnimationParam
-	jr c, .egg
 	and a
 	jr z, .no_cry
-	jr .cry
-
-.egg
-	call .AnimateEgg
-	call SetDefaultBGPAndOBP
-	ret
-
-.no_cry
-	call .AnimateMon
-	call SetDefaultBGPAndOBP
-	ret
-
+; fallthrough
 .cry
 	call SetDefaultBGPAndOBP
 	call .AnimateMon
 	ld a, [wCurPartySpecies]
-	call PlayMonCry2
-	ret
+	jp PlayMonCry2
+
+.no_cry
+	call .AnimateMon
+	jp SetDefaultBGPAndOBP
 
 .AnimateMon:
 	ld hl, wStatsScreenFlags
 	set 5, [hl]
 	ld a, [wCurPartySpecies]
-	cp UNOWN
-	jr z, .unown
 	hlcoord 0, 0
-	call PrepMonFrontpic
-	ret
-
-.unown
-	xor a
-	ld [wBoxAlignment], a
-	hlcoord 0, 0
-	call _PrepMonFrontpic
-	ret
-
-.AnimateEgg:
-	ld a, [wCurPartySpecies]
-	cp UNOWN
-	jr z, .unownegg
-	ld a, TRUE
-	ld [wBoxAlignment], a
-	call .get_animation
-	ret
-
-.unownegg
-	xor a
-	ld [wBoxAlignment], a
-	call .get_animation
-	ret
+	jp PrepMonFrontpic
 
 .get_animation
 	ld a, [wCurPartySpecies]
@@ -824,7 +748,7 @@ StatsScreen_GetAnimationParam:
 	call AddNTimes
 	ld b, h
 	ld c, l
-	jr .CheckEggFaintedFrzSlp
+	jr .CheckFaintedFrzSlp
 
 .OTPartyMon:
 	xor a
@@ -839,7 +763,7 @@ StatsScreen_GetAnimationParam:
 	ld c, l
 	ld a, BANK(sBoxMons)
 	call OpenSRAM
-	call .CheckEggFaintedFrzSlp
+	call .CheckFaintedFrzSlp
 	push af
 	call CloseSRAM
 	pop af
@@ -848,14 +772,10 @@ StatsScreen_GetAnimationParam:
 .Tempmon:
 	ld bc, wTempMonSpecies
 
-.CheckEggFaintedFrzSlp:
-	ld a, [wCurPartySpecies]
-	cp EGG
-	jr z, .egg
+.CheckFaintedFrzSlp:
 	call CheckFaintedFrzSlp
 	jr c, .FaintedFrzSlp
 	jr .Wildmon
-.egg
 	xor a
 	scf
 	ret
@@ -890,121 +810,6 @@ StatsScreen_LoadTextboxSpaceGFX:
 	pop bc
 	pop de
 	pop hl
-	ret
-
-EggStatsScreen:
-	xor a
-	ldh [hBGMapMode], a
-	ld hl, wCurHPPal
-	call SetHPPal
-	ld b, SCGB_STATS_SCREEN_HP_PALS
-	call GetSGBLayout
-	call StatsScreen_PlaceHorizontalDivider
-	ld de, EggString
-	hlcoord 8, 1
-	call PlaceString
-	ld de, IDNoString
-	hlcoord 8, 3
-	call PlaceString
-	ld de, OTString
-	hlcoord 8, 5
-	call PlaceString
-	ld de, FiveQMarkString
-	hlcoord 11, 3
-	call PlaceString
-	ld de, FiveQMarkString
-	hlcoord 11, 5
-	call PlaceString
-if DEF(_DEBUG)
-	ld de, .PushStartString
-	hlcoord 8, 17
-	call PlaceString
-	jr .placed_push_start
-
-.PushStartString:
-	db "▶PUSH START.@"
-
-.placed_push_start
-endc
-	ld a, [wTempMonHappiness] ; egg status
-	ld de, EggSoonString
-	cp $6
-	jr c, .picked
-	ld de, EggCloseString
-	cp $b
-	jr c, .picked
-	ld de, EggMoreTimeString
-	cp $29
-	jr c, .picked
-	ld de, EggALotMoreTimeString
-.picked
-	hlcoord 1, 9
-	call PlaceString
-	ld hl, wStatsScreenFlags
-	set 5, [hl]
-	call SetDefaultBGPAndOBP
-	call DelayFrame
-	hlcoord 0, 0
-	call PrepMonFrontpic
-	farcall HDMATransferTilemapToWRAMBank3
-	call StatsScreen_AnimateEgg
-
-	ld a, [wTempMonHappiness]
-	cp 6
-	ret nc
-	ld de, SFX_2_BOOPS
-	call PlaySFX
-	ret
-
-EggString:
-	db "EGG@"
-
-FiveQMarkString:
-	db "?????@"
-
-EggSoonString:
-	db   "It's making sounds"
-	next "inside. It's going"
-	next "to hatch soon!@"
-
-EggCloseString:
-	db   "It moves around"
-	next "inside sometimes."
-	next "It must be close"
-	next "to hatching.@"
-
-EggMoreTimeString:
-	db   "Wonder what's"
-	next "inside? It needs"
-	next "more time, though.@"
-
-EggALotMoreTimeString:
-	db   "This EGG needs a"
-	next "lot more time to"
-	next "hatch.@"
-
-StatsScreen_AnimateEgg:
-	call StatsScreen_GetAnimationParam
-	ret nc
-	ld a, [wTempMonHappiness]
-	ld e, $7
-	cp 6
-	jr c, .animate
-	ld e, $8
-	cp 11
-	jr c, .animate
-	ret
-
-.animate
-	push de
-	ld a, $1
-	ld [wBoxAlignment], a
-	call StatsScreen_LoadTextboxSpaceGFX
-	ld de, vTiles2 tile $00
-	predef GetAnimatedFrontpic
-	pop de
-	ld hl, wStatsScreenFlags
-	set 6, [hl]
 	ret
 
 StatsScreen_LoadPageIndicators:
@@ -1050,8 +855,7 @@ CopyNickname:
 	push de
 	call CopyBytes
 	pop de
-	call CloseSRAM
-	ret
+	jp CloseSRAM
 
 .partymon
 	push de

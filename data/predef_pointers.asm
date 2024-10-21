@@ -16,7 +16,6 @@ PredefPointers::
 	add_predef AddTempmonToParty
 	add_predef SendGetMonIntoFromBox
 	add_predef SendMonIntoBox
-	add_predef GiveEgg
 	add_predef AnimateHPBar
 	add_predef CalcMonStats
 	add_predef CalcMonStatC
@@ -49,7 +48,6 @@ PredefPointers::
 	add_predef PrintMoveType
 	add_predef PrintType
 	add_predef PrintMonTypes
-	add_predef GetUnownLetter
 	add_predef LoadPoisonBGPals
 	add_predef InitSGBBorder
 	add_predef LoadSGBLayout

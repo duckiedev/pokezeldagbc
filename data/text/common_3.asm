@@ -204,15 +204,6 @@ _SeerNoLocationText::
 	para "Am I good or what?"
 	prompt
 
-_SeerEggText::
-	text "Hey!"
-
-	para "That's an EGG!"
-
-	para "You can't say that"
-	line "you've met it yet…"
-	done
-
 _SeerDoNothingText::
 	text "Fufufu! I saw that"
 	line "you'd do nothing!"
@@ -837,11 +828,6 @@ _ItemLooksBitterText::
 	text "It looks bitter…"
 	prompt
 
-_ItemCantUseOnEggText::
-	text "That can't be used"
-	line "on an EGG."
-	prompt
-
 _ItemOakWarningText::
 	text "OAK: <PLAYER>!"
 	line "This isn't the"
@@ -898,11 +884,6 @@ _AskDeleteMoveText::
 _DeleterForgotMoveText::
 	text "Done! Your #MON"
 	line "forgot the move."
-	done
-
-_DeleterEggText::
-	text "An EGG doesn't"
-	line "know any moves!"
 	done
 
 _DeleterNoComeAgainText::

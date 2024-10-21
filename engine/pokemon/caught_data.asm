@@ -12,7 +12,7 @@ SetCaughtData:
 	dec a
 	ld hl, wPartyMon1CaughtLevel
 	call GetPartyLocation
-SetBoxmonOrEggmonCaughtData:
+SetBoxmonCaughtData:
 	ld a, [wTimeOfDay]
 	inc a
 	rrca
@@ -49,7 +49,7 @@ SetBoxMonCaughtData:
 	ld a, BANK(sBoxMon1CaughtLevel)
 	call OpenSRAM
 	ld hl, sBoxMon1CaughtLevel
-	call SetBoxmonOrEggmonCaughtData
+	call SetBoxmonCaughtData
 	call CloseSRAM
 	ret
 
@@ -77,17 +77,4 @@ SetGiftMonCaughtData:
 	rrc b
 	or b
 	ld [hl], a
-	ret
-
-SetEggMonCaughtData:
-	ld a, [wCurPartyMon]
-	ld hl, wPartyMon1CaughtLevel
-	call GetPartyLocation
-	ld a, [wCurPartyLevel]
-	push af
-	ld a, CAUGHT_EGG_LEVEL
-	ld [wCurPartyLevel], a
-	call SetBoxmonOrEggmonCaughtData
-	pop af
-	ld [wCurPartyLevel], a
 	ret
