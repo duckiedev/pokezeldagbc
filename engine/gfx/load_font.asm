@@ -16,6 +16,9 @@ Get2bppOptionalHDMA: ; unreferenced
 	jmp Get2bpp
 
 _LoadStandardFont::
+	ld a, [wTextboxStyle]
+	cp HYRULE
+	jr nz, .crystal
 	ld de, Font
 	ld hl, vTiles1
 	lb bc, BANK(Font), $70
@@ -23,15 +26,33 @@ _LoadStandardFont::
 	ld de, TextboxSpaceUniqueGFX
 	ld hl, vTiles2 tile " "
 	lb bc, BANK(TextboxSpaceUniqueGFX), 1
+	jmp Get2bpp
+
+.crystal
+	ld de, FontCrystal
+	ld hl, vTiles1
+	lb bc, BANK(Font), $70
 	call Get2bpp
-	ret
+	ld de, TextboxSpaceGFX
+	ld hl, vTiles2 tile " "
+	lb bc, BANK(TextboxSpaceGFX), 1
+	call Get2bpp
+
+LoadFrame:
+	ld de, FrameCrystal
+	ld hl, vTiles2 tile "┌" ; $79
+	lb bc, BANK(FrameCrystal), TEXTBOX_FRAME_TILES ; "┌" to "┘"
+	call Get1bppViaHDMA
+	ld hl, vTiles2 tile " " ; $7f
+	ld de, TextboxSpaceGFX
+	lb bc, BANK(TextboxSpaceGFX), 1
+	jmp Get1bppViaHDMA
 
 _LoadFontsBattleExtra::
 	ld de, FontBattleExtra
 	ld hl, vTiles2 tile $60
 	lb bc, BANK(FontBattleExtra), 25
-	call Get2bppViaHDMA
-	ret
+	jmp Get2bppViaHDMA
 
 LoadBattleFontsHPBar:
 	ld de, FontBattleExtra
@@ -55,8 +76,7 @@ LoadHPBar:
 	ld de, ExpBarGFX
 	ld hl, vTiles0 tile $F0
 	lb bc, BANK(ExpBarGFX), 15
-	call Get2bppViaHDMA
-	ret
+	jmp Get2bppViaHDMA
 
 StatsScreen_LoadFont:
 	call _LoadFontsBattleExtra
@@ -80,5 +100,4 @@ LoadStatsScreenPageTilesGFX:
 	ld de, StatsScreenPageTilesGFX
 	ld hl, vTiles2 tile $31
 	lb bc, BANK(StatsScreenPageTilesGFX), 17
-	call Get2bppViaHDMA
-	ret
+	jmp Get2bppViaHDMA

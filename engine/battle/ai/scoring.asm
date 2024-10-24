@@ -1870,7 +1870,7 @@ AI_Smart_Curse:
 	push hl
 	call AICheckLastPlayerMon
 	pop hl
-	jr nz, .approve
+	jr nz, .highly_discourage
 
 	jr .ghost_continue
 

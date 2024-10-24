@@ -285,15 +285,6 @@ DEF CELEBIEVENT_FOREST_IS_RESTLESS_F EQU 2
 	const SWARMFLAGS_DUNSPARCE_SWARM_F           ; 2
 	const SWARMFLAGS_YANMA_SWARM_F               ; 3
 
-; wDayCareMan::
-DEF DAYCAREMAN_HAS_MON_F         EQU 0
-DEF DAYCAREMAN_MONS_COMPATIBLE_F EQU 1
-DEF DAYCAREMAN_ACTIVE_F          EQU 2
-
-; wDayCareLady::
-DEF DAYCARELADY_HAS_MON_F        EQU 0
-DEF DAYCARELADY_ACTIVE_F         EQU 1
-
 ; hVBlank::
 ; VBlankHandlers indexes (see home/vblank.asm)
 	const_def
@@ -314,3 +305,9 @@ DEF NUM_VBLANK_HANDLERS EQU const_value
 	const DISABLE_DYN_PAL_F    ; 3
 
 DEF OCARINA_MAX_SONG_LENGTH EQU 6;
+
+; wTextboxStyle
+	const_def
+	const JOHTO				   ; 0
+	const HYRULE			   ; 1
+DEF NUM_TEXTBOX_STYLES EQU const_value

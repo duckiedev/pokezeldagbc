@@ -1,4 +1,6 @@
 Intro_MainMenu:
+	ld a, HYRULE
+	ld [wTextboxStyle], a
 	ld de, MUSIC_NONE
 	call PlayMusic
 	call DelayFrame

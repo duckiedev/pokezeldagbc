@@ -1887,8 +1887,7 @@ ContinueFaintProcess:
 
 HandleEnemyMonLostHeartAlive:
 	call HandleEnemyRestoreAllHP
-	call HandleEnemyTurnReset
-	ret
+	jmp HandleEnemyTurnReset
 
 HandleEnemyZolTransform:
 	; set the status
@@ -1915,8 +1914,7 @@ HandleEnemyRestoreAllHP:
 	ld a, [hl]
 	ld [wHPBuffer1], a
 	ld c, a
-	call RestoreHP
-	ret
+	jmp RestoreHP
 
 ContinueEnemyZolTransform:
 	; change the name
@@ -2592,8 +2590,7 @@ JumpToPartyMenuAndPrintText:
 	farcall PlacePartyMenuText
 	call WaitBGMap
 	call SetDefaultBGPAndOBP
-	call DelayFrame
-	ret
+	jmp DelayFrame
 
 SelectBattleMon:
 	farcall PartyMenuSelect
@@ -2818,8 +2815,7 @@ ForceEnemySwitch:
 	call ResetEnemyStatLevels
 	call ShowSetEnemyMonAndSendOutAnimation
 	call BreakAttraction
-	call ResetBattleParticipants
-	ret
+	jmp ResetBattleParticipants
 
 EnemySwitch:
 	call CheckWhetherToAskSwitch
@@ -3509,8 +3505,7 @@ InitBattleMon:
 	ld bc, PARTYMON_STRUCT_LENGTH - MON_ATK
 	call CopyBytes
 	call ApplyStatusEffectOnPlayerStats
-	call BadgeStatBoosts
-	ret
+	jmp BadgeStatBoosts
 
 BattleCheckPlayerShininess:
 	call GetPartyMonDVs
@@ -4155,8 +4150,7 @@ DrawPlayerHUD:
 	ld a, [wTempMonLevel]
 	ld b, a
 	hlcoord 19, 8
-	call FillInExpBar
-	ret
+	jmp FillInExpBar
 
 UpdatePlayerHPPal:
 	ld hl, wPlayerHPPal
@@ -4465,8 +4459,7 @@ DrawEnemySong:
 	; draw notes from the song
 	hlcoord 1, 3
 	ld de, wBattleEnemySong
-	call PlaceString
-	ret
+	jmp PlaceString
 	; based on stored wram value of percentage of hp left
 .music_note
 	db "<NOTE>@"
@@ -4644,8 +4637,7 @@ Battle_StatsScreen:
 	ld bc, $31 tiles
 	call CopyBytes
 
-	call EnableLCD
-	ret
+	jmp EnableLCD
 
 TryPlayerSwitch:
 	ld a, [wCurBattleMon]
@@ -5179,8 +5171,7 @@ MoveInfoBox:
 	inc hl
 	ld de, wNamedObjectIndex
 	lb bc, 1, 2
-	call PrintNum
-	ret
+	jmp PrintNum
 
 CheckPlayerHasUsableMoves:
 	ld a, STRUGGLE
@@ -5768,8 +5759,7 @@ LoadEnemyMon:
 	ld bc, NUM_BATTLE_STATS * 2
 	call CopyBytes
 
-	call ApplyStatusEffectOnEnemyStats
-	ret
+	jmp ApplyStatusEffectOnEnemyStats
 
 CheckSleepingTreeMon:
 ; Return carry if species is in the list
@@ -7354,8 +7344,7 @@ InitEnemyWildmon:
 
 ExitBattle:
 	call .HandleEndOfBattle
-	call CleanUpBattleRAM
-	ret
+	jmp CleanUpBattleRAM
 
 .HandleEndOfBattle:
 	ld a, [wBattleResult]
@@ -7398,8 +7387,7 @@ CleanUpBattleRAM:
 	ld [hli], a
 	dec b
 	jr nz, .loop
-	call WaitSFX
-	ret
+	jmp WaitSFX
 
 CheckPayDay:
 	ld hl, wPayDayMoney
@@ -7430,8 +7418,7 @@ CheckPayDay:
 	ld hl, BattleText_PlayerPickedUpPayDayMoney
 	call StdBattleTextbox
 	call ClearTilemap
-	call ClearBGPalettes
-	ret
+	jmp ClearBGPalettes
 
 BattleEnd_HandleRoamMons:
 	ld a, [wBattleType]
@@ -7600,8 +7587,7 @@ InitBattleDisplay:
 
 .InitBackPic:
 	call GetTrainerBackpic
-	call CopyBackpic
-	ret
+	jmp CopyBackpic
 
 GetTrainerBackpic:
 ; Load the player character's backpic (6x6) into VRAM starting from vTiles2 tile $31.
@@ -7745,6 +7731,4 @@ BattleStartMessage:
 	push hl
 	farcall BattleStart_TrainerHuds
 	pop hl
-	call StdBattleTextbox
-
-	ret
+	jmp StdBattleTextbox

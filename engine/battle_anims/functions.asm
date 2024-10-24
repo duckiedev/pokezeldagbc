@@ -109,8 +109,7 @@ BattleAnimFunc_Null:
 BattleAnimFunc_ThrowFromUserToTargetAndDisappear:
 	call BattleAnimFunc_ThrowFromUserToTarget
 	ret c
-	call DeinitBattleAnimation
-	ret
+	jmp DeinitBattleAnimation
 
 BattleAnimFunc_ThrowFromUserToTarget:
 	; If x coord at $88 or beyond, abort.
@@ -151,8 +150,7 @@ BattleAnimFunc_MoveWaveToTarget:
 	ld a, [hl]
 	cp $88
 	jr c, .move
-	call DeinitBattleAnimation
-	ret
+	jmp DeinitBattleAnimation
 
 .move
 	add $2
@@ -241,8 +239,7 @@ BattleAnimFunc_MoveFromUserToTarget:
 	dw .zero
 	dw .one
 .one
-	call DeinitBattleAnimation
-	ret
+	jmp DeinitBattleAnimation
 
 .zero
 	ld hl, BATTLEANIMSTRUCT_XCOORD
@@ -253,8 +250,7 @@ BattleAnimFunc_MoveFromUserToTarget:
 	ld hl, BATTLEANIMSTRUCT_PARAM
 	add hl, bc
 	ld a, [hl]
-	call BattleAnim_StepToTarget
-	ret
+	jmp BattleAnim_StepToTarget
 
 BattleAnimFunc_MoveFromUserToTargetAndDisappear:
 ; Same as BattleAnimFunc_01 but objs are cleared when they reach x coord $84
@@ -266,12 +262,10 @@ BattleAnimFunc_MoveFromUserToTargetAndDisappear:
 	ld hl, BATTLEANIMSTRUCT_PARAM
 	add hl, bc
 	ld a, [hl]
-	call BattleAnim_StepToTarget
-	ret
+	jmp BattleAnim_StepToTarget
 
 .done
-	call DeinitBattleAnimation
-	ret
+	jmp DeinitBattleAnimation
 
 BattleAnimFunc_PokeBall:
 	call BattleAnim_AnonJumptable
@@ -290,8 +284,7 @@ BattleAnimFunc_PokeBall:
 	dw .eleven
 .zero ; init
 	call GetBallAnimPal
-	call BattleAnim_IncAnonJumptableIndex
-	ret
+	jmp BattleAnim_IncAnonJumptableIndex
 
 .one
 	call BattleAnimFunc_ThrowFromUserToTarget
@@ -305,8 +298,7 @@ BattleAnimFunc_PokeBall:
 	ld [hl], a
 	ld a, BATTLE_ANIM_FRAMESET_POKE_BALL_3
 	call ReinitBattleAnimFrameset
-	call BattleAnim_IncAnonJumptableIndex
-	ret
+	jmp BattleAnim_IncAnonJumptableIndex
 
 .three
 	call BattleAnim_IncAnonJumptableIndex
@@ -342,8 +334,7 @@ BattleAnimFunc_PokeBall:
 	ret nz
 	ld a, BATTLE_ANIM_FRAMESET_POKE_BALL_4
 	call ReinitBattleAnimFrameset
-	call BattleAnim_IncAnonJumptableIndex
-	ret
+	jmp BattleAnim_IncAnonJumptableIndex
 
 .six
 	ld a, BATTLE_ANIM_FRAMESET_POKE_BALL_5
@@ -383,12 +374,10 @@ BattleAnimFunc_PokeBall:
 	jr z, .eleven
 	and $f
 	ret nz
-	call BattleAnim_IncAnonJumptableIndex
-	ret
+	jmp BattleAnim_IncAnonJumptableIndex
 
 .eleven
-	call DeinitBattleAnimation
-	ret
+	jmp DeinitBattleAnimation
 
 BattleAnimFunc_PokeBallBlocked:
 	call BattleAnim_AnonJumptable
@@ -398,8 +387,7 @@ BattleAnimFunc_PokeBallBlocked:
 	dw .two
 .zero
 	call GetBallAnimPal
-	call BattleAnim_IncAnonJumptableIndex
-	ret
+	jmp BattleAnim_IncAnonJumptableIndex
 
 .one
 	ld hl, BATTLEANIMSTRUCT_XCOORD
@@ -407,8 +395,7 @@ BattleAnimFunc_PokeBallBlocked:
 	ld a, [hl]
 	cp $70
 	jr nc, .next
-	call BattleAnimFunc_ThrowFromUserToTarget
-	ret
+	jmp BattleAnimFunc_ThrowFromUserToTarget
 
 .next
 	call BattleAnim_IncAnonJumptableIndex
@@ -427,8 +414,7 @@ BattleAnimFunc_PokeBallBlocked:
 	ret
 
 .done
-	call DeinitBattleAnimation
-	ret
+	jmp DeinitBattleAnimation
 
 GetBallAnimPal:
 	ld hl, BallColors
@@ -486,12 +472,10 @@ BattleAnimFunc_Ember:
 	ld hl, BATTLEANIMSTRUCT_PARAM
 	add hl, bc
 	ld a, [hl]
-	call BattleAnim_StepToTarget
-	ret
+	jmp BattleAnim_StepToTarget
 
 .two
-	call DeinitBattleAnimation
-	ret
+	jmp DeinitBattleAnimation
 
 .three
 	call BattleAnim_IncAnonJumptableIndex
@@ -545,8 +529,7 @@ BattleAnimFunc_Drop:
 	ret
 
 .done
-	call DeinitBattleAnimation
-	ret
+	jmp DeinitBattleAnimation
 
 BattleAnimFunc_MoveFromUserToTargetSpinAround:
 ; Object moves from user to target target and spins around it once. Example: Fire Spin, Swift
@@ -631,12 +614,10 @@ BattleAnimFunc_MoveFromUserToTargetSpinAround:
 	ld a, [hl]
 	cp $b0
 	jr c, .retain
-	call DeinitBattleAnimation
-	ret
+	jmp DeinitBattleAnimation
 
 .retain
-	call .SetCoords
-	ret
+	jmp .SetCoords
 
 .SetCoords:
 	ld hl, BATTLEANIMSTRUCT_PARAM
@@ -708,8 +689,7 @@ BattleAnimFunc_Shake:
 	ret
 
 .two
-	call DeinitBattleAnimation
-	ret
+	jmp DeinitBattleAnimation
 
 BattleAnimFunc_FireBlast:
 	call BattleAnim_AnonJumptable
@@ -734,8 +714,7 @@ BattleAnimFunc_FireBlast:
 	cp $7
 	jr z, .seven
 	ld a, BATTLE_ANIM_FRAMESET_BURNED
-	call ReinitBattleAnimFrameset
-	ret
+	jmp ReinitBattleAnimFrameset
 
 .seven
 	ld hl, BATTLEANIMSTRUCT_XCOORD
@@ -777,8 +756,7 @@ BattleAnimFunc_FireBlast:
 	ret
 
 .nine
-	call DeinitBattleAnimation
-	ret
+	jmp DeinitBattleAnimation
 
 .one
 	; Flame that moves upward
@@ -891,8 +869,7 @@ BattleAnimFunc_RazorLeaf:
 	ld a, [hl]
 	cp $20
 	jr nz, .sine_cosine_2
-	call DeinitBattleAnimation
-	ret
+	jmp DeinitBattleAnimation
 
 .sine_cosine_2
 	ld hl, BATTLEANIMSTRUCT_VAR1
@@ -946,8 +923,7 @@ BattleAnimFunc_RazorLeaf:
 .five
 .six
 .seven
-	call BattleAnim_IncAnonJumptableIndex
-	ret
+	jmp BattleAnim_IncAnonJumptableIndex
 
 .eight
 	ld hl, BATTLEANIMSTRUCT_XCOORD
@@ -956,8 +932,7 @@ BattleAnimFunc_RazorLeaf:
 	cp $c0
 	ret nc
 	ld a, $8
-	call BattleAnim_StepToTarget
-	ret
+	jmp BattleAnim_StepToTarget
 
 BattleAnim_ScatterHorizontal:
 ; Affects horizontal sine movement based on bit 7 of Obj Param
@@ -1028,8 +1003,7 @@ BattleAnimFunc_RockSmash:
 	ld a, [hl]
 	cp $30
 	jr nc, .sine_cosine
-	call DeinitBattleAnimation
-	ret
+	jmp DeinitBattleAnimation
 
 .sine_cosine
 	ld hl, BATTLEANIMSTRUCT_PARAM
@@ -1085,8 +1059,7 @@ BattleAnimFunc_Bubble:
 	ld hl, BATTLEANIMSTRUCT_PARAM
 	add hl, bc
 	ld a, [hl]
-	call BattleAnim_StepToTarget
-	ret
+	jmp BattleAnim_StepToTarget
 
 .next
 	call BattleAnim_IncAnonJumptableIndex
@@ -1221,8 +1194,7 @@ BattleAnimFunc_Surf:
 	ldh [hLYOverrideStart], a
 	ldh [hLYOverrideEnd], a
 .four
-	call DeinitBattleAnimation
-	ret
+	jmp DeinitBattleAnimation
 
 .move_down
 	inc a
@@ -1255,8 +1227,7 @@ BattleAnimFunc_Sing:
 	ld a, [hl]
 	cp $b8
 	jr c, .move
-	call DeinitBattleAnimation
-	ret
+	jmp DeinitBattleAnimation
 
 .move
 	ld a, $2
@@ -1339,8 +1310,7 @@ BattleAnimFunc_Powder:
 	ld a, [hl]
 	cp $38
 	jr c, .move
-	call DeinitBattleAnimation
-	ret
+	jmp DeinitBattleAnimation
 
 .move
 	ld a, [hl]
@@ -1401,8 +1371,7 @@ BattleAnimFunc_Recover:
 	ld a, [hl]
 	and a
 	jr nz, .move
-	call DeinitBattleAnimation
-	ret
+	jmp DeinitBattleAnimation
 
 .move
 	ld hl, BATTLEANIMSTRUCT_VAR1
@@ -1452,8 +1421,7 @@ BattleAnimFunc_ThunderWave:
 	ret
 
 .three
-	call DeinitBattleAnimation
-	ret
+	jmp DeinitBattleAnimation
 
 BattleAnimFunc_Clamp_Encore:
 ; Claps two objects together, twice. Also used by Encore
@@ -1533,8 +1501,7 @@ BattleAnimFunc_Clamp_Encore:
 .three
 .four
 .five
-	call BattleAnim_IncAnonJumptableIndex
-	ret
+	jmp BattleAnim_IncAnonJumptableIndex
 
 .six
 	ld hl, BATTLEANIMSTRUCT_JUMPTABLE_INDEX
@@ -1610,8 +1577,7 @@ BattleAnimFunc_Bite:
 .three
 .four
 .five
-	call BattleAnim_IncAnonJumptableIndex
-	ret
+	jmp BattleAnim_IncAnonJumptableIndex
 
 .six
 	ld hl, BATTLEANIMSTRUCT_JUMPTABLE_INDEX
@@ -1674,8 +1640,7 @@ BattleAnimFunc_SolarBeam:
 	ret
 
 .zero_radius
-	call DeinitBattleAnimation
-	ret
+	jmp DeinitBattleAnimation
 
 BattleAnimFunc_Gust:
 	call BattleAnim_AnonJumptable
@@ -1702,8 +1667,7 @@ BattleAnimFunc_Gust:
 	ld a, [hl]
 	cp $88
 	jr c, .move
-	call BattleAnim_IncAnonJumptableIndex
-	ret
+	jmp BattleAnim_IncAnonJumptableIndex
 
 .four
 	ld hl, BATTLEANIMSTRUCT_XCOORD
@@ -1711,8 +1675,7 @@ BattleAnimFunc_Gust:
 	ld a, [hl]
 	cp $b8
 	jr c, .move
-	call DeinitBattleAnimation
-	ret
+	jmp DeinitBattleAnimation
 
 .move
 	call .GustWobble
@@ -1811,8 +1774,7 @@ BattleAnimFunc_Absorb:
 	ld a, [hl]
 	cp $30
 	jr nc, .move
-	call DeinitBattleAnimation
-	ret
+	jmp DeinitBattleAnimation
 
 .move
 	ld hl, BATTLEANIMSTRUCT_PARAM
@@ -1879,15 +1841,13 @@ BattleAnimFunc_LeechSeed:
 	ld a, [hl]
 	cp $20
 	jr c, .sprout
-	call BattleAnim_StepThrownToTarget
-	ret
+	jmp BattleAnim_StepThrownToTarget
 
 .sprout
 	ld [hl], $40
 	ld a, BATTLE_ANIM_FRAMESET_LEECH_SEED_2
 	call ReinitBattleAnimFrameset
-	call BattleAnim_IncAnonJumptableIndex
-	ret
+	jmp BattleAnim_IncAnonJumptableIndex
 
 .two
 	ld hl, BATTLEANIMSTRUCT_VAR2
@@ -1975,8 +1935,7 @@ BattleAnimFunc_Spikes:
 	ld a, [hl]
 	cp $20
 	jr c, .wait
-	call BattleAnim_StepThrownToTarget
-	ret
+	jmp BattleAnim_StepThrownToTarget
 
 .wait
 	call BattleAnim_IncAnonJumptableIndex
@@ -2196,15 +2155,13 @@ BattleAnimFunc_Egg:
 
 .five
 	; Clears Egg Bomb object via anim_incobj
-	call DeinitBattleAnimation
-	ret
+	jmp DeinitBattleAnimation
 
 .seven
 	; Switches Softboiled frameset to egg wobbling
 	ld a, BATTLE_ANIM_FRAMESET_EGG_WOBBLE ; Egg wobbling
 	call ReinitBattleAnimFrameset
-	call BattleAnim_IncAnonJumptableIndex
-	ret
+	jmp BattleAnim_IncAnonJumptableIndex
 
 .eight
 	; Softboiled object waves slightly side to side
@@ -2227,8 +2184,7 @@ BattleAnimFunc_Egg:
 	ld hl, BATTLEANIMSTRUCT_YOFFSET
 	add hl, bc
 	ld [hl], $4
-	call BattleAnim_IncAnonJumptableIndex
-	ret
+	jmp BattleAnim_IncAnonJumptableIndex
 
 .eleven
 	; Second Softboiled BATTLE_ANIM_OBJ_EGG
@@ -2294,8 +2250,7 @@ BattleAnimFunc_Egg:
 	add hl, bc
 	ld [hli], a
 	ld [hl], a
-	call BattleAnim_IncAnonJumptableIndex
-	ret
+	jmp BattleAnim_IncAnonJumptableIndex
 
 BattleAnimFunc_MoveUp:
 ; Moves object up for 41 frames
@@ -2307,8 +2262,7 @@ BattleAnimFunc_MoveUp:
 	jr z, .move
 	cp $d8
 	jr nc, .move
-	call DeinitBattleAnimation
-	ret
+	jmp DeinitBattleAnimation
 
 .move
 	ld hl, BATTLEANIMSTRUCT_PARAM
@@ -2351,8 +2305,7 @@ BattleAnimFunc_Sound:
 	assert BATTLE_ANIM_FRAMESET_SOUND_1 + 1 == BATTLE_ANIM_FRAMESET_SOUND_2 \
 		&& BATTLE_ANIM_FRAMESET_SOUND_2 + 1 == BATTLE_ANIM_FRAMESET_SOUND_3
 	add [hl]
-	call ReinitBattleAnimFrameset
-	ret
+	jmp ReinitBattleAnimFrameset
 
 .one
 	ld hl, BATTLEANIMSTRUCT_VAR1
@@ -2365,8 +2318,7 @@ BattleAnimFunc_Sound:
 	ret
 
 .done_anim
-	call DeinitBattleAnimation
-	ret
+	jmp DeinitBattleAnimation
 
 .SoundWaveMotion:
 	ld hl, BATTLEANIMSTRUCT_VAR2
@@ -2428,8 +2380,7 @@ BattleAnimFunc_ConfuseRay:
 	ld [hl], a
 	assert BATTLE_ANIM_FRAMESET_CONFUSE_RAY_1 + 1 == BATTLE_ANIM_FRAMESET_CONFUSE_RAY_2
 	add BATTLE_ANIM_FRAMESET_CONFUSE_RAY_1
-	call ReinitBattleAnimFrameset
-	ret
+	jmp ReinitBattleAnimFrameset
 
 .one
 	ld hl, BATTLEANIMSTRUCT_PARAM
@@ -2546,8 +2497,7 @@ BattleAnimFunc_Dizzy:
 	add hl, bc
 	ld a, [hl] ; BATTLE_ANIM_FRAMESET_CHICK_1 or BATTLE_ANIM_FRAMESET_IMP
 .got_frameset
-	call ReinitBattleAnimFrameset
-	ret
+	jmp ReinitBattleAnimFrameset
 
 BattleAnimFunc_Amnesia:
 ; Creates 3 objects based on Obj Param
@@ -2583,8 +2533,7 @@ BattleAnimFunc_Amnesia:
 
 .two
 	; anim_incobj forces obj to deinit
-	call DeinitBattleAnimation
-	ret
+	jmp DeinitBattleAnimation
 
 .AmnesiaOffsets: ; Hardcoded Y Offsets for each Obj Param
 	db $ec, $f8, $00
@@ -2698,8 +2647,7 @@ BattleAnimFunc_Paralyzed:
 	inc a
 	ld [hl], a
 	ld a, BATTLE_ANIM_FRAMESET_PARALYZED_FLIPPED
-	call ReinitBattleAnimFrameset
-	ret
+	jmp ReinitBattleAnimFrameset
 
 .one
 	ld hl, BATTLEANIMSTRUCT_VAR1
@@ -2763,8 +2711,7 @@ BattleAnimFunc_SpiralDescent:
 	ret
 
 .delete
-	call DeinitBattleAnimation
-	ret
+	jmp DeinitBattleAnimation
 
 BattleAnimFunc_PetalDance:
 ; Object moves downwards in a spiral around the user. Object disappears at y coord $28
@@ -2805,8 +2752,7 @@ BattleAnimFunc_PetalDance:
 	ret
 
 .end
-	call DeinitBattleAnimation
-	ret
+	jmp DeinitBattleAnimation
 
 BattleAnimFunc_PoisonGas:
 	call BattleAnim_AnonJumptable
@@ -2841,8 +2787,7 @@ BattleAnimFunc_PoisonGas:
 	ret
 
 .next
-	call BattleAnim_IncAnonJumptableIndex
-	ret
+	jmp BattleAnim_IncAnonJumptableIndex
 
 BattleAnimFunc_SmokeFlameWheel:
 ; Object spins around target while also moving upward until it disappears at x coord $e8
@@ -2885,8 +2830,7 @@ BattleAnimFunc_SmokeFlameWheel:
 	ret
 
 .done
-	call DeinitBattleAnimation
-	ret
+	jmp DeinitBattleAnimation
 
 BattleAnimFunc_SacredFire:
 ; Moves object in a circle where the height is 1/8 the width, while also moving upward 2 pixels per frame for 24 frames after which it disappears
@@ -2930,8 +2874,7 @@ BattleAnimFunc_SacredFire:
 	ret
 
 .done
-	call DeinitBattleAnimation
-	ret
+	jmp DeinitBattleAnimation
 
 BattleAnimFunc_PresentSmokescreen:
 ; Object bounces from user to target and stops at x coord $6c. Uses anim_incobj to clear object
@@ -2990,8 +2933,7 @@ BattleAnimFunc_PresentSmokescreen:
 	ret
 
 .two
-	call DeinitBattleAnimation
-	ret
+	jmp DeinitBattleAnimation
 
 BattleAnimFunc_Horn:
 	call BattleAnim_AnonJumptable
@@ -3023,8 +2965,7 @@ BattleAnimFunc_Horn:
 	cp $58
 	ret nc
 	ld a, $2
-	call BattleAnim_StepToTarget
-	ret
+	jmp BattleAnim_StepToTarget
 
 .two
 	ld hl, BATTLEANIMSTRUCT_VAR2
@@ -3032,8 +2973,7 @@ BattleAnimFunc_Horn:
 	ld a, [hl]
 	cp $20
 	jr c, .three
-	call DeinitBattleAnimation
-	ret
+	jmp DeinitBattleAnimation
 
 .three
 	ld hl, BATTLEANIMSTRUCT_VAR2

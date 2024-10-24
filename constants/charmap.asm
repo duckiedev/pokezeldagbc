@@ -44,7 +44,12 @@
 	charmap "№",         $74
 
 ; Actual characters (from other graphics files)
-
+	charmap "┌",         $79
+	charmap "─",         $7a
+	charmap "┐",         $7b
+	charmap "│",         $7c
+	charmap "└",         $7d
+	charmap "┘",         $7e	
 	charmap " ",		 $7f ;
 
 	; needed for StatsScreen_PlaceShinyIcon and PrintPartyMonPage1

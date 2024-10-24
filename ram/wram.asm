@@ -133,7 +133,11 @@ wMapTimeOfDay:: db
 
 wPalFlags:: db
 
-	ds 4
+wTextboxStyle:: db
+; JOHTO 0
+; HYRULE 1
+
+	ds 3
 
 wPrevDexEntry:: db
 wDisableTextAcceleration:: db
