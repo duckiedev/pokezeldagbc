@@ -69,13 +69,13 @@ ScrollingMenuJoyAction:
 	bit START_F, a
 	jr nz, .start
 	bit D_RIGHT_F, a
-	jmp nz, .d_right
+ 	jmp nz, .d_right
 	bit D_LEFT_F, a
 	jr nz, .d_left
 	bit D_UP_F, a
-	jmp nz, .d_up
+ 	jmp nz, .d_up
 	bit D_DOWN_F, a
-	jmp nz, .d_down
+ 	jmp nz, .d_down
 	jr .loop
 
 .a_button
@@ -106,13 +106,13 @@ ScrollingMenuJoyAction:
 .select
 	ld a, [wMenuDataFlags]
 	bit 7, a
-	jmp z, xor_a_dec_a
+ 	jmp z, xor_a_dec_a
 	ld a, [wMenuCursorY]
 	dec a
 	call ScrollingMenu_GetListItemCoordAndFunctionArgs
 	ld a, [wMenuSelection]
 	cp -1
-	jmp z, xor_a_dec_a
+ 	jmp z, xor_a_dec_a
 	call ScrollingMenu_GetCursorPosition
 	dec a
 	ld [wScrollingMenuCursorPosition], a
@@ -123,7 +123,7 @@ ScrollingMenuJoyAction:
 .start
 	ld a, [wMenuDataFlags]
 	bit 6, a
-	jmp z, xor_a_dec_a
+ 	jmp z, xor_a_dec_a
 	ld a, START
 	scf
 	ret
@@ -131,10 +131,10 @@ ScrollingMenuJoyAction:
 .d_left
 	ld hl, w2DMenuFlags2
 	bit 7, [hl]
-	jmp z, xor_a_dec_a
+ 	jmp z, xor_a_dec_a
 	ld a, [wMenuDataFlags]
 	bit 3, a
-	jmp z, xor_a_dec_a
+ 	jmp z, xor_a_dec_a
 	ld a, D_LEFT
 	scf
 	ret
@@ -142,10 +142,10 @@ ScrollingMenuJoyAction:
 .d_right
 	ld hl, w2DMenuFlags2
 	bit 7, [hl]
-	jmp z, xor_a_dec_a
+ 	jmp z, xor_a_dec_a
 	ld a, [wMenuDataFlags]
 	bit 2, a
-	jmp z, xor_a_dec_a
+ 	jmp z, xor_a_dec_a
 	ld a, D_RIGHT
 	scf
 	ret
@@ -153,21 +153,21 @@ ScrollingMenuJoyAction:
 .d_up
 	ld hl, w2DMenuFlags2
 	bit 7, [hl]
-	jmp z, xor_a
+ 	jmp z, xor_a
 	ld hl, wMenuScrollPosition
 	ld a, [hl]
 	and a
 	jr z, .xor_dec_up
 	dec [hl]
-	jmp xor_a
+ 	jmp xor_a
 
 .xor_dec_up
-	jmp xor_a_dec_a
+ 	jmp xor_a_dec_a
 
 .d_down
 	ld hl, w2DMenuFlags2
 	bit 7, [hl]
-	jmp z, xor_a
+ 	jmp z, xor_a
 	ld hl, wMenuScrollPosition
 	ld a, [wMenuData_ScrollingMenuHeight]
 	add [hl]
@@ -176,10 +176,10 @@ ScrollingMenuJoyAction:
 	cp b
 	jr c, .xor_dec_down
 	inc [hl]
-	jmp xor_a
+ 	jmp xor_a
 
 .xor_dec_down
-	jmp xor_a_dec_a
+ 	jmp xor_a_dec_a
 
 ScrollingMenu_GetCursorPosition:
 	ld a, [wMenuScrollPosition]
@@ -397,8 +397,7 @@ ScrollingMenu_UpdateDisplay:
 	bit 0, a ; call function on cancel
 	jr nz, .call_function
 	ld de, .CancelString
-	call PlaceString
-	ret
+    jmp PlaceString
 
 .CancelString
 	db "CANCEL@"
@@ -407,7 +406,7 @@ ScrollingMenu_UpdateDisplay:
 	ld d, h
 	ld e, l
 	ld hl, wMenuData_ScrollingMenuFunction1
-	jmp CallPointerAt
+ 	jmp CallPointerAt
 
 ScrollingMenu_CallFunctions1and2:
 	push hl
@@ -476,8 +475,7 @@ ScrollingMenu_CheckCallFunction3:
 	dec a
 	call ScrollingMenu_GetListItemCoordAndFunctionArgs
 	ld hl, wMenuData_ScrollingMenuFunction3
-	call CallPointerAt
-	ret
+    jmp CallPointerAt
 
 ScrollingMenu_GetListItemCoordAndFunctionArgs:
 	push de

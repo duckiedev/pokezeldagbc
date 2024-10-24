@@ -203,7 +203,7 @@ Movement_step_loop:
 	ld hl, OBJECT_MOVEMENT_INDEX
 	add hl, bc
 	ld [hl], $0
-	jmp ContinueReadingMovement
+ 	jmp ContinueReadingMovement
 
 Movement_step_end:
 	call RestoreDefaultMovement
@@ -366,45 +366,45 @@ Movement_remove_sliding:
 	ld hl, OBJECT_FLAGS1
 	add hl, bc
 	res SLIDING_F, [hl]
-	jmp ContinueReadingMovement
+ 	jmp ContinueReadingMovement
 
 Movement_set_sliding:
 	ld hl, OBJECT_FLAGS1
 	add hl, bc
 	set SLIDING_F, [hl]
-	jmp ContinueReadingMovement
+ 	jmp ContinueReadingMovement
 
 Movement_remove_fixed_facing:
 	ld hl, OBJECT_FLAGS1
 	add hl, bc
 	res FIXED_FACING_F, [hl]
-	jmp ContinueReadingMovement
+ 	jmp ContinueReadingMovement
 
 Movement_fix_facing:
 	ld hl, OBJECT_FLAGS1
 	add hl, bc
 	set FIXED_FACING_F, [hl]
-	jmp ContinueReadingMovement
+ 	jmp ContinueReadingMovement
 
 Movement_show_object:
 	ld hl, OBJECT_FLAGS1
 	add hl, bc
 	res INVISIBLE_F, [hl]
-	jmp ContinueReadingMovement
+ 	jmp ContinueReadingMovement
 
 Movement_hide_object:
 	ld hl, OBJECT_FLAGS1
 	add hl, bc
 	set INVISIBLE_F, [hl]
-	jmp ContinueReadingMovement
+ 	jmp ContinueReadingMovement
 
 Movement_hide_emote:
 	call DespawnEmote
-	jmp ContinueReadingMovement
+ 	jmp ContinueReadingMovement
 
 Movement_show_emote:
 	call SpawnEmote
-	jmp ContinueReadingMovement
+ 	jmp ContinueReadingMovement
 
 Movement_step_shake:
 ; parameters:
@@ -412,7 +412,7 @@ Movement_step_shake:
 
 	call JumpMovementPointer
 	call ShakeScreen
-	jmp ContinueReadingMovement
+ 	jmp ContinueReadingMovement
 
 Movement_turn_head_down:
 	ld a, OW_DOWN
@@ -495,151 +495,151 @@ Movement_big_step_right:
 Movement_do_step:
 	ld d, OBJECT_ACTION_STEP
 Movement_normal_step:
-	jmp NormalStep
+ 	jmp NormalStep
 
 Movement_turn_away_down:
 	ld a, STEP_SLOW << 2 | DOWN
-	jmp TurningStep
+ 	jmp TurningStep
 
 Movement_turn_away_up:
 	ld a, STEP_SLOW << 2 | UP
-	jmp TurningStep
+ 	jmp TurningStep
 
 Movement_turn_away_left:
 	ld a, STEP_SLOW << 2 | LEFT
-	jmp TurningStep
+ 	jmp TurningStep
 
 Movement_turn_away_right:
 	ld a, STEP_SLOW << 2 | RIGHT
-	jmp TurningStep
+ 	jmp TurningStep
 
 Movement_turn_in_down:
 	ld a, STEP_WALK << 2 | DOWN
-	jmp TurningStep
+ 	jmp TurningStep
 
 Movement_turn_in_up:
 	ld a, STEP_WALK << 2 | UP
-	jmp TurningStep
+ 	jmp TurningStep
 
 Movement_turn_in_left:
 	ld a, STEP_WALK << 2 | LEFT
-	jmp TurningStep
+ 	jmp TurningStep
 
 Movement_turn_in_right:
 	ld a, STEP_WALK << 2 | RIGHT
-	jmp TurningStep
+ 	jmp TurningStep
 
 Movement_turn_waterfall_down:
 	ld a, STEP_BIKE << 2 | DOWN
-	jmp TurningStep
+ 	jmp TurningStep
 
 Movement_turn_waterfall_up:
 	ld a, STEP_BIKE << 2 | UP
-	jmp TurningStep
+ 	jmp TurningStep
 
 Movement_turn_waterfall_left:
 	ld a, STEP_BIKE << 2 | LEFT
-	jmp TurningStep
+ 	jmp TurningStep
 
 Movement_turn_waterfall_right:
 	ld a, STEP_BIKE << 2 | RIGHT
-	jmp TurningStep
+ 	jmp TurningStep
 
 Movement_slow_slide_step_down:
 	ld a, STEP_SLOW << 2 | DOWN
-	jmp SlideStep
+ 	jmp SlideStep
 
 Movement_slow_slide_step_up:
 	ld a, STEP_SLOW << 2 | UP
-	jmp SlideStep
+ 	jmp SlideStep
 
 Movement_slow_slide_step_left:
 	ld a, STEP_SLOW << 2 | LEFT
-	jmp SlideStep
+ 	jmp SlideStep
 
 Movement_slow_slide_step_right:
 	ld a, STEP_SLOW << 2 | RIGHT
-	jmp SlideStep
+ 	jmp SlideStep
 
 Movement_slide_step_down:
 	ld a, STEP_WALK << 2 | DOWN
-	jmp SlideStep
+ 	jmp SlideStep
 
 Movement_slide_step_up:
 	ld a, STEP_WALK << 2 | UP
-	jmp SlideStep
+ 	jmp SlideStep
 
 Movement_slide_step_left:
 	ld a, STEP_WALK << 2 | LEFT
-	jmp SlideStep
+ 	jmp SlideStep
 
 Movement_slide_step_right:
 	ld a, STEP_WALK << 2 | RIGHT
-	jmp SlideStep
+ 	jmp SlideStep
 
 Movement_fast_slide_step_down:
 	ld a, STEP_BIKE << 2 | DOWN
-	jmp SlideStep
+ 	jmp SlideStep
 
 Movement_fast_slide_step_up:
 	ld a, STEP_BIKE << 2 | UP
-	jmp SlideStep
+ 	jmp SlideStep
 
 Movement_fast_slide_step_left:
 	ld a, STEP_BIKE << 2 | LEFT
-	jmp SlideStep
+ 	jmp SlideStep
 
 Movement_fast_slide_step_right:
 	ld a, STEP_BIKE << 2 | RIGHT
-	jmp SlideStep
+ 	jmp SlideStep
 
 Movement_slow_jump_step_down:
 	ld a, STEP_SLOW << 2 | DOWN
-	jmp JumpStep
+ 	jmp JumpStep
 
 Movement_slow_jump_step_up:
 	ld a, STEP_SLOW << 2 | UP
-	jmp JumpStep
+ 	jmp JumpStep
 
 Movement_slow_jump_step_left:
 	ld a, STEP_SLOW << 2 | LEFT
-	jmp JumpStep
+ 	jmp JumpStep
 
 Movement_slow_jump_step_right:
 	ld a, STEP_SLOW << 2 | RIGHT
-	jmp JumpStep
+ 	jmp JumpStep
 
 Movement_jump_step_down:
 	ld a, STEP_WALK << 2 | DOWN
-	jmp JumpStep
+ 	jmp JumpStep
 
 Movement_jump_step_up:
 	ld a, STEP_WALK << 2 | UP
-	jmp JumpStep
+ 	jmp JumpStep
 
 Movement_jump_step_left:
 	ld a, STEP_WALK << 2 | LEFT
-	jmp JumpStep
+ 	jmp JumpStep
 
 Movement_jump_step_right:
 	ld a, STEP_WALK << 2 | RIGHT
-	jmp JumpStep
+ 	jmp JumpStep
 
 Movement_fast_jump_step_down:
 	ld a, STEP_BIKE << 2 | DOWN
-	jmp JumpStep
+ 	jmp JumpStep
 
 Movement_fast_jump_step_up:
 	ld a, STEP_BIKE << 2 | UP
-	jmp JumpStep
+ 	jmp JumpStep
 
 Movement_fast_jump_step_left:
 	ld a, STEP_BIKE << 2 | LEFT
-	jmp JumpStep
+ 	jmp JumpStep
 
 Movement_fast_jump_step_right:
 	ld a, STEP_BIKE << 2 | RIGHT
-	jmp JumpStep
+ 	jmp JumpStep
 
 Movement_turn_step_down:
 	ld a, OW_DOWN

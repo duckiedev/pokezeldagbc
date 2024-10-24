@@ -12,8 +12,8 @@ BattleCommand_LockOn:
 	call AnimateCurrentMove
 
 	ld hl, TookAimText
-	jmp StdBattleTextbox
+ 	jmp StdBattleTextbox
 
 .fail
 	call AnimateFailedMove
-	jmp PrintDidntAffect
+ 	jmp PrintDidntAffect

@@ -28,8 +28,8 @@ BattleCommand_Nightmare:
 	set SUBSTATUS_NIGHTMARE, [hl]
 	call AnimateCurrentMove
 	ld hl, StartedNightmareText
-	jmp StdBattleTextbox
+ 	jmp StdBattleTextbox
 
 .failed
 	call AnimateFailedMove
-	jmp PrintButItFailed
+ 	jmp PrintButItFailed

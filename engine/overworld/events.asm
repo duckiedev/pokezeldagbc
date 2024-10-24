@@ -160,7 +160,7 @@ NextOverworldFrame:
 	; of a busy LY overflow, perform that now.
 	ld a, [hDelayFrameLY]
 	inc a
-	jmp nz, DelayFrame
+ 	jmp nz, DelayFrame
 	xor a
 	ld [hDelayFrameLY], a
 	ret
@@ -172,7 +172,7 @@ HandleMapTimeAndJoypad:
 
 	call UpdateTime
 	call GetJoypad
-	jmp TimeOfDayPals
+ 	jmp TimeOfDayPals
 
 HandleMapObjects:
 	farcall HandleNPCStep
@@ -340,7 +340,7 @@ CheckTileEvent:
 	call CheckStepCountEnabled
 	jr z, .step_count_disabled
 
-	jmp CountStep
+ 	jmp CountStep
 
 .step_count_disabled
 	call CheckWildEncountersEnabled
@@ -377,8 +377,7 @@ CheckTileEvent:
 	ld h, [hl]
 	ld l, a
 	call GetMapScriptsBank
-	call CallScript
-	ret
+    jmp CallScript
 
 CheckWildEncounterCooldown::
 	ld hl, wWildEncounterCooldown
@@ -406,7 +405,7 @@ SetMinTwoStepWildEncounterCooldown:
 	ret
 
 Dummy_CheckEnabledMapEventsBit5:
-	jmp CheckEnabledMapEventsBit5
+ 	jmp CheckEnabledMapEventsBit5
 
 RunSceneScript:
 	ld a, [wCurMapSceneScriptCount]
@@ -566,7 +565,7 @@ ObjectEventTypeArray:
 	ld h, [hl]
 	ld l, a
 	call GetMapScriptsBank
-	jmp CallScript
+ 	jmp CallScript
 
 .itemball
 	ld hl, MAPOBJECT_SCRIPT_POINTER
@@ -1002,7 +1001,7 @@ RenderRunThroughGrass:
 	add hl, bc
 	ld a, $0a
 	call QueueVolatileTiles
-	jmp FinishVolatileTiles
+ 	jmp FinishVolatileTiles
 
 SwapGrassCollision:
 	ld a, [wPlayerMapX]
@@ -1011,7 +1010,7 @@ SwapGrassCollision:
 	ld e, a
 	ld a, COLL_FLOOR
 	ld [wSetTileCollisionType], a
-	jmp SetCoordTileCollision
+ 	jmp SetCoordTileCollision
 
 INCLUDE "engine/overworld/scripting.asm"
 

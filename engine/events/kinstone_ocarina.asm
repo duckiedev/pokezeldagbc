@@ -1,7 +1,6 @@
 OcarinaFunction:
     ld hl, Script_OcarinaFromMenu
-	call QueueScript
-    ret 
+    jmp QueueScript
 
 Script_OcarinaFromMenu:
     refreshmap
@@ -53,8 +52,7 @@ InitOcarina:
 	call CGBOnly_CopyTilemapAtOnce
     call .GetDPad
     jr nc, .loop
-    call ClearJoypad
-    ret
+    jmp ClearJoypad
 .GetDPad:
     call JoyTextDelay
     ld hl, hJoyPressed
@@ -82,8 +80,7 @@ InitOcarina:
     ld b, "<A>"
     call AddCharToOcarina
     ld de, MUSIC_OCARINA_NOTE_B4
-    call PlayMusic
-    ret
+    jmp PlayMusic
 
 .b
     scf
@@ -93,29 +90,25 @@ InitOcarina:
     ld b, "<RIGHT>"
     call AddCharToOcarina
     ld de, MUSIC_OCARINA_NOTE_A5
-    call PlayMusic
-    ret
+    jmp PlayMusic
 
 .left
     ld b, "<LEFT>"
     call AddCharToOcarina
     ld de, MUSIC_OCARINA_NOTE_F5
-    call PlayMusic
-    ret
+    jmp PlayMusic
 
 .down
     ld b, "<DOWN>"
     call AddCharToOcarina
     ld de, MUSIC_OCARINA_NOTE_D5
-    call PlayMusic
-    ret
+    jmp PlayMusic
 
 .up
     ld b, "<UP>"
     call AddCharToOcarina
     ld de, MUSIC_OCARINA_NOTE_B5
-    call PlayMusic
-    ret
+    jmp PlayMusic
 
 .music_note
     db "<NOTE>@"

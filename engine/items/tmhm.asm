@@ -285,7 +285,7 @@ TMHM_ScrollPocket:
 	ld hl, wTMHMPocketScrollPosition
 	ld a, [hl]
 	and a
-	jmp z, TMHM_JoypadLoop
+ 	jmp z, TMHM_JoypadLoop
 	dec [hl]
 	call TMHM_DisplayPocketItems
 	jr TMHM_ShowTMMoveDescription
@@ -297,7 +297,7 @@ TMHM_ScrollPocket:
 	inc c
 	ld a, c
 	cp NUM_TMS + NUM_HMS + 1
-	jmp nc, TMHM_JoypadLoop
+ 	jmp nc, TMHM_JoypadLoop
 	ld a, [hli]
 	and a
 	jr z, .loop
@@ -306,7 +306,7 @@ TMHM_ScrollPocket:
 	ld hl, wTMHMPocketScrollPosition
 	inc [hl]
 	call TMHM_DisplayPocketItems
-	jmp TMHM_ShowTMMoveDescription
+ 	jmp TMHM_ShowTMMoveDescription
 
 TMHM_DisplayPocketItems:
 	hlcoord 5, 2
@@ -439,7 +439,7 @@ VerboseReceiveTMHM: ; unreferenced
 	jr nc, .print
 	ld hl, .ReceivedTMHMText
 .print
-	jmp PrintText
+ 	jmp PrintText
 
 .NoRoomTMHMText:
 	text_far _NoRoomTMHMText

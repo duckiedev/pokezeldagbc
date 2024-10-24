@@ -16,10 +16,10 @@ BattleCommand_Attract:
 
 ; 'fell in love!'
 	ld hl, FellInLoveText
-	jmp StdBattleTextbox
+ 	jmp StdBattleTextbox
 
 .failed
-	jmp FailMove
+ 	jmp FailMove
 
 CheckOppositeGender:
 	ld a, MON_SPECIES

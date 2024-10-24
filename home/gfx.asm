@@ -3,7 +3,7 @@ DEF TILES_PER_CYCLE EQU 8
 Get2bppViaHDMA::
 	ldh a, [rLCDC]
 	bit rLCDC_ENABLE, a
-	jmp z, Copy2bpp
+ 	jmp z, Copy2bpp
 
 	homecall HDMATransfer2bpp
 
@@ -12,7 +12,7 @@ Get2bppViaHDMA::
 Get1bppViaHDMA::
 	ldh a, [rLCDC]
 	bit rLCDC_ENABLE, a
-	jmp z, Copy1bpp
+ 	jmp z, Copy1bpp
 
 	homecall HDMATransfer1bpp
 
@@ -126,8 +126,7 @@ DecompressRequest2bpp::
 
 	ld de, sScratch
 	call Request2bpp
-	call CloseSRAM
-	ret
+    jmp CloseSRAM
 
 FarCopyBytes::
 ; copy bc bytes from a:hl to de
@@ -214,7 +213,7 @@ CheckGDMA:
 Request2bpp::
 ; Load 2bpp at b:de to occupy c tiles of hl.
 	call CheckGDMA
-	jmp c, SafeHDMATransfer
+ 	jmp c, SafeHDMATransfer
 
 	ldh a, [hBGMapMode]
 	push af
@@ -346,12 +345,12 @@ Get2bpp::
 ; copy c 2bpp tiles from b:de to hl
 	ldh a, [rLCDC]
 	bit rLCDC_ENABLE, a
-	jmp nz, Request2bpp
+ 	jmp nz, Request2bpp
 	; fallthrough
 
 Copy2bpp:
 	call CheckGDMA
-	jmp c, SafeHDMATransfer
+ 	jmp c, SafeHDMATransfer
 
 	push hl
 	ld h, d
@@ -372,7 +371,7 @@ Copy2bpp:
 	ld c, a
 	pop af
 
-	jmp FarCopyBytes
+ 	jmp FarCopyBytes
 
 Get1bpp::
 ; copy c 1bpp tiles from b:de to hl
@@ -401,4 +400,4 @@ Copy1bpp::
 	pop af
 
 	pop hl
-	jmp FarCopyBytesDouble
+ 	jmp FarCopyBytesDouble

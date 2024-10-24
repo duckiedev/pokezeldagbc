@@ -92,9 +92,7 @@ UnusedTitleScreen: ; unreferenced
 	ldh [hCGBPalUpdate], a
 
 	ld de, MUSIC_TITLE
-	call PlayMusic
-
-	ret
+ 	jmp PlayMusic
 
 UnusedTitleBG_GFX:
 INCBIN "gfx/title/old_bg.2bpp"

@@ -36,7 +36,7 @@ InsertPokemonIntoBox:
 	ld a, [wCurPartyMon]
 	ld b, a
 	farcall RestorePPOfDepositedPokemon
-	jmp CloseSRAM
+ 	jmp CloseSRAM
 
 InsertPokemonIntoParty:
 	ld hl, wPartyCount
@@ -61,8 +61,7 @@ InsertPokemonIntoParty:
 	ld hl, wPartyMons
 	ld bc, PARTYMON_STRUCT_LENGTH
 	ld de, wBufferMon
-	call InsertDataIntoBoxOrParty
-	ret
+    jr InsertDataIntoBoxOrParty
 
 InsertSpeciesIntoBoxOrParty:
 	inc [hl]
@@ -130,8 +129,7 @@ InsertDataIntoBoxOrParty:
 	ld d, h
 	ld e, l
 	pop hl
-	call CopyBytes
-	ret
+    jmp CopyBytes
 
 TryAddMonToParty:
 ; Check if to copy wild mon or generate a new one
@@ -606,13 +604,13 @@ SendGetMonIntoFromBox:
 	ld a, [hl]
 	cp MONS_PER_BOX
 	jr nz, .there_is_room
-	jmp CloseSRAM_And_SetCarryFlag
+ 	jmp CloseSRAM_And_SetCarryFlag
 
 .check_IfPartyIsFull
 	ld hl, wPartyCount
 	ld a, [hl]
 	cp PARTY_LENGTH
-	jmp z, CloseSRAM_And_SetCarryFlag
+ 	jmp z, CloseSRAM_And_SetCarryFlag
 
 .there_is_room
 	inc a
@@ -862,7 +860,7 @@ SendMonIntoBox:
 	ld de, sBoxCount
 	ld a, [de]
 	cp MONS_PER_BOX
-	jmp nc, .full
+ 	jmp nc, .full
 	inc a
 	ld [de], a
 
@@ -1134,7 +1132,7 @@ RemoveMonFromPartyOrBox:
 .party7
 	call CopyDataUntil
 .finish
-	jmp CloseSRAM
+ 	jmp CloseSRAM
 
 ComputeNPCTrademonStats:
 	ld a, MON_LEVEL
@@ -1418,7 +1416,7 @@ GivePoke::
 	ld [wTempEnemyMonSpecies], a
 	callfar LoadEnemyMon
 	call SendMonIntoBox
-	jmp nc, .FailedToGiveMon
+ 	jmp nc, .FailedToGiveMon
 	ld a, BOXMON
 	ld [wMonType], a
 	xor a
@@ -1447,7 +1445,7 @@ GivePoke::
 	call CopyBytes
 	pop af
 	and a
-	jmp z, .wildmon
+ 	jmp z, .wildmon
 	pop de
 	pop bc
 	pop hl

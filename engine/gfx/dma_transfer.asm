@@ -1,6 +1,6 @@
 HDMATransferAttrmapAndTilemapToWRAMBank3::
 	ld hl, .Function
-	jmp CallInSafeGFXMode
+ 	jmp CallInSafeGFXMode
 
 .Function:
 	decoord 0, 0, wAttrmap
@@ -16,11 +16,11 @@ HDMATransferAttrmapAndTilemapToWRAMBank3::
 	ld a, $1
 	ldh [rVBK], a
 	ld hl, wScratchAttrmap
-	jmp HDMATransferToWRAMBank3
+ 	jmp HDMATransferToWRAMBank3
 
 HDMATransferTilemapToWRAMBank3::
 	ld hl, .Function
-	jmp CallInSafeGFXMode
+ 	jmp CallInSafeGFXMode
 
 .Function:
 	decoord 0, 0
@@ -29,7 +29,7 @@ HDMATransferTilemapToWRAMBank3::
 	xor a
 	ldh [rVBK], a
 	ld hl, wScratchTilemap
-	jmp HDMATransferToWRAMBank3
+ 	jmp HDMATransferToWRAMBank3
 
 HDMATransferAttrmapToWRAMBank3:
 	ld hl, .Function
@@ -42,7 +42,7 @@ HDMATransferAttrmapToWRAMBank3:
 	ld a, $1
 	ldh [rVBK], a
 	ld hl, wScratchAttrmap
-	jmp HDMATransferToWRAMBank3
+ 	jmp HDMATransferToWRAMBank3
 
 HDMATransferTilemapAndAttrmap_Overworld::
 	ld hl, .Function
@@ -438,7 +438,7 @@ HDMATransfer1bpp::
 
 HDMATransfer_OnlyTopFourRows:
 	ld hl, .Function
-	jmp CallInSafeGFXMode
+ 	jmp CallInSafeGFXMode
 
 .Function:
 	ld hl, wScratchTilemap
@@ -458,7 +458,7 @@ HDMATransfer_OnlyTopFourRows:
 	ld c, $8
 	ld hl, wScratchTilemap
 	debgcoord 0, 0, vBGMap1
-	jmp HDMATransfer_WaitForScanline128
+ 	jmp HDMATransfer_WaitForScanline128
 
 .Copy:
 	ld b, 4

@@ -2,7 +2,7 @@ BattleCommand_BeatUp:
 	call ResetDamage
 	ldh a, [hBattleTurn]
 	and a
-	jmp nz, .enemy_beats_up
+ 	jmp nz, .enemy_beats_up
 
 	ld a, [wPlayerSubStatus3]
 	bit SUBSTATUS_IN_LOOP, a
@@ -31,7 +31,7 @@ BattleCommand_BeatUp:
 	call GetBeatupMonLocation
 	ld a, [hli]
 	or [hl]
-	jmp z, .beatup_fail ; fainted
+ 	jmp z, .beatup_fail ; fainted
 	ld a, [wCurBeatUpPartyMon]
 	ld c, a
 	ld a, [wCurBattleMon]
@@ -43,7 +43,7 @@ BattleCommand_BeatUp:
 .active_mon
 	ld a, [hl]
 	and a
-	jmp nz, .beatup_fail
+ 	jmp nz, .beatup_fail
 
 	ld a, $1
 	ld [wBeatUpHitAtLeastOnce], a
@@ -140,7 +140,7 @@ BattleCommand_BeatUp:
 	call GetPokemonName
 	ld hl, BeatUpAttackText
 	call StdBattleTextbox
-	jmp EnemyAttackDamage
+ 	jmp EnemyAttackDamage
 
 .finish_beatup
 	ld hl, BeatUpAttackText
@@ -175,7 +175,7 @@ BattleCommand_BeatUp:
 
 .beatup_fail
 	ld b, buildopponentrage_command
-	jmp SkipToBattleCommand
+ 	jmp SkipToBattleCommand
 
 BattleCommand_BeatUpFailText:
 	ld a, [wBeatUpHitAtLeastOnce]
@@ -185,7 +185,7 @@ BattleCommand_BeatUpFailText:
 	inc a
 	ld [wAttackMissed], a
 
-	jmp PrintButItFailed
+ 	jmp PrintButItFailed
 
 GetBeatupMonLocation:
 	push bc

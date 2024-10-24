@@ -6,8 +6,7 @@ LoadZeldaFont::
 	ld de, .ZeldaFontSpaceGFX
 	ld hl, vTiles2 tile " "
 	lb bc, BANK(.ZeldaFontSpaceGFX), 1
-	call Get2bpp
-	ret
+    jmp Get2bpp
 
 .ZeldaFontGFX:
 INCBIN "gfx/font/zelda.2bpp"

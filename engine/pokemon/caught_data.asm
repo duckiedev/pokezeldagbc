@@ -1,7 +1,7 @@
 GiveANickname_YesNo:
 	ld hl, CaughtAskNicknameText
 	call PrintText
-	jmp YesNoBox
+ 	jmp YesNoBox
 
 CaughtAskNicknameText:
 	text_far _CaughtAskNicknameText
@@ -50,8 +50,7 @@ SetBoxMonCaughtData:
 	call OpenSRAM
 	ld hl, sBoxMon1CaughtLevel
 	call SetBoxmonCaughtData
-	call CloseSRAM
-	ret
+    jmp CloseSRAM
 
 SetGiftBoxMonCaughtData:
 	push bc
@@ -60,8 +59,7 @@ SetGiftBoxMonCaughtData:
 	ld hl, sBoxMon1CaughtLevel
 	pop bc
 	call SetGiftMonCaughtData
-	call CloseSRAM
-	ret
+    jmp CloseSRAM
 
 SetGiftPartyMonCaughtData:
 	ld a, [wPartyCount]

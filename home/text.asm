@@ -31,7 +31,7 @@ ClearTilemap::
 	ldh a, [rLCDC]
 	bit rLCDC_ENABLE, a
 	ret z
-	jmp WaitBGMap
+ 	jmp WaitBGMap
 
 ClearScreen::
 	ld a, PAL_BG_TEXT
@@ -152,8 +152,7 @@ PrintTextboxText::
 	; fallthrough
 
 .finish
-	call PrintTextboxTextAt
-	ret
+    jmp PrintTextboxTextAt
 
 SetUpTextbox::
 	push hl
@@ -235,7 +234,7 @@ ENDM
 
 	ld [hli], a
 	call PrintLetterDelay
-	jmp NextChar
+ 	jmp NextChar
 
 MACRO print_name
 	push de
@@ -321,7 +320,7 @@ PlaceCommandCharacter::
 	ld h, b
 	ld l, c
 	pop de
-	jmp NextChar
+ 	jmp NextChar
 
 TMCharText::      db "TM@"
 TrainerCharText:: db "TRAINER@"
@@ -339,14 +338,14 @@ NextLineChar::
 	ld bc, SCREEN_WIDTH * 2
 	add hl, bc
 	push hl
-	jmp NextChar
+ 	jmp NextChar
 
 LineFeedChar::
 	pop hl
 	ld bc, SCREEN_WIDTH
 	add hl, bc
 	push hl
-	jmp NextChar
+ 	jmp NextChar
 
 CarriageReturnChar::
 	pop hl
@@ -387,7 +386,7 @@ CarriageReturnChar::
 	ld b, 0
 	add hl, bc
 	push hl
-	jmp NextChar
+ 	jmp NextChar
 
 LineChar::
 	pop hl
@@ -401,7 +400,7 @@ LineChar::
 
 .continue
 	push hl
-	jmp NextChar
+ 	jmp NextChar
 
 Paragraph::
 	push de
@@ -416,7 +415,7 @@ Paragraph::
 	call DelayFrames
 	hlcoord TEXTBOX_INNERX, TEXTBOX_INNERY
 	pop de
-	jmp NextChar
+ 	jmp NextChar
 
 _ContText::
 	call LoadBlinkingCursor
@@ -438,7 +437,7 @@ _ContTextNoPause::
 
 .continue
 	pop de
-	jmp NextChar
+ 	jmp NextChar
 
 ContText::
 	push de
@@ -449,7 +448,7 @@ ContText::
 	ld h, b
 	ld l, c
 	pop de
-	jmp NextChar
+ 	jmp NextChar
 
 .cont: db "<_CONT>@"
 
@@ -479,7 +478,7 @@ NullChar::
 	ld a, "?"
 	ld [hli], a
 	call PrintLetterDelay
-	jmp NextChar
+ 	jmp NextChar
 
 TextScroll::
 	hlcoord TEXTBOX_INNERX, TEXTBOX_INNERY
@@ -510,8 +509,7 @@ TextScroll::
 	ld bc, TEXTBOX_INNERW
 	call ByteFill
 	ld c, 5
-	call DelayFrames
-	ret
+    jmp DelayFrames
 
 TextScrollBattle::
 	hlcoord TEXTBOX_BATTLE_INNERX, TEXTBOX_BATTLE_INNERY
@@ -542,8 +540,7 @@ TextScrollBattle::
 	ld bc, TEXTBOX_BATTLE_INNERW
 	call ByteFill
 	ld c, 5
-	call DelayFrames
-	ret
+    jmp DelayFrames
 
 Text_WaitBGMap::
 	push bc

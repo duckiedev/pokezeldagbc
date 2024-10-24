@@ -21,4 +21,4 @@ BattleCommand_PayDay:
 	inc [hl]
 .done
 	ld hl, CoinsScatteredText
-	jmp StdBattleTextbox
+ 	jmp StdBattleTextbox

@@ -55,8 +55,7 @@ CelebiShrineEvent:
 	pop af
 	ld [wStateFlags], a
 	call .RestorePlayerSprite_DespawnLeaves
-	call CelebiEvent_SetBattleType
-	ret
+    jmp CelebiEvent_SetBattleType
 
 .RestorePlayerSprite_DespawnLeaves:
 	ld hl, wShadowOAMSprite00TileID
@@ -73,8 +72,7 @@ endr
 	ld hl, wShadowOAMSprite04
 	ld bc, wShadowOAMEnd - wShadowOAMSprite04
 	xor a
-	call ByteFill
-	ret
+    jmp ByteFill
 
 LoadCelebiGFX:
 	farcall ClearSpriteAnims
@@ -227,8 +225,7 @@ UpdateCelebiPosition:
 	ld hl, SPRITEANIMSTRUCT_FRAMESET_ID
 	add hl, bc
 	ld a, SPRITE_ANIM_FRAMESET_CELEBI_LEFT
-	call ReinitSpriteAnimFrame
-	ret
+    jmp ReinitSpriteAnimFrame
 
 CelebiEvent_Cosine:
 ; a = d * cos(a * pi/32)

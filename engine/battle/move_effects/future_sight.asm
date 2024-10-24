@@ -21,7 +21,7 @@ BattleCommand_CheckFutureSight:
 	ld a, [de]
 	ld [wCurDamage + 1], a
 	ld b, futuresight_command
-	jmp SkipToBattleCommand
+ 	jmp SkipToBattleCommand
 
 BattleCommand_FutureSight:
 	call CheckUserIsCharging
@@ -67,11 +67,11 @@ BattleCommand_FutureSight:
 	ld a, [hl]
 	ld [de], a
 	ld [hl], 0
-	jmp EndMoveEffect
+ 	jmp EndMoveEffect
 
 .failed
 	pop bc
 	call ResetDamage
 	call AnimateFailedMove
 	call PrintButItFailed
-	jmp EndMoveEffect
+ 	jmp EndMoveEffect

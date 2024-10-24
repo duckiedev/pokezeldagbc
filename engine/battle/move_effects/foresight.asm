@@ -14,7 +14,7 @@ BattleCommand_Foresight:
 	set SUBSTATUS_IDENTIFIED, [hl]
 	call AnimateCurrentMove
 	ld hl, IdentifiedText
-	jmp StdBattleTextbox
+ 	jmp StdBattleTextbox
 
 .failed
-	jmp FailMove
+ 	jmp FailMove

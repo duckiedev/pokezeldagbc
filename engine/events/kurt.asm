@@ -1,7 +1,6 @@
 Kurt_PrintTextWhichApricorn:
 	ld hl, .WhichApricornText
-	call PrintText
-	ret
+    jmp PrintText
 
 .WhichApricornText:
 	text_far _WhichApricornText
@@ -9,8 +8,7 @@ Kurt_PrintTextWhichApricorn:
 
 Kurt_PrintTextHowMany:
 	ld hl, .HowManyShouldIMakeText
-	call PrintText
-	ret
+    jmp PrintText
 
 .HowManyShouldIMakeText:
 	text_far _HowManyShouldIMakeText
@@ -46,8 +44,7 @@ SelectApricornForKurt:
 	call Kurt_GiveUpSelectedQuantityOfSelectedApricorn
 
 .done
-	call Call_ExitMenu
-	ret
+    jmp Call_ExitMenu
 
 Kurt_SelectApricorn:
 	farcall FindApricornsInBag
@@ -142,8 +139,7 @@ Kurt_SelectQuantity:
 	scf
 
 .done
-	call CloseWindow
-	ret
+    jmp CloseWindow
 
 .MenuHeader:
 	db MENU_BACKUP_TILES ; flags
@@ -169,7 +165,7 @@ PlaceApricornQuantity:
 	inc hl
 	ld de, wItemQuantityChange
 	lb bc, PRINTNUM_LEADINGZEROS | 1, 2
-	jmp PrintNum
+ 	jmp PrintNum
 
 Kurt_GetQuantityOfApricorn:
 	push bc

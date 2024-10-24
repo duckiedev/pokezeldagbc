@@ -91,8 +91,7 @@ PokeGear:
 	and a
 	ret z
 	ld a, %11100100
-	call DmgToCgbObjPal0
-	ret
+    jmp DmgToCgbObjPal0
 
 Pokegear_LoadGFX:
 	call ClearVBank1
@@ -132,15 +131,13 @@ Pokegear_LoadGFX:
 	add hl, de
 	ld de, vTiles0 tile $14
 	ld bc, 4 tiles
-	call FarCopyBytes
-	ret
+    jmp FarCopyBytes
 
 .ssaqua
 	ld hl, FastShipGFX
 	ld de, vTiles0 tile $10
 	ld bc, 8 tiles
-	call CopyBytes
-	ret
+    jmp CopyBytes
 
 FastShipGFX:
 INCBIN "gfx/pokegear/fast_ship.2bpp"
@@ -182,8 +179,7 @@ TownMap_GetCurrentLandmark:
 	ld b, a
 	ld a, [wBackupMapNumber]
 	ld c, a
-	call GetWorldMapLocation
-	ret
+    jmp GetWorldMapLocation
 
 TownMap_InitCursorAndPlayerIconPositions:
 	ld a, [wMapGroup]
@@ -278,8 +274,7 @@ InitPokegearTilemap:
 	ld c, 3
 	call DelayFrames
 .dmg
-	call WaitBGMap
-	ret
+    jmp WaitBGMap
 
 .Jumptable:
 ; entries correspond to POKEGEARCARD_* constants
@@ -295,8 +290,7 @@ InitPokegearTilemap:
 	hlcoord 0, 12
 	lb bc, 4, 18
 	call Textbox
-	call Pokegear_UpdateClock
-	ret
+    jmp Pokegear_UpdateClock
 
 .switch
 	db " SWITCH▶@"
@@ -324,8 +318,7 @@ InitPokegearTilemap:
 	hlcoord 19, 2
 	ld [hl], $17
 	ld a, [wPokegearMapCursorLandmark]
-	call PokegearMap_UpdateLandmarkName
-	ret
+    jmp PokegearMap_UpdateLandmarkName
 
 Pokegear_FinishTilemap:
 	hlcoord 0, 0
@@ -401,8 +394,7 @@ PokegearClock_Joypad:
 	jr .done
 
 .done
-	call Pokegear_SwitchPage
-	ret
+    jmp Pokegear_SwitchPage
 
 .quit
 	ld hl, wJumptableIndex
@@ -429,8 +421,7 @@ Pokegear_UpdateClock:
 	farcall PrintHoursMins
 	ld hl, .GearTodayText
 	bccoord 6, 6
-	call PrintTextboxTextAt
-	ret
+    jmp PrintTextboxTextAt
 
 .GearTodayText:
 	text_far _GearTodayText
@@ -495,8 +486,7 @@ PokegearMap_ContinueMap:
 	ld c, POKEGEARSTATE_CLOCKINIT
 	ld b, POKEGEARCARD_CLOCK
 .done
-	call Pokegear_SwitchPage
-	ret
+    jmp Pokegear_SwitchPage
 
 .cancel
 	ld hl, wJumptableIndex
@@ -543,8 +533,7 @@ PokegearMap_ContinueMap:
 	ld a, [wPokegearMapCursorObjectPointer + 1]
 	ld b, a
 	ld a, [wPokegearMapCursorLandmark]
-	call PokegearMap_UpdateCursorPosition
-	ret
+    jr PokegearMap_UpdateCursorPosition
 
 PokegearMap_InitPlayerIcon:
 	push af
@@ -638,8 +627,7 @@ Pokegear_SwitchPage:
 	ld [wJumptableIndex], a
 	ld a, b
 	ld [wPokegearCard], a
-	call DeleteSpriteAnimStruct2ToEnd
-	ret
+    jr DeleteSpriteAnimStruct2ToEnd
 
 DeleteSpriteAnimStruct2ToEnd:
 	ld hl, wSpriteAnim2
@@ -768,8 +756,7 @@ _TownMap:
 	ldh [hInMenu], a
 	pop af
 	ld [wOptions], a
-	call ClearBGPalettes
-	ret
+    jmp ClearBGPalettes
 
 .loop
 	call JoyTextDelay
@@ -870,13 +857,11 @@ PokegearMap:
 	and a
 	jr nz, .kanto
 	call LoadTownMapGFX
-	call FillJohtoMap
-	ret
+    jmp FillJohtoMap
 
 .kanto
 	call LoadTownMapGFX
-	call FillKantoMap
-	ret
+    jmp FillKantoMap
 
 _FlyMap:
 	call ClearBGPalettes
@@ -1047,8 +1032,7 @@ TownMapBubble:
 	farcall GetLandmarkName
 	hlcoord 2, 1
 	ld de, wStringBuffer1
-	call PlaceString
-	ret
+    jmp PlaceString
 
 GetMapCursorCoordinates:
 	ld a, [wTownMapPlayerIconLandmark]
@@ -1134,8 +1118,7 @@ FlyMap:
 	call FillJohtoMap
 	call .MapHud
 	pop af
-	call TownMapPlayerIcon
-	ret
+    jmp TownMapPlayerIcon
 
 .KantoFlyMap:
 ; The event that there are no flypoints enabled in a map is not
@@ -1161,8 +1144,7 @@ FlyMap:
 	call FillKantoMap
 	call .MapHud
 	pop af
-	call TownMapPlayerIcon
-	ret
+    jmp TownMapPlayerIcon
 
 .NoKanto:
 ; If Indigo Plateau hasn't been visited, we use Johto's map instead
@@ -1293,15 +1275,13 @@ Pokedex_GetArea:
 	ld a, e
 	and $10
 	jr nz, .copy_sprites
-	call ClearSprites
-	ret
+    jmp ClearSprites
 
 .copy_sprites
 	hlcoord 0, 0
 	ld de, wShadowOAM
 	ld bc, wShadowOAMEnd - wShadowOAM
-	call CopyBytes
-	ret
+    jmp CopyBytes
 
 .PlaceString_MonsNest:
 	hlcoord 0, 0
@@ -1321,8 +1301,7 @@ Pokedex_GetArea:
 	ld h, b
 	ld l, c
 	ld de, .String_SNest
-	call PlaceString
-	ret
+    jmp PlaceString
 
 .String_SNest:
 	db "'S NEST@"
@@ -1362,8 +1341,7 @@ Pokedex_GetArea:
 	ld hl, wShadowOAM
 	decoord 0, 0
 	ld bc, wShadowOAMEnd - wShadowOAM
-	call CopyBytes
-	ret
+    jmp CopyBytes
 
 .HideNestsShowPlayer:
 	call .CheckPlayerLocation
@@ -1407,8 +1385,7 @@ Pokedex_GetArea:
 	ld hl, wShadowOAMSprite04
 	ld bc, wShadowOAMEnd - wShadowOAMSprite04
 	xor a
-	call ByteFill
-	ret
+    jmp ByteFill
 
 .PlayerOAM:
 	; y pxl, x pxl, tile offset
@@ -1633,8 +1610,7 @@ LoadTownMapGFX:
 	ld hl, TownMapGFX
 	ld de, vTiles2
 	lb bc, BANK(TownMapGFX), 48
-	call DecompressRequest2bpp
-	ret
+    jmp DecompressRequest2bpp
 
 JohtoMap:
 INCBIN "gfx/pokegear/johto.bin"

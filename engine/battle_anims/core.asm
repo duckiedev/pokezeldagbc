@@ -17,7 +17,7 @@ QueueBattleAnimation:
 	ld b, h
 	ld hl, wLastAnimObjectIndex
 	inc [hl]
-	jmp InitBattleAnimation
+ 	jr InitBattleAnimation
 
 DeinitBattleAnimation:
 	ld hl, BATTLEANIMSTRUCT_INDEX
@@ -80,9 +80,9 @@ BattleAnimOAMUpdate:
 	call InitBattleAnimBuffer
 	call GetBattleAnimFrame
 	cp oamwait_command
-	jmp z, .done
+ 	jmp z, .done
 	cp oamdelete_command
-	jmp z, .delete
+ 	jmp z, .delete
 
 	push af
 	ld hl, wBattleAnimTempOAMFlags

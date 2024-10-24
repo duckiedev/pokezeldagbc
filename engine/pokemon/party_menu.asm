@@ -8,8 +8,7 @@ SelectMonFromParty:
 	call SetDefaultBGPAndOBP
 	call DelayFrame
 	call PartyMenuSelect
-	call ReturnToMapWithSpeechTextbox
-	ret
+    jmp ReturnToMapWithSpeechTextbox
 
 SelectTradeOrDayCareMon:
 	ld a, b
@@ -23,16 +22,14 @@ SelectTradeOrDayCareMon:
 	call SetDefaultBGPAndOBP
 	call DelayFrame
 	call PartyMenuSelect
-	call ReturnToMapWithSpeechTextbox
-	ret
+    jmp ReturnToMapWithSpeechTextbox
 
 InitPartyMenuLayout:
 	call LoadPartyMenuGFX
 	call InitPartyMenuWithCancel
 	call InitPartyMenuGFX
 	call WritePartyMenuTilemap
-	call PlacePartyMenuText
-	ret
+    jmp PlacePartyMenuText
 
 LoadPartyMenuGFX:
 	call LoadFontsBattleExtra
@@ -105,8 +102,7 @@ PlacePartyNicknames:
 	dec hl
 	dec hl
 	ld de, .CancelString
-	call PlaceString
-	ret
+    jmp PlaceString
 
 .CancelString:
 	db "CANCEL@"
@@ -146,8 +142,7 @@ PlacePartyHPBar:
 	dec c
 	jr nz, .loop
 	ld b, SCGB_PARTY_MENU
-	call GetSGBLayout
-	ret
+    jmp GetSGBLayout
 
 PlacePartymonHPBar:
 	ld a, b

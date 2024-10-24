@@ -58,11 +58,11 @@ BattleCommand_SleepTalk:
 .charging
 	call LoadMoveAnim
 	call UpdateMoveData
-	jmp ResetTurn
+ 	jmp ResetTurn
 
 .fail
 	call AnimateFailedMove
-	jmp TryPrintButItFailed
+ 	jmp TryPrintButItFailed
 
 .safely_check_has_usable_move
 	push hl

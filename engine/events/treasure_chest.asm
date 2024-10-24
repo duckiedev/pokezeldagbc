@@ -31,8 +31,7 @@ OpenChestBlockSwap:
 	call GetBlockLocation
 	ld a, [wTreasureChestOpenBlock]
 	ld [hl], a
-	call BufferScreen
-	ret
+    jmp BufferScreen
 
 TreasureItemAnim:
 	call DelayFrame
@@ -96,8 +95,7 @@ TreasureItem_FrameTimer:
 	and $7
 	ret nz
 	ld de, SFX_FLY
-	call PlaySFX
-	ret
+    jmp PlaySFX
 .stop 
 	ld hl, wJumptableIndex
 	set 7, [hl]
@@ -109,8 +107,7 @@ TreasureItem_Remove:
 	ld bc, wShadowOAMEnd - wShadowOAMSprite36
 	xor a
 	call ByteFill
-	call UpdatePlayerSprite
-	ret
+    jmp UpdatePlayerSprite
 
 SetupLoadItemIcon:
 	ld c, a     

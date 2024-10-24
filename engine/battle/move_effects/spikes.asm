@@ -18,7 +18,7 @@ BattleCommand_Spikes:
 	call AnimateCurrentMove
 
 	ld hl, SpikesText
-	jmp StdBattleTextbox
+ 	jmp StdBattleTextbox
 
 .failed
-	jmp FailMove
+ 	jmp FailMove

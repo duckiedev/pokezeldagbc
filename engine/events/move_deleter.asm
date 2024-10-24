@@ -38,18 +38,15 @@ MoveDeletion:
 	call PlaySFX
 	call WaitSFX
 	ld hl, .DeleterForgotMoveText
-	call PrintText
-	ret
+    jmp PrintText
 
 .declined
 	ld hl, .DeleterNoComeAgainText
-	call PrintText
-	ret
+    jmp PrintText
 
 .onlyonemove
 	ld hl, .MoveKnowsOneText
-	call PrintText
-	ret
+    jmp PrintText
 
 .MoveKnowsOneText:
 	text_far _MoveKnowsOneText

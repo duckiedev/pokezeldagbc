@@ -1,7 +1,7 @@
 DisplayUsedMoveText:
 	ld hl, UsedMoveText
 	call BattleTextbox
-	jmp WaitBGMap
+ 	jmp WaitBGMap
 
 UsedMoveText:
 	text_far _ActorNameText

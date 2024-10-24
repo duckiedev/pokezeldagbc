@@ -43,7 +43,7 @@ _PlayBattleAnim:
 
 	ld c, 3
 	call DelayFrames
-	jmp WaitSFX
+ 	jmp WaitSFX
 
 BattleAnimRunScript:
 	ld a, [wFXAnimID + 1]
@@ -89,7 +89,7 @@ BattleAnimRunScript:
 	call RunBattleAnimScript
 
 .done
-	jmp BattleAnim_RevertPals
+ 	jmp BattleAnim_RevertPals
 
 RunBattleAnimScript:
 	call ClearBattleAnims
@@ -129,7 +129,7 @@ RunBattleAnimScript:
 	bit BATTLEANIM_STOP_F, a
 	jr z, .playframe
 
-	jmp BattleAnim_ClearOAM
+ 	jr BattleAnim_ClearOAM
 
 BattleAnimClearHud:
 	call DelayFrame
@@ -138,7 +138,7 @@ BattleAnimClearHud:
 	ld a, $1
 	ldh [hBGMapMode], a
 	call Delay3
-	jmp WaitTop
+ 	jmp WaitTop
 
 BattleAnimRestoreHuds:
 	call DelayFrame
@@ -157,7 +157,7 @@ BattleAnimRestoreHuds:
 	ld a, $1
 	ldh [hBGMapMode], a
 	call Delay3
-	jmp WaitTop
+ 	jmp WaitTop
 
 BattleAnimRequestPals:
 	ldh a, [hCGB]
@@ -174,7 +174,7 @@ BattleAnimRequestPals:
 	ld b, a
 	ld a, [wOBP0]
 	cp b
-	jmp nz, BattleAnim_SetOBPals
+ 	jmp nz, BattleAnim_SetOBPals
 	ret
 
 ClearActorHud:
@@ -184,12 +184,12 @@ ClearActorHud:
 
 	hlcoord 0, 0
 	lb bc, 4, 10
-	jmp ClearBox
+ 	jmp ClearBox
 
 .player
 	hlcoord 9, 7
 	lb bc, 5, 11
-	jmp ClearBox
+ 	jmp ClearBox
 
 PlaceWindowOverBattleTextbox: ; unreferenced
 	xor a
@@ -207,7 +207,7 @@ PlaceWindowOverBattleTextbox: ; unreferenced
 	ldh [hBGMapAddress], a
 	ld a, HIGH(vBGMap0)
 	ldh [hBGMapAddress + 1], a
-	jmp DelayFrame
+ 	jmp DelayFrame
 
 BattleAnim_ClearOAM:
 	ld a, [wBattleAnimFlags]
@@ -612,7 +612,7 @@ BattleAnimCmd_Obj:
 	ld [wBattleObjectTempYCoord], a
 	call GetBattleAnimByte
 	ld [wBattleObjectTempParam], a
-	jmp QueueBattleAnimation
+ 	jmp QueueBattleAnimation
 
 BattleAnimCmd_BGEffect:
 	call GetBattleAnimByte
@@ -623,7 +623,7 @@ BattleAnimCmd_BGEffect:
 	ld [wBattleBGEffectTempTurn], a
 	call GetBattleAnimByte
 	ld [wBattleBGEffectTempParam], a
-	jmp _QueueBGEffect
+ 	jmp _QueueBGEffect
 
 BattleAnimCmd_BGP:
 	call GetBattleAnimByte
@@ -937,13 +937,13 @@ BattleAnimCmd_UpdateActorPic:
 	ld hl, vTiles2 tile $00
 	ld b, 0
 	ld c, 7 * 7
-	jmp Request2bpp
+ 	jmp Request2bpp
 
 .player
 	ld hl, vTiles2 tile $31
 	ld b, 0
 	ld c, 6 * 6
-	jmp Request2bpp
+ 	jmp Request2bpp
 
 BattleAnimCmd_RaiseSub:
 	ldh a, [rSVBK]
@@ -1017,7 +1017,7 @@ GetSubstitutePic: ; used only for BANK(GetSubstitutePic)
 .CopyTile:
 	ld bc, 1 tiles
 	ld a, BANK(MonsterSpriteGFX)
-	jmp FarCopyBytes
+ 	jmp FarCopyBytes
 
 BattleAnimCmd_MinimizeOpp:
 	ldh a, [rSVBK]
@@ -1069,7 +1069,7 @@ CopyMinimizePic:
 	ld hl, MinimizePic
 	ld bc, $10
 	ld a, BANK(MinimizePic)
-	jmp FarCopyBytes
+ 	jmp FarCopyBytes
 
 MinimizePic:
 INCBIN "gfx/battle/minimize.2bpp"
@@ -1321,7 +1321,7 @@ PlayHitSound:
 	ld de, SFX_NOT_VERY_EFFECTIVE
 
 .play
-	jmp PlaySFX
+ 	jmp PlaySFX
 
 BattleAnimAssignPals:
 	ldh a, [hCGB]
@@ -1347,7 +1347,7 @@ BattleAnimAssignPals:
 	ld [wOBP1], a
 	call DmgToCgbBGPals
 	lb de, %11100100, %11100100
-	jmp DmgToCgbObjPals
+ 	jmp DmgToCgbObjPals
 
 ClearBattleAnims::
 ; Clear animation block
@@ -1365,7 +1365,7 @@ ClearBattleAnims::
 	add hl, de
 	call GetBattleAnimPointer
 	call BattleAnimAssignPals
-	jmp DelayFrame
+ 	jmp DelayFrame
 
 BattleAnim_RevertPals:
 	call WaitTop

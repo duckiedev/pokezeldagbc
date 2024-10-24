@@ -10,13 +10,13 @@ BattleCommand_Encore:
 	ld a, BATTLE_VARS_LAST_MOVE_OPP
 	call GetBattleVar
 	and a
-	jmp z, .failed
+ 	jmp z, .failed
 	cp STRUGGLE
-	jmp z, .failed
+ 	jmp z, .failed
 	cp ENCORE
-	jmp z, .failed
+ 	jmp z, .failed
 	cp MIRROR_MOVE
-	jmp z, .failed
+ 	jmp z, .failed
 	ld b, a
 
 .got_move
@@ -28,7 +28,7 @@ BattleCommand_Encore:
 	add hl, bc
 	ld a, [hl]
 	and PP_MASK
-	jmp z, .failed
+ 	jmp z, .failed
 	ld a, [wAttackMissed]
 	and a
 	jr nz, .failed
@@ -112,7 +112,7 @@ BattleCommand_Encore:
 .finish_move
 	call AnimateCurrentMove
 	ld hl, GotAnEncoreText
-	jmp StdBattleTextbox
+ 	jmp StdBattleTextbox
 
 .failed
-	jmp PrintDidntAffect2
+ 	jmp PrintDidntAffect2

@@ -31,16 +31,14 @@ _BillsPC:
 	call PrintText
 	pop af
 	ld [wOptions], a
-	call LoadFontsBattleExtra
-	ret
+    jmp LoadFontsBattleExtra
 
 .PCWhatText:
 	text_far _PCWhatText
 	text_end
 
 .LogOut:
-	call CloseSubmenu
-	ret
+    jmp CloseSubmenu
 
 .UseBillsPC:
 	ld hl, .MenuHeader
@@ -63,8 +61,7 @@ _BillsPC:
 	ld a, b
 	jr nc, .loop
 .cancel
-	call CloseWindow
-	ret
+    jmp CloseWindow
 
 .MenuHeader:
 	db MENU_BACKUP_TILES ; flags
@@ -212,8 +209,7 @@ ClearPCItemScreen:
 	lb bc, 4, 18
 	call Textbox
 	call WaitBGMap2
-	call SetDefaultBGPAndOBP
-	ret
+    jmp SetDefaultBGPAndOBP
 
 CopyBoxmonToTempMon:
 	ld a, [wCurPartyMon]
@@ -225,5 +221,4 @@ CopyBoxmonToTempMon:
 	ld a, BANK(sBoxMon1Species)
 	call OpenSRAM
 	call CopyBytes
-	call CloseSRAM
-	ret
+    jmp CloseSRAM

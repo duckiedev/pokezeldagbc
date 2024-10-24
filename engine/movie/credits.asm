@@ -229,7 +229,7 @@ Credits_LYOverride:
 ParseCredits:
 	ld hl, wJumptableIndex
 	bit 7, [hl]
-	jmp nz, .done
+ 	jmp nz, .done
 
 ; Wait until the timer has run out to parse the next command.
 	ld hl, wCreditsTimer
@@ -239,7 +239,7 @@ ParseCredits:
 
 ; One tick has passed.
 	dec [hl]
-	jmp .done
+ 	jmp .done
 
 .parse
 ; First, let's clear the current text display,
@@ -258,7 +258,7 @@ ParseCredits:
 
 ; Commands:
 	cp CREDITS_END
-	jmp z, .end
+ 	jmp z, .end
 	cp CREDITS_WAIT
 	jr z, .wait
 	cp CREDITS_SCENE
@@ -343,7 +343,7 @@ ParseCredits:
 	call DelayFrame
 	pop de
 	call PlayMusic
-	jmp .loop
+ 	jmp .loop
 
 .wait2
 ; Wait for some amount of ticks.
@@ -362,7 +362,7 @@ ParseCredits:
 	ldh [hBGMapMode], a
 
 .done
-	jmp Credits_Next
+ 	jmp Credits_Next
 
 .end
 ; Stop execution.
@@ -447,8 +447,7 @@ ConstructCreditsTilemap:
 	ldh [hBGMapAddress], a
 	hlcoord 0, 0
 	call .InitTopPortion
-	call WaitBGMap2
-	ret
+    jmp WaitBGMap2
 
 .InitTopPortion:
 	ld b, 5
@@ -533,8 +532,7 @@ GetCreditsPalette:
 	adc HIGH(wBGPals2)
 	ld d, a
 	ld bc, 24
-	call CopyBytes
-	ret
+    jmp CopyBytes
 
 CreditsPalettes:
 INCLUDE "gfx/credits/credits.pal"

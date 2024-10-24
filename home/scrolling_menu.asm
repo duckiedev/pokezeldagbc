@@ -19,8 +19,8 @@ ScrollingMenu::
 .UpdatePalettes:
 	ld hl, wStateFlags
 	bit SPRITE_UPDATES_DISABLED_F, [hl]
-	jmp nz, UpdateTimePals
-	jmp SetDefaultBGPAndOBP
+ 	jmp nz, UpdateTimePals
+ 	jmp SetDefaultBGPAndOBP
 
 InitScrollingMenu::
 	ld a, [wMenuBorderTopCoord]
@@ -38,7 +38,7 @@ InitScrollingMenu::
 	push de
 	call Coord2Tile
 	pop bc
-	jmp Textbox
+ 	jmp Textbox
 
 JoyTextDelay_ForcehJoyDown::
 	call DelayFrame

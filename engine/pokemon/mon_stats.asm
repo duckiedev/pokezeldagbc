@@ -103,7 +103,7 @@ PrintTempMonStats:
 	ld de, wTempMonSpclDef
 	call .PrintStat
 	ld de, wTempMonSpeed
-	jmp PrintNum
+ 	jmp PrintNum
 
 .PrintStat:
 	push hl

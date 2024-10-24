@@ -128,7 +128,7 @@ SetFacingCounterclockwiseSpin:
 
 SetFacingCounterclockwiseSpin2:
 	call CounterclockwiseSpinAction
-	jmp SetFacingStanding
+ 	jmp SetFacingStanding
 
 CounterclockwiseSpinAction:
 ; Here, OBJECT_STEP_FRAME consists of two 2-bit components,

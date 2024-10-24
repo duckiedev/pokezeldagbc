@@ -13,8 +13,7 @@ BlankScreen:
 	ld a, $7
 	call ByteFill
 	call WaitBGMap2
-	call SetDefaultBGPAndOBP
-	ret
+    jmp SetDefaultBGPAndOBP
 
 SpawnPlayer:
 	ld a, -1
@@ -83,8 +82,7 @@ PlayerSpawn_ConvertCoords:
 	add 4
 	ld e, a
 	pop bc
-	call CopyDECoordsToMapObject
-	ret
+    jr CopyDECoordsToMapObject
 
 WriteObjectXY::
 	ld a, b
@@ -169,8 +167,7 @@ CopyObjectStruct::
 
 CopyMapObjectToObjectStruct:
 	call .CopyMapObjectToTempObject
-	call CopyTempObjectToObjectStruct
-	ret
+    jmp CopyTempObjectToObjectStruct
 
 .CopyMapObjectToTempObject:
 	ldh a, [hObjectStructIndex]
@@ -535,8 +532,7 @@ TrainerWalkToPlayer:
 
 .TerminateStep:
 	ld a, movement_step_wait_end
-	call AppendToMovementBuffer
-	ret
+    jmp AppendToMovementBuffer
 
 .GetPathToPlayer:
 	push de
@@ -579,8 +575,7 @@ TrainerWalkToPlayer:
 	ld d, a
 
 	pop af
-	call ComputePathToWalkToPlayer
-	ret
+    jmp ComputePathToWalkToPlayer
 
 SurfStartStep:
 	ld a, [wPlayerDirection]
@@ -594,7 +589,7 @@ SurfStartStep:
 	add hl, de
 	add hl, de
 	ld a, BANK(.movement_data)
-	jmp StartAutoInput
+ 	jmp StartAutoInput
 
 .movement_data
 	db D_DOWN,	0, -1

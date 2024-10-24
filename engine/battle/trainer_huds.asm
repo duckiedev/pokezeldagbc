@@ -27,7 +27,7 @@ ShowPlayerMonsRemaining:
 	ld a, TILE_WIDTH
 	ld [wPlaceBallsDirection], a
 	ld hl, wShadowOAMSprite00
-	jmp LoadTrainerHudOAM
+ 	jmp LoadTrainerHudOAM
 
 ShowOTTrainerMonsRemaining:
 	call DrawEnemyHUDBorder
@@ -42,7 +42,7 @@ ShowOTTrainerMonsRemaining:
 	ld a, -TILE_WIDTH
 	ld [wPlaceBallsDirection], a
 	ld hl, wShadowOAMSprite00 + PARTY_LENGTH * SPRITEOAMSTRUCT_LENGTH
-	jmp LoadTrainerHudOAM
+ 	jmp LoadTrainerHudOAM
 
 StageBallTilesData:
 	ld a, [de]
@@ -203,7 +203,7 @@ LoadBallIconGFX:
 	ld de, .gfx
 	ld hl, vTiles0 tile $31
 	lb bc, BANK(LoadBallIconGFX), 4
-	jmp Get2bppViaHDMA
+ 	jmp Get2bppViaHDMA
 
 .gfx
 INCBIN "gfx/battle/balls.2bpp"

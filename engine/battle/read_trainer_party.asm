@@ -63,7 +63,7 @@ ReadTrainerParty:
 	jp hl
 
 .done
-	jmp ComputeTrainerReward
+ 	jmp ComputeTrainerReward
 
 .cal2
 	jr .done

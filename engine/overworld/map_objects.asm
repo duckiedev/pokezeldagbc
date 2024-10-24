@@ -31,8 +31,7 @@ HandleObjectStep:
 	call CheckObjectStillVisible
 	ret c
 	call HandleStepType
-	call HandleObjectAction
-	ret
+    jmp HandleObjectAction
 
 CheckObjectStillVisible:
 	ld hl, OBJECT_FLAGS2
@@ -185,8 +184,7 @@ CallObjectAction:
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	call _hl_
-	ret
+    jmp _hl_
 
 INCLUDE "engine/overworld/map_object_action.asm"
 
@@ -584,20 +582,20 @@ MovementFunction_RandomWalkY:
 	call Random
 	ldh a, [hRandomAdd]
 	and %00000001
-	jmp _RandomWalkContinue
+ 	jmp _RandomWalkContinue
 
 MovementFunction_RandomWalkX:
 	call Random
 	ldh a, [hRandomAdd]
 	and %00000001
 	or  %00000010
-	jmp _RandomWalkContinue
+ 	jmp _RandomWalkContinue
 
 MovementFunction_RandomWalkXY:
 	call Random
 	ldh a, [hRandomAdd]
 	and %00000011
-	jmp _RandomWalkContinue
+ 	jmp _RandomWalkContinue
 
 MovementFunction_RandomSpinSlow:
 	call Random
@@ -606,7 +604,7 @@ MovementFunction_RandomSpinSlow:
 	ld hl, OBJECT_DIRECTION
 	add hl, bc
 	ld [hl], a
-	jmp RandomStepDuration_Slow
+ 	jmp RandomStepDuration_Slow
 
 MovementFunction_RandomSpinFast:
 	ld hl, OBJECT_DIRECTION
@@ -622,7 +620,7 @@ MovementFunction_RandomSpinFast:
 	xor %00001100
 .keep
 	ld [hl], a
-	jmp RandomStepDuration_Fast
+ 	jmp RandomStepDuration_Fast
 
 MovementFunction_Standing:
 	call CopyLastCoordsToCoords
@@ -637,39 +635,39 @@ MovementFunction_Standing:
 
 MovementFunction_ObeyDPad:
 	ld hl, GetPlayerNextMovementIndex
-	jmp HandleMovementData
+ 	jmp HandleMovementData
 
 MovementFunction_Indexed1:
 	ld hl, GetIndexedMovementIndex1
-	jmp HandleMovementData
+ 	jmp HandleMovementData
 
 MovementFunction_Indexed2:
 	ld hl, GetIndexedMovementIndex2
-	jmp HandleMovementData
+ 	jmp HandleMovementData
 
 MovementFunction_0a:
-	jmp _GetMovementObject
+ 	jmp _GetMovementObject
 
 MovementFunction_0b:
-	jmp _GetMovementObject
+ 	jmp _GetMovementObject
 
 MovementFunction_0c:
-	jmp _GetMovementObject
+ 	jmp _GetMovementObject
 
 MovementFunction_0d:
 	ld hl, GetPlayerNextMovementIndex
-	jmp HandleMovementData
+ 	jmp HandleMovementData
 
 MovementFunction_0e:
-	jmp _GetMovementObject
+ 	jmp _GetMovementObject
 
 MovementFunction_Follow:
 	ld hl, GetFollowerNextMovementIndex
-	jmp HandleMovementData
+ 	jmp HandleMovementData
 
 MovementFunction_Script:
 	ld hl, GetMovementIndex
-	jmp HandleMovementData
+ 	jmp HandleMovementData
 
 MovementFunction_Strength:
 	call ObjectMovement_AnonJumptable
@@ -771,7 +769,7 @@ MovementFunction_FollowNotExact:
 	and %00001100
 	or d
 	pop bc
-	jmp NormalStep
+ 	jmp NormalStep
 
 .standing
 	pop bc
@@ -842,8 +840,7 @@ _MovementSpinRepeat:
 	ld hl, OBJECT_STEP_TYPE
 	add hl, bc
 	ld [hl], STEP_TYPE_SLEEP
-	call ObjectMovement_IncAnonJumptableIndex
-	ret
+    jmp ObjectMovement_IncAnonJumptableIndex
 
 _MovementSpinTurnLeft:
 	ld de, .facings_counterclockwise
@@ -881,8 +878,7 @@ _MovementSpinNextFacing:
 	ld a, [hl]
 	pop hl
 	ld [hl], a
-	call ObjectMovement_DecAnonJumptableIndex
-	ret
+    jmp ObjectMovement_DecAnonJumptableIndex
 
 MovementFunction_Shadow:
 	call InitMovementField1dField1e
@@ -1181,8 +1177,7 @@ StepFunction_NPCJump:
 	ld hl, OBJECT_FLAGS2
 	add hl, bc
 	res OVERHEAD_F, [hl]
-	call ObjectStep_IncAnonJumptableIndex
-	ret
+    jmp ObjectStep_IncAnonJumptableIndex
 
 .Land:
 	call AddStepVector
@@ -1223,8 +1218,7 @@ StepFunction_PlayerJump:
 	ld hl, wPlayerStepFlags
 	set PLAYERSTEP_STOP_F, [hl]
 	set PLAYERSTEP_MIDAIR_F, [hl]
-	call ObjectStep_IncAnonJumptableIndex
-	ret
+    jmp ObjectStep_IncAnonJumptableIndex
 
 .initland
 	call GetNextTile
@@ -1270,8 +1264,7 @@ StepFunction_TeleportFrom:
 	add hl, bc
 	dec [hl]
 	ret nz
-	call ObjectStep_IncAnonJumptableIndex
-	ret
+    jmp ObjectStep_IncAnonJumptableIndex
 
 .InitSpinRise:
 	ld hl, OBJECT_STEP_FRAME
@@ -1332,8 +1325,7 @@ StepFunction_TeleportTo:
 	ld hl, OBJECT_STEP_DURATION
 	add hl, bc
 	ld [hl], 32
-	call ObjectStep_IncAnonJumptableIndex
-	ret
+    jmp ObjectStep_IncAnonJumptableIndex
 
 .DoWait:
 	ld hl, OBJECT_STEP_DURATION
@@ -1351,8 +1343,7 @@ StepFunction_TeleportTo:
 	ld hl, OBJECT_STEP_DURATION
 	add hl, bc
 	ld [hl], 16
-	call ObjectStep_IncAnonJumptableIndex
-	ret
+    jmp ObjectStep_IncAnonJumptableIndex
 
 .DoDescent:
 	ld hl, OBJECT_ACTION
@@ -1378,8 +1369,7 @@ StepFunction_TeleportTo:
 	ld hl, OBJECT_STEP_DURATION
 	add hl, bc
 	ld [hl], 32
-	call ObjectStep_IncAnonJumptableIndex
-	ret
+    jmp ObjectStep_IncAnonJumptableIndex
 
 .DoFinalSpin:
 	ld hl, OBJECT_ACTION
@@ -1498,7 +1488,7 @@ StepFunction_GotBite:
 
 StepFunction_RockSmash:
 	call .Step
-	jmp WaitStep_InPlace
+ 	jmp WaitStep_InPlace
 
 .Step:
 	ld hl, OBJECT_STEP_DURATION
@@ -1526,7 +1516,7 @@ StepFunction_DigTo:
 	ld hl, OBJECT_ACTION
 	add hl, bc
 	ld [hl], a
-	jmp WaitStep_InPlace
+ 	jmp WaitStep_InPlace
 
 StepFunction_Sleep:
 	ld hl, OBJECT_WALKING
@@ -1549,7 +1539,7 @@ StepFunction_Delete:
 	add hl, bc
 	dec [hl]
 	ret nz
-	jmp DeleteMapObject
+ 	jmp DeleteMapObject
 
 StepFunction_Bump:
 	ld hl, OBJECT_STEP_DURATION
@@ -1606,7 +1596,7 @@ StepFunction_ContinueWalk:
 	dec [hl]
 	ret nz
 	call CopyCoordsTileToLastCoordsTile
-	jmp RandomStepDuration_Slow
+ 	jmp RandomStepDuration_Slow
 
 StepFunction_PlayerWalk:
 	call ObjectStep_AnonJumptable
@@ -1744,7 +1734,7 @@ StepFunction_TrackingObject:
 	dec [hl]
 	ret nz
 .nope
-	jmp DeleteMapObject
+ 	jmp DeleteMapObject
 
 StepFunction_14:
 StepFunction_ScreenShake:
@@ -1782,8 +1772,7 @@ StepFunction_ScreenShake:
 	ret
 
 .ok
-	call DeleteMapObject
-	ret
+    jmp DeleteMapObject
 
 .GetSign:
 	ld hl, OBJECT_1E
@@ -1898,8 +1887,7 @@ GetPlayerNextMovementIndex:
 
 GetMovementIndex:
 	ld hl, wMovementDataBank
-	call _GetMovementIndex
-	ret
+    jmp _GetMovementIndex
 
 GetIndexedMovementIndex1:
 	ld hl, OBJECT_MOVEMENT_INDEX
@@ -2115,7 +2103,7 @@ SplashPuddle:
 	call InitTempObject
 	pop bc
 	ld de, SFX_PUDDLE
-	jmp PlaySFX
+ 	jmp PlaySFX
 
 .PuddleObject:
 	; vtile, palette, movement
@@ -2250,15 +2238,13 @@ RespawnPlayerAndOpponent:
 	jr z, .skip_opponent
 	call RespawnObject
 .skip_opponent
-	call _UpdateSprites
-	ret
+    jmp _UpdateSprites
 
 RespawnPlayer:
 	call HideAllObjects
 	ld a, PLAYER
 	call RespawnObject
-	call _UpdateSprites
-	ret
+    jmp _UpdateSprites
 
 RespawnObject:
 	cp NUM_OBJECTS
@@ -2274,8 +2260,7 @@ RespawnObject:
 	call GetObjectStruct
 	call DoesObjectHaveASprite
 	ret z
-	call UpdateRespawnedObjectFrozen
-	ret
+    jr UpdateRespawnedObjectFrozen
 
 HideAllObjects:
 	xor a
@@ -2332,8 +2317,7 @@ UpdateObjectTile:
 	ld hl, OBJECT_TILE_COLLISION
 	add hl, bc
 	ld [hl], a
-	call UpdateTallGrassFlags
-	ret
+    jmp UpdateTallGrassFlags
 
 CheckObjectOnScreen:
 	ld hl, OBJECT_MAP_X
@@ -2381,7 +2365,7 @@ CheckObjectCoveredByTextbox:
 	cp $f0
 	jr nc, .ok1
 	cp SCREEN_WIDTH_PX
-	jmp nc, .nope
+ 	jmp nc, .nope
 .ok1
 ; Account for objects currently moving left/right.
 	and %00000111
@@ -2528,8 +2512,7 @@ RefreshPlayerSprite:
 	call TryResetPlayerAction
 	farcall CheckWarpFacingDown
 	call c, SpawnInFacingDown
-	call SpawnInCustomFacing
-	ret
+    jr SpawnInCustomFacing
 
 TryResetPlayerAction:
 	ld hl, wPlayerSpriteSetupFlags
@@ -2553,8 +2536,7 @@ SpawnInFacingDown:
 	ld a, DOWN
 _ContinueSpawnFacing:
 	ld bc, wPlayerStruct
-	call SetSpriteDirection
-	ret
+    jmp SetSpriteDirection
 
 StartFollow::
 	push bc
@@ -2576,8 +2558,7 @@ SetLeaderIfVisible:
 
 StopFollow::
 	call ResetLeader
-	call ResetFollower
-	ret
+    jr ResetFollower
 
 ResetLeader:
 	ld a, -1

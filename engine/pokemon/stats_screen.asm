@@ -80,8 +80,7 @@ StatsScreen_WaitAnim:
 	jr nz, .try_anim
 	bit 5, [hl]
 	jr nz, .finish
-	call DelayFrame
-	ret
+    jmp DelayFrame
 
 .try_anim
 	ld hl, wStatsScreenFlags
@@ -116,8 +115,7 @@ MonStatsInit:
 	ld hl, wStatsScreenFlags
 	set 4, [hl]
 	ld h, 4
-	call StatsScreen_SetJumptableIndex
-	ret
+    jr StatsScreen_SetJumptableIndex
 
 StatsScreen_LoadPage:
 	call StatsScreen_LoadGFX
@@ -132,8 +130,7 @@ MonStatsJoypad:
 	call StatsScreen_GetJoypad
 	jr nc, .next
 	ld h, 0
-	call StatsScreen_SetJumptableIndex
-	ret
+    jr StatsScreen_SetJumptableIndex
 
 .next
 	and D_DOWN | D_UP | D_LEFT | D_RIGHT | A_BUTTON | B_BUTTON
@@ -205,7 +202,7 @@ StatsScreen_JoypadAction:
 	ld c, a
 	pop af
 	bit B_BUTTON_F, a
-	jmp nz, .b_button
+ 	jmp nz, .b_button
 	bit D_LEFT_F, a
 	jr nz, .d_left
 	bit D_RIGHT_F, a
@@ -284,18 +281,15 @@ StatsScreen_JoypadAction:
 	or c
 	ld [wStatsScreenFlags], a
 	ld h, 4
-	call StatsScreen_SetJumptableIndex
-	ret
+    jmp StatsScreen_SetJumptableIndex
 
 .load_mon
 	ld h, 0
-	call StatsScreen_SetJumptableIndex
-	ret
+    jmp StatsScreen_SetJumptableIndex
 
 .b_button
 	ld h, 7
-	call StatsScreen_SetJumptableIndex
-	ret
+    jmp StatsScreen_SetJumptableIndex
 
 StatsScreen_InitUpperHalf:
 	call .PlaceHPBar
@@ -331,8 +325,7 @@ StatsScreen_InitUpperHalf:
 	call PlaceString
 	call StatsScreen_PlaceHorizontalDivider
 	call StatsScreen_PlacePageSwitchArrows
-	call StatsScreen_PlaceShinyIcon
-	ret
+    jr StatsScreen_PlaceShinyIcon
 
 .PlaceHPBar:
 	ld hl, wTempMonHP
@@ -348,8 +341,7 @@ StatsScreen_InitUpperHalf:
 	call SetHPPal
 	ld b, SCGB_STATS_SCREEN_HP_PALS
 	call GetSGBLayout
-	call DelayFrame
-	ret
+    jmp DelayFrame
 
 .PlaceGenderChar:
 	push hl
@@ -406,12 +398,10 @@ StatsScreen_LoadGFX:
 	ld hl, wStatsScreenFlags
 	bit 4, [hl]
 	jr nz, .place_frontpic
-	call SetDefaultBGPAndOBP
-	ret
+    jmp SetDefaultBGPAndOBP
 
 .place_frontpic
-	call StatsScreen_PlaceFrontpic
-	ret
+    jmp StatsScreen_PlaceFrontpic
 
 .ClearBox:
 	ld a, [wStatsScreenFlags]
@@ -420,8 +410,7 @@ StatsScreen_LoadGFX:
 	call StatsScreen_LoadPageIndicators
 	hlcoord 0, 8
 	lb bc, 10, 20
-	call ClearBox
-	ret
+    jmp ClearBox
 
 .LoadPals:
 	ld a, [wStatsScreenFlags]
@@ -623,8 +612,7 @@ LoadGreenPage:
 	ld b, a
 	ld a, b
 	ld [wNamedObjectIndex], a
-	call GetItemName
-	ret
+    jmp GetItemName
 
 .Item:
 	db "ITEM@"
@@ -876,7 +864,7 @@ GetNicknamePointer:
 	cp TEMPMON ; if its TEMPMON
 	ret z ; return
 	ld a, [wCurPartyMon] ; otherwise store wCurPartyMon in a (0) and
-	jmp SkipNames ; skip to the right party member's name (0)
+ 	jmp SkipNames ; skip to the right party member's name (0)
 
 CheckFaintedFrzSlp:
 	ld hl, MON_HP

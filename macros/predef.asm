@@ -13,5 +13,5 @@ ENDM
 
 MACRO predef_jump
 	lda_predef \1
-	jmp Predef
+ 	jmp Predef
 ENDM

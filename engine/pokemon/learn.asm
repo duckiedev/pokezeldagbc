@@ -105,7 +105,7 @@ LearnMove:
 	ld hl, StopLearningMoveText
 	call PrintText
 	call YesNoBox
-	jmp c, .loop
+ 	jmp c, .loop
 
 	ld hl, DidNotLearnMoveText
 	call PrintText

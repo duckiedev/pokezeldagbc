@@ -78,7 +78,7 @@ BattleCommand_Spite:
 	ld a, d
 	ld [wTextDecimalByte], a
 	ld hl, SpiteEffectText
-	jmp StdBattleTextbox
+ 	jmp StdBattleTextbox
 
 .failed
-	jmp PrintDidntAffect2
+ 	jmp PrintDidntAffect2

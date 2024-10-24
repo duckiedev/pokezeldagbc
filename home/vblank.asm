@@ -226,7 +226,7 @@ UpdatePals::
 
 	ldh a, [hCGB]
 	and a
-	jmp nz, UpdateCGBPals
+ 	jmp nz, UpdateCGBPals
 
 	; update gb pals
 	ld a, [wBGP]

@@ -36,8 +36,7 @@ _SwitchPartyMons:
 	dec c
 	jr nz, .gfx_loop
 	ld de, SFX_SWITCH_POKEMON
-	call WaitPlaySFX
-	ret
+    jmp WaitPlaySFX
 
 .SwapMon:
 	push hl
@@ -118,5 +117,4 @@ _SwitchPartyMons:
 
 .CopyName:
 	ld bc, NAME_LENGTH
-	call CopyBytes
-	ret
+    jmp CopyBytes

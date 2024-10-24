@@ -2,7 +2,7 @@ BattleCommand_Sketch:
 	call ClearLastMove
 ; If the opponent has a substitute up, fail.
 	call CheckSubstituteOpp
-	jmp nz, .fail
+ 	jmp nz, .fail
 ; If the user is transformed, fail.
 	ld a, BATTLE_VARS_SUBSTATUS5
 	call GetBattleVarAddr
@@ -100,8 +100,8 @@ BattleCommand_Sketch:
 	call AnimateCurrentMove
 
 	ld hl, SketchedText
-	jmp StdBattleTextbox
+ 	jmp StdBattleTextbox
 
 .fail
 	call AnimateFailedMove
-	jmp PrintDidntAffect
+ 	jmp PrintDidntAffect

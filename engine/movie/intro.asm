@@ -79,12 +79,10 @@ IntroScene28:
 	ret nz
 
 	ld de, SFX_INTRO_WHOOSH
-	call PlaySFX
-	ret
+    jmp PlaySFX
 
 .clear
-	call ClearBGPalettes
-	ret
+    jmp ClearBGPalettes
 
 .done
 	ld hl, wJumptableIndex
@@ -164,8 +162,7 @@ CrystalIntro_InitUnownAnim:
 	add hl, bc
 	ld [hl], $38
 	ld a, SPRITE_ANIM_FRAMESET_INTRO_UNOWN_2
-	call ReinitSpriteAnimFrame
-	ret
+    jmp ReinitSpriteAnimFrame
 
 CrystalIntro_UnownFade:
 	add a
@@ -478,8 +475,7 @@ Intro_ClearBGPals:
 	ld a, TRUE
 	ldh [hCGBPalUpdate], a
 	call DelayFrame
-	call DelayFrame
-	ret
+    jmp DelayFrame
 
 Intro_DecompressRequest2bpp_128Tiles:
 	ldh a, [rSVBK]

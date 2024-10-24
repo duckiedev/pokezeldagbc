@@ -25,8 +25,8 @@ BattleCommand_BellyDrum:
 	jr nz, .max_attack_loop
 
 	ld hl, BellyDrumText
-	jmp StdBattleTextbox
+ 	jmp StdBattleTextbox
 
 .failed
 	call AnimateFailedMove
-	jmp PrintButItFailed
+ 	jmp PrintButItFailed

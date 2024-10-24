@@ -90,14 +90,13 @@ LoadIconPalette:
 	call FarCopyColorWRAM
 	ld hl, BlackPalette
 	ld bc, 2
-	jmp FarCopyColorWRAM
+ 	jmp FarCopyColorWRAM
 	
 InitPartyMenuPalettes:
 	ld hl, PalPacket_PartyMenu + 1
 	call CopyFourPalettes
 	call InitPartyMenuOBPals
-	call WipeAttrmap
-	ret
+    jmp WipeAttrmap
 
 LoadTrainerClassPaletteAsNthBGPal:
 	ld a, [wTrainerClass]
@@ -132,7 +131,7 @@ LoadNthMiddleBGPal:
 	ld e, l
 	ld d, h
 	pop hl
-	jmp LoadPalette_White_Col1_Col2_Black
+ 	jmp LoadPalette_White_Col1_Col2_Black
 
 ApplyMonOrTrainerPals:
 	call CheckCGB
@@ -153,7 +152,7 @@ ApplyMonOrTrainerPals:
 	call LoadPalette_White_Col1_Col2_Black
 	call WipeAttrmap
 	call ApplyAttrmap
-	jmp ApplyPals
+ 	jmp ApplyPals
 
 ApplyHPBarPals:
 	ld a, [wWhichHPBar]
@@ -202,7 +201,7 @@ ApplyHPBarPals:
 .done
 	lb bc, 2, 8
 	ld a, e
-	jmp FillBoxCGB
+ 	jmp FillBoxCGB
 
 LoadStatsScreenPals:
 	call CheckCGB
@@ -362,14 +361,14 @@ WipeAttrmap:
 	hlcoord 0, 0, wAttrmap
 	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
 	xor a
-	jmp ByteFill
+ 	jmp ByteFill
 
 ApplyPals:
 	ld hl, wBGPals1
 	ld de, wBGPals2
 	ld bc, 16 palettes
 	ld a, BANK(wGBCPalettes)
-	jmp FarCopyWRAM
+ 	jmp FarCopyWRAM
 
 ApplyAttrmap:
 	ldh a, [rLCDC]
@@ -437,14 +436,14 @@ CGB_ApplyPartyMenuHPPals:
 .done
 	lb bc, 2, 8
 	ld a, e
-	jmp FillBoxWithByte
+ 	jmp FillBoxWithByte
 
 InitPartyMenuOBPals:
 	ld hl, PartyMenuOBPals
 	ld de, wOBPals1
 	ld bc, 8 palettes
 	ld a, BANK(wOBPals1)
-	jmp FarCopyWRAM
+ 	jmp FarCopyWRAM
 
 SetFirstOBJPalette::
 ; input: e must contain the offset of the selected palette from PartyMenuOBPals
@@ -457,7 +456,7 @@ SetFirstOBJPalette::
 	call FarCopyWRAM
 	ld a, TRUE
 	ldh [hCGBPalUpdate], a
-	jmp ApplyPals
+ 	jmp ApplyPals
 
 SetSecondOBJPalette::
 ; input: e must contain the offset of the selected palette from PartyMenuOBPals
@@ -470,7 +469,7 @@ SetSecondOBJPalette::
 	call FarCopyWRAM
 	ld a, TRUE
 	ldh [hCGBPalUpdate], a
-	jmp ApplyPals
+ 	jmp ApplyPals
 
 GetBattlemonBackpicPalettePointer:
 	push de
@@ -719,7 +718,7 @@ PushSGBBorder:
 	push de
 	call SGBBorder_YetMorePalPushing
 	pop hl
-	jmp SGBBorder_MorePalPushing
+ 	jmp SGBBorder_MorePalPushing
 
 .LoadSGBBorderPointers:
 	ld hl, SGBBorderGFX
@@ -730,7 +729,7 @@ SGB_ClearVRAM:
 	ld hl, STARTOF(VRAM)
 	ld bc, SIZEOF(VRAM)
 	xor a
-	jmp ByteFill
+ 	jmp ByteFill
 
 PushSGBBorderPalsAndWait:
 	ld hl, MltReq2Packet
@@ -781,7 +780,7 @@ endr
 	ld hl, MltReq1Packet
 	call _PushSGBPals
 	vc_hook Unknown_network_reset ; Unknown why this hook is here, doesn't seem to be needed
-	jmp SGBDelayCycles
+ 	jmp SGBDelayCycles
 
 SGBBorder_PushBGPals:
 	call DisableLCD
@@ -1044,8 +1043,7 @@ endr
 	ld de, wBGPals1 palette PAL_BG_ROOF color 1
 	ld bc, 4
 	ld a, BANK(wBGPals1)
-	call FarCopyWRAM
-	ret
+    jmp FarCopyWRAM
 
 	; Day Care outdoor palettes
 	ld a, [wMapGroup]

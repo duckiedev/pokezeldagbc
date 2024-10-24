@@ -12,7 +12,7 @@ IsHM::
 IsHMMove::
 	ld hl, .HMMoves
 	ld de, 1
-	jmp IsInArray
+ 	jmp IsInArray
 
 .HMMoves:
 	db CUT

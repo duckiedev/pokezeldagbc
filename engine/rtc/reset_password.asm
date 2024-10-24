@@ -20,8 +20,7 @@ _ResetClock:
 	ld [sRTCStatusFlags], a
 	call CloseSRAM
 	ld hl, .PasswordAskResetText
-	call PrintText
-	ret
+    jmp PrintText
 
 .PasswordAskResetText:
 	text_far _PasswordAskResetText

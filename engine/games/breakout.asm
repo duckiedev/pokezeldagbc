@@ -152,8 +152,7 @@ InitGFXData:
 	ld de, vTiles0 tile $01
 	ld hl, BreakoutBallGFX
 	ld bc, $10
-	call CopyBytes
-	ret
+    jmp CopyBytes
 
 InitOAM:
     ; Initialize Paddle sprite
@@ -207,7 +206,7 @@ BounceOnTop:
 	call GetTileByPixel ; Returns tile address in hl
 	ld a, [hl]
 	call IsWallTile
-	jmp nz, BounceOnRight
+ 	jmp nz, BounceOnRight
 	ld a, 1
 	ld [wBallMomentumY], a
 
@@ -222,7 +221,7 @@ BounceOnRight:
 	call GetTileByPixel
 	ld a, [hl]
 	call IsWallTile
-	jmp nz, BounceOnLeft
+ 	jmp nz, BounceOnLeft
 	ld a, -1
 	ld [wBallMomentumX], a
 
@@ -236,7 +235,7 @@ BounceOnLeft:
 	call GetTileByPixel
 	ld a, [hl]
 	call IsWallTile
-	jmp nz, BounceOnBottom
+ 	jmp nz, BounceOnBottom
 	ld a, 1
 	ld [wBallMomentumX], a
 
@@ -250,7 +249,7 @@ BounceOnBottom:
 	call GetTileByPixel
 	ld a, [hl]
 	call IsWallTile
-	jmp nz, BounceDone
+ 	jmp nz, BounceDone
 	ld a, -1
 	ld [wBallMomentumY], a
 BounceDone:
@@ -289,22 +288,22 @@ Left:
 	dec a
 	; If we've already hit the edge of the playfield, don't move.
 	cp a, 15
-	jmp z, Main
+ 	jmp z, Main
 	ld [wShadowOAMSprite00XCoord], a
-	jmp Main
+ 	jmp Main
 CheckRight:
 	ld a, [hJoyDown]
 	and a, D_RIGHT
-	jmp z, Main
+ 	jmp z, Main
 Right:
 	; Move the paddle one pixel to the right.
 	ld a, [wShadowOAMSprite00XCoord]
 	inc a
 	; If we've already hit the edge of the playfield, don't move.
 	cp a, 105
-	jmp z, Main
+ 	jmp z, Main
 	ld [wShadowOAMSprite00XCoord], a
-	jmp Main
+ 	jmp Main
 
 ResetFrameCounter:
 	; Initialize global variables
@@ -438,8 +437,7 @@ endr
 	call MemoryGame_Card2Coord
 	xor a
 	ld [wMemoryGameLastCardPicked], a
-	call MemoryGame_PlaceCard
-	ret
+    jmp MemoryGame_PlaceCard
 
 .spawn_object
 	depixel 6, 3, 4, 4
@@ -623,8 +621,7 @@ MemoryGame_CheckMatch:
 	add hl, de
 	call MemoryGame_PlaceCard
 	ld hl, .VictoryText
-	call PrintText
-	ret
+    jmp PrintText
 
 .no_match
 	xor a
@@ -639,8 +636,7 @@ MemoryGame_CheckMatch:
 	call MemoryGame_PlaceCard
 
 	ld hl, MemoryGameDarnText
-	call PrintText
-	ret
+    jmp PrintText
 
 .VictoryText:
 	text_asm
@@ -764,8 +760,7 @@ MemoryGame_PlaceCard:
 	inc a
 	ld [hl], a
 	ld c, 3
-	call DelayFrames
-	ret
+    jmp DelayFrames
 
 MemoryGame_DeleteCard:
 	ld a, $1
@@ -776,8 +771,7 @@ MemoryGame_DeleteCard:
 	ld [hli], a
 	ld [hl], a
 	ld c, 3
-	call DelayFrames
-	ret
+    jmp DelayFrames
 
 MemoryGame_InitStrings:
 	hlcoord 0, 0
@@ -791,8 +785,7 @@ MemoryGame_InitStrings:
 	ld de, .str2
 	call PlaceString
 	ld hl, .dummy_text
-	call PrintText
-	ret
+    jmp PrintText
 
 .dummy_text
 	db "@"

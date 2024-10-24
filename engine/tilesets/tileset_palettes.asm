@@ -92,8 +92,7 @@ LoadPokeComPalette:
 	ld de, wBGPals1
 	ld hl, PokeComPalette
 	ld bc, 8 palettes
-	call FarCopyWRAM
-	ret
+    jmp FarCopyWRAM
 
 PokeComPalette:
 INCLUDE "gfx/tilesets/pokecom_center.pal"
@@ -103,8 +102,7 @@ LoadIcePathPalette:
 	ld de, wBGPals1
 	ld hl, IcePathPalette
 	ld bc, 8 palettes
-	call FarCopyWRAM
-	ret
+    jmp FarCopyWRAM
 
 IcePathPalette:
 INCLUDE "gfx/tilesets/ice_path.pal"
@@ -114,8 +112,7 @@ LoadHousePalette:
 	ld de, wBGPals1
 	ld hl, HousePalette
 	ld bc, 8 palettes
-	call FarCopyWRAM
-	ret
+    jmp FarCopyWRAM
 
 HousePalette:
 INCLUDE "gfx/tilesets/house.pal"
@@ -125,8 +122,7 @@ LoadRadioTowerPalette:
 	ld de, wBGPals1
 	ld hl, RadioTowerPalette
 	ld bc, 8 palettes
-	call FarCopyWRAM
-	ret
+    jmp FarCopyWRAM
 
 RadioTowerPalette:
 INCLUDE "gfx/tilesets/radio_tower.pal"
@@ -154,8 +150,7 @@ LoadMansionPalette:
 	ld de, wBGPals1 palette PAL_BG_ROOF
 	ld hl, MansionPalette1 palette 8
 	ld bc, 1 palettes
-	call FarCopyWRAM
-	ret
+    jmp FarCopyWRAM
 
 MansionPalette2:
 INCLUDE "gfx/tilesets/mansion_2.pal"
@@ -165,7 +160,7 @@ LoadOverworldMainPalette:
 	ld de, wBGPals1
 	ld hl, OverworldMainPalette
 	ld bc, 8 palettes
-	jmp FarCopyWRAM
+ 	jmp FarCopyWRAM
 	
 OverworldMainPalette:
 INCLUDE "gfx/tilesets/overworld_main.pal"
@@ -175,7 +170,7 @@ LoadCaveMainPalette:
 	ld de, wBGPals1
 	ld hl, CaveMainPalette
 	ld bc, 8 palettes
-	jmp FarCopyWRAM
+ 	jmp FarCopyWRAM
 
 CaveMainPalette:
 INCLUDE "gfx/tilesets/cave_main.pal"
@@ -185,7 +180,7 @@ LoadGateOfTimePalette:
 	ld de, wBGPals1
 	ld hl, GateOfTimePalette
 	ld bc, 8 palettes
-	jmp FarCopyWRAM
+ 	jmp FarCopyWRAM
 
 GateOfTimePalette:
 INCLUDE "gfx/tilesets/gate_of_time.pal"
@@ -195,7 +190,7 @@ LoadSidescrollTestPalette:
 	ld de, wBGPals1
 	ld hl, SidescrollTestPalette
 	ld bc, 8 palettes
-	jmp FarCopyWRAM
+ 	jmp FarCopyWRAM
 
 SidescrollTestPalette:
 INCLUDE "gfx/tilesets/sidescrolltest.pal"
@@ -205,7 +200,7 @@ LoadForestGateSidescrollingPalette:
 	ld de, wBGPals1
 	ld hl, ForestGateSidescrollingPalette
 	ld bc, 8 palettes
-	jmp FarCopyWRAM
+ 	jmp FarCopyWRAM
 
 ForestGateSidescrollingPalette:
 INCLUDE "gfx/tilesets/forest_gate_sidescrolling.pal"
@@ -215,7 +210,7 @@ LoadDebugMapPalette:
 	ld de, wBGPals1
 	ld hl, DebugMapPalette
 	ld bc, 8 palettes
-	jmp FarCopyWRAM
+ 	jmp FarCopyWRAM
 
 DebugMapPalette:
 INCLUDE "gfx/tilesets/debug_map.pal"

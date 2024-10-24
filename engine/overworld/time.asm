@@ -1,6 +1,5 @@
 _InitializeStartDay:
-	call InitializeStartDay
-	ret
+    jr InitializeStartDay
 
 ClearDailyTimers:
 	xor a
@@ -65,8 +64,7 @@ InitNDaysCountdown:
 	call UpdateTime
 	pop hl
 	inc hl
-	call CopyDayToHL
-	ret
+    jmp CopyDayToHL
 
 CheckDayDependentEventHL:
 	inc hl
@@ -75,24 +73,21 @@ CheckDayDependentEventHL:
 	call GetDaysSince
 	pop hl
 	dec hl
-	call UpdateTimeRemaining
-	ret
+    jr UpdateTimeRemaining
 
 RestartReceiveCallDelay:
 	ld hl, wReceiveCallDelay_MinsRemaining
 	ld [hl], a
 	call UpdateTime
 	ld hl, wReceiveCallDelay_StartTime
-	call CopyDayHourMinToHL
-	ret
+    jmp CopyDayHourMinToHL
 
 CheckReceiveCallDelay:
 	ld hl, wReceiveCallDelay_StartTime
 	call CalcMinsHoursDaysSince
 	call GetMinutesSinceIfLessThan60
 	ld hl, wReceiveCallDelay_MinsRemaining
-	call UpdateTimeRemaining
-	ret
+    jr UpdateTimeRemaining
 
 RestartDailyResetTimer:
 	ld hl, wDailyResetTimer
@@ -113,8 +108,7 @@ CheckDailyResetTimer::
 InitializeStartDay:
 	call UpdateTime
 	ld hl, wTimerEventStartDay
-	call CopyDayToHL
-	ret
+    jmp CopyDayToHL
 
 CheckPokerusTick::
 	ld hl, wTimerEventStartDay

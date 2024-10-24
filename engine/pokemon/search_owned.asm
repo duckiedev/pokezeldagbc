@@ -100,8 +100,7 @@ CheckOwnMonAnywhere:
 	call CheckOwnMon
 	jr nc, .loop
 
-	call CloseSRAM
-	ret
+    jmp CloseSRAM
 
 .loop
 	push bc
@@ -166,8 +165,7 @@ CheckOwnMonAnywhere:
 	jr nc, .loopboxmon
 
 	pop bc
-	call CloseSRAM
-	ret
+    jmp CloseSRAM
 
 .loopboxmon
 	push bc

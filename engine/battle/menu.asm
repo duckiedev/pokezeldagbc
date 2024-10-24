@@ -6,7 +6,7 @@ LoadBattleMenu:
 	call InterpretBattleMenu
 	ld a, [wMenuCursorPosition]
 	ld [wBattleMenuCursorPosition], a
-	jmp ExitMenu
+ 	jmp ExitMenu
 
 SafariBattleMenu: ; unreferenced
 	ld hl, SafariBattleMenuHeader
@@ -19,7 +19,7 @@ CommonBattleMenu:
 	call _2DMenu
 	ld a, [wMenuCursorPosition]
 	ld [wBattleMenuCursorPosition], a
-	jmp ExitMenu
+ 	jmp ExitMenu
 
 BattleMenuHeader:
 	db MENU_BACKUP_TILES ; flags
@@ -63,4 +63,4 @@ SafariBattleMenuHeader:
 	hlcoord 17, 13
 	ld de, wSafariBallsRemaining
 	lb bc, PRINTNUM_LEADINGZEROS | 1, 2
-	jmp PrintNum
+ 	jmp PrintNum

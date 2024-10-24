@@ -28,14 +28,13 @@ OverworldBGMap:
 	call ClearSprites
 	ld a, CGB_PLAIN
 	call GetSGBLayout
-	jmp SetDefaultBGPAndOBP
+ 	jmp SetDefaultBGPAndOBP
 	ret
 
 BattleBGMap:
 	ld b, SCGB_BATTLE_GRAYSCALE
 	call GetSGBLayout
-	call SetDefaultBGPAndOBP
-	ret
+    jmp SetDefaultBGPAndOBP
 
 HalveMoney:
 

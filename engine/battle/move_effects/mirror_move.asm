@@ -17,7 +17,7 @@ BattleCommand_MirrorMove:
 
 	ld hl, MirrorMoveFailedText
 	call StdBattleTextbox
-	jmp EndMoveEffect
+ 	jmp EndMoveEffect
 
 .use
 	ld a, b

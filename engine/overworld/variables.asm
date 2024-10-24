@@ -25,8 +25,7 @@ _GetVarAction::
 	jr .loadstringbuffer2
 
 .call
-	call _de_
-	ret
+    jmp _de_
 
 .loadstringbuffer2
 	ld de, wStringBuffer2
@@ -106,9 +105,9 @@ _GetVarAction::
 	ld b, a
 	call CloseSRAM
 	ld a, b
-	jmp .loadstringbuffer2
+ 	jmp .loadstringbuffer2
 
 .BattleResult:
 	ld a, [wBattleResult]
 	and ~BATTLERESULT_BITMASK
-	jmp .loadstringbuffer2
+ 	jmp .loadstringbuffer2

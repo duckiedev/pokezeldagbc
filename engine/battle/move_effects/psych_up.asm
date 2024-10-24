@@ -22,7 +22,7 @@ BattleCommand_PsychUp:
 	jr nz, .loop
 	pop hl
 	call AnimateFailedMove
-	jmp PrintButItFailed
+ 	jmp PrintButItFailed
 
 .break
 	pop hl
@@ -44,4 +44,4 @@ BattleCommand_PsychUp:
 .merge
 	call AnimateCurrentMove
 	ld hl, CopiedStatsText
-	jmp StdBattleTextbox
+ 	jmp StdBattleTextbox

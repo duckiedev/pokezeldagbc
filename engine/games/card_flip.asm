@@ -350,8 +350,7 @@ CardFlip_ShuffleDeck:
 	ld [wCardFlipNumCardsPlayed], a
 	ld hl, wDiscardPile
 	ld bc, CARDFLIP_DECK_SIZE
-	call ByteFill
-	ret
+    jmp ByteFill
 
 CollapseCursorPosition:
 	ld hl, 0
@@ -384,8 +383,7 @@ PlaceCardFaceDown:
 	ldh [hBGMapMode], a
 	ld de, .FaceDownCardTilemap
 	lb bc, 6, 5
-	call CardFlip_CopyToBox
-	ret
+    jmp CardFlip_CopyToBox
 
 .FaceDownCardTilemap:
 	db $08, $09, $09, $09, $0a
@@ -454,8 +452,7 @@ CardFlip_DisplayCardFaceUp:
 	and 3
 	inc a
 	lb bc, 6, 5
-	call CardFlip_FillBox
-	ret
+    jmp CardFlip_FillBox
 
 .FaceUpCardTilemap:
 	db $18, $19, $19, $19, $1a
@@ -482,8 +479,7 @@ CardFlip_UpdateCoinBalanceDisplay:
 	call Textbox
 	pop hl
 	call PrintTextboxText
-	call CardFlip_PrintCoinBalance
-	ret
+    jr CardFlip_PrintCoinBalance
 
 CardFlip_PrintCoinBalance:
 	hlcoord 9, 15
@@ -496,8 +492,7 @@ CardFlip_PrintCoinBalance:
 	hlcoord 15, 16
 	ld de, wCoins
 	lb bc, PRINTNUM_LEADINGZEROS | 2, 4
-	call PrintNum
-	ret
+    jmp PrintNum
 
 .CoinStr:
 	db "COIN@"
@@ -515,8 +510,7 @@ CardFlip_InitTilemap:
 	call CardFlip_CopyToBox
 	hlcoord 0, 12
 	lb bc, 4, 18
-	call Textbox
-	ret
+    jmp Textbox
 
 CardFlip_FillGreenBox:
 	ld a, $29
@@ -842,108 +836,108 @@ CardFlip_CheckWinCondition:
 	dw .OddSix
 
 .Impossible:
-	jmp .Lose
+ 	jmp .Lose
 
 .PikaJiggly:
 	ld a, [wCardFlipFaceUpCard]
 	and $2
-	jmp nz, .Lose
+ 	jmp nz, .Lose
 	jr .WinSix
 
 .PoliOddish:
 	ld a, [wCardFlipFaceUpCard]
 	and $2
 	jr nz, .WinSix
-	jmp .Lose
+ 	jmp .Lose
 
 .WinSix:
 	ld c, $6
 	ld de, SFX_2ND_PLACE
-	jmp .Payout
+ 	jmp .Payout
 
 .OneTwo:
 	ld a, [wCardFlipFaceUpCard]
 	and $18
 	jr z, .WinNine
-	jmp .Lose
+ 	jmp .Lose
 
 .ThreeFour:
 	ld a, [wCardFlipFaceUpCard]
 	and $18
 	cp $8
 	jr z, .WinNine
-	jmp .Lose
+ 	jmp .Lose
 
 .FiveSix:
 	ld a, [wCardFlipFaceUpCard]
 	and $18
 	cp $10
 	jr z, .WinNine
-	jmp .Lose
+ 	jmp .Lose
 
 .WinNine:
 	ld c, $9
 	ld de, SFX_2ND_PLACE
-	jmp .Payout
+ 	jmp .Payout
 
 .Pikachu:
 	ld a, [wCardFlipFaceUpCard]
 	and $3
 	jr z, .WinTwelve
-	jmp .Lose
+ 	jmp .Lose
 
 .Jigglypuff:
 	ld a, [wCardFlipFaceUpCard]
 	and $3
 	cp $1
 	jr z, .WinTwelve
-	jmp .Lose
+ 	jmp .Lose
 
 .Poliwag:
 	ld a, [wCardFlipFaceUpCard]
 	and $3
 	cp $2
 	jr z, .WinTwelve
-	jmp .Lose
+ 	jmp .Lose
 
 .Oddish:
 	ld a, [wCardFlipFaceUpCard]
 	and $3
 	cp $3
 	jr z, .WinTwelve
-	jmp .Lose
+ 	jmp .Lose
 
 .WinTwelve:
 	ld c, $c
 	ld de, SFX_2ND_PLACE
-	jmp .Payout
+ 	jmp .Payout
 
 .One:
 	ld a, [wCardFlipFaceUpCard]
 	and $1c
 	jr z, .WinEighteen
-	jmp .Lose
+ 	jmp .Lose
 
 .Two:
 	ld a, [wCardFlipFaceUpCard]
 	and $1c
 	cp $4
 	jr z, .WinEighteen
-	jmp .Lose
+ 	jmp .Lose
 
 .Three:
 	ld a, [wCardFlipFaceUpCard]
 	and $1c
 	cp $8
 	jr z, .WinEighteen
-	jmp .Lose
+ 	jmp .Lose
 
 .Four:
 	ld a, [wCardFlipFaceUpCard]
 	and $1c
 	cp $c
 	jr z, .WinEighteen
-	jmp .Lose
+ 	jmp .Lose
 
 .Five:
 	ld a, [wCardFlipFaceUpCard]
@@ -1072,8 +1066,7 @@ CardFlip_CheckWinCondition:
 	call PlaySFX
 	ld hl, .CardFlipDarnText
 	call CardFlip_UpdateCoinBalanceDisplay
-	call WaitSFX
-	ret
+    jmp WaitSFX
 
 .Payout:
 	push bc
@@ -1118,8 +1111,7 @@ CardFlip_CheckWinCondition:
 	ld a, l
 	ld [wCoins + 1], a
 	ld de, SFX_PAY_DAY
-	call PlaySFX
-	ret
+    jmp PlaySFX
 
 .IsCoinCaseFull:
 	ld a, [wCoins]
@@ -1144,8 +1136,7 @@ CardFlip_CheckWinCondition:
 PlaceOAMCardBorder:
 	call GetCoordsOfChosenCard
 	ld hl, .SpriteData
-	call CardFlip_CopyOAM
-	ret
+    jmp CardFlip_CopyOAM
 
 .SpriteData:
 	db 18
@@ -1186,7 +1177,7 @@ ChooseCard_HandleJoypad:
 	jr nz, .d_up
 	ld a, [hl]
 	and D_DOWN
-	jmp nz, .d_down
+ 	jmp nz, .d_down
 	ret
 
 .d_left
@@ -1200,14 +1191,14 @@ ChooseCard_HandleJoypad:
 	and a
 	ret z
 	dec [hl]
-	jmp .play_sound
+ 	jmp .play_sound
 
 .mon_group_left
 	ld a, [hl]
 	cp $3
 	jr c, .left_to_number_gp
 	dec [hl]
-	jmp .play_sound
+ 	jmp .play_sound
 
 .mon_pair_left
 	ld a, [hl]
@@ -1307,8 +1298,7 @@ ChooseCard_HandleJoypad:
 
 .play_sound
 	ld de, SFX_POKEBALLS_PLACED_ON_TABLE
-	call PlaySFX
-	ret
+    jmp PlaySFX
 
 CardFlip_UpdateCursorOAM:
 	call ClearSprites
@@ -1332,8 +1322,7 @@ CardFlip_UpdateCursorOAM:
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	call CardFlip_CopyOAM
-	ret
+    jmp CardFlip_CopyOAM
 
 .OAMData:
 MACRO cardflip_cursor

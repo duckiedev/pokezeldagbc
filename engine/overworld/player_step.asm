@@ -133,8 +133,7 @@ UpdateOverworldMap:
 	; default code if no border tile is detected
 	call .ScrollOverworldMapDown
 	call LoadOverworldTilemap
-	call ScrollMapDown
-	ret
+    jmp ScrollMapDown
 
 .border_tile_down_step:
 	ret
@@ -154,8 +153,7 @@ UpdateOverworldMap:
 	; default code if no border tile is detected
 	call .ScrollOverworldMapUp
 	call LoadOverworldTilemap
-	call ScrollMapUp
-	ret
+    jmp ScrollMapUp
 
 .border_tile_up_step:
 	ret
@@ -173,8 +171,7 @@ UpdateOverworldMap:
     ; Default code if no border tile is detected
     call .ScrollOverworldMapLeft
     call LoadOverworldTilemap
-    call ScrollMapLeft
-	ret
+    jmp ScrollMapLeft
 
 .border_tile_left_step:
     ret
@@ -190,8 +187,7 @@ UpdateOverworldMap:
 	
 	call .ScrollOverworldMapRight
 	call LoadOverworldTilemap
-	call ScrollMapRight
-	ret
+    jmp ScrollMapRight
 	
 .border_tile_right_step:
 	ret

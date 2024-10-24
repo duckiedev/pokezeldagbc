@@ -18,9 +18,9 @@ EnterMapConnection:
 ; Return carry if a connection has been entered.
 	ld a, [wPlayerStepDirection]
 	and a ; DOWN
-	jmp z, .south
+ 	jmp z, .south
 	cp UP
-	jmp z, .north
+ 	jmp z, .north
 	cp LEFT
 	jr z, .west
 	cp RIGHT
@@ -60,7 +60,7 @@ EnterMapConnection:
 	ld [wOverworldMapAnchor], a
 	ld a, h
 	ld [wOverworldMapAnchor + 1], a
-	jmp .done
+ 	jmp .done
 
 .east
 	ld a, [wEastConnectedMapGroup]
@@ -262,8 +262,7 @@ LoadMapTimeOfDay:
 	ld a, "■"
 	ld bc, vBGMap1 - vBGMap0
 	hlbgcoord 0, 0
-	call ByteFill
-	ret
+    jmp ByteFill
 
 .PushAttrmap:
 	decoord 0, 0
@@ -309,7 +308,7 @@ LoadMapGraphics:
 
 LoadMapPalettes:
 	ld b, SCGB_MAPPALS
-	jmp GetSGBLayout
+ 	jmp GetSGBLayout
 
 RefreshMapSprites:
 	call ClearSprites

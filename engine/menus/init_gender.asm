@@ -22,8 +22,7 @@ InitGender:
 	dec a
 	ld [wPlayerGender], a
 	ld c, 10
-	call DelayFrames
-	ret*/
+    jmp DelayFrames
 
 .MenuHeader:
 	db MENU_BACKUP_TILES ; flags
@@ -59,8 +58,7 @@ InitGenderScreen:
 	hlcoord 0, 0, wAttrmap
 	ld bc, SCREEN_HEIGHT * SCREEN_WIDTH
 	xor a
-	call ByteFill
-	ret
+    jmp ByteFill
 
 LoadGenderScreenPal:
 	ld hl, .Palette
@@ -78,8 +76,8 @@ LoadGenderScreenLightBlueTile:
 	ld de, .LightBlueTile
 	ld hl, vTiles2 tile $00
 	lb bc, BANK(.LightBlueTile), 1
-	call Get2bpp
-	ret
+    jmp Get2bpp
 
 .LightBlueTile:
 INCBIN "gfx/new_game/gender_screen.2bpp"
+*/

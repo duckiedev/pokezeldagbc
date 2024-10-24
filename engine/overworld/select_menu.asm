@@ -1,7 +1,7 @@
 SelectMenu::
 	call CheckRegisteredItem
 	jr c, .NotRegistered
-	jmp UseRegisteredItem
+ 	jmp UseRegisteredItem
 
 .NotRegistered:
 	call OpenText
@@ -9,7 +9,7 @@ SelectMenu::
 	ld hl, MayRegisterItemText
 	call MapTextbox
 	call WaitButton
-	jmp CloseText
+ 	jmp CloseText
 
 MayRegisterItemText:
 	text_far _MayRegisterItemText

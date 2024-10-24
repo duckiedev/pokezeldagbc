@@ -79,8 +79,7 @@ StartMenu::
 	call ExitMenu
 .ReturnEnd2:
 	call CloseText
-	call UpdateTimePals
-	ret
+    jmp UpdateTimePals
 
 .GetInput:
 ; Return carry on exit, and no-carry on selection.
@@ -139,7 +138,7 @@ StartMenu::
 	call DrawVariableLengthMenuBox
 	call UpdateSprites
 	call FinishExitMenu
-	jmp .Reopen
+ 	jmp .Reopen
 	ret
 
 .MenuHeader:
@@ -225,8 +224,7 @@ StartMenu::
 	ld d, [hl]
 	ld e, a
 	pop hl
-	call PlaceString
-	ret
+    jmp PlaceString
 
 .MenuDesc:
 	push de
@@ -241,8 +239,7 @@ endr
 	ld d, [hl]
 	ld e, a
 	pop hl
-	call PlaceString
-	ret
+    jmp PlaceString
 .none
 	pop de
 	ret
@@ -330,7 +327,7 @@ endr
 	ret z
 	call ._DrawMenuAccount
 	decoord 0, 14
-	jmp .MenuDesc
+ 	jmp .MenuDesc
 
 ._DrawMenuAccount:
 	call .IsMenuAccountOn
@@ -341,7 +338,7 @@ endr
 	hlcoord 0, 13
 	ld b, 3
 	ld c, 8
-	jmp TextboxPalette
+ 	jmp TextboxPalette
 
 .IsMenuAccountOn:
 	ld a, [wOptions2]

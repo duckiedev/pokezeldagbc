@@ -29,8 +29,8 @@ BattleCommand_PerishSong:
 .done
 	call AnimateCurrentMove
 	ld hl, StartPerishText
-	jmp StdBattleTextbox
+ 	jmp StdBattleTextbox
 
 .failed
 	call AnimateFailedMove
-	jmp PrintButItFailed
+ 	jmp PrintButItFailed

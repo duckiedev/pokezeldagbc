@@ -5,4 +5,4 @@ BattleCommand_StartSun:
 	ld [wWeatherCount], a
 	call AnimateCurrentMove
 	ld hl, SunGotBrightText
-	jmp StdBattleTextbox
+ 	jmp StdBattleTextbox

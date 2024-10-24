@@ -61,7 +61,7 @@ DoBattleTransition:
 	pop af
 	vc_hook Stop_reducing_battle_transition_flashing
 	ldh [hVBlank], a
-	jmp DelayFrame
+ 	jmp DelayFrame
 
 .InitGFX:
 	farcall ReanchorBGMap_NoOAMUpdate
@@ -81,7 +81,7 @@ DoBattleTransition:
 	ld [hli], a
 	ld [hli], a
 	ld [hl], a
-	jmp WipeLYOverrides
+ 	jmp WipeLYOverrides
 
 LoadTrainerBattlePokeballTiles:
 ; Load the tiles used in the Pokeball Graphic that fills the screen
@@ -271,7 +271,7 @@ StartTrainerBattle_SetUpBGMap:
 StartTrainerBattle_Flash:
 	call .DoFlashAnimation
 	ret nc
-	jmp StartTrainerBattle_NextScene
+ 	jr StartTrainerBattle_NextScene
 
 .DoFlashAnimation:
 	ld a, [wTimeOfDayPalset]
@@ -588,7 +588,7 @@ StartTrainerBattle_SpeckleToBlack:
 StartTrainerBattle_LoadPokeBallGraphics:
 	ld a, [wOtherTrainerClass]
 	and a
-	jmp z, .nextscene ; don't need to be here if wild
+ 	jmp z, .nextscene ; don't need to be here if wild
 
 	xor a
 	ldh [hBGMapMode], a
@@ -690,7 +690,7 @@ StartTrainerBattle_LoadPokeBallGraphics:
 	call BattleStart_CopyTilemapAtOnce
 
 .nextscene
-	jmp StartTrainerBattle_NextScene
+ 	jmp StartTrainerBattle_NextScene
 
 .copypals
 	ld de, wBGPals1 palette PAL_BG_TEXT

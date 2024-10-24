@@ -27,6 +27,6 @@ PrintItemDescription:
 	inc hl
 	ld d, [hl]
 	pop hl
-	jmp PlaceString
+ 	jmp PlaceString
 
 INCLUDE "data/items/descriptions.asm"

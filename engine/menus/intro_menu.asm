@@ -9,7 +9,7 @@ Intro_MainMenu:
 	ld [wMapMusic], a
 	call PlayMusic
 	farcall MainMenu
-	jmp StartTitleScreen
+ 	jmp StartTitleScreen
 
 PrintDayOfWeek:
 	push de
@@ -23,8 +23,7 @@ PrintDayOfWeek:
 	ld h, b
 	ld l, c
 	ld de, .Day
-	call PlaceString
-	ret
+    jmp PlaceString
 
 .Days:
 	db "SUN@"
@@ -43,8 +42,7 @@ NewGame_ClearTilemapEtc:
 	ldh [hMapAnims], a
 	call ClearTilemap
 	call LoadStandardFont
-	call ClearWindowData
-	ret
+    jmp ClearWindowData
 
 Option:
 	farcall _Option
@@ -70,7 +68,7 @@ NewGame:
 
 	ld a, MAPSETUP_WARP
 	ldh [hMapEntryMethod], a
-	jmp FinishContinueFunction
+ 	jmp FinishContinueFunction
 
 PlayerProfileSetup:
 	farcall InitGender
@@ -79,8 +77,7 @@ PlayerProfileSetup:
 ResetWRAM:
 	xor a
 	ldh [hBGMapMode], a
-	call _ResetWRAM
-	ret
+    jr _ResetWRAM
 
 _ResetWRAM:
 	ld hl, wShadowOAM
@@ -189,8 +186,7 @@ endc
 
 	call InitializeNPCNames
 
-	call ResetGameTime
-	ret
+    jmp ResetGameTime
 
 .InitList:
 ; Loads 0 in the count and -1 in the first item or mon slot.
@@ -250,8 +246,7 @@ InitializeNPCNames:
 
 .Copy:
 	ld bc, NAME_LENGTH
-	call CopyBytes
-	ret
+    jmp CopyBytes
 
 .Rival:  db "???@"
 .Red:    db "RED@"
@@ -370,7 +365,7 @@ FinishContinueFunction:
 	ld a, [wSpawnAfterChampion]
 	cp SPAWN_RED
 	jr z, .AfterRed
-	jmp Reset
+ 	jmp Reset
 
 .AfterRed:
 	call SpawnAfterRed
@@ -381,13 +376,11 @@ DisplaySaveInfoOnContinue:
 	and %10000000
 	jr z, .clock_ok
 	lb de, 4, 8
-	call DisplayContinueDataWithRTCError
-	ret
+    jr DisplayContinueDataWithRTCError
 
 .clock_ok
 	lb de, 4, 8
-	call DisplayNormalContinueData
-	ret
+    jr DisplayNormalContinueData
 
 DisplaySaveInfoOnSave:
 	lb de, 4, 0
@@ -397,15 +390,13 @@ DisplayNormalContinueData:
 	call Continue_LoadMenuHeader
 	call Continue_DisplayBadgesDexPlayerName
 	call Continue_PrintGameTime
-	call UpdateSprites
-	ret
+    jmp UpdateSprites
 
 DisplayContinueDataWithRTCError:
 	call Continue_LoadMenuHeader
 	call Continue_DisplayBadgesDexPlayerName
 	call Continue_UnknownGameTime
-	call UpdateSprites
-	ret
+    jmp UpdateSprites
 
 Continue_LoadMenuHeader:
 	xor a
@@ -419,8 +410,7 @@ Continue_LoadMenuHeader:
 .show_menu
 	call _OffsetMenuHeader
 	call MenuBox
-	call PlaceVerticalMenuItems
-	ret
+    jmp PlaceVerticalMenuItems
 
 .MenuHeader_Dex:
 	db MENU_BACKUP_TILES ; flags
@@ -476,15 +466,13 @@ Continue_DisplayBadgesDexPlayerName:
 Continue_PrintGameTime:
 	decoord 9, 8, 0
 	add hl, de
-	call Continue_DisplayGameTime
-	ret
+    jr Continue_DisplayGameTime
 
 Continue_UnknownGameTime:
 	decoord 9, 8, 0
 	add hl, de
 	ld de, .three_question_marks
-	call PlaceString
-	ret
+    jmp PlaceString
 
 .three_question_marks
 	db " ???@"
@@ -497,7 +485,7 @@ Continue_DisplayBadgeCount:
 	pop hl
 	ld de, wNumSetBits
 	lb bc, 1, 2
-	jmp PrintNum
+ 	jmp PrintNum
 
 Continue_DisplayPokedexNumCaught:
 	ld a, [wStatusFlags]
@@ -514,7 +502,7 @@ endc
 	pop hl
 	ld de, wNumSetBits
 	lb bc, 1, 3
-	jmp PrintNum
+ 	jmp PrintNum
 
 Continue_DisplayGameTime:
 	ld de, wGameTimeHours
@@ -524,7 +512,7 @@ Continue_DisplayGameTime:
 	inc hl
 	ld de, wGameTimeMinutes
 	lb bc, PRINTNUM_LEADINGZEROS | 1, 2
-	jmp PrintNum
+ 	jmp PrintNum
 
 OakSpeech:
 	farcall InitClock
@@ -606,8 +594,7 @@ OakSpeech:
 	call PrintText
 	call NamePlayer
 	ld hl, OakText7
-	call PrintText
-	ret
+    jmp PrintText
 
 OakText1:
 	text_far _OakText1
@@ -679,8 +666,7 @@ NamePlayer:
 	jr z, .Male
 	ld de, .Kris
 .Male:
-	call InitName
-	ret
+    jmp InitName
 
 .Chris:
 	db "CHRIS@@@@@@"
@@ -694,8 +680,7 @@ StorePlayerName:
 	call ByteFill
 	ld hl, wPlayerName
 	ld de, wStringBuffer2
-	call CopyName2
-	ret
+    jmp CopyName2
 
 ShrinkPlayer:
 	ldh a, [hROMBank]
@@ -745,8 +730,7 @@ ShrinkPlayer:
 
 	ld c, 15
 	call FadeToWhite
-	call ClearTilemap
-	ret
+    jmp ClearTilemap
 
 Intro_RotatePalettesLeftFrontpic:
 	ld hl, IntroFadePalettes
@@ -947,8 +931,7 @@ UnusedTitlePerspectiveScroll: ; unreferenced
 	ld a, [hl]
 	dec a
 	ld bc, 2 * SCREEN_WIDTH
-	call ByteFill
-	ret
+    jmp ByteFill
 
 TitleScreenScene:
 	ld e, a
@@ -1136,11 +1119,11 @@ TitleScreenEnd:
 
 DeleteSaveData:
 	farcall _DeleteSaveData
-	jmp Init
+ 	jmp Init
 
 ResetClock:
 	farcall _ResetClock
-	jmp Init
+ 	jmp Init
 
 Copyright:
 	call ClearTilemap
@@ -1150,7 +1133,7 @@ Copyright:
 	call Request2bpp
 	hlcoord 2, 7
 	ld de, CopyrightString
-	jmp PlaceString
+ 	jmp PlaceString
 
 CopyrightString:
 	; ©1995-2001 Nintendo
@@ -1182,4 +1165,4 @@ GameInit::
 	ld a, $90
 	ldh [hWY], a
 	call WaitBGMap
-	jmp IntroSequence
+ 	jmp IntroSequence

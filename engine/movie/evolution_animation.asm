@@ -151,17 +151,16 @@ EvolutionAnimation:
 	ret c
 
 	ld a, [wPlayerHPPal]
-	call PlayMonCry
-	ret
+    jmp PlayMonCry
 
 .GetSGBLayout:
 	ld b, SCGB_EVOLUTION
-	jmp GetSGBLayout
+ 	jmp GetSGBLayout
 
 .PlaceFrontpic:
 	call GetBaseData
 	hlcoord 7, 2
-	jmp PrepMonFrontpic
+ 	jmp PrepMonFrontpic
 
 .LoadFrontpic:
 	call GetBaseData
@@ -349,8 +348,7 @@ endr
 	dec c
 	jr nz, .loop6
 	pop bc
-	call DelayFrame
-	ret
+    jmp DelayFrame
 
 .GFX:
 INCBIN "gfx/evo/bubble_large.2bpp"

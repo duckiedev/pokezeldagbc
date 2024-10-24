@@ -69,7 +69,7 @@ WillObjectBumpIntoWater:
 	ld hl, OBJECT_PALETTE
 	add hl, bc
 	bit OAM_PRIORITY, [hl]
-	jmp nz, WillObjectRemainOnWater
+ 	jmp nz, WillObjectRemainOnWater
 	ld hl, OBJECT_TILE_COLLISION
 	add hl, bc
 	ld a, [hl]
@@ -248,7 +248,6 @@ CheckFacingObject::
 	ld e, a
 
 .not_counter
-	ld bc, wObjectStructs ; redundant
 	ld a, 0
 	ldh [hMapObjectIndex], a
 	call IsNPCAtCoord
@@ -278,8 +277,7 @@ IsObjectFacingSomeoneElse: ; unreferenced
 	ldh a, [hMapObjectIndex]
 	call GetObjectStruct
 	call .GetFacingCoords
-	call IsNPCAtCoord
-	ret
+    jr IsNPCAtCoord
 
 .GetFacingCoords:
 	ld hl, OBJECT_MAP_X

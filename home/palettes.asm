@@ -318,7 +318,7 @@ ReloadSpritesNoPalettes::
 	ldh [rSVBK], a
 	ld a, TRUE
 	ldh [hCGBPalUpdate], a
-	jmp DelayFrame
+ 	jmp DelayFrame
 
 SetBlackObjectPals::
 	ldh a, [rSVBK]
@@ -333,4 +333,4 @@ SetBlackObjectPals::
 	ldh [rSVBK], a
 	ld a, 1
 	ldh [hCGBPalUpdate], a
-	jmp DelayFrame
+ 	jmp DelayFrame

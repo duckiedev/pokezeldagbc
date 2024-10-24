@@ -582,7 +582,7 @@ UpdateRoamMons:
 	ld [wRoamMon3MapNumber], a
 
 .Finished:
-	jmp _BackUpMapIndices
+ 	jmp _BackUpMapIndices
 
 .Update:
 	ld hl, RoamMaps

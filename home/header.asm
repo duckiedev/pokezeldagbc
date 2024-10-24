@@ -2,11 +2,11 @@
 
 SECTION "rst0", ROM0[$0000]
 	di
-	jmp Start
+ 	jmp Start
 
 SECTION "rst8", ROM0[$0008]
 FarCall::
-	jmp FarCall_hl
+ 	jmp FarCall_hl
 
 SECTION "rst10", ROM0[$0010]
 Bankswitch::
@@ -41,13 +41,13 @@ SECTION "rst38", ROM0[$0038]
 ; Game Boy hardware interrupts
 
 SECTION "vblank", ROM0[$0040]
-	jmp VBlank
+ 	jmp VBlank
 
 SECTION "lcd", ROM0[$0048]
-	jmp LCD
+ 	jmp LCD
 
 SECTION "joypad", ROM0[$0060]
-	jmp Joypad
+ 	jmp Joypad
 
 
 SECTION "Header", ROM0[$0100]

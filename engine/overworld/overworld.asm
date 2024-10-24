@@ -12,8 +12,7 @@ _UpdatePlayerSprite::
 	ldh [hUsedSpriteIndex], a
 	ld a, [wUsedSprites + 1]
 	ldh [hUsedSpriteTile], a
-	call GetUsedSprite
-	ret
+    jmp GetUsedSprite
 
 GetPlayerSprite:
 ; Get Chris or Kris's sprite.
@@ -108,8 +107,7 @@ LoadUsedSpritesGFX:
 	ld a, MAPCALLBACK_SPRITES
 	call RunMapCallback
 	call GetUsedSprites
-	call LoadMiscTiles
-	ret
+    jr LoadMiscTiles
 
 LoadMiscTiles:
 	ld a, [wSpriteFlags]
@@ -470,8 +468,7 @@ LoadEmote::
 	ld a, c
 	and a
 	ret z
-	call GetEmote2bpp
-	ret
+    jmp GetEmote2bpp
 
 INCLUDE "data/sprites/emotes.asm"
 

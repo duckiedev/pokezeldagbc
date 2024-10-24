@@ -10,8 +10,7 @@ RunMapSetupScript::
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	call ReadMapSetupScript
-	ret
+    jmp ReadMapSetupScript
 
 INCLUDE "data/maps/setup_scripts.asm"
 
@@ -103,8 +102,7 @@ CheckUpdatePlayerSprite:
 	ret
 
 .ok
-	call UpdatePlayerSprite
-	ret
+    jmp UpdatePlayerSprite
 
 .CheckForcedBiking:
 	and a
@@ -168,8 +166,7 @@ CheckUpdatePlayerSprite:
 
 FadeOutMapMusic:
 	ld a, 6
-	call SkipMusic
-	ret
+    jmp SkipMusic
 
 ApplyMapPalettes:
 	farcall _UpdateTimePals
@@ -193,5 +190,4 @@ ForceMapMusic:
 	ld a, $88
 	ld [wMusicFade], a
 .notbiking
-	call TryRestartMapMusic
-	ret
+    jmp TryRestartMapMusic

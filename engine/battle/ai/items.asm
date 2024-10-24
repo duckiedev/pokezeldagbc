@@ -32,7 +32,7 @@ AI_SwitchOrTryItem:
 	; fallthrough
 
 DontSwitch:
-	jmp AI_TryItem
+ 	jmp AI_TryItem
 
 SwitchOften:
 	callfar CheckAbleToSwitch
@@ -67,7 +67,7 @@ SwitchOften:
 	inc a
 	; In register 'a' is the number (1-6) of the mon to switch to
 	ld [wEnemySwitchMonIndex], a
-	jmp AI_TrySwitch
+ 	jmp AI_TrySwitch
 
 SwitchRarely:
 	callfar CheckAbleToSwitch
@@ -101,20 +101,20 @@ SwitchRarely:
 	and $f
 	inc a
 	ld [wEnemySwitchMonIndex], a
-	jmp AI_TrySwitch
+ 	jmp AI_TrySwitch
 
 SwitchSometimes:
 	callfar CheckAbleToSwitch
 	ld a, [wEnemySwitchMonParam]
 	and $f0
-	jmp z, DontSwitch
+ 	jmp z, DontSwitch
 
 	cp $10
 	jr nz, .not_10
 	call Random
 	cp 20 percent - 1
 	jr c, .switch
-	jmp DontSwitch
+ 	jmp DontSwitch
 .not_10
 
 	cp $20
@@ -122,20 +122,20 @@ SwitchSometimes:
 	call Random
 	cp 50 percent + 1
 	jr c, .switch
-	jmp DontSwitch
+ 	jmp DontSwitch
 .not_20
 
 	; $30
 	call Random
 	cp 20 percent - 1
-	jmp c, DontSwitch
+ 	jmp c, DontSwitch
 
 .switch
 	ld a, [wEnemySwitchMonParam]
 	and $f
 	inc a
 	ld [wEnemySwitchMonIndex], a
-	jmp AI_TrySwitch
+ 	jmp AI_TrySwitch
 
 CheckSubstatusCantRun: ; unreferenced
 	ld a, [wEnemySubStatus5]
@@ -273,25 +273,25 @@ AI_Items:
 
 .FullHeal:
 	call .Status
-	jmp c, .DontUse
+ 	jmp c, .DontUse
 	call EnemyUsedFullHeal
-	jmp .Use
+ 	jmp .Use
 
 .Status:
 	ld a, [wEnemyMonStatus]
 	and a
-	jmp z, .DontUse
+ 	jmp z, .DontUse
 
 	ld a, [bc]
 	bit CONTEXT_USE_F, a
 	jr nz, .StatusCheckContext
 	ld a, [bc]
 	bit ALWAYS_USE_F, a
-	jmp nz, .Use
+ 	jmp nz, .Use
 	call Random
 	cp 20 percent - 1
-	jmp c, .Use
-	jmp .DontUse
+ 	jmp c, .Use
+ 	jmp .DontUse
 
 .StatusCheckContext:
 	ld a, [wEnemySubStatus5]
@@ -302,38 +302,38 @@ AI_Items:
 	jr c, .FailToxicCheck
 	call Random
 	cp 50 percent + 1
-	jmp c, .Use
+ 	jmp c, .Use
 .FailToxicCheck:
 	ld a, [wEnemyMonStatus]
 	and 1 << FRZ | SLP_MASK
-	jmp z, .DontUse
-	jmp .Use
+ 	jmp z, .DontUse
+ 	jmp .Use
 
 .FullRestore:
 	call .HealItem
 	jr nc, .UseFullRestore
 	ld a, [bc]
 	bit CONTEXT_USE_F, a
-	jmp z, .DontUse
+ 	jmp z, .DontUse
 	call .Status
-	jmp c, .DontUse
+ 	jmp c, .DontUse
 
 .UseFullRestore:
 	call EnemyUsedFullRestore
-	jmp .Use
+ 	jmp .Use
 
 .MaxPotion:
 	call .HealItem
-	jmp c, .DontUse
+ 	jmp c, .DontUse
 	call EnemyUsedMaxPotion
-	jmp .Use
+ 	jmp .Use
 
 .HealItem:
 	ld a, [bc]
 	bit CONTEXT_USE_F, a
 	jr nz, .CheckHalfOrQuarterHP
 	callfar AICheckEnemyHalfHP
-	jmp c, .DontUse
+ 	jmp c, .DontUse
 	ld a, [bc]
 	bit UNKNOWN_USE_F, a
 	jr nz, .CheckQuarterHP
@@ -342,41 +342,41 @@ AI_Items:
 	call Random
 	cp 50 percent + 1
 	jr c, .UseHealItem
-	jmp .DontUse
+ 	jmp .DontUse
 
 .CheckQuarterHP:
 	callfar AICheckEnemyQuarterHP
-	jmp c, .DontUse
+ 	jmp c, .DontUse
 	call Random
 	cp 20 percent - 1
-	jmp c, .DontUse
+ 	jmp c, .DontUse
 	jr .UseHealItem
 
 .CheckHalfOrQuarterHP:
 	callfar AICheckEnemyHalfHP
-	jmp c, .DontUse
+ 	jmp c, .DontUse
 	callfar AICheckEnemyQuarterHP
 	jr nc, .UseHealItem
 	call Random
 	cp 20 percent - 1
-	jmp nc, .DontUse
+ 	jmp nc, .DontUse
 
 .UseHealItem:
-	jmp .Use
+ 	jmp .Use
 
 .HyperPotion:
 	call .HealItem
-	jmp c, .DontUse
+ 	jmp c, .DontUse
 	ld b, 200
 	call EnemyUsedHyperPotion
-	jmp .Use
+ 	jmp .Use
 
 .SuperPotion:
 	call .HealItem
-	jmp c, .DontUse
+ 	jmp c, .DontUse
 	ld b, 50
 	call EnemyUsedSuperPotion
-	jmp .Use
+ 	jmp .Use
 
 .Potion:
 	call .HealItem
@@ -482,7 +482,7 @@ EnemyUsedFullHeal:
 	call AIUsedItemSound
 	call AI_HealStatus
 	ld a, FULL_HEAL
-	jmp PrintText_UsedItemOn_AND_AIUpdateHUD
+ 	jmp PrintText_UsedItemOn_AND_AIUpdateHUD
 
 EnemyUsedMaxPotion:
 	ld a, MAX_POTION
@@ -576,7 +576,7 @@ EnemyPotionFinish:
 	ld [wWhichHPBar], a
 	call AIUsedItemSound
 	predef AnimateHPBar
-	jmp AIUpdateHUD
+ 	jmp AIUpdateHUD
 
 AI_TrySwitch:
 ; Determine whether the AI can switch based on how many Pokemon are still alive.
@@ -716,14 +716,14 @@ EnemyUsedXItem:
 	call PrintText_UsedItemOn
 	pop bc
 	farcall RaiseStat
-	jmp AIUpdateHUD
+ 	jmp AIUpdateHUD
 
 ; Parameter
 ; a = ITEM_CONSTANT
 PrintText_UsedItemOn_AND_AIUpdateHUD:
 	ld [wCurEnemyItem], a
 	call PrintText_UsedItemOn
-	jmp AIUpdateHUD
+ 	jmp AIUpdateHUD
 
 PrintText_UsedItemOn:
 	ld a, [wCurEnemyItem]
@@ -734,7 +734,7 @@ PrintText_UsedItemOn:
 	ld bc, ITEM_NAME_LENGTH
 	call CopyBytes
 	ld hl, EnemyUsedOnText
-	jmp PrintText
+ 	jmp PrintText
 
 EnemyUsedOnText:
 	text_far _EnemyUsedOnText

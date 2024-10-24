@@ -6,8 +6,7 @@ _2DMenu_::
 	call Draw2DMenu
 	call UpdateSprites
 	call ApplyTilemap
-	call Get2DMenuSelection
-	ret
+    jr Get2DMenuSelection
 
 _InterpretBattleMenu::
 	ld hl, CopyMenuData
@@ -17,15 +16,13 @@ _InterpretBattleMenu::
 	call Draw2DMenu
 	call UpdateSprites
 	call ApplyTilemap
-	call Get2DMenuSelection
-	ret
+    jr Get2DMenuSelection
 
 Draw2DMenu:
 	xor a
 	ldh [hBGMapMode], a
 	call MenuBox
-	call Place2DMenuItemStrings
-	ret
+    jr Place2DMenuItemStrings
 
 Get2DMenuSelection:
 	call Init2DMenuCursorPosition
@@ -282,13 +279,13 @@ Menu_WasButtonPressed:
 _2DMenuInterpretJoypad:
 	call GetMenuJoypad
 	bit A_BUTTON_F, a
-	jmp nz, .a_b_start_select
+ 	jmp nz, .a_b_start_select
 	bit B_BUTTON_F, a
-	jmp nz, .a_b_start_select
+ 	jmp nz, .a_b_start_select
 	bit SELECT_F, a
-	jmp nz, .a_b_start_select
+ 	jmp nz, .a_b_start_select
 	bit START_F, a
-	jmp nz, .a_b_start_select
+ 	jmp nz, .a_b_start_select
 	bit D_RIGHT_F, a
 	jr nz, .d_right
 	bit D_LEFT_F, a
@@ -313,8 +310,7 @@ _2DMenuInterpretJoypad:
 	jr z, .check_wrap_around_down
 	inc [hl]
 	xor a
-	call PlayMenuMoveSFX
-	ret
+    jr PlayMenuMoveSFX
 
 .check_wrap_around_down
 	ld a, [w2DMenuFlags1]
@@ -337,8 +333,7 @@ _2DMenuInterpretJoypad:
 	jr z, .check_wrap_around_up
 	ld [hl], a
 	xor a
-	call PlayMenuMoveSFX
-	ret
+    jr PlayMenuMoveSFX
 
 .check_wrap_around_up
 	ld a, [w2DMenuFlags1]
@@ -362,8 +357,7 @@ _2DMenuInterpretJoypad:
 	jr z, .check_wrap_around_left
 	ld [hl], a
 	xor a
-	call PlayMenuMoveSFX
-	ret
+    jr PlayMenuMoveSFX
 
 .check_wrap_around_left
 	ld a, [w2DMenuFlags1]
@@ -387,15 +381,14 @@ _2DMenuInterpretJoypad:
 	jr z, .check_wrap_around_right
 	inc [hl]
 	xor a
-	call PlayMenuMoveSFX
-	ret
+    jr PlayMenuMoveSFX
 
 .check_wrap_around_right
 	ld a, [w2DMenuFlags1]
 	bit 4, a
 	jr nz, .wrap_around_right
 	bit 0, a
-	jmp nz, .set_bit_7
+    jr nz, .set_bit_7
 	xor a
 	ret
 
@@ -645,8 +638,7 @@ RestoreOverworldMapTiles: ; unreferenced
 	ld a, c
 	or b
 	jr nz, .loop
-	call CloseSRAM
-	ret
+    jmp CloseSRAM
 
 Error_Cant_ExitMenu:
 	ld hl, .WindowPoppingErrorText

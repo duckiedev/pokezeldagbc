@@ -30,7 +30,7 @@ PlayBattleMusic:
 	ld a, [wBattleType]
 	cp BATTLETYPE_SUICUNE
 	ld de, MUSIC_SUICUNE_BATTLE
-	jmp z, .done
+ 	jmp z, .done
 	cp BATTLETYPE_ROAMING
 	jr z, .done
 

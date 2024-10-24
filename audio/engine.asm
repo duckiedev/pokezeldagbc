@@ -96,7 +96,7 @@ _UpdateSound::
 	ld hl, CHANNEL_FLAGS1
 	add hl, bc
 	bit SOUND_CHANNEL_ON, [hl]
-	jmp z, .nextchannel
+ 	jmp z, .nextchannel
 	; check time left in the current note
 	ld hl, CHANNEL_NOTE_DURATION
 	add hl, bc
@@ -196,7 +196,7 @@ _UpdateSound::
 	inc a
 	ld [wCurChannel], a
 	cp NUM_CHANNELS ; are we done?
-	jmp nz, .loop ; do it all again
+ 	jmp nz, .loop ; do it all again
 
 	call PlayDanger
 	; fade music in/out
@@ -294,7 +294,7 @@ UpdateChannels:
 	and %10001110 ; ch1 off
 	ldh [rNR52], a
 	ld hl, rNR10
-	jmp ClearChannel
+ 	jmp ClearChannel
 
 .ch1_noise_sampling
 	ld hl, wCurTrackDuty
@@ -353,7 +353,7 @@ UpdateChannels:
 	and %10001101 ; ch2 off
 	ldh [rNR52], a
 	ld hl, rNR21 - 1 ; there is no rNR20
-	jmp ClearChannel
+ 	jmp ClearChannel
 
 .ch2_noise_sampling
 	ld hl, wCurTrackDuty
@@ -398,7 +398,7 @@ UpdateChannels:
 	and %10001011 ; ch3 off
 	ldh [rNR52], a
 	ld hl, rNR30
-	jmp ClearChannel
+ 	jmp ClearChannel
 
 .ch3_noise_sampling
 	ld a, $3f ; sound length
@@ -489,7 +489,7 @@ endr
 	and %10000111 ; ch4 off
 	ldh [rNR52], a
 	ld hl, rNR41 - 1 ; there is no rNR40
-	jmp ClearChannel
+ 	jmp ClearChannel
 
 .ch4_noise_sampling
 	ld a, $3f ; sound length
@@ -1153,11 +1153,11 @@ ParseMusic:
 	ld hl, CHANNEL_FLAGS1
 	add hl, bc
 	bit SOUND_SFX, [hl]
-	jmp nz, ParseSFXOrCry
+ 	jmp nz, ParseSFXOrCry
 	bit SOUND_CRY, [hl]
-	jmp nz, ParseSFXOrCry
+ 	jmp nz, ParseSFXOrCry
 	bit SOUND_NOISE, [hl]
-	jmp nz, GetNoiseSample
+ 	jmp nz, GetNoiseSample
 ; normal note
 	; set note duration (bottom nybble)
 	ld a, [wCurMusicByte]
@@ -1189,7 +1189,7 @@ ParseMusic:
 	ld hl, CHANNEL_NOTE_FLAGS
 	add hl, bc
 	set NOTE_NOISE_SAMPLING, [hl]
-	jmp LoadNote
+ 	jmp LoadNote
 
 .rest
 ; note = rest
@@ -1906,7 +1906,7 @@ Music_NoteType:
 	cp CHAN4
 	ret z
 	; volume envelope
-	jmp Music_VolumeEnvelope
+ 	jr Music_VolumeEnvelope
 
 Music_PitchSweep:
 ; update pitch sweep
@@ -1949,7 +1949,7 @@ Music_Tempo:
 	ld d, a
 	call GetMusicByte
 	ld e, a
-	jmp SetGlobalTempo
+ 	jmp SetGlobalTempo
 
 Music_Octave8:
 Music_Octave7:
@@ -1985,7 +1985,7 @@ Music_StereoPanning:
 	bit STEREO, a
 	jr nz, Music_ForceStereoPanning
 	; skip param
-	jmp GetMusicByte
+ 	jr GetMusicByte
 
 Music_ForceStereoPanning:
 ; force panning
@@ -2037,7 +2037,7 @@ Music_TempoRelative:
 	add hl, de
 	ld e, l
 	ld d, h
-	jmp SetGlobalTempo
+ 	jmp SetGlobalTempo
 
 Music_SFXPriorityOn:
 ; turn sfx priority on
@@ -2347,7 +2347,7 @@ _PlayMusic::
 	ld [wNoiseSampleAddress + 1], a
 	ld [wNoiseSampleDelay], a
 	ld [wMusicNoiseSampleSet], a
-	jmp MusicOn
+ 	jmp MusicOn
 
 _PlayCry::
 ; Play cry de using parameters:
@@ -2457,7 +2457,7 @@ _PlayCry::
 .end
 	ld a, 1 ; stop playing music
 	ld [wSFXPriority], a
-	jmp MusicOn
+ 	jmp MusicOn
 
 _PlaySFX::
 ; clear channels if they aren't already
@@ -2566,7 +2566,7 @@ PlayStereoSFX::
 ; standard procedure if stereo's off
 	ld a, [wOptions]
 	bit STEREO, a
-	jmp z, _PlaySFX
+ 	jmp z, _PlaySFX
 
 ; else, let's go ahead with this
 	ld hl, wMusicID
@@ -2656,7 +2656,7 @@ PlayStereoSFX::
 	jr nz, .loop
 
 ; we're done
-	jmp MusicOn
+ 	jmp MusicOn
 
 LoadChannel:
 ; input: de = audio pointer
@@ -2836,4 +2836,4 @@ PlayTrainerEncounterMusic::
 	ld hl, TrainerEncounterMusic
 	add hl, de
 	ld e, [hl]
-	jmp PlayMusic
+ 	jmp PlayMusic

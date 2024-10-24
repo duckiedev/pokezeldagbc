@@ -7,8 +7,7 @@ DEF NAMINGSCREEN_UNDERLINE  EQU "<DOT>" ; $f2
 _NamingScreen:
 	call DisableSpriteUpdates
 	call NamingScreen
-	call ReturnToMapWithSpeechTextbox
-	ret
+    jmp ReturnToMapWithSpeechTextbox
 
 NamingScreen:
 	ld hl, wNamingScreenDestinationPointer
@@ -40,8 +39,7 @@ NamingScreen:
 	ldh [hMapAnims], a
 	pop af
 	ld [wOptions], a
-	call ClearJoypad
-	ret
+    jmp ClearJoypad
 
 .SetUpNamingScreen:
 	call ClearBGPalettes
@@ -56,8 +54,7 @@ NamingScreen:
 	call WaitBGMap
 	call WaitTop
 	call SetDefaultBGPAndOBP
-	call NamingScreen_InitNameEntry
-	ret
+    jmp NamingScreen_InitNameEntry
 
 .GetNamingScreenSetup:
 	ld a, [wNamingScreenType]
@@ -208,8 +205,7 @@ NamingScreen:
 .not_kris
 	ld a, b
 	depixel 4, 4, 4, 0
-	call InitSpriteAnimStruct
-	ret
+    jmp InitSpriteAnimStruct
 
 .StoreMonIconParams:
 	ld a, MON_NAME_LENGTH - 1
@@ -427,8 +423,7 @@ NamingScreenJoypadLoop:
 	ret
 
 .b
-	call NamingScreen_DeleteCharacter
-	ret
+    jmp NamingScreen_DeleteCharacter
 
 .end
 	call NamingScreen_StoreEntry
@@ -443,13 +438,11 @@ NamingScreenJoypadLoop:
 	ld [hl], a
 	jr z, .upper
 	ld de, NameInputLower
-	call NamingScreen_ApplyTextInputMode
-	ret
+    jmp NamingScreen_ApplyTextInputMode
 
 .upper
 	ld de, NameInputUpper
-	call NamingScreen_ApplyTextInputMode
-	ret
+    jmp NamingScreen_ApplyTextInputMode
 
 .GetCursorPosition:
 	ld hl, wNamingScreenCursorObjectPointer
