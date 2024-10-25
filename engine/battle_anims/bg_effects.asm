@@ -132,7 +132,7 @@ BattleBGEffects:
 	dw BattleBGEffect_WobbleScreen
 
 BattleBGEffect_End:
- 	jmp EndBattleBGEffect
+ 	jr EndBattleBGEffect
 
 BatttleBGEffects_GetNamedJumptablePointer:
 	ld hl, BG_EFFECT_STRUCT_JT_INDEX

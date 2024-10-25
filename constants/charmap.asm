@@ -43,13 +43,7 @@
 	charmap "<ID>",      $73
 	charmap "№",         $74
 
-; Actual characters (from other graphics files)
-	charmap "┌",         $79
-	charmap "─",         $7a
-	charmap "┐",         $7b
-	charmap "│",         $7c
-	charmap "└",         $7d
-	charmap "┘",         $7e	
+; Actual characters (from other graphics files)	
 	charmap " ",		 $7f ;
 
 	; needed for StatsScreen_PlaceShinyIcon and PrintPartyMonPage1
@@ -170,6 +164,15 @@
 	charmap "▶",         $e6
 	charmap "▼",         $e7
 
+	; JOHTO FRAME
+	charmap "┌",         $ea
+	charmap "─",         $eb
+	charmap "┐",         $ec
+	charmap "│",         $ed
+	charmap "└",         $ee
+	charmap "┘",         $ef
+
+	; HYRULE Ocarina Notes
 	charmap "<NOTE>",    $e8
 	charmap "<UP>",		 $e9
 	charmap "<DOWN>",	 $ea

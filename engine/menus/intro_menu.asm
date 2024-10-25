@@ -1,5 +1,5 @@
 Intro_MainMenu:
-	ld a, HYRULE
+	ld a, JOHTO
 	ld [wTextboxStyle], a
 	ld de, MUSIC_NONE
 	call PlayMusic

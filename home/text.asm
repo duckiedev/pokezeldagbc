@@ -52,11 +52,15 @@ Textbox::
 	jr TextboxPalette
 
 TextboxBorder::
+	ld a, [wTextboxStyle]
+	cp JOHTO
+	jr z, TextboxJohto
+TextboxHyrule:
 	; Top
 	push hl
 	ld a, "<BORDER>"
 	ld [hli], a
-	call .PlaceChars
+	call PlaceChars
 	ld [hl], a
 	pop hl
 
@@ -66,7 +70,7 @@ TextboxBorder::
 .row
 	push hl
 	ld [hli], a
-	call .PlaceChars
+	call PlaceChars
 	ld [hl], a
 	pop hl
 
@@ -77,12 +81,49 @@ TextboxBorder::
 
 	; Bottom
 	ld [hli], a
-	call .PlaceChars
+	call PlaceChars
 	ld [hl], a
 
 	ret
 
-.PlaceChars:
+TextboxJohto:
+	; Top
+	push hl
+	ld a, "┌"
+	ld [hli], a
+	inc a ; "─"
+	call PlaceChars
+	inc a ; "┐"
+	ld [hl], a
+	pop hl
+
+	; Middle
+	ld de, SCREEN_WIDTH
+	add hl, de
+.row
+	push hl
+	ld a, "│"
+	ld [hli], a
+	ld a, " "
+	call PlaceChars
+	ld [hl], "│"
+	pop hl
+
+	ld de, SCREEN_WIDTH
+	add hl, de
+	dec b
+	jr nz, .row
+
+	; Bottom
+	ld a, "└"
+	ld [hli], a
+	ld a, "─"
+	call PlaceChars
+	ld [hl], "┘"
+
+	ret
+
+PlaceChars:
 ; Place char a c times.
 	ld d, c
 .loop
@@ -123,13 +164,13 @@ SpeechTextbox::
 	hlcoord TEXTBOX_X, TEXTBOX_Y
 	ld b, TEXTBOX_INNERH
 	ld c, TEXTBOX_INNERW
-	jr Textbox
+	jmp Textbox
 	
 .battle
 	hlcoord TEXTBOX_BATTLE_X, TEXTBOX_BATTLE_Y
 	ld b, TEXTBOX_BATTLE_INNERH
 	ld c, TEXTBOX_BATTLE_INNERW
-	jr Textbox
+	jmp Textbox
 
 PrintText::
 	call SetUpTextbox

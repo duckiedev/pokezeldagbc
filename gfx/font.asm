@@ -1,9 +1,6 @@
 FontCrystal:
 INCBIN "gfx/font/font_crystal.2bpp"
 
-FrameCrystal:
-INCBIN "gfx/font/frame_crystal.1bpp"
-
 Font:
 INCBIN "gfx/font/font.2bpp"
 

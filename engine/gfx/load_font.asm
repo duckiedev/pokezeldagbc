@@ -36,17 +36,7 @@ _LoadStandardFont::
 	ld de, TextboxSpaceGFX
 	ld hl, vTiles2 tile " "
 	lb bc, BANK(TextboxSpaceGFX), 1
-	call Get2bpp
-
-LoadFrame:
-	ld de, FrameCrystal
-	ld hl, vTiles2 tile "┌" ; $79
-	lb bc, BANK(FrameCrystal), TEXTBOX_FRAME_TILES ; "┌" to "┘"
-	call Get1bppViaHDMA
-	ld hl, vTiles2 tile " " ; $7f
-	ld de, TextboxSpaceGFX
-	lb bc, BANK(TextboxSpaceGFX), 1
- 	jmp Get1bppViaHDMA
+	jmp Get2bpp
 
 _LoadFontsBattleExtra::
 	ld de, FontBattleExtra
