@@ -1031,8 +1031,7 @@ BattleCommand_DoTurn:
 
 .mimic
 	ld hl, wWildMonPP
-	call .consume_pp
-	ret
+	jr .consume_pp
 
 .out_of_pp
 	call BattleCommand_MoveDelay
@@ -2752,8 +2751,7 @@ SpeciesItemBoost:
 	ret nz
 
 ; Double the stat
-	sla l
-	rl h
+	add hl, hl
 
 	ld a, HIGH(MAX_STAT_VALUE)
 	cp h

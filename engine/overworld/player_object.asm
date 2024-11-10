@@ -702,7 +702,7 @@ GetRelativeFacing::
 	cp NUM_OBJECT_STRUCTS
 	jr nc, .carry
 	ld e, a
-	call .GetFacing_e_relativeto_d
+	jr .GetFacing_e_relativeto_d
 	ret
 
 .carry

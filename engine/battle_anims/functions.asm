@@ -545,8 +545,7 @@ BattleAnimFunc_MoveFromUserToTargetSpinAround:
 	ld a, [hl]
 	cp $80
 	jr nc, .next
-	call .SetCoords
-	ret
+	jr .SetCoords
 
 .next
 	call BattleAnim_IncAnonJumptableIndex
@@ -1658,8 +1657,7 @@ BattleAnimFunc_Gust:
 	ld [hl], 0
 .one
 .three
-	call .GustWobble
-	ret
+	jr .GustWobble
 
 .two
 	ld hl, BATTLEANIMSTRUCT_XCOORD
@@ -2080,8 +2078,7 @@ BattleAnimFunc_Egg:
 	jr nc, .egg_bomb_vertical_wave
 	inc [hl]
 .egg_bomb_vertical_wave
-	call .EggVerticalWaveMotion
-	ret
+	jmp .EggVerticalWaveMotion
 
 .six
 	; Initial Softboiled arc movement to x coord $4b
@@ -2092,8 +2089,8 @@ BattleAnimFunc_Egg:
 	jr nc, .softboiled_vertical_wave
 	inc [hl]
 .softboiled_vertical_wave
-	call .EggVerticalWaveMotion
-	ret
+	jmp .EggVerticalWaveMotion
+
 
 .two
 	; Compares the egg's x coord to determine whether to move, wait or end animation
@@ -2314,8 +2311,7 @@ BattleAnimFunc_Sound:
 	and a
 	jr z, .done_anim
 	dec [hl]
-	call .SoundWaveMotion
-	ret
+	jr .SoundWaveMotion
 
 .done_anim
  	jmp DeinitBattleAnimation
@@ -3306,8 +3302,7 @@ BattleAnimFunc_SkyAttack:
 	ret
 
 .one
-	call .SkyAttack_CyclePalette
-	ret
+	jr .SkyAttack_CyclePalette
 
 .two
 ; Moves towards target and stops at x coord $84

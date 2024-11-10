@@ -44,6 +44,7 @@ DEF TEXT_DELAY_SLOW EQU %101 ; 5
 	const_def
 	const FAST_TEXT_DELAY_F ; 0
 	const TEXT_DELAY_F      ; 1
+	const NO_LINE_SPACING_F ; 2
 
 ; wOptions2::
 	const_def
@@ -263,7 +264,7 @@ DEF CELEBIEVENT_FOREST_IS_RESTLESS_F EQU 2
 	const DAILYFLAGS1_KURT_MAKING_BALLS_F             ; 0
 	const DAILYFLAGS1_FISH_SWARM_F                    ; 1
 	const DAILYFLAGS1_ALL_FRUIT_TREES_F               ; 2
-	const DAILYFLAGS1_GOT_SHUCKIE_TODAY_F             ; 3
+	const DAILYFLAGS1_UNUSED1_F			              ; 3
 	const DAILYFLAGS1_GOLDENROD_UNDERGROUND_BARGAIN_F ; 4
 	const DAILYFLAGS1_TRAINER_HOUSE_F                 ; 5
 

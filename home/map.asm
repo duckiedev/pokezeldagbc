@@ -1589,8 +1589,8 @@ GetMovementPermissions::
 	ld hl, .MovementPermissionsData
 	add l
 	ld l, a
-	ld a, 0
 	adc h
+	sub l
 	ld h, a
 	ld a, [hl]
 	ld hl, wTilePermissions
@@ -1624,8 +1624,7 @@ GetMovementPermissions::
 	dec e
 	call GetCoordTileCollision
 	ld [wTileUp], a
-	call .Up
-	ret
+	jr .Up
 
 .LeftRight:
 	ld a, [wPlayerMapX]
@@ -1643,8 +1642,7 @@ GetMovementPermissions::
 	inc d
 	call GetCoordTileCollision
 	ld [wTileRight], a
-	call .Right
-	ret
+	jr .Right
 
 .Down:
 	call .CheckHiNybble

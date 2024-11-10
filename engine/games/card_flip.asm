@@ -98,8 +98,7 @@ _CardFlip:
 	call YesNoBox
 	jr c, .SaidNo
 	call CardFlip_ShuffleDeck
-	call .Increment
-	ret
+	jr .Increment
 
 .SaidNo:
 	ld a, 7
@@ -142,8 +141,7 @@ _CardFlip:
 	ld a, $1
 	ldh [hBGMapMode], a
 	call WaitSFX
-	call .Increment
-	ret
+	jr .Increment
 
 .CardFlipNotEnoughCoinsText:
 	text_far _CardFlipNotEnoughCoinsText
@@ -218,8 +216,7 @@ _CardFlip:
 	call CardFlip_FillGreenBox
 	pop af
 	ld [wCardFlipWhichCard], a
-	call .Increment
-	ret
+	jmp .Increment
 
 .CardFlipChooseACardText:
 	text_far _CardFlipChooseACardText
@@ -239,8 +236,7 @@ _CardFlip:
 	jr .betloop
 
 .betdone
-	call .Increment
-	ret
+	jmp .Increment
 
 .CardFlipPlaceYourBetText:
 	text_far _CardFlipPlaceYourBetText
@@ -272,14 +268,12 @@ _CardFlip:
 	call GetCoordsOfChosenCard
 	call CardFlip_DisplayCardFaceUp
 	call WaitBGMap2
-	call .Increment
-	ret
+	jmp .Increment
 
 .TabulateTheResult:
 	call CardFlip_CheckWinCondition
 	call WaitPressAorB_BlinkCursor
-	call .Increment
-	ret
+	jmp .Increment
 
 .PlayAgain:
 	call ClearSprites
@@ -287,8 +281,7 @@ _CardFlip:
 	call CardFlip_UpdateCoinBalanceDisplay
 	call YesNoBox
 	jr nc, .Continue
-	call .Increment
-	ret
+	jmp .Increment
 
 .Continue:
 	ld a, [wCardFlipNumCardsPlayed]

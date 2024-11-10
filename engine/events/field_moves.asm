@@ -363,9 +363,7 @@ FlyToAnim:
 .exit
 	pop af
 	ld [wStateFlags], a
-	call .RestorePlayerSprite_DespawnLeaves
-	ret
-
+; fallthrough
 .RestorePlayerSprite_DespawnLeaves:
 	ld hl, wShadowOAMSprite00TileID
 	xor a

@@ -640,12 +640,6 @@ TeachWhichPKMNString:
 MoveToWhereString:
 	db "Move to where?@"
 
-ChooseAFemalePKMNString: ; unreferenced
-	db "Choose a ♀<PK><MN>.@"
-
-ChooseAMalePKMNString: ; unreferenced
-	db "Choose a ♂<PK><MN>.@"
-
 ToWhichPKMNString:
 	db "To which <PK><MN>?@"
 
@@ -659,8 +653,7 @@ PrintPartyMenuActionText:
 	ld a, [wPartyMenuActionText]
 	and $f
 	ld hl, .MenuActionTexts
-	call .PrintText
-	ret
+	jr .PrintText
 
 .MenuActionTexts:
 ; entries correspond to PARTYMENUTEXT_* constants

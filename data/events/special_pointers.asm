@@ -47,8 +47,6 @@ SpecialsPointers::
 	add_special FindPartyMonThatSpecies
 	add_special FindPartyMonThatSpeciesYourTrainerID
 	add_special ActivateFishingSwarm
-	add_special GiveShuckle
-	add_special ReturnShuckie
 	add_special CheckPokerus
 	add_special DisplayCoinCaseBalance
 	add_special DisplayMoneyAndCoinBalance

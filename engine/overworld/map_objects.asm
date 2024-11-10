@@ -2818,8 +2818,7 @@ InitSprites:
 	ld c, PRIORITY_NORM
 	call .InitSpritesByPriority
 	ld c, PRIORITY_LOW
-	call .InitSpritesByPriority
-	ret
+	jr .InitSpritesByPriority
 
 .DeterminePriorities:
 	xor a

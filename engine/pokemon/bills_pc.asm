@@ -1866,14 +1866,12 @@ MovePKMN_InsertMon:
 	cp [hl]
 	jr z, .same_box
 	call .CopyFromBox
-	call .CopyToBox
-	ret
+	jmp .CopyToBox
 
 .same_box
 	call .CopyFromBox
 	call .CheckTrivialMove
-	call .CopyToBox
-	ret
+	jmp .CopyToBox
 
 .PartyToBox:
 	call .CopyFromParty
@@ -1882,19 +1880,16 @@ MovePKMN_InsertMon:
 	farcall SaveGameData
 	xor a
 	ld [wGameLogicPaused], a
-	call .CopyToBox
-	ret
+	jr .CopyToBox
 
 .BoxToParty:
 	call .CopyFromBox
-	call .CopyToParty
-	ret
+	jmp .CopyToParty
 
 .PartyToParty:
 	call .CopyFromParty
 	call .CheckTrivialMove
-	call .CopyToParty
-	ret
+	jmp .CopyToParty
 
 .CheckTrivialMove:
 	ld a, [wBillsPC_CursorPosition]

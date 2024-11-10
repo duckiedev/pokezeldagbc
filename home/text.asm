@@ -242,6 +242,7 @@ MACRO dict
 ENDM
 
 	dict "<LINE>",    LineChar
+	dict "<LNBRK>",   LineBreak
 	dict "<NEXT>",    NextLineChar
 	dict "<CR>",      CarriageReturnChar
 	dict "<NULL>",    NullChar
@@ -375,11 +376,17 @@ PlacePOKEText::   db "<PO><KE>@"
 String_Space::    db " @"
 
 NextLineChar::
-	pop hl
+	ld a, [wTextboxFlags]
+	bit NO_LINE_SPACING_F, a
 	ld bc, SCREEN_WIDTH * 2
+	jr z, LineBreak.ok
+LineBreak::
+	ld bc, SCREEN_WIDTH
+.ok
+	pop hl
 	add hl, bc
 	push hl
- 	jmp NextChar
+	jmp NextChar
 
 LineFeedChar::
 	pop hl

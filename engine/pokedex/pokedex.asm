@@ -1347,8 +1347,7 @@ Pokedex_OrderMonsByMode:
 	ld [hli], a
 	dec c
 	jr nz, .loopnew
-	call .FindLastSeen
-	ret
+	jr .FindLastSeen
 
 .OldMode:
 	ld hl, wPokedexOrder
@@ -1359,8 +1358,7 @@ Pokedex_OrderMonsByMode:
 	inc a
 	dec c
 	jr nz, .loopold
-	call .FindLastSeen
-	ret
+	jr .FindLastSeen
 
 .FindLastSeen:
 	ld hl, wPokedexOrder + NUM_POKEMON - 1

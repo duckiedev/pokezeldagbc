@@ -49,6 +49,7 @@ Option:
 	ret
 
 NewGame:
+	farcall _InternetBrowser
 	xor a
 	ld [wDebugFlags], a
 	call ResetWRAM
@@ -515,7 +516,7 @@ Continue_DisplayGameTime:
  	jmp PrintNum
 
 OakSpeech:
-	farcall InitClock
+	;farcall InitClock
 	ld c, 31
 	call FadeToBlack
 	call ClearTilemap

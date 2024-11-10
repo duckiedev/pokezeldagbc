@@ -1455,7 +1455,9 @@ wPoisonStepPartyFlags:: ds PARTY_LENGTH
 wPoisonStepDataEnd::
 ENDU
 
-	ds 13
+wBrowserButtonSelected:: db
+
+	ds 12
 
 wSeenOWMonBank:: db
 wSeenOWMonDistance:: db

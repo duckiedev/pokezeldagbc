@@ -234,8 +234,7 @@ LoadMapTimeOfDay:
 	farcall UpdateTimeOfDayPal
 	call LoadOverworldTilemapAndAttrmapPals
 	call .ClearBGMap
-	call .PushAttrmap
-	ret
+	jr .PushAttrmap
 
 .ClearBGMap:
 	ld a, HIGH(vBGMap0)

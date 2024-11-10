@@ -9,9 +9,7 @@ INCLUDE "engine/math/math.asm"
 INCLUDE "data/items/attributes.asm"
 INCLUDE "engine/overworld/npc_movement.asm"
 INCLUDE "engine/events/happiness_egg.asm"
-INCLUDE "engine/events/shuckle.asm"
 INCLUDE "engine/events/treasure_chest.asm"
-
 
 SECTION "bank2", ROMX
 
@@ -19,7 +17,6 @@ INCLUDE "engine/overworld/player_object.asm"
 INCLUDE "engine/math/sine.asm"
 INCLUDE "engine/predef.asm"
 INCLUDE "engine/gfx/color.asm"
-
 
 SECTION "bank3", ROMX
 
@@ -122,6 +119,7 @@ SECTION "bankA", ROMX
 INCLUDE "engine/movie/trade_animation.asm"
 INCLUDE "engine/overworld/wildmons.asm"
 INCLUDE "engine/menus/naming_screen.asm"
+INCLUDE "engine/menus/browser/internet_browser.asm"
 
 
 SECTION "bankB", ROMX

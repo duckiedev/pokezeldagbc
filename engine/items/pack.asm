@@ -84,8 +84,7 @@ Pack:
 	ld c, PACKSTATE_INITBALLSPOCKET ; right
 	call Pack_InterpretJoypad
 	ret c
-	call .ItemBallsKey_LoadSubmenu
-	ret
+	jmp .ItemBallsKey_LoadSubmenu
 
 .InitKeyItemsPocket:
 	ld a, KEY_ITEM_POCKET
@@ -111,8 +110,7 @@ Pack:
 	ld c, PACKSTATE_INITTMHMPOCKET ; right
 	call Pack_InterpretJoypad
 	ret c
-	call .ItemBallsKey_LoadSubmenu
-	ret
+	jmp .ItemBallsKey_LoadSubmenu
 
 .InitTMHMPocket:
 	ld a, TM_HM_POCKET
@@ -230,9 +228,7 @@ Pack:
 	ld c, PACKSTATE_INITKEYITEMSPOCKET ; right
 	call Pack_InterpretJoypad
 	ret c
-	call .ItemBallsKey_LoadSubmenu
-	ret
-
+; fallthrough
 .ItemBallsKey_LoadSubmenu:
 	farcall _CheckTossableItem
 	ld a, [wItemAttributeValue]

@@ -660,8 +660,7 @@ DebugColor_TMHMJoypad:
 	ld a, [hl]
 	and B_BUTTON
 	jr nz, .cancel
-	call .scroll
-	ret
+	jr .scroll
 
 .cancel
 	ld a, DEBUGCOLORMAIN_INITSCREEN
@@ -978,9 +977,7 @@ DebugColor_PlaceCursor:
 	ld de, wDebugGreenChannel
 	call .placesprite
 	ld de, wDebugBlueChannel
-	call .placesprite
-	ret
-
+; fallthrough
 .placesprite:
 	ld a, b
 	ld [hli], a ; y

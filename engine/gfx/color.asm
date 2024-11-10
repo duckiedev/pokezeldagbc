@@ -1149,3 +1149,6 @@ INCLUDE "gfx/beta_poker/beta_poker.pal"
 
 SlotMachinePals:
 INCLUDE "gfx/slots/slots.pal"
+
+BrowserPals:
+INCLUDE "gfx/browser/browser.pal"

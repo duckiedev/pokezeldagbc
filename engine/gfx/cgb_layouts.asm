@@ -62,6 +62,7 @@ CGBLayoutJumptable:
 	dw _CGB_Unused1E
 	dw _CGB_NamingScreen
 	dw _CGB_Plain
+	dw _CGB_Browser
 	assert_table_length NUM_SCGB_LAYOUTS
 
 _CGB_BattleGrayscale:
@@ -924,3 +925,14 @@ INCLUDE "gfx/diploma/plain.pal" ; todo: replace this polished port
 
 PokegearOBPals:
 INCLUDE "gfx/icons/icons.pal" ; todo: replace this polished port
+
+_CGB_Browser:
+	ld hl, BrowserPals
+	ld de, wBGPals1
+	ld bc, 7 palettes
+	ld a, BANK(wBGPals1)
+	call FarCopyWRAM
+	call ApplyPals
+	ld a, TRUE
+	ldh [hCGBPalUpdate], a
+	ret

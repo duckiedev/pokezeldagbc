@@ -243,14 +243,6 @@ DEF NUM_FRUIT_TREES EQU const_value - 1
 	const GBCHECK_SGB ; 1
 	const GBCHECK_CGB ; 2
 
-; ReturnShuckie return values
-	const_def
-	const SHUCKIE_WRONG_MON ; 0
-	const SHUCKIE_REFUSED   ; 1
-	const SHUCKIE_RETURNED  ; 2
-	const SHUCKIE_HAPPY     ; 3
-	const SHUCKIE_FAINTED   ; 4
-
 ; HealMachineAnim setval arguments
 ; HealMachineAnim.Pointers indexes (see engine/events/heal_machine_anim.asm)
 	const_def
