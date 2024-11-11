@@ -27,8 +27,6 @@ StdScripts::
 	add_stdscript GymStatue2Script
 	add_stdscript ReceiveItemScript
 	add_stdscript PCScript
-	add_stdscript GameCornerCoinVendorScript
-	add_stdscript HappinessCheckScript
 
 PokecenterNurseScript:
 ; EVENT_WELCOMED_TO_POKECOM_CENTER is never set
@@ -276,108 +274,4 @@ ReceiveItemScript:
 	farwritetext ReceivedItemText
 	playsound SFX_ITEM
 	waitsfx
-	end
-
-GameCornerCoinVendorScript:
-	faceplayer
-	opentext
-	farwritetext CoinVendor_WelcomeText
-	promptbutton
-	checkitem COIN_CASE
-	iftrue CoinVendor_IntroScript
-	farwritetext CoinVendor_NoCoinCaseText
-	waitbutton
-	closetext
-	end
-
-CoinVendor_IntroScript:
-	farwritetext CoinVendor_IntroText
-
-.loop
-	special DisplayMoneyAndCoinBalance
-	loadmenu .MenuHeader
-	verticalmenu
-	closewindow
-	ifequal 1, .Buy50
-	ifequal 2, .Buy500
-	sjump .Cancel
-
-.Buy50:
-	checkcoins MAX_COINS - 50
-	ifequal HAVE_MORE, .CoinCaseFull
-	checkmoney YOUR_MONEY, 1000
-	ifequal HAVE_LESS, .NotEnoughMoney
-	givecoins 50
-	takemoney YOUR_MONEY, 1000
-	waitsfx
-	playsound SFX_TRANSACTION
-	farwritetext CoinVendor_Buy50CoinsText
-	waitbutton
-	sjump .loop
-
-.Buy500:
-	checkcoins MAX_COINS - 500
-	ifequal HAVE_MORE, .CoinCaseFull
-	checkmoney YOUR_MONEY, 10000
-	ifequal HAVE_LESS, .NotEnoughMoney
-	givecoins 500
-	takemoney YOUR_MONEY, 10000
-	waitsfx
-	playsound SFX_TRANSACTION
-	farwritetext CoinVendor_Buy500CoinsText
-	waitbutton
-	sjump .loop
-
-.NotEnoughMoney:
-	farwritetext CoinVendor_NotEnoughMoneyText
-	waitbutton
-	closetext
-	end
-
-.CoinCaseFull:
-	farwritetext CoinVendor_CoinCaseFullText
-	waitbutton
-	closetext
-	end
-
-.Cancel:
-	farwritetext CoinVendor_CancelText
-	waitbutton
-	closetext
-	end
-
-.MenuHeader:
-	db MENU_BACKUP_TILES ; flags
-	menu_coords 0, 4, 15, TEXTBOX_Y - 1
-	dw .MenuData
-	db 1 ; default option
-
-.MenuData:
-	db STATICMENU_CURSOR ; flags
-	db 3 ; items
-	db " 50 :  ¥1000@"
-	db "500 : ¥10000@"
-	db "CANCEL@"
-
-HappinessCheckScript:
-	faceplayer
-	opentext
-	special GetFirstPokemonHappiness
-	ifless 50, .Unhappy
-	ifless 150, .KindaHappy
-	farwritetext HappinessText3
-	waitbutton
-	closetext
-	end
-
-.KindaHappy:
-	farwritetext HappinessText2
-	waitbutton
-	closetext
-	end
-
-.Unhappy:
-	farwritetext HappinessText1
-	waitbutton
-	closetext
 	end

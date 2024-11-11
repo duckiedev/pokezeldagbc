@@ -623,7 +623,7 @@ MartFinalPriceText:
 
 MenuHeader_Buy:
 	db MENU_BACKUP_TILES ; flags
-	menu_coords 1, 3, SCREEN_WIDTH - 1, TEXTBOX_Y - 1
+	menu_coords 1, 3, SCREEN_WIDTH - 1, HYRULE_TEXTBOX_Y - 1
 	dw .MenuData
 	db 1 ; default option
 

@@ -1,6 +1,6 @@
 ChrisNameMenuHeader:
 	db MENU_BACKUP_TILES ; flags
-	menu_coords 0, 0, 10, TEXTBOX_Y - 1
+	menu_coords 0, 0, 10, HYRULE_TEXTBOX_Y - 1
 	dw .MaleNames
 	db 1 ; default option
 	db 0 ; ???
@@ -18,7 +18,7 @@ MalePlayerNameArray:
 
 KrisNameMenuHeader:
 	db MENU_BACKUP_TILES ; flags
-	menu_coords 0, 0, 10, TEXTBOX_Y - 1
+	menu_coords 0, 0, 10, HYRULE_TEXTBOX_Y - 1
 	dw .FemaleNames
 	db 1 ; default option
 	db 0 ; ???

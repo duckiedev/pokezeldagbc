@@ -388,7 +388,7 @@ OakText_ResponseToSetTime:
 	text_far _OakTimeSoDarkText
 	text_end
 
-TimeSetBackgroundGFX:
+TimeSetBackgroundGFX::
 INCBIN "gfx/new_game/timeset_bg.1bpp"
 TimeSetUpArrowGFX:
 INCBIN "gfx/new_game/up_arrow.1bpp"

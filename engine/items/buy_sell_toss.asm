@@ -197,7 +197,7 @@ BuySell_DisplaySubtotal:
 
 TossItem_MenuHeader:
 	db MENU_BACKUP_TILES ; flags
-	menu_coords 15, 9, SCREEN_WIDTH - 1, TEXTBOX_Y - 1
+	menu_coords 15, 9, SCREEN_WIDTH - 1, HYRULE_TEXTBOX_Y - 1
 	dw NoPriceToDisplay
 	db 0 ; default option
 

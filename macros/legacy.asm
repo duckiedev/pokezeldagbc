@@ -371,8 +371,6 @@ DEF gymstatue1            EQUS "GymStatue1Script"
 DEF gymstatue2            EQUS "GymStatue2Script"
 DEF receiveitem           EQUS "ReceiveItemScript"
 DEF pcscript              EQUS "PCScript"
-DEF gamecornercoinvendor  EQUS "GameCornerCoinVendorScript"
-DEF happinesschecknpc     EQUS "HappinessCheckScript"
 
 ; constants/charmap.asm
 charmap "%", "<BSP>"

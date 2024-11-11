@@ -49,6 +49,7 @@ Option:
 	ret
 
 NewGame:
+	farcall InitWakeup
 	farcall _InternetBrowser
 	xor a
 	ld [wDebugFlags], a

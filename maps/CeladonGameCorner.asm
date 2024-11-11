@@ -15,7 +15,7 @@ CeladonGameCorner_MapScripts:
 	def_callbacks
 
 CeladonGameCornerClerkScript:
-	jumpstd GameCornerCoinVendorScript
+	end
 
 CeladonGameCornerReceptionistScript:
 	jumptextfaceplayer CeladonGameCornerReceptionistText

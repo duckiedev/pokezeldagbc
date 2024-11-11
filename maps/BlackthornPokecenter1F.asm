@@ -19,7 +19,7 @@ BlackthornPokecenter1FTwinScript:
 	jumptextfaceplayer BlackthornPokecenter1FTwinText
 
 BlackthornPokecenter1FCooltrainerMScript:
-	jumpstd HappinessCheckScript
+	end
 
 BlackthornPokecenter1FGentlemanText:
 	text "Deep inside far-"

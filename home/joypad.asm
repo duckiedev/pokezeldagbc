@@ -329,14 +329,20 @@ WaitPressAorB_BlinkCursor::
 
 .loop
 	push hl
+	ld a, [wTextboxStyle]
+	cp JOHTO
+	jr z, .johto
 	ld a, [wBattleMode]
 	and a
 	jr nz, .battle
-	hlcoord BLINKING_CURSOR_X, BLINKING_CURSOR_Y
-	call .finish
+	hlcoord HYRULE_BLINKING_CURSOR_X, HYRULE_BLINKING_CURSOR_Y
+	jr .finish
+.johto
+	hlcoord JOHTO_BLINKING_CURSOR_X, JOHTO_BLINKING_CURSOR_Y
+	jr .finish
 .battle
 	hlcoord BLINKING_CURSOR_BATTLE_X, BLINKING_CURSOR_BATTLE_Y
-
+; fallthrough
 .finish
 	call BlinkCursor
 	pop hl
@@ -404,25 +410,40 @@ PromptButton::
 .cursor_off
 	; copies tile to the left of the cursor
 	push af
+	ld a, [wTextboxStyle]
+	cp JOHTO
+	jr z, .johto_off
 	ld a, [wBattleMode]
 	and a
 	jr nz, .battle_off
 	pop af
-	lda_coord BLINKING_CURSOR_X-1, BLINKING_CURSOR_Y
+	lda_coord HYRULE_BLINKING_CURSOR_X-1, HYRULE_BLINKING_CURSOR_Y
+	jr .load_cursor_state
+
+.johto_off
+	pop af
+	lda_coord JOHTO_BLINKING_CURSOR_X-1, JOHTO_BLINKING_CURSOR_Y
 	jr .load_cursor_state
 
 .battle_off
 	pop af
 	lda_coord BLINKING_CURSOR_BATTLE_X-1, BLINKING_CURSOR_BATTLE_Y
-
+; fallthrough
 .load_cursor_state
 	; places either "▼" or the copied tile
 	push af
+	ld a, [wTextboxStyle]
+	cp JOHTO
+	jr z, .johto_load
 	ld a, [wBattleMode]
 	and a
 	jr nz, .battle_load
 	pop af
-	ldcoord_a BLINKING_CURSOR_X, BLINKING_CURSOR_Y
+	ldcoord_a HYRULE_BLINKING_CURSOR_X, HYRULE_BLINKING_CURSOR_Y
+	ret
+.johto_load
+	pop af
+	ldcoord_a JOHTO_BLINKING_CURSOR_X, JOHTO_BLINKING_CURSOR_Y
 	ret
 
 .battle_load

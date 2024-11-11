@@ -158,12 +158,22 @@ TextboxPalette::
 
 SpeechTextbox::
 ; Standard textbox.
+	ld b, b
 	ld a, [wBattleMode]
 	and a
 	jr nz, .battle
-	hlcoord TEXTBOX_X, TEXTBOX_Y
-	ld b, TEXTBOX_INNERH
-	ld c, TEXTBOX_INNERW
+	ld a, [wTextboxStyle]
+	cp JOHTO
+	jr z, .johto
+	hlcoord HYRULE_TEXTBOX_X, HYRULE_TEXTBOX_Y
+	ld b, HYRULE_TEXTBOX_INNERH
+	ld c, HYRULE_TEXTBOX_INNERW
+	jmp Textbox
+
+.johto
+	hlcoord JOHTO_TEXTBOX_X, JOHTO_TEXTBOX_Y
+	ld b, JOHTO_TEXTBOX_INNERH
+	ld c, JOHTO_TEXTBOX_INNERW
 	jmp Textbox
 	
 .battle
@@ -175,23 +185,37 @@ SpeechTextbox::
 PrintText::
 	call SetUpTextbox
 	push hl
-	hlcoord TEXTBOX_INNERX, TEXTBOX_INNERY
-	lb bc, TEXTBOX_INNERH - 1, TEXTBOX_INNERW
+	ld a, [wTextboxStyle]
+	cp JOHTO
+	jr z, .johto
+	hlcoord HYRULE_TEXTBOX_INNERX, HYRULE_TEXTBOX_INNERY
+	lb bc, HYRULE_TEXTBOX_INNERH - 1, HYRULE_TEXTBOX_INNERW
+	jr .finish
+.johto
+	hlcoord JOHTO_TEXTBOX_INNERX, JOHTO_TEXTBOX_INNERY
+	lb bc, JOHTO_TEXTBOX_INNERH - 1, JOHTO_TEXTBOX_INNERW
+.finish
 	call ClearBox
 	pop hl
 	; fallthrough
 
 PrintTextboxText::
+	ld b, b
+	ld a, [wTextboxStyle]
+	cp JOHTO
+	jr z, .johto
 	ld a, [wBattleMode]
 	and a
 	jr nz, .battle
-	bccoord TEXTBOX_INNERX, TEXTBOX_INNERY
+	bccoord HYRULE_TEXTBOX_INNERX, HYRULE_TEXTBOX_INNERY
 	jr .finish
 
+.johto
+	bccoord JOHTO_TEXTBOX_INNERX, JOHTO_TEXTBOX_INNERY
+	jr .finish
 .battle
 	bccoord TEXTBOX_BATTLE_INNERX, TEXTBOX_BATTLE_INNERY
 	; fallthrough
-
 .finish
     jmp PrintTextboxTextAt
 
@@ -438,14 +462,20 @@ CarriageReturnChar::
 
 LineChar::
 	pop hl
+	ld a, [wTextboxStyle]
+	cp JOHTO
+	jr z, .johto
 	ld a, [wBattleMode]
 	and a
 	jr nz, .battle
-	hlcoord TEXTBOX_INNERX, TEXTBOX_INNERY + 2
+	hlcoord HYRULE_TEXTBOX_INNERX, HYRULE_TEXTBOX_INNERY + 2
+	jr .continue
+.johto
+	hlcoord JOHTO_TEXTBOX_INNERX, JOHTO_TEXTBOX_INNERY + 2
 	jr .continue
 .battle
 	hlcoord TEXTBOX_BATTLE_INNERX, TEXTBOX_BATTLE_INNERY + 1
-
+; fallthrough
 .continue
 	push hl
  	jmp NextChar
@@ -455,15 +485,31 @@ Paragraph::
 	call LoadBlinkingCursor
 	call Text_WaitBGMap
 	call PromptButton
-	hlcoord TEXTBOX_INNERX, TEXTBOX_INNERY
-	lb bc, TEXTBOX_INNERH - 1, TEXTBOX_INNERW
+	ld a, [wTextboxStyle]
+	cp JOHTO
+	jr z, .johto_one
+	hlcoord HYRULE_TEXTBOX_INNERX, HYRULE_TEXTBOX_INNERY
+	lb bc, HYRULE_TEXTBOX_INNERH - 1, HYRULE_TEXTBOX_INNERW
+.continue_one
 	call ClearBox
 	call UnloadBlinkingCursor
 	ld c, 20
 	call DelayFrames
-	hlcoord TEXTBOX_INNERX, TEXTBOX_INNERY
+	ld a, [wTextboxStyle]
+	cp JOHTO
+	jr z, .johto_two
+	hlcoord HYRULE_TEXTBOX_INNERX, HYRULE_TEXTBOX_INNERY
+.continue_two
 	pop de
  	jmp NextChar
+
+.johto_one
+	hlcoord JOHTO_TEXTBOX_INNERX, JOHTO_TEXTBOX_INNERY
+	lb bc, JOHTO_TEXTBOX_INNERH - 1, JOHTO_TEXTBOX_INNERW
+	jr .continue_one
+.johto_two
+	hlcoord JOHTO_TEXTBOX_INNERX, JOHTO_TEXTBOX_INNERY
+	jr .continue_two
 
 _ContText::
 	call LoadBlinkingCursor
@@ -473,16 +519,24 @@ _ContTextNoPause::
 	ld a, [wBattleMode]
 	and a
 	jr nz, .battle
-	call TextScroll
-	call TextScroll
-	hlcoord TEXTBOX_INNERX, TEXTBOX_INNERY + 2
+	ld a, [wTextboxStyle]
+	cp JOHTO
+	jr z, .johto
+	call TextScrollHyrule
+	call TextScrollHyrule
+	hlcoord HYRULE_TEXTBOX_INNERX, HYRULE_TEXTBOX_INNERY + 2
 	jr .continue
 
-.battle
-	;call TextScrollBattle
+.johto
+	call TextScrollJohto
+	call TextScrollJohto
+	hlcoord JOHTO_TEXTBOX_INNERX, JOHTO_TEXTBOX_INNERY + 2
+	jr .continue
+
+.battle	
 	call TextScrollBattle
 	hlcoord TEXTBOX_BATTLE_INNERX, TEXTBOX_BATTLE_INNERY + 1
-
+; fallthrough
 .continue
 	pop de
  	jmp NextChar
@@ -528,14 +582,14 @@ NullChar::
 	call PrintLetterDelay
  	jmp NextChar
 
-TextScroll::
-	hlcoord TEXTBOX_INNERX, TEXTBOX_INNERY
-	decoord TEXTBOX_INNERX, TEXTBOX_INNERY - 1
-	ld a, TEXTBOX_INNERH - 1
+TextScrollHyrule::
+	hlcoord HYRULE_TEXTBOX_INNERX, HYRULE_TEXTBOX_INNERY
+	decoord HYRULE_TEXTBOX_INNERX, HYRULE_TEXTBOX_INNERY - 1
+	ld a, HYRULE_TEXTBOX_INNERH - 1
 
 .col
 	push af
-	ld c, TEXTBOX_INNERW
+	ld c, HYRULE_TEXTBOX_INNERW
 
 .row
 	ld a, [hli]
@@ -552,12 +606,43 @@ TextScroll::
 	dec a
 	jr nz, .col
 
-	hlcoord TEXTBOX_INNERX, TEXTBOX_INNERY + 2
+	hlcoord HYRULE_TEXTBOX_INNERX, HYRULE_TEXTBOX_INNERY + 2
 	ld a, " "
-	ld bc, TEXTBOX_INNERW
+	ld bc, HYRULE_TEXTBOX_INNERW
 	call ByteFill
 	ld c, 5
     jmp DelayFrames
+
+TextScrollJohto::
+	hlcoord JOHTO_TEXTBOX_INNERX, JOHTO_TEXTBOX_INNERY
+	decoord JOHTO_TEXTBOX_INNERX, JOHTO_TEXTBOX_INNERY - 1
+	ld a, JOHTO_TEXTBOX_INNERH - 1
+
+.col
+	push af
+	ld c, JOHTO_TEXTBOX_INNERW
+
+.row
+	ld a, [hli]
+	ld [de], a
+	inc de
+	dec c
+	jr nz, .row
+
+	inc de
+	inc de
+	inc hl
+	inc hl
+	pop af
+	dec a
+	jr nz, .col
+
+	hlcoord JOHTO_TEXTBOX_INNERX, JOHTO_TEXTBOX_INNERY + 2
+	ld a, " "
+	ld bc, JOHTO_TEXTBOX_INNERW
+	call ByteFill
+	ld c, 5
+	jmp DelayFrames
 
 TextScrollBattle::
 	hlcoord TEXTBOX_BATTLE_INNERX, TEXTBOX_BATTLE_INNERY
@@ -605,11 +690,19 @@ Text_WaitBGMap::
 	ret
 
 LoadBlinkingCursor::
+	ld a, [wTextboxStyle]
+	cp JOHTO
+	jr z, .johto
 	ld a, [wBattleMode]
 	and a
 	jr nz, .battle
 	ld a, "▼"
-	ldcoord_a BLINKING_CURSOR_X, BLINKING_CURSOR_Y
+	ldcoord_a HYRULE_BLINKING_CURSOR_X, HYRULE_BLINKING_CURSOR_Y
+	ret
+
+.johto
+	ld a, "▼"
+	ldcoord_a JOHTO_BLINKING_CURSOR_X, JOHTO_BLINKING_CURSOR_Y
 	ret
 
 .battle
@@ -618,11 +711,19 @@ LoadBlinkingCursor::
 	ret
 
 UnloadBlinkingCursor::
+	ld a, [wTextboxStyle]
+	cp JOHTO
+	jr z, .johto
 	ld a, [wBattleMode]
 	and a
 	jr nz, .battle
-	lda_coord BLINKING_CURSOR_X - 1, BLINKING_CURSOR_Y
-	ldcoord_a BLINKING_CURSOR_X, BLINKING_CURSOR_Y
+	lda_coord HYRULE_BLINKING_CURSOR_X - 1, HYRULE_BLINKING_CURSOR_Y
+	ldcoord_a HYRULE_BLINKING_CURSOR_X, HYRULE_BLINKING_CURSOR_Y
+	ret
+
+.johto
+	lda_coord JOHTO_BLINKING_CURSOR_X - 1, JOHTO_BLINKING_CURSOR_Y
+	ldcoord_a JOHTO_BLINKING_CURSOR_X, JOHTO_BLINKING_CURSOR_Y
 	ret
 
 .battle
@@ -812,7 +913,7 @@ TextCommand_BOX::
 
 TextCommand_LOW::
 ; write text at (1,16)
-	bccoord TEXTBOX_INNERX, TEXTBOX_INNERY + 2
+	bccoord HYRULE_TEXTBOX_INNERX, HYRULE_TEXTBOX_INNERY + 2
 	ret
 
 TextCommand_PROMPT_BUTTON::
@@ -834,10 +935,10 @@ TextCommand_SCROLL::
 	ld a, [wBattleMode]
 	and a
 	jr nz, .battle
-	call TextScroll
-	call TextScroll
+	call TextScrollHyrule
+	call TextScrollHyrule
 	pop hl
-	bccoord TEXTBOX_INNERX, TEXTBOX_INNERY + 2
+	bccoord HYRULE_TEXTBOX_INNERX, HYRULE_TEXTBOX_INNERY + 2
 	ret 
 .battle
 	call TextScrollBattle

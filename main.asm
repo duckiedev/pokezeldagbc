@@ -3,6 +3,7 @@ SECTION "bank1", ROMX
 INCLUDE "engine/gfx/load_push_oam.asm"
 INCLUDE "engine/overworld/map_objects.asm"
 INCLUDE "engine/menus/intro_menu.asm"
+INCLUDE "engine/events/intro_wakeup.asm"
 INCLUDE "engine/overworld/init_map.asm"
 INCLUDE "engine/pokemon/learn.asm"
 INCLUDE "engine/math/math.asm"

@@ -13,7 +13,7 @@ OlivinePokecenter1FNurseScript:
 	jumpstd PokecenterNurseScript
 
 OlivinePokecenter1FFishingGuruScript:
-	jumpstd HappinessCheckScript
+	end
 
 OlivinePokecenter1FFisherScript:
 	jumptextfaceplayer OlivinePokecenter1FFisherText
