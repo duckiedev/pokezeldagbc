@@ -56,10 +56,6 @@ NewGame:
 	call ResetWRAM
 	farcall ClearSavedObjPals
 	call NewGame_ClearTilemapEtc
-	call PlayerProfileSetup
-	;call OakSpeech
-	farcall InitClock
-	call NamePlayer
 	call InitializeWorld
 
 	ld a, LANDMARK_NEW_BARK_TOWN
@@ -256,9 +252,9 @@ InitializeNPCNames:
 .Mom:    db "MOM@"
 
 InitializeWorld:
-	call ShrinkPlayer
 	farcall SpawnPlayer
-	farcall _InitializeStartDay
+	;farcall InitClock
+	;farcall _InitializeStartDay
 	farcall InitializeEvents
 	ret
 
@@ -538,8 +534,6 @@ OakSpeech:
 	call GetSGBLayout
 	call Intro_RotatePalettesLeftFrontpic
 
-	ld hl, OakText1
-	call PrintText
 	ld c, 15
 	call FadeToWhite
 	call ClearTilemap
@@ -561,10 +555,6 @@ OakSpeech:
 	call GetSGBLayout
 	call Intro_RotatePalettesLeftFrontpic
 
-	ld hl, OakText2
-	call PrintText
-	ld hl, OakText4
-	call PrintText
 	ld c, 15
 	call FadeToWhite
 	call ClearTilemap
@@ -579,9 +569,7 @@ OakSpeech:
 	call GetSGBLayout
 	call Intro_RotatePalettesLeftFrontpic
 
-	ld hl, OakText5
-	call PrintText
-	;call RotateThreePalettesRight
+	call RotateThreePalettesRight
 	call ClearTilemap
 
 	xor a
@@ -590,99 +578,7 @@ OakSpeech:
 
 	ld b, SCGB_TRAINER_OR_MON_FRONTPIC_PALS
 	call GetSGBLayout
-	call Intro_RotatePalettesLeftFrontpic
-
-	ld hl, OakText6
-	call PrintText
-	call NamePlayer
-	ld hl, OakText7
-    jmp PrintText
-
-OakText1:
-	text_far _OakText1
-	text_end
-
-OakText2:
-	text_far _OakText2
-	text_asm
-	ld a, MARILL
-	call PlayMonCry
-	call WaitSFX
-	ld hl, OakText3
-	ret
-
-OakText3:
-	text_far _OakText3
-	text_end
-
-OakText4:
-	text_far _OakText4
-	text_end
-
-OakText5:
-	text_far _OakText5
-	text_end
-
-OakText6:
-	text_far _OakText6
-	text_end
-
-OakText7:
-	text_far _OakText7
-	text_end
-
-NamePlayer:
-	;farcall MovePlayerPicRight
-	farcall ShowPlayerNamingChoices
-	ld a, [wMenuCursorY]
-	dec a
-	jr z, .NewName
-	call StorePlayerName
-	;farcall ApplyMonOrTrainerPals
-	;farcall MovePlayerPicLeft
-	ret
-
-.NewName:
-	ld b, NAME_PLAYER
-	ld de, wPlayerName
-	farcall NamingScreen
-
-	ld c, 15
-	call FadeToWhite
-	call ClearTilemap
-
-	call WaitBGMap
-
-	xor a
-	ld [wCurPartySpecies], a
-	farcall DrawIntroPlayerPic
-
-	ld b, SCGB_TRAINER_OR_MON_FRONTPIC_PALS
-	call GetSGBLayout
-	call Intro_RotatePalettesLeftFrontpic
-
-	ld hl, wPlayerName
-	ld de, .Chris
-	ld a, [wPlayerGender]
-	bit PLAYERGENDER_FEMALE_F, a
-	jr z, .Male
-	ld de, .Kris
-.Male:
-    jmp InitName
-
-.Chris:
-	db "CHRIS@@@@@@"
-.Kris:
-	db "KRIS@@@@@@@"
-
-StorePlayerName:
-	ld a, "@"
-	ld bc, NAME_LENGTH
-	ld hl, wPlayerName
-	call ByteFill
-	ld hl, wPlayerName
-	ld de, wStringBuffer2
-    jmp CopyName2
+	jmp Intro_RotatePalettesLeftFrontpic
 
 ShrinkPlayer:
 	ldh a, [hROMBank]

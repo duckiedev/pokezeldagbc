@@ -11,8 +11,8 @@ _NamingScreen:
 
 NamingScreen:
 	ld hl, wNamingScreenDestinationPointer
-	ld [hl], e
-	inc hl
+	ld a, e
+	ld [hli], a
 	ld [hl], d
 	ld hl, wNamingScreenType
 	ld [hl], b
@@ -213,10 +213,10 @@ NamingScreen:
 	jr .StoreParams
 
 .StoreBoxIconParams:
-	ld a, BOX_NAME_LENGTH - 1
+	ld a, BOX_NAME_LENGTH
 	hlcoord 5, 4
-	jr .StoreParams
 
+; fallthrough
 .StoreParams:
 	ld [wNamingScreenMaxNameLength], a
 	ld a, l
@@ -332,9 +332,9 @@ NamingScreenJoypadLoop:
 	lb bc, 1, 18
 	call ClearBox
 	ld hl, wNamingScreenDestinationPointer
-	ld e, [hl]
-	inc hl
+	ld a, [hli]
 	ld d, [hl]
+	ld e, a
 	ld hl, wNamingScreenStringEntryCoord
 	ld a, [hli]
 	ld h, [hl]
@@ -403,9 +403,9 @@ NamingScreenJoypadLoop:
 
 .start
 	ld hl, wNamingScreenCursorObjectPointer
-	ld c, [hl]
-	inc hl
+	ld a, [hli]
 	ld b, [hl]
+	ld c, a
 	ld hl, SPRITEANIMSTRUCT_VAR1
 	add hl, bc
 	ld [hl], $8
@@ -441,10 +441,10 @@ NamingScreenJoypadLoop:
 
 .GetCursorPosition:
 	ld hl, wNamingScreenCursorObjectPointer
-	ld c, [hl]
-	inc hl
+	ld a, [hli]
 	ld b, [hl]
-
+	ld c, a
+; fallthrough
 NamingScreen_GetCursorPosition:
 	ld hl, SPRITEANIMSTRUCT_VAR2
 	add hl, bc
@@ -538,10 +538,8 @@ NamingScreen_AnimateCursor:
 	jr nz, .left
 	ld a, [hl]
 	and D_RIGHT
-	jr nz, .right
-	ret
+	ret z
 
-.right
 	call NamingScreen_GetCursorPosition
 	and a
 	jr nz, .target_right
@@ -686,8 +684,8 @@ NamingScreen_DeleteCharacter:
 	ret z
 	dec [hl]
 	call NamingScreen_GetTextCursorPosition
-	ld [hl], NAMINGSCREEN_UNDERLINE
-	inc hl
+	ld a, NAMINGSCREEN_UNDERLINE
+	ld [hli], a
 	ld a, [hl]
 	cp NAMINGSCREEN_UNDERLINE
 	ret nz
@@ -713,8 +711,8 @@ NamingScreen_InitNameEntry:
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	ld [hl], NAMINGSCREEN_UNDERLINE
-	inc hl
+	ld a, NAMINGSCREEN_UNDERLINE
+	ld [hli], a
 	ld a, [wNamingScreenMaxNameLength]
 	dec a
 	ld c, a
@@ -749,9 +747,9 @@ NamingScreen_StoreEntry:
 
 NamingScreen_GetLastCharacter:
 	ld hl, wNamingScreenCursorObjectPointer
-	ld c, [hl]
-	inc hl
+	ld a, [hli]
 	ld b, [hl]
+	ld c, a
 	ld hl, SPRITEANIMSTRUCT_XOFFSET
 	add hl, bc
 	ld a, [hl]
@@ -759,9 +757,10 @@ NamingScreen_GetLastCharacter:
 	add hl, bc
 	add [hl]
 	sub $8
-	srl a
-	srl a
-	srl a
+	rrca
+	rrca
+	rrca
+	and %00011111
 	ld e, a
 	ld hl, SPRITEANIMSTRUCT_YOFFSET
 	add hl, bc
@@ -770,9 +769,10 @@ NamingScreen_GetLastCharacter:
 	add hl, bc
 	add [hl]
 	sub $10
-	srl a
-	srl a
-	srl a
+	rrca
+	rrca
+	rrca
+	and %00011111
 	ld d, a
 	hlcoord 0, 0
 	ld bc, SCREEN_WIDTH
@@ -799,17 +799,6 @@ LoadNamingScreenGFX:
 	ld hl, vTiles0 tile NAMINGSCREEN_MIDDLELINE
 	lb bc, BANK(NamingScreenGFX_MiddleLine), 1
 	call Get1bpp
-
-	ld de, NamingScreenGFX_UnderLine
-	ld hl, vTiles0 tile NAMINGSCREEN_UNDERLINE
-	lb bc, BANK(NamingScreenGFX_UnderLine), 1
-	call Get1bpp
-
-	ld de, vTiles2 tile NAMINGSCREEN_BORDER
-	ld hl, NamingScreenGFX_Border
-	ld bc, 1 tiles
-	ld a, BANK(NamingScreenGFX_Border)
-	call FarCopyBytes
 
 	ld de, vTiles0 tile NAMINGSCREEN_CURSOR
 	ld hl, NamingScreenGFX_Cursor
@@ -850,6 +839,32 @@ INCBIN "gfx/naming_screen/underline.1bpp"
 
 NamingScreen_PressedA_GetCursorCommand:
 	ld hl, wNamingScreenCursorObjectPointer
-	ld c, [hl]
-	inc hl
+	ld a, [hli]
 	ld b, [hl]
+	ld c, a
+	ld hl, SPRITEANIMSTRUCT_VAR2
+	add hl, bc
+	ld a, [hl]
+	cp $5
+	jr nz, .letter
+	ld hl, SPRITEANIMSTRUCT_VAR1
+	add hl, bc
+	ld a, [hl]
+	cp $3
+	jr c, .case
+	cp $6
+	jr c, .del
+	ld a, $3
+	ret
+
+.case
+	ld a, $1
+	ret
+
+.del
+	ld a, $2
+	ret
+
+.letter
+	xor a
+	ret

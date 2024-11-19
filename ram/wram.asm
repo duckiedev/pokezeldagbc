@@ -875,7 +875,8 @@ wCurSpecies:: db
 
 wNamedObjectType:: db
 
-	ds 1
+wBrowserPageIndex::
+	db
 
 wJumptableIndex::
 	db

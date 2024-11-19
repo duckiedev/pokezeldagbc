@@ -158,7 +158,6 @@ TextboxPalette::
 
 SpeechTextbox::
 ; Standard textbox.
-	ld b, b
 	ld a, [wBattleMode]
 	and a
 	jr nz, .battle
@@ -200,7 +199,6 @@ PrintText::
 	; fallthrough
 
 PrintTextboxText::
-	ld b, b
 	ld a, [wTextboxStyle]
 	cp JOHTO
 	jr z, .johto

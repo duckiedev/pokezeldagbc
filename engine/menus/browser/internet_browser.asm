@@ -8,7 +8,7 @@ _InternetBrowser::
 	ldh [hInMenu], a
 	; Initialize browser state
 	xor a
-	ld [wJumptableIndex], a ; first page
+	ld [wBrowserPageIndex], a ; first page
 	jmp BrowserJumptable
 
 LoadPagePrep:
@@ -42,8 +42,8 @@ LoadPagePrep:
 
 .LoadTilemap:
 	ld hl, BrowserAvatarTilemap
-	ld a, [wJumptableIndex]
-	cp 2
+	ld a, [wBrowserPageIndex]
+	cp 4 ; BrowserPage8
 	jr z, .continue
 	ld hl, BrowserTilemap
 .continue
@@ -64,7 +64,7 @@ LoadPageEnd:
 InputLoop:
 	farcall PlaySpriteAnimationsAndDelayFrame
 	call JoyTextDelay
-	ld a, [wJumptableIndex]
+	ld a, [wBrowserPageIndex]
 	bit 7, a
 	jr nz, .exit
 	ld hl, hJoyPressed
@@ -77,8 +77,8 @@ InputLoop:
 	ld a, [hl]
 	and START
 	jr nz, .start
-	ld a, [wJumptableIndex]
-	cp 2
+	ld a, [wBrowserPageIndex]
+	cp 4
 	jr nz, InputLoop
 .check_left_right
 	; only check for left and right if on profile page
@@ -95,17 +95,17 @@ InputLoop:
 
 .start
 .a
-	ld a, [wJumptableIndex]
-	cp 2
+	ld a, [wBrowserPageIndex]
+	cp 4
 	jp z, ProfileSelectionInputs
 	jr ButtonNextPage
 
 .b
-	ld a, [wJumptableIndex]
+	ld a, [wBrowserPageIndex]
 	cp 0
 	jr z, InputLoop
 	
-	ld hl, wJumptableIndex
+	ld hl, wBrowserPageIndex
 	dec [hl]
 	jmp BrowserJumptable
 
@@ -146,12 +146,12 @@ InputLoop:
 	jmp InputLoop
 
 .end
-	ld hl, wJumptableIndex
+	ld hl, wBrowserPageIndex
 	set 7, [hl]
 	ret
 
 ButtonNextPage:
-	ld hl, wJumptableIndex
+	ld hl, wBrowserPageIndex
 	inc [hl]
 	jmp BrowserJumptable
 
@@ -276,32 +276,27 @@ Function16cc90:
 	ret
 
 BrowserJumptable:
-	jumptable .Jumptable, wJumptableIndex
+	jumptable .Jumptable, wBrowserPageIndex
 
 .Jumptable:
 	dw BrowserPage1 ; 0
 	dw BrowserPage2 ; 1
 	dw BrowserPage3 ; 2
-	; Add more pages as needed
+	dw BrowserPage4 ; 3
+	dw BrowserPage5 ; 4
+	dw BrowserPage6 ; 5
+	dw BrowserPage7 ; 6
 
 BrowserPage1:
 	call LoadPagePrep
-
-	; Button
-	ld de, Next
-	hlcoord 14, 15
-	call PlaceString
-
+	call DrawNextButton
 	call CursorOnNext
-
-	; Message
 	ld de, .Text
-	hlcoord 2, 6
-	call PlaceString
-
+	call DrawMessage
 	jmp LoadPageEnd
 .Text:
-	db "You've been invited"
+	db "Congratulations!"
+	next1 "You've been invited"
 	next1 "to the official"
 	next1 "<PKMN> Champion's"
 	next1 "Summit as the"
@@ -311,52 +306,140 @@ BrowserPage1:
 
 BrowserPage2:
 	call LoadPagePrep
-
-	; Message
 	ld de, .Text
-	hlcoord 2, 6
-	call PlaceString
-
-	; Button
-	ld de, Next
-	hlcoord 14, 15
-	call PlaceString
-
+	call DrawMessage
+	call DrawNextButton
 	call CursorOnNext
-
 	jmp LoadPageEnd
 .Text:
-	db "This is page no.2!"
-	next1 "This is the second"
-	next1 "line. Now 3rd."
+	db 		"PROF.ELM has spon-"
+	next1 	"sored your round-"
+	next1 	"trip flight and"
+	next1 	"accommodations to"
+	next1 	"the Sinnoh region."
 	db "@"
 
 BrowserPage3:
 	call LoadPagePrep
-
-	farcall InitGender
-	call GenderSwitch
-
-	; Message
 	ld de, .Text
-	hlcoord 2, 6
-	call PlaceString
-
-	; Button
-	ld de, Next
-	hlcoord 14, 15
-	call PlaceString
-
-	call MoveToMale
-
+	call DrawMessage
+	call DrawNextButton
+	call CursorOnNext
 	jmp LoadPageEnd
 .Text:
-	db "Please choose your"
+	db 		"Once there, you'll"
+	next1 	"join the champions"
+	next1 	"from all over the"
+	next1 	"world at SPEAR"
+	next1 	"PILLAR, located at"
+	next1 	"the peak of MT."
+	next1 	"CORONET to discuss"
+	next1 	"the future of <PKMN>"
+	next1 	"training!"
+	db "@"
+
+BrowserPage4:
+	call LoadPagePrep
+	ld de, .Text
+	call DrawMessage
+	call DrawNextButton
+	call CursorOnNext
+	jmp LoadPageEnd
+.Text:
+	db 		"Please register"
+	next1 	"your profile to"
+	next1 	"reserve your spot"
+	next1 	"and verify you've"
+	next1 	"received this"
+	next1 	"information."
+	db "@"
+
+BrowserPage5:
+	call LoadPagePrep
+	farcall InitGender
+	call GenderSwitch
+	ld de, .Text
+	call DrawMessage
+	call DrawNextButton
+	call MoveToMale
+	jmp LoadPageEnd
+.Text:
+	db "First, choose your"
 	next1 "profile avatar."
 	db "@"
 
+BrowserPage6:
+	call LoadPagePrep
+	ld de, .Text
+	call DrawMessage
+	call DrawNextButton
+	call CursorOnNext
+	jmp LoadPageEnd
+.Text:
+	db 		"Thank you!"
+	next1   "Please verify your"
+	next1 	"name."
+	db "@"
+
+BrowserPage7:
+	call DoNamingScreen
+	call LoadPagePrep
+	ld de, .Text
+	call DrawMessage
+	ld de, Done
+	hlcoord 14, 15
+	call PlaceString
+	call CursorOnNext
+	jmp LoadPageEnd
+.Text:
+	db 		"Thank you <PLAYER>!"
+	next1   "Your tickets have"
+	next1 	"been e-mailed to"
+	next1   "your sponsor,"
+	next1
+	next1 	"PROF.ELM."
+	next1
+	next1   "We hope to see you"
+	next1   "soon!"
+	db "@"
 Next:
 	db "Next@"
+Done:
+	db "Done@"
+
+DoNamingScreen:
+	ld b, NAME_PLAYER
+	ld de, wPlayerName
+	farcall NamingScreen
+
+	ld c, 15
+	call FadeToWhite
+	call ClearTilemap
+
+	call WaitBGMap
+
+	ld hl, wPlayerName
+	ld de, .Chris
+	ld a, [wPlayerGender]
+	bit PLAYERGENDER_FEMALE_F, a
+	jr z, .Male
+	ld de, .Kris
+.Male:
+    jmp InitName
+
+.Chris:
+	db "CHRIS@@@@@@"
+.Kris:
+	db "KRIS@@@@@@@"
+
+DrawMessage:
+	hlcoord 2, 6
+	jmp PlaceString
+
+DrawNextButton:
+	ld de, Next
+	hlcoord 14, 15
+	jmp PlaceString
 
 LoadPlayerGFX:
 	call ClearSprites

@@ -31,7 +31,6 @@ InitWakeup:
 	call WaitBGMap
 	call SetDefaultBGPAndOBP
 	ld hl, MomWakeUpText
-    ld b, b
 	call PrintText
 	call WaitPressAorB_BlinkCursor
 	pop af
