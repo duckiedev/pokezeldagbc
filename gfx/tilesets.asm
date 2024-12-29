@@ -525,3 +525,15 @@ INCLUDE "data/tilesets/debug_map_collision.asm"
 
 TilesetDebugMapAttr::
 INCBIN "data/tilesets/debug_map_attributes.bin"
+
+TilesetNewBarkTownGFX::
+INCBIN "gfx/tilesets/newbarktown.2bpp.lz"
+
+TilesetNewBarkTownMeta::
+INCBIN "data/tilesets/newbarktown_metatiles.bin"
+
+TilesetNewBarkTownColl::
+INCLUDE "data/tilesets/newbarktown_collision.asm"
+
+TilesetNewBarkTownAttr::
+INCBIN "data/tilesets/newbarktown_attributes.bin"

@@ -52,4 +52,5 @@ Tilesets::
 	tileset TilesetSidescrollTest
 	tileset TilesetForestGateSidescrolling
 	tileset TilesetDebugMap
+	tileset TilesetNewBarkTown
 	assert_table_length NUM_TILESETS + 1

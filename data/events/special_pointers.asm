@@ -77,6 +77,9 @@ SpecialsPointers::
 	add_special RefreshSprites
 	add_special LoadMapPalettes
 
+	add_special _InitClock
+	add_special _InitializeStartDay
+
 	add_special InitialSetDSTFlag
 	add_special InitialClearDSTFlag
 

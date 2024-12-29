@@ -41,6 +41,7 @@
 	const TILESET_SIDESCROLLTEST	   ; 27
 	const TILESET_FOREST_GATE_SIDESCROLLING ; 28
 	const TILESET_DEBUG_MAP			   ; 29
+	const TILESET_NEWBARKTOWN		   ; 2a
 DEF NUM_TILESETS EQU const_value - 1
 
 ; wTileset struct size

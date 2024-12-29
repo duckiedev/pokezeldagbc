@@ -49,11 +49,12 @@ Option:
 	ret
 
 NewGame:
-	farcall InitWakeup
-	farcall _InternetBrowser
 	xor a
 	ld [wDebugFlags], a
 	call ResetWRAM
+	farcall InitWakeup
+	farcall _InternetBrowser
+
 	farcall ClearSavedObjPals
 	call NewGame_ClearTilemapEtc
 	call InitializeWorld
@@ -61,7 +62,7 @@ NewGame:
 	ld a, LANDMARK_NEW_BARK_TOWN
 	ld [wPrevLandmark], a
 
-	ld a, SPAWN_DEBUG_START
+	ld a, SPAWN_HOME
 	ld [wDefaultSpawnpoint], a
 
 	ld a, MAPSETUP_WARP
@@ -253,8 +254,6 @@ InitializeNPCNames:
 
 InitializeWorld:
 	farcall SpawnPlayer
-	;farcall InitClock
-	;farcall _InitializeStartDay
 	farcall InitializeEvents
 	ret
 
@@ -569,7 +568,6 @@ OakSpeech:
 	call GetSGBLayout
 	call Intro_RotatePalettesLeftFrontpic
 
-	call RotateThreePalettesRight
 	call ClearTilemap
 
 	xor a
@@ -578,7 +576,7 @@ OakSpeech:
 
 	ld b, SCGB_TRAINER_OR_MON_FRONTPIC_PALS
 	call GetSGBLayout
-	jmp Intro_RotatePalettesLeftFrontpic
+	jr Intro_RotatePalettesLeftFrontpic
 
 ShrinkPlayer:
 	ldh a, [hROMBank]

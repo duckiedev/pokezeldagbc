@@ -1,0 +1,13 @@
+constants/map_constants.asm
+data/maps/roofs.asm					; new map group only
+gfx/tilesets/roofs.pal				; new map group only
+data/maps/outdoor_sprites.asm		; new map group only
+data/maps/maps.asm
+data/maps/attributes.asm
+data/maps/sgb_roof_pal_inds.asm		; new map group only
+constants/scgb_constants.asm		; new map group only
+gfx/sgb/predef.pal					; new map group only
+constants/landmark_constants.asm	
+data/maps/landmarks.asm
+data/maps/blocks.asm
+data/maps/scripts.asm

@@ -38,7 +38,8 @@ _AnimateTileset::
 Tileset0Anim:
 TilesetJohtoModernAnim:
 TilesetKantoAnim:
-	dw vTiles2 tile $14, AnimateWaterTile
+TilesetNewBarkTownAnim:
+	dw vTiles2 tile $42, AnimateWaterTile
 	dw NULL,  WaitTileAnimation
 	dw NULL,  WaitTileAnimation
 	dw NULL,  WaitTileAnimation
@@ -655,7 +656,7 @@ AnimateFlowerTile:
 
 ; Write the tile graphic from hl (now sp) to tile $03 (now hl)
 	ld sp, hl
-	ld hl, vTiles2 tile $03
+	ld hl, vTiles2 tile $62
  	jmp WriteTile
 
 .FlowerTileFrames:
